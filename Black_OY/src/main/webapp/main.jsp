@@ -10,6 +10,7 @@
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
-
+<jsp:include page="/layout/head.jsp"></jsp:include>
+	
 </body>
 </html>
