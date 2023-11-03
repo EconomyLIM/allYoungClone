@@ -362,7 +362,7 @@
 							<button class="mymenu_btn"
 								onclick="javascript:common.link.moveLoginPage();">로그인</button>
 						</div></li>
-					<li class="recent"><a onclick="" href="#" class="mymenu_layer"
+					<li class="recent"><a onclick="recProductView()" href="#" class="mymenu_layer"
 						title="최근 본 상품 자세히보기 열기/닫기">최근 본 상품</a>
 						<div class="recent_prd_box" style="min-height: 510px;">
 							<p class="recent_tit">
@@ -751,6 +751,7 @@
 
 			<!-- //[3553186] 온라인몰 전시 카테고리 개편 일괄 작업 요청의 건 -->
 			<!-- 메인 카테고리 목록 -->
+			
 		</div>
 	</div>
 </body>
