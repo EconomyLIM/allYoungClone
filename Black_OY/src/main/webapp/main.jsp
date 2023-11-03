@@ -11,6 +11,6 @@
 </head>
 <body>
 <jsp:include page="/layout/head.jsp"></jsp:include>
-	dsdsdsd
+	
 </body>
 </html>
