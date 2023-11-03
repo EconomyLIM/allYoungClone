@@ -11,7 +11,7 @@
 <title>블랙올리브영 온라인몰</title>
 <style>
  #directTop {
-            
+            opacity : 0;
             transition: opacity 0.5s ease;
         }
 </style>
