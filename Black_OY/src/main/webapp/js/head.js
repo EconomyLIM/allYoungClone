@@ -1,11 +1,7 @@
 
-window.onload = () =>{
+$(function() {
 	document.getElementById("btnGnbOpen").onclick = function () {
-    if(document.querySelector(".layer_all_menu").classList.contains("active")){
-                document.querySelector(".layer_all_menu.active").className = "layer_all_menu";
-            }else{
-                document.querySelector(".layer_all_menu").className += " active";
-            }
+		document.querySelector(".layer_all_menu").classList.toggle("active");
 }
 
 document.getElementById("btnGnbClose").onclick = function () {
@@ -22,6 +18,4 @@ $(".mymenu_layer").click(function(){
             
         })
 
-};
-
-
+});
