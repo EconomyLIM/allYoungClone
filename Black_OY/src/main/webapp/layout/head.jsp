@@ -9,6 +9,12 @@
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <script src="/Black_OY/js/head.js"></script>
 <title>블랙올리브영 온라인몰</title>
+<style>
+ #directTop {
+            
+            transition: opacity 0.5s ease;
+        }
+</style>
 </head>
 <body>
 	<!-- 3200210 큐레이션 개선 관련 건-레코벨 데이터 송부 
@@ -781,6 +787,11 @@
 						data-ref-linkurl="main/getEventList.do" data-attr="공통^GNB^이벤트"><span>이벤트</span>
 					</a></li>
 				</ul>
+				
+				<div id="directTop" style="display: block;">
+		<button><span></span>TOP</button>
+	</div>
+				
 			</div>
 			<!-- RecoBell Script Start -->
 			<form name="ssologinfrm"
