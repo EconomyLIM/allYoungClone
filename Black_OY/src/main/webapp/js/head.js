@@ -29,7 +29,10 @@ $('#btnGnbOpen').on('click', function() {
     $('#gnbAllMenu').toggleClass('active');
 });
 
-
+// 카테고리 닫기 버튼 클릭 이벤트
+document.getElementById("btnGnbClose").onclick = function () {
+    document.querySelector(".layer_all_menu.active").className = "layer_all_menu";
+}
 
 // 최근 본 상품 마우스 호버(쿠키 처리)
 $("li.recent>.mymenu_layer").click(function(){
