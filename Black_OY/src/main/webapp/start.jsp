@@ -13,9 +13,8 @@
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
-<jsp:include page="/layout/head.jsp"></jsp:include>
 <div>
-<a href=""></a>
+<a href="/Black_OY/view/product/pmidlistproduct.do">dd</a>
 </div>
 </body>
 </html>
