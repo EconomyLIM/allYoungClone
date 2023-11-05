@@ -14,7 +14,7 @@
 </head>
 <body>
 <div>
-<a href="/Black_OY/view/product/pmidlistproduct.do">dd</a>
+<a href="/Black_OY/view/product/pmidlistproduct.do?displNum=00010008">dd</a>
 </div>
 </body>
 </html>

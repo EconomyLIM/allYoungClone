@@ -8,5 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlowcateDTO {
+	
 	private String plowcate;
-}
+	
+} // class
