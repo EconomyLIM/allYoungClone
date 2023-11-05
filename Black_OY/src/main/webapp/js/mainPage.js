@@ -27,6 +27,16 @@ $(function() {
 	$("#mainFullSlider .slick-prev").on("click", function() {
 		mainFullSlider(-1);
 	});
+	
+	/* 메인 카테고리 목록 */
+	$(".main_cate_wrap .main_cate_list > li").on("mouseover", function() {
+		$(".main_cate_wrap").addClass("active");
+		$(this).addClass("on");
+		$()
+	}).on("mouseleave", function() {
+		$(".main_cate_wrap").removeClass("active");
+		$(this).removeClass("on");
+	})
 });
 
 // 매개변수를 안주면 현재페이지+1
