@@ -17,13 +17,6 @@
 <div id="bodyWrap" class="wide">
 
 	<!--header-->
-	 
-
-
-
-
-
-
 
 <form method="post" id="getCoopForm" name="getCoopForm">
     <input type="hidden" name="get_coopco_cd" id="get_coopco_cd" value="7030">
