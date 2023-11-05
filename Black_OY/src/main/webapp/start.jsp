@@ -49,7 +49,6 @@
 
 <a href="/Black_OY/view/product/pmidlistproduct.do?displNum=00010008">dd</a>
 
-<a href="/Black_OY/view/product/pmidlistproduct.do">dd</a>
 <br>
 <a href="<%=contextPath %>/olive/main.do">main page</a>
 
