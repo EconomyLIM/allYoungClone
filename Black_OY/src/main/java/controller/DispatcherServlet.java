@@ -64,7 +64,7 @@ public class DispatcherServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* System.out.println(request.getRequestURL()); */ ///jspPro/days06/list.do 
+		 System.out.println(request.getRequestURL());  ///jspPro/days06/list.do 
 		String requestURI =  request.getRequestURI();
 		System.out.println("requestURI:  "+requestURI);
 		String contextPath = request.getContextPath();

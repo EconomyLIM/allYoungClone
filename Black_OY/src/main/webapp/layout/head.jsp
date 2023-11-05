@@ -1,5 +1,8 @@
+<%@page import="user.domain.LogOnDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/inc/include.jspf" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -218,8 +221,18 @@
 		<div id="Header">
 			<div class="top_util">
 				<ul class="menu_list" id="menu_list_header">
-					<li class="join"><a href="#" data-attr="공통^헤더^회원가입">회원가입</a></li>
-					<li class="login"><a href="#" data-attr="공통^헤더^로그인">로그인</a></li>
+					<c:choose>
+						<c:when test="${empty sessionScope.logOn }">
+							<li class="join"><a href="#" data-attr="공통^헤더^회원가입">회원가입</a></li>
+							<li class="login"><a href="<%=contextPath %>/view/logon/logon.jsp" data-attr="공통^헤더^로그인">로그인</a></li>	
+						</c:when>
+						<c:otherwise>
+							<li class="logout">
+								<strong>${sessionScope.logOn.grade_id}&nbsp; ${sessionScope.logOn.u_name}</strong> <a href="<%=contextPath %>/view/logon/logout.jsp" data-attr="공통^헤더^로그아웃">로그아웃</a></li>
+								<li class="mypage"><a onclick="" href="#" data-attr="공통^헤더^마이페이지">마이페이지</a></li>
+						</c:otherwise>
+					</c:choose>
+					
 					<li class="cart"><a href="#" data-attr="공통^헤더^장바구니">장바구니<span
 							id="cartToCnt"></span></a></li>
 					<li class="order"><a onclick="" href="#"
@@ -228,7 +241,7 @@
 						data-attr="공통^헤더^고객센터">고객센터</a></li>
 					<li class="store"><a onclick="" href="#"
 						data-attr="공통^헤더^매장안내">매장안내</a></li>
-					<li class="global"><a onclick="" href="" target="_blank"
+					<li class="global"><a href="#" 
 						title="올리브영 글로벌 새창으로 열기" data-attr="공통^헤더^Global">Global</a></li>
 				</ul>
 			</div>
