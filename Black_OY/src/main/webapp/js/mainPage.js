@@ -10,6 +10,7 @@ let flag = false; // main full banner의 timer 조건
 $(function() {
 	timer = setInterval(mainFullSlider, 5000);	
 	
+	// / mainFullSlider에서 ㅣㅣ 또는 ▶ 눌렀을 때
 	$("#mainSliderBtn").on("click", function() {
 		$(this).toggleClass("pause");
 		if(flag) {
@@ -20,10 +21,12 @@ $(function() {
 		flag = !flag;
 	});
 	
+	// mainFullSlider에서 > 눌렀을 때
 	$("#mainFullSlider .slick-next").on("click", function() {
 		mainFullSlider();
 	});
 	
+	// mainFullSlider에서 < 눌렀을 때
 	$("#mainFullSlider .slick-prev").on("click", function() {
 		mainFullSlider(-1);
 	});
@@ -37,6 +40,30 @@ $(function() {
 		$(".main_cate_wrap").removeClass("active");
 		$(this).removeClass("on");
 	})
+	
+	/* 큐레이션 S 구현 */ 
+	// 다른상품 추천해드릴게요 눌렀을 때
+	$("#refBtn").on("click", function() {
+		let slides = $("#main_curation02_01 .slick-slide").length;
+		let slick_index = $("#mainFullSlider .slick-slide.slick-active").data("slick-index");
+		let index = (slick_index+1)%slides;
+		
+		$("#main_curation02_01 .slick-slide.slick-active")
+			.removeClass(["slick-active", "slick-current"])
+			.css({
+				"z-index" : "1"
+				, "opacity" : "0"
+			});
+			
+		$(`#main_curation02_01 .slick-slide[data-slick-index=${index}]`)
+			.addClass(["slick-active", "slick-current"])
+			.css({
+				"z-index" : "999"
+				, "opacity" : "1"
+			});
+			
+		$("#contsInfoBeginNum").html(`${index+1}`);
+	});
 });
 
 // 매개변수를 안주면 현재페이지+1
