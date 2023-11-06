@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -10,6 +9,12 @@
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <script src="/Black_OY/js/head.js"></script>
 <title>블랙올리브영 온라인몰</title>
+<style>
+ #directTop {
+            opacity : 0;
+            transition: opacity 0.5s ease;
+        }
+</style>
 </head>
 <body>
 	<!-- 3200210 큐레이션 개선 관련 건-레코벨 데이터 송부 
@@ -255,7 +260,7 @@
 							</div>
 							<!--// 2017-02-07 수정 : 자동완성기능 영역 -->
 							<!-- 최근 검색어 -->
-							<a href="#" class="search_tab tab01 on" id="searchRecent"
+							<a href="#" class="search_tab tab01" id="searchRecent"
 								style="display: none;">최근 검색어</a>
 							<!-- 현재 보여지는 탭에 클래스 on 넣어주세요 -->
 							<div class="search_tab_cont" id="recent_cont"
@@ -276,11 +281,71 @@
 							</div>
 							<!--// 최근 검색어 -->
 							<!-- 급상승 검색어 -->
-							<a href="#" class="search_tab tab02" id="searchPop"
+							<a href="#" class="search_tab tab02 on" id="searchPop"
 								style="display: none;">급상승 검색어</a>
 							<div class="search_tab_cont sharp_rise" id="w_pop_cont"
 								style="display: none;">
-								<ul id="mainPopword">
+									<ul id="mainPopword">
+										<li class="top"><a href="#"
+											onclick="javascript:popwordSearchdo('틴트','Pop_PROD');"
+											data-attr="공통^통합검색_급상승검색어^틴트"> <span>1</span> <strong>틴트</strong>
+												<span class="rate "> <span>&nbsp;</span>
+											</span>
+										</a></li>
+										<li class="top"><a href="#"
+											onclick="javascript:popwordSearchdo('쿠션','Pop_PROD');"
+											data-attr="공통^통합검색_급상승검색어^쿠션"> <span>2</span> <strong>쿠션</strong>
+												<span class="rate "> <span>&nbsp;</span>
+											</span>
+										</a></li>
+										<li class="top"><a href="#"
+											onclick="javascript:popwordSearchdo('블프','Pop_PROD');"
+											data-attr="공통^통합검색_급상승검색어^블프"> <span>3</span> <strong>블프</strong>
+												<span class="rate "> <span>&nbsp;</span>
+											</span>
+										</a></li>
+										<li class=""><a href="#"
+											onclick="javascript:popwordSearchdo('셀러버','Pop_PROD');"
+											data-attr="공통^통합검색_급상승검색어^셀러버"> <span>4</span> 셀러버 <span
+												class="rate "> <span>&nbsp;</span>
+											</span>
+										</a></li>
+										<li class=""><a href="#"
+											onclick="javascript:popwordSearchdo('롬앤','Pop_PROD');"
+											data-attr="공통^통합검색_급상승검색어^롬앤"> <span>5</span> 롬앤 <span
+												class="rate "> <span>&nbsp;</span>
+											</span>
+										</a></li>
+										<li class=""><a href="#"
+											onclick="javascript:popwordSearchdo('블러셔','Pop_PROD');"
+											data-attr="공통^통합검색_급상승검색어^블러셔"> <span>6</span> 블러셔 <span
+												class="rate "> <span>&nbsp;</span>
+											</span>
+										</a></li>
+										<li class=""><a href="#"
+											onclick="javascript:popwordSearchdo('립밤','Pop_PROD');"
+											data-attr="공통^통합검색_급상승검색어^립밤"> <span>7</span> 립밤 <span
+												class="rate "> <span>&nbsp;</span>
+											</span>
+										</a></li>
+										<li class=""><a href="#"
+											onclick="javascript:popwordSearchdo('마스크팩','Pop_PROD');"
+											data-attr="공통^통합검색_급상승검색어^마스크팩"> <span>8</span> 마스크팩 <span
+												class="rate "> <span>&nbsp;</span>
+											</span>
+										</a></li>
+										<li class=""><a href="#"
+											onclick="javascript:popwordSearchdo('아이라이너','Pop_PROD');"
+											data-attr="공통^통합검색_급상승검색어^아이라이너"> <span>9</span> 아이라이너 <span
+												class="rate "> <span>&nbsp;</span>
+											</span>
+										</a></li>
+										<li class=""><a href="#"
+											onclick="javascript:popwordSearchdo('마스카라','Pop_PROD');"
+											data-attr="공통^통합검색_급상승검색어^마스카라"> <span>10</span> 마스카라 <span
+												class="rate "> <span>&nbsp;</span>
+											</span>
+										</a></li>
 								</ul>
 								<div class="search_set_area">
 									<a href="#" class="sch_pop_close">닫기</a>
@@ -362,8 +427,8 @@
 							<button class="mymenu_btn"
 								onclick="javascript:common.link.moveLoginPage();">로그인</button>
 						</div></li>
-					<li class="recent"><a onclick="recProductView()" href="#" class="mymenu_layer"
-						title="최근 본 상품 자세히보기 열기/닫기">최근 본 상품</a>
+					<li class="recent"><a onclick="recProductView()" href="#"
+						class="mymenu_layer" title="최근 본 상품 자세히보기 열기/닫기">최근 본 상품</a>
 						<div class="recent_prd_box" style="min-height: 510px;">
 							<p class="recent_tit">
 								전체 <span>0</span>개
@@ -722,6 +787,11 @@
 						data-ref-linkurl="main/getEventList.do" data-attr="공통^GNB^이벤트"><span>이벤트</span>
 					</a></li>
 				</ul>
+				
+				<div id="directTop" style="display: block;">
+		<button><span></span>TOP</button>
+	</div>
+				
 			</div>
 			<!-- RecoBell Script Start -->
 			<form name="ssologinfrm"
@@ -730,28 +800,29 @@
 				<input type="hidden" id="cjssoq" name="cjssoq">
 			</form>
 			<script>
-                var ssoCheck = "null";
-                var cjssoq = "null";
-                //alert('ssocheck:'+ssoCheck);
-                //세션 정보가 없을경우 
-                if (!_isLogin || ssoCheck != 'N') {
-                    //SSO 쿠키가 있고 정상적으로 토큰을 밥급받았을 경우
-                    if ((typeof _cjssoEncData) != "undefined" && _cjssoEncData != "") {
-                        //ajax를 사용해서 _cjssoEncData 를 처리하여 사용하셔도 무방합니다.
-                        //alert("111 SSO쿠키를 조사해보니 있어서 확인하러 갑니다11."+_cjssoEncData);
-                        if (_cjssoEncData != cjssoq) {
-                            document.getElementById("cjssoq").value = _cjssoEncData;
-                            document.ssologinfrm.submit();
-                        }
-                    } else {
-                        //alert("222세션도 없고 쿠키도 없어서 해당 페이지로 갑니다.")
-                    }
-                }
-            </script>
+				var ssoCheck = "null";
+				var cjssoq = "null";
+				//alert('ssocheck:'+ssoCheck);
+				//세션 정보가 없을경우 
+				if (!_isLogin || ssoCheck != 'N') {
+					//SSO 쿠키가 있고 정상적으로 토큰을 밥급받았을 경우
+					if ((typeof _cjssoEncData) != "undefined"
+							&& _cjssoEncData != "") {
+						//ajax를 사용해서 _cjssoEncData 를 처리하여 사용하셔도 무방합니다.
+						//alert("111 SSO쿠키를 조사해보니 있어서 확인하러 갑니다11."+_cjssoEncData);
+						if (_cjssoEncData != cjssoq) {
+							document.getElementById("cjssoq").value = _cjssoEncData;
+							document.ssologinfrm.submit();
+						}
+					} else {
+						//alert("222세션도 없고 쿠키도 없어서 해당 페이지로 갑니다.")
+					}
+				}
+			</script>
 
 			<!-- //[3553186] 온라인몰 전시 카테고리 개편 일괄 작업 요청의 건 -->
 			<!-- 메인 카테고리 목록 -->
-			
+
 		</div>
 	</div>
 </body>
