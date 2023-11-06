@@ -3,12 +3,20 @@ package product.persistence;
 import java.sql.Connection;
 import java.util.List;
 
+import product.domain.MidCateDTO;
 import product.domain.PMidListDTO;
 import product.domain.PbrandListDTO;
 import product.domain.PlowcateDTO;
+import product.domain.TopCateDTO;
 
 public interface PMidListDAO {
 		
+	// a. 중위 카테고리 고르면 상위 가져오기
+	List<TopCateDTO> selectTop(Connection conn, String id) throws Exception;
+	
+	// b. 하위 카테고리 고르면 상위, 중위 가져오기
+	List<MidCateDTO> selectMid(Connection conn, String id) throws Exception;
+	
 	// 1. 중분류안에 있는 하위 분류 리스트 가져오기
 	List<PlowcateDTO> selectLowCate(Connection conn, String mId) throws Exception;
 	

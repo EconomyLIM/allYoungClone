@@ -9,6 +9,7 @@ import com.util.JDBCUtil;
 import product.domain.PMidListDTO;
 import product.domain.PbrandListDTO;
 import product.domain.PlowcateDTO;
+import product.domain.TopCateDTO;
 import product.persistence.PMidListDAOImpl;
 
 public class PMidSurvice {
@@ -90,6 +91,26 @@ public class PMidSurvice {
 
 		return null;
 	} // selectMproduct
+	
+	// 상위 카테고리를 가져오는 작업
+	public List<TopCateDTO> selectTopCate(String id){
+		
+		Connection conn = null;
+		List<TopCateDTO> list = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			PMidListDAOImpl pmidlistdaoImpl = PMidListDAOImpl.getInstance();
+			list = pmidlistdaoImpl.selectTop(conn, id);
+		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(">PMidSurvice.selectTopCate_Exception");
+		}//try-catch
+		
+		return list;
+		
+	} // selectTopCate
 
 
 
