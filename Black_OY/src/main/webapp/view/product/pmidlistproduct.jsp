@@ -242,10 +242,9 @@
 			<c:if test="${not empty pmidlistdto}">
 					<c:forEach items="${pmidlistdto}" var="pml" varStatus="outerLoop" begin="1" end="6">
 						<ul class="cate_prd_list gtm_cate_list">
-						 <c:forEach begin="1" end="4" varStatus="innerLoop">
-						 <c:if test="${innerLoop.index == 4}">
-						 <c:set var="index" value="${outerLoop.index * 6 + innerLoop.index}" />
-						<li class="flag" data-index="${index}">
+						 <%-- <c:forEach items="pml" var="pml2" begin="1" end="4" varStatus="innerLoop">
+					 --%>
+						<li class="flag" >
 							<div class="prd_info">
 								<a 
 								href="do?${pml.productID}"
@@ -285,8 +284,8 @@
 								</p>
 							</div>
 						</li>
-						</c:if>
-						</c:forEach>
+						
+						<%-- </c:forEach> --%>
 						</ul>
 					</c:forEach>
 				</c:if>
