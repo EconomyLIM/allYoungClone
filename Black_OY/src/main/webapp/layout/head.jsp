@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/inc/include.jspf" %>
@@ -239,7 +238,7 @@
 						data-attr="공통^헤더^주문배송">주문배송</a></li>
 					<li class="customer"><a onclick="" href="#"
 						data-attr="공통^헤더^고객센터">고객센터</a></li>
-					<li class="store"><a onclick="" href="#"
+					<li class="store"><a onclick="" href="<%=contextPath %>/store/getStoreMain.do"
 						data-attr="공통^헤더^매장안내">매장안내</a></li>
 					<li class="global"><a href="#" 
 						title="올리브영 글로벌 새창으로 열기" data-attr="공통^헤더^Global">Global</a></li>
