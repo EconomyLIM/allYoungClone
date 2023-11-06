@@ -127,7 +127,7 @@ public class PMidListDAOImpl  implements PMidListDAO{
 //================================product List 가져오는 작업 =====================================
 	@Override
 	public List<PMidListDTO> selectMProList(Connection conn, String mId) throws Exception {
-		String sql = " SELECT displ_img_src, brand_name, pro_displ_name "
+		String sql = " SELECT pro_displ_src, brand_name, pro_displ_name "
 				+ " , cat_l_id, cat_m_id, cat_s_id "
 				+ " , pro_price, afterprice "
 				+ " , pro_displ_id, pro_id "
@@ -170,7 +170,7 @@ public class PMidListDAOImpl  implements PMidListDAO{
 				list = new ArrayList<>();
 				do {
 				
-					displImgSrc = rs.getString("displ_img_src");
+					displImgSrc = rs.getString("pro_displ_src");
 					brandName = rs.getString("brand_name");
 					displProName = rs.getString("pro_displ_name");
 					lId = rs.getString("cat_l_id");
