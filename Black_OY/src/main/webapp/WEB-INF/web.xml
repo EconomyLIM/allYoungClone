@@ -34,5 +34,19 @@
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 	
-	
+		<servlet>
+		<description>All dispatcher</description>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>controller.DispatcherServlet</servlet-class>
+		<init-param>
+			<description>URL과 Handler 등록 경로</description>
+			<param-name>path</param-name>
+			<param-value>/WEB-INF/commandHandler.properties</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
 </web-app>
