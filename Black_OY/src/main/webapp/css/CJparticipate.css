@@ -45,7 +45,7 @@
 .member_join .step_join ul li.step1_1 .haze,
 .member_join .step_join ul li.step2 .haze,
 .member_join .step_join ul li.step3 .haze,
-.member_join .step_join ul li.step4 .haze {background:url('/cjmweb/images/member/bg_member.png') no-repeat left top;}
+.member_join .step_join ul li.step4 .haze {background:url('https://www.cjone.com/cjmweb/images/member/bg_member.png') no-repeat left top;}
 .member_join .step_join ul li.step1 .haze {background-position:0 0;}
 .member_join .step_join ul li.step1_1 .haze {background-position:-100px 0;}
 .member_join .step_join ul li.step2 .haze {background-position:-200px 0;}

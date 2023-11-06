@@ -5,12 +5,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import user.domain.OuserDTO;
 @NoArgsConstructor
 @Setter
 @Getter
@@ -23,9 +23,9 @@ public class OuserDAOImpl implements OuserDAO {
 		String getJoinCheck = null;
 		PreparedStatement pstmt = null;
 	      
-	      String sql = "SELECT u_tel "
-	            + " FROM o_user "
-	            + " WHERE u_tel =  ? ";
+	      String sql = "SELECT SUBSTR ( REGEXP_REPLACE(u_tel, '[^0-9]'), 4 )"
+	      		+ "FROM o_user"
+	      		+ "WHERE SUBSTR ( REGEXP_REPLACE(u_tel, '[^0-9]'), 4 ) = ?" ;
 
 	      pstmt = this.conn.prepareStatement(sql); 
 	      pstmt.setString(1, u_tel);

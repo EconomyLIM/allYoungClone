@@ -693,7 +693,7 @@ button.btn_more {width:310px; height:50px; border:1px solid #ddd; background-col
 #contentsWrap {min-height:700px; padding-top:120px;}
 #contents {position:relative; max-width:1060px; min-width:1024px; margin:0 auto; padding-bottom:80px;}
 #contents .location {position:absolute; top:30px; right:0; height:15px; text-align:right;}
-#contents .location a {float:left; margin:3px 0 0 5px; padding-left:10px; background:url('/cjmweb/images/common/ico_location.png') no-repeat; color:#555; font-size:12px; line-height:13px;}
+#contents .location a {float:left; margin:3px 0 0 5px; padding-left:10px; background:url('https://www.cjone.com/cjmweb/images/common/ico_home.png/cjmweb/images/common/ico_location.png') no-repeat; color:#555; font-size:12px; line-height:13px;}
 #contents .location .home {width:15px; height:15px; margin:0; padding:0; background:url('/cjmweb/images/common/ico_home.png') no-repeat;}
 #contents .location .now {color:#222;}
 #contents .location_wrap.white a,
