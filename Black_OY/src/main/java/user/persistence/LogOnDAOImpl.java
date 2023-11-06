@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.util.JDBCUtil;
+
 import user.domain.LogOnDTO;
 
 public class LogOnDAOImpl implements LogOnDAO{
@@ -32,12 +34,14 @@ public class LogOnDAOImpl implements LogOnDAO{
 			psmt.setString(2, u_pwd);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
-				
 					logdto = new LogOnDTO(rs.getString("user_id"),rs.getString("u_name") , rs.getString("u_pwd"), rs.getString("gr_name"));
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(rs);
 		}
 		
 		return logdto;

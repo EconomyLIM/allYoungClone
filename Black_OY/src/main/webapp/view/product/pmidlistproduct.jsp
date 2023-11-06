@@ -6,6 +6,7 @@
 <%@ include file="/WEB-INF/inc/session_auth.jspf"%>
 <%
 	ArrayList myList = (ArrayList)request.getAttribute("pbrandlist");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -242,8 +243,8 @@
 			<c:if test="${not empty pmidlistdto}">
 					<c:forEach var="i" varStatus="outerLoop" begin="1" end="6">
 						<ul class="cate_prd_list gtm_cate_list">
-						<c:set var="innerLoopBegin" value="${(outerLoop.index - 1) * 4 + 1}" />
-        				<c:set var="innerLoopEnd" value="${outerLoop.index * 4}" />
+						<c:set var="innerLoopBegin" value="${(outerLoop.index - 1) * 4}" />
+        				<c:set var="innerLoopEnd" value="${(outerLoop.index * 4) -1}" />
 						  <c:forEach items="${pmidlistdto}" var="pml" begin="${innerLoopBegin}" end="${innerLoopEnd}" varStatus="innerLoop">
 					 
 						<li class="flag" >
