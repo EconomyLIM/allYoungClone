@@ -46,8 +46,8 @@ public class DispatcherServlet extends HttpServlet{
 			Entry<Object, Object> entry =it.next();
 			String url = (String) entry.getKey();
 			String className = (String) entry.getValue();
-			System.out.println(url);
-			System.out.println(className);
+//			System.out.println(url);
+//			System.out.println(className);
 			
 			Class<?> commandhandlerClass = null;
 			try {
@@ -66,9 +66,9 @@ public class DispatcherServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 System.out.println(request.getRequestURL());  ///jspPro/days06/list.do 
 		String requestURI =  request.getRequestURI();
-		System.out.println("requestURI:  "+requestURI);
+//		System.out.println("requestURI:  "+requestURI);
 		String contextPath = request.getContextPath();
-		System.out.println("contextPath:  "+contextPath);
+//		System.out.println("contextPath:  "+contextPath);
 		requestURI = requestURI.replace(contextPath, "");
 		
 		CommandHandler handler = this.commandHandlerMap.get(requestURI);
