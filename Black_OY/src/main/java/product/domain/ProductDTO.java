@@ -1,5 +1,5 @@
 package product.domain;
 
-public class Product {
- 
+public class ProductDTO {
+
 }
