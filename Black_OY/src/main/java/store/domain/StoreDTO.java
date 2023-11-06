@@ -1,3 +1,4 @@
+
 package store.domain;
 
 import lombok.AllArgsConstructor;
