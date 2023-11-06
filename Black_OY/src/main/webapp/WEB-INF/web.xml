@@ -9,10 +9,11 @@
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
+    <welcome-file>start.jsp</welcome-file>
   </welcome-file-list>
   
   	<resource-ref>
-		<description>Oracle Datasource example</description>
+		<description>Oracle example</description>
 		<res-ref-name>jdbc/myoracle</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
@@ -34,7 +35,8 @@
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 	
-		<servlet>
+	
+	<servlet>
 		<description>All dispatcher</description>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>controller.DispatcherServlet</servlet-class>
@@ -49,4 +51,5 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
 </web-app>
