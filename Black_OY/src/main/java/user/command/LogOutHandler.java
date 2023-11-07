@@ -13,7 +13,9 @@ public class LogOutHandler implements CommandHandler{
 		System.out.println("> LogOut.process...");
 		HttpSession session = request.getSession();
 		session.removeAttribute("logOn");
-		return "/view/mainPage/main.jsp";
+		session.setAttribute("basketlistcnt",0);
+		response.sendRedirect("/Black_OY/olive/main.do");
+		return null;
 	}
 
 }

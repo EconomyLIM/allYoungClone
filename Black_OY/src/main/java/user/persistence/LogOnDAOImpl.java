@@ -47,4 +47,30 @@ public class LogOnDAOImpl implements LogOnDAO{
 		return logdto;
 	}
 
+	@Override
+	public int baskekcnt(Connection conn, String user_id) {
+		LogOnDTO logdto = null; 
+		String sql = "select count(*) from basket where user_id = ? ";
+		
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, user_id);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt("count(*)");
+				return cnt;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(rs);
+		}
+		return 0;
+	}
+
 }

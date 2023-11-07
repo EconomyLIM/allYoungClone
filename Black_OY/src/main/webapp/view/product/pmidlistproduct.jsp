@@ -280,7 +280,10 @@
 									<c:if test="${pml.prc eq 1}">
 										<span class="icon_flag coupon">쿠폰</span>
 									</c:if>
-									<span class="icon_flag gift">증정</span>
+									<c:if test="${bpl.pmp eq 1 }">
+										<span class="icon_flag gift">증정</span>
+									</c:if>
+									
 									<c:if test="${pml.stock > 0}">
 										<span class="icon_flag delivery">오늘드림</span>
 									</c:if>

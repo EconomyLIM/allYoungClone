@@ -131,7 +131,7 @@ public class PMidListDAOImpl  implements PMidListDAO{
 				+ " , cat_l_id, cat_m_id, cat_s_id "
 				+ " , pro_price, afterprice "
 				+ " , pro_displ_id, pro_id "
-				+ " , prc, pdc, stock "
+				+ " , prc, pdc, pmp, stock "
 				+ " , ordercnt, pro_displ_like, pro_reg "
 				+ " FROM pmlistview WHERE cat_m_id = ? ";
 		

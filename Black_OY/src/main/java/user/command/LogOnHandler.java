@@ -24,8 +24,9 @@ public class LogOnHandler implements CommandHandler {
 		HttpSession session = request.getSession();
 		
 		if(method.equals("GET")) {
-			refer = request.getHeader("Referer");
-			session.setAttribute("refer", refer);
+			//refer = request.getHeader("Referer");
+//			session.setAttribute("refer", refer);
+			refer = (String) session.getAttribute("refer");
 			System.out.println("요청URL:" + refer);
 			return "/view/logon/logon.jsp";
 		}else {
@@ -38,8 +39,9 @@ public class LogOnHandler implements CommandHandler {
 		
 
 		if (logdto != null) {
-
 			session.setAttribute("logOn", logdto);
+			int cnt = logOnService.basketcntService(user_id);
+			session.setAttribute("basketlistcnt", cnt);
 			request.removeAttribute("errorMessage");
 			refer = (String) session.getAttribute("refer");
 			 if (refer != null) {
