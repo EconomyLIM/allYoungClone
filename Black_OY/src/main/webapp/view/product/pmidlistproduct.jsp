@@ -240,10 +240,12 @@
 			
 			<!-- pmidlistdto -->
 			<c:if test="${not empty pmidlistdto}">
-					<c:forEach items="${pmidlistdto}" var="pml" varStatus="outerLoop" begin="1" end="6">
+					<c:forEach var="i" varStatus="outerLoop" begin="1" end="6">
 						<ul class="cate_prd_list gtm_cate_list">
-						 <%-- <c:forEach items="pml" var="pml2" begin="1" end="4" varStatus="innerLoop">
-					 --%>
+						<c:set var="innerLoopBegin" value="${(outerLoop.index - 1) * 4 + 1}" />
+        				<c:set var="innerLoopEnd" value="${outerLoop.index * 4}" />
+						  <c:forEach items="${pmidlistdto}" var="pml" begin="${innerLoopBegin}" end="${innerLoopEnd}" varStatus="innerLoop">
+					 
 						<li class="flag" >
 							<div class="prd_info">
 								<a 
@@ -285,7 +287,7 @@
 							</div>
 						</li>
 						
-						<%-- </c:forEach> --%>
+						</c:forEach>
 						</ul>
 					</c:forEach>
 				</c:if>

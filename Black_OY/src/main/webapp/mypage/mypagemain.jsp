@@ -1,3 +1,6 @@
+<%@page import="mypage.domain.MpUserInfoDTO"%>
+<%@page import="user.domain.LogOnDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -15,10 +18,19 @@
 <body>
 <jsp:include page="/layout/head.jsp"></jsp:include>
 
+
 <div id="Contents">
 		
+		<%
+			String ugrade = null;
+			String uname = null;
+			Object a = request.getParameter("userInfo");
+			
+		%>
 		
+	<script>
 
+	</script>
 		<div class="mypage-head rate_04">
 			<h1 class="tit"><a href="https://www.oliveyoung.co.kr/store/mypage/myPageMain.do">마이페이지</a></h1>
 			
@@ -34,9 +46,11 @@
 							
 						
 					</div>
-					<p class="txt">
-						BABY OLIVE <strong class="name">김호영</strong>님 반갑습니다.
-					</p>
+					 <p class="txt">
+					
+						<%-- 등급 --%> ${ userInfo } <strong class="name"> <%-- 이름 --%> </strong>님 반갑습니다.
+						
+					</p> 
 					<ul class="mem_opt">
 						
 						<li id="membershipBenefit"><a href="javascript:common.wlog('mypage_coupon_onbenefit_tab');" onclick="mypage.header.getMembership()">올리브 멤버스 라운지</a></li>
@@ -52,15 +66,15 @@
 					<ul class="infor clrfix" id="pointInfo">
 						<li id="cjOnePoingInfo" onclick="location.href='https://www.oliveyoung.co.kr/store/mypage/getCJOnePointInfo.do'+'?'+ getEventParameterString({t_page: '마이페이지', t_click: 'CJONE포인트'})">
 							<span class="tit">CJ ONE 포인트</span>
-							<a class="num" href="javascript:;">6,680<em class="unit">P</em></a>
+							<a class="num" href="javascript:;"><%-- 포인트 잔액 --%><em class="unit">P</em></a>
 						</li>
 						<li id="couponList" onclick="location.href='https://www.oliveyoung.co.kr/store/mypage/getCouponList.do'+'?'+ getEventParameterString({t_page: '마이페이지', t_click: '쿠폰'})">
 							<span class="tit">쿠폰</span>
-							<a class="num" href="javascript:;" data-attr="마이페이지^쿠폰^쿠폰함이동">2<em class="unit">개</em></a>
+							<a class="num" href="javascript:;" data-attr="마이페이지^쿠폰^쿠폰함이동"><%-- 쿠폰갯수 --%><em class="unit">개</em></a>
 						</li>
 						<li id="depositList" onclick="location.href='https://www.oliveyoung.co.kr/store/mypage/getDepositList.do'+'?'+ getEventParameterString({t_page: '마이페이지', t_click: '마이월렛_예치금'})">
 							<span class="tit">예치금</span>
-							<a class="num" href="javascript:;">0<em class="unit">원</em></a>
+							<a class="num" href="javascript:;"><%-- 예치금 잔액 --%><em class="unit">원</em></a>
 						</li>
 						
 					</ul>
@@ -98,7 +112,7 @@
 							<ul>
 								<li class="subMenu"><a href="javascript:;" mymenuid="0401" data-ref-linkurl="https://www.oliveyoung.co.kr/store/counsel/getQnaList.do" data-attr="마이페이지^메뉴^1:1문의내역" data-tracking-name="1대1문의 클릭" data-tracking-properties="t_page=마이페이지&amp;t_click=문의현황_1대1문의">1:1문의내역</a></li>
 								
-								<li class="subMenu"><a href="javascript:;" mymenuid="0402" data-ref-linkurl="https://www.oliveyoung.co.kr/store/mypage/getGdasList.do" data-attr="마이페이지^메뉴^리뷰" data-tracking-properties="t_page=마이페이지&amp;t_click=리뷰">리뷰 (<span class="num_review" id="_gdasPossibleTotCnt">0</span>)<img src="https://static.oliveyoung.co.kr/pc-static-root/image/comm/icon_lnb_new2.png" class="new" id="_newGdasPossible" style="display: none;" alt="신규 리뷰 작성"></a></li>
+								<li class="subMenu"><a href="javascript:;" mymenuid="0402" data-ref-linkurl="https://www.oliveyoung.co.kr/store/mypage/getGdasList.do" data-attr="마이페이지^메뉴^리뷰" data-tracking-properties="t_page=마이페이지&amp;t_click=리뷰">리뷰 (<span class="num_review" id="_gdasPossibleTotCnt"><%-- 리뷰 갯수 --%></span>)<img src="https://static.oliveyoung.co.kr/pc-static-root/image/comm/icon_lnb_new2.png" class="new" id="_newGdasPossible" style="display: none;" alt="신규 리뷰 작성"></a></li>
 								<li class="subMenu"><a href="javascript:;" mymenuid="0403" data-ref-linkurl="https://www.oliveyoung.co.kr/store/mypage/getGoodsQnaList.do" data-attr="마이페이지^메뉴^상품Q&amp;A내역" data-tracking-name="상품QnA 클릭" data-tracking-properties="t_page=마이페이지&amp;t_click=문의현황_상품QnA">상품Q&amp;A내역</a></li>
 								<li class="subMenu"><a href="javascript:;" mymenuid="0404" data-ref-linkurl="https://www.oliveyoung.co.kr/store/mypage/getMyEventList.do" data-attr="마이페이지^메뉴^이벤트 참여 현황" data-tracking-name="이벤트참여현황 클릭" data-tracking-properties="t_page=마이페이지&amp;t_click=이벤트참여현황">이벤트 참여 현황</a></li>
 
@@ -119,7 +133,7 @@
 				<!-- //마이페이지 SUB 메뉴 -->
 
 <!-- //마이페이지 SUB -->
-<script src="https://static.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.side.js?dumm=202311020005"></script>
+<!-- <script src="https://static.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.side.js?dumm=202311020005"></script>
 <script>
 	$(window).ready(function(){
 	    mypage.side.init();
@@ -175,7 +189,7 @@
 				
 
 
-
+ -->
 
 
 

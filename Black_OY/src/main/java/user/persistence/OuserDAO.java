@@ -11,3 +11,4 @@ public interface OuserDAO {
 	//회원가입
 	int join(OuserDTO dto) throws SQLException;
 }
+

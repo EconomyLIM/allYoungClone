@@ -1,3 +1,4 @@
+
 package user.persistence;
 
 import java.sql.Connection;
@@ -16,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import user.domain.OuserDTO;
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -69,7 +71,7 @@ public class OuserDAOImpl implements OuserDAO {
 		pstmt.setString(2,  dto.getU_name() );
 		pstmt.setString(3,  dto.getU_pwd() );
 		pstmt.setString(4,  dto.getU_tel() );
-		pstmt.setDate(5, (Date) dto.getU_birth());
+		pstmt.setDate(5,  (Date) dto.getU_birth());
 		pstmt.setString(6,  dto.getU_email() );
 		rowCount = pstmt.executeUpdate();
 
@@ -81,3 +83,4 @@ public class OuserDAOImpl implements OuserDAO {
 
 
 }
+
