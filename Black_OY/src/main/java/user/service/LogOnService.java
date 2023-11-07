@@ -34,6 +34,22 @@ public class LogOnService {
 		}
 		return logdto;
 		
-	} // selectLowCate
+	} // logselectservice
+	
+	public int basketcntService(String user_id) {
+		Connection conn = null;
+		int cnt = 0;
+		try {
+			conn = ConnectionProvider.getConnection();
+			LogOnDAOImpl daoImpl = LogOnDAOImpl.getInstance();
+			cnt = daoImpl.baskekcnt(conn, user_id);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
+		
+	}
 	
 }

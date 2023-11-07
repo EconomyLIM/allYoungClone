@@ -25,12 +25,7 @@ public class BrandimgDTO { //수정필요 ㅠ
 	 * 
 	 * public void setBrandExpl(String brandExpl) { this.brandExpl = brandExpl; }
 	 * 
-	 * // toString method for debugging
-	 * 
-	 * @Override public String toString() { return "BrandDTO{" + "brandId='" +
-	 * brandId + '\'' + ", brandName='" + brandName + '\'' + ", brandLike=" +
-	 * brandLike + ", brandSumm='" + brandSumm + '\'' + ", brandExpl='" + brandExpl
-	 * + '\'' + '}'; } }
+
 	 */
 
 }
