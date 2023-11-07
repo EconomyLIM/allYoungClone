@@ -1,14 +1,24 @@
+<%@page import="user.domain.LogOnDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/inc/include.jspf" %>
 <%@ include file="/WEB-INF/inc/session_auth.jspf" %>
+<%
+	boolean logonCheck = false;
+	LogOnDTO dto = (LogOnDTO)request.getSession().getAttribute("logOn");
+	
+	String user_id = "";
+	if(dto != null) {
+		user_id = dto.getUser_id();
+	}
+	logonCheck = (dto != null);
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="/Black_OY/js/store.js"></script>
 <script src="/Black_OY/js/head.js"></script>
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
@@ -66,6 +76,8 @@
 										<a href="javascript:;" class="btn_sch_del"><span class="blind">검색어 삭제</span></a>
 										<a href="javascript:;" class="btn_sch"><span class="blind">검색</span></a>
 									</div>
+									<dl class="reShop_result"><dt><span></span>개의 매장이 검색되었습니다.</dt><dd><span class="oyblind">관심매장</span>클릭하여 관심매장을 등록하세요.</dd></dl>
+									<div class="urNotice"><p>매장 상황에 따라 매장별 실 영업시간이 다를 수 있습니다.</p></div>
 								</div>
 								<div class="no_store" id="noSearchWordInfo" style="display: none">
 									<dl class="no_list">
@@ -478,6 +490,427 @@
 </div>
 
 <jsp:include page="/layout/footer.jsp"></jsp:include>
+
+<script>
+$(function() {
+	// 직접검색 지역검색 관심매장 판매매장 찾기 
+	// 탭 구현
+	$("#TabsOpenArea > li").on("click", function() {
+		$("#TabsOpenArea > li").removeClass("on");
+		$(this).addClass("on");
+		$(".tab_area").hide();
+		switch($(this).text()) {
+			case "직접검색" : 
+				$(".tab_area").eq(0).show();
+				break;
+			case "지역검색" : 
+				$(".tab_area").eq(1).show();
+				break;
+			case "관심매장" : 
+				$(".tab_area").eq(2).show();
+				break;
+			case "판매매장 찾기" : 
+				$(".tab_area").eq(3).show();
+				break;
+		}
+	}); // end
+	
+	// 매장 검색 옵션 눌렀을 때
+	$(".btn_opSt").on("click", function() {
+		$(this).toggleClass("on");
+		$(".choice_opSt").slideToggle("fast");
+		
+		/*if($(this).hasClass("on")) {
+			$(".choice_opSt").css("display", "block");
+		} else {
+			$(".choice_opSt").css("display", "none");
+		}*/
+	}); // end
+	
+	// 카테고리 취급매장, 서비스 제공 매장 버튼 선택 구현
+	$(".reShop_opList > ul > li > button").on("click", function() {
+		$(this).toggleClass("on");
+	});
+	
+	// 초기화 버튼 구현
+	$(".init_btn.empty_btn").on("click", function() {
+		$(".reShop_opList > ul > li > button").removeClass("on");
+	});
+	
+	
+	
+	
+	
+	/* 직접검색 탭 */
+	
+	// 검색어를 입력하고 enter를 눌렀을 때
+	$("#searchWord").on("keyup", function(event) {
+		if(event.which == 13) {
+			let keyword = $(this).val();
+			$.ajax({
+				type : 'get'
+				, async : false
+				, cache: false
+				, url : '/Black_OY/store/getStoreListKeyword.do'
+				, dataType : 'text'
+				, data : { keyword : keyword }
+				, success : function(data) {
+					$("#wordStoreList").empty();
+					if(data == "") {
+						$("#noSearchWordInfo").show();
+						$("#searchWordDiv .reShop_result > dt > span").text("0");
+						return;
+					}
+					$("#noSearchWordInfo").hide();
+					let stores = JSON.parse(data);
+					$("#searchWordDiv .reShop_result > dt > span").text(stores.stores.length);
+					for(let i=0; i<stores.stores.length; i++) {
+						let li = $("<li>").addClass(stores.stores[i].store_id);
+						let div = $("<div>").addClass("li_Pc_reInner");
+						let h4 = $("<h4>").addClass("tit")
+						let a = $("<a>").text(stores.stores[i].store_name);
+						let p = $("<p>").addClass("addr").text(stores.stores[i].store_addr);
+						let area = $("<div>").addClass("area");
+						let call = $("<div>").addClass("call").text(stores.stores[i].store_tel);
+						
+						let date = new Date();
+						let hour = date.getHours() + "";
+						let curTime = hour.padStart(2, '0') + ":" + date.getMinutes();
+						let weekday = stores.stores[i].weekday;
+						let weekdays = weekday.split(" - ");
+						let time;
+						if(weekdays[0] <= curTime && curTime <= weekdays[1]) {
+							time = $("<div>").addClass(["time", "on"]).text("영업중");
+						} else {
+							time = $("<div>").addClass("time").text("영업 준비중");
+						}
+						
+						
+						let fv_reShop_in = $("<div>")
+											.addClass("fv_reShop_in")
+											.html(`<span>\${stores.stores[i].store_fav}</span>명이 관심매장으로 등록했습니다.`);
+						let button = $("<button>").addClass(["star", "active"]);
+						
+						$(area).append(call);
+						$(area).append(time);
+						
+						$(h4).append(a);
+						$(div).append(h4);
+						$(div).append(p);
+						$(div).append(area);
+						$(div).append(fv_reShop_in);
+						$(div).append(button);
+						
+						$(li).append(div);
+						$("#wordStoreList").append(li);
+					}
+					
+					//console.log(data);
+	            }
+				, error : function (data, textStatus) {
+	                console.log('error');
+	            }
+			});
+		}
+	}); // end
+	
+	// 돋보기를 눌렀을 때
+	$(".btn_sch").on("click", function() {
+		let keyword = $("#searchWord").val();
+			$.ajax({
+				type : 'get'
+				, async : false
+				, cache: false
+				, url : '/Black_OY/store/getStoreListKeyword.do'
+				, dataType : 'text'
+				, data : { keyword : keyword }
+				, success : function(data) {
+					$("#wordStoreList").empty();
+					if(data == "") {
+						$("#noSearchWordInfo").show();
+						$("#searchWordDiv .reShop_result > dt > span").text("0");
+						return;
+					}
+					$("#noSearchWordInfo").hide();
+					let stores = JSON.parse(data);
+					$("#searchWordDiv .reShop_result > dt > span").text(stores.stores.length)
+					for(let i=0; i<stores.stores.length; i++) {
+						let li = $("<li>").addClass(stores.stores[i].store_id);
+						let div = $("<div>").addClass("li_Pc_reInner");
+						let h4 = $("<h4>").addClass("tit")
+						let a = $("<a>").text(stores.stores[i].store_name);
+						let p = $("<p>").addClass("addr").text(stores.stores[i].store_addr);
+						let area = $("<div>").addClass("area");
+						let call = $("<div>").addClass("call").text(stores.stores[i].store_tel);
+						
+						let date = new Date();
+						let hour = date.getHours() + "";
+						let curTime = hour.padStart(2, '0') + ":" + date.getMinutes();
+						let weekday = stores.stores[i].weekday;
+						let weekdays = weekday.split(" - ");
+						let time;
+						if(weekdays[0] <= curTime && curTime <= weekdays[1]) {
+							time = $("<div>").addClass(["time", "on"]).text("영업중");
+						} else {
+							time = $("<div>").addClass("time").text("영업 준비중");
+						}
+						
+						
+						let fv_reShop_in = $("<div>")
+											.addClass("fv_reShop_in")
+											.html(`<span>\${stores.stores[i].store_fav}</span>명이 관심매장으로 등록했습니다.`);
+						let button = $("<button>").addClass(["star", "active"]);
+						
+						$(area).append(call);
+						$(area).append(time);
+						
+						$(h4).append(a);
+						$(div).append(h4);
+						$(div).append(p);
+						$(div).append(area);
+						$(div).append(fv_reShop_in);
+						$(div).append(button);
+						
+						$(li).append(div);
+						$("ul#wordStoreList").append(li);
+					}
+					//console.log(data);
+	            }
+				, error : function (data, textStatus) {
+	                console.log('error');
+	            }
+			});
+	});
+	
+	
+	
+	
+	
+	
+	/* 지역검색 탭 */
+	$.ajax({
+			type : 'get'
+			, async : false
+			, cache: false
+			, url : '/Black_OY/store/getStoreCity.do'
+			, dataType : 'text'
+			, data : {}
+			, success : function(data) {
+				let citys = JSON.parse(data);
+				let select = $("#mainAreaList");
+				$(select).empty();
+				let firstOpt = $("<option>")
+					.prop({
+						value : "none"
+						, selected : true
+					}).text("지역")
+				
+				$(select).append(firstOpt);
+				
+				for(let i=0; i<citys.citys.length; i++) {
+					let li = $("<option>").prop({
+						value : citys.citys[i].city_id
+					}).text(citys.citys[i].city_name);
+					
+					$(select).append(li);
+				}
+				// console.log(data);
+            }
+			, error : function (data, textStatus) {
+                console.log('error');
+            }
+		});
+	
+	
+	// 시,도가 바꼈을 때
+	$("#mainAreaList").on("change", function() {
+		let city_id = $(this).val();
+		$.ajax({
+			type : 'get'
+			, async : false
+			, cache: false
+			, url : '/Black_OY/store/getStoreDistrict.do'
+			, dataType : 'text'
+			, data : {
+				city_id : city_id
+			}
+			, success : function(data) {
+				// console.log(data)
+				let select = $("#subAreaList");
+				$("#subAreaList option:not(:first)").remove();
+				
+				let districts = JSON.parse(data);
+				for(let i=0; i<districts.districts.length; i++) {
+					let li = $("<option>").prop({
+						value : districts.districts[i].city_id
+					}).text(districts.districts[i].district_name);
+					
+					$(select).append(li);
+				}
+            }
+			, error : function (data, textStatus) {
+                console.log('error');
+            }
+		});
+	});
+	
+	// 검색 눌렀을 때
+	// [개선] weekday로만 했음
+	$("#searchAreaButton").on("click", function() {
+		let city = $("#mainAreaList > option:selected").val() === "none" ? "" : $("#mainAreaList > option:selected").text();
+		let district = $("#subAreaList > option:selected").val() === "none" ? "" : $("#subAreaList > option:selected").text();
+		$.ajax({
+            type : 'get'
+			, async : false
+			, cache: false
+			, url : '/Black_OY/store/getStoreList.do'
+			, dataType : 'text'
+			, data : {
+				city : city 
+				, district : district
+			}
+			, success : function(data) {
+				$("#areaStoreList").empty();
+				
+				if(data === "") {
+					$("#noSearchAreaInfo").show();
+					$(".reShop_result > dt > span").text("0");
+					return;
+				}
+				$("#noSearchAreaInfo").hide();
+				let stores = JSON.parse(data);
+				$("#searchAreaDiv .reShop_result > dt > span").text(stores.stores.length)
+				for(let i=0; i<stores.stores.length; i++) {
+					let li = $("<li>").addClass(stores.stores[i].store_id);
+					let div = $("<div>").addClass("li_Pc_reInner");
+					let h4 = $("<h4>").addClass("tit")
+					let a = $("<a>").text(stores.stores[i].store_name);
+					let p = $("<p>").addClass("addr").text(stores.stores[i].store_addr);
+					let area = $("<div>").addClass("area");
+					let call = $("<div>").addClass("call").text(stores.stores[i].store_tel);
+					
+					let date = new Date();
+					let hour = date.getHours() + "";
+					let curTime = hour.padStart(2, '0') + ":" + date.getMinutes();
+					let weekday = stores.stores[i].weekday;
+					let weekdays = weekday.split(" - ");
+					let time;
+					if(weekdays[0] <= curTime && curTime <= weekdays[1]) {
+						time = $("<div>").addClass(["time", "on"]).text("영업중");
+					} else {
+						time = $("<div>").addClass("time").text("영업 준비중");
+					}
+					
+					
+					let fv_reShop_in = $("<div>")
+										.addClass("fv_reShop_in")
+										.html(`<span>\${stores.stores[i].store_fav}</span>명이 관심매장으로 등록했습니다.`);
+					// 즐겨찾기 눌렀을 때
+					// 로그인 했는지 체크 후
+					// db에도 +1 하기
+					// ~명이 관심매장으로 등록했습니다. 업데이트
+					let button = $("<button>").addClass(["star", "active"]).on("click", function() {
+						
+						// 로그인 여부 로직
+						<%-- let logonCheck = <%= logonCheck%>
+						if(!logonCheck) {
+							let check = confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?");
+							if(check) {
+								location.href = '/Black_OY/olive/LogOn.do';
+							}
+							return;
+							// return;
+						}  --%>
+						let user_id = "<%= user_id %>";
+						let clickCheck = 0;
+						
+						if($(this).hasClass("active")) {
+							$(this).removeClass("active").addClass("on");
+							clickCheck = 1;
+						} else {
+							$(this).removeClass("on").addClass("active");
+							clickCheck = -1;
+						}
+						
+						let cnt = $(this).prev().children("span").html();
+						$(this).prev().children("span").html(Number(cnt) + clickCheck);
+						
+						let store_id = $(this).parent().parent().attr("class");
+						
+						$.ajax({
+							type : 'get'
+							, async : false
+							, cache: false
+							, url : '/Black_OY/store/updStoreFav.do'
+							, dataType : 'text'
+							, data : {
+								store_id : store_id
+								, clickCheck : clickCheck
+								, user_id : user_id
+							}
+							, success : function(data) {
+								console.log("즐겨찾기 업데이트 완료~~")
+				            }
+							, error : function (data, textStatus) {
+				                console.log('error');
+				            }
+						});
+						
+					});
+					
+					$(area).append(call);
+					$(area).append(time);
+					
+					$(h4).append(a);
+					$(div).append(h4);
+					$(div).append(p);
+					$(div).append(area);
+					$(div).append(fv_reShop_in);
+					$(div).append(button);
+					
+					$(li).append(div);
+					$("#areaStoreList").append(li);
+				}
+                // console.log(data);
+            }
+			, error : function (data, textStatus) {
+               console.log('error');
+            }
+        });
+	});
+	
+	
+	
+	
+	// 지역검색 눌렀을 때 자동 클릭되게 만듬
+	$("#searchAreaTab").on("click", function() {	
+		$("#searchAreaButton").click();
+	})
+	
+	// 스크롤 구현
+	$(document).ready(function() {
+	    var dragger = $("#mCSB_3_dragger_vertical");
+	
+	    dragger.on('mousewheel DOMMouseScroll', function(e) {
+	        var scrollAmount = 100; // 움직일 스크롤 양을 조절하세요
+	        var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+	
+	        // 스크롤바를 마우스 휠로 움직입니다
+	        dragger.css('top', (dragger.position().top - (delta * scrollAmount)) + 'px');
+	    });
+	});
+	
+	
+	/* 관심매장 탭  */
+	
+	// 로그인이 안 되어 있을 때
+	$(".no_login a").on("click", function() {
+		location.href = '/Black_OY/olive/LogOn.do';
+	})
+})
+
+</script>
+
 </body>
 
 </html>

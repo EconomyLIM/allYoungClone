@@ -77,4 +77,50 @@ public class StoreService {
 
 		return list;
 	}
+	
+	public List<StoreTimeDTO> storeSelectKeyword(String keyword) {
+		List<StoreTimeDTO> list = null;
+
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			StoreDAO dao = StoreDAOImpl.getInstance();
+			list = dao.storeSelectKeyword(conn, keyword);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		}
+
+		return list;
+	}
+	
+	/*
+	 * 만약 테이블에 저장되어 있다면 저장할 필요가 없다.
+	 * 조건을 체크해서 행을 삭제할지 추가할지 선택하자.
+	 */
+	public int addAttrShop(String store_id, int clickCheck, String user_id) {
+		int rowCount = 0;
+
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			StoreDAO dao = StoreDAOImpl.getInstance();
+			
+			rowCount = dao.updateStoreFav(conn, store_id, clickCheck);
+			if(clickCheck == 1) {
+				rowCount = dao.insertAttShop(conn, store_id, user_id);	
+			} else {
+				rowCount = dao.deleteAttShop(conn, store_id, user_id);
+			}
+			return rowCount;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		}
+
+		return rowCount;
+	}
 }
