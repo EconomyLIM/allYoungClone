@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class StoreDTO {
+public class StoreTimeDTO {
 	private String store_id;
 	private String district_id;
 	private String store_name;
@@ -20,4 +20,9 @@ public class StoreDTO {
 	private String store_parking;
 	private String store_spec;
 	private int store_fav;
+	private String weekday;
+	private String saturday;
+	private String sunday;
+	private String holiday;
+	
 }

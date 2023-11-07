@@ -20,6 +20,7 @@ public class LogOnHandler implements CommandHandler {
 
 		System.out.println("> LogOn.process...");
 		String method = request.getMethod(); // GET, POST
+
 		String refer = null;
 		HttpSession session = request.getSession();
 		
@@ -28,15 +29,16 @@ public class LogOnHandler implements CommandHandler {
 //			session.setAttribute("refer", refer);
 			refer = (String) session.getAttribute("refer");
 			System.out.println("요청URL:" + refer);
+
+
 			return "/view/logon/logon.jsp";
-		}else {
+		} else {
 
-		String user_id = request.getParameter("loginId");
-		String u_pwd = request.getParameter("password");
-		LogOnService logOnService = LogOnService.getInstance();
-		LogOnDTO logdto = logOnService.logselectService(user_id, u_pwd);
+			String user_id = request.getParameter("loginId");
+			String u_pwd = request.getParameter("password");
+			LogOnService logOnService = LogOnService.getInstance();
+			LogOnDTO logdto = logOnService.logselectService(user_id, u_pwd);
 
-		
 
 		if (logdto != null) {
 			session.setAttribute("logOn", logdto);
@@ -60,5 +62,7 @@ public class LogOnHandler implements CommandHandler {
 	}
 	}//else
 	return null;
+
+
 	}
 }
