@@ -228,11 +228,13 @@
 								data-attr="공통^헤더^로그인">로그인</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="logout"><strong>${sessionScope.logOn.grade_id}&nbsp;
-									${sessionScope.logOn.u_name}</strong> <a
-								href="<%=contextPath%>/olive/Logout.do" data-attr="공통^헤더^로그아웃">로그아웃</a></li>
-							<li class="mypage"><a onclick="" href="#"
-								data-attr="공통^헤더^마이페이지">마이페이지</a></li>
+
+							<li class="logout">
+								<strong>${sessionScope.logOn.grade_id}&nbsp; 
+                  ${sessionScope.logOn.u_name}</strong> <a 
+               href="<%=contextPath %>/olive/Logout.do" data-attr="공통^헤더^로그아웃">로그아웃</a></li>
+								<li class="mypage"><a onclick="" href="<%=contextPath %>/mypage/mypageMain.do" data-attr="공통^헤더^마이페이지">마이페이지</a></li>
+
 						</c:otherwise>
 					</c:choose>
 					
