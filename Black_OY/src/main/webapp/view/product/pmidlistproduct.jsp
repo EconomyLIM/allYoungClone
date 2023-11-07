@@ -14,7 +14,11 @@
 	String midcol = midId.substring(4, 8);
 	
 	int sortcate = 1;
-	if(request.getParameter("sort") != null){
+	
+	if(request.getParameter("sort") == null){
+		sortcate = 1;
+		request.setAttribute("sort", sortcate);
+	} else if(request.getParameter("sort") != null){
 		sortcate = Integer.parseInt(request.getParameter("sort"));
 	}//if
 	
@@ -71,7 +75,7 @@ $(function () {
 				<a href="<%=contextPath %>/olive/main.do" class="loc_home">홈</a>
 				<ul class="loc_history">
 					<li>
-					<a href="#" class="cate_y">클렌징</a>
+					<a href="#" class="cate_y">${mnameiddto.catLName} </a>
 						<div class="history_cate_box" style="width: 242px">
 							<ul>
 								<c:if test="${not empty topcatedto}">
@@ -85,7 +89,7 @@ $(function () {
 						</div>
 						</li>
 
-					<li><a href="#" class="cate_y">클렌징폼/젤</a>
+					<li><a href="#" class="cate_y"> ${mnameiddto.catMName}</a>
 						<div class="history_cate_box" style="width: 122px">
 							<ul>
 								<c:if test="${not empty midcatedto}">
@@ -99,24 +103,25 @@ $(function () {
 			</div>
 
 			<div class="titBox">
-				<h1>클렌징폼/젤</h1>
+				<h1> ${mnameiddto.catMName}</h1>
 			</div>
 
 			<ul class="cate_list_box">
-				<li class="first on"><a href=""
+				<li class="first on"><a href="pmidlistproduct.do?displNum=${mnameiddto.catLId}${mnameiddto.catMId}&sort=1"
 					class="<%=midId %>" data-attr="카테고리상세^카테고리리스트^전체">전체</a>
 				</li>
+				<c:set var="counter" value="0" />
 				<c:if test="${not empty pLowcateList}">
 					<c:forEach items="${pLowcateList}" var="pl">
 						<li><a>${pl.plowcate}</a></li>
+						<c:set var="counter" value="${counter + 1}" />
 					</c:forEach>
 				</c:if>
-
+				<c:set var="remainder" value="${counter % 5}" />
+				<c:forEach begin="1" end="${5-remainder}">
 				<li>&nbsp;</li>
-
-				<li>&nbsp;</li>
-
-				<li>&nbsp;</li>
+				</c:forEach>
+				
 			</ul>
 
 			<div class="cate_brand_box">
@@ -226,7 +231,7 @@ $(function () {
 			<!-- //2020.12.01 기획전 개선 -->
 
 			<p class="cate_info_tx">
-				클렌징폼/젤 카테고리에 <span> <%= proList.size() %> </span> 개의 상품이 등록되어 있습니다.
+				 ${mnameiddto.catMName} <span> ${totalRecords}</span> 개의 상품이 등록되어 있습니다.
 			</p>
 
 			<div class="cate_align_box">

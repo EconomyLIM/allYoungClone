@@ -47,7 +47,7 @@
 <div>
 
 
-<a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=00010008">dd</a>
+<a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=00010002&sort=1">dd</a>
 
 <br>
 <a href="<%=contextPath %>/olive/main.do">main page</a>

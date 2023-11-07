@@ -7,6 +7,7 @@ import com.util.ConnectionProvider;
 import com.util.JDBCUtil;
 
 import product.domain.MidCateDTO;
+import product.domain.MnameIdDTO;
 import product.domain.PMidListDTO;
 import product.domain.PbrandListDTO;
 import product.domain.PlowcateDTO;
@@ -185,10 +186,32 @@ public class PMidService {
 			temp = pmidlistdaoImpl.getTotalRecords(conn, mId);
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("GTRService Survice Exception");
+			e.printStackTrace();
 		} // try_catch
 		
 		return temp;
 	} // GTRSERVICE
+	
+	// ===========================현재 카테고리 이름, ID 상위 카테고리 이름,ID 가져오기
+	public MnameIdDTO selectCurNameS(String mId){
+		
+		Connection conn = null;
+		MnameIdDTO mnameiddto = null;
+		
+		try {
+			
+			conn = ConnectionProvider.getConnection();
+			PMidListDAOImpl pmidlistdaoImpl = PMidListDAOImpl.getInstance();
+			mnameiddto = pmidlistdaoImpl.selectCurName(conn, mId);
+			
+		} catch (Exception e) {
+			System.out.println("GTRService Survice Exception");
+			e.printStackTrace();
+		} //try_catch 
+		
+		return mnameiddto;
+		
+	} // selectCurName
 
 } // class

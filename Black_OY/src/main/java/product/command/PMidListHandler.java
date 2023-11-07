@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.CommandHandler;
 import product.domain.MidCateDTO;
+import product.domain.MnameIdDTO;
 import product.domain.PMidListDTO;
 import product.domain.PageDTO;
 import product.domain.PbrandListDTO;
@@ -46,6 +47,7 @@ public class PMidListHandler implements CommandHandler{
 		List<PMidListDTO> pmidlistdto = null;
 		List<TopCateDTO> topcatedto = null;
 		List<MidCateDTO> midcatedto = null;
+		MnameIdDTO mnameiddto = null;
 		
 		//  ======= 페이징 처리 ===== 
 		int currentPage =1; //현재페이지 번호 
@@ -65,18 +67,16 @@ public class PMidListHandler implements CommandHandler{
 		
 		try {
 			
-			if (request.getParameter("currentpage") == null) {
+			if (request.getParameter("currentpage") == null || request.getParameter("currentpage") == "") {
 				currentPage = 1;
 			} else {
 				currentPage =Integer.parseInt(request.getParameter("currentpage"));
-			} //ifelse
+			} //if_else
 			
 		} catch (Exception e) {
 			System.out.println("currentPage Parsing exception");
 			e.printStackTrace();
 		} //try-catch
-		
-		
 		
 		// 분기
 		if (displNum.length() == 4) {
@@ -94,6 +94,7 @@ public class PMidListHandler implements CommandHandler{
 			pmidlistdto = pmidsurvice.selectMproduct(cateM, sort, currentPage, perPage);
 			topcatedto = pmidsurvice.selectTopCate(cateM);
 			midcatedto = pmidsurvice.selectMidCate(cateL);
+			mnameiddto = pmidsurvice.selectCurNameS(cateM);
 			
 			totalRecords = pmidsurvice.GTRService(cateM); // 총레코드 수 가져오는 서비스 
 			totalpage = pmidsurvice.GTPService(perPage, cateM); // 몇페이지 나오는지 구하는 서비스
@@ -105,7 +106,8 @@ public class PMidListHandler implements CommandHandler{
 			request.setAttribute("topcatedto", topcatedto);
 			request.setAttribute("midcatedto", midcatedto);
 			request.setAttribute("pDto", pageDTO);
-			
+			request.setAttribute("totalRecords", totalRecords);			
+			request.setAttribute("mnameiddto", mnameiddto);			
 			
 		} else {
 			

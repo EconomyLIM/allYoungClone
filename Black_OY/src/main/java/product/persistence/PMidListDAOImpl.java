@@ -6,13 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.util.JDBCUtil;
 
 import product.domain.MidCateDTO;
+import product.domain.MnameIdDTO;
 import product.domain.PMidListDTO;
 import product.domain.PbrandListDTO;
 import product.domain.PlowcateDTO;
@@ -521,6 +520,59 @@ public class PMidListDAOImpl  implements PMidListDAO{
 		
 		return totalPages;
 	} // getTotalPages
+	
+
+	//====================== 현재 카테고리 이름과 상위 카테고리 정보 가져오기(중위페이지) =============================
+	@Override
+	public MnameIdDTO selectCurName(Connection conn, String mId) throws Exception {
+		
+		String sql = " SELECT cat_m_id, cat_m_name, cl.cat_l_id, cl.cat_l_name "
+				+ " FROM cate_m cm "
+				+ " JOIN cate_l cl ON cm.cat_l_id = cl.cat_l_id "
+				+ " WHERE cat_m_id = ? ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MnameIdDTO mnameIdDTO = null;
+		
+		try {
+		
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+			
+				do {
+					mnameIdDTO = MnameIdDTO.builder()
+							.catLId(rs.getString("cat_l_id"))
+							.catLName(rs.getString("cat_l_name"))
+							.catMId(rs.getString("cat_m_id"))
+							.catMName(rs.getString("cat_m_name"))
+							.build();
+					
+				
+					
+				} while (rs.next());
+			} //if
+			
+		} catch (SQLException e) {
+			System.out.println(">PMidListDAOImpl selectCurName SQLException");
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			System.out.println(">PMidListDAOImpl selectCurName NullPointerException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">PMidListDAOImpl selectCurName Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		} // try catch finally
+		
+		return mnameIdDTO;
+	} //selectCurName
 
 
 
