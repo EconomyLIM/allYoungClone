@@ -13,25 +13,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import store.domain.StoreDTO;
 import store.domain.StoreTimeDTO;
 import store.service.StoreService;
 
-@WebServlet("/store/getStoreList.do")
-public class StoreList extends HttpServlet {
+@WebServlet("/store/getStoreListKeyword.do")
+public class StoreListKeyword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("StoreList.doGet() called~~");
+		System.out.println("StoreListKeyword.doGet() called~~");
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		String city = request.getParameter("city");
-		String district = request.getParameter("district");
+		String keyword = request.getParameter("keyword");
 		
 		StoreService service = StoreService.getinstance();
-		List<StoreTimeDTO> list = service.storeSelectAll(city, district);
+		List<StoreTimeDTO> list = service.storeSelectKeyword(keyword);
 		
 		if(list == null) {
 			out.write("");
@@ -66,11 +64,9 @@ public class StoreList extends HttpServlet {
 		jsonObject.put("stores", stores);
 		
 		out.write(jsonObject.toString());
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		doGet(request, response);
 	}
 
