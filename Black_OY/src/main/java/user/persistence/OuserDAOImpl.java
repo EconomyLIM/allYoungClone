@@ -2,7 +2,6 @@
 package user.persistence;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import user.domain.OuserDTO;
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -41,4 +40,4 @@ public class OuserDAOImpl implements OuserDAO {
 
 
 }
->>>>>>> branch 'feature_user' of https://github.com/Team3-JSP/OliveYoung.git
+

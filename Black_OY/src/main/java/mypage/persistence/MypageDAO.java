@@ -10,13 +10,13 @@ import mypage.domain.MpUserInfoDTO;
 
 
 
+
 public interface MypageDAO {
 	
 	//매개변수로 회원id, 마이페이지메인에 필요한 정보들 불러오기
-	
-	//1. 회원등급, 회원이름 가져오기
+	//1. 회원정보 가져오기
 	List<MpUserInfoDTO> selectUserInfo(Connection conn, String Uid) throws Exception;
-	
+
 	//2. cj포인트 잔액 가져오기
 	int selectUserPoint(Connection conn, String Uid) throws Exception;
 	
