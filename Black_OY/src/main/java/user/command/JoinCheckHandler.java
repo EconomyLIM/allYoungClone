@@ -2,6 +2,8 @@ package user.command;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,39 +13,40 @@ import com.util.ConnectionProvider;
 import command.CommandHandler;
 import user.domain.OuserDTO;
 import user.persistence.OuserDAOImpl;
-/*
-public class JoinHandler implements CommandHandler{
+
+public class JoinCheckHandler implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		 String method = request.getMethod(); 
 		 request.setCharacterEncoding("utf-8");
 
-		 String name = request.getParameter("name");
-		 String birth =  request.getParameter("birth");
 		 String tel=  request.getParameter("tel");
-	
-		 
-		 OuserDTO dto = new OuserDTO();
+		 System.out.println(tel);
 		 
 		 Connection conn = ConnectionProvider.getConnection();
 		 OuserDAOImpl dao = new OuserDAOImpl(conn);
-			
-			int rowCount = 0;
+		 OuserDTO dto = null;
 			try {
-				rowCount = dao.getJoinCheck(dto);
+				dto = dao.joinCheck(tel);
 			} catch (SQLException e) {
-				System.out.println("> JoinCheckHandler.doPost() Exception!");
+				System.out.println("> JoinCheckHandler.process Exception!");
 				e.printStackTrace();
 			}
 			conn.close();
-
-			String location = "/jspPro/member/joinCheck.do";
-			response.sendRedirect(location);
+			String location = "";
+			
+			request.setAttribute("dto", dto);
+			
+			if (dto ==null) {
+				location = "/CJjoin/agreement.jsp";
+			} else {
+				location = "/CJjoin/join_already.jsp";
+			}
 			
 			
 			
+			return location;
+	
 	}
 
 }
-*/

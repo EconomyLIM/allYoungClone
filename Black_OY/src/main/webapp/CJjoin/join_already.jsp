@@ -1,3 +1,6 @@
+<%@page import="user.domain.OuserDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -323,7 +326,9 @@ function goNft(){
     
 
 	<!--//header-->
-	
+	<%
+		OuserDTO dto = (OuserDTO)request.getAttribute("dto");
+	%>	
 	<!--contents-->
 	<div id="contentsWrap">
 		<form method="post" id="form1" name="form1" action="">
@@ -360,13 +365,9 @@ function goNft(){
 								<h2 class="haze">본인인증</h2>
 								<div class="certi_txt check">
 									<span class="ico"></span>
-									<p class="b_txt"><strong class="em">이주영</strong>님! 이미 CJ ONE 회원으로 등록되어 있습니다.</p>			
-												
-									
-										
-											 
-											<p class="s_txt">회원 아이디<em>(jybee**)</em>로 로그인 하시거나 아이디 찾기를 진행해 주세요.</p>
-										
+									<p class="b_txt"><strong class="em"><%=dto.getU_name() %></strong>님! 이미 CJ ONE 회원으로 등록되어 있습니다.</p>			
+									<p class="s_txt">회원 아이디<em>(<%=dto.getUser_id() %>)</em>로 로그인 하시거나 아이디 찾기를 진행해 주세요.</p>
+				
 										
 																		
 								</div>
