@@ -7,6 +7,7 @@
 <%
 	ArrayList myList = (ArrayList)request.getAttribute("pbrandlist");
 	ArrayList proList = (ArrayList)request.getAttribute("pmidlistdto");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -243,8 +244,8 @@
 			<c:if test="${not empty pmidlistdto}">
 					<c:forEach var="i" varStatus="outerLoop" begin="1" end="6">
 						<ul class="cate_prd_list gtm_cate_list">
-						<c:set var="innerLoopBegin" value="${(outerLoop.index - 1) * 4 + 1}" />
-        				<c:set var="innerLoopEnd" value="${outerLoop.index * 4}" />
+						<c:set var="innerLoopBegin" value="${(outerLoop.index - 1) * 4}" />
+        				<c:set var="innerLoopEnd" value="${(outerLoop.index * 4) -1}" />
 						  <c:forEach items="${pmidlistdto}" var="pml" begin="${innerLoopBegin}" end="${innerLoopEnd}" varStatus="innerLoop">
 					 
 						<li class="flag" >
@@ -280,7 +281,10 @@
 									<c:if test="${pml.prc eq 1}">
 										<span class="icon_flag coupon">쿠폰</span>
 									</c:if>
-									<span class="icon_flag gift">증정</span>
+									<c:if test="${bpl.pmp eq 1 }">
+										<span class="icon_flag gift">증정</span>
+									</c:if>
+									
 									<c:if test="${pml.stock > 0}">
 										<span class="icon_flag delivery">오늘드림</span>
 									</c:if>
