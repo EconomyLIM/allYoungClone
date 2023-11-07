@@ -181,9 +181,9 @@ try {
 					</p></c:forEach>
 					<ul class="mem_opt">
 						
-						<li id="membershipBenefit"><a href="javascript:common.wlog('mypage_coupon_onbenefit_tab');" onclick="mypage.header.getMembership()">올리브 멤버스 라운지</a></li>
+						<li id="membershipBenefit"><a href="<%-- 맴버십페이지 연결 --%>" onclick="<%-- 맴버십페이지 연결스크립트 --%>">올리브 멤버스 라운지</a></li>
 						
-						<li id="profileModify"><a href="javascript:common.wlog('mypage_profile');" onclick="mypage.header.goReviewerProfile('VHdCeVV6R3J1MTBMaWFjcWllYWRjZz09', {t_page: '마이페이지', t_click: '나의프로필이미지'})">나의 프로필</a></li>
+						<li id="profileModify"><a href="<%-- 나의 프로필 연결 --%>" onclick="<%-- 나의 프로필 연결스크립트 --%>">나의 프로필</a></li>
 					</ul>
 				</div>
 
@@ -192,17 +192,17 @@ try {
 
 				<div class="point-box ">
 					<ul class="infor clrfix" id="pointInfo">
-						<li id="cjOnePoingInfo" onclick="location.href='https://www.oliveyoung.co.kr/store/mypage/getCJOnePointInfo.do'+'?'+ getEventParameterString({t_page: '마이페이지', t_click: 'CJONE포인트'})">
+						<li id="cjOnePoingInfo" onclick="<%-- 맴버십 페이지 연결 스크립트 --%>">
 							<span class="tit">CJ ONE 포인트</span>
-							<a class="num" href="javascript:;"><%= request.getAttribute("userCoupon")%><em class="unit">P</em></a>
+							<a class="num" href="<%-- 맴버십 페이지 연결 --%>"><%-- 맴버십 잔액 --%><em class="unit">P</em></a>
 						</li>
-						<li id="couponList" onclick="location.href='https://www.oliveyoung.co.kr/store/mypage/getCouponList.do'+'?'+ getEventParameterString({t_page: '마이페이지', t_click: '쿠폰'})">
+						<li id="couponList" onclick="<%-- 쿠폰 페이지 연결 스크립트 --%>">
 							<span class="tit">쿠폰</span>
 							<a class="num" href="javascript:;" data-attr="마이페이지^쿠폰^쿠폰함이동"><%-- 쿠폰갯수 --%><em class="unit">개</em></a>
 						</li>
-						<li id="depositList" onclick="location.href='https://www.oliveyoung.co.kr/store/mypage/getDepositList.do'+'?'+ getEventParameterString({t_page: '마이페이지', t_click: '마이월렛_예치금'})">
+						<li id="depositList" onclick="<%--  예치금 페이지 연결 스크립트 --%>">
 							<span class="tit">예치금</span>
-							<a class="num" href="javascript:;"><%-- 예치금 잔액 --%><em class="unit">원</em></a>
+							<a class="num" href="<%--  예치금 페이지 연결 --%>"><%-- 예치금 잔액 --%><em class="unit">원</em></a>
 						</li>
 						
 					</ul>
@@ -219,7 +219,7 @@ try {
 					<ul>
 						<li><h2>마이 쇼핑</h2>
 							<ul>
-								<li class="subMenu"><a href="javascript:;" mymenuid="0101" data-ref-linkurl="https://www.oliveyoung.co.kr/store/mypage/getOrderList.do" data-attr="마이페이지^메뉴^주문/배송 조회" data-tracking-name="주문배송조회 클릭" data-tracking-properties="t_page=마이페이지&amp;t_click=주문배송조회">주문/배송 조회</a></li>
+								<li class="subMenu"><a href="<%-- 주문/배송 페이지 --%>" mymenuid="0101" data-ref-linkurl="https://www.oliveyoung.co.kr/store/mypage/getOrderList.do" data-attr="마이페이지^메뉴^주문/배송 조회" data-tracking-name="주문배송조회 클릭" data-tracking-properties="t_page=마이페이지&amp;t_click=주문배송조회">주문/배송 조회</a></li>
 								<li class="subMenu"><a href="javascript:;" mymenuid="0102" data-ref-linkurl="https://www.oliveyoung.co.kr/store/mypage/getOrderCancelList.do" data-attr="마이페이지^메뉴^취소/반품/교환 내역" data-tracking-name="취소반품교환내역 클릭" data-tracking-properties="t_page=마이페이지&amp;t_click=취소반품교환내역">취소/반품/교환 내역</a></li>
 								<li class="subMenu"><a href="javascript:;" mymenuid="0103" data-ref-linkurl="https://www.oliveyoung.co.kr/store/mypage/getDealList.do" data-attr="마이페이지^메뉴^거래증빙서류 확인" data-tracking-properties="t_page=마이페이지&amp;t_click=거래증빙서류확인">거래증빙서류 확인</a></li>
 							</ul>
