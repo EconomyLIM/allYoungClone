@@ -52,7 +52,7 @@
 <br>
 <a href="<%=contextPath %>/olive/main.do">main page</a>
 
->>>>>>> branch 'feature_product' of https://github.com/Team3-JSP/OliveYoung.git
+
 </div>
 </body>
 </html>

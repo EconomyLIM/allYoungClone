@@ -20,23 +20,39 @@ public class LogOnHandler implements CommandHandler {
 
 		System.out.println("> LogOn.process...");
 		String method = request.getMethod(); // GET, POST
-		if(method.equals("GET")) {
-			return "/view/logon/logon.jsp";
-		}else {
 
-		String user_id = request.getParameter("loginId");
-		String u_pwd = request.getParameter("password");
-		LogOnService logOnService = LogOnService.getInstance();
-		LogOnDTO logdto = logOnService.logselectService(user_id, u_pwd);
-
+		String refer = null;
 		HttpSession session = request.getSession();
+		
+		if(method.equals("GET")) {
+			//refer = request.getHeader("Referer");
+//			session.setAttribute("refer", refer);
+			refer = (String) session.getAttribute("refer");
+			System.out.println("요청URL:" + refer);
+
+
+			return "/view/logon/logon.jsp";
+		} else {
+
+			String user_id = request.getParameter("loginId");
+			String u_pwd = request.getParameter("password");
+			LogOnService logOnService = LogOnService.getInstance();
+			LogOnDTO logdto = logOnService.logselectService(user_id, u_pwd);
+
 
 		if (logdto != null) {
-
 			session.setAttribute("logOn", logdto);
+			int cnt = logOnService.basketcntService(user_id);
+			session.setAttribute("basketlistcnt", cnt);
 			request.removeAttribute("errorMessage");
-			//response.sendRedirect("/view/mainPage/main.jsp");
-			return "/view/mainPage/main.jsp";
+			refer = (String) session.getAttribute("refer");
+			 if (refer != null) {
+				 	session.removeAttribute("refer");
+			        response.sendRedirect(refer);
+			    } else {
+			        response.sendRedirect("/Black_OY/olive/main.do");
+			    }
+			//return "/Black_OY/olive/main.do";
 		} else {
 		
 		System.out.println("비밀번호 오류");
@@ -45,6 +61,8 @@ public class LogOnHandler implements CommandHandler {
 		return "/view/logon/logon.jsp";
 	}
 	}//else
-	//return null;
+	return null;
+
+
 	}
 }

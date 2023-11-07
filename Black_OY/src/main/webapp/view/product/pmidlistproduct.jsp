@@ -6,6 +6,8 @@
 <%@ include file="/WEB-INF/inc/session_auth.jspf"%>
 <%
 	ArrayList myList = (ArrayList)request.getAttribute("pbrandlist");
+	ArrayList proList = (ArrayList)request.getAttribute("pmidlistdto");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -129,7 +131,7 @@
 					<c:if test="${ not empty pbrandlist }">
 						<c:forEach items="${ pbrandlist }" var="pbl">
 							<li><input type="checkbox" id="${ pbl.brandID }" name=""
-								value="" /> <label for="${pbl.brandID}">
+								value="${ pbl.brandID }" /> <label for="${pbl.brandID}">
 									${pbl.pBrandName} </label></li>
 						</c:forEach>
 					</c:if>
@@ -206,14 +208,14 @@
 			<!-- //2020.12.01 기획전 개선 -->
 
 			<p class="cate_info_tx">
-				클렌징폼/젤 카테고리에 <span> 15 </span> 개의 상품이 등록되어 있습니다.
+				클렌징폼/젤 카테고리에 <span> <%= proList.size() %> </span> 개의 상품이 등록되어 있습니다.
 			</p>
 
 			<div class="cate_align_box">
 				<div class="align_sort">
 					<ul>
-						<li><a href="javascript:;" data-prdsoting="01">인기순</a></li>
-						<li class="on"><a href="javascript:;" data-prdsoting="02">신상품순</a>
+						<li class="on"><a href="javascript:;" data-prdsoting="01">인기순</a></li>
+						<li><a href="javascript:;" data-prdsoting="02">신상품순</a>
 						</li>
 						<li><a href="javascript:;" data-prdsoting="03">판매순</a></li>
 
@@ -242,8 +244,8 @@
 			<c:if test="${not empty pmidlistdto}">
 					<c:forEach var="i" varStatus="outerLoop" begin="1" end="6">
 						<ul class="cate_prd_list gtm_cate_list">
-						<c:set var="innerLoopBegin" value="${(outerLoop.index - 1) * 4 + 1}" />
-        				<c:set var="innerLoopEnd" value="${outerLoop.index * 4}" />
+						<c:set var="innerLoopBegin" value="${(outerLoop.index - 1) * 4}" />
+        				<c:set var="innerLoopEnd" value="${(outerLoop.index * 4) -1}" />
 						  <c:forEach items="${pmidlistdto}" var="pml" begin="${innerLoopBegin}" end="${innerLoopEnd}" varStatus="innerLoop">
 					 
 						<li class="flag" >
@@ -279,7 +281,10 @@
 									<c:if test="${pml.prc eq 1}">
 										<span class="icon_flag coupon">쿠폰</span>
 									</c:if>
-									<span class="icon_flag gift">증정</span>
+									<c:if test="${bpl.pmp eq 1 }">
+										<span class="icon_flag gift">증정</span>
+									</c:if>
+									
 									<c:if test="${pml.stock > 0}">
 										<span class="icon_flag delivery">오늘드림</span>
 									</c:if>
@@ -291,173 +296,21 @@
 						</ul>
 					</c:forEach>
 				</c:if>
-
-				<!-- 부가정보수집 -->
-
-				<li criteo-goods="A000000141736001" class="" data-index="9">
-					<div class="prd_info">
-						<a
-							href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000141736&amp;dispCatNo=100000100100001&amp;trackingCd=Cat100000100100001_Small&amp;t_page=카테고리관&amp;t_click=클렌징폼/젤_소_전체_가히,갸스비,그라펜,그레이멜린,네오젠,닥터디퍼런트_상품상세&amp;t_number=10"
-							name="Cat100000100100001_Small" class="prd_thumb goodsList"
-							data-ref-goodsno="A000000141736"
-							data-attr="카테고리상세^검색결과상품_신상품순^네오젠 더마로지 카밍시카트리 미셀라 클렌징 폼 200ml^10"
-							data-ref-dispcatno="100000100100001" data-ref-itemno="001"
-							data-trk="/Cat100000100100001_Small"
-							data-impression="A000000141736^카테고리상세_검색결과상품_신상품순^10"
-							onclick='javascript: gtm.goods.callGoodsGtmInfo("A000000141736", "", "ee-productClick", "카테고리상세_검색결과상품", "10");'
-							data-impression-visibility="1">
-							<img
-							src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0014/A00000014173606ko.jpg?l=ko"
-							alt="네오젠 더마로지 카밍시카트리 미셀라 클렌징 폼 200ml"
-							onerror="common.errorImg(this);" /></a>
-						<div class="prd_name">
-							<a href="javascript:;" name="Cat100000100100001_Small"
-								class="goodsList" data-ref-goodsno="A000000141736"
-								data-attr="카테고리상세^검색결과상품_신상품순^네오젠 더마로지 카밍시카트리 미셀라 클렌징 폼 200ml^10"
-								data-ref-dispcatno="100000100100001" data-ref-itemno="001"
-								data-trk="/Cat100000100100001_Small"
-								onclick='javascript: gtm.goods.callGoodsGtmInfo("A000000141736", "", "ee-productClick", "카테고리상세_검색결과상품", "10");'>
-								<span class="tx_brand">네오젠</span>
-								<p class="tx_name">네오젠 더마로지 카밍시카트리 미셀라 클렌징 폼 200ml</p></a>
-						</div>
-						<button class="btn_zzim jeem" data-ref-goodsno="A000000141736">
-							<span>찜하기전</span>
-						</button>
-						<p class="prd_price">
-							<span class="tx_cur"><span
-								class="tx_num">14,000</span>원 </span>
-						</p>
-						<p class="prd_point_area tx_num">
-							<span class="review_point"><span
-								class="point" style="width: 96%">10점만점에
-									5.5점</span></span>(13)
-						</p>
-						<p class="prd_btn_area">
-							<button class="cartBtn" data-ref-goodsno="A000000141736"
-								data-ref-dispcatno="100000100100001" data-ref-itemno="001">
-								장바구니</button>
-							<button class="btn_new_pop goodsList"
-								name="Cat100000100100001_Small">새창보기
-							</button>
-						</p>
-					</div>
-				</li>
-
-				<!-- 부가정보수집 -->
-
-				<li criteo-goods="A000000130399001" class="" data-index="10">
-					<div class="prd_info">
-						<a
-							href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000130399&amp;dispCatNo=100000100100001&amp;trackingCd=Cat100000100100001_Small&amp;t_page=카테고리관&amp;t_click=클렌징폼/젤_소_전체_가히,갸스비,그라펜,그레이멜린,네오젠,닥터디퍼런트_상품상세&amp;t_number=11"
-							name="Cat100000100100001_Small" class="prd_thumb goodsList"
-							data-ref-goodsno="A000000130399"
-							data-attr="카테고리상세^검색결과상품_신상품순^그레이멜린 센텔라 크레이지 폼 클렌저 500ml^11"
-							data-ref-dispcatno="100000100100001" data-ref-itemno="001"
-							data-trk="/Cat100000100100001_Small"
-							data-impression="A000000130399^카테고리상세_검색결과상품_신상품순^11"
-							onclick='javascript: gtm.goods.callGoodsGtmInfo("A000000130399", "", "ee-productClick", "카테고리상세_검색결과상품", "11");'
-							data-impression-visibility="1"><img
-							src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0013/A00000013039907ko.jpg?l=ko"
-							alt="그레이멜린 센텔라 크레이지 폼 클렌저 500ml" onerror="common.errorImg(this);" /><span
-							class="status_flag soldout">일시품절</span></a>
-						<div class="prd_name">
-							<a href="javascript:;" name="Cat100000100100001_Small"
-								class="goodsList" data-ref-goodsno="A000000130399"
-								data-attr="카테고리상세^검색결과상품_신상품순^그레이멜린 센텔라 크레이지 폼 클렌저 500ml^11"
-								data-ref-dispcatno="100000100100001" data-ref-itemno="001"
-								data-trk="/Cat100000100100001_Small"
-								onclick='javascript: gtm.goods.callGoodsGtmInfo("A000000130399", "", "ee-productClick", "카테고리상세_검색결과상품", "11");'><span
-								class="tx_brand">그레이멜린</span>
-								<p class="tx_name">그레이멜린 센텔라 크레이지 폼 클렌저 500ml</p></a>
-						</div>
-						<button class="btn_zzim jeem" data-ref-goodsno="A000000130399">
-							<span>찜하기전</span>
-						</button>
-						<p class="prd_price">
-							<span class="tx_org"><span class="tx_num">15,000</span>원 </span><span
-								class="tx_cur"><span class="tx_num">10,600</span>원
-							</span>
-						</p>
-						<p class="prd_flag">
-							<span class="icon_flag sale">세일</span><span
-								class="icon_flag delivery">오늘드림</span>
-						</p>
-						<p class="prd_point_area tx_num">
-							<span class="review_point"><span
-								class="point" style="width: 92%">10점만점에
-									5.5점</span></span>(144)
-						</p>
-						<p class="prd_btn_area">
-							<button class="cartBtn" data-ref-goodsno="A000000130399"
-								data-ref-dispcatno="100000100100001" data-ref-itemno="001">
-								장바구니</button>
-							<button class="btn_new_pop goodsList"
-								name="Cat100000100100001_Small">새창보기
-							</button>
-						</p>
-					</div>
-				</li>
-
-				<!-- 부가정보수집 -->
-
-				<li criteo-goods="A000000130391001" class="" data-index="13">
-					<div class="prd_info">
-						<a
-							href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000130391&amp;dispCatNo=100000100100001&amp;trackingCd=Cat100000100100001_Small&amp;t_page=카테고리관&amp;t_click=클렌징폼/젤_소_전체_가히,갸스비,그라펜,그레이멜린,네오젠,닥터디퍼런트_상품상세&amp;t_number=14"
-							name="Cat100000100100001_Small" class="prd_thumb goodsList"
-							data-ref-goodsno="A000000130391"
-							data-attr="카테고리상세^검색결과상품_신상품순^그레이멜린 그린티 크레이지 폼클렌저 500ml^14"
-							data-ref-dispcatno="100000100100001" data-ref-itemno="001"
-							data-trk="/Cat100000100100001_Small"
-							data-impression="A000000130391^카테고리상세_검색결과상품_신상품순^14"
-							onclick='javascript: gtm.goods.callGoodsGtmInfo("A000000130391", "", "ee-productClick", "카테고리상세_검색결과상품", "14");'
-							data-impression-visibility="1"><img
-							src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0013/A00000013039104ko.jpg?l=ko"
-							alt="그레이멜린 그린티 크레이지 폼클렌저 500ml" onerror="common.errorImg(this);" /></a>
-						<div class="prd_name">
-							<a href="javascript:;" name="Cat100000100100001_Small"
-								class="goodsList" data-ref-goodsno="A000000130391"
-								data-attr="카테고리상세^검색결과상품_신상품순^그레이멜린 그린티 크레이지 폼클렌저 500ml^14"
-								data-ref-dispcatno="100000100100001" data-ref-itemno="001"
-								data-trk="/Cat100000100100001_Small"
-								onclick='javascript: gtm.goods.callGoodsGtmInfo("A000000130391", "", "ee-productClick", "카테고리상세_검색결과상품", "14");'><span
-								class="tx_brand">그레이멜린</span>
-								<p class="tx_name">그레이멜린 그린티 크레이지 폼클렌저 500ml</p></a>
-						</div>
-						<button class="btn_zzim jeem" data-ref-goodsno="A000000130391">
-							<span>찜하기전</span>
-						</button>
-						<p class="prd_price">
-							<span class="tx_cur"><span
-								class="tx_num">15,000</span>원 </span>
-						</p>
-						<p class="prd_flag">
-							<span class="icon_flag delivery">오늘드림</span>
-						</p>
-						<p class="prd_point_area tx_num">
-							<span class="review_point"><span
-								class="point" style="width: 94%">10점만점에
-									5.5점</span></span>(150)
-						</p>
-						<p class="prd_btn_area">
-							<button class="cartBtn" data-ref-goodsno="A000000130391"
-								data-ref-dispcatno="100000100100001" data-ref-itemno="001">
-								장바구니</button>
-							<button class="btn_new_pop goodsList"
-								name="Cat100000100100001_Small">새창보기
-							</button>
-						</p>
-					</div>
-				</li>
-
-				<!-- 부가정보수집 -->
-			</ul>
 		</div>
 
 		<div class="pageing">
 			<strong title="현재 페이지">1</strong>
 		</div>
 	</div>
+	
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>
+<script>
+$(document).ready(function() {
+    $('.align_sort ul li').on('click', function() {
+        // 현재 클릭된 요소에 'on' 클래스 추가 및 형제 요소로부터 'on' 클래스 제거
+        $(this).addClass('on').siblings().removeClass('on');
+    });
+});
+</script>

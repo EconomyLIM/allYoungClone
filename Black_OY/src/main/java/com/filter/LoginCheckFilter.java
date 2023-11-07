@@ -35,7 +35,7 @@ public class LoginCheckFilter implements Filter {
 		boolean isLogon = false; // 인증 true, false
 		
 		HttpSession session = req.getSession(false);
-		if (session != null && (auth =(String) session.getAttribute("auth")) != null) {
+		if (session != null && (auth =(String) session.getAttribute("logOn")) != null) {
 			// 인증처리가 된 상태
 			isLogon = true;
 		}//if
@@ -44,8 +44,8 @@ public class LoginCheckFilter implements Filter {
 			chain.doFilter(request, response);
 		} else {
 			String referer = req.getRequestURI(); // /jspPro/days07/board/write.jsp
-			session.setAttribute("referer", referer);
-			String location = "/jspPro/days07/member/logon.jsp";
+			session.setAttribute("refer", referer);
+			String location = "/Black_OY/olive/LogOn.do";
 			res.sendRedirect(location);
 		} //if/else
 		

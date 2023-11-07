@@ -10,9 +10,11 @@ import java.util.List;
 
 import com.util.JDBCUtil;
 
+import product.domain.MidCateDTO;
 import product.domain.PMidListDTO;
 import product.domain.PbrandListDTO;
 import product.domain.PlowcateDTO;
+import product.domain.TopCateDTO;
 
 public class PMidListDAOImpl  implements PMidListDAO{
 	
@@ -131,7 +133,7 @@ public class PMidListDAOImpl  implements PMidListDAO{
 				+ " , cat_l_id, cat_m_id, cat_s_id "
 				+ " , pro_price, afterprice "
 				+ " , pro_displ_id, pro_id "
-				+ " , prc, pdc, stock "
+				+ " , prc, pdc, pmp, stock "
 				+ " , ordercnt, pro_displ_like, pro_reg "
 				+ " FROM pmlistview WHERE cat_m_id = ? ";
 		
@@ -209,9 +211,74 @@ public class PMidListDAOImpl  implements PMidListDAO{
 		return list;
 	} // selectProList
 
-	
-	
-	
+	//================================상위 카테고리 List 가져오는 작업 =====================================
+	@Override
+	public List<TopCateDTO> selectTop(Connection conn, String id) throws Exception {
+		String sql = " SELECT * FROM cate_l ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		TopCateDTO topcatedto = null;
+		ArrayList<TopCateDTO> list = null;
+		
+		String lCateId;
+		String lCateName;
+		
+		// 중분류 번호에 따라 가져오는 대분류 카테고리 분기
+		if (Integer.parseInt(id) <= 58) {
+			sql += " WHERE cat_l_id <= 8 ";
+		} else if(  59 <= Integer.parseInt(id) && Integer.parseInt(id) <= 78) {
+			sql += " WHERE 9 <= cat_l_id AND cat_l_id <= 16 ";
+		} else {
+			sql += " WHERE 17 < cate_l_id ";
+		} // if else
+		
+		// sql실행
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				
+				do {
+					lCateId = rs.getString("cate_l_id");
+					lCateName = rs.getString("cate_l_name");
+					
+					topcatedto = new TopCateDTO(lCateId, lCateName);
+					
+					list.add(topcatedto);
+					
+				} while ( rs.next() ); // while
+				
+			} // if
+			
+		} catch (SQLException e) {
+			System.out.println(">PMidListDAOImpl selectTop SQLException");
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			System.out.println(">PMidListDAOImpl selectTop NullPointerException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">PMidListDAOImpl selectTop Exception");
+			e.printStackTrace();
+		} finally {
+			
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		}
+		
+		return list;
+		
+	} // selectTop
+
+	//================================중위 카테고리 List 가져오는 작업 =====================================
+	@Override
+	public List<MidCateDTO> selectMid(Connection conn, String id) throws Exception {
+		
+		return null;
+	} // selectMid
+
+		
 	
 	
 	
