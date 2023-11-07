@@ -1,7 +1,5 @@
 package product.domain;
 
-import java.util.ArrayList;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TopCateDTO {
 
-	String id;
-	String name;
-	
+	private String id;
+	private String name;
+
 } // class
