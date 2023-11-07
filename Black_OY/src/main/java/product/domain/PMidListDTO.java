@@ -23,6 +23,7 @@ public class PMidListDTO {
 	private String productID;
 	private int prc;
 	private int pdc;
+	private int pmp;
 	private int stock;
 	private int displLike;
 	private int ordercnt;

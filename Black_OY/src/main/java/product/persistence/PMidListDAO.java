@@ -1,6 +1,7 @@
 package product.persistence;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import product.domain.MidCateDTO;
@@ -29,11 +30,16 @@ public interface PMidListDAO {
 	
 	// 5.  *** 상품표시이미지, 브랜드, 상품표시명, 상품 원래 가격, 상품프로모션후 가격, 무슨 프로모션인지 갖고 와야 함
 	//					ㄴ 첫번째는 인기순
-	List<PMidListDTO> selectMProList(Connection conn, String mId) throws Exception;
+//	List<PMidListDTO> selectMProList(Connection conn, String mId, String sort) throws Exception;
+	List<PMidListDTO> selectMProList(Connection conn, String mId, String sort,int currentPage, int numberPerPage) throws Exception;
 	
 	
 	// 6. 페이징 처리
+	// 총 레코드 수 가져오기
+	int getTotalRecords(Connection conn, String mId)  throws SQLException;
 	
+	// 총 페이지 구하기 
+	int getTotalPages(Connection conn, int numberPerPage, String mId)  throws SQLException;
 	
 	
 } // interface

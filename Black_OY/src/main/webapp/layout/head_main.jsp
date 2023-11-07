@@ -388,7 +388,7 @@
                                         href="#"
                                         data-ref-dispcatno="10000010010" data-attr="공통^드로우^클렌징">클렌징</a></p>
                                 <ul>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=00010008"
                                             data-ref-dispcatno="100000100100001" data-attr="공통^드로우^클렌징_클렌징폼/젤"
                                             data-trk="/">클렌징폼/젤</a></li>
                                     <li><a href="#"
@@ -1137,6 +1137,7 @@
             <!-- //[3553186] 온라인몰 전시 카테고리 개편 일괄 작업 요청의 건 -->
             <!-- 메인 카테고리 목록 -->
         </div>
+        
     </div>
 </body>
 </html>
