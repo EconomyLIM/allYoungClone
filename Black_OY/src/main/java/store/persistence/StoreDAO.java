@@ -30,5 +30,9 @@ public interface StoreDAO {
 	// 7. 관심 매장 테이블 삭제
 	int deleteAttShop(Connection conn, String store_id, String user_id) throws SQLException;
 	
-	// 8. 
+	// 8. 유저의 관심 매장 리스트 얻어오기
+	List<StoreTimeDTO> attShopSelect(Connection conn, String user_id) throws SQLException;
+	
+	// 9. 
+	
 }

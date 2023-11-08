@@ -202,7 +202,7 @@
                             data-attr="공통^헤더^고객센터">고객센터</a></li>
                     <li class="store"><a
                             onclick=""
-                            href="#"
+                            href="<%=contextPath%>/olive/getStoreMain.do"
                             data-attr="공통^헤더^매장안내">매장안내</a></li>
                     <li class="global"><a
                             onclick=""

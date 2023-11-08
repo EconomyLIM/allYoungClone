@@ -31,6 +31,11 @@ public class StoreDistrict extends HttpServlet {
 		StoreService service = StoreService.getinstance();
 		List<DistrictDTO> list = service.districtSelectAll(city_id);
 		
+		if(list == null) {
+			out.write("");
+			return;
+		}
+		
 		DistrictDTO dto = null;
 		JSONObject jsonObject = new JSONObject();
 		JSONArray districts = new JSONArray();
