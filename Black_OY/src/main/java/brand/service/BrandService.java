@@ -12,14 +12,14 @@ import brand.domain.BrandDTO;
 import brand.persistence.BrandDAO;
 
 
-public class brandService {
-
+public class BrandService {
+/*
 		   // 1. 싱글톤
-		   private brandService() {}      
-		   private static brandService instance = null;  
-		   public static brandService getInstance() {   
+		   private BrandService() {}      
+		   private static BrandService instance = null;  
+		   public static BrandService getInstance() {   
 		      if(   instance == null  ) {
-		         instance = new brandService();
+		         instance = new BrandService();
 		      }
 		      return instance;
 		   }
@@ -40,7 +40,7 @@ public class brandService {
 		       
 		      }
 		   }   
-		  
+	*/	  
 		
 	}
 	
