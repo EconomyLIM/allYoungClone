@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/inc/include.jspf" %>
+<%@ include file="/WEB-INF/inc/include.jspf"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,10 +13,10 @@
 <script src="/Black_OY/js/head.js"></script>
 <title>블랙올리브영 온라인몰</title>
 <style>
- #directTop {
-            opacity : 0;
-            transition: opacity 0.5s ease;
-        }
+#directTop {
+	opacity: 0;
+	transition: opacity 0.5s ease;
+}
 </style>
 </head>
 <body>
@@ -223,30 +224,53 @@
 					<c:choose>
 						<c:when test="${empty sessionScope.logOn }">
 							<li class="join"><a href="#" data-attr="공통^헤더^회원가입">회원가입</a></li>
-							<li class="login"><a href="<%=contextPath %>/olive/LogOn.do" data-attr="공통^헤더^로그인">로그인</a></li>	
+							<li class="login"><a href="<%=contextPath%>/olive/LogOn.do"
+								data-attr="공통^헤더^로그인">로그인</a></li>
 						</c:when>
 						<c:otherwise>
+
 							<li class="logout">
-								<strong>${sessionScope.logOn.grade_id}&nbsp; ${sessionScope.logOn.u_name}</strong> <a href="<%=contextPath %>/olive/Logout.do" data-attr="공통^헤더^로그아웃">로그아웃</a></li>
-								<li class="mypage"><a onclick="" href="#" data-attr="공통^헤더^마이페이지">마이페이지</a></li>
+								<strong>${sessionScope.logOn.grade_id}&nbsp; 
+                  ${sessionScope.logOn.u_name}</strong> <a 
+               href="<%=contextPath %>/olive/Logout.do" data-attr="공통^헤더^로그아웃">로그아웃</a></li>
+								<li class="mypage"><a onclick="" href="<%=contextPath %>/mypage/mypageMain.do" data-attr="공통^헤더^마이페이지">마이페이지</a></li>
+
 						</c:otherwise>
 					</c:choose>
 					
-					<li class="cart"><a href="#" data-attr="공통^헤더^장바구니">장바구니<span
-							id="cartToCnt"></span></a></li>
+					<c:choose>
+						<c:when test="${empty sessionScope.logOn }">
+							<li class="cart"><a href="<%=contextPath%>/olive/basket.do"
+						data-attr="공통^헤더^장바구니">장바구니								
+									<span id="cartToCnt"></span>
+					</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="cart"><a href="<%=contextPath%>/olive/basket.do"
+						data-attr="공통^헤더^장바구니">장바구니								
+									<span id="cartToCnt">
+										(${sessionScope.basketlistcnt})
+									</span>
+					</a></li>
+						</c:otherwise>
+					</c:choose>
+
+					
+
 					<li class="order"><a onclick="" href="#"
 						data-attr="공통^헤더^주문배송">주문배송</a></li>
 					<li class="customer"><a onclick="" href="#"
 						data-attr="공통^헤더^고객센터">고객센터</a></li>
-					<li class="store"><a onclick="" href="<%=contextPath %>/store/getStoreMain.do"
+					<li class="store"><a onclick=""
+						href="<%=contextPath%>/store/getStoreMain.do"
 						data-attr="공통^헤더^매장안내">매장안내</a></li>
-					<li class="global"><a href="#" 
-						title="올리브영 글로벌 새창으로 열기" data-attr="공통^헤더^Global">Global</a></li>
+					<li class="global"><a href="#" title="올리브영 글로벌 새창으로 열기"
+						data-attr="공통^헤더^Global">Global</a></li>
 				</ul>
 			</div>
 			<div class="header_inner">
 				<h1>
-					<a onclick="" href="#"> <img
+					<a onclick="" href="<%=contextPath%>/olive/main.do"> <img
 						src="https://static.oliveyoung.co.kr/pc-static-root/image/comm/h1_logo.png"
 						alt="올리브영">
 					</a>
@@ -297,67 +321,67 @@
 								style="display: none;">급상승 검색어</a>
 							<div class="search_tab_cont sharp_rise" id="w_pop_cont"
 								style="display: none;">
-									<ul id="mainPopword">
-										<li class="top"><a href="#"
-											onclick="javascript:popwordSearchdo('틴트','Pop_PROD');"
-											data-attr="공통^통합검색_급상승검색어^틴트"> <span>1</span> <strong>틴트</strong>
-												<span class="rate "> <span>&nbsp;</span>
-											</span>
-										</a></li>
-										<li class="top"><a href="#"
-											onclick="javascript:popwordSearchdo('쿠션','Pop_PROD');"
-											data-attr="공통^통합검색_급상승검색어^쿠션"> <span>2</span> <strong>쿠션</strong>
-												<span class="rate "> <span>&nbsp;</span>
-											</span>
-										</a></li>
-										<li class="top"><a href="#"
-											onclick="javascript:popwordSearchdo('블프','Pop_PROD');"
-											data-attr="공통^통합검색_급상승검색어^블프"> <span>3</span> <strong>블프</strong>
-												<span class="rate "> <span>&nbsp;</span>
-											</span>
-										</a></li>
-										<li class=""><a href="#"
-											onclick="javascript:popwordSearchdo('셀러버','Pop_PROD');"
-											data-attr="공통^통합검색_급상승검색어^셀러버"> <span>4</span> 셀러버 <span
-												class="rate "> <span>&nbsp;</span>
-											</span>
-										</a></li>
-										<li class=""><a href="#"
-											onclick="javascript:popwordSearchdo('롬앤','Pop_PROD');"
-											data-attr="공통^통합검색_급상승검색어^롬앤"> <span>5</span> 롬앤 <span
-												class="rate "> <span>&nbsp;</span>
-											</span>
-										</a></li>
-										<li class=""><a href="#"
-											onclick="javascript:popwordSearchdo('블러셔','Pop_PROD');"
-											data-attr="공통^통합검색_급상승검색어^블러셔"> <span>6</span> 블러셔 <span
-												class="rate "> <span>&nbsp;</span>
-											</span>
-										</a></li>
-										<li class=""><a href="#"
-											onclick="javascript:popwordSearchdo('립밤','Pop_PROD');"
-											data-attr="공통^통합검색_급상승검색어^립밤"> <span>7</span> 립밤 <span
-												class="rate "> <span>&nbsp;</span>
-											</span>
-										</a></li>
-										<li class=""><a href="#"
-											onclick="javascript:popwordSearchdo('마스크팩','Pop_PROD');"
-											data-attr="공통^통합검색_급상승검색어^마스크팩"> <span>8</span> 마스크팩 <span
-												class="rate "> <span>&nbsp;</span>
-											</span>
-										</a></li>
-										<li class=""><a href="#"
-											onclick="javascript:popwordSearchdo('아이라이너','Pop_PROD');"
-											data-attr="공통^통합검색_급상승검색어^아이라이너"> <span>9</span> 아이라이너 <span
-												class="rate "> <span>&nbsp;</span>
-											</span>
-										</a></li>
-										<li class=""><a href="#"
-											onclick="javascript:popwordSearchdo('마스카라','Pop_PROD');"
-											data-attr="공통^통합검색_급상승검색어^마스카라"> <span>10</span> 마스카라 <span
-												class="rate "> <span>&nbsp;</span>
-											</span>
-										</a></li>
+								<ul id="mainPopword">
+									<li class="top"><a href="#"
+										onclick="javascript:popwordSearchdo('틴트','Pop_PROD');"
+										data-attr="공통^통합검색_급상승검색어^틴트"> <span>1</span> <strong>틴트</strong>
+											<span class="rate "> <span>&nbsp;</span>
+										</span>
+									</a></li>
+									<li class="top"><a href="#"
+										onclick="javascript:popwordSearchdo('쿠션','Pop_PROD');"
+										data-attr="공통^통합검색_급상승검색어^쿠션"> <span>2</span> <strong>쿠션</strong>
+											<span class="rate "> <span>&nbsp;</span>
+										</span>
+									</a></li>
+									<li class="top"><a href="#"
+										onclick="javascript:popwordSearchdo('블프','Pop_PROD');"
+										data-attr="공통^통합검색_급상승검색어^블프"> <span>3</span> <strong>블프</strong>
+											<span class="rate "> <span>&nbsp;</span>
+										</span>
+									</a></li>
+									<li class=""><a href="#"
+										onclick="javascript:popwordSearchdo('셀러버','Pop_PROD');"
+										data-attr="공통^통합검색_급상승검색어^셀러버"> <span>4</span> 셀러버 <span
+											class="rate "> <span>&nbsp;</span>
+										</span>
+									</a></li>
+									<li class=""><a href="#"
+										onclick="javascript:popwordSearchdo('롬앤','Pop_PROD');"
+										data-attr="공통^통합검색_급상승검색어^롬앤"> <span>5</span> 롬앤 <span
+											class="rate "> <span>&nbsp;</span>
+										</span>
+									</a></li>
+									<li class=""><a href="#"
+										onclick="javascript:popwordSearchdo('블러셔','Pop_PROD');"
+										data-attr="공통^통합검색_급상승검색어^블러셔"> <span>6</span> 블러셔 <span
+											class="rate "> <span>&nbsp;</span>
+										</span>
+									</a></li>
+									<li class=""><a href="#"
+										onclick="javascript:popwordSearchdo('립밤','Pop_PROD');"
+										data-attr="공통^통합검색_급상승검색어^립밤"> <span>7</span> 립밤 <span
+											class="rate "> <span>&nbsp;</span>
+										</span>
+									</a></li>
+									<li class=""><a href="#"
+										onclick="javascript:popwordSearchdo('마스크팩','Pop_PROD');"
+										data-attr="공통^통합검색_급상승검색어^마스크팩"> <span>8</span> 마스크팩 <span
+											class="rate "> <span>&nbsp;</span>
+										</span>
+									</a></li>
+									<li class=""><a href="#"
+										onclick="javascript:popwordSearchdo('아이라이너','Pop_PROD');"
+										data-attr="공통^통합검색_급상승검색어^아이라이너"> <span>9</span> 아이라이너 <span
+											class="rate "> <span>&nbsp;</span>
+										</span>
+									</a></li>
+									<li class=""><a href="#"
+										onclick="javascript:popwordSearchdo('마스카라','Pop_PROD');"
+										data-attr="공통^통합검색_급상승검색어^마스카라"> <span>10</span> 마스카라 <span
+											class="rate "> <span>&nbsp;</span>
+										</span>
+									</a></li>
 								</ul>
 								<div class="search_set_area">
 									<a href="#" class="sch_pop_close">닫기</a>
@@ -799,11 +823,13 @@
 						data-ref-linkurl="main/getEventList.do" data-attr="공통^GNB^이벤트"><span>이벤트</span>
 					</a></li>
 				</ul>
-				
+
 				<div id="directTop" style="display: block;">
-		<button><span></span>TOP</button>
-	</div>
-				
+					<button>
+						<span></span>TOP
+					</button>
+				</div>
+
 			</div>
 			<!-- RecoBell Script Start -->
 			<form name="ssologinfrm"
