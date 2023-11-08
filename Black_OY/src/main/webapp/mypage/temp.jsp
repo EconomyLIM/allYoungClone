@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/WEB-INF/inc/include.jspf" %>
 <%@ include file="/WEB-INF/inc/session_auth.jspf" %>
 <!DOCTYPE html>
@@ -9,7 +10,7 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="/Black_OY/js/head.js"></script>
-<link rel="stylesheet" href="/BlackOY/css/style.css">
+
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
@@ -191,34 +192,60 @@
 				</ul>
 			</a>
 			
-			
 			<div class="title-area mgT15">
 				<h2 class="tit">좋아요</h2>
 				<a class="btnMore" id="wishListMore" href="javascript:common.link.moveWishList(getEventParameterString({t_page: '마이페이지', t_click: '좋아요'}))">더보기</a>
 			</div>
-		
+			
+			<%-- <c:set value="${ userPlike }" var="pl"/> --%>
 			<!-- 좋아요 상품 목록 -->
-			<script>
-				function addList() {
-					const addValue = ${ plike.plikeDispN }
-				}
-			</script>
+			
 			
 			<div class="list-four"><!-- 상품 3개 list-three, 상품 4개 list-four -->
-				
-						<c:forEach items="${ userPlike }" var="plike">
+			
+			<%-- 동적 태그 추가로 좋아요 상품 출력 --%>
+					<%-- ${ fn:length(requestScore.uerPlike) } 만큼만 동적 태그 추가 --%>
+					<c:forEach items="${ userPlike }" var="pl">
+						
+					</c:forEach>
+	
 						<ul class="cate_prd_list" id="wishList" name="wishList"><!-- 상품 4개 일때 -->
 							
-								<li <%-- 상품id --%>>
-									<div class="prd_info"><a href="javascript:;" class="prd_thumb goodsList" data-ref-goodsno="A000000166675" data-ref-dispcatno="" data-ref-itemno="001"><span class="thumb_flag best">베스트</span><%-- 상품 이미지 --%></a><div class="prd_name"><a href="javascript:;" class="goodsList" data-ref-goodsno="A000000166675" data-ref-dispcatno="" data-ref-itemno="001"><span class="tx_brand">아누아</span><p class="tx_name">[리필기획] 아누아 어성초 77 수딩 토너 350ml 리필 기획세트(350ml+350ml리필)</p></a></div><button class="btn_zzim jeem on" data-ref-goodsno="A000000166675"><span>찜하기후</span></button><p class="prd_price"><span class="tx_org"><span class="tx_num">49,000</span>원 </span><span class="tx_cur"><span class="tx_num">34,000</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span></p></div>
+							  
+								<li data-goods-no="<%-- 상품id --%>">
+									<div class="prd_info">
+										<a href="<%-- 해당 상품페이지로 이동 --%>" class="prd_thumb goodsList" data-ref-goodsno="<%-- 상품표시id --%>" data-ref-dispcatno="" data-ref-itemno="001">
+											<span class="thumb_flag best">베스트</span>
+											<%-- 상품 이미지 --%>
+										</a>
+										<div class="prd_name">
+											<a href="<%-- 해당 상품페이지로 이동 --%>" class="goodsList" data-ref-goodsno="<%-- 상품표시id --%>" data-ref-dispcatno="" data-ref-itemno="001">
+												<span class="tx_brand"><%-- 브랜드명 --%></span>
+												<p class="tx_name"><%-- 상품명 --%></p>
+											</a>
+										</div>
+										<button class="btn_zzim jeem on" data-ref-goodsno="<%--  --%>">
+											<span>찜하기후</span>
+										</button>
+										<p class="prd_price">
+										<%-- 할인 여부에 따라 달라지는 태그 --%>
+											<span class="tx_org">
+												<span class="tx_num"><%-- 할인전 가격 --%>
+												</span>원
+											</span>
+											<span class="tx_cur"><span class="tx_num"><%-- 할인후 가격 --%></span>원 </span>
+										</p>
+										<p class="prd_flag">
+										
+										<%-- 프로모션 span태그 동적 추가 --%>
+										
+											<span class="icon_flag sale">세일</span>
+										
+										</p>
+									</div>
 
 								</li>
-							
-								<li <%-- 상품id --%>>
-									<div class="prd_info"><a href="javascript:;" class="prd_thumb goodsList" data-ref-goodsno="A000000188803" data-ref-dispcatno="" data-ref-itemno="001"><span class="thumb_flag best">베스트</span><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018880304ko.jpg?l=ko" alt="[11월 블프특가]아이디얼 포 맨&nbsp;퍼펙트 올인원 탄력 기획(올인원 30ml+탄력크림 30ml 증정)" onerror="common.errorImg(this);"></a><div class="prd_name"><a href="javascript:;" class="goodsList" data-ref-goodsno="A000000188803" data-ref-dispcatno="" data-ref-itemno="001"><span class="tx_brand">아이디얼포맨</span><p class="tx_name">[11월 블프특가]아이디얼 포 맨&nbsp;퍼펙트 올인원 탄력 기획(올인원 30ml+탄력크림 30ml 증정)</p></a></div><button class="btn_zzim jeem on" data-ref-goodsno="A000000188803"><span>찜하기후</span></button><p class="prd_price"><span class="tx_org"><span class="tx_num">29,000</span>원 ~</span><span class="tx_cur"><span class="tx_num">19,860</span>원 ~</span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></div>
-
-								</li>
-							
+														
 								<li data-goods-no="A000000190280">
 									<div class="prd_info"><a href="javascript:;" class="prd_thumb goodsList" data-ref-goodsno="A000000190280" data-ref-dispcatno="" data-ref-itemno="001"><span class="thumb_flag best">베스트</span><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019028015ko.jpg?l=ko" alt="[유트루PICK/한정기획] 라네즈 크림스킨(170ml+170ml리필)" onerror="common.errorImg(this);"></a><div class="prd_name"><a href="javascript:;" class="goodsList" data-ref-goodsno="A000000190280" data-ref-dispcatno="" data-ref-itemno="001"><span class="tx_brand">라네즈</span><p class="tx_name">[유트루PICK/한정기획] 라네즈 크림스킨(170ml+170ml리필)</p></a></div><button class="btn_zzim jeem on" data-ref-goodsno="A000000190280"><span>찜하기후</span></button><p class="prd_price"><span class="tx_org"><span class="tx_num">33,000</span>원 </span><span class="tx_cur"><span class="tx_num">23,760</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span><span class="icon_flag delivery">오늘드림</span></p></div>
 
@@ -226,24 +253,23 @@
 							
 						</ul>
 					
-					</c:forEach>
+					
 				
 			</div>
 			<!-- //좋아요 상품 목록 -->
-		
+			
+			
 			<div class="area-over" id="cousel">
 				<div class="left">
 					<div class="title-area">
 						<h2 class="tit">1 : 1 문의내역</h2>
-						<a class="btnMore" id="qnaListMore" href="javascript:common.link.moveQnaList('','마이페이지');">더보기</a>
+						<a class="btnMore" id="qnaListMore" href="<%--  고객센터 1:1문의하기 페이지 --%>">더보기</a>
 					</div>
 					<div class="list-customer">
 						<ul>
 	
-		
-		
-									<li class="nodata">최근 1개월간 문의하신 내용이 없습니다.</li>
-		
+							<%-- 동적 태그 추가로 문의 내역 출력 --%>
+							
 									
 						</ul>
 					</div>
@@ -251,15 +277,13 @@
 				<div class="right" id="goodsQna">
 					<div class="title-area">
 						<h2 class="tit">상품Q&amp;A내역</h2>
-						<a class="btnMore" id="goodsQnaListMore" href="javascript:common.link.moveGoodsQnaList(getEventParameterString({t_page: '마이페이지', t_click: '문의현황_상품QnA내역'}))">더보기</a>
+						<a class="btnMore" id="goodsQnaListMore" href="<%-- 상품QnA 페이지 이동 --%>">더보기</a>
 					</div>
 		
 					<div class="list-customer">
 						<ul>
 	
-		
-		
-							<li class="nodata">최근 1개월간 문의하신 내용이 없습니다.</li>
+							<%-- 동적 태그 추가 상품QnA내역 출력 --%>
 		
 	
 						</ul>
@@ -279,7 +303,120 @@
 </div>
 </div>
 
-
+			<!-- 테스트버튼 -->
+			<input type="button" value="테스트" onclick='addList()'>
+			
+<script>
+				function addList() {
+					alert('addList실행')
+					//상품전체 li
+					let prdNli = document.createElement("li");
+					
+					
+						//상품정보div
+						let prdinfodiv = document.createElement("div");
+						prdinfodiv.className = 'prd_info';
+						
+							//상품페이지연결a
+							let prdconA = document.createElement("a");
+							prdconA.setAttribute("href", "<%-- 상품페이지 --%>");
+							
+							
+								//베스트표시
+								let prdbst = document.createElement("span");
+								prdbst.className = "prd_thumb goodsList";
+								prdbst.setAttribute("value", "베스트")
+							
+							//상품이름
+							let prdName = document.createElement("div");
+							prdName.className =  "prd_name";
+								
+								//상품이름으로 페이지 연결 a
+								let prdconAbyN = document.createElement("a");
+								prdconAbyN.className = "goodsList";
+								
+								//브랜드명
+								let prdbrand = document.createElement("span");
+								prdbrand.className =  "tx_brand";
+								
+								//상품명
+								let prdN = document.createElement("p");
+								prdN.className = "tx_name";
+							
+							//찜하기
+							let btnZzim = document.createElement("button");
+							btnZzim.className = "btn_zzim jeem on";
+							
+							//상품가격
+							let prdprice = document.createElement("div");
+							prdprice.className = "prd_price";
+							
+								//할인전
+								let prdpricep = document.createElement("span");
+								prdpricep.className = "tx_org";
+								
+									//할인전 단위추가
+									let prdpricepnum = document.createElement("span");
+									prdpricepnum.className = "tx_num";
+								prdpricep.setAttribute("value", "원");
+								
+								//할인후
+								let prdpricea = document.createElement("span");
+								prdpricep.className = "tx_org";
+								
+									//할인후 단위추가
+									let prdpriceanum = document.createElement("span");
+									prdpriceanum.className = "tx_num";
+									prdpricea.setAttribute("value", "원");
+								
+							//프로모션
+							let prdflag = document.createElement("p");
+			
+								//할인 프로모션
+								let discflag = document.createElement("span");
+								discflag.className = "icon_flag sale";
+								discflag.setAttribute("value", "세일");
+								
+								//쿠폰 프로모션
+								let cpflag = document.createElement("span");
+								cpflag.className = "icon_flag coupon";
+								cpflag.setAttribute("value", "쿠폰");
+								
+								//배송 프로모션
+								let deliflag = document.createElement("span");
+								deliflag.className = "icon_flag delivery";
+								deliflag.setAttribute("value", "오늘드림");
+							
+							let parenttag = document.querySelector("#wishList");
+							
+							parenttag.appendChild(prdNli);
+							
+							prdNli.appendChild(prdinfodiv);
+							
+							prdinfodiv.appendChild(prdconA)
+										.appendChild(prdName)
+										.appendChild(btnZzim)
+										.appendChild(prdprice)
+										.appendChild(prdflag);
+							
+							prdconA.appendChild(prdbst);
+							
+							prdName.appendChild(prdconAbyN)
+									.appendChild(prdbrand)
+									.appendChild(prdN);
+							
+							prdprice.appendChild(prdpricep)
+									.appendChild(prdpricea);
+							
+							prdpricep.appendChild(prdpricepnum);
+							
+							prdpricea.appendChild(prdpriceanum);
+							
+							prdflag.appendChild(discflag)
+									.appendChild(cpflag)
+									.appendChild(deliflag);
+				}
+			</script>
 
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>

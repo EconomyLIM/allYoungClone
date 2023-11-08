@@ -144,38 +144,77 @@ public class MyPageDAOImpl implements MypageDAO {
 	@Override
 	public List<MpPlikeDTO> selectUserPlike(Connection conn, String Uid) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT *  "
-				+ " FROM ( "
-				+ "    SELECT l.pro_displ_id, pro_displ_name, pro_displ_src, prom_g_id, prom_c_id, prom_d_id, prom_p_id "
-				+ "    FROM p_like l "
-				+ "    LEFT JOIN pro_prom p ON l.pro_displ_id = p.pro_displ_id "
-				+ "    LEFT JOIN product_display d ON l.pro_displ_id = d.pro_displ_id "
-				+ "    LEFT JOIN pro_displ_img i ON l.pro_displ_id = i.pro_displ_id "
-				+ "    WHERE user_id = ? "
-				+ "    ORDER BY pro_displ_src  "
-				+ " ) "
-				+ " WHERE ROWNUM = 1  ";
-		
+		String sql = " SELECT user_id "
+				+ " ,pdi.pro_displ_src, b.brand_name, pd.pro_displ_name "
+				+ " ,a.pro_price "
+				+ " , "
+				+ " NVL(CASE  "
+				+ "         WHEN prc.promo_c_kind = 1 THEN a.pro_price + prc.promo_c_discount "
+				+ "         WHEN prc.promo_c_kind = 2 THEN a.pro_price * (1-prc.promo_c_discount) "
+				+ "         ELSE a.pro_price "
+				+ "         END  "
+				+ " , 0) "
+				+ " + "
+				+ " NVL(prd.promo_d_discount,0) as afterprice "
+				+ " , pd.pro_displ_id, p.pro_id "
+				+ " ,CASE  "
+				+ "         WHEN prc.promo_c_s <= SYSDATE AND prc.promo_c_e >= SYSDATE THEN '1' "
+				+ "         ELSE '0' "
+				+ "     END AS pmc "
+				+ " ,CASE  "
+				+ "         WHEN prd.promo_d_s <= SYSDATE AND prd.promo_d_e >= SYSDATE THEN '1' "
+				+ "         ELSE '0' "
+				+ "     END AS pmd "
+				+ " ,CASE  "
+				+ "         WHEN prp.promo_p_s <= SYSDATE AND prp.promo_p_e >= SYSDATE THEN '1' "
+				+ "         ELSE '0' "
+				+ "     END AS pmp "
+				+ " ,CASE  "
+				+ "         WHEN ss.store_id IS NOT NULL THEN '1' "
+				+ "         ELSE '0' "
+				+ "     END AS stock "
+				+ " FROM  "
+				+ " product_display pd "
+				+ " JOIN p_like pl ON pd.pro_displ_id = pl.pro_displ_id "
+				+ " JOIN brand b ON pd.brand_id = b.brand_id "
+				+ " JOIN product p ON p.pro_displ_id = pd.pro_displ_id "
+				+ " JOIN pro_displ_img pdi ON pdi.pro_displ_id = pd.pro_displ_id "
+				+ " JOIN pro_prom pm ON pd.pro_displ_id = pm.pro_displ_id "
+				+ " LEFT JOIN prom_c prc ON pm.prom_c_id = prc.prom_c_id "
+				+ " LEFT JOIN prom_d prd ON prd.prom_d_id = pm.prom_d_id "
+				+ " LEFT JOIN prom_p prp ON prp.prom_p_id = pm.prom_p_id "
+				+ " LEFT JOIN store_stock ss ON p.pro_id = ss.pro_id "
+				+ "  JOIN ( "
+				+ "     SELECT pro_displ_id, pro_price,  "
+				+ "         RANK() OVER (PARTITION BY pro_displ_id ORDER BY pro_price DESC) as price_rank "
+				+ "     FROM product "
+				+ " ) a ON a.pro_displ_id = pd.pro_displ_id AND a.price_rank = 1 "
+				+ " where user_id= ?   AND ROWNUM <= 4 " ; 
 		ArrayList<MpPlikeDTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, Uid);
-		rs = pstmt.executeQuery();
-		MpPlikeDTO dto = null;
+			pstmt.setString(1, Uid);
+			rs = pstmt.executeQuery();
+			MpPlikeDTO dto = null;
 		if (rs.next()) {
 			list = new ArrayList<MpPlikeDTO>();
 			
 			do {
 				dto = new MpPlikeDTO();
-				dto.setPlikeDispN(rs.getString("pro_displ_name"));
-				dto.setPlikeImgsrc(rs.getString("pro_displ_src"));
-				dto.setPromgId(rs.getLong("prom_g_id"));
-				dto.setPromcId(rs.getLong("prom_c_id"));
-				dto.setPromdId(rs.getLong("prom_d_id"));
-				dto.setPrompId(rs.getLong("prom_p_id"));
+				dto.setPlImgsrc(rs.getString("pdi.pro_displ_src"));
+				dto.setPlbrand(rs.getString("b.brand_name"));
+				dto.setPlpdispN(rs.getString("pd.pro_displ_name"));
+				dto.setPlpricep(rs.getString("a.pro_price"));
+				dto.setPlpricea(rs.getString("afterprice"));
+				dto.setPlpdispId(rs.getString("pd.pro_displ_id"));
+				dto.setPlpId(rs.getString("p.pro_id"));
+				dto.setPmc(rs.getInt("pmc"));
+				dto.setPmd(rs.getInt("pmd"));
+				dto.setPmp(rs.getInt("pmp"));
+				dto.setStock(rs.getInt("stock"));
 				list.add(dto);
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
@@ -183,7 +222,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		}
 		
 		} catch (Exception e) {
-			System.out.println("> MyPageDAOImpl_selectUserPlike() Exception");
+			System.out.println("> MyPageDAOImpl_selectUserInfo() Exception");
 		}
 		
 		return list;
