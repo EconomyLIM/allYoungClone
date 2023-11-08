@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="/BlackOY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
 
-<style>
+<style>	
 	* {
 		box-sizing: border-box;
 	}
@@ -47,7 +47,7 @@
 <div>
 
 
-<a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=00010002&sort=1">dd</a>
+<a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=00010002&sort=1&currentpage=1&brandId=br_00000108&brandId=br_00000107">dd</a>
 
 <br>
 <a href="<%=contextPath %>/olive/main.do">main page</a>

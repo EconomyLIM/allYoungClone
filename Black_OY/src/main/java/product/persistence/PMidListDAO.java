@@ -6,6 +6,7 @@ import java.util.List;
 
 import product.domain.MidCateDTO;
 import product.domain.MnameIdDTO;
+import product.domain.PCurNameDTO;
 import product.domain.PMidListDTO;
 import product.domain.PbrandListDTO;
 import product.domain.PlowcateDTO;
@@ -35,15 +36,22 @@ public interface PMidListDAO {
 	// 5.  *** 상품표시이미지, 브랜드, 상품표시명, 상품 원래 가격, 상품프로모션후 가격, 무슨 프로모션인지 갖고 와야 함
 	//					ㄴ 첫번째는 인기순
 //	List<PMidListDTO> selectMProList(Connection conn, String mId, String sort) throws Exception;
-	List<PMidListDTO> selectMProList(Connection conn, String mId, String sort,int currentPage, int numberPerPage) throws Exception;
+	List<PMidListDTO> selectMProList(Connection conn, int group, String Id, String sort, String brands[], int currentPage, int numberPerPage) throws Exception;
 	
 	
 	// 6. 페이징 처리
 	// 6-1. 총 레코드 수 가져오기
-	int getTotalRecords(Connection conn, String mId)  throws SQLException;
+	int getTotalRecords(Connection conn, int group, String mId)  throws SQLException;
+	// 6-1-a. 총 레코드 수 가져오기 (브랜드 검색 추가)
+	int getTotalRecords(Connection conn, int group, String mId, String brands[])  throws SQLException;
 	
 	// 6-2. 총 페이지 구하기 
-	int getTotalPages(Connection conn, int numberPerPage, String mId)  throws SQLException;
+	int getTotalPages(Connection conn, int group, int numberPerPage, String mId)  throws SQLException;
+	// 6-2-a. 총 페이지 구하기 (브랜드 검색 추가) 
+	int getTotalPages(Connection conn, int group, int numberPerPage, String mId, String brands[])  throws SQLException;
+	
+	// 7. 현재 선택된 카테고리 이름 가져오기
+	PCurNameDTO curName(Connection conn, int group, String id) throws Exception;
 	
 	
 } // interface
