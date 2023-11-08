@@ -21,6 +21,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="/Black_OY/js/head.js"></script>
 <link rel="stylesheet" href="/Black_OY/css/style.css">
+
+
+
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
@@ -53,8 +56,10 @@
 				<h1>매장안내 <span>가까운 매장을 등록해 보세요.</span></h1>
 			</div>
 			<div class="store_area">
-					<div class="api_mapArea" id="map" style="overflow: hidden; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/2x/bg_tile.png&quot;);">
-					<div style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; touch-action: none; cursor: url(&quot;https://t1.daumcdn.net/mapjsapi/images/2x/cursor/openhand.cur.ico&quot;) 7 5, url(&quot;https://t1.daumcdn.net/mapjsapi/images/2x/cursor/openhand.cur.ico&quot;), default;"><div style="position: absolute; left: 1201px; top: 1305px;"><div style="position: absolute; z-index: 1; left: 0px; top: 0px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/60/26.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1305px; top: -607px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/60/27.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1049px; top: -607px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/60/28.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -793px; top: -607px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/60/29.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -537px; top: -607px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/60/30.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -281px; top: -607px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/60/31.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -25px; top: -607px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/61/26.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1305px; top: -863px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/61/27.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1049px; top: -863px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/61/28.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -793px; top: -863px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/61/29.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -537px; top: -863px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/61/30.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -281px; top: -863px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/61/31.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -25px; top: -863px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/62/26.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1305px; top: -1119px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/62/27.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1049px; top: -1119px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/62/28.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -793px; top: -1119px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/62/29.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -537px; top: -1119px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/62/30.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -281px; top: -1119px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/62/31.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -25px; top: -1119px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/63/26.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1305px; top: -1375px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/63/27.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1049px; top: -1375px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/63/28.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -793px; top: -1375px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/63/29.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -537px; top: -1375px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/63/30.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -281px; top: -1375px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/8/63/31.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -25px; top: -1375px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"></div><div style="position: absolute; z-index: 0; left: 0px; top: 0px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/123/53.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1177px; top: -862.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/123/54.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1049px; top: -862.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/123/55.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -921px; top: -862.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/123/56.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -793px; top: -862.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/123/57.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -665px; top: -862.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/123/58.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -537px; top: -862.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/124/53.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1177px; top: -990.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/124/54.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1049px; top: -990.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/124/55.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -921px; top: -990.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/124/56.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -793px; top: -990.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/124/57.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -665px; top: -990.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/124/58.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -537px; top: -990.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/125/53.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1177px; top: -1118.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/125/54.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1049px; top: -1118.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/125/55.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -921px; top: -1118.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/125/56.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -793px; top: -1118.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/125/57.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -665px; top: -1118.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/125/58.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -537px; top: -1118.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/126/53.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1177px; top: -1246.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/126/54.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -1049px; top: -1246.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/126/55.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -921px; top: -1246.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/126/56.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -793px; top: -1246.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/126/57.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -665px; top: -1246.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"><img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/126/58.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -537px; top: -1246.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;"></div><div style="position: absolute; z-index: 1;"></div><div style="position: absolute; z-index: 1; width: 630px; height: 715px;"></div><div style="position: absolute; z-index: 1;"><svg version="1.1" style="stroke: none; stroke-dashoffset: 0.5; stroke-linejoin: round; fill: none; transform: translateZ(0px); position: absolute; left: -2461px; top: -2735px; width: 3150px; height: 3575px;" viewBox="0 0 3150 3575"><defs></defs></svg></div><div style="position: absolute; z-index: 1; width: 100%; height: 0px; transform: translateZ(0px);"><div style="position: absolute; margin: -41px 0px 0px -13px; z-index: 0; left: -1071px; top: -1100px; display: block;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way.png" alt="" role="presentation" title="고양향동점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 28px, 42px, 0px); top: 0px; left: 0px; width: 28px; height: 42px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1064px; top: -1266px; display: block;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="스타필드고양점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1126px; top: -1224px; display: block;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="고양원흥점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1152px; top: -1206px; display: block;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="롯데아울렛고양점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1063px; top: -1286px; display: block;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="삼송역점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1231px; top: -1152px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="행신역점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1122px; top: -1275px; display: block;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="원흥역점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1228px; top: -1187px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="고양행신점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1078px; top: -1324px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="고양삼송점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1236px; top: -1216px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="화정로데오점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1226px; top: -1301px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="고양원당점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1043px; top: -1462px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="고양동점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1346px; top: -1250px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="일산벨라시타점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1363px; top: -1259px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="백석역점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1356px; top: -1302px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="일산백마점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; z-index: 9999; white-space: nowrap; margin: 0px; left: -1071px; top: -1100px;"><div class="store_wayP mapMessage">    <div class="way_view">        <h4 class="tit">고양향동점        </h4>        <p class="addr" style="white-space : normal">경기도 고양시 덕양구 꽃마을로 4 퍼스트타워 101, 102, 103호</p>        <div class="area">            <div class="call">02-3159-0243</div>            <div class="time on">영업중</div>            <div class="fv_reShop_in DC8F_cnt"><span>3106</span>명이 관심매장으로 등록했습니다.</div>        </div>        <a href="javascript:;" onclick="javascript:store.main.openPopupStrDetail2('DC8F','Y')" class="store_btn" id="store_view">상세정보보기</a>        <button class="star active DC8F" onclick="javascript:store.main.setPopStarEvent($(this));" data_strno="DC8F">관심매장 등록</button>        <button class="wayClose" onclick="javascript:store.detail.closeMessage()"></button>    </div></div></div><div style="position: absolute; z-index: 9999; white-space: nowrap; margin: 0px; left: -735px; top: -723px;"></div><div style="position: absolute; z-index: 9999; white-space: nowrap; margin: 0px; left: -733px; top: -705px;"></div><div style="position: absolute; z-index: 9999; white-space: nowrap; margin: 0px; left: -735px; top: -723px;"></div></div></div></div><div style="position: absolute; cursor: default; z-index: 1; margin: 0px 6px; height: 19px; line-height: 14px; left: 0px; bottom: 0px; color: rgb(0, 0, 0);"><div style="color: rgb(0, 0, 0); text-align: center; font-size: 10px; float: left;"><div style="float: left; margin: 2px 3px 0px 4px; height: 6px; transition: width 0.1s ease 0s; border-top: none rgb(0, 0, 0); border-right: 2px solid rgb(0, 0, 0); border-bottom: 2px solid rgb(0, 0, 0); border-left: 2px solid rgb(0, 0, 0); border-image: initial; width: 58px;"></div><div style="float: left; margin: 0px 4px 0px 0px; font-family: AppleSDGothicNeo-Regular, 돋움, dotum, sans-serif; font-weight: bold; color: rgb(0, 0, 0);">2km</div></div><div style="margin: 0px 4px; float: left;"><a target="_blank" href="http://map.kakao.com/" title="Kakao 지도로 보시려면 클릭하세요." style="float: left; width: 32px; height: 10px;"><img src="https://t1.daumcdn.net/mapjsapi/images/2x/m_bi_b.png" alt="Kakao 지도로 이동" style="float: left; width: 32px; height: 10px; border: none;"></a><div style="font: 11px / 11px Arial, Tahoma, Dotum, sans-serif; float: left;"></div></div></div><div style="cursor: auto; position: absolute; z-index: 2; left: 0px; top: 0px;"></div></div>
+					<div class="api_mapArea" id="map" style="overflow: hidden;">
+					<div style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; touch-action: none; cursor: url(&quot;https://t1.daumcdn.net/mapjsapi/images/2x/cursor/openhand.cur.ico&quot;) 7 5, url(&quot;https://t1.daumcdn.net/mapjsapi/images/2x/cursor/openhand.cur.ico&quot;), default;"><div style="position: absolute; left: 1201px; top: 1305px;"><div style="position: absolute; z-index: 1; left: 0px; top: 0px;">
+					<img src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNG01/v23_izbfy/7/126/58.png" alt="" role="presentation" draggable="false" style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -537px; top: -1246.5px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 128px; height: 128px;">
+					</div><div style="position: absolute; z-index: 1;"></div><div style="position: absolute; z-index: 1; width: 630px; height: 715px;"></div><div style="position: absolute; z-index: 1;"><svg version="1.1" style="stroke: none; stroke-dashoffset: 0.5; stroke-linejoin: round; fill: none; transform: translateZ(0px); position: absolute; left: -2461px; top: -2735px; width: 3150px; height: 3575px;" viewBox="0 0 3150 3575"><defs></defs></svg></div><div style="position: absolute; z-index: 1; width: 100%; height: 0px; transform: translateZ(0px);"><div style="position: absolute; margin: -41px 0px 0px -13px; z-index: 0; left: -1071px; top: -1100px; display: block;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way.png" alt="" role="presentation" title="고양향동점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 28px, 42px, 0px); top: 0px; left: 0px; width: 28px; height: 42px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1064px; top: -1266px; display: block;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="스타필드고양점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1126px; top: -1224px; display: block;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="고양원흥점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1152px; top: -1206px; display: block;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="롯데아울렛고양점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1063px; top: -1286px; display: block;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="삼송역점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1231px; top: -1152px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="행신역점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1122px; top: -1275px; display: block;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="원흥역점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1228px; top: -1187px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="고양행신점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1078px; top: -1324px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="고양삼송점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1236px; top: -1216px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="화정로데오점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1226px; top: -1301px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="고양원당점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1043px; top: -1462px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="고양동점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1346px; top: -1250px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="일산벨라시타점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1363px; top: -1259px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="백석역점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; margin: -33px 0px 0px -11px; z-index: 0; left: -1356px; top: -1302px; display: none;"><img draggable="false" src="https://static.oliveyoung.co.kr/pc-static-root/image/store/point_way_gray.png" alt="" role="presentation" title="일산백마점" style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 23px, 34px, 0px); top: 0px; left: 0px; width: 23px; height: 34px;"></div><div style="position: absolute; z-index: 9999; white-space: nowrap; margin: 0px; left: -1071px; top: -1100px;"><div class="store_wayP mapMessage">    </div></div><div style="position: absolute; z-index: 9999; white-space: nowrap; margin: 0px; left: -735px; top: -723px;"></div><div style="position: absolute; z-index: 9999; white-space: nowrap; margin: 0px; left: -733px; top: -705px;"></div><div style="position: absolute; z-index: 9999; white-space: nowrap; margin: 0px; left: -735px; top: -723px;"></div></div></div></div><div style="position: absolute; cursor: default; z-index: 1; margin: 0px 6px; height: 19px; line-height: 14px; left: 0px; bottom: 0px; color: rgb(0, 0, 0);"><div style="color: rgb(0, 0, 0); text-align: center; font-size: 10px; float: left;"><div style="float: left; margin: 2px 3px 0px 4px; height: 6px; transition: width 0.1s ease 0s; border-top: none rgb(0, 0, 0); border-right: 2px solid rgb(0, 0, 0); border-bottom: 2px solid rgb(0, 0, 0); border-left: 2px solid rgb(0, 0, 0); border-image: initial; width: 58px;"></div><div style="float: left; margin: 0px 4px 0px 0px; font-family: AppleSDGothicNeo-Regular, 돋움, dotum, sans-serif; font-weight: bold; color: rgb(0, 0, 0);">2km</div></div><div style="margin: 0px 4px; float: left;"><a target="_blank" href="http://map.kakao.com/" title="Kakao 지도로 보시려면 클릭하세요." style="float: left; width: 32px; height: 10px;"><img src="https://t1.daumcdn.net/mapjsapi/images/2x/m_bi_b.png" alt="Kakao 지도로 이동" style="float: left; width: 32px; height: 10px; border: none;"></a><div style="font: 11px / 11px Arial, Tahoma, Dotum, sans-serif; float: left;"></div></div></div><div style="cursor: auto; position: absolute; z-index: 2; left: 0px; top: 0px;"></div></div>
 					<!-- 매장 검색 영역 -->
 					<div class="store_side">
 						<div class="store_tab">
@@ -84,7 +89,7 @@
 										<dt>매장 검색 옵션에 해당하는<br>매장이 없습니다.</dt>
 									</dl>
 								</div>
-								<div class="sroll_store scrbar mCustomScrollbar _mCS_2 mCS_no_scrollbar" style="overflow: auto;"><div id="mCSB_2" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 0px;" tabindex="0"><div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position: relative; top: 0px; left: 0px;" dir="ltr">
+								<div class="sroll_store scrbar mCustomScrollbar _mCS_2 mCS_no_scrollbar" style="overflow: auto;"><div id="mCSB_2" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 100%;" tabindex="0"><div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position: relative; top: 0px; left: 0px;" dir="ltr">
 									<ul class="mlist-reStore" id="wordStoreList">	
 	
 </ul>
@@ -121,12 +126,9 @@
 										<dt>매장 검색 옵션에 해당하는<br>매장이 없습니다.</dt>
 									</dl>
 								</div>
-								<div class="sroll_store scrbar mCustomScrollbar _mCS_3" style="overflow: auto;"><div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 460px;" tabindex="0"><div id="mCSB_3_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
-									<ul class="mlist-reStore" id="areaStoreList">
-
-	
-</ul>
-								</div><div id="mCSB_3_scrollbar_vertical" class="mCSB_scrollTools mCSB_3_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;"><div class="mCSB_draggerContainer"><div id="mCSB_3_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px; height: 98px; display: block; max-height: 450px;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
+								<div class="sroll_store scrbar mCustomScrollbar _mCS_3" style="overflow: auto;"><div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 100%;" tabindex="0"><div id="mCSB_3_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
+									<ul class="mlist-reStore" id="areaStoreList"></ul>
+								</div><div id="mCSB_3_scrollbar_vertical" class="mCSB_scrollTools mCSB_3_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;"><div class="mCSB_draggerContainer"><div id="mCSB_3_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px; height: 98px; display: none; max-height: 450px;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
 							</div>
 						</div>
 						<!-- 지역검색 영역 E  -->
@@ -138,8 +140,7 @@
 							</div>
 							<!-- :: 관심매장이 없는 경우 :: -->
 							<div class="no_store" id="noFavorStoreInfo" style="display: none">
-								<dl class="no_list">
-								</dl>
+								<dl class="no_list"></dl>
 							</div>
 							<div class="no_store" id="noLoginInfo" style="">
 								<dl class="no_login">
@@ -152,9 +153,8 @@
 									<dt>매장 검색 옵션에 해당하는<br>매장이 없습니다.</dt>
 								</dl>
 							</div>
-							<div class="sroll_store scrbar mCustomScrollbar _mCS_4 mCS_no_scrollbar" style="max-height:500px; overflow: auto;"><div id="mCSB_4" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 0px;" tabindex="0"><div id="mCSB_4_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
-								<ul class="mlist-reStore" id="favorStoreList" style="display: none;">
-</ul>
+							<div class="sroll_store scrbar mCustomScrollbar _mCS_4 mCS_no_scrollbar" style="max-height:100%; overflow: auto;"><div id="mCSB_4" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 100%;" tabindex="0"><div id="mCSB_4_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+								<ul class="mlist-reStore" id="favorStoreList" style="display: none;"></ul>
 							</div><div id="mCSB_4_scrollbar_vertical" class="mCSB_scrollTools mCSB_4_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_4_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
 						</div>
 						<!-- 관심매장 영역 E  -->					
@@ -491,6 +491,19 @@
 
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 
+ <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36d928ed3fda62efe8373b73be2275c2"></script>  -->
+<script>
+	// 지도 
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+</script>
+
 <script>
 $(function() {
 	// 직접검색 지역검색 관심매장 판매매장 찾기 
@@ -589,7 +602,9 @@ $(function() {
 						let fv_reShop_in = $("<div>")
 											.addClass("fv_reShop_in")
 											.html(`<span>\${stores.stores[i].store_fav}</span>명이 관심매장으로 등록했습니다.`);
-						let button = $("<button>").addClass(["star", "active"]);
+						let button = $("<button>").addClass(["star", "active"]).on("click", function() {
+							favBtnClick(this);
+						});
 						
 						$(area).append(call);
 						$(area).append(time);
@@ -659,7 +674,9 @@ $(function() {
 						let fv_reShop_in = $("<div>")
 											.addClass("fv_reShop_in")
 											.html(`<span>\${stores.stores[i].store_fav}</span>명이 관심매장으로 등록했습니다.`);
-						let button = $("<button>").addClass(["star", "active"]);
+						let button = $("<button>").addClass(["star", "active"]).on("click", function() {
+							favBtnClick(this);
+						});
 						
 						$(area).append(call);
 						$(area).append(time);
@@ -688,6 +705,8 @@ $(function() {
 	
 	
 	/* 지역검색 탭 */
+	
+	
 	$.ajax({
 			type : 'get'
 			, async : false
@@ -725,6 +744,10 @@ $(function() {
 	// 시,도가 바꼈을 때
 	$("#mainAreaList").on("change", function() {
 		let city_id = $(this).val();
+		if(city_id == "none") {
+			$("#subAreaList option:not(:first)").remove();
+			return;
+		}
 		$.ajax({
 			type : 'get'
 			, async : false
@@ -735,6 +758,11 @@ $(function() {
 				city_id : city_id
 			}
 			, success : function(data) {
+				if(data == "") {
+					$("#subAreaList option:not(:first)").remove();
+					return;
+				}
+				
 				// console.log(data)
 				let select = $("#subAreaList");
 				$("#subAreaList option:not(:first)").remove();
@@ -810,52 +838,7 @@ $(function() {
 					// db에도 +1 하기
 					// ~명이 관심매장으로 등록했습니다. 업데이트
 					let button = $("<button>").addClass(["star", "active"]).on("click", function() {
-						
-						// 로그인 여부 로직
-						<%-- let logonCheck = <%= logonCheck%>
-						if(!logonCheck) {
-							let check = confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?");
-							if(check) {
-								location.href = '/Black_OY/olive/LogOn.do';
-							}
-							return;
-							// return;
-						}  --%>
-						let user_id = "<%= user_id %>";
-						let clickCheck = 0;
-						
-						if($(this).hasClass("active")) {
-							$(this).removeClass("active").addClass("on");
-							clickCheck = 1;
-						} else {
-							$(this).removeClass("on").addClass("active");
-							clickCheck = -1;
-						}
-						
-						let cnt = $(this).prev().children("span").html();
-						$(this).prev().children("span").html(Number(cnt) + clickCheck);
-						
-						let store_id = $(this).parent().parent().attr("class");
-						
-						$.ajax({
-							type : 'get'
-							, async : false
-							, cache: false
-							, url : '/Black_OY/store/updStoreFav.do'
-							, dataType : 'text'
-							, data : {
-								store_id : store_id
-								, clickCheck : clickCheck
-								, user_id : user_id
-							}
-							, success : function(data) {
-								console.log("즐겨찾기 업데이트 완료~~")
-				            }
-							, error : function (data, textStatus) {
-				                console.log('error');
-				            }
-						});
-						
+						favBtnClick(this);
 					});
 					
 					$(area).append(call);
@@ -879,7 +862,52 @@ $(function() {
         });
 	});
 	
-	
+	// 즐겨찾기 버튼 눌렀을 때 
+	function favBtnClick(myBtn) {
+		let logonCheck = <%= logonCheck%>
+		if(!logonCheck) {
+			let check = confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?");
+			if(check) {
+				location.href = '/Black_OY/olive/LogOn.do';
+			}
+			return;
+			// return;
+		} 
+		let user_id = "<%= user_id %>";
+		let clickCheck = 0;
+		
+		if($(myBtn).hasClass("active")) {
+			$(myBtn).removeClass("active").addClass("on");
+			clickCheck = 1;
+		} else {
+			$(myBtn).removeClass("on").addClass("active");
+			clickCheck = -1;
+		}
+		
+		let cnt = $(myBtn).prev().children("span").html();
+		$(myBtn).prev().children("span").html(Number(cnt) + clickCheck);
+		
+		let store_id = $(myBtn).parent().parent().attr("class");
+		
+		$.ajax({
+			type : 'get'
+			, async : false
+			, cache: false
+			, url : '/Black_OY/store/updStoreFav.do'
+			, dataType : 'text'
+			, data : {
+				store_id : store_id
+				, clickCheck : clickCheck
+				, user_id : user_id
+			}
+			, success : function(data) {
+				console.log("즐겨찾기 업데이트 완료~~")
+            }
+			, error : function (data, textStatus) {
+                console.log('error');
+            }
+		});
+	}
 	
 	
 	// 지역검색 눌렀을 때 자동 클릭되게 만듬
@@ -887,26 +915,182 @@ $(function() {
 		$("#searchAreaButton").click();
 	})
 	
-	// 스크롤 구현
-	$(document).ready(function() {
-	    var dragger = $("#mCSB_3_dragger_vertical");
-	
-	    dragger.on('mousewheel DOMMouseScroll', function(e) {
-	        var scrollAmount = 100; // 움직일 스크롤 양을 조절하세요
-	        var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
-	
-	        // 스크롤바를 마우스 휠로 움직입니다
-	        dragger.css('top', (dragger.position().top - (delta * scrollAmount)) + 'px');
-	    });
-	});
 	
 	
 	/* 관심매장 탭  */
 	
-	// 로그인이 안 되어 있을 때
+	// 관심매장 탭을 눌렀을 때
+	$("#searchFavorTab").on("click", function() {
+		if(!<%=logonCheck%>) {
+			$("#favorStoreList").hide();
+	        $("#favorStoreInfo").hide();
+	        $("#noFavorStoreInfo").hide();
+	        $("#noLoginInfo").show();
+		} else {
+			let user_id = "<%= user_id %>";
+			let stores; // JSON객체로 받을 거
+			let attShopCnt; // 회원의 관심매장 수
+			
+			$("#favorStoreList").hide();
+	        $("#favorStoreInfo").hide();
+	        $("#noFavorStoreInfo").hide();
+	        $("#noLoginInfo").hide();
+	        
+	        $.ajax({
+				type : 'post'
+				, async : false
+				, cache: false
+				, url : '/Black_OY/store/getAttShopList.do'
+				, dataType : 'text'
+				, data : {
+					user_id : user_id
+				}
+				, success : function(data) {
+					// console.log(data)
+					if(data == "") {
+						stores = "";
+					} else {
+						stores = JSON.parse(data);
+					}
+					
+	            }
+				, error : function (data, textStatus) {
+	                console.log('error');
+	            }
+			});
+	        
+	        if(stores == "") {
+		        attShopCnt = 0;
+	        } else {
+		        attShopCnt = stores.stores.length;
+	        }
+	        
+	        if(attShopCnt < 1) {
+	        	$("#noFavorStoreInfo .no_list").empty();
+	        	let dt = $("<dt>").html("${logOn.u_name} 님이<br>등록하신 관심매장이 없습니다.");
+	        	let dd = $("<dd>").html("자주 가는 매장을 관심매장으로 등록하면 매장소식을 <br>빠르게 받아 보실 수 있습니다.");
+	        	$("#noFavorStoreInfo > dl").append(dt).append(dd);
+	        	$("#noFavorStoreInfo").show();
+	        } else {
+	        	$("#favorStoreInfo").empty();
+	        	let p = $("<p>").html(`<b>${logOn.u_name}</b>님이 <br>등록하신`
+	        			+ `<span>관심매장은 총 <b>\${attShopCnt}</b>개</span>입니다`);
+	        	let div = $("<div>").addClass("urNotice")
+	        		.html("<p>매장 상황에 따라 매장별 실 영업시간이 다를 수 있습니다.</p>")
+	        	
+	        	$("#favorStoreInfo").append(p).append(div);
+	        	$("#favorStoreInfo").show();
+	        
+				$("#favorStoreList").empty();
+				
+				for(let i=0; i<stores.stores.length; i++) {
+					let li = $("<li>").addClass(stores.stores[i].store_id);
+					let div = $("<div>").addClass("li_Pc_reInner");
+					let h4 = $("<h4>").addClass("tit")
+					let a = $("<a>").text(stores.stores[i].store_name);
+					let p = $("<p>").addClass("addr").text(stores.stores[i].store_addr);
+					let area = $("<div>").addClass("area");
+					let call = $("<div>").addClass("call").text(stores.stores[i].store_tel);
+					
+					let date = new Date();
+					let hour = date.getHours() + "";
+					let curTime = hour.padStart(2, '0') + ":" + date.getMinutes();
+					let weekday = stores.stores[i].weekday;
+					let weekdays = weekday.split(" - ");
+					let time;
+					if(weekdays[0] <= curTime && curTime <= weekdays[1]) {
+						time = $("<div>").addClass(["time", "on"]).text("영업중");
+					} else {
+						time = $("<div>").addClass("time").text("영업 준비중");
+					}
+					
+					
+					let fv_reShop_in = $("<div>")
+										.addClass("fv_reShop_in")
+										.html(`<span>\${stores.stores[i].store_fav}</span>명이 관심매장으로 등록했습니다.`);
+					// 즐겨찾기 눌렀을 때
+					// 로그인 했는지 체크 후
+					// db에도 +1 하기
+					// ~명이 관심매장으로 등록했습니다. 업데이트
+					let button = $("<button>").addClass(["star", "on"]).on("click", function() {
+						let logonCheck = <%= logonCheck%>
+						if(!logonCheck) {
+							let check = confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?");
+							if(check) {
+								location.href = '/Black_OY/olive/LogOn.do';
+							}
+							return;
+							// return;
+						} 
+						let user_id = "<%= user_id %>";
+						let clickCheck = 0;
+						
+						if($(this).hasClass("active")) {
+							$(this).removeClass("active").addClass("on");
+							clickCheck = 1;
+						} else {
+							$(this).removeClass("on").addClass("active");
+							clickCheck = -1;
+						}
+						
+						let cnt = $(this).prev().children("span").html();
+						$(this).prev().children("span").html(Number(cnt) + clickCheck);
+						$("#favorStoreInfo > p > span > b").html(function(index, currentHtml) {
+							return Number(currentHtml) + clickCheck;
+						});
+						
+						let store_id = $(this).parent().parent().attr("class");
+						
+						$.ajax({
+							type : 'get'
+							, async : false
+							, cache: false
+							, url : '/Black_OY/store/updStoreFav.do'
+							, dataType : 'text'
+							, data : {
+								store_id : store_id
+								, clickCheck : clickCheck
+								, user_id : user_id
+							}
+							, success : function(data) {
+								console.log("즐겨찾기 업데이트 완료~~")
+				            }
+							, error : function (data, textStatus) {
+				                console.log('error');
+				            }
+						});
+					});
+
+					$(area).append(call);
+					$(area).append(time);
+					
+					$(h4).append(a);
+					$(div).append(h4);
+					$(div).append(p);
+					$(div).append(area);
+					$(div).append(fv_reShop_in);
+					$(div).append(button);
+					
+					$(li).append(div);
+					$("#favorStoreList").append(li);
+					$("#favorStoreList").show();
+				}
+	        }
+		}
+		
+	})
+	
+	// 로그인이 안 되어 있을 시 로그인 버튼을 눌렀을 때
 	$(".no_login a").on("click", function() {
 		location.href = '/Black_OY/olive/LogOn.do';
 	})
+	
+	
+	// 적용하기 버튼을 눌렀을 때
+	$(".btnSmall.choice_btn").on("click", function() {
+		alert();
+	})
+	
 })
 
 </script>

@@ -295,4 +295,58 @@ public class StoreDAOImpl implements StoreDAO {
 		return rowCount;	
 	}
 
+	@Override
+	public List<StoreTimeDTO> attShopSelect(Connection conn, String user_id) throws SQLException {
+		ArrayList<StoreTimeDTO> list = null;
+		
+		String sql = "SELECT * "
+				+ " FROM store s JOIN store_time st ON s.store_id = st.store_id "
+				+ "             JOIN att_shop a ON s.store_id = a.store_id "
+				+ " WHERE a.user_id = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StoreTimeDTO dto = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					dto = StoreTimeDTO.builder()
+							.store_id(rs.getString("store_id"))
+							.store_name(rs.getString("store_name"))
+							.store_tel(rs.getString("store_tel"))
+							.store_addr(rs.getString("store_addr"))
+							.store_dir(rs.getString("store_dir"))
+							.store_parking(rs.getString("store_parking"))
+							.store_spec(rs.getString("store_spec"))
+							.store_fav(rs.getInt("store_fav"))
+							.weekday(rs.getString("weekday"))
+							.saturday(rs.getString("saturday"))
+							.sunday(rs.getString("sunday"))
+							.holiday(rs.getString("holiday"))
+							.build();
+					
+					list.add(dto);
+					
+				} while ( rs.next() );
+				
+			} // if
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+		}// try_catch
+		
+		return list;
+	}
+
 }
