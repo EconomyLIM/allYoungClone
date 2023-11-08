@@ -383,7 +383,7 @@ button.btn_more {width:310px; height:50px; border:1px solid #ddd; background-col
 .fc_gray {color:#888;}
 .fc_black {color:#222;}
 .fc_white {color:#fff;}
-.msg_mandatory {padding-left:20px; background:url('/cjmweb/images/common/ico_mandatory.png') no-repeat 0 6px;}
+.msg_mandatory {padding-left:20px; background:url('https://www.cjone.com/cjmweb/images/common/ico_mandatory.png') no-repeat 0 6px;}
 .uline {text-decoration:underline;}
 .lang_china {font-family:nbgr;}
 

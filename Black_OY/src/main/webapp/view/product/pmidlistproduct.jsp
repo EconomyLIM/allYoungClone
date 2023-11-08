@@ -6,6 +6,18 @@
 <%@ include file="/WEB-INF/inc/session_auth.jspf"%>
 <%
 	ArrayList myList = (ArrayList)request.getAttribute("pbrandlist");
+	ArrayList proList = (ArrayList)request.getAttribute("pmidlistdto");
+
+	String currentUrl = request.getRequestURL().toString();
+	String midId = request.getParameter("displNum");
+	String largeId = midId.substring(0,4);
+	String midcol = midId.substring(4, 8);
+	
+	int sortcate = 1;
+	if(request.getParameter("sort") != null){
+		sortcate = Integer.parseInt(request.getParameter("sort"));
+	}//if
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -17,83 +29,70 @@
 <link rel="stylesheet" href="/BlackOY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
 </head>
+<script>
+$(function () {
+
+	$(".loc_history>li").mouseover(function () {
+		$(this).addClass("active");
+		$("history_cate_box").css("display","block");
+	})
+	$(".loc_history>li").mouseleave(function () {
+		$(".loc_history>li").removeClass("active");
+	})
+	//
+	
+	 $('.btn_more').click(function() {
+	        const brandBox = $('.cate_brand_box');
+	        if (brandBox.hasClass('more_view')) {
+	            brandBox.removeClass('more_view');
+	            $(this).text('더보기');
+	        } else {
+	            brandBox.addClass('more_view');
+	            $(this).text('축소');
+	        }
+	    });
+	//
+
+	 // midId와 일치하는 id를 가진 li 요소에 'on' 클래스 추가
+	 $( '.loc_history li a#' + '<%=largeId%>').addClass('on');
+	
+	// 
+	 $(".cate_align_box .align_sort ul > li").removeClass("on");
+	
+	$(".cate_align_box .align_sort ul > li").eq( ${param.sort} == null ? 1 : ${param.sort}-1).addClass("on");
+	
+})
+</script>
 <body>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
 	<div id="Container">
 		<div id="Contents">
 			<div class="page_location">
-				<a href="javascript:common.link.moveMainHome();" class="loc_home">홈</a>
+				<a href="<%=contextPath %>/olive/main.do" class="loc_home">홈</a>
 				<ul class="loc_history">
-					<li><a href="#" class="cate_y">클렌징</a>
+					<li>
+					<a href="#" class="cate_y">클렌징</a>
 						<div class="history_cate_box" style="width: 242px">
 							<ul>
-								<li data-ref-dispcatno="10000010001"><a
-									href="javascript:common.link.moveCategoryShop('10000010001','',{ t_page: '로케이션_카테고리관', t_click: '카테고리탭_대카테고리', t_1st_category_type: '대_스킨케어' })">스킨케어</a>
-								</li>
-
-								<li data-ref-dispcatno="10000010009"><a
-									href="javascript:common.link.moveCategoryShop('10000010009','',{ t_page: '로케이션_카테고리관', t_click: '카테고리탭_대카테고리', t_1st_category_type: '대_마스크팩' })">마스크팩</a>
-								</li>
-
-								<li data-ref-dispcatno="10000010010"><a
-									href="javascript:common.link.moveCategoryShop('10000010010','',{ t_page: '로케이션_카테고리관', t_click: '카테고리탭_대카테고리', t_1st_category_type: '대_클렌징' })"
-									class="on">클렌징</a></li>
-
-								<li data-ref-dispcatno="10000010011"><a
-									href="javascript:common.link.moveCategoryShop('10000010011','',{ t_page: '로케이션_카테고리관', t_click: '카테고리탭_대카테고리', t_1st_category_type: '대_선케어' })">선케어</a>
-								</li>
-
-								<li data-ref-dispcatno="10000010008"><a
-									href="javascript:common.link.moveCategoryShop('10000010008','',{ t_page: '로케이션_카테고리관', t_click: '카테고리탭_대카테고리', t_1st_category_type: '대_더모 코스메틱' })">더모
-										코스메틱</a></li>
-
-								<li data-ref-dispcatno="10000010002"><a
-									href="javascript:common.link.moveCategoryShop('10000010002','',{ t_page: '로케이션_카테고리관', t_click: '카테고리탭_대카테고리', t_1st_category_type: '대_메이크업' })">메이크업</a>
-								</li>
-
-								<li data-ref-dispcatno="10000010012"><a
-									href="javascript:common.link.moveCategoryShop('10000010012','',{ t_page: '로케이션_카테고리관', t_click: '카테고리탭_대카테고리', t_1st_category_type: '대_네일' })">네일</a>
-								</li>
-
-								<li data-ref-dispcatno="10000010003"><a
-									href="javascript:common.link.moveCategoryShop('10000010003','',{ t_page: '로케이션_카테고리관', t_click: '카테고리탭_대카테고리', t_1st_category_type: '대_바디케어' })">바디케어</a>
-								</li>
-
-								<li data-ref-dispcatno="10000010004"><a
-									href="javascript:common.link.moveCategoryShop('10000010004','',{ t_page: '로케이션_카테고리관', t_click: '카테고리탭_대카테고리', t_1st_category_type: '대_헤어케어' })">헤어케어</a>
-								</li>
-
-								<li data-ref-dispcatno="10000010005"><a
-									href="javascript:common.link.moveCategoryShop('10000010005','',{ t_page: '로케이션_카테고리관', t_click: '카테고리탭_대카테고리', t_1st_category_type: '대_향수/디퓨저' })">향수/디퓨저</a>
-								</li>
+								<c:if test="${not empty topcatedto}">
+									<c:forEach items="${topcatedto}" var="tcd">
+									<li><a id="${tcd.id}" href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${tcd.id}">${tcd.name}</a></li>
+									</c:forEach>
+								</c:if>
 							</ul>
 
-							<ul>
-								<li data-ref-dispcatno="10000010006"><a
-									href="javascript:common.link.moveCategoryShop('10000010006','',{ t_page: '로케이션_카테고리관', t_click: '카테고리탭_대카테고리', t_1st_category_type: '대_미용소품' })">미용소품</a>
-								</li>
-
-								<li data-ref-dispcatno="10000010007"><a
-									href="javascript:common.link.moveCategoryShop('10000010007','',{ t_page: '로케이션_카테고리관', t_click: '카테고리탭_대카테고리', t_1st_category_type: '대_남성' })">남성</a>
-								</li>
-							</ul>
-						</div></li>
+							
+						</div>
+						</li>
 
 					<li><a href="#" class="cate_y">클렌징폼/젤</a>
 						<div class="history_cate_box" style="width: 122px">
 							<ul>
-								<li data-ref-dispcatno="100000100100001"><a href="#"
-									class="on"
-									data-tracking-param="t_page=로케이션_카테고리관&amp;t_click=카테고리탭_중카테고리&amp;t_2nd_category_type=중_클렌징폼/젤">클렌징폼/젤</a>
-								</li>
-
-								<li data-ref-dispcatno="100000100100002"><a href="#"
-									data-tracking-param="t_page=로케이션_카테고리관&amp;t_click=카테고리탭_중카테고리&amp;t_2nd_category_type=중_오일/워터/리무버">오일/워터/리무버</a>
-								</li>
-
-								<li data-ref-dispcatno="100000100100003"><a href="#"
-									data-tracking-param="t_page=로케이션_카테고리관&amp;t_click=카테고리탭_중카테고리&amp;t_2nd_category_type=중_필링/패드">필링/패드</a>
-								</li>
+								<c:if test="${not empty midcatedto}">
+								<c:forEach items="${midcatedto}" var="mcd">
+									<li><a href=".do?${mcd.id}">${mcd.name}</a></li>
+								</c:forEach>
+								</c:if>
 							</ul>
 						</div></li>
 				</ul>
@@ -104,8 +103,8 @@
 			</div>
 
 			<ul class="cate_list_box">
-				<li class="first on"><a href="javascript:;"
-					class="100000100100001" data-attr="카테고리상세^카테고리리스트^전체">전체</a>
+				<li class="first on"><a href=""
+					class="<%=midId %>" data-attr="카테고리상세^카테고리리스트^전체">전체</a>
 				</li>
 				<c:if test="${not empty pLowcateList}">
 					<c:forEach items="${pLowcateList}" var="pl">
@@ -129,11 +128,32 @@
 					<c:if test="${ not empty pbrandlist }">
 						<c:forEach items="${ pbrandlist }" var="pbl">
 							<li><input type="checkbox" id="${ pbl.brandID }" name=""
-								value="" /> <label for="${pbl.brandID}">
+								value="${ pbl.brandID }" /> <label for="${pbl.brandID}">
 									${pbl.pBrandName} </label></li>
 						</c:forEach>
+						
 					</c:if>
-
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
+					
+					
 				</ul>
 
 				<button class="btn_more">더보기</button>
@@ -206,22 +226,28 @@
 			<!-- //2020.12.01 기획전 개선 -->
 
 			<p class="cate_info_tx">
-				클렌징폼/젤 카테고리에 <span> 15 </span> 개의 상품이 등록되어 있습니다.
+				클렌징폼/젤 카테고리에 <span> <%= proList.size() %> </span> 개의 상품이 등록되어 있습니다.
 			</p>
 
 			<div class="cate_align_box">
 				<div class="align_sort">
 					<ul>
-						<li><a href="javascript:;" data-prdsoting="01">인기순</a></li>
-						<li class="on"><a href="javascript:;" data-prdsoting="02">신상품순</a>
+						<li><a class="on" href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=1&currentpage=${param.currentpage}" data-prdsoting="01">인기순</a></li>
+						<li><a href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=2&currentpage=${param.currentpage}" data-prdsoting="02">신상품순</a>
 						</li>
-						<li><a href="javascript:;" data-prdsoting="03">판매순</a></li>
+						<li><a href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=3&currentpage=${param.currentpage}" data-prdsoting="03">판매순</a></li>
 
-						<li><a href="javascript:;" data-prdsoting="05">낮은 가격순</a></li>
+						<li><a href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=4&currentpage=${param.currentpage}" data-prdsoting="05">낮은 가격순</a></li>
 
-						<li><a href="javascript:;" data-prdsoting="09">할인율순</a></li>
+						<li><a href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=5&currentpage=${param.currentpage}" data-prdsoting="09">할인율순</a></li>
 					</ul>
 				</div>
+				
+				<script>
+				
+					
+				</script>
+				
 				<div class="count_sort tx_num">
 					<span class="tx_view">VIEW</span>
 					<ul>
@@ -242,8 +268,10 @@
 			<c:if test="${not empty pmidlistdto}">
 					<c:forEach var="i" varStatus="outerLoop" begin="1" end="6">
 						<ul class="cate_prd_list gtm_cate_list">
-						<c:set var="innerLoopBegin" value="${(outerLoop.index - 1) * 4 + 1}" />
-        				<c:set var="innerLoopEnd" value="${outerLoop.index * 4}" />
+
+						<c:set var="innerLoopBegin" value="${(outerLoop.index - 1) * 4}" />
+        				<c:set var="innerLoopEnd" value="${(outerLoop.index * 4) -1}" />
+
 						  <c:forEach items="${pmidlistdto}" var="pml" begin="${innerLoopBegin}" end="${innerLoopEnd}" varStatus="innerLoop">
 					 
 						<li class="flag" >
@@ -279,7 +307,11 @@
 									<c:if test="${pml.prc eq 1}">
 										<span class="icon_flag coupon">쿠폰</span>
 									</c:if>
-									<span class="icon_flag gift">증정</span>
+
+									<c:if test="${pml.pmp eq 1}">
+										<span class="icon_flag gift">증정</span>
+									</c:if>
+
 									<c:if test="${pml.stock > 0}">
 										<span class="icon_flag delivery">오늘드림</span>
 									</c:if>
@@ -291,173 +323,40 @@
 						</ul>
 					</c:forEach>
 				</c:if>
-
-				<!-- 부가정보수집 -->
-
-				<li criteo-goods="A000000141736001" class="" data-index="9">
-					<div class="prd_info">
-						<a
-							href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000141736&amp;dispCatNo=100000100100001&amp;trackingCd=Cat100000100100001_Small&amp;t_page=카테고리관&amp;t_click=클렌징폼/젤_소_전체_가히,갸스비,그라펜,그레이멜린,네오젠,닥터디퍼런트_상품상세&amp;t_number=10"
-							name="Cat100000100100001_Small" class="prd_thumb goodsList"
-							data-ref-goodsno="A000000141736"
-							data-attr="카테고리상세^검색결과상품_신상품순^네오젠 더마로지 카밍시카트리 미셀라 클렌징 폼 200ml^10"
-							data-ref-dispcatno="100000100100001" data-ref-itemno="001"
-							data-trk="/Cat100000100100001_Small"
-							data-impression="A000000141736^카테고리상세_검색결과상품_신상품순^10"
-							onclick='javascript: gtm.goods.callGoodsGtmInfo("A000000141736", "", "ee-productClick", "카테고리상세_검색결과상품", "10");'
-							data-impression-visibility="1">
-							<img
-							src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0014/A00000014173606ko.jpg?l=ko"
-							alt="네오젠 더마로지 카밍시카트리 미셀라 클렌징 폼 200ml"
-							onerror="common.errorImg(this);" /></a>
-						<div class="prd_name">
-							<a href="javascript:;" name="Cat100000100100001_Small"
-								class="goodsList" data-ref-goodsno="A000000141736"
-								data-attr="카테고리상세^검색결과상품_신상품순^네오젠 더마로지 카밍시카트리 미셀라 클렌징 폼 200ml^10"
-								data-ref-dispcatno="100000100100001" data-ref-itemno="001"
-								data-trk="/Cat100000100100001_Small"
-								onclick='javascript: gtm.goods.callGoodsGtmInfo("A000000141736", "", "ee-productClick", "카테고리상세_검색결과상품", "10");'>
-								<span class="tx_brand">네오젠</span>
-								<p class="tx_name">네오젠 더마로지 카밍시카트리 미셀라 클렌징 폼 200ml</p></a>
-						</div>
-						<button class="btn_zzim jeem" data-ref-goodsno="A000000141736">
-							<span>찜하기전</span>
-						</button>
-						<p class="prd_price">
-							<span class="tx_cur"><span
-								class="tx_num">14,000</span>원 </span>
-						</p>
-						<p class="prd_point_area tx_num">
-							<span class="review_point"><span
-								class="point" style="width: 96%">10점만점에
-									5.5점</span></span>(13)
-						</p>
-						<p class="prd_btn_area">
-							<button class="cartBtn" data-ref-goodsno="A000000141736"
-								data-ref-dispcatno="100000100100001" data-ref-itemno="001">
-								장바구니</button>
-							<button class="btn_new_pop goodsList"
-								name="Cat100000100100001_Small">새창보기
-							</button>
-						</p>
-					</div>
-				</li>
-
-				<!-- 부가정보수집 -->
-
-				<li criteo-goods="A000000130399001" class="" data-index="10">
-					<div class="prd_info">
-						<a
-							href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000130399&amp;dispCatNo=100000100100001&amp;trackingCd=Cat100000100100001_Small&amp;t_page=카테고리관&amp;t_click=클렌징폼/젤_소_전체_가히,갸스비,그라펜,그레이멜린,네오젠,닥터디퍼런트_상품상세&amp;t_number=11"
-							name="Cat100000100100001_Small" class="prd_thumb goodsList"
-							data-ref-goodsno="A000000130399"
-							data-attr="카테고리상세^검색결과상품_신상품순^그레이멜린 센텔라 크레이지 폼 클렌저 500ml^11"
-							data-ref-dispcatno="100000100100001" data-ref-itemno="001"
-							data-trk="/Cat100000100100001_Small"
-							data-impression="A000000130399^카테고리상세_검색결과상품_신상품순^11"
-							onclick='javascript: gtm.goods.callGoodsGtmInfo("A000000130399", "", "ee-productClick", "카테고리상세_검색결과상품", "11");'
-							data-impression-visibility="1"><img
-							src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0013/A00000013039907ko.jpg?l=ko"
-							alt="그레이멜린 센텔라 크레이지 폼 클렌저 500ml" onerror="common.errorImg(this);" /><span
-							class="status_flag soldout">일시품절</span></a>
-						<div class="prd_name">
-							<a href="javascript:;" name="Cat100000100100001_Small"
-								class="goodsList" data-ref-goodsno="A000000130399"
-								data-attr="카테고리상세^검색결과상품_신상품순^그레이멜린 센텔라 크레이지 폼 클렌저 500ml^11"
-								data-ref-dispcatno="100000100100001" data-ref-itemno="001"
-								data-trk="/Cat100000100100001_Small"
-								onclick='javascript: gtm.goods.callGoodsGtmInfo("A000000130399", "", "ee-productClick", "카테고리상세_검색결과상품", "11");'><span
-								class="tx_brand">그레이멜린</span>
-								<p class="tx_name">그레이멜린 센텔라 크레이지 폼 클렌저 500ml</p></a>
-						</div>
-						<button class="btn_zzim jeem" data-ref-goodsno="A000000130399">
-							<span>찜하기전</span>
-						</button>
-						<p class="prd_price">
-							<span class="tx_org"><span class="tx_num">15,000</span>원 </span><span
-								class="tx_cur"><span class="tx_num">10,600</span>원
-							</span>
-						</p>
-						<p class="prd_flag">
-							<span class="icon_flag sale">세일</span><span
-								class="icon_flag delivery">오늘드림</span>
-						</p>
-						<p class="prd_point_area tx_num">
-							<span class="review_point"><span
-								class="point" style="width: 92%">10점만점에
-									5.5점</span></span>(144)
-						</p>
-						<p class="prd_btn_area">
-							<button class="cartBtn" data-ref-goodsno="A000000130399"
-								data-ref-dispcatno="100000100100001" data-ref-itemno="001">
-								장바구니</button>
-							<button class="btn_new_pop goodsList"
-								name="Cat100000100100001_Small">새창보기
-							</button>
-						</p>
-					</div>
-				</li>
-
-				<!-- 부가정보수집 -->
-
-				<li criteo-goods="A000000130391001" class="" data-index="13">
-					<div class="prd_info">
-						<a
-							href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000130391&amp;dispCatNo=100000100100001&amp;trackingCd=Cat100000100100001_Small&amp;t_page=카테고리관&amp;t_click=클렌징폼/젤_소_전체_가히,갸스비,그라펜,그레이멜린,네오젠,닥터디퍼런트_상품상세&amp;t_number=14"
-							name="Cat100000100100001_Small" class="prd_thumb goodsList"
-							data-ref-goodsno="A000000130391"
-							data-attr="카테고리상세^검색결과상품_신상품순^그레이멜린 그린티 크레이지 폼클렌저 500ml^14"
-							data-ref-dispcatno="100000100100001" data-ref-itemno="001"
-							data-trk="/Cat100000100100001_Small"
-							data-impression="A000000130391^카테고리상세_검색결과상품_신상품순^14"
-							onclick='javascript: gtm.goods.callGoodsGtmInfo("A000000130391", "", "ee-productClick", "카테고리상세_검색결과상품", "14");'
-							data-impression-visibility="1"><img
-							src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0013/A00000013039104ko.jpg?l=ko"
-							alt="그레이멜린 그린티 크레이지 폼클렌저 500ml" onerror="common.errorImg(this);" /></a>
-						<div class="prd_name">
-							<a href="javascript:;" name="Cat100000100100001_Small"
-								class="goodsList" data-ref-goodsno="A000000130391"
-								data-attr="카테고리상세^검색결과상품_신상품순^그레이멜린 그린티 크레이지 폼클렌저 500ml^14"
-								data-ref-dispcatno="100000100100001" data-ref-itemno="001"
-								data-trk="/Cat100000100100001_Small"
-								onclick='javascript: gtm.goods.callGoodsGtmInfo("A000000130391", "", "ee-productClick", "카테고리상세_검색결과상품", "14");'><span
-								class="tx_brand">그레이멜린</span>
-								<p class="tx_name">그레이멜린 그린티 크레이지 폼클렌저 500ml</p></a>
-						</div>
-						<button class="btn_zzim jeem" data-ref-goodsno="A000000130391">
-							<span>찜하기전</span>
-						</button>
-						<p class="prd_price">
-							<span class="tx_cur"><span
-								class="tx_num">15,000</span>원 </span>
-						</p>
-						<p class="prd_flag">
-							<span class="icon_flag delivery">오늘드림</span>
-						</p>
-						<p class="prd_point_area tx_num">
-							<span class="review_point"><span
-								class="point" style="width: 94%">10점만점에
-									5.5점</span></span>(150)
-						</p>
-						<p class="prd_btn_area">
-							<button class="cartBtn" data-ref-goodsno="A000000130391"
-								data-ref-dispcatno="100000100100001" data-ref-itemno="001">
-								장바구니</button>
-							<button class="btn_new_pop goodsList"
-								name="Cat100000100100001_Small">새창보기
-							</button>
-						</p>
-					</div>
-				</li>
-
-				<!-- 부가정보수집 -->
-			</ul>
 		</div>
 
 		<div class="pageing">
-			<strong title="현재 페이지">1</strong>
+			<c:if test="${pDto.prev }">
+        		<%-- <a href="<%=contextPath%>/view/product/pmidlistproduct.do=${pDto.start-1}">&lt;</a> --%>
+        	</c:if>
+        	<a class="prev" href="javascript:void(0);" data-page-no="1">이전 10 페이지</a>
+        	<c:forEach var="i" begin="${pDto.start }" end="${pDto.end }" step="1">
+  				<c:choose>
+  					<c:when test="${i eq pDto.currentPage}">
+  						<strong title="현재 페이지">${i}</strong>
+  						<%-- <a class="active" href="#">${i }</a> --%>
+  					</c:when>
+  					<c:otherwise>
+  						<a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${i}">${i }</a>
+  					</c:otherwise>
+  				</c:choose>
+  			</c:forEach>
+  			<a class="next" href="" data-page-no="21">다음 10 페이지</a>
+  			<c:if test="${pDto.next }">
+        		<%-- <a href="<%=contextPath%>/view/product/pmidlistproduct.do=${pDto.end+1}">&gt;</a> --%>
+        	</c:if>
+			<!-- <strong title="현재 페이지">1</strong> -->
 		</div>
 	</div>
+	
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
+<script>
+$(document).ready(function() {
+    $('.align_sort ul li').on('click', function() {
+        // 현재 클릭된 요소에 'on' 클래스 추가 및 형제 요소로부터 'on' 클래스 제거
+        $(this).addClass('on').siblings().removeClass('on');
+    });
+});
+</script>
 </html>

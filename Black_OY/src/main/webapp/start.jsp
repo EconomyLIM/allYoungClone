@@ -47,12 +47,12 @@
 <div>
 
 
-<a href="/Black_OY/view/product/pmidlistproduct.do?displNum=00010008">dd</a>
+<a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=00010008">dd</a>
 
 <br>
 <a href="<%=contextPath %>/olive/main.do">main page</a>
 
->>>>>>> branch 'feature_product' of https://github.com/Team3-JSP/OliveYoung.git
+
 </div>
 </body>
 </html>

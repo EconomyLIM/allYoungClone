@@ -7,6 +7,8 @@ import user.domain.OuserDTO;
 
 public interface OuserDAO {
 	//회원가입 여부 체크
-	String getJoinCheck(String u_tel) throws SQLException;
+	OuserDTO joinCheck(String u_tel) throws SQLException;
+	//회원가입
+	int join(OuserDTO dto) throws SQLException;
 }
 
