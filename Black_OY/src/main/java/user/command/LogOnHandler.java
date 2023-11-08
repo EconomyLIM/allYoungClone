@@ -42,7 +42,7 @@ public class LogOnHandler implements CommandHandler {
 
 		if (logdto != null) {
 			session.setAttribute("logOn", logdto);
-			int cnt = logOnService.basketcntService(user_id);
+			List<Integer> cnt = logOnService.basketcntService(user_id);
 			session.setAttribute("basketlistcnt", cnt);
 			request.removeAttribute("errorMessage");
 			refer = (String) session.getAttribute("refer");
