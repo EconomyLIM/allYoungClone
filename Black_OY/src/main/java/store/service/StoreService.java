@@ -123,4 +123,22 @@ public class StoreService {
 
 		return rowCount;
 	}
+	
+	public List<StoreTimeDTO> getAttShopList(String user_id) {
+		List<StoreTimeDTO> list = null;
+
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			StoreDAO dao = StoreDAOImpl.getInstance();
+			list = dao.attShopSelect(conn, user_id);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		}
+
+		return list;
+	}
 }
