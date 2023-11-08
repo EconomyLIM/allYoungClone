@@ -307,115 +307,115 @@
 			<input type="button" value="테스트" onclick='addList()'>
 			
 <script>
-				function addList() {
-					alert('addList실행')
-					//상품전체 li
-					let prdNli = document.createElement("li");
-					
-					
-						//상품정보div
-						let prdinfodiv = document.createElement("div");
-						prdinfodiv.className = 'prd_info';
-						
-							//상품페이지연결a
-							let prdconA = document.createElement("a");
-							prdconA.setAttribute("href", "<%-- 상품페이지 --%>");
-							
-							
-								//베스트표시
-								let prdbst = document.createElement("span");
-								prdbst.className = "prd_thumb goodsList";
-								prdbst.setAttribute("value", "베스트")
-							
-							//상품이름
-							let prdName = document.createElement("div");
-							prdName.className =  "prd_name";
-								
-								//상품이름으로 페이지 연결 a
-								let prdconAbyN = document.createElement("a");
-								prdconAbyN.className = "goodsList";
-								
-								//브랜드명
-								let prdbrand = document.createElement("span");
-								prdbrand.className =  "tx_brand";
-								
-								//상품명
-								let prdN = document.createElement("p");
-								prdN.className = "tx_name";
-							
-							//찜하기
-							let btnZzim = document.createElement("button");
-							btnZzim.className = "btn_zzim jeem on";
-							
-							//상품가격
-							let prdprice = document.createElement("div");
-							prdprice.className = "prd_price";
-							
-								//할인전
-								let prdpricep = document.createElement("span");
-								prdpricep.className = "tx_org";
-								
-									//할인전 단위추가
-									let prdpricepnum = document.createElement("span");
-									prdpricepnum.className = "tx_num";
-								prdpricep.setAttribute("value", "원");
-								
-								//할인후
-								let prdpricea = document.createElement("span");
-								prdpricep.className = "tx_org";
-								
-									//할인후 단위추가
-									let prdpriceanum = document.createElement("span");
-									prdpriceanum.className = "tx_num";
-									prdpricea.setAttribute("value", "원");
-								
-							//프로모션
-							let prdflag = document.createElement("p");
+function addList() {
+	alert('addList실행')
+	//상품전체 li
+	let prdNli = document.createElement("li");
+	
+	
+		//상품정보div
+		let prdinfodiv = document.createElement("div");
+		prdinfodiv.className = 'prd_info';
+		
+			//상품페이지연결a
+			let prdconA = document.createElement("a");
+			prdconA.setAttribute("href", "<%-- 상품페이지 --%>");
 			
-								//할인 프로모션
-								let discflag = document.createElement("span");
-								discflag.className = "icon_flag sale";
-								discflag.setAttribute("value", "세일");
-								
-								//쿠폰 프로모션
-								let cpflag = document.createElement("span");
-								cpflag.className = "icon_flag coupon";
-								cpflag.setAttribute("value", "쿠폰");
-								
-								//배송 프로모션
-								let deliflag = document.createElement("span");
-								deliflag.className = "icon_flag delivery";
-								deliflag.setAttribute("value", "오늘드림");
-							
-							let parenttag = document.querySelector("#wishList");
-							
-							parenttag.appendChild(prdNli);
-							
-							prdNli.appendChild(prdinfodiv);
-							
-							prdinfodiv.appendChild(prdconA)
-										.appendChild(prdName)
-										.appendChild(btnZzim)
-										.appendChild(prdprice)
-										.appendChild(prdflag);
-							
-							prdconA.appendChild(prdbst);
-							
-							prdName.appendChild(prdconAbyN)
-									.appendChild(prdbrand)
-									.appendChild(prdN);
-							
-							prdprice.appendChild(prdpricep)
-									.appendChild(prdpricea);
-							
-							prdpricep.appendChild(prdpricepnum);
-							
-							prdpricea.appendChild(prdpriceanum);
-							
-							prdflag.appendChild(discflag)
-									.appendChild(cpflag)
-									.appendChild(deliflag);
-				}
+			
+				//베스트표시
+				let prdbst = document.createElement("span");
+				prdbst.className = "prd_thumb goodsList";
+				prdbst.setAttribute("value", "베스트")
+			
+			//상품이름
+			let prdName = document.createElement("div");
+			prdName.className =  "prd_name";
+				
+				//상품이름으로 페이지 연결 a
+				let prdconAbyN = document.createElement("a");
+				prdconAbyN.className = "goodsList";
+				
+				//브랜드명
+				let prdbrand = document.createElement("span");
+				prdbrand.className =  "tx_brand";
+				
+				//상품명
+				let prdN = document.createElement("p");
+				prdN.className = "tx_name";
+			
+			//찜하기
+			let btnZzim = document.createElement("button");
+			btnZzim.className = "btn_zzim jeem on";
+			
+			//상품가격
+			let prdprice = document.createElement("div");
+			prdprice.className = "prd_price";
+			
+				//할인전
+				let prdpricep = document.createElement("span");
+				prdpricep.className = "tx_org";
+				
+					//할인전 단위추가
+					let prdpricepnum = document.createElement("span");
+					prdpricepnum.className = "tx_num";
+				prdpricep.setAttribute("value", "원");
+				
+				//할인후
+				let prdpricea = document.createElement("span");
+				prdpricep.className = "tx_org";
+				
+					//할인후 단위추가
+					let prdpriceanum = document.createElement("span");
+					prdpriceanum.className = "tx_num";
+					prdpricea.setAttribute("value", "원");
+				
+			//프로모션
+			let prdflag = document.createElement("p");
+
+				//할인 프로모션
+				let discflag = document.createElement("span");
+				discflag.className = "icon_flag sale";
+				discflag.setAttribute("value", "세일");
+				
+				//쿠폰 프로모션
+				let cpflag = document.createElement("span");
+				cpflag.className = "icon_flag coupon";
+				cpflag.setAttribute("value", "쿠폰");
+				
+				//배송 프로모션
+				let deliflag = document.createElement("span");
+				deliflag.className = "icon_flag delivery";
+				deliflag.setAttribute("value", "오늘드림");
+			
+			let parenttag = document.querySelector("#wishList");
+			
+			parenttag.appendChild(prdNli);
+			
+			prdNli.appendChild(prdinfodiv);
+			
+			prdinfodiv.appendChild(prdconA)
+						.appendChild(prdName)
+						.appendChild(btnZzim)
+						.appendChild(prdprice)
+						.appendChild(prdflag);
+			
+			prdconA.appendChild(prdbst);
+			
+			prdName.appendChild(prdconAbyN)
+					.appendChild(prdbrand)
+					.appendChild(prdN);
+			
+			prdprice.appendChild(prdpricep)
+					.appendChild(prdpricea);
+			
+			prdpricep.appendChild(prdpricepnum);
+			
+			prdpricea.appendChild(prdpriceanum);
+			
+			prdflag.appendChild(discflag)
+					.appendChild(cpflag)
+					.appendChild(deliflag);
+}
 			</script>
 
 <jsp:include page="/layout/footer.jsp"></jsp:include>
