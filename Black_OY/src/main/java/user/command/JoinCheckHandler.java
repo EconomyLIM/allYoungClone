@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.util.ConnectionProvider;
 
@@ -21,6 +22,8 @@ public class JoinCheckHandler implements CommandHandler{
 		 request.setCharacterEncoding("utf-8");
 
 		 String tel=  request.getParameter("tel");
+		 String u_name=  request.getParameter("u_name");
+		 String u_birth=  request.getParameter("u_birth");
 		 System.out.println(tel);
 		 
 		 Connection conn = ConnectionProvider.getConnection();
@@ -35,16 +38,19 @@ public class JoinCheckHandler implements CommandHandler{
 			conn.close();
 			String location = "";
 			
-			request.setAttribute("dto", dto);
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("tel", tel);
+			session.setAttribute("u_name", u_name);
+			session.setAttribute("u_birth", u_birth);
 			
 			if (dto ==null) {
-				location = "/CJjoin/agreement.jsp";
+				location = "/join/agreement.jsp";
 			} else {
-				location = "/CJjoin/join_already.jsp";
+				location = "/join/join_already.jsp";
 			}
 			
-			
-			
+		
 			return location;
 	
 	}

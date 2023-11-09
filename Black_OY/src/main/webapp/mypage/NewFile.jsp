@@ -18,11 +18,7 @@
 		
 </div>
 
-<%
-	String userId = null;
-	userId = "admin";
-	request.setAttribute("userId", userId );
-%>
+
 
 <a href="<%=contextPath %>/mypage/mypageMain.do">마이페이지</a>
 <jsp:include page="/layout/footer.jsp"></jsp:include>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.util.ConnectionProvider;
 
 import command.CommandHandler;
+import mypage.domain.MpOrderDTO;
 import mypage.domain.MpPAskDTO;
 import mypage.domain.MpPlikeDTO;
 import mypage.domain.MpQnADTO;
@@ -26,7 +27,7 @@ public class MyPageHandler implements CommandHandler {
 		Connection conn = ConnectionProvider.getConnection();
 		
 		//회원id가져오기
-		userId = "admin";//request.getParameter("userId");
+		userId = "admin";	//request.getParameter("userId");
 		MypageService service = MypageService.getinstance();
 		
 		//초기화
@@ -38,6 +39,7 @@ public class MyPageHandler implements CommandHandler {
 		List<MpPAskDTO> userpAsk = null;
 		List<MpQnADTO> userQnA = null;
 		int userRevCount = 0;
+		List<MpOrderDTO> userOrder = null;
 		
 		userInfo = service.mpUIservice(userId);
 		userPoint = service.mpUPservice(userId);
@@ -47,8 +49,10 @@ public class MyPageHandler implements CommandHandler {
 		userpAsk = service.mpUPAservice(userId);
 		userQnA = service.mpUQnAservice(userId);
 		userRevCount = service.mpURservice(userId);
+		userOrder = service.mpUOservice(userId);
 		
-				
+		
+		
 		request.setAttribute("userInfo", userInfo);
 		request.setAttribute("userPoint", userPoint);
 		request.setAttribute("userCoupon", userCoupon);
@@ -57,8 +61,9 @@ public class MyPageHandler implements CommandHandler {
 		request.setAttribute("userpAsk", userpAsk);
 		request.setAttribute("userQnA", userQnA);
 		request.setAttribute("userRevCount", userRevCount);
+		request.setAttribute("userOrder", userOrder);
 		
-		return "/mypage/mypagemain.jsp";
+		return "/mypage/temp.jsp";
 	}
 
 }

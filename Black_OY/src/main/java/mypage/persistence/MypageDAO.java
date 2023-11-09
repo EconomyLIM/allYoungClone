@@ -3,6 +3,7 @@ package mypage.persistence;
 import java.sql.Connection;
 import java.util.List;
 
+import mypage.domain.MpOrderDTO;
 import mypage.domain.MpPAskDTO;
 import mypage.domain.MpPlikeDTO;
 import mypage.domain.MpQnADTO;
@@ -37,4 +38,7 @@ public interface MypageDAO {
 	
 	//8. 회원의 리뷰 갯수
 	int selectUserRevCount(Connection conn, String Uid) throws Exception;
+	
+	//9. 회원의 배송상태 조회
+	List<MpOrderDTO> selectUserOrderStatus(Connection conn, String Uid) throws Exception;
 }

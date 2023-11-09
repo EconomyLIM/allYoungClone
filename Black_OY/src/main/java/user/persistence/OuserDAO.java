@@ -10,5 +10,6 @@ public interface OuserDAO {
 	OuserDTO joinCheck(String u_tel) throws SQLException;
 	//회원가입
 	int join(OuserDTO dto) throws SQLException;
+	
 }
 
