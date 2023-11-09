@@ -69,8 +69,8 @@ public class BasketDAOImpl implements BasketDAO{
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			System.out.println(basketT);
-			System.out.println(quickyn);
+			//System.out.println(basketT);
+			System.out.println("qu:"+quickyn);
 //			psmt.setString(1, basketT);
 			psmt.setString(1, user_id);
 			rs = psmt.executeQuery();

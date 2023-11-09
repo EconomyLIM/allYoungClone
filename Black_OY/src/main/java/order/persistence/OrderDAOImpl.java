@@ -38,7 +38,7 @@ public class OrderDAOImpl implements OrderDAO {
 		String deli_tel2;      
 		String req_select;     
 		String req_content;    
-		int def_del;           
+		//int def_del;           
 		
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -61,9 +61,9 @@ public class OrderDAOImpl implements OrderDAO {
 					deli_tel2 = rs.getString("deli_tel2");      
 					req_select = rs.getString("req_select");     
 					req_content = rs.getString("req_content");    
-					def_del = rs.getInt("def_del");
+					//def_del = rs.getInt("def_del");
 					
-					deliveryDTO = new DeliveryDTO(delivery_id, user_id, deli_name, deli_zip, deli_road_addr, deli_addr, deli_baddr, deli_recipient, deli_tel, deli_tel2, req_select, req_content, def_del);
+					deliveryDTO = new DeliveryDTO(delivery_id, user_id, deli_name, deli_zip, deli_road_addr, deli_addr, deli_baddr, deli_recipient, deli_tel, deli_tel2, req_select, req_content);
 					deliverylist.add(deliveryDTO);
 				} while (rs.next());
 			}
