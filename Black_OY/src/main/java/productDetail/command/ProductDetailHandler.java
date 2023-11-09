@@ -13,11 +13,22 @@ public class ProductDetailHandler implements CommandHandler{
 		System.out.println("ProductDetailHandler process..");
 		
 		String displNum = request.getParameter("displNum");
-		if (displNum.length() == 4) {
-			
+		String cLId; // 대분류 ID
+		String cMId; // 중분류 ID
+		String cSId; // 소분류 ID
+		
+		if (displNum.length() == 8) {
+			cLId = displNum.substring(0,4);
+			cMId = displNum.substring(4,8);
 		} else {
-
-		}
+			cLId = displNum.substring(0,4);
+			cMId = displNum.substring(4,8);
+			cSId = displNum.substring(8,12);
+		} // if else
+		
+		
+		
+		
 		
 		return "/view/product/product.jsp";
 	} // process
