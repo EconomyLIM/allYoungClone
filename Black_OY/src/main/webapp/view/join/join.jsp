@@ -10,8 +10,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../css/CJbase.css" />
-<link rel="stylesheet" href="../css/CJparticipate.css" />
+<link rel="stylesheet" href="../../css/CJbase.css" />
+<link rel="stylesheet" href="../../css/CJparticipate.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src = "https://www.cjone.com/cjmweb/js/modules/cjoneCore.js"></script>
 
@@ -29,6 +29,9 @@
     String birthstr1 = u_birth.substring(0, 4);
     String birthstr2 = u_birth.substring(4, 6);
     String birthstr3 = u_birth.substring(6);
+    System.out.println(birthstr1);
+    System.out.println(birthstr2);
+    System.out.println(birthstr3);
 %>
 
 		<form id="headerFrm" method="get">
@@ -59,8 +62,8 @@
 
 				<div class="location_wrap">
 					<div class="location">
-						<a href="https://www.cjone.com/cjmweb/main.do" class="home"><span class="haze">홈</span></a>
-						<a href="https://www.cjone.com/cjmweb/join.do" class="now"><span>회원가입</span></a>
+						<a href="#" class="home"><span class="haze">홈</span></a>
+						<a href="joinCheck.jsp" class="now"><span>회원가입</span></a>
 					</div>
 				</div>
 
@@ -168,8 +171,8 @@
 														<label for="input_member_name"><span class="haze">"필수"</span>
 															이름</label>
 													</th>
-													<td><span class="input_txt"><input type="text"
-															readonly="" value="<%=u_name %>" class="text readonly member_name"
+													<td><span class="input_txt">
+													<input type="text" name ="u_name"	readonly="" value="<%=u_name %>" class="text readonly member_name"
 															id="input_member_name"></span>
 													<!-- 에러시 .error 클래스 추가 --></td>
 												</tr>
@@ -188,7 +191,7 @@
 
 															<button type="button" class="btn btn_search"
 																id="btnIdCheck">중복확인</button>
-															<p class="msg_info em hide" id="alert_mbr_id"></p>
+															<p class="msg_info em " id="alert_mbr_id"></p>
 														</div>
 														<p class="msg_desc">CGV,CJ온스타일 등 기존의 CJ ONE 제휴 브랜드
 															회원님의 경우는 기존에 사용하고 계신 아이디가 새롭게 생성하신 통합 아이디로 변경됩니다.</p>
@@ -234,8 +237,8 @@
 													</th>
 													<td>
 														<div class="birthday_select">
-															<span class="select w120 " data-skin="form"> <select
-																title="생년월일 중 년 선택" id="birth_yy" name="birth_yy" value ="<%=birthstr1%>">
+															<span class="select w120 " data-skin="form"> 
+															<select title="생년월일 중 년 선택" id="birth_yy" name="birth_yy" >
 																	[<option value="">년</option>,
 																	<option value="2023">2023</option>,
 																	<option value="2022">2022</option>,
@@ -366,7 +369,7 @@
 															<span class="symbol">년</span> <span
 																class="select w70 " data-skin="form"> <select
 																title="생년월일 중 월 선택" class="narrow" id="birth_mm"
-																name="birth_mm" value ="<%=birthstr2%>">
+																name="birth_mm">
 																	[<option value="">월</option>,
 																	<option value="01">01</option>,
 																	<option value="02">02</option>,
@@ -385,7 +388,7 @@
 															<span class="symbol">월</span> <span
 																class="select w70 " data-skin="form"> <select
 																title="생년월일 중 일 선택" class="narrow" id="birth_dd"
-																name="birth_dd" value = "<%=birthstr3%>">
+																name="birth_dd">
 																	<option value="">일</option>,
 																	<option value="01">01</option>,
 																	<option value="02">02</option>,
@@ -425,14 +428,12 @@
 													</td>
 				
 				<script>
-				
 				var sel;
 				
 				sel = $("#birth_yy");
 				var selYYvalue ="<%=birthstr1%>";
 				
 				sel.find("option[value='" + selYYvalue + "']").prop("selected", true);
-				
 				
 				sel = $("#birth_mm");
 				var selMMvalue ="<%=birthstr2%>";
@@ -474,14 +475,13 @@
 															<span class="input_txt w110"> <input type="text"
 																class="text small" title="이메일 도메인 입력" name="email_addr2"
 																id="email_addr2" value="" placeholder="이메일 도메인"
-																data-format="email" readonly="readonly"
-																autocomplete="off">
+																data-format="email" autocomplete="off">
 															</span> 
 															
 															<span class="select w100" data-skin="form">
 																<select title="이메일 도메인 선택" name="email_addr_opt"
 																id="email_addr_opt" data-control="emailSelector" > 
-																	<option value="0">직접입력</option>
+																	<option value="">직접입력</option>
 																	<option value="naver.com" selected="selected">네이버</option>
 																	<option value="hanmail.net">한메일</option>
 																	<option value="nate.com">네이트</option>
@@ -501,10 +501,15 @@
 									</table>
 									</div>
 				<script>
+				$("#email_addr2").val( $("#email_addr_opt").val() );
+				$("#email_addr_opt").change(function () {
+					$("#email_addr2").val( $("#email_addr_opt").val() );
+				});
+				</script>
+				<script>
 				let str1 = "<%=telstr1%>";
 				let str2 = "<%=telstr2%>";
 				let strAll = "010" + str1.replace(str1, '****') +str2;
-				alert(strAll);
 				$("#mob_no").val(strAll);
 				</script>					
 
@@ -626,16 +631,13 @@
 						<div class="btn_center">
 							<a href="javascript:closeLayerConfirm();" id="a_confirm_y"
 								class="btn"><span id="span_confirm_y">확인</span></a>
-							<button id="a_confirm_n" type="button"
-								onclick="closeLayerConfirm();" class="btn cancel">
+							<button id="a_confirm_n" type="button" class="btn cancel">
 								<span id="span_confirm_n">취소</span>
 							</button>
 						</div>
 
-						<button id="btn_confirm_close" type="button"
-							onclick="closeLayerConfirm();" class="close">닫기</button>
+						<button id="btn_confirm_close" type="button" class="close">닫기</button>
 					</div>
-
 				</div>
 				<div class="ui_modal_overlay"
 					style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 9100;"></div>
@@ -749,15 +751,9 @@
 					$('#crdNo02').keypress(onlyNumber);
 					$('#crdNo03').keypress(onlyNumber);
 					$('#crdNo04').keypress(onlyNumber);
-					/*
-					$('#mkt_rcv_all').click(radioAll);              // 마케팅 수신동의
-					
-					
-					
-						$('#mkt_rcv_all2').click(radioAll2);              // 푸드빌 마케팅 수신동의
-					
-					 */
 
+					
+					
 					$("#birth_yy").change(function() {
 						date_change();
 					});
@@ -1545,20 +1541,7 @@
 		}
 
 	</script>
-	<script>
-        $(function () {
-            $('[data-check-all]').checkboxAllChecker();             //CJONE마케팅 전체동의
-            
-            //input type 설정
-            cjone.importJs(['/cjmweb/js/modules/formatter'], function () {
-                $('[data-format]').formatter();
-            });
-            
-            if('' == '') {
-	            $("#email_addr_opt").val("naver.com").change();
-            }
-        });
-    </script>
+
 
 	<!--//script 영역-->
 	<form method="post" name="form2" id="form2">
@@ -1609,12 +1592,6 @@
 			name="upd_coopco_id" id="upd_coopco_id" value=""> <input
 			type="hidden" name="card_chk" id="card_chk" value="">
 	</form>
-
-
-	<script type="text/javascript" data-import="true"
-		src="/cjmweb/js/modules/formatter.js"></script>
-	<script type="text/javascript" data-import="true"
-		src="/cjmweb/js/modules/placeholder.js"></script>
 </body>
 
 <script>
@@ -1640,14 +1617,44 @@
 					}//if	
 				}
 				, error: function () {
-					alert("이미 사용중인 아이디입니다. 다른 아이디를 입력해주세요.");
+					alert("error");
 				}
 			});
 		});
 	});
 </script>
-<script>
+<!-- <script>
+//입력체크 
+$("#btnok").on("click", function () {
 	
+var userid = $("#mbr_id").val();
+var userpwd = $("#pwd").val();
+var useremail1 = $("#email_addr1").val();
+var useremail2 = $('#email_addr2').val();
+var edomain = $("#email_addr_opt").val();
+
+	if ( userid== "" ){
+		alert("6~12자리의 영문 소문자 또는 영문 소문자+숫자 아이디를 입력해 주세요.");
+		$("#mbr_id").focus();
+		return false;
+	} else if (userpwd =="") {
+		alert("비밀번호를 입력해 주세요.");
+		$("#pwd").focus();
+		return false;
+	}else if (useremail1== "") {
+		alert("이메일 주소를 다시 확인해주세요.");
+		$('#email_addr1').focus();
+		return false;
+	} else if( edomain== "0" && useremail2== ""){
+        alert("이메일 도메인 직접입력시 이메일 도메인을 입력하셔야 합니다.");
+        $('#email_addr2').focus();
+        return false;
+    }
+	return true;
+});
+</script> -->
+<script>
+	//비밀번호 체크
 	function chkPwd() {
 		var userpwd = $("#pwd").val();
 		var userckpwd = $("#pwd_check").val();
@@ -1656,48 +1663,41 @@
 		var num = userpwd.search(/[0-9]/g);
 		var eng = userpwd.search(/[a-z]/ig);
 		var spe = userpwd.search(/[!"#$%&'()*+,-./:;<=>?@[]^_`{|}~]/gi);
-		if (userpwd === "") {
-			alert("비밀번호를 입력해 주세요.");
-			$("#pwd").focus();
-			return false;
-		} else if (userpwd.length<8 || userpwd.length>12) {
+		
+		if (userpwd.length<8 || userpwd.length>12) {
 			alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
+			$("#msg_pwd").removeClass("hide");
 			$("#pwd").focus();
 			return false;
 		} else if ((num < 0 && eng < 0) || (eng < 0 && spe < 0)
 				|| (spe < 0 && num < 0)) {
 			alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
+			$("#msg_pwd").removeClass("hide");
 			$("#pwd").focus();
 			return false;
 		} else if (/(\w)\1\1\1/.test(userpwd)) {
 			alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
+			$("#msg_pwd").removeClass("hide");
 			$("#pwd").focus();
 			return false;
 		} else if (userpwd.search(userid) > -1) {
 			alert("비밀번호 설정 시 아이디와 4자리 이상 동일한 문자 또는 숫자를 사용할 수 없습니다.");
+			$("#msg_pwd").removeClass("hide");
 			$("#pwd").focus();
 			return false;
 		} else if ( userpwd !=userckpwd){
 			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+			$("#msg_pwd_check").removeClass("hide");
 			$("#pwd").focus();
 			return false;
 		}
 		return true;
 	}
 	$("#btnok").on("click", function () {
-		chkPwd();
+		if (chkPwd() ) {
+			$("#formJoin").submit();
+		}
 	});
-</script>
-
-<script>
-// 이메일 직접입력
-        if($('#email_addr_opt').val() == "0" && $('#email_addr2').val() == ""){
-            alertMsg('alert_email_addr', "이메일 도메인 직접입력시 이메일 도메인을 입력하셔야 합니다.");
-            alert("이메일 도메인 직접입력시 이메일 도메인을 입력하셔야 합니다.");
-            $('#email_addr2').focus();
-            return false;
-        }
-
 </script>
 
 <%

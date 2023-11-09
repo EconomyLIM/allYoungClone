@@ -2,6 +2,7 @@ package user.command;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +14,7 @@ import command.CommandHandler;
 import user.domain.OuserDTO;
 import user.persistence.OuserDAOImpl;
 
-/*
+
 public class JoinHandler implements CommandHandler{
 
 	@Override
@@ -30,18 +31,28 @@ public class JoinHandler implements CommandHandler{
 			System.out.println("요청URL:" + refer);
 
 			return "/view/join/join.jsp";
-		} else {
+		} else { //post
 
-		 String user_id = request.getParameter("user_id");
+		 String user_id = request.getParameter("mbr_id");
 		 String u_name = request.getParameter("u_name");
-		 String u_pwd = request.getParameter("u_pwd");
-		 String u_birth = request.getParameter("u_birth");
-		 String u_tel=  request.getParameter("u_tel");
+		 String u_pwd = request.getParameter("pwd");
+		 int u_Ybirth = Integer.parseInt( request.getParameter("birth_yy") );
+		 int u_Mbirth = Integer.parseInt(request.getParameter("birth_mm") );
+		 int u_Dbirth = Integer.parseInt(request.getParameter("birth_dd") );
+		 String u_tel=  request.getParameter("mob_no");
+		 String u_email=  request.getParameter("email_addr1")+"@"+request.getParameter("email_addr2");
 
 		 Connection conn = ConnectionProvider.getConnection();
 		 OuserDAOImpl dao = new OuserDAOImpl(conn);
-		 OuserDTO dto = new OuserDTO();
-
+		 OuserDTO dto = OuserDTO.builder()
+				 					.user_id(user_id)
+				 					.u_name(u_name)
+				 					.u_pwd(u_pwd)
+				 					.u_birth(new Date(u_Ybirth,u_Mbirth,u_Dbirth))
+				 					.u_tel(u_tel)
+				 					.u_email(u_email)
+				 					.build();
+		 
 			conn.close();
 			
 			request.setAttribute("dto", dto);
@@ -49,7 +60,6 @@ public class JoinHandler implements CommandHandler{
 			String location = "/";
 		
 			return location;
+		}
 	}
 }
-*/
-

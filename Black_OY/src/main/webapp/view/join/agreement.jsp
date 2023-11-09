@@ -4744,7 +4744,7 @@ function goFooterMenu(type){
 	</div>
 	<script>
 	$("#btn_agree").on("click", function () {
-		location.href = "/Black_OY/join/join.jsp";
+		location.href = "/Black_OY/view/join/join.jsp";
 	});
 
 </script>
