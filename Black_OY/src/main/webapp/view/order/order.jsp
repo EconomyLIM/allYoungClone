@@ -206,7 +206,7 @@
 				<tr>
 					<th scope="row">배송지선택</th>
 					<td>
-						<span class="chk_area mgzero"><input type="radio" id="btn_dlvp_exist" name="inpAddrSel" value="" targetid="exist" data-attr="배송지정보^1_배송지선택"><label for="btn_dlvp_exist">기존 배송지</label></span>
+						<span class="chk_area mgzero"><input type="radio" checked="checked" id="btn_dlvp_exist" name="inpAddrSel" value="" targetid="exist" data-attr="배송지정보^1_배송지선택"><label for="btn_dlvp_exist">기존 배송지</label></span>
 						<!-- 2020-08-04 o2oJJ 24H 화면 제어로 인한 주석 처리 -->
 						
 							<span class="chk_area"><input type="radio" id="btn_dlvp_new" name="inpAddrSel" value="" targetid="new" data-attr="배송지정보^1_배송지선택"><label for="btn_dlvp_new">신규 배송지</label></span>
@@ -588,7 +588,7 @@
 					</td>
 				</tr>
 				<c:forEach items="${ dlist }" var="deli">
-				<tr id="pickupHide4" type="exist" style="display: none;">
+				<tr id="pickupHide4" class = "${deli.delivery_id }" type="exist" style="display: none;">
 					<th scope="row">주소</th>
 					<td class="imp_data"><!-- 2017-01-25 수정 : 클래스 추가 -->
 						<input type="text" id="stnmRmitPostNo_exist" name="rmitPostNo" value="${deli.deli_zip }" class="inpH28" title="우편번호를 검색해주세요." style="width:90px" readonly="readonly">
@@ -791,7 +791,7 @@
 						- <input type="text" id="rmitTelEndNo_new" name="rmitTelEndNo" value="" class="inpH28" title="연락처2 마지막 4자리를 입력해주세요." this="연락처2 마지막 자리는" style="width:90px" disabled="disabled">
 					</td>
 				</tr>
-				<tr type="new" class="new_order_area" style="display: table-row;">
+				<tr type="new" class="new_order_area" style="display: none;">
 					<th scope="row">주소</th>
 					<td class="imp_data"><!-- 2017-01-25 수정 : 클래스 추가 -->
 						<input type="text" id="stnmRmitPostNo_new" name="rmitPostNo" value="" class="inpH28" title="우편번호를 검색해주세요." style="width:90px" readonly="readonly" disabled="disabled">
@@ -892,7 +892,7 @@
 							<span class="chk_area"><input type="radio" id="btn_door_manner_temp4" name="o2oVisitTypeSp" value="4" <c:if test="${dlist[0].req_select eq '4'}">checked</c:if> data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp4">기타사항</label></span>
 						</td>
 					</tr>
-					<tr type="exist" class="quick_area" id="visitTypeDescExist" style="display: none;">
+					<tr type="exist" class="quick_area" id="visitTypeDescExist" style="display: table-row;">
 						<th scope="row">
 							
 								
@@ -902,7 +902,7 @@
 							
 						</th>
 						<td class="imp_data">
-							<input type="text" id="door_type_exist" name="o2oVisitTypeDesc" value="" class="inpH28" title="공동현관 출입방법 상세내용." style="width: 500px" data-attr="배송지정보^2_공동현관 비밀번호" disabled="disabled">
+							<input type="text" id="door_type_exist" name="o2oVisitTypeDesc" value="${dlist[0].req_content}" class="inpH28" title="공동현관 출입방법 상세내용." style="width: 500px" data-attr="배송지정보^2_공동현관 비밀번호" disabled="disabled">
 						</td>
 					</tr>
 
@@ -1039,14 +1039,17 @@
 					
 					
 						
-						
-						
+						<c:set var="salePrice" value="${0}" scope="page" />
+						<c:set var="totalPrice" value="${0}" scope="page" />
+						<c:forEach items="${ blist }" var="bpl">
+							<c:set var="totalPrice" value="${totalPrice + (bpl.proPrice * bpl.product_cnt)}" scope="page" />
+							<c:set var="salePrice" value="${salePrice + (bpl.afterPrice * bpl.product_cnt)}" scope="page" />
 							<tr>
 						
 					
 					<input type="hidden" name="cartNo" value="679179789">
 					<!-- 2020-08-05 o2oJJ 상품 수량 추가 -->
-					<td colspan="5" dispcatno="" stdcatno="010101" goodsno="A000000160436" itemno="001" entrno="C18617" brndcd="3854" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="1" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0016/A00000016043610ko.jpg?l=ko" goodsnm="그레이멜린 알래스카85 내추럴 토너500ml" cartno="679179789" purchasetype="N"><!-- 2017-01-13 수정 -->
+					<td colspan="5" dispcatno="" stdcatno="010101" goodsno="${bpl.productID }" itemno="001" entrno="C18617" brndcd="3854" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="1" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0016/A00000016043610ko.jpg?l=ko" goodsnm="그레이멜린 알래스카85 내추럴 토너500ml" cartno="679179789" purchasetype="N"><!-- 2017-01-13 수정 -->
 						<div class="tbl_cont_area">
 							
 							
@@ -1056,27 +1059,30 @@
 									
 									<div class="prd_info">
 										<div class="prd_img">
-											<img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0016/A00000016043610ko.jpg?l=ko" alt="장바구니 상품 임시 이미지" onerror="common.errorImg(this);">
+											<img src="${bpl.displImgSrc }" alt="장바구니 상품 임시 이미지" onerror="common.errorImg(this);">
 										</div>
 										<div class="prd_name">
 											
-											<span>그레이멜린</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
-											<p>그레이멜린 알래스카85 내추럴 토너500ml</p>
+											<span>${bpl.brandName }</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
+											<p>${bpl.displProName }</p>
 										</div>
 										<p class="prd_opt">
 											
 										</p>
 										<p class="prd_flag">
 											
-											
-											
-												<span class="icon_flag sale">세일</span>
-											
-											
-											
-											
-											
-												<span class="icon_flag delivery">오늘드림</span><!-- 15 -->
+											<c:if test="${bpl.pdc eq 1}">
+															<span class="icon_flag sale">세일</span>
+														</c:if>
+														<c:if test="${bpl.prc eq 1}">
+															<span class="icon_flag coupon">쿠폰</span>
+														</c:if>
+														<c:if test="${bpl.pmp eq 1 }">
+															<span class="icon_flag gift">증정</span>
+														</c:if>
+														<c:if test="${bpl.stock > 0}">
+															<span class="icon_flag delivery">오늘드림</span>
+														</c:if>
 											
 										</p>
 										<!--//fix/3275248 bmiy20 cjone point 적립불가건에 대해 사용 불가 처리 추가-->
@@ -1088,9 +1094,9 @@
 								<!-- 2019-11-15 추가 (오늘드림배송 선물포장) End -->
 								<div class="tbl_cell w110">
 									<!-- <span class="org_price" style="display: none;"><span class="tx_num" id="normPrc_"></span>원</span> --><!-- 2017-01-24 수정 : 삭제 -->
-									<span class="cur_price"><span class="tx_num">18,000</span>원</span>
+									<span class="cur_price"><span class="tx_num">${bpl.proPrice }</span>원</span>
 								</div>
-								<div class="tbl_cell w100">1</div>
+								<div class="tbl_cell w100">${bpl.product_cnt}</div>
 								<!-- 2017-01-24 수정 : 삭제
                                 <div class="tbl_cell w120">
                                     <p class="prd_delivery">
@@ -1107,18 +1113,12 @@
 									
 									
 									
-									<span class="org_price"><span class="tx_num" id="normPrc_A000000160436/001">18,000</span>원</span><!-- 2017-01-24 수정 : 추가 -->
-									<span class="pur_price"><span class="tx_num" id="salePrc_A000000160436/001">13,900</span>원</span>
-									<input type="hidden" id="orgNormPrc_A000000160436/001" value="18000">
-									<input type="hidden" id="orgSalePrc_A000000160436/001" value="13900">
+									<span class="org_price"><span class="tx_num" id="normPrc_A000000160436/001">${bpl.proPrice }</span>원</span><!-- 2017-01-24 수정 : 추가 -->
+									<span class="pur_price"><span class="tx_num" id="salePrc_A000000160436/001">${bpl.afterPrice }</span>원</span>
+									<input type="hidden" id="orgNormPrc_A000000160436/001" value="${bpl.proPrice }">
+									<input type="hidden" id="orgSalePrc_A000000160436/001" value="${bpl.afterPrice }">
 									<input type="hidden" id="imdtDscntAmt_A000000160436/001" value="0">
-
-										
-									
-										
-											
-										
-										
+								
 									
 										
 								</div>
@@ -1127,370 +1127,10 @@
 					</td>
 					</tr>
 					<!--// 1+1 행사 상품인 경우 -->
-					
+					</c:forEach>
 				
 					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 
-					
-					
-					
-					
-					<!-- 2020-08-04 o2oJJ 24H 화면 제어로 인한 주석 처리 -->
-					
-					
-					
-
-					
-					
-					
-						
-						
-						
-							<tr>
-						
-					
-					<input type="hidden" name="cartNo" value="679179557">
-					<!-- 2020-08-05 o2oJJ 상품 수량 추가 -->
-					<td colspan="5" dispcatno="" stdcatno="010102" goodsno="A000000135591" itemno="001" entrno="C15537" brndcd="2025" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="11" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0013/A00000013559108ko.jpg?l=ko" goodsnm="[증량] 네오젠 프로바이오틱스 유스 리페어 에멀젼" cartno="679179557" purchasetype="N"><!-- 2017-01-13 수정 -->
-						<div class="tbl_cont_area">
-							
-							
-								
-								<div class="tbl_cell w700"><!-- 2017-01-24 수정 : 클래스명 변경 -->
-									
-									
-									<div class="prd_info">
-										<div class="prd_img">
-											<img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0013/A00000013559108ko.jpg?l=ko" alt="장바구니 상품 임시 이미지" onerror="common.errorImg(this);">
-										</div>
-										<div class="prd_name">
-											
-											<span>네오젠</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
-											<p>[증량] 네오젠 프로바이오틱스 유스 리페어 에멀젼</p>
-										</div>
-										<p class="prd_opt">
-											
-										</p>
-										<p class="prd_flag">
-											
-											
-											
-												<span class="icon_flag sale">세일</span>
-											
-											
-											
-											
-											
-										</p>
-										<!--//fix/3275248 bmiy20 cjone point 적립불가건에 대해 사용 불가 처리 추가-->
-										
-									</div>
-								</div>
-								<!-- 2019-11-15 추가 (오늘드림배송 선물포장) Start -->
-								
-								<!-- 2019-11-15 추가 (오늘드림배송 선물포장) End -->
-								<div class="tbl_cell w110">
-									<!-- <span class="org_price" style="display: none;"><span class="tx_num" id="normPrc_A000000160436/001">18,000</span>원</span> --><!-- 2017-01-24 수정 : 삭제 -->
-									<span class="cur_price"><span class="tx_num">34,000</span>원</span>
-								</div>
-								<div class="tbl_cell w100">11</div>
-								<!-- 2017-01-24 수정 : 삭제
-                                <div class="tbl_cell w120">
-                                    <p class="prd_delivery">
-                                        <strong>
-                                            무료배송
-                                        </strong>
-                                        도서·산간 제외
-                                    </p>
-                                </div>
-                                -->
-								<div class="tbl_cell w110">
-									
-									
-									
-									
-									
-									<span class="org_price"><span class="tx_num" id="normPrc_A000000135591/001">374,000</span>원</span><!-- 2017-01-24 수정 : 추가 -->
-									<span class="pur_price"><span class="tx_num" id="salePrc_A000000135591/001">218,900</span>원</span>
-									<input type="hidden" id="orgNormPrc_A000000135591/001" value="374000">
-									<input type="hidden" id="orgSalePrc_A000000135591/001" value="218900">
-									<input type="hidden" id="imdtDscntAmt_A000000135591/001" value="0">
-
-										
-									
-										
-											
-										
-										
-									
-										
-								</div>
-							</div>
-							
-					</td>
-					</tr>
-					<!--// 1+1 행사 상품인 경우 -->
-					
-				
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-
-					
-					
-					
-					
-					<!-- 2020-08-04 o2oJJ 24H 화면 제어로 인한 주석 처리 -->
-					
-					
-					
-
-					
-					
-					
-						
-						
-						
-							<tr>
-						
-					
-					<input type="hidden" name="cartNo" value="679179660">
-					<!-- 2020-08-05 o2oJJ 상품 수량 추가 -->
-					<td colspan="5" dispcatno="" stdcatno="010108" goodsno="A000000154138" itemno="001" entrno="C18584" brndcd="2633" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="3" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0015/A00000015413824ko.jpg?l=ko" goodsnm="그라펜 제주 해수 올인원 로션 200ml" cartno="679179660" purchasetype="N"><!-- 2017-01-13 수정 -->
-						<div class="tbl_cont_area">
-							
-							
-								
-								<div class="tbl_cell w700"><!-- 2017-01-24 수정 : 클래스명 변경 -->
-									
-									
-									<div class="prd_info">
-										<div class="prd_img">
-											<img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0015/A00000015413824ko.jpg?l=ko" alt="장바구니 상품 임시 이미지" onerror="common.errorImg(this);">
-										</div>
-										<div class="prd_name">
-											
-											<span>그라펜</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
-											<p>그라펜 제주 해수 올인원 로션 200ml</p>
-										</div>
-										<p class="prd_opt">
-											
-												<i class="tit">옵션</i>200ml
-											
-										</p>
-										<p class="prd_flag">
-											
-											
-											
-												<span class="icon_flag sale">세일</span>
-											
-											
-											
-											
-											
-												<span class="icon_flag delivery">오늘드림</span><!-- 15 -->
-											
-										</p>
-										<!--//fix/3275248 bmiy20 cjone point 적립불가건에 대해 사용 불가 처리 추가-->
-										
-									</div>
-								</div>
-								<!-- 2019-11-15 추가 (오늘드림배송 선물포장) Start -->
-								
-								<!-- 2019-11-15 추가 (오늘드림배송 선물포장) End -->
-								<div class="tbl_cell w110">
-									<!-- <span class="org_price" style="display: none;"><span class="tx_num" id="normPrc_A000000135591/001">34,000</span>원</span> --><!-- 2017-01-24 수정 : 삭제 -->
-									<span class="cur_price"><span class="tx_num">22,000</span>원</span>
-								</div>
-								<div class="tbl_cell w100">3</div>
-								<!-- 2017-01-24 수정 : 삭제
-                                <div class="tbl_cell w120">
-                                    <p class="prd_delivery">
-                                        <strong>
-                                            무료배송
-                                        </strong>
-                                        도서·산간 제외
-                                    </p>
-                                </div>
-                                -->
-								<div class="tbl_cell w110">
-									
-									
-									
-									
-									
-									<span class="org_price"><span class="tx_num" id="normPrc_A000000154138/001">66,000</span>원</span><!-- 2017-01-24 수정 : 추가 -->
-									<span class="pur_price"><span class="tx_num" id="salePrc_A000000154138/001">59,400</span>원</span>
-									<input type="hidden" id="orgNormPrc_A000000154138/001" value="66000">
-									<input type="hidden" id="orgSalePrc_A000000154138/001" value="59400">
-									<input type="hidden" id="imdtDscntAmt_A000000154138/001" value="0">
-
-										
-									
-										
-											
-										
-										
-									
-										
-								</div>
-							</div>
-							
-					</td>
-					</tr>
-					<!--// 1+1 행사 상품인 경우 -->
-					
-				
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-
-					
-					
-					
-					
-					<!-- 2020-08-04 o2oJJ 24H 화면 제어로 인한 주석 처리 -->
-					
-					
-					
-
-					
-					
-					
-						
-						
-						
-							<tr>
-						
-					
-					<input type="hidden" name="cartNo" value="679128110">
-					<!-- 2020-08-05 o2oJJ 상품 수량 추가 -->
-					<td colspan="5" dispcatno="" stdcatno="010102" goodsno="A000000184129" itemno="001" entrno="C19275" brndcd="3440" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="1" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko" goodsnm="에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)" cartno="679128110" purchasetype="N"><!-- 2017-01-13 수정 -->
-						<div class="tbl_cont_area">
-							
-							
-								
-								<div class="tbl_cell w700"><!-- 2017-01-24 수정 : 클래스명 변경 -->
-									
-									
-									<div class="prd_info">
-										<div class="prd_img">
-											<img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko" alt="장바구니 상품 임시 이미지" onerror="common.errorImg(this);">
-										</div>
-										<div class="prd_name">
-											
-											<span>에스트라</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
-											<p>에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)</p>
-										</div>
-										<p class="prd_opt">
-											
-												<i class="tit">옵션</i>에스트라 아토베리어 로션 기획
-											
-										</p>
-										<p class="prd_flag">
-											
-											
-											
-												<span class="icon_flag sale">세일</span>
-											
-											
-											
-												<span class="icon_flag gift">증정</span><!-- 14 -->
-											
-											
-											
-												<span class="icon_flag delivery">오늘드림</span><!-- 15 -->
-											
-										</p>
-										<!--//fix/3275248 bmiy20 cjone point 적립불가건에 대해 사용 불가 처리 추가-->
-										
-									</div>
-								</div>
-								<!-- 2019-11-15 추가 (오늘드림배송 선물포장) Start -->
-								
-								<!-- 2019-11-15 추가 (오늘드림배송 선물포장) End -->
-								<div class="tbl_cell w110">
-									<!-- <span class="org_price" style="display: none;"><span class="tx_num" id="normPrc_A000000154138/001">22,000</span>원</span> --><!-- 2017-01-24 수정 : 삭제 -->
-									<span class="cur_price"><span class="tx_num">31,000</span>원</span>
-								</div>
-								<div class="tbl_cell w100">1</div>
-								<!-- 2017-01-24 수정 : 삭제
-                                <div class="tbl_cell w120">
-                                    <p class="prd_delivery">
-                                        <strong>
-                                            무료배송
-                                        </strong>
-                                        도서·산간 제외
-                                    </p>
-                                </div>
-                                -->
-								<div class="tbl_cell w110">
-									
-									
-									
-									
-									
-									<span class="org_price"><span class="tx_num" id="normPrc_A000000184129/001">31,000</span>원</span><!-- 2017-01-24 수정 : 추가 -->
-									<span class="pur_price"><span class="tx_num" id="salePrc_A000000184129/001">23,200</span>원</span>
-									<input type="hidden" id="orgNormPrc_A000000184129/001" value="31000">
-									<input type="hidden" id="orgSalePrc_A000000184129/001" value="23200">
-									<input type="hidden" id="imdtDscntAmt_A000000184129/001" value="0">
-
-										
-									
-										
-											
-										
-										
-									
-										
-								</div>
-							</div>
-							
-					</td>
-					</tr>
-					<!--// 1+1 행사 상품인 경우 -->
 					
 						</tbody>
 						</table>
@@ -2517,12 +2157,12 @@
 					<ul class="total_payment_box">
 						<li>
 							<span class="tx_tit">총 상품금액</span>
-							<span class="tx_cont"><span class="tx_num">315,400</span>원</span>
-							<input type="hidden" name="goodsAmt" value="315400">
+							<span class="tx_cont"><span class="tx_num">${totalPrice }</span>원</span>
+							<input type="hidden" name="goodsAmt" value="${totalPrice }">
 						</li>
 						<li>
 							<span class="tx_tit">쿠폰할인금액</span><!-- 2017-01-18 수정 : 문구수정 -->
-							<span class="tx_cont colorOrange"><span class="tx_num" id="totDscntAmt_span">- 4,000</span>원</span>
+							<span class="tx_cont colorOrange"><span class="tx_num" id="totDscntAmt_span">- ${totalPrice - salePrice }</span>원</span>
 							<input type="hidden" name="descentAmt" value="4000">
 							<input type="hidden" id="imdtDscntAmt" value="0">
 						</li>
@@ -2565,7 +2205,7 @@
 						</li>
 						<li class="total">
 							<span class="tx_tit">최종 결제금액</span>
-							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">311,400</span>원</span>
+							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">${salePrice }</span>원</span>
 							<input type="hidden" name="remainAmt" value="311400">
 							<input type="hidden" name="ordPayAmt" value="311400">
 							<input type="hidden" name="goodsNm" value="그레이멜린 알래스카85 내추럴 토너500ml 외 3건">
@@ -2630,5 +2270,19 @@
 </div>
 </div>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
+<script>
+	$(function(){
+		
+		let delid = $("#dlvpSelect").val();
+		
+		$("tr#pickupHide4."+delid).css("display","table-row");
+		
+		$("#dlvpSelect").on("change",function(){
+			delid = $("#dlvpSelect").val();
+			$("tr#pickupHide4").css("display","none");
+			$("tr#pickupHide4."+delid).css("display","table-row");
+		})
+	})
+</script>
 </body>
 </html>

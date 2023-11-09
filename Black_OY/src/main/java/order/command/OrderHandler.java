@@ -42,9 +42,10 @@ public class OrderHandler implements CommandHandler {
 		// 배송지 목록 가져오기
 		List<DeliveryDTO> dlist = null;
 		OrderService orderService = OrderService.getInstance();
-		if (quickyn == null || quickyn.equals("")) {
+		if (quickyn == null || quickyn.equals("null")) {
 			quickyn = "N";
 		}
+		System.out.println("order qu:" + quickyn);
 		blist = basketListService.basketListService(user_id, quickyn);
 		request.setAttribute("blist", blist);
 		dlist = orderService.deliveryService(user_id);

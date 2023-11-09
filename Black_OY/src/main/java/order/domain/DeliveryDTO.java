@@ -21,6 +21,6 @@ public class DeliveryDTO {
 	private String deli_tel2;
 	private String req_select;
 	private String req_content;
-	private int def_del;
+	//private int def_del;
 	
 }

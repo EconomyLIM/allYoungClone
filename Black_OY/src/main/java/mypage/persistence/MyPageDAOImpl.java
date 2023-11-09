@@ -50,6 +50,7 @@ public class MyPageDAOImpl implements MypageDAO {
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		} catch (Exception e) {
@@ -82,6 +83,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		}finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 
 		return UserPoint;
@@ -137,6 +139,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		}finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}		
 		return UserDeposit;
 	}
@@ -256,6 +259,7 @@ public class MyPageDAOImpl implements MypageDAO {
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		} catch (Exception e) {
@@ -292,6 +296,7 @@ public class MyPageDAOImpl implements MypageDAO {
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		} catch (Exception e) {
@@ -322,6 +327,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		}finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}		
 		return UserRevCount;
 	}
@@ -361,6 +367,7 @@ public class MyPageDAOImpl implements MypageDAO {
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		} catch (Exception e) {

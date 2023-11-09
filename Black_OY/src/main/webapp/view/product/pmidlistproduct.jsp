@@ -134,7 +134,7 @@ $(function () {
 
     $('input[name="brandId"]').on('change', function() {
     	
-    	var url = "http://localhost/Black_OY/view/product/pmidlistproduct.do?displNum="+'<%=midId%>'+"&sort=${param.sort}&currentpage=1<%=s%>";
+    	var url = "/Black_OY/view/product/pmidlistproduct.do?displNum="+'<%=midId%>'+"&sort=${param.sort}&currentpage=1<%=s%>";
     	console.log(url);
         var brandID = $(this).val();
 
@@ -478,6 +478,14 @@ function changePerPageAndClass(value) {
 											<span class="icon_flag delivery">오늘드림</span>
 										</c:if>
 									</p>
+									<!-- 리뷰점수 추가 -->
+									
+									<p class="prd_btn_area">
+										<button class="cartBtn" data-ref-goodsno="A000000188420" data-ref-dispcatno="100000100010009" data-ref-itemno="001">장바구니</button>
+										<button class="btn_new_pop goodsList" name="Cat100000100010009_MID">새창보기</button>
+									</p>
+									
+									
 								</div>
 							</li>
 
@@ -511,6 +519,26 @@ function changePerPageAndClass(value) {
 		</div>
 	</div>
 
+
+<!-- 팝업창 -->
+<div class="layer_pop_wrap w490" id="basketOption" style="z-index: 999; display: none; left: 50%; margin-left: -245px; top: 871.5px;" data-quick-yn="N">
+
+	<div class="layer_cont2">
+		<h2 class="layer_title2">선택완료</h2>
+		<div class="basket_add_txt">장바구니에 추가되었습니다.</div>
+		
+		
+			
+				<div class="area2sButton">
+					<button class="btnGreen" onclick="fnLayerSet('basketOption', 'close');"><span>쇼핑 계속하기</span></button>
+					<button class="btnGray" onclick="common.link.moveCartPage();"><span>장바구니 확인</span></button>						
+				</div>
+				<button class="layer_close type2">창 닫기</button>
+	</div>	
+</div>
+
+
+
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 <script>
@@ -521,4 +549,31 @@ $(document).ready(function() {
     });
 });
 </script>
+<script>
+	$(document).ready(function(){
+		$(".btn_thumb").click(function(){
+			$(this).addClass('active');
+			$(".btn_list").removeClass('active');
+			$(".cate_prd_list.gtm_cate_list").removeClass("list_type");
+		})
+		
+		$(".btn_list").click(function(){
+			$(this).addClass('active');
+			$(".btn_thumb").removeClass('active');
+			$(".cate_prd_list.gtm_cate_list").addClass("list_type");
+		})
+		
+		$(".cartBtn").click(function(){
+			$("#basketOption").css("display","block");
+		})
+		
+		$(".layer_close.type2").click(function(){
+			$("#basketOption").css("display","none");
+		})
+		
+	})
+	
+</script>
+
+
 </html>
