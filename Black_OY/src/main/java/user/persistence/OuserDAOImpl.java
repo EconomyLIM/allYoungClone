@@ -63,7 +63,7 @@ public class OuserDAOImpl implements OuserDAO {
 	public int join(OuserDTO dto) throws SQLException {
 		int rowCount = 0;
 		String sql = "INSERT INTO o_user (user_id, u_name, u_pwd, u_tel, u_birth, u_email "
-				+ " VALUES (? , ?, ?, ?, ?, ? ) ";
+				+ " VALUES (?, ?, ?, ?, ?, ? ) ";
 		PreparedStatement pstmt = null;
 
 		pstmt = this.conn.prepareStatement(sql); 
@@ -79,7 +79,6 @@ public class OuserDAOImpl implements OuserDAO {
 		return rowCount;
 
 	}
-
 
 
 }

@@ -565,9 +565,11 @@ function checkField(event) {
 </script>
 <script>
 	document.getElementById("btnCheRegister").onclick = function () {
-		this.href = this.href+"?tel="+document.getElementById("mob_no").value;
+		this.href = this.href+"?tel="+document.getElementById("mob_no").value+"&u_name="+document.getElementById("user_nm").value 
+				+"&u_birth="+document.getElementById("legl_birth_dy").value;
 	}
 </script>
+
 
 
 <script>
