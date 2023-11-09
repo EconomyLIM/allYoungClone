@@ -20,4 +20,6 @@ public class StoreDTO {
 	private String store_parking;
 	private String store_spec;
 	private int store_fav;
+	private double lat;
+	private double lng;
 }

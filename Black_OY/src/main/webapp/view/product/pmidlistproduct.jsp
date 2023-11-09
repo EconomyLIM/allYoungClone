@@ -5,23 +5,63 @@
 <%@ include file="/WEB-INF/inc/include.jspf"%>
 <%@ include file="/WEB-INF/inc/session_auth.jspf"%>
 <%
-	ArrayList myList = (ArrayList)request.getAttribute("pbrandlist");
-	ArrayList proList = (ArrayList)request.getAttribute("pmidlistdto");
+ArrayList myList = (ArrayList) request.getAttribute("pbrandlist");
+ArrayList proList = (ArrayList) request.getAttribute("pmidlistdto");
 
-	String currentUrl = request.getRequestURL().toString();
-	String midId = request.getParameter("displNum");
-	String largeId = midId.substring(0,4);
-	String midcol = midId.substring(4, 8);
+String currentUrl = request.getRequestURL().toString();
+String midId = request.getParameter("displNum");
+
+String largecol = "0000";
+String midcol = "0000";
+String smallcol = "0000";
+
+if (midId.length() == 4) { // displ 자리가 4자리 일때
+	largecol = midId.substring(0, 4);
+	request.setAttribute("largecol", largecol);
+} else if (midId.length() == 8) { // displ 자리가 8자리 일때
+	largecol = midId.substring(0, 4);
+	midcol = midId.substring(4, 8);
+	request.setAttribute("midcol", midcol);
+} else if (midId.length() == 12) { // displ 자리가 12자리 일때
+	largecol = midId.substring(0, 4); // 대분류
+	midcol = midId.substring(4, 8); // 중
+	smallcol = midId.substring(8, 12); //소
+	request.setAttribute("smallcol", smallcol);
+}
+
+int sortcate = 1;
+
+if (request.getParameter("sort") == null) {
 	
-	int sortcate = 1;
+	request.setAttribute("sort", sortcate);
 	
-	if(request.getParameter("sort") == null){
-		sortcate = 1;
-		request.setAttribute("sort", sortcate);
-	} else if(request.getParameter("sort") != null){
-		sortcate = Integer.parseInt(request.getParameter("sort"));
-	}//if
+} else if (request.getParameter("sort") != null) {
+	sortcate = Integer.parseInt(request.getParameter("sort"));
+} //if
+
+String s = "";
+if(request.getParameter("brandId") != null){
+	String brandIds[] = request.getParameterValues("brandId");	
 	
+	for(int i = 0 ; i < brandIds.length ; i++ ){
+		s += "&brandId=" + brandIds[i];
+	} // for
+	
+} //if
+String curParam = request.getQueryString();
+			
+//
+int getPPval = 0;
+			
+if(request.getParameter("perPage")!= null){
+	if(request.getParameter("perPage").equals("8")){
+		getPPval = 1;
+	}else if(request.getParameter("perPage").equals("12")){
+		getPPval =2;
+	}else{
+		getPPval = 0;
+	}//if else
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -58,85 +98,191 @@ $(function () {
 	//
 
 	 // midId와 일치하는 id를 가진 li 요소에 'on' 클래스 추가
-	 $( '.loc_history li a#' + '<%=largeId%>').addClass('on');
-	
-	// 
-	 $(".cate_align_box .align_sort ul > li").removeClass("on");
-	
+	$( '.loc_history li a#' + '<%=largecol%>').addClass('on');
+	$('#Contents > div.page_location > ul > li:nth-child(2) > div > ul > li a#' + '<%=midcol%>').addClass('on'); 
+	$('#Contents > div.page_location > ul > li:nth-child(3) > div > ul > li a#' + '<%=smallcol%>').addClass('on');
+	 
+	// 정렬 리스트 class on 추가
+	$(".cate_align_box .align_sort ul > li").removeClass("on");
 	$(".cate_align_box .align_sort ul > li").eq( ${param.sort} == null ? 1 : ${param.sort}-1).addClass("on");
 	
-})
+	//
+	$("#Contents > ul.cate_list_box li").removeClass("on");
+	$('#Contents > ul.cate_list_box li#' + '<%=smallcol%>').addClass('on') ; 
+	if (<%=smallcol%> == ("0000")) {
+		$('#Contents > ul.cate_list_box li.first').addClass('on') ; 
+	}
+
+	$("div.count_sort.tx_num > ul > li").removeClass("on");
+	$("div.count_sort.tx_num > ul > li").eq(<%=getPPval%>).addClass("on");
+	console.log('?<%=request.getQueryString()%>');
+
+	var urlParams = new URLSearchParams(window.location.search);
+    var checkboxes = document.querySelectorAll('input[name="brandId"]');
+
+    // 브랜드 체크 처리
+    if (urlParams.has('brandId')) {
+        var selectedBrands = urlParams.getAll('brandId');
+        
+        checkboxes.forEach(function(checkbox) {
+            var brandID = checkbox.value;
+            if (selectedBrands.includes(brandID)) {
+                checkbox.checked = true; // 파라미터에 해당하는 값이 있으면 체크박스를 체크함
+            }
+        });
+    }
+
+    $('input[name="brandId"]').on('change', function() {
+    	
+    	var url = "http://localhost/Black_OY/view/product/pmidlistproduct.do?displNum="+'<%=midId%>'+"&sort=${param.sort}&currentpage=1<%=s%>";
+    	console.log(url);
+        var brandID = $(this).val();
+
+        if ($(this).is(':checked')) {
+            // 체크박스가 체크되었을 때
+            if (url.indexOf('brandId=' + brandID) === -1) {
+                // 파라미터가 없으면 파라미터 추가
+                var separator = url.indexOf('?') !== -1 ? '&' : '?';
+                window.location.href = url + separator + 'brandId=' + brandID;
+            }
+        } else {
+            // 체크박스가 해제되었을 때
+            if (url.indexOf('brandId=' + brandID) !== -1) {
+                // 파라미터가 있으면 파라미터 삭제
+                var newUrl = url.replace(new RegExp('[?&]brandId=' + brandID), '');
+                window.location.href = newUrl;
+            }
+        }
+    })   
+}) ; 
+
+function changePerPage(value) { // perPage 수정
+	  // 현재 URL 또는 기존 링크에서 파라미터 값 가져오기
+	const currentURL = window.location.href;
+	  const url = new URL(currentURL);
+
+	  // 'perPage' 파라미터 값 변경
+	  url.searchParams.set('perPage', value);
+
+	  // 새 URL을 만들고 브라우저의 주소창을 업데이트
+	  window.location.href = url;
+	}
+	
+function changePerPageAndClass(value) {
+	  const perPage = value.toString();
+	  const currentURL = new URL(window.location.href);
+
+	  // Set 'perPage' parameter value
+	  currentURL.searchParams.set('perPage', perPage);
+
+	  // Go to the new URL with updated 'perPage' parameter
+	  window.location.href = currentURL;
+
+	  // Remove 'on' class from all li elements
+	  const allLi = document.querySelectorAll('.count_sort tx_num ul li');
+	  allLi.forEach(li => {
+	    li.classList.remove('on');
+	  });
+
+	  // Get 'perPage' parameter value from the URL
+	  const urlParams = currentURL.searchParams.get('perPage');
+
+	  // Add 'on' class to the li element matching the 'perPage' parameter
+	  const matchedLi = document.querySelector(`.count_sort tx_num ul li a[href*="perPage=${urlParams}"]`);
+	  if (matchedLi) {
+	    matchedLi.parentElement.classList.add('on');
+	  }
+	}
 </script>
 <body>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
 	<div id="Container">
 		<div id="Contents">
 			<div class="page_location">
-				<a href="<%=contextPath %>/olive/main.do" class="loc_home">홈</a>
+				<a href="<%=contextPath%>/olive/main.do" class="loc_home">홈</a>
 				<ul class="loc_history">
-					<li>
-					<a href="#" class="cate_y">${mnameiddto.catLName} </a>
+					<li><a href="#" class="cate_y">${mnameiddto.catLName} </a>
 						<div class="history_cate_box" style="width: 242px">
 							<ul>
 								<c:if test="${not empty topcatedto}">
 									<c:forEach items="${topcatedto}" var="tcd">
-									<li><a id="${tcd.id}" href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${tcd.id}">${tcd.name}</a></li>
+										<li><a id="${tcd.id}"
+											href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${tcd.id}">${tcd.name}</a></li>
 									</c:forEach>
 								</c:if>
 							</ul>
-
-							
-						</div>
-						</li>
-
+						</div></li>
 					<li><a href="#" class="cate_y"> ${mnameiddto.catMName}</a>
 						<div class="history_cate_box" style="width: 122px">
 							<ul>
 								<c:if test="${not empty midcatedto}">
-								<c:forEach items="${midcatedto}" var="mcd">
-									<li><a href=".do?${mcd.id}">${mcd.name}</a></li>
-								</c:forEach>
+									<c:forEach items="${midcatedto}" var="mcd">
+										<li><a id="${mcd.id}"
+											href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${mnameiddto.catLId}${mcd.id}&sort=1">${mcd.name}</a></li>
+									</c:forEach>
 								</c:if>
 							</ul>
 						</div></li>
+					<%
+					if (midId.length() == 12) {
+					%>
+					<c:if test="${not empty pLowcateList}">
+						<li class=""><a href="#" class="cate_y">${pcurnamedto.name}</a>
+							<div class="history_cate_box" style="width: 122px;">
+								<ul>
+									<c:forEach items="${ pLowcateList}" var="pll">
+										<li><a id="${pll.sId}"
+											href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${mnameiddto.catLId}${mnameiddto.catMId}${pll.sId}&sort=1">${pll.plowcate}</a></li>
+									</c:forEach>
+								</ul>
+							</div></li>
+					</c:if>
+
+					<%
+					}
+					%>
+
 				</ul>
 			</div>
 
 			<div class="titBox">
-				<h1> ${mnameiddto.catMName}</h1>
+				<h1>${pcurnamedto.name}</h1>
 			</div>
 
 			<ul class="cate_list_box">
-				<li class="first on"><a href="pmidlistproduct.do?displNum=${mnameiddto.catLId}${mnameiddto.catMId}&sort=1"
-					class="<%=midId %>" data-attr="카테고리상세^카테고리리스트^전체">전체</a>
-				</li>
+				<li class="first on"><a
+					href="pmidlistproduct.do?displNum=${mnameiddto.catLId}${mnameiddto.catMId}&sort=1"
+					class="<%=midId %>" data-attr="카테고리상세^카테고리리스트^전체">전체</a></li>
 				<c:set var="counter" value="0" />
 				<c:if test="${not empty pLowcateList}">
 					<c:forEach items="${pLowcateList}" var="pl">
-						<li><a>${pl.plowcate}</a></li>
+						<li id="${pl.sId}"><a
+							data-attr="카테고리상세^카테고리리스트^${pl.plowcate}"
+							href="pmidlistproduct.do?displNum=${mnameiddto.catLId}${mnameiddto.catMId}${pl.sId}&sort=1">${pl.plowcate}</a></li>
 						<c:set var="counter" value="${counter + 1}" />
 					</c:forEach>
 				</c:if>
 				<c:set var="remainder" value="${counter % 5}" />
 				<c:forEach begin="1" end="${5-remainder}">
-				<li>&nbsp;</li>
+					<li>&nbsp;</li>
 				</c:forEach>
-				
+
 			</ul>
 
 			<div class="cate_brand_box">
 				<div class="tit_area">
-					<strong>브랜드</strong> <span class="tx_num">Total <%=myList.size() %></span>
+					<strong>브랜드</strong> <span class="tx_num">Total <%=myList.size()%></span>
 				</div>
 				<ul class="brand_list">
 
 					<c:if test="${ not empty pbrandlist }">
 						<c:forEach items="${ pbrandlist }" var="pbl">
-							<li><input type="checkbox" id="${ pbl.brandID }" name=""
-								value="${ pbl.brandID }" /> <label for="${pbl.brandID}">
-									${pbl.pBrandName} </label></li>
+							<li><input type="checkbox" id="${ pbl.brandID }"
+								name="brandId" value="${ pbl.brandID }"
+								 /> <label
+								for="${pbl.brandID}"> ${pbl.pBrandName} </label></li>
 						</c:forEach>
-						
+
 					</c:if>
 					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
 					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
@@ -157,8 +303,8 @@ $(function () {
 					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
 					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
 					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					
-					
+
+
 				</ul>
 
 				<button class="btn_more">더보기</button>
@@ -168,6 +314,9 @@ $(function () {
 				</div>
 			</div>
 
+			<%
+			if (midId.length() == 8) {
+			%>
 			<!-- 2020.12.01 기획전 개선 -->
 			<div class="plan_slider_wrap02">
 				<div
@@ -224,42 +373,53 @@ $(function () {
 					</div>
 				</div>
 				<span class="slick-prev prev slick-arrow slick-hidden"
-					id="plan_prev" aria-disabled="true" tabindex="-1">prev</span>
-				<span class="slick-next next slick-arrow slick-hidden"
-					id="plan_next" aria-disabled="true" tabindex="-1">next</span>
+					id="plan_prev" aria-disabled="true" tabindex="-1">prev</span> <span
+					class="slick-next next slick-arrow slick-hidden" id="plan_next"
+					aria-disabled="true" tabindex="-1">next</span>
 			</div>
 			<!-- //2020.12.01 기획전 개선 -->
-
+			<%
+			}
+			%>
 			<p class="cate_info_tx">
-				 ${mnameiddto.catMName} <span> ${totalRecords}</span> 개의 상품이 등록되어 있습니다.
+				${pcurnamedto.name}<span> ${totalRecords}</span> 개의 상품이 등록되어 있습니다.
 			</p>
 
 			<div class="cate_align_box">
 				<div class="align_sort">
 					<ul>
-						<li><a class="on" href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=1&currentpage=${param.currentpage}" data-prdsoting="01">인기순</a></li>
-						<li><a href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=2&currentpage=${param.currentpage}" data-prdsoting="02">신상품순</a>
-						</li>
-						<li><a href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=3&currentpage=${param.currentpage}" data-prdsoting="03">판매순</a></li>
+						<li><a class="on"
+							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=1&currentpage=1"
+							data-prdsoting="01">인기순</a></li>
+						<li><a
+							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=2&currentpage=1"
+							data-prdsoting="02">신상품순</a></li>
+						<li><a
+							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=3&currentpage=1"
+							data-prdsoting="03">판매순</a></li>
 
-						<li><a href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=4&currentpage=${param.currentpage}" data-prdsoting="05">낮은 가격순</a></li>
+						<li><a
+							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=4&currentpage=1"
+							data-prdsoting="05">낮은 가격순</a></li>
 
-						<li><a href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=5&currentpage=${param.currentpage}" data-prdsoting="09">할인율순</a></li>
+						<li><a
+							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=5&currentpage=1"
+							data-prdsoting="09">할인율순</a></li>
 					</ul>
 				</div>
-				
+
 				<script>
 				
 					
 				</script>
-				
+
 				<div class="count_sort tx_num">
 					<span class="tx_view">VIEW</span>
 					<ul>
-						<li class="on"><a href="javascript:;" title="24개씩 보기">24</a>
+						<li class="on"><a href="#" onclick="changePerPage(4)" title="24개씩 보기">24</a>
 						</li>
-						<li><a href="javascript:;" title="36개씩 보기">36</a></li>
-						<li><a href="javascript:;" title="48개씩 보기">48</a></li>
+						<li><a href="#" onclick="changePerPage(8)" title="36개씩 보기">36</a></li>
+						<li><a href="#" onclick="changePerPage(12);" title="48개씩 보기">48</a></li>
 					</ul>
 				</div>
 				<div class="type_sort">
@@ -268,92 +428,89 @@ $(function () {
 					<button class="btn_list" data-view-cnt="1">리스트형식으로 보기</button>
 				</div>
 			</div>
-			
+
 			<!-- pmidlistdto -->
 			<c:if test="${not empty pmidlistdto}">
-					<c:forEach var="i" varStatus="outerLoop" begin="1" end="6">
-						<ul class="cate_prd_list gtm_cate_list">
+				<c:forEach var="i" varStatus="outerLoop" begin="1" end="6">
+					<ul class="cate_prd_list gtm_cate_list">
 
 						<c:set var="innerLoopBegin" value="${(outerLoop.index - 1) * 4}" />
-        				<c:set var="innerLoopEnd" value="${(outerLoop.index * 4) -1}" />
+						<c:set var="innerLoopEnd" value="${(outerLoop.index * 4) -1}" />
 
-						  <c:forEach items="${pmidlistdto}" var="pml" begin="${innerLoopBegin}" end="${innerLoopEnd}" varStatus="innerLoop">
-					 
-						<li class="flag" >
-							<div class="prd_info">
-								<a 
-								href="do?${pml.productID}"
-								class="prd_thumb goodsList"
-								name=""> 
-								<img
-									src="${pml.displImgSrc}" alt="사진" 
-									class="completed-seq-lazyload"/>
-								</a>
-								<div class="prd_name">
-									<a href="#" class="goodsList"> 
-									<span class="tx_brand">${pml.brandName}</span>
-										<p class="tx_name">${pml.displProName}</p>
+						<c:forEach items="${pmidlistdto}" var="pml"
+							begin="${innerLoopBegin}" end="${innerLoopEnd}"
+							varStatus="innerLoop">
+
+							<li class="flag">
+								<div class="prd_info">
+									<a href="do?${pml.productID}" class="prd_thumb goodsList"
+										name=""> <img src="${pml.displImgSrc}" alt="사진"
+										class="completed-seq-lazyload" />
 									</a>
+									<div class="prd_name">
+										<a href="#" class="goodsList"> <span class="tx_brand">${pml.brandName}</span>
+											<p class="tx_name">${pml.displProName}</p>
+										</a>
+									</div>
+									<button class="btn_zzim jeem" data-ref-goodsno="A000000185252">
+										<span>찜하기전</span>
+									</button>
+									<p class="prd_price">
+										<span class="tx_org"> <span class="tx_num">
+												${pml.proPrice}</span> 원
+										</span> <span class="tx_cur"> <span class="tx_num">
+												${pml.afterPrice}</span> 원
+										</span>
+									</p>
+									<p class="prd_flag">
+										<c:if test="${pml.pdc eq 1}">
+											<span class="icon_flag sale">세일</span>
+										</c:if>
+										<c:if test="${pml.prc eq 1}">
+											<span class="icon_flag coupon">쿠폰</span>
+										</c:if>
+
+										<c:if test="${pml.pmp eq 1}">
+											<span class="icon_flag gift">증정</span>
+										</c:if>
+
+										<c:if test="${pml.stock > 0}">
+											<span class="icon_flag delivery">오늘드림</span>
+										</c:if>
+									</p>
 								</div>
-								<button class="btn_zzim jeem" data-ref-goodsno="A000000185252">
-									<span>찜하기전</span>
-								</button>
-								<p class="prd_price">
-									<span class="tx_org"> <span class="tx_num">
-											${pml.proPrice}</span> 원
-									</span> <span class="tx_cur"> <span class="tx_num">
-											${pml.afterPrice}</span> 원
-									</span>
-								</p>
-								<p class="prd_flag">
-									<c:if test="${pml.pdc eq 1}">
-										<span class="icon_flag sale">세일</span>
-									</c:if>
-									<c:if test="${pml.prc eq 1}">
-										<span class="icon_flag coupon">쿠폰</span>
-									</c:if>
+							</li>
 
-									<c:if test="${pml.pmp eq 1}">
-										<span class="icon_flag gift">증정</span>
-									</c:if>
-
-									<c:if test="${pml.stock > 0}">
-										<span class="icon_flag delivery">오늘드림</span>
-									</c:if>
-								</p>
-							</div>
-						</li>
-						
 						</c:forEach>
-						</ul>
-					</c:forEach>
-				</c:if>
+					</ul>
+				</c:forEach>
+			</c:if>
 		</div>
 
 		<div class="pageing">
 			<c:if test="${pDto.prev }">
-        		<%-- <a href="<%=contextPath%>/view/product/pmidlistproduct.do=${pDto.start-1}">&lt;</a> --%>
-        	</c:if>
-        	<a class="prev" href="javascript:void(0);" data-page-no="1">이전 10 페이지</a>
-        	<c:forEach var="i" begin="${pDto.start }" end="${pDto.end }" step="1">
-  				<c:choose>
-  					<c:when test="${i eq pDto.currentPage}">
-  						<strong title="현재 페이지">${i}</strong>
-  						<%-- <a class="active" href="#">${i }</a> --%>
-  					</c:when>
-  					<c:otherwise>
-  						<a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${i}">${i }</a>
-  					</c:otherwise>
-  				</c:choose>
-  			</c:forEach>
-  			<a class="next" href="" data-page-no="21">다음 10 페이지</a>
-  			<c:if test="${pDto.next }">
-        		<%-- <a href="<%=contextPath%>/view/product/pmidlistproduct.do=${pDto.end+1}">&gt;</a> --%>
-        	</c:if>
+				<a class="prev" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${(param.currentpage+9)/10*10+1}<%=s %>" data-page-no="1">이전 10
+				페이지</a>
+			</c:if>
+			<c:forEach var="i" begin="${pDto.start }" end="${pDto.end }" step="1">
+				<c:choose>
+					<c:when test="${i eq pDto.currentPage}">
+						<strong title="현재 페이지">${i}</strong>
+						<%-- <a class="active" href="#">${i }</a> --%>
+					</c:when>
+					<c:otherwise>
+						<a
+							href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${i}<%=s %>">${i }</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${pDto.next }">
+				<a class="next" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${(param.currentpage-(param.currentpage%1))/10+1}<%=s %>" data-page-no="21">다음 10 페이지</a>
+			</c:if>
 			<!-- <strong title="현재 페이지">1</strong> -->
 		</div>
 	</div>
-	
+
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 <script>

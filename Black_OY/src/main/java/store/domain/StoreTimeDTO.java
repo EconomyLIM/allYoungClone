@@ -20,6 +20,8 @@ public class StoreTimeDTO {
 	private String store_parking;
 	private String store_spec;
 	private int store_fav;
+	private double lat;
+	private double lng;
 	private String weekday;
 	private String saturday;
 	private String sunday;

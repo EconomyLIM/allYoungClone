@@ -357,13 +357,13 @@
                                         href="#"
                                         data-ref-dispcatno="10000010001" data-attr="공통^드로우^스킨케어">스킨케어</a></p>
                                 <ul>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00010001&sort=1"
                                             data-ref-dispcatno="100000100010008" data-attr="공통^드로우^스킨케어_토너/로션/올인원"
                                             data-trk="/">토너/로션/올인원</a></li>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00010002&sort=1"
                                             data-ref-dispcatno="100000100010009" data-attr="공통^드로우^스킨케어_에센스/크림"
                                             data-trk="/">에센스/크림</a></li>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00010003&sort=1"
                                             data-ref-dispcatno="100000100010010" data-attr="공통^드로우^스킨케어_미스트/오일"
                                             data-trk="/">미스트/오일</a></li>
                                 </ul>
