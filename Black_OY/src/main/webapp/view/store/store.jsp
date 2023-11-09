@@ -497,7 +497,7 @@
 
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 
- <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36d928ed3fda62efe8373b73be2275c2"></script>  -->
+<!--  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36d928ed3fda62efe8373b73be2275c2"></script>  -->
 <script>
 	// 지도 
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -511,6 +511,13 @@
 </script>
 
 <script>
+// 위도 경도를 저장
+let latLngs;
+let latLng;
+let markers = [];
+let contents = [];
+
+
 $(function() {
 	/* // 처음 열었을때 직접검색의 돋보기 클릭되게
 	$(".btn_sch").click(); */
@@ -817,7 +824,25 @@ $(function() {
 				$("#noSearchAreaInfo").hide();
 				let stores = JSON.parse(data);
 				$("#searchAreaDiv .reShop_result > dt > span").text(stores.stores.length)
+				
+				latLngs = new Array();
+				for ( var j = 0; j < markers.length; j++ ) {
+					markers[j].setMap(null);
+				}   
+				markers = [];
+				contents = [];
+				
 				for(let i=0; i<stores.stores.length; i++) {
+					
+					latLng = {
+							title : stores.stores[i].store_name
+							, latlng : new kakao.maps.LatLng(stores.stores[i].lat, stores.stores[i].lng)
+					};
+					
+					
+									
+					latLngs.push(latLng);
+					
 					let li = $("<li>").addClass(stores.stores[i].store_id);
 					let div = $("<div>").addClass("li_Pc_reInner");
 					let h4 = $("<h4>").addClass("tit")
@@ -832,10 +857,16 @@ $(function() {
 					let weekday = stores.stores[i].weekday;
 					let weekdays = weekday.split(" - ");
 					let time;
+					let onCheck = "on";
+					let openCheck = "영업중";
 					if(weekdays[0] <= curTime && curTime <= weekdays[1]) {
 						time = $("<div>").addClass(["time", "on"]).text("영업중");
+						onCheck = "on";
+						openCheck = "영업중";
 					} else {
 						time = $("<div>").addClass("time").text("영업 준비중");
+						onCheck = "";
+						openCheck = "영업 준비중";
 					}
 					
 					
@@ -850,6 +881,23 @@ $(function() {
 						favBtnClick(this);
 					});
 					
+					var content = '<div class="way_view">' 
+						+ '  <h4 class="tit">' + stores.stores[i].store_name + '</h4>'
+						+ '  <p class="addr" style="white-space:nonrmal">' + stores.stores[i].store_addr + '</p>'
+						+ '  <div class="area">'
+						+ '    <div class="call">' + stores.stores[i].store_tel + '</div>'
+						+ '    <div class="time ' + onCheck + '">' + openCheck + '</div>'
+						+ '    <div class="fv_reShop_in_DD75_cnt">'
+						+ '      <span>' + stores.stores[i].store_fav + '</span>'
+						+ '      명이 관심매장으로 등록했습니다.'
+						+ '  </div>'
+						+ '</div>'
+						+ '<a class="store_btn">상세정보보기</a>'
+						+ '<button class="star active></button>'
+						+ '<button class="wayClose" ></button>';
+					
+					contents.push(content);
+						
 					$(area).append(call);
 					$(area).append(time);
 					
@@ -863,6 +911,35 @@ $(function() {
 					$(li).append(div);
 					$("#areaStoreList").append(li);
 				}
+				
+				
+				
+				for (var i = 0; i < latLngs.length; i++) {
+					var marker = new kakao.maps.Marker({
+				        map: map, // 마커를 표시할 지도
+				        position: latLngs[i].latlng, // 마커를 표시할 위치
+				        title : latLngs[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+				    });
+					markers.push(marker);
+					
+					var overlay = new kakao.maps.CustomOverlay({
+				        content: contents[i],
+				        map: map,
+				        position: marker.getPosition()       
+				    });
+					
+					kakao.maps.event.addListener(marker, 'click', function() {
+				        overlay.setMap(map);
+				    });
+				}
+				
+				var moveLatLon = latLngs[0].latlng;
+			    
+			    // 지도 중심을 이동 시킵니다
+			    map.setCenter(moveLatLon);
+			    
+				
+				
                 // console.log(data);
             }
 			, error : function (data, textStatus) {

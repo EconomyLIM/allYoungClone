@@ -75,7 +75,7 @@ if(request.getParameter("perPage")!= null){
 </head>
 <script>
 $(function () {
-
+	console.log(window.location.href);
 	$(".loc_history>li").mouseover(function () {
 		$(this).addClass("active");
 		$("history_cate_box").css("display","block");
@@ -112,9 +112,10 @@ $(function () {
 	if (<%=smallcol%> == ("0000")) {
 		$('#Contents > ul.cate_list_box li.first').addClass('on') ; 
 	}
-
+	
 	$("div.count_sort.tx_num > ul > li").removeClass("on");
 	$("div.count_sort.tx_num > ul > li").eq(<%=getPPval%>).addClass("on");
+	
 	console.log('?<%=request.getQueryString()%>');
 
 	var urlParams = new URLSearchParams(window.location.search);
@@ -134,7 +135,7 @@ $(function () {
 
     $('input[name="brandId"]').on('change', function() {
     	
-    	var url = "http://localhost/Black_OY/view/product/pmidlistproduct.do?displNum="+'<%=midId%>'+"&sort=${param.sort}&currentpage=1<%=s%>";
+    	var url = "/Black_OY/view/product/pmidlistproduct.do?displNum="+'<%=midId%>'+"&sort=${param.sort}&currentpage=1<%=s%>";
     	console.log(url);
         var brandID = $(this).val();
 
@@ -171,7 +172,7 @@ function changePerPage(value) { // perPage 수정
 function changePerPageAndClass(value) {
 	  const perPage = value.toString();
 	  const currentURL = new URL(window.location.href);
-
+		
 	  // Set 'perPage' parameter value
 	  currentURL.searchParams.set('perPage', perPage);
 
@@ -489,7 +490,7 @@ function changePerPageAndClass(value) {
 
 		<div class="pageing">
 			<c:if test="${pDto.prev }">
-				<a class="prev" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${(param.currentpage+9)/10*10+1}<%=s %>" data-page-no="1">이전 10
+				<a class="prev" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${pDto.start-1}<%=s %>" data-page-no="1">이전 10
 				페이지</a>
 			</c:if>
 			<c:forEach var="i" begin="${pDto.start }" end="${pDto.end }" step="1">
@@ -505,7 +506,7 @@ function changePerPageAndClass(value) {
 				</c:choose>
 			</c:forEach>
 			<c:if test="${pDto.next }">
-				<a class="next" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${(param.currentpage-(param.currentpage%1))/10+1}<%=s %>" data-page-no="21">다음 10 페이지</a>
+				<a class="next" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${pDto.end+1}<%=s %>" data-page-no="21">다음 10 페이지</a>
 			</c:if>
 			<!-- <strong title="현재 페이지">1</strong> -->
 		</div>
