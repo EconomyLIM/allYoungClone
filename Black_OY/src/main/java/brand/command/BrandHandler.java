@@ -36,7 +36,7 @@ public class BrandHandler implements CommandHandler {
 		        // 데이터를 요청 속성에 추가
 		        request.setAttribute("brandDetails", brandDetails);
 		        request.setAttribute("brand", brand);
-		       System.out.println(brand);
+		        //System.out.println(brand);
 		        
 
 		        // JSP 페이지로 요청 전달

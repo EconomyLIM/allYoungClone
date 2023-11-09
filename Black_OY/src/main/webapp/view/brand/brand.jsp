@@ -35,14 +35,14 @@
 				</ul>
 			</div>
 			<div class="brand">
-				<h2 class="title-detail-brand">${ brand.BRAND_NAME }</h2>
+				<h2 class="title-detail-brand">${ brand.brand_name }</h2>
             
 
 				<div class="brand_like">
 					<a href="javascript:void(0);" data-ref-onlbrndnm="구달"
 						data-ref-onlbrndcd="A001436" id="icobrand">
 						<p class="brand">
-							<span class="icon"><span class="fw400">${ brand.BRAND_LIKE }</span>명이 구달을
+							<span class="icon"><span class="fw400">${ brand.brand_like }</span>명이 구달을
 								좋아합니다.</span>
 						</p>
 					</a>
@@ -62,12 +62,12 @@
 								alt="구달 이미지 배너입니다."
 								data-ref-link-url="https://www.oliveyoung.co.kr/store/"
 								class="completed-seq-lazyload"
-								src="${ brand.BRAND_IMG_SRC }">
+								src="${ brand.brand_img_src }">
 						</div>
 						<div class="info">
-							<h4 class="vtit">${ brand.BRAND_SUMM }</h4>
+							<h4 class="vtit">${ brand.brand_summ }</h4>
 							<p class="txt">
-								${ brand.BRAND_EXPL }
+								${ brand.brand_expl }
 							</p>
 						</div>
 
@@ -2021,7 +2021,7 @@
 											data-attr="브랜드관^구달_전체상품_전체^[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획"
 											onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000162323&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_전체상품_전체&quot;, &quot;1&quot;);">
 											<img
-											src="${ dto.pro_Displ_Src }"
+											src="${ dto.pro_displ_src }"
 											alt="[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획"
 											class="pic-thumb" onerror="common.errorImg(this);"> <span
 											class="flag-badge best">베스트</span>

@@ -9,19 +9,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BrandDTO {
 	
-	    private String BRAND_ID;
-	    private String BRAND_NAME;
-	    private int BRAND_LIKE;
-	    private String BRAND_SUMM;
-	    private String BRAND_EXPL;
-	    private String BRANDIMGSRC;
-	    private String PRO_DISPL_ID;
-	    private int PRO_PRICE;
-	    private String PRO_DISPL_NAME;
-	    private String PRO_DISPL_SRC;
-	    private String REV_ID;
-	    private int REV_LIKE;
-	    private String REV_CONTENT;
-	    private int REV_GRADE; 
-  
+	    private String brand_id;  // brand_id
+	    private String brand_name;// brand_name
+	    private int brand_like;
+	    private String brand_summ;
+	    private String brand_expl;	   
+	    private String brand_img_src;
+	    private String pro_displ_id;
+	    private int pro_price;
+	    private String pro_displ_name;
+	    private String pro_displ_src;// PRO_DISPL_SRC;
+	    private String rev_id;
+	    private int rev_like;
+	    private String rev_content;
+	    private int rev_grade; 
+	   
 }
