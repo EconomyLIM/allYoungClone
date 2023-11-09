@@ -24,21 +24,53 @@ public class StoreDAOImpl implements StoreDAO {
 	} // getInstance
 
 	@Override
-	public List<StoreTimeDTO> storeSelectAll(Connection conn, String city, String district) throws SQLException {
-		ArrayList<StoreTimeDTO> list = null;
-		
+	public List<StoreTimeDTO> storeSelectAll(Connection conn, String city, String district, String[] tcs, String[] pss) throws SQLException {
+		ArrayList<StoreTimeDTO> list = null;	
 		String pattern = "%" + city + " " + district + "%";
-		String sql = "SELECT s.store_id, store_name, store_tel, store_addr "
-				+ "    , store_dir, store_parking, store_spec, store_fav, weekday, saturday, sunday, holiday "
-				+ " FROM store s JOIN store_time st ON s.store_id = st.store_id "
-				+ " WHERE store_addr LIKE ?";
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT *  "
+				+ " FROM store s JOIN store_time st ON s.store_id = st.store_id  "
+				+ " WHERE s.store_id IN ( "
+				+ "    SELECT DISTINCT(store_id) "
+				+ "    FROM sc_handling  ");
+		if(tcs.length > 0) {
+			sb.append("WHERE ");
+			for (int i = 0; i < tcs.length; i++) {
+				if(i == tcs.length-1) {
+					sb.append("cat_id="+tcs[i]);
+				} else {
+					sb.append("cat_id="+tcs[i] + " OR ");
+				}
+			}
+		}
+		sb.append(" ) ");
+		if(pss.length > 0) {
+			sb.append(" AND s.store_id IN ( ");
+			sb.append("    SELECT DISTINCT(store_id) ");
+			sb.append("    FROM store_service ");
+			sb.append("    WHERE ");
+			for(int i=0; i<pss.length; i++) {
+				if(i==pss.length-1) {
+					sb.append("os_id=" + pss[i]);
+				} else {
+					sb.append("os_id=" + pss[i] + " OR ");
+				}
+			}
+			sb.append(" ) ");
+		}
+		
+		sb.append(" AND store_addr LIKE ?");
+		
+		
+		System.out.println(sb.toString());
+		
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		StoreTimeDTO dto = null;
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setString(1, pattern);
 			rs = pstmt.executeQuery();
 			
@@ -54,6 +86,8 @@ public class StoreDAOImpl implements StoreDAO {
 							.store_parking(rs.getString("store_parking"))
 							.store_spec(rs.getString("store_spec"))
 							.store_fav(rs.getInt("store_fav"))
+							.lat(rs.getDouble("lat"))
+							.lng(rs.getDouble("lng"))
 							.weekday(rs.getString("weekday"))
 							.saturday(rs.getString("saturday"))
 							.sunday(rs.getString("sunday"))
@@ -169,7 +203,8 @@ public class StoreDAOImpl implements StoreDAO {
 		
 		String pattern = "%" + keyword + "%";
 		String sql = "SELECT s.store_id, store_name, store_tel, store_addr "
-				+ "    , store_dir, store_parking, store_spec, store_fav, weekday, saturday, sunday, holiday "
+				+ "    , store_dir, store_parking, store_spec, store_fav, lat, lng"
+				+ "    , weekday, saturday, sunday, holiday "
 				+ " FROM store s JOIN store_time st ON s.store_id = st.store_id "
 				+ " WHERE store_addr LIKE ? OR store_name LIKE ?";
 		
@@ -195,6 +230,8 @@ public class StoreDAOImpl implements StoreDAO {
 							.store_parking(rs.getString("store_parking"))
 							.store_spec(rs.getString("store_spec"))
 							.store_fav(rs.getInt("store_fav"))
+							.lat(rs.getDouble("lat"))
+							.lng(rs.getDouble("lng"))
 							.weekday(rs.getString("weekday"))
 							.saturday(rs.getString("saturday"))
 							.sunday(rs.getString("sunday"))
@@ -293,6 +330,183 @@ public class StoreDAOImpl implements StoreDAO {
 		}// try_catch
 		
 		return rowCount;	
+	}
+
+	@Override
+	public List<StoreTimeDTO> attShopSelect(Connection conn, String user_id, String[] tcs, String[] pss) throws SQLException {
+		ArrayList<StoreTimeDTO> list = null;
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT *  "
+				+ " FROM store s JOIN store_time st ON s.store_id = st.store_id  "
+				+ "             JOIN att_shop a ON s.store_id = a.store_id "
+				+ " WHERE s.store_id IN ( "
+				+ "    SELECT DISTINCT(store_id) "
+				+ "    FROM sc_handling  ");
+		if(tcs.length > 0) {
+			sb.append("WHERE ");
+			for (int i = 0; i < tcs.length; i++) {
+				if(i == tcs.length-1) {
+					sb.append("cat_id="+tcs[i]);
+				} else {
+					sb.append("cat_id="+tcs[i] + " OR ");
+				}
+			}
+		}
+		sb.append(" ) ");
+		if(pss.length > 0) {
+			sb.append(" AND s.store_id IN ( ");
+			sb.append("    SELECT DISTINCT(store_id) ");
+			sb.append("    FROM store_service ");
+			sb.append("    WHERE ");
+			for(int i=0; i<pss.length; i++) {
+				if(i==pss.length-1) {
+					sb.append("os_id=" + pss[i]);
+				} else {
+					sb.append("os_id=" + pss[i] + " OR ");
+				}
+			}
+			sb.append(" ) ");
+		}
+		
+		sb.append(" AND a.user_id = ?");
+		
+		
+		System.out.println(sb.toString());
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StoreTimeDTO dto = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					dto = StoreTimeDTO.builder()
+							.store_id(rs.getString("store_id"))
+							.store_name(rs.getString("store_name"))
+							.store_tel(rs.getString("store_tel"))
+							.store_addr(rs.getString("store_addr"))
+							.store_dir(rs.getString("store_dir"))
+							.store_parking(rs.getString("store_parking"))
+							.store_spec(rs.getString("store_spec"))
+							.store_fav(rs.getInt("store_fav"))
+							.lat(rs.getDouble("lat"))
+							.lng(rs.getDouble("lng"))
+							.weekday(rs.getString("weekday"))
+							.saturday(rs.getString("saturday"))
+							.sunday(rs.getString("sunday"))
+							.holiday(rs.getString("holiday"))
+							.build();
+					
+					list.add(dto);
+					
+				} while ( rs.next() );
+				
+			} // if
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+		}// try_catch
+		
+		return list;
+	}
+
+	@Override
+	public List<StoreTimeDTO> selectStoreCondition(Connection conn, String[] tcs, String[] pss, String keyword) throws SQLException {
+		ArrayList<StoreTimeDTO> list = null;
+		String pattern = "%" + keyword + "%";
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT *  "
+				+ " FROM store s JOIN store_time st ON s.store_id = st.store_id  "
+				+ " WHERE s.store_id IN ( "
+				+ "    SELECT DISTINCT(store_id) "
+				+ "    FROM sc_handling  ");
+		if(tcs.length > 0) {
+			sb.append("WHERE ");
+			for (int i = 0; i < tcs.length; i++) {
+				if(i == tcs.length-1) {
+					sb.append("cat_id="+tcs[i]);
+				} else {
+					sb.append("cat_id="+tcs[i] + " OR ");
+				}
+			}
+		}
+		sb.append(" ) ");
+		if(pss.length > 0) {
+			sb.append(" AND s.store_id IN ( ");
+			sb.append("    SELECT DISTINCT(store_id) ");
+			sb.append("    FROM store_service ");
+			sb.append("    WHERE ");
+			for(int i=0; i<pss.length; i++) {
+				if(i==pss.length-1) {
+					sb.append("os_id=" + pss[i]);
+				} else {
+					sb.append("os_id=" + pss[i] + " OR ");
+				}
+			}
+			sb.append(" ) ");
+		}
+		
+		sb.append(" AND store_addr LIKE ? OR store_name LIKE ? ");
+		
+		System.out.println(sb.toString());
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StoreTimeDTO dto = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, pattern);
+			pstmt.setString(2, pattern);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					dto = StoreTimeDTO.builder()
+							.store_id(rs.getString("store_id"))
+							.store_name(rs.getString("store_name"))
+							.store_tel(rs.getString("store_tel"))
+							.store_addr(rs.getString("store_addr"))
+							.store_dir(rs.getString("store_dir"))
+							.store_parking(rs.getString("store_parking"))
+							.store_spec(rs.getString("store_spec"))
+							.store_fav(rs.getInt("store_fav"))
+							.lat(rs.getDouble("lat"))
+							.lng(rs.getDouble("lng"))
+							.weekday(rs.getString("weekday"))
+							.saturday(rs.getString("saturday"))
+							.sunday(rs.getString("sunday"))
+							.holiday(rs.getString("holiday"))
+							.build();
+					
+					list.add(dto);
+					
+				} while ( rs.next() );
+				
+			} // if
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+		}// try_catch
+		
+		return list;
 	}
 
 }

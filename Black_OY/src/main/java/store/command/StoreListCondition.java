@@ -2,6 +2,7 @@ package store.command;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,20 +17,29 @@ import net.sf.json.JSONObject;
 import store.domain.StoreTimeDTO;
 import store.service.StoreService;
 
-@WebServlet("/store/getStoreListKeyword.do")
-public class StoreListKeyword extends HttpServlet {
+@WebServlet("/store/getStoreListCondition.do")
+public class StoreListCondition extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("StoreListKeyword.doGet() called~~");
+		
+		String tcs = request.getParameter("tcs");
+		String pss = request.getParameter("pss");
+		String keyword = request.getParameter("keyword");
+		
+		if(tcs == null || tcs == "") {
+			tcs = "1,2,3,4,5,6,7,8,9,10,11";
+		}
+		if(pss == null || pss == "") {
+			pss = "1,2,3,4,5,6,7,8,9,10,11,12,13";
+		}
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		String keyword = request.getParameter("keyword");
-		
 		StoreService service = StoreService.getinstance();
-		List<StoreTimeDTO> list = service.storeSelectKeyword(keyword);
+		List<StoreTimeDTO> list = service.getStoreListCondition(tcs.split(","), pss.split(","), keyword);
 		
 		if(list == null) {
 			out.write("");

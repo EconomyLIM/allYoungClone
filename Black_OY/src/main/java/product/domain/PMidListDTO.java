@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class PMidListDTO {
 
 	private String displImgSrc;
+	private String brandId;
 	private String brandName;
 	private String displProName;
 	private String lId;

@@ -16,20 +16,31 @@ import net.sf.json.JSONObject;
 import store.domain.StoreTimeDTO;
 import store.service.StoreService;
 
-@WebServlet("/store/getStoreListKeyword.do")
-public class StoreListKeyword extends HttpServlet {
+@WebServlet("/store/getAttShopList.do")
+public class StoreAttShop extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("StoreListKeyword.doGet() called~~");
+		System.out.println("StoreAttShop.doGet() called~~");
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		String keyword = request.getParameter("keyword");
+		String user_id = request.getParameter("user_id");
+		String tcs = request.getParameter("tcs");
+		String pss = request.getParameter("pss");
+		
+		System.out.println(tcs + " / " + pss);
+		
+		if(tcs == null || tcs == "") {
+			tcs = "1,2,3,4,5,6,7,8,9,10,11";
+		}
+		if(pss == null || pss == "") {
+			pss = "1,2,3,4,5,6,7,8,9,10,11,12,13";
+		}
 		
 		StoreService service = StoreService.getinstance();
-		List<StoreTimeDTO> list = service.storeSelectKeyword(keyword);
+		List<StoreTimeDTO> list = service.getAttShopList(user_id, tcs.split(","), pss.split(","));
 		
 		if(list == null) {
 			out.write("");
@@ -54,7 +65,7 @@ public class StoreListKeyword extends HttpServlet {
 			store.put("store_spec", dto.getStore_spec());
 			store.put("store_fav", dto.getStore_fav());
 			store.put("lat", dto.getLat());
-			store.put("lng", dto.getLng());	
+			store.put("lng", dto.getLng());			
 			store.put("weekday", dto.getWeekday());
 			store.put("saturday", dto.getSaturday());
 			store.put("sunday", dto.getSunday());

@@ -24,14 +24,14 @@ public class StoreService {
 		return instance;
 	} // getinstance
 
-	public List<StoreTimeDTO> storeSelectAll(String city, String district) {
+	public List<StoreTimeDTO> storeSelectAll(String city, String district, String[] tcs, String[] pss) {
 		List<StoreTimeDTO> list = null;
 
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			StoreDAO dao = StoreDAOImpl.getInstance();
-			list = dao.storeSelectAll(conn, city, district);
+			list = dao.storeSelectAll(conn, city, district, tcs, pss);
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -122,5 +122,41 @@ public class StoreService {
 		}
 
 		return rowCount;
+	}
+	
+	public List<StoreTimeDTO> getAttShopList(String user_id, String[] tcs, String[] pss) {
+		List<StoreTimeDTO> list = null;
+
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			StoreDAO dao = StoreDAOImpl.getInstance();
+			list = dao.attShopSelect(conn, user_id, tcs, pss);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		}
+
+		return list;
+	}
+	
+	public List<StoreTimeDTO> getStoreListCondition(String[] tcs, String[] pss, String keyword) {
+		List<StoreTimeDTO> list = null;
+
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			StoreDAO dao = StoreDAOImpl.getInstance();
+			list = dao.selectStoreCondition(conn, tcs, pss, keyword);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		}
+
+		return list;
 	}
 }

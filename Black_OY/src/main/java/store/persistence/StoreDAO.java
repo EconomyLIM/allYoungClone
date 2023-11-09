@@ -10,7 +10,7 @@ import store.domain.StoreTimeDTO;
 
 public interface StoreDAO {
 	// 1. 스토어 전부를 얻어오는 함수
-	List<StoreTimeDTO> storeSelectAll(Connection conn, String city, String district) throws SQLException;
+	List<StoreTimeDTO> storeSelectAll(Connection conn, String city, String district, String[] tcs, String[] pss) throws SQLException;
 	
 	// 2. 도시 전부를 얻어오는 함수
 	List<CityDTO> citySelectAll(Connection conn) throws SQLException;
@@ -30,5 +30,10 @@ public interface StoreDAO {
 	// 7. 관심 매장 테이블 삭제
 	int deleteAttShop(Connection conn, String store_id, String user_id) throws SQLException;
 	
-	// 8. 
+	// 8. 유저의 관심 매장 리스트 얻어오기
+	List<StoreTimeDTO> attShopSelect(Connection conn, String user_id, String[] tcs, String[] pss) throws SQLException;
+	
+	// 9. 조건으로 검색 했을 때
+	List<StoreTimeDTO> selectStoreCondition(Connection conn, String[] tcs, String[] pss, String keyword) throws SQLException;
+	
 }

@@ -20,8 +20,7 @@ public class StoreFav extends HttpServlet {
 		new Date();
 		String store_id = request.getParameter("store_id");
 		int clickCheck = Integer.parseInt(request.getParameter("clickCheck"));
-		// String user_id = request.getParameter("user_id");
-		String user_id = "user1";
+		String user_id = request.getParameter("user_id");
 		
 		System.out.println(store_id + " / " + clickCheck);
 		

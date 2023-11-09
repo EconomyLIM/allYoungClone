@@ -7,6 +7,8 @@ import com.util.ConnectionProvider;
 import com.util.JDBCUtil;
 
 import product.domain.MidCateDTO;
+import product.domain.MnameIdDTO;
+import product.domain.PCurNameDTO;
 import product.domain.PMidListDTO;
 import product.domain.PbrandListDTO;
 import product.domain.PlowcateDTO;
@@ -95,14 +97,14 @@ public class PMidService {
 	} // selectMproduct
 	*/
 	// 3-2. ProductList 가져오는 서비스 + 페이징 처리
-		public List<PMidListDTO> selectMproduct(String mNum, String sort, int currentPage, int numberPerPage){
+		public List<PMidListDTO> selectMproduct(int group, String mNum, String sort, String brands[], int currentPage, int numberPerPage){
 			Connection conn = null;
 
 			try {
 
 				conn = ConnectionProvider.getConnection();
 				PMidListDAOImpl pmidlistdaoImpl = PMidListDAOImpl.getInstance();
-				List<PMidListDTO> list = pmidlistdaoImpl.selectMProList(conn, mNum, sort, currentPage, numberPerPage);
+				List<PMidListDTO> list = pmidlistdaoImpl.selectMProList(conn, group, mNum, sort, brands, currentPage, numberPerPage);
 				return list;
 
 			} catch (Exception e) {
@@ -157,14 +159,14 @@ public class PMidService {
 	} // selectMidCate
 
 	// 전체 상품수를 가져오는 작업
-	public int GTPService(int i, String cateM) {
+	public int GTPService(int group, int i, String cateM) {
 		int temp = 0;
 		
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			PMidListDAOImpl pmidlistdaoImpl = PMidListDAOImpl.getInstance();
-			temp = pmidlistdaoImpl.getTotalPages(conn, i, cateM);
+			temp = pmidlistdaoImpl.getTotalPages(conn,group, i, cateM);
 			
 		} catch (Exception e) {
 			System.out.println("GTPSurvice Survice Exception");
@@ -174,7 +176,25 @@ public class PMidService {
 		return temp;
 	} // GTPSurvice
 	
-	public int GTRService(String mId) {
+	// 전체 상품수를 가져오는 작업(브랜드 추가_
+	public int GTPService(int group, int i, String cateM, String brands[]) {
+		int temp = 0;
+		
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			PMidListDAOImpl pmidlistdaoImpl = PMidListDAOImpl.getInstance();
+			temp = pmidlistdaoImpl.getTotalPages(conn,group, i, cateM, brands);
+			
+		} catch (Exception e) {
+			System.out.println("GTPSurvice Survice Exception");
+			e.printStackTrace();
+		} //try_catch
+		
+		return temp;
+	} // GTPSurvice
+	
+	public int GTRService(int group, String mId) {
 		int temp = 0;
 		Connection conn = null;
 		
@@ -182,13 +202,73 @@ public class PMidService {
 			
 			conn = ConnectionProvider.getConnection();
 			PMidListDAOImpl pmidlistdaoImpl = PMidListDAOImpl.getInstance();
-			temp = pmidlistdaoImpl.getTotalRecords(conn, mId);
+			temp = pmidlistdaoImpl.getTotalRecords(conn, group, mId);
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("GTRService Survice Exception");
+			e.printStackTrace();
 		} // try_catch
 		
 		return temp;
 	} // GTRSERVICE
+	
+	// 총 페이지수 구하기(브랜드 추가)
+	public int GTRService(int group, String mId, String brands[]) {
+		int temp = 0;
+		Connection conn = null;
+		
+		try {
+			
+			conn = ConnectionProvider.getConnection();
+			PMidListDAOImpl pmidlistdaoImpl = PMidListDAOImpl.getInstance();
+			temp = pmidlistdaoImpl.getTotalRecords(conn, group, mId, brands);
+			
+		} catch (Exception e) {
+			System.out.println("GTRService Survice Exception");
+			e.printStackTrace();
+		} // try_catch
+		
+		return temp;
+	} // GTRSERVICE
+	
+	// ===========================현재 카테고리 이름, ID 상위 카테고리 이름,ID 가져오기
+	public MnameIdDTO selectCurNameS(String mId){
+		
+		Connection conn = null;
+		MnameIdDTO mnameiddto = null;
+		
+		try {
+			
+			conn = ConnectionProvider.getConnection();
+			PMidListDAOImpl pmidlistdaoImpl = PMidListDAOImpl.getInstance();
+			mnameiddto = pmidlistdaoImpl.selectCurName(conn, mId);
+			
+		} catch (Exception e) {
+			System.out.println("GTRService Survice Exception");
+			e.printStackTrace();
+		} //try_catch 
+		
+		return mnameiddto;
+		
+	} // selectCurName
 
+	// ===========================현재 카테고리 이름(소분류 추가)
+	public PCurNameDTO ScurName(int group, String id) {
+		
+		PCurNameDTO pndto = null;
+		Connection conn = null;
+		
+			try {
+			
+			conn = ConnectionProvider.getConnection();
+			PMidListDAOImpl pmidlistdaoImpl = PMidListDAOImpl.getInstance();
+			pndto = pmidlistdaoImpl.curName(conn, group, id);
+			
+		} catch (Exception e) {
+			System.out.println("GTRService Survice Exception");
+			e.printStackTrace();
+		} //try_catch 
+		
+		return pndto;
+	}// ScurName
 } // class
