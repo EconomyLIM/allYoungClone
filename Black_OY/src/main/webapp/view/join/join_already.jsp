@@ -242,70 +242,6 @@ function makeList (jsonList) {
     }
 }
 
-//알림 상세로 이동
-function goNotifyAction(notify_seq,link_url){
-    if(readNotifyAction(notify_seq) == true ){
-        ga('send', 'event', 'MY Dash Board 영역', '알림메세지', '알림메세지');      
-        $(location).attr("href",link_url);
-    }
-}
-
-//알림 읽음처리
-function readNotifyAction(notify_seq){
-    $.ajax({
-        url : '/cjmweb/layer/notify/notify-read.do',
-        dataType : 'json',
-        data : 'notify_seq='+notify_seq,
-        async : false,
-        type : 'POST',
-        error : function(err) { 
-            readProcessResult = false;
-        },
-        success : function(response, statusText) {
-            if(statusText == 'success'){
-                readProcessResult = true;
-            }else{
-                readProcessResult = false;
-            }
-        }
-    });
-    return readProcessResult;
-}
-    
-function linkLogin() {
-    var current = location.href;
-    var rtn = '';
-    if(current.indexOf('/cjmweb/main.do')> -1) {
-        rtn = 'https://www.cjone.com/cjmweb/main.do?s=m';
-        rtn = '?return_url='+encodeURI(rtn);
-    }
-    location.href = 'https://www.cjone.com/cjmweb/login.do'+rtn;
-}
-
-function linkCardMng() {
-    if( !loginCheck() ) {
-        if(confirm('카드 등록을 위해 로그인이 필요합니다.\n계속 진행하시겠습니까?')) {
-            //location.href='https://www.cjone.com/cjmweb/my-one/card.do';
-            $(location).attr('href', '/cjmweb/login.do?return_url='+escape('https://www.cjone.com/cjmweb/my-one/card.do'));
-            return false;
-        }
-    } else {
-        location.href='https://www.cjone.com/cjmweb/my-one/card.do';
-        return false;
-    }
-    return false;
-}
-
-function goNft(){
-	var url = "/nft.html";
-	
-    
-    url = "https://m.cjone.com" + url;
-    
-    
-    
-	location.href = url;
-}
 
 </script>
 <form id="headerFrm" method="get">
@@ -534,36 +470,6 @@ function goFooterMenu(type){
     <!-- //footer -->
 
 </div>
-<!--script 영역-->
-<script src="/cjmweb/js/modules/cjoneCore.js"></script>
-<script src="/cjmweb/js/modules/commonUi.js"></script>
-<script src="/cjmweb/js/frontUi.js"></script>
-<script src="/cjmweb/js/modules/jquery.bxslider.js"></script>
-<script type="text/javascript">
-   $(document).ready(function(){
-		// 미사용으로 주석처리 2019.04.26
-		
-   });
-</script>
-<script>
-      
-	// 아이디 찾기
-	function searchId() {
-		$("#form1").attr("action", "https://www.cjone.com/cjmweb/member/find-id.do");
-		$("#form1").submit();
-	}
-	
-	function openLogin(){
-		simpleLoginAction("/cjmweb/main.do","");
-				
-		return;        	
-	}
-   </script>
-<!--//script 영역-->
-<script>
-	$("#")
-</script>
-
-<script type="text/javascript" data-import="true" src="/cjmweb/js/modules/placeholder.js"></script><script type="text/javascript" data-import="true" src="/cjmweb/js/modules/formatter.js"></script></body>
+</body>
 </body>
 </html>

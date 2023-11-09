@@ -183,15 +183,39 @@
         <div id="Header">
             <div class="top_util">
                 <ul class="menu_list" id="menu_list_header">
-                    <li class="join"><a
-                            href="#"
-                            data-attr="공통^헤더^회원가입">회원가입</a></li>
-                    <li class="login"><a
-                            href="#"
-                            data-attr="공통^헤더^로그인">로그인</a></li>
-                    <li class="cart"><a
-                            href="#"
-                            data-attr="공통^헤더^장바구니">장바구니<span id="cartToCnt"></span></a></li>
+                    <c:choose>
+						<c:when test="${empty sessionScope.logOn }">
+							<li class="join"><a href="#" data-attr="공통^헤더^회원가입">회원가입</a></li>
+							<li class="login"><a href="<%=contextPath%>/olive/LogOn.do"
+								data-attr="공통^헤더^로그인">로그인</a></li>
+						</c:when>
+						<c:otherwise>
+
+							<li class="logout">
+								<strong>${sessionScope.logOn.grade_id}&nbsp; 
+                  ${sessionScope.logOn.u_name}</strong> <a 
+               href="<%=contextPath %>/olive/Logout.do" data-attr="공통^헤더^로그아웃">로그아웃</a></li>
+								<li class="mypage"><a onclick="" href="<%=contextPath %>/mypage/mypageMain.do" data-attr="공통^헤더^마이페이지">마이페이지</a></li>
+
+						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${empty sessionScope.logOn }">
+							<li class="cart"><a href="<%=contextPath%>/olive/basket.do"
+						data-attr="공통^헤더^장바구니">장바구니								
+									<span id="cartToCnt"></span>
+					</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="cart"><a href="<%=contextPath%>/olive/basket.do"
+						data-attr="공통^헤더^장바구니">장바구니								
+									<span id="cartToCnt">
+										(${sessionScope.basketlistcnt[0] + sessionScope.basketlistcnt[1]})
+									</span>
+					</a></li>
+						</c:otherwise>
+					</c:choose>
                     <li class="order"><a
                             onclick=""
                             href="#"
@@ -202,7 +226,7 @@
                             data-attr="공통^헤더^고객센터">고객센터</a></li>
                     <li class="store"><a
                             onclick=""
-                            href="#"
+                            href="<%=contextPath%>/olive/getStoreMain.do"
                             data-attr="공통^헤더^매장안내">매장안내</a></li>
                     <li class="global"><a
                             onclick=""
@@ -357,13 +381,13 @@
                                         href="#"
                                         data-ref-dispcatno="10000010001" data-attr="공통^드로우^스킨케어">스킨케어</a></p>
                                 <ul>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00010001&sort=1"
                                             data-ref-dispcatno="100000100010008" data-attr="공통^드로우^스킨케어_토너/로션/올인원"
                                             data-trk="/">토너/로션/올인원</a></li>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00010002&sort=1"
                                             data-ref-dispcatno="100000100010009" data-attr="공통^드로우^스킨케어_에센스/크림"
                                             data-trk="/">에센스/크림</a></li>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00010003&sort=1"
                                             data-ref-dispcatno="100000100010010" data-attr="공통^드로우^스킨케어_미스트/오일"
                                             data-trk="/">미스트/오일</a></li>
                                 </ul>

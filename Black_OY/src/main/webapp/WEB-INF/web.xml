@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-
   <display-name>Black_OY</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -32,6 +31,17 @@
 		<filter-name>characterEncodingFilter</filter-name>
 		<!-- <url-pattern>/</url-pattern> url 패턴에 /, /* 차이점이 뭘까? -->
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	
+	<filter>
+		<description>post.인증/권한</description>
+		<filter-name>loginCheckFilter</filter-name>
+		<filter-class>com.filter.LoginCheckFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginCheckFilter</filter-name>
+		<url-pattern>/olive/basket.do</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 	

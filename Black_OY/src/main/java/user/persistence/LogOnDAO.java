@@ -8,6 +8,6 @@ import user.domain.LogOnDTO;
 public interface LogOnDAO {
 
 	LogOnDTO logselect(Connection conn, String user_id, String u_pwd);
-	int baskekcnt(Connection conn, String user_id);
+	List<Integer> baskekcnt(Connection conn, String user_id);
 	
 }

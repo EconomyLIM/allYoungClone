@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.util.JDBCUtil;
 
 import product.domain.MidCateDTO;
+import product.domain.MnameIdDTO;
+import product.domain.PCurNameDTO;
 import product.domain.PMidListDTO;
 import product.domain.PbrandListDTO;
 import product.domain.PlowcateDTO;
@@ -30,13 +30,14 @@ public class PMidListDAOImpl  implements PMidListDAO{
 	//
 	@Override
 	public List<PlowcateDTO> selectLowCate(Connection conn, String mId) throws Exception {
-		String sql = " SELECT cat_s_name FROM cate_s "
+		String sql = " SELECT cat_s_id, cat_s_name FROM cate_s "
 				+ " WHERE cat_m_id = ? ";
 
 		ArrayList<PlowcateDTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		PlowcateDTO plowcateDTO = null;
+		String sId;
 		String plowcate;
 
 		try {
@@ -48,8 +49,9 @@ public class PMidListDAOImpl  implements PMidListDAO{
 				list = new ArrayList<>();
 				do {
 
+					sId = rs.getString("cat_s_id");
 					plowcate = rs.getString("cat_s_name");
-					plowcateDTO = new PlowcateDTO(plowcate);
+					plowcateDTO = new PlowcateDTO(sId, plowcate);
 
 					list.add(plowcateDTO);
 
@@ -237,122 +239,151 @@ public class PMidListDAOImpl  implements PMidListDAO{
 
 		return list;
 	} // selectProList
-	*/
+	 */
 	//================================product List 가져오는 작업(정렬기능 완료) + 페이징 처리 =====================================
-		@Override
-		public List<PMidListDTO> selectMProList(Connection conn, String mId, String sort,int currentPage, int numberPerPage) throws Exception {
-			int begin = (currentPage -1) * numberPerPage + 1;
-			int end = begin + numberPerPage -1 ;
-			
-			String sql = " SELECT * "
-					+ "    FROM ( "
-					+ "        SELECT ROWNUM no, t.* "
-					+ "            FROM( "
-					+ "                select * from pmlistview ";
-					
+	@Override
+	public List<PMidListDTO> selectMProList(Connection conn, int group, String Id, String sort, String brands[], int currentPage, int numberPerPage) throws Exception {
+		int begin = (currentPage -1) * numberPerPage + 1;
+		int end = begin + numberPerPage -1 ;
+
+		String sql = " SELECT * "
+				+ "    FROM ( "
+				+ "        SELECT ROWNUM no, t.* "
+				+ "            FROM( "
+				+ "                select * from pmlistview ";
+
+		if (group == 1) {
+			sql += "WHERE cat_l_id = ? ";
+		} else if (group == 2){
 			sql += "WHERE cat_m_id = ? ";
-			int value = Integer.parseInt(sort);
-			switch (value) {
-			case 1:
-				sql += " ORDER BY pro_displ_like desc ";
-				break;
-			case 2:
-				sql += " ORDER BY pro_reg desc ";
-				break;
-			case 3:
-				sql += " ORDER BY ordercnt desc ";
-				break;
-			case 4:
-				sql += " ORDER BY afterprice asc ";
-				break;
-			case 5:
-				sql += " ORDER BY (pro_price-afterprice)/pro_price*100 desc ";
-				break;
-			} // switch
-			sql +=  " ) t "
-					+ "        ) b "
-					+ " WHERE b.no BETWEEN ? AND ?";
-			// 초기 설정
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			PMidListDTO pmidlistdto = null;
-			ArrayList<PMidListDTO> list = null;
+		} else if(group == 3) {
+			sql += "WHERE cat_s_id = ? ";
+		} //if_else
 
-			// sql실행후 받을 값 저장할 변수 저장
-			String displImgSrc; // 이미지 소스
-			String brandName; // 브랜드 
-			String displProName; // 상품표시 이름
-			String lId; // 대분류
-			String midId; // 중분류
-			String sId; // 소분류
-			String proPrice; // 가격
-			String afterPrice; // 할인후 가격
-			String displId; // 상품 표시 id
-			String productID; // 상품 id -> 나중에 파라미터값으로 넘겨 상품 상세 페이지로 이동할 값
-			int prc; // 프로모션_쿠폰 (0이면 안하고 1이면 하는중)
-			int pdc; // 프로모션_할인 (0이면 안하고 1이면 하는중)
-			int pmp; // 프로모션_증정 (0이면 안하고 1이면 하는중)
-			int stock; // 오늘드림 매장 재고 (있으면 0 없으면 1)
-			int displLike; // 좋아요 수
-			int ordercnt; // 주문수
-			Date proReg; // 등록일
+		if (brands != null) {
+			sql += " AND brand_id = ";
+			for (int i = 0; i < brands.length; i++) {
+				if (i==0) {
+					sql += " ? ";
+				} else {
+					sql += " OR brand_id = ? " ;
+				} //if else
+			} //for
+		} //if
 
-			
+		int value = Integer.parseInt(sort);
+		switch (value) {
+		case 1:
+			sql += " ORDER BY pro_displ_like desc ";
+			break;
+		case 2:
+			sql += " ORDER BY pro_reg desc ";
+			break;
+		case 3:
+			sql += " ORDER BY ordercnt desc ";
+			break;
+		case 4:
+			sql += " ORDER BY afterprice asc ";
+			break;
+		case 5:
+			sql += " ORDER BY (pro_price-afterprice)/pro_price*100 desc ";
+			break;
+		} // switch
+		sql +=  " ) t "
+				+ "        ) b "
+				+ " WHERE b.no BETWEEN ? AND ?";
+		// 초기 설정
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		PMidListDTO pmidlistdto = null;
+		ArrayList<PMidListDTO> list = null;
 
-			try {
+		// sql실행후 받을 값 저장할 변수 저장
+		String displImgSrc; // 이미지 소스
+		String brandName; // 브랜드 
+		String brandId = null;
+		String displProName; // 상품표시 이름
+		String lId; // 대분류
+		String midId; // 중분류
+		String sId; // 소분류
+		String proPrice; // 가격
+		String afterPrice; // 할인후 가격
+		String displId; // 상품 표시 id
+		String productID; // 상품 id -> 나중에 파라미터값으로 넘겨 상품 상세 페이지로 이동할 값
+		int prc; // 프로모션_쿠폰 (0이면 안하고 1이면 하는중)
+		int pdc; // 프로모션_할인 (0이면 안하고 1이면 하는중)
+		int pmp; // 프로모션_증정 (0이면 안하고 1이면 하는중)
+		int stock; // 오늘드림 매장 재고 (있으면 0 없으면 1)
+		int displLike; // 좋아요 수
+		int ordercnt; // 주문수
+		Date proReg; // 등록일
 
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, mId);
+		int temp =2;
+		System.out.println(sql);
+		try {
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, Id);
+			if (brands != null) {
+				for (int i = 0; i < brands.length; i++) {
+					pstmt.setString(i+2, brands[i]);
+					temp++;
+				} // for
+				pstmt.setInt(temp, begin);
+				pstmt.setInt(temp+1, end);
+			}else {
 				pstmt.setInt(2, begin);
 				pstmt.setInt(3, end);
+			}
 
-				rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 
-				if(rs.next()) {
-					list = new ArrayList<>();
-					do {
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
 
-						displImgSrc = rs.getString("pro_displ_src");
-						brandName = rs.getString("brand_name");
-						displProName = rs.getString("pro_displ_name");
-						lId = rs.getString("cat_l_id");
-						midId = rs.getString("cat_m_id");
-						sId = rs.getString("cat_s_id");
-						proPrice = rs.getString("pro_price");
-						afterPrice = rs.getString("afterprice");
-						displId = rs.getString("pro_displ_id");
-						productID = rs.getString("pro_id");
-						prc = Integer.parseInt(rs.getString("prc"));
-						pdc = Integer.parseInt(rs.getString("pdc"));
-						pmp = rs.getInt("pmp");
-						stock = rs.getInt("stock");
-						displLike = rs.getInt("pro_displ_like");
-						ordercnt = rs.getInt("ordercnt");
-						proReg = rs.getDate("pro_reg");
+					displImgSrc = rs.getString("pro_displ_src");
+					brandName = rs.getString("brand_name");
+					brandId = rs.getString("brand_id");
+					displProName = rs.getString("pro_displ_name");
+					lId = rs.getString("cat_l_id");
+					midId = rs.getString("cat_m_id");
+					sId = rs.getString("cat_s_id");
+					proPrice = rs.getString("pro_price");
+					afterPrice = rs.getString("afterprice");
+					displId = rs.getString("pro_displ_id");
+					productID = rs.getString("pro_id");
+					prc = Integer.parseInt(rs.getString("prc"));
+					pdc = Integer.parseInt(rs.getString("pdc"));
+					pmp = rs.getInt("pmp");
+					stock = rs.getInt("stock");
+					displLike = rs.getInt("pro_displ_like");
+					ordercnt = rs.getInt("ordercnt");
+					proReg = rs.getDate("pro_reg");
 
-						pmidlistdto = new PMidListDTO(displImgSrc, brandName, displProName, lId, midId, sId, proPrice, afterPrice, displId, productID, prc, pdc, pmp, stock, displLike, ordercnt, proReg);
+					pmidlistdto = new PMidListDTO(displImgSrc, brandId, brandName, displProName, lId, midId, sId, proPrice, afterPrice, displId, productID, prc, pdc, pmp, stock, displLike, ordercnt, proReg);
 
-						list.add(pmidlistdto);
+					list.add(pmidlistdto);
 
-					} while (rs.next());
+				} while (rs.next());
 
-				} //if
+			} //if
 
-			} catch (SQLException e) {
-				System.out.println(">PMidListDAOImpl_selectMProList SQLException");
-				e.printStackTrace();
-			} catch (Exception e) {
-				System.out.println(">PMidListDAOImpl_selectMProList Exception");
-				e.printStackTrace();
-			} finally {
-				JDBCUtil.close(pstmt);
-				JDBCUtil.close(rs);
-				JDBCUtil.close(conn);
-			} //try_catch
+		} catch (SQLException e) {
+			System.out.println(">PMidListDAOImpl_selectMProList SQLException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">PMidListDAOImpl_selectMProList Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		} //try_catch
 
-			return list;
-		} // selectProList
-	
+		return list;
+	} // selectProList
+
 	//================================상위 카테고리 List 가져오는 작업 =====================================
 	@Override
 	public List<TopCateDTO> selectTop(Connection conn, String id) throws Exception {
@@ -468,59 +499,216 @@ public class PMidListDAOImpl  implements PMidListDAO{
 		return list;
 	} // selectMid
 
-	
+
 	//================================ 상단 카테고리 작업 =====================================
 
-	
-	
 	//================================ 총 레코드 수 구하기 =====================================
+	// (브랜드 추가 작업 완료)
 	@Override
-	public int getTotalRecords(Connection conn, String mId) throws SQLException {
-		
+	public int getTotalRecords(Connection conn, int group, String mId, String[] brands) throws SQLException {
 		int totalRecords = 0;
 
 		String sql = "SELECT COUNT(*) "
-				+ " FROM pmlistview "
-				+ " WHERE cat_m_id = ? ";
+				+ " FROM pmlistview ";
+
+		if (group == 1) {
+			sql += " WHERE cat_l_id = ? ";
+		} else if(group ==2) {
+			sql += " WHERE cat_m_id = ? ";
+		} else if(group == 3) {
+			sql += " WHERE cat_s_id = ? ";
+		}//if else
 		
+		if (brands != null) {
+			sql += " AND brand_id = ";
+			for (int i = 0; i < brands.length; i++) {
+				if (i==0) {
+					sql += " ? ";
+				} else {
+					sql += " OR brand_id = ? " ;
+				} //if else
+			} //for
+		} //if
+
 		PreparedStatement pstmt = null;
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, mId);
-		ResultSet rs =  pstmt.executeQuery();
 		
+		if (brands != null) {
+			for (int i = 0; i < brands.length; i++) {
+				pstmt.setString(i+2, brands[i]);
+			} // for
+		} // if
+		
+		ResultSet rs =  pstmt.executeQuery();
+
 		if( rs.next() )  totalRecords = rs.getInt(1);
 
 		JDBCUtil.close(pstmt);
 		JDBCUtil.close(rs);
 		JDBCUtil.close(conn);
-		
+
 		return totalRecords;
+		
 		
 	} // getTotalRecords
 
 	//================================ 총 페이지 구하기 =====================================
-
+	// (브랜드 추가 작업 완료)
 	@Override
-	public int getTotalPages(Connection conn, int numberPerPage, String mId) throws SQLException {
+	public int getTotalPages(Connection conn, int group, int numberPerPage, String mId, String[] brands)
+			throws SQLException {
 		int totalPages = 0;
 
 		String sql = "SELECT CEIL( COUNT(*)/ ? ) " 
-				+ " FROM pmlistview "
-				+ " WHERE cat_m_id = ? ";
+				+ " FROM pmlistview ";
+
+		if (group == 1) {
+			sql += " WHERE cat_l_id = ? ";
+		} else if(group ==2) {
+			sql += " WHERE cat_m_id = ? ";
+		} else if(group == 3) {
+			sql += " WHERE cat_s_id = ? ";
+		}//if else
+		
+		if (brands != null) {
+			sql += " AND brand_id = ";
+			for (int i = 0; i < brands.length; i++) {
+				if (i==0) {
+					sql += " ? ";
+				} else {
+					sql += " OR brand_id = ? " ;
+				} //if else
+			} //for
+		} //if
+
 		PreparedStatement pstmt = null;
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, numberPerPage);		
-		pstmt.setString(2, mId);		
+		pstmt.setString(2, mId);	
+		
+		if (brands != null) {
+			for (int i = 0; i < brands.length; i++) {
+				pstmt.setString(i+3, brands[i]);
+			} // for
+		} // if
+		
 		ResultSet rs =  pstmt.executeQuery();
 
 		if( rs.next() )  totalPages = rs.getInt(1);
-
+		
 		JDBCUtil.close(pstmt);
 		JDBCUtil.close(rs);
 		JDBCUtil.close(conn);
-		
+
 		return totalPages;
 	} // getTotalPages
+
+	//====================== 현재 카테고리 이름과 상위 카테고리 정보 가져오기(중위페이지) =============================
+	@Override
+	public MnameIdDTO selectCurName(Connection conn, String mId) throws Exception {
+
+		String sql = " SELECT cat_m_id, cat_m_name, cl.cat_l_id, cl.cat_l_name "
+				+ " FROM cate_m cm "
+				+ " JOIN cate_l cl ON cm.cat_l_id = cl.cat_l_id "
+				+ " WHERE cat_m_id = ? ";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MnameIdDTO mnameIdDTO = null;
+
+		try {
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+
+				do {
+					mnameIdDTO = MnameIdDTO.builder()
+							.catLId(rs.getString("cat_l_id"))
+							.catLName(rs.getString("cat_l_name"))
+							.catMId(rs.getString("cat_m_id"))
+							.catMName(rs.getString("cat_m_name"))
+							.build();
+
+
+
+				} while (rs.next());
+			} //if
+
+		} catch (SQLException e) {
+			System.out.println(">PMidListDAOImpl selectCurName SQLException");
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			System.out.println(">PMidListDAOImpl selectCurName NullPointerException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">PMidListDAOImpl selectCurName Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		} // try catch finally
+
+		return mnameIdDTO;
+	} //selectCurName
+
+	//====================== 현재 카테고리 이름과 상위 카테고리 정보 가져오기(중위페이지) =============================
+	@Override
+	public PCurNameDTO curName(Connection conn, int group, String id) throws Exception {
+
+		String sql = "";
+		String name = null;
+		PCurNameDTO dto = null;
+		switch (group) {
+		case 1:
+			sql = "SELECT cat_l_name FROM cate_l WHERE cat_l_id = ?";
+			break;
+		case 2:
+			sql = "SELECT cat_m_name FROM cate_m WHERE cat_m_id = ?";
+			break;
+		case 3:
+			sql = "SELECT cat_s_name FROM cate_s WHERE cat_s_id = ?";
+			break;
+		} // switch
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+
+				switch (group) {
+				case 1:
+					name = rs.getString("cat_l_name");
+					break;
+				case 2:
+					name = rs.getString("cat_m_name");
+					break;
+				case 3:
+					name = rs.getString("cat_s_name");
+					break;
+				} // switch
+				dto = new PCurNameDTO(name);
+			} //if
+		} catch (Exception e) {
+			System.out.println(">PMidListDAOImpl curName Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(conn);
+		} // try catch finally
+		return dto;
+	} // curName
+
+
+
 
 
 

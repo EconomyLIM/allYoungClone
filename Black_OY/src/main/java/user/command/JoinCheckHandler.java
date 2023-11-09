@@ -45,9 +45,9 @@ public class JoinCheckHandler implements CommandHandler{
 			session.setAttribute("u_birth", u_birth);
 			
 			if (dto ==null) {
-				location = "/CJjoin/agreement.jsp";
+				location = "/join/agreement.jsp";
 			} else {
-				location = "/CJjoin/join_already.jsp";
+				location = "/join/join_already.jsp";
 			}
 			
 		

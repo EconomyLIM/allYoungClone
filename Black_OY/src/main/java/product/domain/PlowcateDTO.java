@@ -1,14 +1,32 @@
 package product.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class PlowcateDTO {
-	
+
+	private String sId;
 	private String plowcate;
 	
+	public String getsId() {
+		return sId;
+	}
+	public void setsId(String sId) {
+		this.sId = sId;
+	}
+	public String getPlowcate() {
+		return plowcate;
+	}
+	public void setPlowcate(String plowcate) {
+		this.plowcate = plowcate;
+	}
+	public PlowcateDTO(String sId, String plowcate) {
+		super();
+		this.sId = sId;
+		this.plowcate = plowcate;
+	}
+	public PlowcateDTO() {
+		super();
+	}
+	
+	
+	
+
 } // class
