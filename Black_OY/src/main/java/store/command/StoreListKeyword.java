@@ -53,6 +53,8 @@ public class StoreListKeyword extends HttpServlet {
 			store.put("store_parking", dto.getStore_parking());
 			store.put("store_spec", dto.getStore_spec());
 			store.put("store_fav", dto.getStore_fav());
+			store.put("lat", dto.getLat());
+			store.put("lng", dto.getLng());	
 			store.put("weekday", dto.getWeekday());
 			store.put("saturday", dto.getSaturday());
 			store.put("sunday", dto.getSunday());
