@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/inc/include.jspf" %>
 <%@ include file="/WEB-INF/inc/session_auth.jspf" %>
+<%
+   String contextPathString = request.getContextPath();   
+%>
 <!DOCTYPE html>
 <html>
 <head>     
