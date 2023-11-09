@@ -28,9 +28,16 @@ public class BrandHandler implements CommandHandler {
 				this.brandDao = new BrandDAOImpl();
 				
 		        List<BrandDTO> brandDetails = brandDao.getAllBrandsDetails();
+		        
+		        BrandDTO brand = brandDao.getgudalBrands();
 
+		        //System.out.println( ">> 검색 결과 확인  : " +  brandDetails.size());
+		        
 		        // 데이터를 요청 속성에 추가
 		        request.setAttribute("brandDetails", brandDetails);
+		        request.setAttribute("brand", brand);
+		       System.out.println(brand);
+		        
 
 		        // JSP 페이지로 요청 전달
 		        //RequestDispatcher dispatcher = request.getRequestDispatcher("brand_page.jsp");
