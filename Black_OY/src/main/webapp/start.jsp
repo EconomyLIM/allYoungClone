@@ -48,7 +48,7 @@
 
 
 <a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=00010002&sort=1&currentpage=1&brandId=br_00000108&brandId=br_00000107">Mid,smallproductList</a>
-<a href="<%=contextPath%>/olive/productDetail.do">produtDetail</a>
+<a href="<%=contextPath%>/olive/productDetail.do?displNum=00010002">productDetail</a>
 <br>
 <br>
 <a href="<%=contextPath %>/olive/main.do">main page</a>
