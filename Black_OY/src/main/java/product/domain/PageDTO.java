@@ -29,9 +29,9 @@ public class PageDTO {
 		start = (currentPage -1) /numberOfPageBlock * numberOfPageBlock +1 ;
 		end= start + numberOfPageBlock -1;         
 		end =   end > totalPages ? totalPages : end;
-	
+		
 		// 이전 버튼, 다음 버튼
-		if( start != 1 ) prev = true;          
+		if( start >= 11 ) prev = true;          
   
 		if( end != totalPages ) next = true;
 	} //PageDTO(4)

@@ -15,28 +15,30 @@ String largecol = "0000";
 String midcol = "0000";
 String smallcol = "0000";
 
-if (midId.length() == 4) {
+if (midId.length() == 4) { // displ 자리가 4자리 일때
 	largecol = midId.substring(0, 4);
 	request.setAttribute("largecol", largecol);
-} else if (midId.length() == 8) {
+} else if (midId.length() == 8) { // displ 자리가 8자리 일때
 	largecol = midId.substring(0, 4);
 	midcol = midId.substring(4, 8);
 	request.setAttribute("midcol", midcol);
-} else if (midId.length() == 12) {
-	largecol = midId.substring(0, 4);
-	midcol = midId.substring(4, 8);
-	smallcol = midId.substring(8, 12);
+} else if (midId.length() == 12) { // displ 자리가 12자리 일때
+	largecol = midId.substring(0, 4); // 대분류
+	midcol = midId.substring(4, 8); // 중
+	smallcol = midId.substring(8, 12); //소
 	request.setAttribute("smallcol", smallcol);
 }
 
 int sortcate = 1;
 
 if (request.getParameter("sort") == null) {
-	sortcate = 1;
+	
 	request.setAttribute("sort", sortcate);
+	
 } else if (request.getParameter("sort") != null) {
 	sortcate = Integer.parseInt(request.getParameter("sort"));
 } //if
+
 String s = "";
 if(request.getParameter("brandId") != null){
 	String brandIds[] = request.getParameterValues("brandId");	
@@ -46,7 +48,20 @@ if(request.getParameter("brandId") != null){
 	} // for
 	
 } //if
-
+String curParam = request.getQueryString();
+			
+//
+int getPPval = 0;
+			
+if(request.getParameter("perPage")!= null){
+	if(request.getParameter("perPage").equals("8")){
+		getPPval = 1;
+	}else if(request.getParameter("perPage").equals("12")){
+		getPPval =2;
+	}else{
+		getPPval = 0;
+	}//if else
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -83,28 +98,29 @@ $(function () {
 	//
 
 	 // midId와 일치하는 id를 가진 li 요소에 'on' 클래스 추가
-	 $( '.loc_history li a#' + '<%=largecol%>').addClass('on');
-	 $('#Contents > div.page_location > ul > li:nth-child(2) > div > ul > li a#' + '<%=midcol%>').addClass('on'); 
-	 $('#Contents > div.page_location > ul > li:nth-child(3) > div > ul > li a#' + '<%=smallcol%>').addClass('on');
+	$( '.loc_history li a#' + '<%=largecol%>').addClass('on');
+	$('#Contents > div.page_location > ul > li:nth-child(2) > div > ul > li a#' + '<%=midcol%>').addClass('on'); 
+	$('#Contents > div.page_location > ul > li:nth-child(3) > div > ul > li a#' + '<%=smallcol%>').addClass('on');
 	 
-	 $(".cate_align_box .align_sort ul > li").removeClass("on");
-	 
+	// 정렬 리스트 class on 추가
+	$(".cate_align_box .align_sort ul > li").removeClass("on");
 	$(".cate_align_box .align_sort ul > li").eq( ${param.sort} == null ? 1 : ${param.sort}-1).addClass("on");
 	
+	//
 	$("#Contents > ul.cate_list_box li").removeClass("on");
 	$('#Contents > ul.cate_list_box li#' + '<%=smallcol%>').addClass('on') ; 
 	if (<%=smallcol%> == ("0000")) {
 		$('#Contents > ul.cate_list_box li.first').addClass('on') ; 
 	}
-	<%-- console.log(window.location.search);
-	console.log('?<%=request.getQueryString()%>'); --%>
 
-	<%-- console.log("<%=contextPath%>/view/product/pmidlistproduct.do"+window.location.search); --%>
-	
+	$("div.count_sort.tx_num > ul > li").removeClass("on");
+	$("div.count_sort.tx_num > ul > li").eq(<%=getPPval%>).addClass("on");
+	console.log('?<%=request.getQueryString()%>');
 
 	var urlParams = new URLSearchParams(window.location.search);
     var checkboxes = document.querySelectorAll('input[name="brandId"]');
 
+    // 브랜드 체크 처리
     if (urlParams.has('brandId')) {
         var selectedBrands = urlParams.getAll('brandId');
         
@@ -118,7 +134,7 @@ $(function () {
 
     $('input[name="brandId"]').on('change', function() {
     	
-    	var url = "http://localhost/Black_OY/view/product/pmidlistproduct.do?displNum="+m+"&sort="+s+"&currentpage=1";
+    	var url = "http://localhost/Black_OY/view/product/pmidlistproduct.do?displNum="+'<%=midId%>'+"&sort=${param.sort}&currentpage=1<%=s%>";
     	console.log(url);
         var brandID = $(this).val();
 
@@ -137,12 +153,46 @@ $(function () {
                 window.location.href = newUrl;
             }
         }
-    }) 
-    
+    })   
 }) ; 
 
+function changePerPage(value) { // perPage 수정
+	  // 현재 URL 또는 기존 링크에서 파라미터 값 가져오기
+	const currentURL = window.location.href;
+	  const url = new URL(currentURL);
 
+	  // 'perPage' 파라미터 값 변경
+	  url.searchParams.set('perPage', value);
 
+	  // 새 URL을 만들고 브라우저의 주소창을 업데이트
+	  window.location.href = url;
+	}
+	
+function changePerPageAndClass(value) {
+	  const perPage = value.toString();
+	  const currentURL = new URL(window.location.href);
+
+	  // Set 'perPage' parameter value
+	  currentURL.searchParams.set('perPage', perPage);
+
+	  // Go to the new URL with updated 'perPage' parameter
+	  window.location.href = currentURL;
+
+	  // Remove 'on' class from all li elements
+	  const allLi = document.querySelectorAll('.count_sort tx_num ul li');
+	  allLi.forEach(li => {
+	    li.classList.remove('on');
+	  });
+
+	  // Get 'perPage' parameter value from the URL
+	  const urlParams = currentURL.searchParams.get('perPage');
+
+	  // Add 'on' class to the li element matching the 'perPage' parameter
+	  const matchedLi = document.querySelector(`.count_sort tx_num ul li a[href*="perPage=${urlParams}"]`);
+	  if (matchedLi) {
+	    matchedLi.parentElement.classList.add('on');
+	  }
+	}
 </script>
 <body>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
@@ -339,21 +389,21 @@ $(function () {
 				<div class="align_sort">
 					<ul>
 						<li><a class="on"
-							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=1&currentpage=${param.currentpage}"
+							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=1&currentpage=1"
 							data-prdsoting="01">인기순</a></li>
 						<li><a
-							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=2&currentpage=${param.currentpage}"
+							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=2&currentpage=1"
 							data-prdsoting="02">신상품순</a></li>
 						<li><a
-							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=3&currentpage=${param.currentpage}"
+							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=3&currentpage=1"
 							data-prdsoting="03">판매순</a></li>
 
 						<li><a
-							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=4&currentpage=${param.currentpage}"
+							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=4&currentpage=1"
 							data-prdsoting="05">낮은 가격순</a></li>
 
 						<li><a
-							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=5&currentpage=${param.currentpage}"
+							href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=<%=midId%>&sort=5&currentpage=1"
 							data-prdsoting="09">할인율순</a></li>
 					</ul>
 				</div>
@@ -366,10 +416,10 @@ $(function () {
 				<div class="count_sort tx_num">
 					<span class="tx_view">VIEW</span>
 					<ul>
-						<li class="on"><a href="javascript:;" title="24개씩 보기">24</a>
+						<li class="on"><a href="#" onclick="changePerPage(4)" title="24개씩 보기">24</a>
 						</li>
-						<li><a href="javascript:;" title="36개씩 보기">36</a></li>
-						<li><a href="javascript:;" title="48개씩 보기">48</a></li>
+						<li><a href="#" onclick="changePerPage(8)" title="36개씩 보기">36</a></li>
+						<li><a href="#" onclick="changePerPage(12);" title="48개씩 보기">48</a></li>
 					</ul>
 				</div>
 				<div class="type_sort">
@@ -439,10 +489,9 @@ $(function () {
 
 		<div class="pageing">
 			<c:if test="${pDto.prev }">
-				<%-- <a href="<%=contextPath%>/view/product/pmidlistproduct.do=${pDto.start-1}">&lt;</a> --%>
-			</c:if>
-			<a class="prev" href="javascript:void(0);" data-page-no="1">이전 10
+				<a class="prev" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${(param.currentpage+9)/10*10+1}<%=s %>" data-page-no="1">이전 10
 				페이지</a>
+			</c:if>
 			<c:forEach var="i" begin="${pDto.start }" end="${pDto.end }" step="1">
 				<c:choose>
 					<c:when test="${i eq pDto.currentPage}">
@@ -455,9 +504,8 @@ $(function () {
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
-			<a class="next" href="" data-page-no="21">다음 10 페이지</a>
 			<c:if test="${pDto.next }">
-				<%-- <a href="<%=contextPath%>/view/product/pmidlistproduct.do=${pDto.end+1}">&gt;</a> --%>
+				<a class="next" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${(param.currentpage-(param.currentpage%1))/10+1}<%=s %>" data-page-no="21">다음 10 페이지</a>
 			</c:if>
 			<!-- <strong title="현재 페이지">1</strong> -->
 		</div>

@@ -62,12 +62,12 @@ public class PMidListHandler implements CommandHandler{
 		int numberOfPageBlock =10; //
 		int totalRecords =0; // 총 레코드 수 게시글 수
 		
-		int perPage = 5; // 한페이지에 출력하는 변수를 서버에 전송하는 변수 원래는 24이지만 테스트로인해 5로수정
+		int perPage = 24; // 한페이지에 출력하는 변수를 서버에 전송하는 변수 원래는 24이지만 테스트로인해 5로수정
 		int totalpage = 0; // 한페이지가 얼마나 나오는 수
 		PageDTO pageDTO = null;
 		
 		if( request.getParameter("perPage") == null || request.getParameter("perPage") == "") {
-			perPage = 5;
+			perPage = 1;
 		} else if (request.getParameter("perPage") != null) {
 			perPage = Integer.parseInt(request.getParameter("perPage"));
 		} //if else

@@ -41,12 +41,10 @@ public interface PMidListDAO {
 	
 	// 6. 페이징 처리
 	// 6-1. 총 레코드 수 가져오기
-	int getTotalRecords(Connection conn, int group, String mId)  throws SQLException;
 	// 6-1-a. 총 레코드 수 가져오기 (브랜드 검색 추가)
 	int getTotalRecords(Connection conn, int group, String mId, String brands[])  throws SQLException;
 	
 	// 6-2. 총 페이지 구하기 
-	int getTotalPages(Connection conn, int group, int numberPerPage, String mId)  throws SQLException;
 	// 6-2-a. 총 페이지 구하기 (브랜드 검색 추가) 
 	int getTotalPages(Connection conn, int group, int numberPerPage, String mId, String brands[])  throws SQLException;
 	
