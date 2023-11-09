@@ -24,12 +24,12 @@ public class BasketListHandler implements CommandHandler{
 		String refer = null;
 		String quickyn = null;
 		
-		if (session.getAttribute("logOn") == null) {
-			refer = request.getRequestURI();
-			session.setAttribute("refer", refer);
-			//response.sendRedirect("/Black_OY/olive/LogOn.do");
-			return "/view/logon/logon.jsp";
-		}
+		/*
+		 * if (session.getAttribute("logOn") == null) { refer = request.getRequestURI();
+		 * session.setAttribute("refer", refer);
+		 * //response.sendRedirect("/Black_OY/olive/LogOn.do"); return
+		 * "/view/logon/logon.jsp"; }
+		 */
 		// 파라미터 값으로 대분류 번호 갖고오기
 		try {
 			

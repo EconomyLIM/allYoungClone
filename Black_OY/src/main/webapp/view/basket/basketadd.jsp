@@ -321,27 +321,9 @@
 														ordpsbminqty="1" ordpsbmaxqty="999" qtyaddunit="1"
 														ordqty="1" title="상품 수량 선택">
 														
-														<option value="0" selected="">${bpl.product_cnt }</option>
-															
-														<option value="1">1</option>
-
-														<option value="2">2</option>
-
-														<option value="3">3</option>
-
-														<option value="4">4</option>
-
-														<option value="5">5</option>
-
-														<option value="6">6</option>
-
-														<option value="7">7</option>
-
-														<option value="8">8</option>
-
-														<option value="9">9</option>
-
-														<option value="10">10</option>
+														<c:forEach var="value" begin="1" end="10">
+        												<option value="${value}" <c:if test="${value == bpl.product_cnt}">selected</c:if>>${value}</option>
+    													</c:forEach>
 
 														<option value="10+">10+</option>
 
