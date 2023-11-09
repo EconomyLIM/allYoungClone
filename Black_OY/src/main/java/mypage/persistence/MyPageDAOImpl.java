@@ -50,6 +50,7 @@ public class MyPageDAOImpl implements MypageDAO {
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		} catch (Exception e) {
@@ -82,6 +83,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		}finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 
 		return UserPoint;
@@ -110,6 +112,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		}finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		return UserCouponCount;
 	}
@@ -137,6 +140,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		}finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}		
 		return UserDeposit;
 	}
@@ -144,8 +148,8 @@ public class MyPageDAOImpl implements MypageDAO {
 	@Override
 	public List<MpPlikeDTO> selectUserPlike(Connection conn, String Uid) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT  "
-				+ " pdi.pro_displ_src src , b.brand_name bname, pd.pro_displ_name displname "
+		String sql = " SELECT ROWNUM "
+				+ " ,pdi.pro_displ_src src , b.brand_name bname, pd.pro_displ_name displname "
 				+ " ,a.pro_price pricep "
 				+ " , "
 				+ " NVL(CASE  "
@@ -204,6 +208,7 @@ public class MyPageDAOImpl implements MypageDAO {
 			
 			do {
 				dto = new MpPlikeDTO();
+				dto.setRowNum(rs.getInt("ROWNUM"));
 				dto.setPlImgsrc(rs.getString("src"));
 				dto.setPlbrand(rs.getString("bname"));
 				dto.setPlpdispN(rs.getString("displname"));
@@ -219,6 +224,7 @@ public class MyPageDAOImpl implements MypageDAO {
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		} catch (Exception e) {
@@ -256,6 +262,7 @@ public class MyPageDAOImpl implements MypageDAO {
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		} catch (Exception e) {
@@ -292,6 +299,7 @@ public class MyPageDAOImpl implements MypageDAO {
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		} catch (Exception e) {
@@ -322,6 +330,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		}finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}		
 		return UserRevCount;
 	}
@@ -361,6 +370,7 @@ public class MyPageDAOImpl implements MypageDAO {
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		} catch (Exception e) {
