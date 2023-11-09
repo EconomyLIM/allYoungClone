@@ -42,17 +42,20 @@ public class LogOnDAOImpl implements LogOnDAO{
 		}finally {
 			JDBCUtil.close(psmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		return logdto;
 	}
 
 	@Override
-	public int baskekcnt(Connection conn, String user_id) {
+	public List<Integer> baskekcnt(Connection conn, String user_id) {
 		LogOnDTO logdto = null; 
 		String sql = "select count(*) from basket where user_id = ? ";
-		
+		String sql2 = "select count(*) from basket_td where user_id = ? ";
+		List<Integer> list = new ArrayList<Integer>();
 		PreparedStatement psmt = null;
+		
 		ResultSet rs = null;
 		int cnt = 0;
 		try {
@@ -60,17 +63,27 @@ public class LogOnDAOImpl implements LogOnDAO{
 			psmt.setString(1, user_id);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
+				
 				cnt = rs.getInt("count(*)");
-				return cnt;
+				list.add(cnt);
 			}
-			
+			psmt = conn.prepareStatement(sql2);
+			psmt.setString(1, user_id);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				
+				cnt = rs.getInt("count(*)");
+				list.add(cnt);
+			}
+			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			JDBCUtil.close(psmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
-		return 0;
+		return null;
 	}
 
 }

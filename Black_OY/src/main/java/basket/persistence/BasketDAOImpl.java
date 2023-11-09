@@ -20,7 +20,7 @@ public class BasketDAOImpl implements BasketDAO{
 	}
 
 	@Override
-	public List<BasketDTO> basketList(Connection conn, String user_id) {
+	public List<BasketDTO> basketList(Connection conn, String user_id, String quickyn) {
 		ArrayList<BasketDTO> basketList = null; 
 		BasketDTO basketDTO = null;
 		String sql = " SELECT pro_displ_src, brand_name, pro_displ_name "
@@ -30,9 +30,16 @@ public class BasketDAOImpl implements BasketDAO{
 				+ " , prc, pdc, pmp, stock "
 				+ " , ordercnt, pro_displ_like, pro_reg "
 				+ " , basket_id,user_id,product_cnt, pro_name "
-				+ " FROM pmlistviewbasket join basket on pro_id = product_id "
-				+ " where user_id = ? ";
-				
+				+ " FROM pmlistviewbasket join "; 
+		String basketT = null;
+		if (quickyn != null && quickyn.equals("Y")) {
+			sql+=  " BASKET_TD ";
+		}else if(quickyn == null || quickyn.equals("") ||quickyn.equals("N") ){
+			sql+= " BASKET ";
+		}
+		
+		sql += " on pro_id = product_id " 
+			+" where user_id = ? ";
 		
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -58,8 +65,13 @@ public class BasketDAOImpl implements BasketDAO{
 		int product_cnt;
 		String pro_name;
 		
+		
 		try {
 			psmt = conn.prepareStatement(sql);
+			
+			System.out.println(basketT);
+			System.out.println(quickyn);
+//			psmt.setString(1, basketT);
 			psmt.setString(1, user_id);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
@@ -97,14 +109,21 @@ public class BasketDAOImpl implements BasketDAO{
 		}finally {
 			JDBCUtil.close(psmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		return basketList;
 	}
 
 	@Override
-	public int basketDelete(Connection conn, String user_id, String product_id) {
-		String sql = "DELETE from basket WHERE user_id = ? AND product_id = ? ";
+	public int basketDelete(Connection conn, String user_id, String product_id, String quickyn) {
+		String sql = "DELETE from ";
+		if (quickyn != null && quickyn.equals("Y")) {
+			sql+=  " BASKET_TD ";
+		}else if(quickyn == null || quickyn.equals("") ||quickyn.equals("N") ){
+			sql+= " BASKET ";
+		}		
+		sql += " WHERE user_id = ? AND product_id = ? ";
 		PreparedStatement psmt = null;
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -118,9 +137,38 @@ public class BasketDAOImpl implements BasketDAO{
 			e.printStackTrace();
 		}finally {
 			JDBCUtil.close(psmt);
+			JDBCUtil.close(conn);
 		}
 		
 		
+		return 0;
+	}
+
+	@Override
+	public int basketAdd(Connection conn, String user_id, String productid, String quickyn, int product_cnt) {
+		String sql = " UPDATE ";
+		if (quickyn != null && quickyn.equals("Y")) {
+			sql+=  " BASKET_TD ";
+		}else if(quickyn == null || quickyn.equals("") ||quickyn.equals("N") ){
+			sql+= " BASKET ";
+		}
+		sql += " SET product_cnt = ? where user_id = ? AND product_id = ? ";
+		PreparedStatement psmt = null;
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, product_cnt);
+			psmt.setString(2, user_id);
+			psmt.setString(3, productid);
+			int row  = psmt.executeUpdate();
+			
+			return row;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(conn);
+		}
 		return 0;
 	}
 

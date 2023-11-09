@@ -7,7 +7,9 @@ import basket.domain.BasketDTO;
 
 public interface BasketDAO {
 
-	 List<BasketDTO> basketList(Connection conn, String user_id);
+	 List<BasketDTO> basketList(Connection conn, String user_id, String quickYn);
 	 
-	 int basketDelete(Connection conn, String user_id, String productid);
+	 int basketDelete(Connection conn, String user_id, String productid, String quickYn);
+	 
+	 int basketAdd(Connection conn, String user_id, String productid, String quickyn, int product_cnt);
 }

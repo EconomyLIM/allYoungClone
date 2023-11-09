@@ -249,7 +249,7 @@
 							<li class="cart"><a href="<%=contextPath%>/olive/basket.do"
 						data-attr="공통^헤더^장바구니">장바구니								
 									<span id="cartToCnt">
-										(${sessionScope.basketlistcnt})
+										(${sessionScope.basketlistcnt[0] + sessionScope.basketlistcnt[1]})
 									</span>
 					</a></li>
 						</c:otherwise>

@@ -35,7 +35,7 @@ public class LoginCheckFilter implements Filter {
 		boolean isLogon = false; // 인증 true, false
 		
 		HttpSession session = req.getSession(false);
-		if (session != null && (auth =(String) session.getAttribute("logOn")) != null) {
+		if (session != null && (session.getAttribute("logOn")) != null) {
 			// 인증처리가 된 상태
 			isLogon = true;
 		}//if
