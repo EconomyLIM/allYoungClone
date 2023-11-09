@@ -12,6 +12,12 @@ public class ProductDetailHandler implements CommandHandler{
 		
 		System.out.println("ProductDetailHandler process..");
 		
+		String displNum = request.getParameter("displNum");
+		if (displNum.length() == 4) {
+			
+		} else {
+
+		}
 		
 		return "/view/product/product.jsp";
 	} // process

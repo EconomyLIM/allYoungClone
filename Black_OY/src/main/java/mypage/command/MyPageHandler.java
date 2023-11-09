@@ -63,7 +63,7 @@ public class MyPageHandler implements CommandHandler {
 		request.setAttribute("userRevCount", userRevCount);
 		request.setAttribute("userOrder", userOrder);
 		
-		return "/mypage/temp.jsp";
+		return "/view/mypage/temp.jsp";
 	}
 
 }

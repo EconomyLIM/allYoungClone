@@ -15,12 +15,8 @@
 <body>
 <jsp:include page="/layout/head.jsp"></jsp:include>
 <div>
-		
+
 </div>
-
-
-
-<a href="<%=contextPath %>/mypage/mypageMain.do">마이페이지</a>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>
