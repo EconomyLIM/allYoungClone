@@ -205,39 +205,37 @@
 			
 			<%-- 동적 태그 추가로 좋아요 상품 출력 --%>
 					<%-- ${ fn:length(requestScore.uerPlike) } 만큼만 동적 태그 추가 --%>
-					<c:forEach items="${ userPlike }" var="pl">
-						
-					</c:forEach>
+					
 	
 						<ul class="cate_prd_list" id="wishList" name="wishList"><!-- 상품 4개 일때 -->
 							
-							  
-								<li data-goods-no="<%-- 상품id --%>">
+							  <%-- 
+								<li data-goods-no="상품id">
 									<div class="prd_info">
-										<a href="<%-- 해당 상품페이지로 이동 --%>" class="prd_thumb goodsList" data-ref-goodsno="<%-- 상품표시id --%>" data-ref-dispcatno="" data-ref-itemno="001">
+										<a href="해당 상품페이지로 이동" class="prd_thumb goodsList" data-ref-goodsno="상품표시id" data-ref-dispcatno="" data-ref-itemno="001">
 											<span class="thumb_flag best">베스트</span>
-											<%-- 상품 이미지 --%>
+											상품 이미지
 										</a>
 										<div class="prd_name">
-											<a href="<%-- 해당 상품페이지로 이동 --%>" class="goodsList" data-ref-goodsno="<%-- 상품표시id --%>" data-ref-dispcatno="" data-ref-itemno="001">
-												<span class="tx_brand"><%-- 브랜드명 --%></span>
-												<p class="tx_name"><%-- 상품명 --%></p>
+											<a href="해당 상품페이지로 이동" class="goodsList" data-ref-goodsno="상품표시id" data-ref-dispcatno="" data-ref-itemno="001">
+												<span class="tx_brand">브랜드명</span>
+												<p class="tx_name">상품명</p>
 											</a>
 										</div>
-										<button class="btn_zzim jeem on" data-ref-goodsno="<%--  --%>">
+										<button class="btn_zzim jeem on" data-ref-goodsno="">
 											<span>찜하기후</span>
 										</button>
 										<p class="prd_price">
-										<%-- 할인 여부에 따라 달라지는 태그 --%>
+										할인 여부에 따라 달라지는 태그
 											<span class="tx_org">
-												<span class="tx_num"><%-- 할인전 가격 --%>
+												<span class="tx_num">할인전 가격
 												</span>원
 											</span>
-											<span class="tx_cur"><span class="tx_num"><%-- 할인후 가격 --%></span>원 </span>
+											<span class="tx_cur"><span class="tx_num">할인후 가격</span>원 </span>
 										</p>
 										<p class="prd_flag">
 										
-										<%-- 프로모션 span태그 동적 추가 --%>
+										프로모션 span태그 동적 추가
 										
 											<span class="icon_flag sale">세일</span>
 										
@@ -250,7 +248,7 @@
 									<div class="prd_info"><a href="javascript:;" class="prd_thumb goodsList" data-ref-goodsno="A000000190280" data-ref-dispcatno="" data-ref-itemno="001"><span class="thumb_flag best">베스트</span><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019028015ko.jpg?l=ko" alt="[유트루PICK/한정기획] 라네즈 크림스킨(170ml+170ml리필)" onerror="common.errorImg(this);"></a><div class="prd_name"><a href="javascript:;" class="goodsList" data-ref-goodsno="A000000190280" data-ref-dispcatno="" data-ref-itemno="001"><span class="tx_brand">라네즈</span><p class="tx_name">[유트루PICK/한정기획] 라네즈 크림스킨(170ml+170ml리필)</p></a></div><button class="btn_zzim jeem on" data-ref-goodsno="A000000190280"><span>찜하기후</span></button><p class="prd_price"><span class="tx_org"><span class="tx_num">33,000</span>원 </span><span class="tx_cur"><span class="tx_num">23,760</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span><span class="icon_flag delivery">오늘드림</span></p></div>
 
 								</li>
-							
+							 --%>
 						</ul>
 					
 					
@@ -305,10 +303,21 @@
 
 			<!-- 테스트버튼 -->
 			<input type="button" value="테스트" onclick='addList()'>
-			
+			<!-- 페이지 열리면 불러와서 동적으로 만들기 -->
 <script>
-function addList() {
-	alert('addList실행')
+
+$(Document).ready( function () {
+	let num = "<c:out value = '${ fn:length(userPlike) }'/>"
+	//alert(num)
+	for (var i = 0; i < num; i++) {
+		addPlike();
+	};
+} )
+		
+		
+function addPlike() {
+	//alert('addList실행')
+	
 	//상품전체 li
 	let prdNli = document.createElement("li");
 	
@@ -351,6 +360,10 @@ function addList() {
 			let prdprice = document.createElement("div");
 			prdprice.className = "prd_price";
 			
+			//단위 텍스트 노드 생성
+			let txtp = document.createTextNode("원");
+			let txta = document.createTextNode("원");
+			
 				//할인전
 				let prdpricep = document.createElement("span");
 				prdpricep.className = "tx_org";
@@ -358,65 +371,94 @@ function addList() {
 					//할인전 단위추가
 					let prdpricepnum = document.createElement("span");
 					prdpricepnum.className = "tx_num";
-				prdpricep.setAttribute("value", "원");
+					
 				
 				//할인후
 				let prdpricea = document.createElement("span");
-				prdpricep.className = "tx_org";
+				prdpricea.className = "tx_cur";
 				
 					//할인후 단위추가
 					let prdpriceanum = document.createElement("span");
 					prdpriceanum.className = "tx_num";
-					prdpricea.setAttribute("value", "원");
 				
+					
+					let parenttag = document.querySelector("#wishList");
+					
+					parenttag.appendChild(prdNli);
+					
+					prdNli.appendChild(prdinfodiv);
+					
+					prdinfodiv.appendChild(prdconA);
+					prdinfodiv.appendChild(prdName);
+					prdinfodiv.appendChild(btnZzim);
+					prdinfodiv.appendChild(prdprice);
+					prdinfodiv.appendChild(prdflag);
+					
+					prdconA.appendChild(prdbst);
+					
+					prdName.appendChild(prdconAbyN);
+					prdName.appendChild(prdbrand);
+					prdName.appendChild(prdN);
+					
+					prdprice.appendChild(prdpricep);
+					prdprice.appendChild(prdpricea);
+					
+					prdpricep.appendChild(prdpricepnum);
+					prdpricep.appendChild(txtp);
+					
+					prdpricea.appendChild(prdpriceanum);
+					prdpricea.appendChild(txta);
+						
+</script>					
+		<c:forEach items="${ userPlike }" var="pl">
+						
+		</c:forEach>
+<script>					
 			//프로모션
 			let prdflag = document.createElement("p");
-
+			prdflag.className = "prd_flag";
+		
+			let pmc = 
+			let pmd = 
+			let pmp = 
+			alert(pmd)
+			alert(pmc)
+			alert(pmp)
+			if ( pmd == true ) {	//할인프로모션값이 있다면(1)
 				//할인 프로모션
+				
 				let discflag = document.createElement("span");
 				discflag.className = "icon_flag sale";
-				discflag.setAttribute("value", "세일");
-				
+				prdflag.appendChild(discflag);
+				let dflagval = "세일"
+				discflag.append(dflagval)
+			};
+			
+			if ( pmc == true ) {	//쿠폰프로모션값이 있다면(1)
 				//쿠폰 프로모션
+				
 				let cpflag = document.createElement("span");
 				cpflag.className = "icon_flag coupon";
-				cpflag.setAttribute("value", "쿠폰");
+				prdflag.appendChild(cpflag);
+				let cflagval = "쿠폰"
+				cpflag.append(cflagval)
+			};
+			
+			if ( pmp == true ) { 	//증정프로모션값이 있다면(1)
+				//증정 프로모션
 				
-				//배송 프로모션
 				let deliflag = document.createElement("span");
 				deliflag.className = "icon_flag delivery";
-				deliflag.setAttribute("value", "오늘드림");
+				prdflag.appendChild(deliflag);
+				let pflagval = "오늘드림"
+				deliflag.append(pflagval)
+				
+			};
 			
-			let parenttag = document.querySelector("#wishList");
+
 			
-			parenttag.appendChild(prdNli);
-			
-			prdNli.appendChild(prdinfodiv);
-			
-			prdinfodiv.appendChild(prdconA)
-						.appendChild(prdName)
-						.appendChild(btnZzim)
-						.appendChild(prdprice)
-						.appendChild(prdflag);
-			
-			prdconA.appendChild(prdbst);
-			
-			prdName.appendChild(prdconAbyN)
-					.appendChild(prdbrand)
-					.appendChild(prdN);
-			
-			prdprice.appendChild(prdpricep)
-					.appendChild(prdpricea);
-			
-			prdpricep.appendChild(prdpricepnum);
-			
-			prdpricea.appendChild(prdpriceanum);
-			
-			prdflag.appendChild(discflag)
-					.appendChild(cpflag)
-					.appendChild(deliflag);
 }
-			</script>
+</script>
 
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
