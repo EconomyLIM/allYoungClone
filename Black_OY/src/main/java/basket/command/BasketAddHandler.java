@@ -1,5 +1,6 @@
 package basket.command;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,38 +10,29 @@ import javax.servlet.http.HttpSession;
 import basket.domain.BasketDTO;
 import basket.service.BasketListService;
 import command.CommandHandler;
-
-import product.domain.PMidListDTO;
-import product.domain.PbrandListDTO;
-import product.domain.PlowcateDTO;
-
 import user.domain.LogOnDTO;
 import user.service.LogOnService;
 
-public class BasketListHandler implements CommandHandler{
+public class BasketAddHandler implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("> BasketListHandler.process...");
+		System.out.println("> BasketAddHandler.process...");
 		String user_id = null;
 		String productid = null;
 		HttpSession session = request.getSession();
 		String refer = null;
 		String quickyn = null;
+		int productcnt = 0;
 		
-		/*
-		 * if (session.getAttribute("logOn") == null) { refer = request.getRequestURI();
-		 * session.setAttribute("refer", refer);
-		 * //response.sendRedirect("/Black_OY/olive/LogOn.do"); return
-		 * "/view/logon/logon.jsp"; }
-		 */
-		// 파라미터 값으로 대분류 번호 갖고오기
+
 		try {
 			
 			LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
 			user_id = logOnDTO.getUser_id();
 			productid = request.getParameter("productid");
 			quickyn = request.getParameter("quickyn");
+			productcnt =  Integer.parseInt(request.getParameter("productcnt"));
 			System.out.println(quickyn);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,15 +43,14 @@ public class BasketListHandler implements CommandHandler{
 		List<BasketDTO> list = null;
 		BasketListService basketListService = BasketListService.getInstance();
 		LogOnService logOnService = LogOnService.getInstance();
-		if (quickyn == null || quickyn.equals("")) {
+		if (quickyn == null || quickyn.equals("") ||quickyn.equals("null")) {
 			quickyn = "N";
 		}
-		System.out.println(quickyn);
+		System.out.println("애드핸들러 값:"+quickyn);
 		if (productid != null) {
-			int row = basketListService.basketListDeleteService(user_id, productid, quickyn);
+			int row = basketListService.basketAddService(user_id, productid, quickyn, productcnt);
 			List<Integer> cnt = logOnService.basketcntService(user_id);
 			session.setAttribute("basketlistcnt", cnt);
-			
 		}
 		List<Integer> cnt = logOnService.basketcntService(user_id);
 		session.setAttribute("basketlistcnt", cnt);
@@ -67,10 +58,9 @@ public class BasketListHandler implements CommandHandler{
 		list = basketListService.basketListService(user_id, quickyn);
 		request.setAttribute("list", list);
 		
+		request.getRequestDispatcher("/view/basket/basketadd.jsp").forward(request, response);
 		
-		
-		
-		return "/view/basket/basket.jsp";
+		return null;
 	
 	}
 

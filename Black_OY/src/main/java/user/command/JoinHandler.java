@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.util.ConnectionProvider;
 
@@ -17,35 +18,38 @@ public class JoinHandler implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		 String method = request.getMethod(); 
-		 request.setCharacterEncoding("utf-8");
+		System.out.println("> Join.process...");
+		String method = request.getMethod(); // GET, POST
 
-		 String name = request.getParameter("name");
-		 String birth =  request.getParameter("birth");
-		 String tel=  request.getParameter("tel");
-	
-		 
-		 OuserDTO dto = new OuserDTO();
-		 
+		String refer = null;
+		HttpSession session = request.getSession();
+		
+		if(method.equals("GET")) {
+
+			refer = (String) session.getAttribute("refer");
+			System.out.println("요청URL:" + refer);
+
+			return "/view/join/join.jsp";
+		} else {
+
+		 String user_id = request.getParameter("user_id");
+		 String u_name = request.getParameter("u_name");
+		 String u_pwd = request.getParameter("u_pwd");
+		 String u_birth = request.getParameter("u_birth");
+		 String u_tel=  request.getParameter("u_tel");
+
 		 Connection conn = ConnectionProvider.getConnection();
 		 OuserDAOImpl dao = new OuserDAOImpl(conn);
-			
-			int rowCount = 0;
-			try {
-				rowCount = dao.getJoinCheck(dto);
-			} catch (SQLException e) {
-				System.out.println("> JoinCheckHandler.doPost() Exception!");
-				e.printStackTrace();
-			}
+		 OuserDTO dto = new OuserDTO();
+
 			conn.close();
-
-			String location = "/jspPro/member/joinCheck.do";
-			response.sendRedirect(location);
 			
-			
-			
+			request.setAttribute("dto", dto);
+			//회원가입 완료 > 메인페이지로 이동
+			String location = "/";
+		
+			return location;
 	}
-
 }
 */
 

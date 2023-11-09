@@ -6,6 +6,7 @@ import java.util.List;
 import com.util.ConnectionProvider;
 import com.util.JDBCUtil;
 
+import mypage.domain.MpOrderDTO;
 import mypage.domain.MpPAskDTO;
 import mypage.domain.MpPlikeDTO;
 import mypage.domain.MpQnADTO;
@@ -180,6 +181,25 @@ public class MypageService {
 			JDBCUtil.close(conn);
 		}
 		return 0;
+	}
+	
+	//	9.	주문현황 가져오기 서비스
+	public List<MpOrderDTO> mpUOservice(String Uid){
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			MyPageDAOImpl daoImpl = MyPageDAOImpl.getinstance();
+			List<MpOrderDTO> list = null;
+			list = daoImpl.selectUserOrderStatus(conn, Uid);
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("> MypageService.mpUOservice_Exception");
+		}finally {
+			JDBCUtil.close(conn);
+		}
+		return null;
 	}
 	
 }

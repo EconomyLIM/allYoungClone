@@ -36,19 +36,19 @@ public class LogOnService {
 		
 	} // logselectservice
 	
-	public int basketcntService(String user_id) {
+	public List<Integer> basketcntService(String user_id) {
 		Connection conn = null;
-		int cnt = 0;
+		List<Integer> list = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			LogOnDAOImpl daoImpl = LogOnDAOImpl.getInstance();
-			cnt = daoImpl.baskekcnt(conn, user_id);
+			list = daoImpl.baskekcnt(conn, user_id);
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return cnt;
+		return list;
 		
 	}
 	
