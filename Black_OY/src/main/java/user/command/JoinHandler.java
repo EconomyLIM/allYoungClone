@@ -13,6 +13,7 @@ import com.util.ConnectionProvider;
 import command.CommandHandler;
 import user.domain.OuserDTO;
 import user.persistence.OuserDAOImpl;
+import user.service.JoinService;
 
 
 public class JoinHandler implements CommandHandler{
@@ -42,24 +43,24 @@ public class JoinHandler implements CommandHandler{
 		 String u_tel=  request.getParameter("mob_no");
 		 String u_email=  request.getParameter("email_addr1")+"@"+request.getParameter("email_addr2");
 
-		 Connection conn = ConnectionProvider.getConnection();
-		 OuserDAOImpl dao = new OuserDAOImpl(conn);
 		 OuserDTO dto = OuserDTO.builder()
-				 					.user_id(user_id)
-				 					.u_name(u_name)
-				 					.u_pwd(u_pwd)
-				 					.u_birth(new Date(u_Ybirth,u_Mbirth,u_Dbirth))
-				 					.u_tel(u_tel)
-				 					.u_email(u_email)
-				 					.build();
+				 .user_id(user_id)
+				 .u_name(u_name)
+				 .u_pwd(u_pwd)
+				 .u_birth(new Date(u_Ybirth,u_Mbirth,u_Dbirth))
+				 .u_tel(u_tel)
+				 .u_email(u_email)
+				 .build();
 		 
-			conn.close();
-			
-			request.setAttribute("dto", dto);
-			//회원가입 완료 > 메인페이지로 이동
-			String location = "/";
-		
-			return location;
+		Connection conn = ConnectionProvider.getConnection();
+		JoinService service = JoinService.getInstance();
+		int rowCount =  service.addUser(dto);
+		//회원가입 완료 > 메인페이지로 이동
+		String location ="" ;
+		if (rowCount ==1) {
+			location = "/Black_OY/olive/LogOn.do";
+		}
+		return location;
 		}
 	}
 }
