@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CateSDTO {
 
-	private String cSId;
-	private String cSName;
+	private String csId;
+	private String csName;
 	
 } // class
