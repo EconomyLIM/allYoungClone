@@ -13,6 +13,125 @@
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
+<script>
+$(function () {
+	console.log(window.location.href);
+	$(".loc_history>li").mouseover(function () {
+		$(this).addClass("active");
+		$("history_cate_box").css("display","block");
+	})
+	$(".loc_history>li").mouseleave(function () {
+		$(".loc_history>li").removeClass("active");
+	})
+	
+	$('#btnSaleOpen').on('click', function() {
+		if ($(this).hasClass('is-active')) {
+	        // 이미 클래스가 추가되어 있으면 제거
+	        $(this).removeClass('is-active');
+	        $('#saleLayer').css('display','none');
+	    } else {
+	        // 클래스가 추가되어 있지 않으면 추가
+	        $(this).addClass('is-active');
+	        $('#saleLayer').css('display','block');
+	    }
+		
+	})
+	
+	$('#btnSaleClose').on('click', function () {
+		$(this).parent().css('display','none');
+		$('#btnSaleOpen').removeClass('is-active');
+	})
+	
+}) ; 
+
+// 팝업창 띄우는 함수들
+function popUp() {
+	event.preventDefault();
+	
+    var topPosition = Math.max(0, (window.innerHeight - $('#layer_pop_wrap').offsetHeight) / 2);
+    var leftPosition = Math.max(0, (window.innerWidth - $('#layer_pop_wrap').offsetWidth) / 2);
+    
+    
+	$('#layer_pop_wrap').css({
+		top: topPosition + 'px',
+        left: leftPosition + 'px',
+		display: 'block'});
+	
+	$('.dimm').css('display','block');
+
+} // popUp
+
+function popDown() {
+	event.preventDefault();
+	$('#layer_pop_wrap').css('display','none');
+	$('.dimm').css('display','none');
+} // popDown
+
+function todayDeliveryPop() {
+	event.preventDefault();
+	
+	 var topPosition = Math.max(0, (window.innerHeight - $('#infoTodayDeliveryQuestion').offsetHeight) / 2);
+	 var leftPosition = Math.max(0, (window.innerWidth - $('#infoTodayDeliveryQuestion').offsetWidth) / 2);
+	    
+	$('#infoTodayDeliveryQuestion').css({
+		top: topPosition + 'px',
+        left: leftPosition + 'px',
+		display: 'block'});
+	$('.dimm').css('display','block');
+} // todayDeliveryPop
+
+function todayDeliveryPopDown() {
+	event.preventDefault();
+	$('#infoTodayDeliveryQuestion').css('display','none');
+	$('.dimm').css('display','none');
+} // todayDeliveryPopDown
+
+function cjone_pointPop() {
+	event.preventDefault();
+	
+	 var topPosition = Math.max(0, (window.innerHeight - $('#layerWrap534').offsetHeight) / 2);
+	 var leftPosition = Math.max(0, (window.innerWidth - $('#layerWrap534').offsetWidth) / 2);
+	 
+	 $('#layerWrap534').css({
+			top: topPosition + 'px',
+	        left: leftPosition + 'px',
+			display: 'block'});
+		$('.dimm').css('display','block');
+	
+} // cjone_pointPop
+
+function cjone_pointPopDown() {
+	
+	event.preventDefault();
+	
+	$('#layerWrap534').css('display','none');
+	$('.dimm').css('display','none');
+	
+} // cjone_pointPopDown
+
+function card_infoPop() {
+	event.preventDefault();
+	
+	var topPosition = Math.max(0, (window.innerHeight - $('#layer_pop_wrap2').offsetHeight) / 2);
+	 var leftPosition = Math.max(0, (window.innerWidth - $('#layer_pop_wrap2').offsetWidth) / 2);
+	 
+	 $('#layer_pop_wrap2').css({
+			top: topPosition + 'px',
+	        left: leftPosition + 'px',
+			display: 'block'});
+		$('.dimm').css('display','block');
+	
+} // card_infoPop
+
+function card_infoPopDown() {
+	event.preventDefault();
+	
+	$('#layer_pop_wrap2').css('display','none');
+	$('.dimm').css('display','none');
+	
+} // card_infoPopDown
+
+</script>
 <jsp:include page="/layout/head.jsp"></jsp:include>
 <div id="Container">
         <div id="Contents">
@@ -22,61 +141,38 @@
                 <a href="#" class="loc_home">홈</a>
                 <ul class="loc_history">
                     <li>
-                        <a href="#" class="cate_y" id="midCatNm">스킨케어</a>
+                        <a href="#" class="cate_y" id="midCatNm">${allCateDTO.catLName}</a>
                         <div class="history_cate_box" style="width: 242px;">
                             <ul>
-                                <li data-ref-dispcatno="10000010001" data-ref-catarea="midCatArea"><a href="#"
-                                        class="goods_category1  on  ">스킨케어</a></li>
-                                <li data-ref-dispcatno="10000010009" data-ref-catarea="midCatArea"><a href="#"
-                                        class="goods_category1  ">마스크팩</a></li>
-                                <li data-ref-dispcatno="10000010010" data-ref-catarea="midCatArea"><a href="#"
-                                        class="goods_category1  ">클렌징</a></li>
-                                <li data-ref-dispcatno="10000010011" data-ref-catarea="midCatArea"><a href="#"
-                                        class="goods_category1  ">선케어</a></li>
-                                <li data-ref-dispcatno="10000010008" data-ref-catarea="midCatArea"><a href="#"
-                                        class="goods_category1  ">더모 코스메틱</a></li>
-                                <li data-ref-dispcatno="10000010002" data-ref-catarea="midCatArea"><a href="#"
-                                        class="goods_category1  ">메이크업</a></li>
-                                <li data-ref-dispcatno="10000010012" data-ref-catarea="midCatArea"><a href="#"
-                                        class="goods_category1  ">네일</a></li>
-                                <li data-ref-dispcatno="10000010003" data-ref-catarea="midCatArea"><a href="#"
-                                        class="goods_category1  ">바디케어</a></li>
-                                <li data-ref-dispcatno="10000010004" data-ref-catarea="midCatArea"><a href="#"
-                                        class="goods_category1  ">헤어케어</a></li>
-                                <li data-ref-dispcatno="10000010005" data-ref-catarea="midCatArea"><a href="#"
-                                        class="goods_category1  ">향수/디퓨저</a></li>
-                            </ul>
-                            <ul>
-                                <li data-ref-dispcatno="10000010006" data-ref-catarea="midCatArea"><a href="#"
-                                        class="goods_category1  ">미용소품</a></li>
-                                <li data-ref-dispcatno="10000010007" data-ref-catarea="midCatArea"><a href="#"
-                                        class="goods_category1  ">남성</a></li>
+                            	<c:if test="${not empty cLList }">
+                            		<c:forEach items="${cLList}" var="cll">
+                            			<li id="${cll.cLId}"><a href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${cll.cLId}" class="goods_category1">${cll.cLName}</a></li>
+                            		</c:forEach>
+                            	</c:if>
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <a href="#" class="cate_y" id="smlCatNm">에센스/크림</a>
+                        <a href="#" class="cate_y" id="smlCatNm">${allCateDTO.catMName}</a>
                         <div class="history_cate_box" style="width: 122px;">
                             <ul>
-                                <li data-ref-dispcatno="100000100010008" data-ref-catarea="smlCatArea"><a href="#"
-                                        class="goods_category2  ">토너/로션/올인원</a></li>
-                                <li data-ref-dispcatno="100000100010009" data-ref-catarea="smlCatArea"><a href="#"
-                                        class="goods_category2  on  ">에센스/크림</a></li>
-                                <li data-ref-dispcatno="100000100010010" data-ref-catarea="smlCatArea"><a href="#"
-                                        class="goods_category2  ">미스트/오일</a></li>
+                            	<c:if test="${not empty cMList}">
+                            		<c:forEach items="${cMList}" var="cml">
+                            		<li id="${cml.cmId}"><a href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${allCateDTO.catLId}${cml.cmId}&sort=1" class="goods_category2" >${cml.cmName}</a></li>
+                            		</c:forEach>
+                            	</c:if>
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <a href="#" class="cate_y" id="dtlCatNm">크림</a>
+                        <a href="#" class="cate_y" id="dtlCatNm">${allCateDTO.catSName}</a>
                         <div class="history_cate_box" style="width: 122px;">
                             <ul>
-                                <li data-ref-uprdispcatno="100000100010009 " data-ref-dispcatno="1000001000100090001"
-                                    data-ref-catarea="dtlCatArea"><a href="#" class="goods_category3 ">에센스/세럼</a></li>
-                                <li data-ref-uprdispcatno="100000100010009 " data-ref-dispcatno="1000001000100090002"
-                                    data-ref-catarea="dtlCatArea"><a href="#" class="goods_category3 on ">크림</a></li>
-                                <li data-ref-uprdispcatno="100000100010009 " data-ref-dispcatno="1000001000100090003"
-                                    data-ref-catarea="dtlCatArea"><a href="#" class="goods_category3 ">아이크림</a></li>
+                            	<c:if test="${not empty cSList}">
+                            		<c:forEach items="${cSList}" var="csl">
+                            		<li id="${csl.csId}"><a href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${allCateDTO.catLId}${allCateDTO.catSId}${csl.csId}&sort=1" class="goods_category3" >${csl.csName}</a></li>
+                            		</c:forEach>
+                            	</c:if>
                             </ul>
                         </div>
                     </li>
@@ -89,33 +185,23 @@
                 <div class="left_area">
                     <div class="prd_img">
                         <img id="mainImg"
-                            src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0017/A00000017506009ko.jpg?l=ko"
+                            src="${proDImg[0].proDImgSrc }"
                             alt="상품명 이미지" onerror="common.errorImg(this);">
                         <input type="hidden" id="mainImgSize" value="550">
-                        <!-- 20200526 상품개선 : 추가 / 발색비교 옵션 선택 시 옵션명 변경 및 관련 썸네일로 변경 -->
-                        <div class="prd-option-name"><!-- 노출 시 is-active class 추가 -->
-                            <span class="txt" id="goodstxt">03. 얼모스트 핑크</span>
+
+                        <div class="prd-option-name">
+                        <!-- 노출 시 is-active class 추가 -->
+                            <span class="txt" id="goodstxt"></span>
                         </div>
                     </div>
                     <ul class="prd_thumb_list" id="prd_thumb_list">
-                        <input type="hidden" id="snsImgUrl"
-                            value="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0017/A00000017506009ko.jpg?l=ko">
-                        <li class="sel"><a href="javascript:;"
-                                data-img="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0017/A00000017506009ko.jpg?l=ko"><img
-                                    src="https://image.oliveyoung.co.kr/uploads/images/goods/85/10/0000/0017/A00000017506009ko.jpg?l=ko"
-                                    alt="썸네일이미지" onerror="common.errorImg(this);"></a></li>
-                        <li class=""><a href="javascript:;"
-                                data-img="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0017/A00000017506004ko.jpg?l=ko"><img
-                                    src="https://image.oliveyoung.co.kr/uploads/images/goods/85/10/0000/0017/A00000017506004ko.jpg?l=ko"
-                                    alt="썸네일이미지" onerror="common.errorImg(this);"></a></li>
-                        <li class=""><a href="javascript:;"
-                                data-img="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0017/A00000017506011ko.jpg?l=ko"><img
-                                    src="https://image.oliveyoung.co.kr/uploads/images/goods/85/10/0000/0017/A00000017506011ko.jpg?l=ko"
-                                    alt="썸네일이미지" onerror="common.errorImg(this);"></a></li>
-                        <li class=""><a href="javascript:;"
-                                data-img="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0017/A00000017506010ko.jpg?l=ko"><img
-                                    src="https://image.oliveyoung.co.kr/uploads/images/goods/85/10/0000/0017/A00000017506010ko.jpg?l=ko"
-                                    alt="썸네일이미지" onerror="common.errorImg(this);"></a></li>
+                        <input type="hidden" id="snsImgUrl" value="">
+                         <c:if test="${not empty proDImg }">
+                         <c:forEach items="${proDImg}" var="pdi">
+                         <li class="sel"><a href="#"><img src="${pdi.proDImgSrc}" alt="썸네일 이미지"></a></li>
+                         </c:forEach>
+                         
+                         </c:if>
                     </ul>
                     <!-- 202005 상품개선 : 위치 변경 및 마크업 변경 -->
                     <!-- 고객 만족도 및 공유, 재고확인 -->
@@ -152,18 +238,21 @@
                         <p class="prd_brand">
                             <a href="#" id="moveBrandShop" class="pd_arrow_link">가히</a>
                         </p>
-                        <p class="prd_name">가히 멀티밤 리필</p>
+                        <p class="prd_name">${pLists[0].displName }</p>
                         <!-- 202005 상품개선 : 추가 -->
                         <div class="price">
                             <span class="price-1">
-                                <strike>25,000</strike>
+                                <strike>${pLists[0].lowPrice }</strike>
                                 <span>원</span>
                             </span>
                             <span class="price-2">
-                                <strong>17,000</strong>
+                                <strong>${pLists[0].afterPrice}</strong>
                                 <span>원</span>
                             </span>
-                            <button type="button" id="btnSaleOpen" class="btn_more">혜택 정보</button>
+                            <c:if test="${not empty productPromo.promoDId or not empty productPromo.promoCId}">
+                            	<button type="button" id="btnSaleOpen" class="btn_more">혜택 정보</button>
+                            </c:if>
+                            
                             <div id="saleLayer" class="sale_list" style="display:none">
                                 <p class="tit">혜택 정보</p>
                                 <div class="detail">
@@ -172,18 +261,28 @@
                                             <span class="label">판매가</span>
                                             <span class="price">25,000<em>원</em></span>
                                         </div>
+                                        <c:if test="${not empty productPromo.promoDId}">
                                         <div class="price_child">
                                             <div class="flex-item">
                                                 <span class="label">세일
-                                                    (23.11.01 ~ 23.12.30)</span>
-                                                <span class="price">- 8,000<em>원</em></span>
+                                                    (${productPromo.promoDS} ~ ${productPromo.promoDE })</span>
+                                                <span class="price">${productPromo.promoDdis }<em>원</em></span>
                                             </div>
                                         </div>
+                                        </c:if>
+                                        <c:if test="${not empty productPromo.promoCId}">
+                                         <div class="price_child">
+                                        <div class="flex-item">
+														<span class="label">${productPromo.promoCName } (${productPromo.promoCS}~ ${productPromo.promoCE})</span>
+														<span class="price">-${productPromo.cpdis}<em>원</em></span>
+										</div>
+										</div>
+                                        </c:if>
                                     </div>
                                     <div class="list">
                                         <div class="flex-item">
                                             <span class="label"><b>최적가</b></span>
-                                            <span class="price total">17,000<em>원</em></span>
+                                            <span class="price total">${pLists[0].afterPrice}<em>원</em></span>
                                         </div>
                                     </div>
                                 </div>
@@ -191,10 +290,20 @@
                             </div>
                         </div>
                         <p class="prd_flag" id="icon_area">
-                            <span class="icon_flag sale">세일</span>
+                        	<c:if test="${pLists[0].prd eq 1}">
+                        		<span class="icon_flag sale">세일</span>
+                        	</c:if>
+                        	<c:if test="${pLists[0].prc eq 1}">
+                        		<span class="icon_flag coupon">쿠폰</span>
+                        	</c:if>
                             <!-- 기간계 상품, 브랜드 증정품만 아이콘 노출 -->
-                            <span class="icon_flag gift" id="free_gift">증정</span>
+                            <c:if test="${pLists[0].prp eq 1}">
+                            	<span class="icon_flag gift" id="free_gift">증정</span>
+                            </c:if>
+                            <c:if test="${pLists[0].stock eq 1}">
                             <span class="icon_flag delivery" id="quick_yn">오늘드림</span>
+                            </c:if>
+                            
                         </p>
                         <div class="viewArea" id="div_goodsViewNumArea" style="display:none;">
                             <span><span class="viewNum" id="goodsViewNum"></span>명이 보고있어요</span>
@@ -205,7 +314,7 @@
                         <!-- EP 쿠폰영역-->
                         <div class="prd_more_info">
                             <div class="row">
-                                <p class="tit">배송정보<a href="javascript:goods.detail.openDlexFullPop('20','1');"
+                                <p class="tit">배송정보<a href="#" onclick="popUp()"
                                         class="ico_info" style="margin:5px 0 0 7px">배송정보 레이어 열기</a></p>
                                 <p></p>
                                 <ul class="bl_list">
@@ -226,7 +335,7 @@
                                         <span>오늘드림</span>
                                         <div>
                                             2,500원 또는 5,000원
-                                            <a href="javascript:goods.detail.todayDelivery.openQuickPopMidle('question');"
+                                            <a href="#" onclick="todayDeliveryPop()"
                                                 class="ico_info">배송정보 안내 레이어열기</a>
                                         </div>
                                     </li>
@@ -239,8 +348,7 @@
                                                 class="ico_infoMore">자세히 보기</a>
                                         </span>
                                         <p class="tx_addre">
-                                            <span>┖ </span><span class="quickUsrAddr">서울 강동구 풍성로 128 (성내동,
-                                                성내동삼성아파트)</span> 기준
+                                            <span>┖ </span><span class="quickUsrAddr">서울 강동구 </span> 기준
                                             <!-- 202005 상품개선 : tx_cont 위치 변경 -->
                                             <span class="tx_cont">
                                                 <span class="span_dlvTitlNm">1~2시간 내</span> <span
@@ -261,24 +369,17 @@
                             <div class="row">
                                 <p class="tit">결제혜택</p>
                                 <div class="txt_list">
-                                    <p>THE CJ 카드 추가 10%할인 <a href="javascript:goods.detail.openCardFullPop();"
+                                    <p>THE CJ 카드 추가 10%할인 <a href="#" onclick="card_infoPop()"
                                             class="ico_info">카드혜택가 안내 레이어 열기</a></p>
                                     <p>
                                         CJ ONE 포인트 <span class="color-5">BABY OLIVE</span>
                                         0.5% 적립 예상
-                                        <a href="javascript:goods.detail.openCjonepntPop();" class="ico_info">CJ ONE 포인트
+                                        <a href="#" class="ico_info" onclick="cjone_pointPop()">CJ ONE 포인트
                                             예상적립 레이어 열기</a>
                                     </p>
-
-
-
                                 </div>
                             </div>
-
-
                         </div>
-
-
                         <div class="option_add_area">
 
                             <div class="prd_cnt_box">
@@ -678,5 +779,219 @@
             </div>
         </div>
     </div>
+    <div class="layer_pop_wrap" id="layer_pop_wrap" style="z-index: 999; display: none; left: 50%; margin-left: -203.5px;">
+	<div class="layer_cont2 w400" id="dlexAmtCont" data-dlv-cd="20" data-set="true">
+		<h2 class="layer_title2">배송비 안내</h2>
+
+		<dl class="oy_dlex">
+			<dt class="bold_str"><span id="dlvShpStr">올리브영</span> 배송</dt>
+			<dd><span id="dlexAmt">2,500</span>원</dd>
+		</dl>
+		<dl class="add_dlex_amt">
+			<dt class="bold_str">추가 배송비</dt>
+			<dd></dd>
+		</dl>
+		<dl class="dlex_amt_info">
+			<dt>도서산간</dt>
+			<dd><span id="ferryRgnDlexAmt">2,500</span>원</dd>
+		</dl>
+		<dl class="dlex_amt_info">
+			<dt>제주지역</dt>
+			<dd><span id="jejuDlexAmt">2,500</span>원</dd>
+		</dl>
+		<dl class="dlex_amt_info">
+			<dt>제주도서산간</dt>
+			<dd><span id="jejuFerryRgnDlexAmt">7,000</span>원</dd>
+		</dl>
+		<button class="layer_close type2" onclick="popDown()">창 닫기</button>
+	</div>
+</div>
+<div class="layer_pop_wrap w500 layer_todelivery" id="infoTodayDeliveryQuestion" style="z-index: 999; display: none; left: 50%; margin-left: -250px;">
+	<div class="layer_header">
+		<h2 class="layer_title">오늘드림 서비스 안내</h2>
+		<button class="layer_close" onclick="todayDeliveryPopDown();">창 닫기</button>
+	</div>
+	<div class="layer_cont layer_scroll_box">
+		<div class="area_logo">
+			<h3 class="logo"><img src="https://static.oliveyoung.co.kr/pc-static-root/image/product/img_todelivery_v2.png" alt=""></h3>
+			<p class="txt">올리브영에서 가장 빠른 배송으로 받고싶다면?<br>지금! 오늘드림 4가지 서비스를 경험해보세요!</p>
+		</div>
+		<div class="area_detail">
+			<div class="bx_detail">
+				<h4 class="tit icon01">배송 및 픽업 가능 지역</h4>
+				<div class="bx_info">
+					<p class="desc">전국 <span class="sub_desc">(정확한 서비스 가능여부는 배송지 등록을 통해서 확인가능)</span></p>
+				</div>
+			</div>
+			<div class="bx_detail type_img">
+				<h4 class="tit icon02">픽업 방법 및 비용</h4>
+				<div class="bx_info">
+					<div class="item_info">
+						<img src="https://static.oliveyoung.co.kr/pc-static-root/image/product/img_today_01.png" class="img_info type01">
+						<img src="https://static.oliveyoung.co.kr/pc-static-root/image/product/flag_today_01.png" class="flag" alt="픽업">
+						<p class="desc">온라인에서 주문하고 매장에서 픽업!</p>
+						<p class="sub_desc">배송비 조건 없음</p>
+					</div>
+				</div>
+				<a href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000100720116" class="btn_link"><span class="btn_txt">픽업 서비스 자세히 보기</span></a>
+			</div>
+			<div class="bx_detail type_img">
+				<h4 class="tit icon03">배송 방법 및 비용</h4>
+				<div class="bx_info">
+					<div class="item_info">
+						<img src="https://static.oliveyoung.co.kr/pc-static-root/image/product/img_today_02.png" class="img_info type02">
+						<img src="https://static.oliveyoung.co.kr/pc-static-root/image/product/flag_today_02.png" class="flag" alt="낮 3-4시 3!4!배송">
+						<p class="desc">낮 1시까지 주문 시, 오늘 낮 3~4시 배송 도착</p>
+						<p class="sub_desc">배송비 2,500원(3만원 이상 무료배송)</p>
+					</div>
+					<div class="item_info">
+						<img src="https://static.oliveyoung.co.kr/pc-static-root/image/product/img_today_03.png" class="img_info type03">
+						<img src="https://static.oliveyoung.co.kr/pc-static-root/image/product/flag_today_03.png" class="flag" alt="밤 10-12시 미드나잇배송">
+						<p class="desc">밤 8시까지 주문 시, 오늘 밤 10~12시 배송도착</p>
+						<p class="sub_desc">배송비 2,500원(3만원 이상 무료배송)</p>
+					</div>
+					<div class="item_info">
+						<img src="https://static.oliveyoung.co.kr/pc-static-root/image/product/img_today_04.png" class="img_info type04">
+						<img src="https://static.oliveyoung.co.kr/pc-static-root/image/product/flag_today_04.png" class="flag" alt="주문 후, +3시간 빠름배송">
+						<p class="desc">밤 8시까지 주문 시, 주문 후 3시간 이내 배송 도착</p>
+						<p class="sub_desc">배송비 5,000원(3만원 이상 무료배송)</p>
+					</div>
+				</div>
+				<a href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000100700005" class="btn_link btn_link2"><span class="btn_txt">오늘드림 사용 설명서 보기</span></a>
+			</div>
+			<div class="bx_detail">
+				<h4 class="tit icon04">교환 및 반품</h4>
+				<div class="bx_info">
+					<dl class="lst_desc">
+						<div class="item_desc">
+							<dt>교환</dt>
+							<dd>회수 기사님을 통해 물류센터로 상품 교환 (단, 매장을 통한 교환 불가)</dd>
+						</div>
+						<div class="item_desc">
+							<dt>반품</dt>
+							<dd>2가지 중 선택 가능
+								<ul class="lst_sub_desc">
+								<li class="item_sub_desc">회수 택배 기사님을 통해 물류센터로 반품</li>
+								<li class="item_sub_desc">오프라인 매장에 방문하여 직접 반품</li>
+								</ul>
+							</dd>
+						</div>
+					</dl>
+				</div>
+			</div>
+			<a href="#" class="btn_confirm" id="todayBtnConfirm" onclick="javascript:goods.detail.todayDelivery.layerClose();"><span class="btn_txt">확인</span></a>
+		</div>
+		<ul class="lst_notice">
+			<li class="item_notice">매장 상품 출발대기 전까지 주문취소가 가능합니다.</li>
+			<li class="item_notice">서비스 특성상 주문 이후 배송지 변경은 어렵습니다.</li>
+			<li class="item_notice">상품 수령 보관장소가 여의치 않은 경우 자동 반송처리 될 수 있으며, 반송에 의한 반품비는 고객 부담으로 처리됩니다.</li>
+			<li class="item_notice">일반 배송비 쿠폰은 오늘드림 주문에 적용되지 않습니다.</li>
+			<li class="item_notice">기상상태에 따라 배송이 지연 또는 취소될 수 있습니다.</li>
+			<li class="item_notice">주문 확인 시 재고가 부족한 경우, 부득이하게 주문이 취소될 수 있습니다.</li>
+		</ul>
+	</div>
+</div>
+
+<!-- 팝업 창 키면 나오는 배경 -->
+<div class="dimm" style="z-index:990; display:none;"></div>
+
+<!-- 등급별 포인트 팝업 -->
+<div class="layer_pop_wrap ly_cjone_point show" id="layerWrap534" style="z-index: 999; display: none; left: 50%; margin-left: -250px; top: 362.5px;">
+	<div class="layer_cont2">
+		<h2 class="layer_title2">등급별 CJ ONE 포인트 적립</h2>	
+		<div class="cjoneBox">
+			<table class="table_type">
+				<caption>등급별 CJ ONE 포인트 적립표</caption>
+				<colgroup><col style="width:50%;"><col style="width:50%;"></colgroup>
+				<thead>
+					<tr>
+						<th>등급</th>
+						<th>적립률</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr>
+						<th>
+							<div class="icon_group">
+								<span class="icon_grade icon_grade1"></span>
+								<span class="txt_grade">GOLD OLIVE</span>
+							</div>
+						</th>
+						<td><em>1%</em></td>
+					</tr>
+
+					<tr>
+						<th>
+							<div class="icon_group">
+								<span class="icon_grade icon_grade2"></span>
+								<span class="txt_grade">BLACK OLIVE</span>
+							</div>
+						</th>
+						<td><em>1%</em></td>
+					</tr>
+
+					<tr>
+						<th>
+							<div class="icon_group">
+								<span class="icon_grade icon_grade3"></span>
+								<span class="txt_grade">GREEN OLIVE</span>
+							</div>
+						</th>
+						<td><em>1%</em></td>
+					</tr>
+
+					<tr>
+						<th>
+							<div class="icon_group">
+								<span class="icon_grade icon_grade4"></span>
+								<span class="txt_grade">PINK OLIVE</span>
+							</div>
+						</th>
+						<td><em>0.5%</em></td>
+					</tr>
+
+					<tr>
+						<th>
+							<div class="icon_group">
+								<span class="icon_grade icon_grade5"></span>
+								<span class="txt_grade">BABY OLIVE</span>
+							</div>
+						</th>
+						<td><em>0.5%</em></td>
+					</tr>
+
+				</tbody>
+			</table>
+			<div class="usage-guide mgT20">
+				<ul class="">
+					<li>일부 제휴카드 / 임직원 카드로 결제 시 0.1% 적립</li>
+					<li>복합 결제 진행 시 포인트 적립액 상이 가능</li>
+				</ul>
+			</div>
+		</div>
+		<div class="layer_btn_area mgT20">
+			<button class="btnMedium fullGreen w120" onclick="cjone_pointPopDown();">닫기</button>
+		</div>
+		<button class="layer_close type2" onclick="cjone_pointPopDown();">창 닫기</button>
+	</div>	
+</div>
+
+<!-- 카드 할인 혜택 팝업 -->
+<div class="layer_pop_wrap" id="layer_pop_wrap2" style="z-index: 999; display: none; left: 50%; margin-left: -325px; top: 532px;">
+	<div class="layer_cont2 w650">
+		<h2 class="layer_title2">카드할인혜택</h2>
+
+		<dl class="card_info_data">
+			<dt>THE CJ카드</dt>
+			<dd>결제 시 10% 할인 (BC 카드 제외)</dd>
+		</dl>
+
+
+	
+
+		<button class="layer_close type2" onclick="card_infoPopDown()">창 닫기</button>
+	</div>
+</div>
 </body>
 </html>

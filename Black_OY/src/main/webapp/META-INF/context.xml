@@ -4,7 +4,7 @@
 				auth="Container"
               	type="javax.sql.DataSource" 
               	driverClassName="oracle.jdbc.OracleDriver"
-              	url="jdbc:oracle:thin:@192.168.10.183:1521:xe"
+              	url="jdbc:oracle:thin:@127.0.0.1:1521:xe"
               	username="scott" password="tiger" maxTotal="20" maxIdle="10"
               	maxWaitMillis="-1"/> <!-- 기다리고 있느 커넥션풀가 있으면 몇초를 기다리게 할건지 -1이면 무한대 --> 
               	

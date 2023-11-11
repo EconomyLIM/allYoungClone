@@ -172,10 +172,11 @@ function changePerPage(value) { // perPage 수정
 function changePerPageAndClass(value) {
 	  const perPage = value.toString();
 	  const currentURL = new URL(window.location.href);
-		
+	  
 	  // Set 'perPage' parameter value
 	  currentURL.searchParams.set('perPage', perPage);
-
+	  
+	  
 	  // Go to the new URL with updated 'perPage' parameter
 	  window.location.href = currentURL;
 
@@ -444,7 +445,7 @@ function changePerPageAndClass(value) {
 
 							<li class="flag">
 								<div class="prd_info">
-									<a href="do?${pml.productID}" class="prd_thumb goodsList"
+									<a href="<%=contextPath%>/olive/productDetail.do?goodsNo=${pml.displId}&displNum=<%=midId %>" class="prd_thumb goodsList"
 										name=""> <img src="${pml.displImgSrc}" alt="사진"
 										class="completed-seq-lazyload" />
 									</a>
@@ -498,7 +499,7 @@ function changePerPageAndClass(value) {
 
 		<div class="pageing">
 			<c:if test="${pDto.prev }">
-				<a class="prev" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${pDto.start-1}<%=s %>" data-page-no="1">이전 10
+				<a class="prev" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${pDto.start-1}<%=s %>&perPage=${param.perPage}" data-page-no="1">이전 10
 				페이지</a>
 			</c:if>
 			<c:forEach var="i" begin="${pDto.start }" end="${pDto.end }" step="1">
@@ -509,12 +510,12 @@ function changePerPageAndClass(value) {
 					</c:when>
 					<c:otherwise>
 						<a
-							href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${i}<%=s %>">${i }</a>
+							href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${i}<%=s %>&perPage=${param.perPage}">${i }</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${pDto.next }">
-				<a class="next" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${pDto.end+1}<%=s %>" data-page-no="21">다음 10 페이지</a>
+				<a class="next" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${pDto.end+1}<%=s %>&perPage=${param.perPage}" data-page-no="21">다음 10 페이지</a>
 			</c:if>
 			<!-- <strong title="현재 페이지">1</strong> -->
 		</div>

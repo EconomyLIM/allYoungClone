@@ -67,7 +67,7 @@ public class PMidListHandler implements CommandHandler{
 		PageDTO pageDTO = null;
 		
 		if( request.getParameter("perPage") == null || request.getParameter("perPage") == "") {
-			perPage = 1;
+			perPage = 24;
 		} else if (request.getParameter("perPage") != null) {
 			perPage = Integer.parseInt(request.getParameter("perPage"));
 		} //if else
