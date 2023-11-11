@@ -482,7 +482,7 @@ function changePerPageAndClass(value) {
 									<!-- 리뷰점수 추가 -->
 									
 									<p class="prd_btn_area">
-										<button class="cartBtn" data-ref-goodsno="A000000188420" data-ref-dispcatno="100000100010009" data-ref-itemno="001">장바구니</button>
+										<button class="cartBtn" id="${pml.displId }" data-ref-goodsno="A000000188420" data-ref-dispcatno="100000100010009" data-ref-itemno="001">장바구니</button>
 										<button class="btn_new_pop goodsList" name="Cat100000100010009_MID">새창보기</button>
 									</p>
 									
@@ -521,8 +521,10 @@ function changePerPageAndClass(value) {
 	</div>
 
 
+ <div id="displItem"></div>
+
 <!-- 팝업창 -->
-<div class="layer_pop_wrap w490" id="basketOption" style="z-index: 999; display: none; left: 50%; margin-left: -245px; top: 871.5px;" data-quick-yn="N">
+<!-- <div class="layer_pop_wrap w490" id="basketOption" style="z-index: 999; display: none; left: 50%; margin-left: -245px; top: 871.5px;" data-quick-yn="N">
 
 	<div class="layer_cont2">
 		<h2 class="layer_title2">선택완료</h2>
@@ -537,7 +539,7 @@ function changePerPageAndClass(value) {
 				<button class="layer_close type2">창 닫기</button>
 	</div>	
 </div>
-
+ -->
 
 
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -565,8 +567,28 @@ $(document).ready(function() {
 		})
 		
 		$(".cartBtn").click(function(){
-			$("#basketOption").css("display","block");
-		})
+			let displID = $(this).attr("id");
+			
+			let data = {
+					displID: displID
+				}
+			
+			$.ajax({
+				
+				
+				url: "<%=contextPath%>/olive/itemlist.do",
+				data:data,
+				cache: false,
+				success:function( response ) {
+		              $("#displItem").empty();
+		              $("#displItem").append( response );
+		          }
+		        , error		: function() {
+		            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+		        }
+			})
+		});
+		
 		
 		$(".layer_close.type2").click(function(){
 			$("#basketOption").css("display","none");
