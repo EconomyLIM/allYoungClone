@@ -10,6 +10,7 @@ import java.util.List;
 import com.util.JDBCUtil;
 
 import basket.domain.BasketDTO;
+import basket.domain.ItemListDTO;
 
 public class BasketDAOImpl implements BasketDAO{
 	
@@ -171,5 +172,125 @@ public class BasketDAOImpl implements BasketDAO{
 		}
 		return 0;
 	}
+	
+	// 장바구니 버튼 클릭시 상품 목록 출력
+	@Override
+	public List<ItemListDTO> itemList(Connection conn, String displID) {
+		// TODO Auto-generated method stub
+		ArrayList<ItemListDTO> itemlist = null; 
+		ItemListDTO itemListDTO = null;
+		
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		String sql = " Select pro_id, pro_name, pro_price from product  where pro_displ_id = ?  ";
+		
+		String pro_id;
+		String pro_name;
+		String pro_price;
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, displID);
+			rs = psmt.executeQuery();
+			
+			if (rs.next()) {
+				itemlist = new ArrayList<ItemListDTO>();
+				do {
+					pro_id = rs.getString("pro_id");
+					pro_name = rs.getString("pro_name");
+					pro_price = rs.getString("pro_price");
+					itemListDTO = new ItemListDTO(pro_id, pro_name, pro_price);
+					itemlist.add(itemListDTO);
+				} while (rs.next());
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		}
+		
+		return itemlist;
+	}
+	
+
+	@Override
+	public int basketCheck(Connection conn, String user_id, String productid) {
+		String sql = " Select user_id, product_id, product_cnt from basket where user_id = ? AND product_id = ? ";
+		
+		PreparedStatement psmt = null;
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, user_id);
+			psmt.setString(2, productid);
+			
+			int row  = psmt.executeUpdate();
+			
+			return row;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(conn);
+		}
+		return 0;
+	}
+
+	//장바구니 업데이트
+	@Override
+	public int basketUpdate(Connection conn, String user_id, String productid) {
+		// TODO Auto-generated method stub
+		String sql = " UPDATE basket SET product_cnt = product_cnt + 1 WHERE user_id = ? AND product_id = ? ";
+		PreparedStatement psmt = null;
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, user_id);
+			psmt.setString(2, productid);
+			int row  = psmt.executeUpdate();
+			
+			return row;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(conn);
+		}
+		return 0;
+	}
+	
+	// 장바구니 추가
+	@Override
+	public int basketinsert(Connection conn, String user_id, String productid) {
+		// TODO Auto-generated method stub
+		String sql = " INSERT INTO basket (basket_id, user_id, product_id, product_cnt) "
+				+ "VALUES ('nb_' || TO_CHAR(basket_seq.NEXTVAL, 'FM00000000'), ?, ?, 1) ";
+		PreparedStatement psmt = null;
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, user_id);
+			psmt.setString(2, productid);
+			int row  = psmt.executeUpdate();
+			
+			return row;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(conn);
+		}
+		return 0;
+	}
+
+	
 
 }
