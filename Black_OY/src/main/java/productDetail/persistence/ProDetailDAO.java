@@ -34,5 +34,9 @@ public interface ProDetailDAO {
 	// 6. 해당 상품의 표시 이미지 갖고오기
 	public List<ProDisplImgDTO> productImgs(Connection conn, String displId) throws Exception;
 	
+	// 리뷰에 쓸 sql
+	//Select rev_id, pro_displ_id, user_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2, rev_grade_3 from review  where pro_displ_id = 'pd_00000006';
+
+	//Select rev_img_src from review_img where rev_id = rev_id;
 	
 } // interface

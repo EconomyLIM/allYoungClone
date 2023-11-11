@@ -72,6 +72,19 @@ if(request.getParameter("perPage")!= null){
 <script src="/Black_OY/js/head.js"></script>
 <link rel="stylesheet" href="/BlackOY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
+<style>
+	.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경색, 투명도 조절 가능 */
+    z-index: 998; /* 모달보다 한 단계 낮은 z-index */
+}
+	
+	
+</style>
 </head>
 <script>
 $(function () {
@@ -524,6 +537,7 @@ function changePerPageAndClass(value) {
 
  <div id="displItem"></div>
 
+
 <!-- 팝업창 -->
 <!-- <div class="layer_pop_wrap w490" id="basketOption" style="z-index: 999; display: none; left: 50%; margin-left: -245px; top: 871.5px;" data-quick-yn="N">
 
@@ -568,6 +582,10 @@ $(document).ready(function() {
 		})
 		
 		$(".cartBtn").click(function(){
+			
+			addModalBackdrop();
+
+			
 			let displID = $(this).attr("id");
 			
 			let data = {
@@ -583,6 +601,7 @@ $(document).ready(function() {
 				success:function( response ) {
 		              $("#displItem").empty();
 		              $("#displItem").append( response );
+		              
 		          }
 		        , error		: function() {
 		            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
@@ -596,6 +615,11 @@ $(document).ready(function() {
 		})
 		
 	})
+	
+	function addModalBackdrop() {
+    var backdrop = $('<div class="modal-backdrop"></div>');
+    $("body").append(backdrop);
+}
 	
 </script>
 
