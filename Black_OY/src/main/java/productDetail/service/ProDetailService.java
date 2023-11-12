@@ -10,6 +10,7 @@ import productDetail.domain.AllCateDTO;
 import productDetail.domain.CateLDTO;
 import productDetail.domain.CateMDTO;
 import productDetail.domain.CateSDTO;
+import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
 import productDetail.domain.ProductPromo;
@@ -171,7 +172,30 @@ public class ProDetailService {
 		return list;
 	} // sProductImgs
 	
-	
+	//====================== 현재 상품의 설명 이미지를 갖고오는 작업 =========================
+	public List<DetailExImgDTO> sDetailExImg (String displId){
+		
+		Connection conn = null;
+		List<DetailExImgDTO> list = null;
+		
+		try {
+			
+			conn = ConnectionProvider.getConnection();
+			ProDetailDAOImpl proDetailDAOImpl = ProDetailDAOImpl.getInstance();
+			list = proDetailDAOImpl.detailExImg(conn, displId);
+			
+		} catch (Exception e) {
+			
+			System.out.println("ProDetailSerivce sDetailExImg Exception");
+			e.printStackTrace();
+			
+		} finally {
+			JDBCUtil.close(conn);
+		} // try_catch
+		
+		return list;
+		
+	} // sDetailExImg
 	
 	
 	
