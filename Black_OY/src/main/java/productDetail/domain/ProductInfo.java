@@ -16,6 +16,7 @@ public class ProductInfo {
 	private String brandId;
 	private String brandName;
 	private String displOpt;
+	private String proImg;
 	private String proId;
 	private String proName;
 	private String catSId;
