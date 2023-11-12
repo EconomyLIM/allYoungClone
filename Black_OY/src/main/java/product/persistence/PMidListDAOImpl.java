@@ -349,7 +349,7 @@ public class PMidListDAOImpl  implements PMidListDAO{
 					lId = rs.getString("cat_l_id");
 					midId = rs.getString("cat_m_id");
 					sId = rs.getString("cat_s_id");
-					proPrice = rs.getString("pro_price");
+					proPrice = rs.getString("proprice");
 					afterPrice = rs.getString("afterprice");
 					displId = rs.getString("pro_displ_id");
 					productID = rs.getString("pro_id");
