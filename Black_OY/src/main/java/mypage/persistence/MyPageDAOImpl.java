@@ -112,6 +112,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		}finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		return UserCouponCount;
 	}
@@ -147,9 +148,9 @@ public class MyPageDAOImpl implements MypageDAO {
 	@Override
 	public List<MpPlikeDTO> selectUserPlike(Connection conn, String Uid) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT user_id "
-				+ " ,pdi.pro_displ_src, b.brand_name, pd.pro_displ_name "
-				+ " ,a.pro_price "
+		String sql = " SELECT ROWNUM "
+				+ " ,pdi.pro_displ_src src , b.brand_name bname, pd.pro_displ_name displname "
+				+ " ,a.pro_price pricep "
 				+ " , "
 				+ " NVL(CASE  "
 				+ "         WHEN prc.promo_c_kind = 1 THEN a.pro_price + prc.promo_c_discount "
@@ -159,7 +160,7 @@ public class MyPageDAOImpl implements MypageDAO {
 				+ " , 0) "
 				+ " + "
 				+ " NVL(prd.promo_d_discount,0) as afterprice "
-				+ " , pd.pro_displ_id, p.pro_id "
+				+ " , pd.pro_displ_id displid, p.pro_id pid "
 				+ " ,CASE  "
 				+ "         WHEN prc.promo_c_s <= SYSDATE AND prc.promo_c_e >= SYSDATE THEN '1' "
 				+ "         ELSE '0' "
@@ -207,13 +208,14 @@ public class MyPageDAOImpl implements MypageDAO {
 			
 			do {
 				dto = new MpPlikeDTO();
-				dto.setPlImgsrc(rs.getString("pdi.pro_displ_src"));
-				dto.setPlbrand(rs.getString("b.brand_name"));
-				dto.setPlpdispN(rs.getString("pd.pro_displ_name"));
-				dto.setPlpricep(rs.getString("a.pro_price"));
+				dto.setRowNum(rs.getInt("ROWNUM"));
+				dto.setPlImgsrc(rs.getString("src"));
+				dto.setPlbrand(rs.getString("bname"));
+				dto.setPlpdispN(rs.getString("displname"));
+				dto.setPlpricep(rs.getString("pricep"));
 				dto.setPlpricea(rs.getString("afterprice"));
-				dto.setPlpdispId(rs.getString("pd.pro_displ_id"));
-				dto.setPlpId(rs.getString("p.pro_id"));
+				dto.setPlpdispId(rs.getString("displid"));
+				dto.setPlpId(rs.getString("pid"));
 				dto.setPmc(rs.getInt("pmc"));
 				dto.setPmd(rs.getInt("pmd"));
 				dto.setPmp(rs.getInt("pmp"));
@@ -222,10 +224,11 @@ public class MyPageDAOImpl implements MypageDAO {
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		} catch (Exception e) {
-			System.out.println("> MyPageDAOImpl_selectUserInfo() Exception");
+			System.out.println("> MyPageDAOImpl_selectUserPlike() Exception");
 		}
 		
 		return list;

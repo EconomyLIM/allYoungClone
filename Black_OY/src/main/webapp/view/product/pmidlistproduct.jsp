@@ -72,10 +72,23 @@ if(request.getParameter("perPage")!= null){
 <script src="/Black_OY/js/head.js"></script>
 <link rel="stylesheet" href="/BlackOY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
+<style>
+	.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경색, 투명도 조절 가능 */
+    z-index: 998; /* 모달보다 한 단계 낮은 z-index */
+}
+	
+	
+</style>
 </head>
 <script>
 $(function () {
-
+	console.log(window.location.href);
 	$(".loc_history>li").mouseover(function () {
 		$(this).addClass("active");
 		$("history_cate_box").css("display","block");
@@ -112,9 +125,10 @@ $(function () {
 	if (<%=smallcol%> == ("0000")) {
 		$('#Contents > ul.cate_list_box li.first').addClass('on') ; 
 	}
-
+	
 	$("div.count_sort.tx_num > ul > li").removeClass("on");
 	$("div.count_sort.tx_num > ul > li").eq(<%=getPPval%>).addClass("on");
+	
 	console.log('?<%=request.getQueryString()%>');
 
 	var urlParams = new URLSearchParams(window.location.search);
@@ -171,10 +185,11 @@ function changePerPage(value) { // perPage 수정
 function changePerPageAndClass(value) {
 	  const perPage = value.toString();
 	  const currentURL = new URL(window.location.href);
-
+	  
 	  // Set 'perPage' parameter value
 	  currentURL.searchParams.set('perPage', perPage);
-
+	  
+	  
 	  // Go to the new URL with updated 'perPage' parameter
 	  window.location.href = currentURL;
 
@@ -443,7 +458,7 @@ function changePerPageAndClass(value) {
 
 							<li class="flag">
 								<div class="prd_info">
-									<a href="do?${pml.productID}" class="prd_thumb goodsList"
+									<a href="<%=contextPath%>/olive/productDetail.do?goodsNo=${pml.displId}&displNum=<%=midId %>" class="prd_thumb goodsList"
 										name=""> <img src="${pml.displImgSrc}" alt="사진"
 										class="completed-seq-lazyload" />
 									</a>
@@ -481,7 +496,7 @@ function changePerPageAndClass(value) {
 									<!-- 리뷰점수 추가 -->
 									
 									<p class="prd_btn_area">
-										<button class="cartBtn" data-ref-goodsno="A000000188420" data-ref-dispcatno="100000100010009" data-ref-itemno="001">장바구니</button>
+										<button class="cartBtn" id="${pml.displId }" data-ref-goodsno="A000000188420" data-ref-dispcatno="100000100010009" data-ref-itemno="001">장바구니</button>
 										<button class="btn_new_pop goodsList" name="Cat100000100010009_MID">새창보기</button>
 									</p>
 									
@@ -497,7 +512,7 @@ function changePerPageAndClass(value) {
 
 		<div class="pageing">
 			<c:if test="${pDto.prev }">
-				<a class="prev" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${(param.currentpage+9)/10*10+1}<%=s %>" data-page-no="1">이전 10
+				<a class="prev" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${pDto.start-1}<%=s %>&perPage=${param.perPage}" data-page-no="1">이전 10
 				페이지</a>
 			</c:if>
 			<c:forEach var="i" begin="${pDto.start }" end="${pDto.end }" step="1">
@@ -508,20 +523,23 @@ function changePerPageAndClass(value) {
 					</c:when>
 					<c:otherwise>
 						<a
-							href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${i}<%=s %>">${i }</a>
+							href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${i}<%=s %>&perPage=${param.perPage}">${i }</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${pDto.next }">
-				<a class="next" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${(param.currentpage-(param.currentpage%1))/10+1}<%=s %>" data-page-no="21">다음 10 페이지</a>
+				<a class="next" href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=${param.displNum}&sort=${param.sort}&currentpage=${pDto.end+1}<%=s %>&perPage=${param.perPage}" data-page-no="21">다음 10 페이지</a>
 			</c:if>
 			<!-- <strong title="현재 페이지">1</strong> -->
 		</div>
 	</div>
 
 
+ <div id="displItem"></div>
+
+
 <!-- 팝업창 -->
-<div class="layer_pop_wrap w490" id="basketOption" style="z-index: 999; display: none; left: 50%; margin-left: -245px; top: 871.5px;" data-quick-yn="N">
+<!-- <div class="layer_pop_wrap w490" id="basketOption" style="z-index: 999; display: none; left: 50%; margin-left: -245px; top: 871.5px;" data-quick-yn="N">
 
 	<div class="layer_cont2">
 		<h2 class="layer_title2">선택완료</h2>
@@ -536,7 +554,7 @@ function changePerPageAndClass(value) {
 				<button class="layer_close type2">창 닫기</button>
 	</div>	
 </div>
-
+ -->
 
 
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
@@ -564,14 +582,44 @@ $(document).ready(function() {
 		})
 		
 		$(".cartBtn").click(function(){
-			$("#basketOption").css("display","block");
-		})
+			
+			addModalBackdrop();
+
+			
+			let displID = $(this).attr("id");
+			
+			let data = {
+					displID: displID
+				}
+			
+			$.ajax({
+				
+				
+				url: "<%=contextPath%>/olive/itemlist.do",
+				data:data,
+				cache: false,
+				success:function( response ) {
+		              $("#displItem").empty();
+		              $("#displItem").append( response );
+		              
+		          }
+		        , error		: function() {
+		            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+		        }
+			})
+		});
+		
 		
 		$(".layer_close.type2").click(function(){
 			$("#basketOption").css("display","none");
 		})
 		
 	})
+	
+	function addModalBackdrop() {
+    var backdrop = $('<div class="modal-backdrop"></div>');
+    $("body").append(backdrop);
+}
 	
 </script>
 

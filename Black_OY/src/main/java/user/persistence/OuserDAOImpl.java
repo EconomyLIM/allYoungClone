@@ -18,17 +18,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import user.domain.OuserDTO;
 
-@NoArgsConstructor
-@Setter
-@Getter
-@AllArgsConstructor
 public class OuserDAOImpl implements OuserDAO {
 	
-	private Connection conn = null;
+	private OuserDAOImpl() {}
+	private static OuserDAOImpl instance = new OuserDAOImpl();
+	public static OuserDAOImpl getInstance() {
+		return instance;
+	}
+	
 	
 	//회원가입여부 체크
 	@Override
-	public OuserDTO joinCheck(String u_tel) throws SQLException {
+	public OuserDTO joinCheck(Connection conn, String u_tel) throws SQLException {
 
 	      String sql = " SELECT * "
 	      		+ " FROM( "
@@ -41,7 +42,7 @@ public class OuserDAOImpl implements OuserDAO {
 		  
 		  OuserDTO dto= null;
 
-	      pstmt = this.conn.prepareStatement(sql); 
+	      pstmt = conn.prepareStatement(sql); 
 	      pstmt.setString(1, u_tel);
 	      rs = pstmt.executeQuery();      
 	      if( rs.next() ) {
@@ -60,18 +61,18 @@ public class OuserDAOImpl implements OuserDAO {
 	
 	//회원가입
 	@Override
-	public int join(OuserDTO dto) throws SQLException {
+	public int join( Connection conn, OuserDTO dto) throws SQLException {
 		int rowCount = 0;
-		String sql = "INSERT INTO o_user (user_id, u_name, u_pwd, u_tel, u_birth, u_email "
+		String sql = "INSERT INTO o_user (user_id, u_name, u_pwd, u_tel, u_birth, u_email) "
 				+ " VALUES (?, ?, ?, ?, ?, ? ) ";
 		PreparedStatement pstmt = null;
 
-		pstmt = this.conn.prepareStatement(sql); 
+		pstmt = conn.prepareStatement(sql); 
 		pstmt.setString(1,  dto.getUser_id() );
 		pstmt.setString(2,  dto.getU_name() );
 		pstmt.setString(3,  dto.getU_pwd() );
 		pstmt.setString(4,  dto.getU_tel() );
-		pstmt.setDate(5,  (Date) dto.getU_birth());
+		pstmt.setDate(5,   new Date(dto.getU_birth().getTime()) );
 		pstmt.setString(6,  dto.getU_email() );
 		rowCount = pstmt.executeUpdate();
 

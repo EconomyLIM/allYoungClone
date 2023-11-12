@@ -461,7 +461,7 @@
 								<span>로그인</span>하시면 자주가는 매장을 <br>관심 매장으로 설정 할 수 있습니다.
 							</p>
 							<button class="mymenu_btn"
-								onclick="javascript:common.link.moveLoginPage();">로그인</button>
+								onclick="javascript:location.href='<%=contextPath%>/olive/LogOn.do'">로그인</button>
 						</div></li>
 					<li class="recent"><a onclick="recProductView()" href="#"
 						class="mymenu_layer" title="최근 본 상품 자세히보기 열기/닫기">최근 본 상품</a>

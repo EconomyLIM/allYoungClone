@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MpPlikeDTO {
-	
+		
+		private int rowNum;					//상품좋아요 rownnum
 		private String plImgsrc;			//상품좋아요 이미지경로
 		private String plbrand;				//상품좋아요 브랜드명
 		private String plpdispN;			//상품좋아요 상품표시명			

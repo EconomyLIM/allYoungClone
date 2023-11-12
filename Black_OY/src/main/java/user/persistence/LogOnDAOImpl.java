@@ -23,7 +23,9 @@ public class LogOnDAOImpl implements LogOnDAO{
 	public LogOnDTO logselect(Connection conn, String user_id, String u_pwd) {
 		
 		LogOnDTO logdto = null; 
-		String sql = "Select user_id, u_name, u_pwd, gr_name From O_USER ou join OLIVE_MEMBERS om on ou.grade_id = om.grade_id Where user_id = ? AND u_pwd = ? ";
+		String sql = "SELECT user_id, u_name, u_pwd, u_tel, u_birth, u_email, u_point, gr_name "
+				+ " From O_USER ou join OLIVE_MEMBERS om on ou.grade_id = om.grade_id "
+				+ " Where user_id = ? AND u_pwd = ? ";
 		
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -34,7 +36,16 @@ public class LogOnDAOImpl implements LogOnDAO{
 			psmt.setString(2, u_pwd);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
-					logdto = new LogOnDTO(rs.getString("user_id"),rs.getString("u_name") , rs.getString("u_pwd"), rs.getString("gr_name"));
+				logdto = LogOnDTO.builder()
+							.user_id(rs.getString("user_id"))
+							.u_name(rs.getString("u_name"))
+							.u_pwd(rs.getString("u_pwd"))
+							.u_tel(rs.getString("u_tel"))
+							.u_birth(rs.getString("u_birth"))
+							.u_email(rs.getString("u_email"))
+							.u_point(rs.getInt("u_point"))
+							.grade_id(rs.getString("gr_name"))
+							.build();
 			}
 			
 		} catch (Exception e) {

@@ -27,15 +27,18 @@ public class JoinCheckHandler implements CommandHandler{
 		 System.out.println(tel);
 		 
 		 Connection conn = ConnectionProvider.getConnection();
-		 OuserDAOImpl dao = new OuserDAOImpl(conn);
+		 OuserDAOImpl dao = OuserDAOImpl.getInstance();
 		 OuserDTO dto = null;
 			try {
-				dto = dao.joinCheck(tel);
+				dto = dao.joinCheck(conn,tel);
 			} catch (SQLException e) {
 				System.out.println("> JoinCheckHandler.process Exception!");
 				e.printStackTrace();
 			}
 			conn.close();
+			
+			request.setAttribute("dto", dto);
+			
 			String location = "";
 			
 			HttpSession session = request.getSession();
@@ -45,14 +48,11 @@ public class JoinCheckHandler implements CommandHandler{
 			session.setAttribute("u_birth", u_birth);
 			
 			if (dto ==null) {
-				location = "/join/agreement.jsp";
+				location = "/view/join/agreement.jsp";
 			} else {
-				location = "/join/join_already.jsp";
+				location = "/view/join/join_already.jsp";
 			}
-			
-		
 			return location;
-	
 	}
 
 }
