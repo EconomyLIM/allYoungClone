@@ -349,7 +349,7 @@ public class PMidListDAOImpl  implements PMidListDAO{
 					lId = rs.getString("cat_l_id");
 					midId = rs.getString("cat_m_id");
 					sId = rs.getString("cat_s_id");
-					proPrice = rs.getString("pro_price");
+					proPrice = rs.getString("proprice");
 					afterPrice = rs.getString("afterprice");
 					displId = rs.getString("pro_displ_id");
 					productID = rs.getString("pro_id");
@@ -502,8 +502,41 @@ public class PMidListDAOImpl  implements PMidListDAO{
 
 	//================================ 상단 카테고리 작업 =====================================
 
+
+
 	//================================ 총 레코드 수 구하기 =====================================
-	// (브랜드 추가 작업 완료)
+	@Override
+	public int getTotalRecords(Connection conn, int group, String mId) throws SQLException {
+
+		int totalRecords = 0;
+
+		String sql = "SELECT COUNT(*) "
+				+ " FROM pmlistview ";
+
+		if (group == 1) {
+			sql += " WHERE cat_l_id = ? ";
+		} else if(group ==2) {
+			sql += " WHERE cat_m_id = ? ";
+		} else if(group == 3) {
+			sql += " WHERE cat_s_id = ? ";
+		}//if else
+
+		PreparedStatement pstmt = null;
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, mId);
+		ResultSet rs =  pstmt.executeQuery();
+
+		if( rs.next() )  totalRecords = rs.getInt(1);
+
+		JDBCUtil.close(pstmt);
+		JDBCUtil.close(rs);
+		JDBCUtil.close(conn);
+
+		return totalRecords;
+
+	} // getTotalRecords
+	
+	// 총 레코드 수 구하기 (브랜드 추가)
 	@Override
 	public int getTotalRecords(Connection conn, int group, String mId, String[] brands) throws SQLException {
 		int totalRecords = 0;
@@ -554,7 +587,39 @@ public class PMidListDAOImpl  implements PMidListDAO{
 	} // getTotalRecords
 
 	//================================ 총 페이지 구하기 =====================================
-	// (브랜드 추가 작업 완료)
+
+	@Override
+	public int getTotalPages(Connection conn,int group, int numberPerPage, String mId) throws SQLException {
+		int totalPages = 0;
+
+		String sql = "SELECT CEIL( COUNT(*)/ ? ) " 
+				+ " FROM pmlistview ";
+
+		if (group == 1) {
+			sql += " WHERE cat_l_id = ? ";
+		} else if(group ==2) {
+			sql += " WHERE cat_m_id = ? ";
+		} else if(group == 3) {
+			sql += " WHERE cat_s_id = ? ";
+		}//if else
+
+		PreparedStatement pstmt = null;
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, numberPerPage);		
+		pstmt.setString(2, mId);		
+		
+		ResultSet rs =  pstmt.executeQuery();
+
+		if( rs.next() )  totalPages = rs.getInt(1);
+
+		JDBCUtil.close(pstmt);
+		JDBCUtil.close(rs);
+		JDBCUtil.close(conn);
+
+		return totalPages;
+	} // getTotalPages
+	
+	// 총 페이지 구하기 (브랜드 추가 작업 완료)
 	@Override
 	public int getTotalPages(Connection conn, int group, int numberPerPage, String mId, String[] brands)
 			throws SQLException {
