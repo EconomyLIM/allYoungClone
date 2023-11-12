@@ -39,7 +39,7 @@ public class pwdUpdateHandler implements CommandHandler{
 	
 			request.setAttribute("dto", dto);
 	
-			String location = "";
+			String location = " ";
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("u_pwd", u_pwd);
