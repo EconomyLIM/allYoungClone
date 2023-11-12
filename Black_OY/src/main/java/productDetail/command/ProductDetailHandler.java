@@ -1,6 +1,5 @@
 package productDetail.command;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +10,7 @@ import productDetail.domain.AllCateDTO;
 import productDetail.domain.CateLDTO;
 import productDetail.domain.CateMDTO;
 import productDetail.domain.CateSDTO;
+import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
 import productDetail.domain.ProductPromo;
@@ -26,7 +26,7 @@ public class ProductDetailHandler implements CommandHandler{
 		String goodsNo = request.getParameter("goodsNo");
 		ProDetailService proDetailService = ProDetailService.getinstance();
 		
-		//=======================  해당 상품의 모든 상위 정보 ===========================	
+		//=======================  해당 상품의 모든 상위칸에 있는 정보 ===========================	
 		List<ProductInfo> pLists = proDetailService.sProductInfo(goodsNo); 
 		ProductInfo productInfo = pLists.get(0);
 		request.setAttribute("pLists", pLists); // 상품 상단 정보 리스트
@@ -55,9 +55,16 @@ public class ProductDetailHandler implements CommandHandler{
 		
 		//======================= 해당 상품의 이미지 갖고오기 ===========================
 		List<ProDisplImgDTO> proDImg = proDetailService.sProductImgs(goodsNo);
-		request.setAttribute("proDImg", proDImg);
+		request.setAttribute("proDImg", proDImg); // 상품의 표시 이미지 갖고오기 
 
-		//=======================  ===========================
+		//======================= 해당 상품의 설명 이미지 갖고오기 ===========================
+		List<DetailExImgDTO> exImg = proDetailService.sDetailExImg(goodsNo);
+		if (exImg == null) {
+			request.setAttribute("noexImg", "상품 설명을 준비중입니다. <br><br><br>");
+		} else {
+			request.setAttribute("exImg", exImg);
+		} // if else
+	
 		
 		
 		

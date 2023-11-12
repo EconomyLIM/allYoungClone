@@ -19,19 +19,39 @@ public class BasketDAOImpl implements BasketDAO{
 	public static BasketDAOImpl getInstance() {
 		return instance;
 	}
-
+	
+	/*
+	String sql = " SELECT pro_displ_src, brand_name, pro_displ_name "
+			+ " , cat_l_id, cat_m_id, cat_s_id "
+			+ " , pro_price, afterprice "
+			+ " , pro_displ_id, pro_id "
+			+ " , prc, pdc, pmp, stock "
+			+ " , ordercnt, pro_displ_like, pro_reg "
+			+ " , basket_id,user_id,product_cnt, pro_name "
+			+ " FROM pmlistviewbasket join "; 
+	if (quickyn != null && quickyn.equals("Y")) {
+		sql+=  " BASKET_TD ";
+	}else if(quickyn == null || quickyn.equals("") ||quickyn.equals("N") ){
+		sql+= " BASKET ";
+	}
+	
+	sql += " on pro_id = product_id " 
+		+" where user_id = ? ";
+*/
+	
+	
+	
 	@Override
 	public List<BasketDTO> basketList(Connection conn, String user_id, String quickyn) {
 		ArrayList<BasketDTO> basketList = null; 
 		BasketDTO basketDTO = null;
-		String sql = " SELECT pro_displ_src, brand_name, pro_displ_name "
-				+ " , cat_l_id, cat_m_id, cat_s_id "
-				+ " , pro_price, afterprice "
-				+ " , pro_displ_id, pro_id "
-				+ " , prc, pdc, pmp, stock "
-				+ " , ordercnt, pro_displ_like, pro_reg "
-				+ " , basket_id,user_id,product_cnt, pro_name "
-				+ " FROM pmlistviewbasket join "; 
+		String sql = " SELECT MIN(pro_displ_src) AS pro_displ_src, brand_name, pro_displ_name, "
+				+ " cat_l_id, cat_m_id, cat_s_id, pro_price, afterprice, "
+				+ " pro_displ_id, pro_id, prc, pdc, pmp, stock, "
+				+ " ordercnt, pro_displ_like, pro_reg, basket_id, user_id, "
+				+ " product_cnt, pro_name "
+				+ " FROM pmlistviewbasket JOIN";
+				
 		String basketT = null;
 		if (quickyn != null && quickyn.equals("Y")) {
 			sql+=  " BASKET_TD ";
@@ -40,7 +60,11 @@ public class BasketDAOImpl implements BasketDAO{
 		}
 		
 		sql += " on pro_id = product_id " 
-			+" where user_id = ? ";
+			+" where user_id = ? "
+			+" GROUP BY brand_name, pro_displ_name, cat_l_id, cat_m_id, cat_s_id,\r\n"
+			+ "      pro_price, afterprice, pro_displ_id, pro_id,\r\n"
+			+ "      prc, pdc, pmp, stock, ordercnt, pro_displ_like,\r\n"
+			+ "      pro_reg, basket_id, user_id, product_cnt, pro_name ";
 		
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -72,6 +96,7 @@ public class BasketDAOImpl implements BasketDAO{
 			
 			//System.out.println(basketT);
 			System.out.println("qu:"+quickyn);
+			System.out.println(sql);
 //			psmt.setString(1, basketT);
 			psmt.setString(1, user_id);
 			rs = psmt.executeQuery();
