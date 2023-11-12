@@ -11,6 +11,9 @@ public interface OuserDAO {
 	OuserDTO joinCheck(Connection conn, String u_tel) throws SQLException;
 	//회원가입
 	int join( Connection conn, OuserDTO dto) throws SQLException;
+	//비밀번호 변경
+	OuserDAO pwdUpdate(Connection conn, String u_pwd) throws SQLException;
+	//회원정보수정
 	
 }
 
