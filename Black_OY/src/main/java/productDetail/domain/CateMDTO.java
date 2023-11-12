@@ -5,11 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class CateMDTO {
 	
-	private String cMId;
-	private String cMName;
+	private String cmId;
+	private String cmName;
 	 
 } // class

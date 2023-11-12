@@ -16,12 +16,16 @@ public class ProductInfo {
 	private String brandId;
 	private String brandName;
 	private String displOpt;
-	private String productId;
-	private int beforePrice;
+	private String proId;
+	private String proName;
+	private String catSId;
+	private int proPrice;
+	private int lowPrice;
 	private int afterPrice;
-	private String prc;
-	private String prd;
-	private String prp;
-	private String stock;
+	private int prg;
+	private int prc;
+	private int prd;
+	private int prp;
+	private int stock;
 	
 } // class
