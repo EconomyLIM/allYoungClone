@@ -15,6 +15,7 @@ import productDetail.domain.AllCateDTO;
 import productDetail.domain.CateLDTO;
 import productDetail.domain.CateMDTO;
 import productDetail.domain.CateSDTO;
+import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
 import productDetail.domain.ProductPromo;
@@ -242,7 +243,7 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 	//================================ 선택한 상품 정보 보여주는 작업=====================================
 	@Override
 	public List<ProductInfo> productInfo(Connection conn, String pid) throws Exception {
-		String sql = " SELECT  pro_displ_id, pro_displ_name, brand_id, brand_name, pro_id, pro_name, cat_s_id, pro_price "
+		String sql = " SELECT  pro_displ_id, pro_displ_name, brand_id, brand_name, pro_img_src, pro_id, pro_name, cat_s_id, pro_price "
 				+ ", lowprice, afterprice, prg, prc, prd, prp, stock "
 				+ " FROM proDetail "
 				+ " WHERE pro_displ_id = ? ";
@@ -268,6 +269,7 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 							.displName(rs.getString("pro_displ_name"))
 							.brandId(rs.getString("brand_id"))
 							.brandName(rs.getString("brand_name"))
+							.proImg(rs.getString("pro_img_src"))
 							.proId(rs.getString("pro_id"))
 							.proName(rs.getString("pro_name"))
 							.catSId(rs.getString("cat_s_id"))
@@ -409,6 +411,58 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 		} //try_catch
 		return list;
 	} // productImgs
+
+	//================================ 선택한 상품의 설명 이미지들을 갖고오는 작업===============================
+	@Override
+	public List<DetailExImgDTO> detailExImg(Connection conn, String displId) throws Exception {
+		
+		String sql = " SELECT displ_img_id, displ_img_src FROM pro_displ_eximg "
+				+ " WHERE pro_displ_id = ? "
+				+ " ORDER BY displ_img_id ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		DetailExImgDTO detailExImgDTO = null;
+		List<DetailExImgDTO> list = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, displId);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				
+				System.out.println(">>ProDetailDAOImpl detailExImg...");				
+				list = new ArrayList<>();
+				
+				do {
+					
+					detailExImgDTO = DetailExImgDTO.builder()
+							.exImgId(rs.getString("displ_img_id"))
+							.exImgSrc(rs.getString("displ_img_src"))
+							.build();
+					
+					list.add(detailExImgDTO);
+					
+				} while (rs.next());
+			} // if
+			
+			
+		} catch (SQLException e) {
+			System.out.println(">proDetailDAOImpl detailExImg SQLException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">proDetailDAOImpl detailExImg Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		} //try_catch
+		
+		
+		
+		return list;
+	} // detailExImg
 
 	
 

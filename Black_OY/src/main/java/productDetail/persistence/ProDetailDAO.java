@@ -7,6 +7,7 @@ import productDetail.domain.AllCateDTO;
 import productDetail.domain.CateLDTO;
 import productDetail.domain.CateMDTO;
 import productDetail.domain.CateSDTO;
+import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
 import productDetail.domain.ProductPromo;
@@ -33,6 +34,9 @@ public interface ProDetailDAO {
 	
 	// 6. 해당 상품의 표시 이미지 갖고오기
 	public List<ProDisplImgDTO> productImgs(Connection conn, String displId) throws Exception;
+	
+	// 7. 해당 상품의 설명 이미지 갖고오기
+	public List<DetailExImgDTO> detailExImg(Connection conn, String displId) throws Exception;
 	
 	
 } // interface
