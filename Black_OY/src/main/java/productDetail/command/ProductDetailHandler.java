@@ -1,6 +1,5 @@
 package productDetail.command;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +54,7 @@ public class ProductDetailHandler implements CommandHandler{
 		
 		//======================= 해당 상품의 이미지 갖고오기 ===========================
 		List<ProDisplImgDTO> proDImg = proDetailService.sProductImgs(goodsNo);
-		request.setAttribute("proDImg", proDImg);
+		request.setAttribute("proDImg", proDImg); // 상품의 표시 이미지 갖고오기 
 
 		//=======================  ===========================
 		
