@@ -819,7 +819,7 @@
 					<li style=""><a onclick="" href="#"
 						data-ref-linkurl="main/getMembership.do" data-attr="공통^GNB^멤버십/쿠폰"><span>멤버십/쿠폰</span>
 					</a></li>
-					<li style=""><a onclick="" href="#"
+					<li style=""><a onclick="" href="<%=contextPath %>/olive/event.do"
 						data-ref-linkurl="main/getEventList.do" data-attr="공통^GNB^이벤트"><span>이벤트</span>
 					</a></li>
 				</ul>

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import head.domain.EventDTO;
 import head.domain.GiftCardDTO;
 
 public interface HeadDAO {
@@ -15,4 +16,10 @@ public interface HeadDAO {
 
 	// 3. 해당 아이디의 기트프카드 얻기
 	GiftCardDTO selectOneGiftCard(Connection conn, String giftCard_id) throws SQLException;
+
+	// 4. 이벤트 리스트 전체 얻어오기
+	List<EventDTO> selectAllEvent(Connection conn, String type) throws SQLException;
+
+	// 5. 선택한 이벤트 얻어오기
+	EventDTO selectOneEvent(Connection conn, String event_id);
 }
