@@ -8,8 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="/Black_OY/js/head.js"></script>
 
 <title>블랙올리브영 온라인몰</title>
@@ -240,7 +239,7 @@
 					<a href="<%=contextPath %>/mypage/orderDelivery.do" class="order_view"
 						data-attr="마이페이지^주문배송조회_요약건수">
 						<ul class="mypage-step">
-							<c:forEach items="${ userOrder }" var="order">
+							<c:forEach items="${ userOrderState }" var="order">
 								<li><em> <%-- 주문접수 --%> ${ order.uorderState1 }
 								</em> <span>주문접수</span></li>
 								<li><em> <%-- 결제완료 --%> ${ order.uorderState2 }
@@ -333,7 +332,7 @@
 														<p class="stit">
 
 															<strong style="background:#ff7f00">${ pa.paskState }</strong>
-															<a href="javascript:mypage.main.goQnaList(5100536);">${ pa.paskQuestion }</a>
+															<a href="<%-- 1:1문의 페이지 - 해당문의로 이동 --%>">${ pa.paskQuestion }</a>
 															<span class="data">${ pa.paskDate }</span>
 														</p>	
 													</li>
@@ -364,7 +363,7 @@
 												<li>
 													<p class="stit">
 														<strong style="background:#ff7f00">${ qa.qnaState }</strong>
-														<a href="javascript:mypage.main.goQnaList(5100536);">${ qa.qnaQus }</a>
+														<a href="<%-- QnA페이지 - 해당QnA페이지로 이동 --%>">${ qa.qnaQus }</a>
 														<span class="data">${ qa.qnaDate }</span>
 													</p>	
 												</li>

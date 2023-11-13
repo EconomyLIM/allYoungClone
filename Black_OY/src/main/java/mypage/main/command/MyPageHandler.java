@@ -45,7 +45,7 @@ public class MyPageHandler implements CommandHandler {
 		List<MpPAskDTO> userpAsk = null;
 		List<MpQnADTO> userQnA = null;
 		int userRevCount = 0;
-		List<MpOrderStateDTO> userOrder = null;
+		List<MpOrderStateDTO> userOrderState = null;
 		
 		userInfo = service.mpUIservice(userId);
 		userPoint = service.mpUPservice(userId);
@@ -55,7 +55,7 @@ public class MyPageHandler implements CommandHandler {
 		userpAsk = service.mpUPAservice(userId);
 		userQnA = service.mpUQnAservice(userId);
 		userRevCount = service.mpURservice(userId);
-		userOrder = service.mpUOservice(userId);
+		userOrderState = service.mpUOservice(userId);
 		
 		
 		
@@ -67,7 +67,7 @@ public class MyPageHandler implements CommandHandler {
 		request.setAttribute("userpAsk", userpAsk);
 		request.setAttribute("userQnA", userQnA);
 		request.setAttribute("userRevCount", userRevCount);
-		request.setAttribute("userOrder", userOrder);
+		request.setAttribute("userOrderState", userOrderState);
 		
 		return "/view/mypage/mypage.jsp";
 	}

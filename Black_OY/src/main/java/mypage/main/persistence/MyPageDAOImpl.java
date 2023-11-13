@@ -25,7 +25,7 @@ public class MyPageDAOImpl implements MypageDAO {
 	
 	
 	@Override
-	public List<MpUserInfoDTO> selectUserInfo(Connection conn, String Uid) throws Exception {
+	public List<MpUserInfoDTO> selectUserInfo(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		String sql = " SELECT gr_name, u_name  "
 				+ " FROM O_user u left join olive_members m on u.grade_id = m.grade_id "
@@ -36,7 +36,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, Uid);
+		pstmt.setString(1, uId);
 		rs = pstmt.executeQuery();
 		MpUserInfoDTO dto = null;
 		if (rs.next()) {
@@ -62,7 +62,7 @@ public class MyPageDAOImpl implements MypageDAO {
 
 
 	@Override
-	public int selectUserPoint(Connection conn, String Uid) throws Exception {
+	public int selectUserPoint(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		int UserPoint = 0;
 		String sql = " SELECT U_POINT "
@@ -73,7 +73,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, Uid);
+			pstmt.setString(1, uId);
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
@@ -90,7 +90,7 @@ public class MyPageDAOImpl implements MypageDAO {
 	}
 
 	@Override
-	public int selectUserCoupon(Connection conn, String Uid) throws Exception {
+	public int selectUserCoupon(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		int UserCouponCount = 0;
 		
@@ -102,7 +102,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, Uid);
+			pstmt.setString(1, uId);
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
@@ -118,7 +118,7 @@ public class MyPageDAOImpl implements MypageDAO {
 	}
 
 	@Override
-	public int selectUserDeposit(Connection conn, String Uid) throws Exception {
+	public int selectUserDeposit(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		int UserDeposit = 0;
 		
@@ -130,7 +130,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, Uid);
+			pstmt.setString(1, uId);
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
@@ -146,7 +146,7 @@ public class MyPageDAOImpl implements MypageDAO {
 	}
 
 	@Override
-	public List<MpPlikeDTO> selectUserPlike(Connection conn, String Uid) throws Exception {
+	public List<MpPlikeDTO> selectUserPlike(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		String sql = " SELECT ROWNUM "
 				+ " ,pdi.pro_displ_src src , b.brand_name bname, pd.pro_displ_name displname "
@@ -200,7 +200,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, Uid);
+			pstmt.setString(1, uId);
 			rs = pstmt.executeQuery();
 			MpPlikeDTO dto = null;
 		if (rs.next()) {
@@ -235,7 +235,7 @@ public class MyPageDAOImpl implements MypageDAO {
 	}
 
 	@Override
-	public List<MpPAskDTO> selectUserPAsk(Connection conn, String Uid) throws Exception {
+	public List<MpPAskDTO> selectUserPAsk(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		String sql = " SELECT pask_state, pask_content, pask_date, ac_major, ac_minor, pask_ans "
 				+ " FROM personal_ask a left join ask_category c on a.ac_id=c.ac_id "
@@ -247,7 +247,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, Uid);
+		pstmt.setString(1, uId);
 		rs = pstmt.executeQuery();
 		MpPAskDTO dto = null;
 		if (rs.next()) {
@@ -276,7 +276,7 @@ public class MyPageDAOImpl implements MypageDAO {
 	}
 
 	@Override
-	public List<MpQnADTO> selectUserQnA(Connection conn, String Uid) throws Exception {
+	public List<MpQnADTO> selectUserQnA(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		String sql = " SELECT p.pro_displ_name dn , b.brand_name bn, i.pro_displ_src img, qa_que, qa_date, qa_state, qa_ans "
 				+ " FROM qanda q left join product_display p on q.pro_displ_id = p.pro_displ_id "
@@ -290,7 +290,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, Uid);
+		pstmt.setString(1, uId);
 		rs = pstmt.executeQuery();
 		MpQnADTO dto = null;
 		if (rs.next()) {
@@ -319,7 +319,7 @@ public class MyPageDAOImpl implements MypageDAO {
 	}
 
 	@Override
-	public int selectUserRevCount(Connection conn, String Uid) throws Exception {
+	public int selectUserRevCount(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		int UserRevCount = 0;
 		String sql = " SELECT count(*) c "
@@ -330,7 +330,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, Uid);
+			pstmt.setString(1, uId);
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
@@ -347,7 +347,7 @@ public class MyPageDAOImpl implements MypageDAO {
 
 
 	@Override
-	public List<MpOrderStateDTO> selectUserOrderStatus(Connection conn, String Uid) throws Exception {
+	public List<MpOrderStateDTO> selectUserOrderStatus(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		String sql = " SELECT COUNT(CASE WHEN order_status='주문접수' THEN 1 END) AS uorderState1 , "
 				+ "        COUNT(CASE WHEN order_status='결제완료' THEN 1 END) AS uorderState2 , "
@@ -363,7 +363,7 @@ public class MyPageDAOImpl implements MypageDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, Uid);
+			pstmt.setString(1, uId);
 			rs = pstmt.executeQuery();
 			MpOrderStateDTO dto = null;
 		if (rs.next()) {
