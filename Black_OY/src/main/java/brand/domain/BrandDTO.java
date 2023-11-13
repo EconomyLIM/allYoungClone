@@ -7,21 +7,23 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BrandDTO {
+public class BrandDTO { //브랜드 페이지에 사용된 객체들을 담음 
+   
+       private String brand_id; 
+       private String brand_name;
+       private int brand_like;
+       private String brand_summ;
+       private String  brand_expl;
+       private String brand_img_src;
+       private String pro_displ_id;
+       private int pro_price;
+       private String pro_displ_name;
+       private String pro_displ_src;
+       private int pro_displ_like;
+       private String rev_id;
+       private int rev_like;
+       private String rev_content;
+       private int rev_grade;
 	
-	    private String brand_id;  // brand_id
-	    private String brand_name;// brand_name
-	    private int brand_like;
-	    private String brand_summ;
-	    private String brand_expl;	   
-	    private String brand_img_src;
-	    private String pro_displ_id;
-	    private int pro_price;
-	    private String pro_displ_name;
-	    private String pro_displ_src;// PRO_DISPL_SRC;
-	    private String rev_id;
-	    private int rev_like;
-	    private String rev_content;
-	    private int rev_grade; 
-	   
+  
 }
