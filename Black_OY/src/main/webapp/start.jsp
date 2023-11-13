@@ -49,6 +49,7 @@
 
 <a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=00010002&sort=1&currentpage=1&brandId=br_00000108&brandId=br_00000107">Mid,smallproductList</a>
 <a href="<%=contextPath%>/olive/productDetail.do?displNum=00010002">productDetail</a>
+<a href="<%=contextPath%>/olive/review.do">review</a>
 <img src="images/productDisplay/pthi_101.jpg" alt="123"></img>
 <br>
 <br>
