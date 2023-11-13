@@ -224,22 +224,7 @@
 			 					str_msg = str_msg.replace(/\\n/g, '\n');
 			 					alert(str_msg);
 			 				}
-			 				$('#pwd').val('');
-			 				//location.replace("/cjmweb"+ data.reqBox.action_url );
-			 			}else if(data.reqBox.result_code == "3" ){
-			 				// 페이지 변경
-			 				if(  str_msg != "undefined" && str_msg != null && str_msg != '' ){
-			 					str_msg = str_msg.replace(/\\n/g, '\n');
-			 					alert(dstr_msg);
-			 				}
-			 				$("#form1").attr("action", "/cjmweb" + data.reqBox.action_url);
-			 				$("#form1").submit();
-			 			}else if(data.reqBox.result_code == "1"){
-			 				// 비밀번호 확인완료 및 수정페이지 이동
-			 				$("#__chkpwd").val(data.reqBox.__chkpwd);
-			 				$("#form1").attr("action", "/cjmweb" + data.reqBox.action_url);
-			 				$("#form1").submit();
-			 			}
+
 			 		}, 
 			 		error: function(xhr) {
 			 		      //에러

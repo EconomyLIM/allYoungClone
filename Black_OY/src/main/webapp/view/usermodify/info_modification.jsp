@@ -1,3 +1,4 @@
+<%@page import="java.sql.Date"%>
 <%@page import="user.domain.OuserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -12,6 +13,21 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <body>
+<%
+	String u_name = (String)session.getAttribute("u_name");
+	String user_id = (String)session.getAttribute("user_id");
+	String u_pwd = (String)session.getAttribute("u_pwd");
+	String u_tel = (String)session.getAttribute("u_tel");
+	String u_email = (String)session.getAttribute("u_email");
+	System.out.println(u_name);
+	System.out.println(user_id);
+	System.out.println(u_pwd);
+	System.out.println(u_tel);
+	System.out.println(u_email);
+	
+
+%>
+
 	<!--skip navigation-->
 	<div class="skipNavi">
 		<a href="#contentsWrap">본문으로 바로가기</a>
@@ -72,7 +88,7 @@
 				<input type="hidden" id="under_14"	name="under_14" value="N">
 				<input type="hidden" id="agr30_yn" name="agr30_yn" value=""> 
 				<input	type="hidden" id="agrbrnd_yn" name="agr_yn" value="">
-				<input 	type="hidden" id="mbr_id" name="mbr_id" value="jy*****"> 
+				<input 	type="hidden" id="mbr_id" name="mbr_id" value=""> 
 				<input 	type="hidden" name="access_token" id="access_token" value="">
 				<input type="hidden" name="sns_typ_cd" id="sns_typ_cd" value="">
 				<input type="hidden" name="sns_typ_cd_10" id="sns_typ_cd_10" value="">
@@ -97,8 +113,7 @@
 					<div class="location_wrap">
 						<div class="location">
 							<a href="usermodify.jsp" class="home"><span class="haze">홈</span></a>
-							<a href="pwdCheck.jsp" class="now"><span>회원정보
-									수정</span></a>
+							<a href="pwdCheck.jsp" class="now"><span>회원정보 수정</span></a>
 						</div>
 					</div>
 					<!-- //location -->
@@ -116,9 +131,8 @@
 									<div class="info">
 
 										<a id="auth_btn_area" href="javascript:callAuthLayer()"
-											 class="btn btn_sm"><span class="arr">전체 정보 확인
-												및 수정</span></a> <a
-											href="https://www.cjone.com/cjmweb/member/withdrawal.do?coopco_cd=7030&amp;brnd_cd=3000&amp;mcht_no=3000"
+											 class="btn btn_sm"><span class="arr">전체 정보 확인 및 수정</span></a>
+											 <a href="https://www.cjone.com/cjmweb/member/withdrawal.do?coopco_cd=7030&amp;brnd_cd=3000&amp;mcht_no=3000"
 											class="btn btn_sm"><span class="arr">회원탈퇴</span></a>
 									</div>
 								</div>
@@ -137,7 +151,7 @@
 												<th scope="row">이름</th>
 												<td>
 													<div class="input_group">
-														<span id="hg_nm_area">이*영</span> <a href="#"
+														<span id="hg_nm_area"></span> <a href="#"
 															class="btn btn_sm" id="lnChangeName"><span
 															class="arr">변경하기</span></a>
 													</div>
@@ -147,7 +161,7 @@
 
 											<tr>
 												<th scope="row">아이디</th>
-												<td><span id="mbr_id_area">jy*****</span></td>
+												<td><span id="mbr_id_area"><%=user_id %></span></td>
 											</tr>
 
 											<tr class="input">
@@ -189,7 +203,7 @@
 																<option value="1996">1996</option>,
 																<option value="1995">1995</option>,
 																<option value="1994">1994</option>,
-																<option value="1993" selected="">1993</option>,
+																<option value="1993">1993</option>,
 																<option value="1992">1992</option>,
 																<option value="1991">1991</option>,
 																<option value="1990">1990</option>,
@@ -325,7 +339,7 @@
 																		<li><a href="#1996"><span>1996</span></a></li>
 																		<li><a href="#1995"><span>1995</span></a></li>
 																		<li><a href="#1994"><span>1994</span></a></li>
-																		<li><a href="#1993" data-selected="true"><span>1993</span></a></li>
+																		<li><a href="#1993"><span>1993</span></a></li>
 																		<li><a href="#1992"><span>1992</span></a></li>
 																		<li><a href="#1991"><span>1991</span></a></li>
 																		<li><a href="#1990"><span>1990</span></a></li>
@@ -436,7 +450,7 @@
 																<option value="02">02</option>,
 																<option value="03">03</option>,
 																<option value="04">04</option>,
-																<option value="05" selected="">05</option>,
+																<option value="05">05</option>,
 																<option value="06">06</option>,
 																<option value="07">07</option>,
 																<option value="08">08</option>,
@@ -460,7 +474,7 @@
 																		<li><a href="#02"><span>02</span></a></li>
 																		<li><a href="#03"><span>03</span></a></li>
 																		<li><a href="#04"><span>04</span></a></li>
-																		<li><a href="#05" data-selected="true"><span>05</span></a></li>
+																		<li><a href="#05"><span>05</span></a></li>
 																		<li><a href="#06"><span>06</span></a></li>
 																		<li><a href="#07"><span>07</span></a></li>
 																		<li><a href="#08"><span>08</span></a></li>
@@ -495,7 +509,7 @@
 																<option value="12">12</option>,
 																<option value="13">13</option>,
 																<option value="14">14</option>,
-																<option value="15" selected="">15</option>,
+																<option value="15">15</option>,
 																<option value="16">16</option>,
 																<option value="17">17</option>,
 																<option value="18">18</option>,
@@ -538,7 +552,7 @@
 																		<li><a href="#12"><span>12</span></a></li>
 																		<li><a href="#13"><span>13</span></a></li>
 																		<li><a href="#14"><span>14</span></a></li>
-																		<li><a href="#15" data-selected="true"><span>15</span></a></li>
+																		<li><a href="#15"><span>15</span></a></li>
 																		<li><a href="#16"><span>16</span></a></li>
 																		<li><a href="#17"><span>17</span></a></li>
 																		<li><a href="#18"><span>18</span></a></li>
@@ -585,12 +599,12 @@
 												<th scope="row"><label for="mob_no_1">휴대전화번호</label></th>
 												<td>
 													<div>
-														<span class="input_txt w100 phon_write" id="mobileNoInfo">010
-															- **** - 8785</span> <input type="hidden" name="mob_no_1"
-															id="mob_no_1" value="010" disabled="disabled"> <input
-															type="hidden" name="mob_no_2" id="mob_no_2" value="****"
+														<span class="input_txt w100 phon_write" id="mobileNoInfo"><%=u_tel %></span>
+														<input type="hidden" name="mob_no_1"
+															id="mob_no_1" value="010" disabled="disabled">
+															<input type="hidden" name="mob_no_2" id="mob_no_2" value="****"
 															disabled="disabled"> <input type="hidden"
-															name="mob_no_3" id="mob_no_3" value="8785"
+															name="mob_no_3" id="mob_no_3" value=""
 															disabled="disabled"> <a
 															href="javascript:void(0);"
 															onclick="callAuthLayerMobChgAuth();" class="btn btn_sm"><span
@@ -661,7 +675,17 @@
 												</td>
 											</tr>
 
-
+				<script>
+				$("#email_addr2").val( $("#email_addr_opt").val() );
+				$("#email_addr_opt").change(function () {
+					$("#email_addr2").val( $("#email_addr_opt").val() );
+				});
+				</script>
+				<%-- <script>
+				let tel = "<%=u_tel%>";
+				let strAll = "010" + str1.replace(str1, '****') +str2;
+				$("#mob_no").val(strAll);
+				</script> --%>
 
 
 
