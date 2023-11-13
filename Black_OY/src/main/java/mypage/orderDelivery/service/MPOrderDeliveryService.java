@@ -10,6 +10,7 @@ import mypage.orderDelivery.domain.MPODOrderDTO;
 import mypage.orderDelivery.domain.MPODdeliveryDTO;
 import mypage.orderDelivery.persistence.MPOrderDeliveryDAOImpl;
 
+
 public class MPOrderDeliveryService {
 	
 	private static MPOrderDeliveryService instance = null;
@@ -21,8 +22,8 @@ public class MPOrderDeliveryService {
 		return instance;
 	}	// getinstance()
 	
-	//1. 주문목록 가져오기 서비스
-	public List<MPODOrderDTO> mpODdeliveryService(String uId){
+	//1.	주문목록 가져오기 서비스
+	public List<MPODOrderDTO> mpODorderService(String uId){
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
@@ -32,13 +33,47 @@ public class MPOrderDeliveryService {
 			return list;
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("> MPOrderDeliveryService.mpODdeliveryService Exception");
+			System.out.println("> MPOrderDeliveryService.mpODorderService Exception");
 		} finally {
 			JDBCUtil.close(conn);
 		}
 		return null;
 	}
 	
-	//2.  상세 주문목록 가져오기 서비스
+	//2.	상세 주문목록 가져오기 서비스
+	public List<MPODOrderDTO> mpODorderdetailService(String oId){
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			MPOrderDeliveryDAOImpl daoImpl = MPOrderDeliveryDAOImpl.getinstance();
+			List<MPODOrderDTO> list = null;
+			list = daoImpl.selectUOrder(conn, oId);
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("> MPOrderDeliveryService.mpODorderdetailService Exception");
+		} finally {
+			JDBCUtil.close(conn);
+		}
+		return null;
+	}
+	//3.	주문 배송지 가져오기 서비스
+	public List<MPODdeliveryDTO> mpODdeliveryService(String oId){
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			MPOrderDeliveryDAOImpl daoImpl = MPOrderDeliveryDAOImpl.getinstance();
+			List<MPODdeliveryDTO> list = null;
+			list = daoImpl.selectUODelivery(conn, oId);
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("> MPOrderDeliveryService.mpODdeliveryService Exception");
+		}finally {
+			JDBCUtil.close(conn);
+		}
+		return null;
+	}
+	//4.	주문 결제 가져오기 서비스
 	
 }
