@@ -166,7 +166,7 @@
 							</ul></li>
 						<li><h2>마이 정보</h2>
 							<ul>
-								<li class="subMenu on"><a href="javascript:;"
+								<li class="subMenu on"><a href="<%=contextPath %>/olive/usermodify.do"
 									mymenuid="0501"
 									data-ref-linkurl="https://www.oliveyoung.co.kr/store/mypage/getMktReceiptInfo.do"
 									data-attr="마이페이지^메뉴^회원정보 수정"
@@ -194,9 +194,6 @@
 				<!-- //마이페이지 SUB 메뉴 -->
 				<!-- //마이페이지 SUB -->
 
-
-
-
 				<!-- 데이터입력 -->
 				<div class="mypage-conts">
 					<script
@@ -216,10 +213,8 @@
 						<p class="txt">회원 정보 및 비밀번호는 CJ ONE 사이트를 통해 수정 가능합니다.</p>
 						<p class="txt">(카카오 간편회원은 CJ ONE에서 통합회원 전환하여 비밀번호 설정/수정 가능)</p>
 						<ul class="btn_pos">
-							<li><a href="javascript:;" class="btn_move"><span>회원정보
-										수정</span></a></li>
-							<li><a href="javascript:;" class="btn_move"><span>비밀번호
-										수정</span></a></li>
+							<li><a href="<%=contextPath %>/olive/pwdCheck.do" class="btn_move"><span>회원정보 수정</span></a></li>
+							<li><a href="pwd_modification.jsp" class="btn_move"><span>비밀번호 수정</span></a></li>
 						</ul>
 					</div>
 					<div class="modify_box line mgT40">

@@ -23,7 +23,7 @@ public class PwdCheckHandler implements CommandHandler{
 		String user_id=  request.getParameter("user_id"); 
 		String u_pwd=  request.getParameter("u_pwd");
 
-		 
+
 		System.out.println(u_pwd);
 		 
 		Connection conn = ConnectionProvider.getConnection();
@@ -38,15 +38,12 @@ public class PwdCheckHandler implements CommandHandler{
 			conn.close();
 			
 			request.setAttribute("dto", dto);
-			
-			String location = "";
-			
+
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("user_id", user_id);
 			session.setAttribute("u_pwd", u_pwd);
 			
-			location = "/view/usermodify/info_modification.jsp";
-			return location;
+			return ;
 	}
 }

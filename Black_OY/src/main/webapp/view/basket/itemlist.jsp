@@ -16,10 +16,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <title>블랙올리브영 온라인몰</title>
+<style>
+	#basketOption{
+	position: fixed;
+top: 50%;
+left: 50%;
+-webkit-transform: translate(-50%, -50%);
+-moz-transform: translate(-50%, -50%);
+-ms-transform: translate(-50%, -50%);
+-o-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+
+	}
+	
+</style>
 </head>
 <body>
 
-	<div class="layer_pop_wrap w490" id="basketOption" style="z-index: 999; display: block; left: 50%; margin-left: -245px; top: 1037px;">
+	<div class="layer_pop_wrap w490" id="basketOption" style="z-index: 999; display: block;">
 
    
 
@@ -111,7 +125,7 @@
 </div>
 
  <!-- 장바구니 추가 버튼클릭시  -->
-<div class="layer_pop_wrap w490 test" id="basketOption" style="z-index: 999; display: none; left: 50%; margin-left: -245px; top: 1031px;" data-quick-yn="N">
+<div class="layer_pop_wrap w490 test" id="basketOption" style="z-index: 999; display: none;" data-quick-yn="N">
 
 
 	<div class="layer_cont2">
@@ -149,6 +163,7 @@ $(function(){
 	})
 	
 	$(".closepopup").click(function(){
+		 $(".modal-backdrop").remove();
 		$("#displItem").empty();
 	})
 	
