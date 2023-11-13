@@ -14,25 +14,25 @@ import com.util.ConnectionProvider;
 import command.CommandHandler;
 import user.domain.OuserDTO;
 import user.persistence.OuserDAOImpl;
-/*
-public class pwdCheckHandler implements CommandHandler{
+
+public class PwdCheckHandler implements CommandHandler{
 
 	@Override
 	
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		 request.setCharacterEncoding("utf-8");
+		String user_id=  request.getParameter("user_id"); 
+		String u_pwd=  request.getParameter("u_pwd");
 
-		 String u_pwd=  request.getParameter("u_pwd");
-
-		 System.out.println(u_pwd);
 		 
-		 Connection conn = ConnectionProvider.getConnection();
-		 OuserDAOImpl dao = OuserDAOImpl.getInstance();
-		 OuserDTO dto = null;
+		System.out.println(u_pwd);
+		 
+		Connection conn = ConnectionProvider.getConnection();
+		OuserDAOImpl dao = OuserDAOImpl.getInstance();
+		OuserDTO dto = null;
 			try {
-				dto = dao.pwdCheck(conn,u_pwd);
+				dto = dao.pwdCheck(conn,user_id);
 			} catch (SQLException e) {
-				System.out.println("> pwdCheckHandler.process Exception!");
+				System.out.println("> PwdCheckHandler.process Exception!");
 				e.printStackTrace();
 			}
 			conn.close();
@@ -43,12 +43,10 @@ public class pwdCheckHandler implements CommandHandler{
 			
 			HttpSession session = request.getSession();
 			
+			session.setAttribute("user_id", user_id);
 			session.setAttribute("u_pwd", u_pwd);
-
-			location = "/view/usermodify/modification.jsp";
-
+			
+			location = "/view/usermodify/info_modification.jsp";
 			return location;
 	}
-
 }
-*/
