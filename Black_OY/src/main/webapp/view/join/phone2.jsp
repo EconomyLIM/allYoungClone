@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,8 +12,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<link
-	href="https://img4.kmcert.com/kmcis/new_web/css/common.css?ver=202206201405"
+<link href="https://img4.kmcert.com/kmcis/new_web/css/common.css?ver=202206201405"
 	media="screen" rel="stylesheet">
 <link
 	href="https://img4.kmcert.com/kmcis/new_web/css/site.css?ver=202211241512"
@@ -19,26 +22,23 @@
 <script src="https://img4.kmcert.com/kmcis/new_web/js/design.js"></script>
 <script src="https://img4.kmcert.com/comm/js/kcComm.js"></script>
 <script src="https://img4.kmcert.com/kmcis/comm/js/kmcisComm.js"></script>
+<script src="https://img4.kmcert.com/kmcis/qr_web/js/kmcisWeb_v3.js?ver=20220622"></script>
 
-
-<script
-	src="https://img4.kmcert.com/kmcis/qr_web/js/kmcisWeb_v3.js?ver=20220622"></script>
-
-<title>ÈÞ´ëÆù ÀÎÁõ Á¤º¸ ÀÔ·Â | º»ÀÎÈ®ÀÎ¼­ºñ½º-ÇÑ±¹¸ð¹ÙÀÏÀÎÁõ(ÁÖ)</title>
+<title>íœ´ëŒ€í° ì¸ì¦ ì •ë³´ ìž…ë ¥ | ë³¸ì¸í™•ì¸ì„œë¹„ìŠ¤-í•œêµ­ëª¨ë°”ì¼ì¸ì¦(ì£¼)</title>
 <script type="text/javascript">
 	window.onload = function() {
 
 	}
 
 	function errAlert() {
-		alert('±ÝÀÏ ÈÞ´ëÆùÀÎÁõ ¿À·ù°¡ 0È¸ ¹ß»ýÇÏ¿´½À´Ï´Ù.\n5È¸ ÀÎÁõ ½ÇÆÐ½Ã º»ÀÎÈ®ÀÎ¼­ºñ½º°¡ Á¦ÇÑµË´Ï´Ù');
+		alert('ê¸ˆì¼ íœ´ëŒ€í°ì¸ì¦ ì˜¤ë¥˜ê°€ 0íšŒ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.\n5íšŒ ì¸ì¦ ì‹¤íŒ¨ì‹œ ë³¸ì¸í™•ì¸ì„œë¹„ìŠ¤ê°€ ì œí•œë©ë‹ˆë‹¤');
 	}
 
 	function img_reload() {
-		// »õ·Î°íÄ§ ¹æ¹ý º¯°æ - 2014.05.29  kmcweb1
+		// ìƒˆë¡œê³ ì¹¨ ë°©ë²• ë³€ê²½ - 2014.05.29  kmcweb1
 		var d = new Date();
 		document.getElementById("captcha_div").innerHTML = "<img src='/KmcCaptcha.png?var1="
-				+ d.getTime() + "' alt='º¸¾È¹®ÀÚ'/>";
+				+ d.getTime() + "' alt='ë³´ì•ˆë¬¸ìž'/>";
 	}
 
 	function play_sound() {
@@ -54,12 +54,12 @@
 			if (ie8 > 0) {
 				document.getElementById('ifmAudioCaptcha').src = '/audio.wav';
 			} else {
-				document.getElementById("audioSupport").innerHTML = "À½¼º <BGSOUND  src='/audio.wav?var1="
+				document.getElementById("audioSupport").innerHTML = "ìŒì„± <BGSOUND  src='/audio.wav?var1="
 						+ d.getTime() + "'  loop='1' />";
 			}
 		} else {
 			if (trident > 0) {
-				document.getElementById("audioSupport").innerHTML = "À½¼º <BGSOUND  src='/audio.wav?var1="
+				document.getElementById("audioSupport").innerHTML = "ìŒì„± <BGSOUND  src='/audio.wav?var1="
 						+ d.getTime() + "'  loop='1' />";
 			} else {
 				document.getElementById("audioSupport").innerHTML = "<audio controls autoplay src='/audio.wav?var1="
@@ -69,7 +69,7 @@
 	}
 
 	function call_check() {
-		// ÀÌÅë»ç ¼­ºñ½º Á¡°Ë Ã¼Å©
+		// ì´í†µì‚¬ ì„œë¹„ìŠ¤ ì ê²€ ì²´í¬
 		//		if(!checkCommId('SKT')) {
 		//			return;
 		//		}
@@ -81,7 +81,7 @@
 	}
 
 	function call_check_noMsg() {
-		// ÀÌÅë»ç ¼­ºñ½º Á¡°Ë Ã¼Å©
+		// ì´í†µì‚¬ ì„œë¹„ìŠ¤ ì ê²€ ì²´í¬
 		//		if(!checkCommId('SKT')) {
 		//			return;
 		//		}
@@ -91,14 +91,9 @@
 	}
 </script>
 </head>
-
 <body ondragstart="return false" onselectstart="return false"
 	oncontextmenu="return false" style="zoom: 1;">
-
-	<!-- ÀÌµ¿Åë½Å»ç Àå¾Ö ¾Ë¸² -->
-
-
-
+	<!-- ì´ë™í†µì‹ ì‚¬ ìž¥ì•  ì•Œë¦¼ -->
 	<script type="text/javascript">
 		function checkCommId(telecom) {
 			var result1 = "1";
@@ -112,8 +107,6 @@
 
 	<div id="wrap">
 		<header id="header">
-
-
 			<script type="text/javascript">
 				var isDupClick = false;
 
@@ -121,7 +114,7 @@
 					var f = document.goTabForm;
 
 					if (isDupClick) {
-						alert('ÀÌ¹Ì ÁøÇàÁßÀÔ´Ï´Ù.');
+						alert('ì´ë¯¸ ì§„í–‰ì¤‘ìž…ë‹ˆë‹¤.');
 						return;
 					}
 
@@ -138,7 +131,6 @@
 					f.submit();
 				}
 			</script>
-
 			<form name="goTabForm" method="post">
 				<input type="hidden" name="reqInfo"
 					value="FF3C0E7EC1A2A8EF675600B2C421F87785F62E8E44C8B86DCD70D56AB7C7F0A568BDC8D8651D1BBF243F7C764696F8CF672D10627188AFA294140A1631209084E19FEB81795467A64615AAFDAE5B740719746E4A8EADEC98F2990469F1BA5CA8B6E1B0D03AD07AF9F52B0CA872ABCBF4E628D11D66D145166B922D22131E93C20315D4201E97AC7BA481BC177C99049AD4EACBECF473EA47BAC2C46775A8221BD8F5A215DF3535587AE4B272AB34602F057F4DF54510BAD12A74A29E8EB0577A44F136697B0150ADD38180199A806E49D46B552D45888DA8096C427FCBCC0D471EB658B188627536661EDAE7D902034DCBF4B677A1701CD4BBC6AF819EAE0766">
@@ -151,33 +143,17 @@
 					type="hidden" name="reqCommIdStatedYn" value="N"> <input
 					type="hidden" name="reqCriOSYn" value="Y">
 			</form>
-
-
 			<h1>
 				<a href="#;"><img
 					src="https://img4.kmcert.com/kmcis/new_web/img/logo_pass.png"
 					alt="PASS"></a>
 			</h1>
-
-
-
-
-
-
-
 			<ul class="gnb_wrap col-2">
-
-
-				<li onclick="javascript:goTab('app');"><a href="#" id="qr_auth">PASS·Î
-						ÀÎÁõÇÏ±â</a></li>
+				<li onclick="javascript:goTab('app');"><a href="#" id="qr_auth">PASSë¡œ
+						ì¸ì¦í•˜ê¸°</a></li>
 				<li class="on" onclick="javascript:goTab('sms');"><a
-					title="¼±ÅÃµÊ" href="#" id="sms_auth">¹®ÀÚ(SMS)·Î ÀÎÁõ</a></li>
+					title="ì„ íƒë¨" href="#" id="sms_auth">ë¬¸ìž(SMS)ë¡œ ì¸ì¦</a></li>
 			</ul>
-
-
-
-
-
 		</header>
 
 		<section id="ct" class="certify_user2 certifyWrap certifyWrap_02">
@@ -185,31 +161,31 @@
 				action="https://www.kmcert.com/kmcis/web_v4/kmcisSms02.jsp">
 				<div class="">
 					<fieldset>
-						<legend>ÈÞ´ëÆù º»ÀÎÈ®ÀÎ ÀÔ·Â</legend>
+						<legend>íœ´ëŒ€í° ë³¸ì¸í™•ì¸ ìž…ë ¥</legend>
 						<ul class="frm_type">
 							<li class="name">
 								<h3>
-									<label for="username">ÀÌ¸§</label>
+									<label for="username">ì´ë¦„</label>
 								</h3>
 								<div class="input input_del">
 									<input type="text" autocomplete="name" name="userName"
-										id="userName" placeholder="¼º¸íÀÔ·Â" title="ÀÌ¸§" value="">
+										id="userName" placeholder="ì„±ëª…ìž…ë ¥" title="ì´ë¦„" value="">
 								</div>
 							</li>
 							<li class="mynum">
 								<h3>
-									<label for="mynum1">»ý³â¿ùÀÏ/¼ºº°</label>
+									<label for="mynum1">ìƒë…„ì›”ì¼/ì„±ë³„</label>
 								</h3>
 								<ul class="ui_cols">
 									<li><span class="input input_mynum"> <input
 											type="text" name="Birth" id="Birth" maxlength="6"
-											title="ÁÖ¹Îµî·Ï¹øÈ£ ¾Õ 6ÀÚ¸®" value=""> <span
+											title="ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì•ž 6ìžë¦¬" value=""> <span
 											class="mark firsChild" id="mynum1_mark"><i></i><i></i><i></i><i></i><i></i><i></i></span>
 									</span></li>
 									<li><i></i></li>
 									<li><span class="input input_mynum last"> <input
 											type="text" name="Sex" id="Sex" maxlength="1"
-											title="ÁÖ¹Îµî·Ï¹øÈ£ 7¹øÂ° ÀÚ¸®" value=""> <span
+											title="ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ 7ë²ˆì§¸ ìžë¦¬" value=""> <span
 											class="mark firstChild" id="mynum2_mark"><i></i></span>
 									</span> <span class="mynum_after"><code class="blind"></code><i></i><i></i><i></i><i></i><i></i><i></i></span>
 									</li>
@@ -217,63 +193,40 @@
 							</li>
 							<li>
 								<h3>
-									<label for="mobileno">ÈÞ´ëÆù¹øÈ£</label>
+									<label for="mobileno">íœ´ëŒ€í°ë²ˆí˜¸</label>
 								</h3>
 								<div class="input input_del">
-									<input type="text" name="No" id="No" placeholder="¼ýÀÚ¸¸ ÀÔ·Â"
-										title="ÈÞ´ëÆù¹øÈ£" maxlength="11" value="">
+									<input type="text" name="No" id="No" placeholder="ìˆ«ìžë§Œ ìž…ë ¥"
+										title="íœ´ëŒ€í°ë²ˆí˜¸" maxlength="11" value="">
 								</div>
 							</li>
 							<li>
 								<h3>
-									<label for="mobileno">º¸¾È¹®ÀÚ</label>
+									<label for="mobileno">ë³´ì•ˆë¬¸ìž</label>
 								</h3>
 								<div class="input input_del secur_wrap">
-
-
-									<!--<div class="num_area">
-							<div style="width: 100% !important; height: 33px !important; ">
-							  <div class="secret_num" id="captcha_div" style="float:left; width: 166px !important;">
-								<img src="/KmcCaptcha.png" alt="º¸¾È¹®ÀÚ" />
-							  </div>
-							  <div class="secuBtn" style="display: inline-block; float: left; width: 19px !important; margin-left: 4px; margin-top: 5px;">
-								<a href="#" onClick="javascript:img_reload()" title="»õ·Î°íÄ§"><img src="/kmcis/new_web/img/return.png" style="border:1px solid gray; border-radius:6px; width:100%;" alt="»õ·Î°íÄ§" /></a>
-								<a rel="nofollow" href="#" onClick="javascript:play_sound()" title="À½¼ºµè±â">
-								  <img src="/kmcis/new_web/img/audio.png" alt="À½¼ºµè±â" style=" border:1px solid gray; border-radius:6px; width:100%;"/>
-								</a>
-								<iframe name="ifmAudioCaptcha" id="ifmAudioCaptcha" style="display:none;" width="0" height="0" title="º¸¾È¹®ÀÚ_hiddenFrame_IE´ëÀÀ"></iframe><span id="audioSupport" style="display:none" title="º¸¾È¹®ÀÚ_À½¼º´ëÀÀ" ></span>
-								<div class="BDC_Placeholder" id="CAPTCHA_AudioPlaceholder">&nbsp;</div>
-							  </div>
-							</div>
-						  </div>
-						  <div class="ipt_area">
-							<div class="input input_del">
-							  <input type="text" autocomplete="secur" name="securityNum" id="securityNum" placeholder="º¸¾È¹®ÀÚ ÀÔ·Â" maxlength="5" value="">
-							</div>
-						  </div>-->
 									<div class="num_area" style="width: 60%">
 										<div style="width: 100% !important; height: 33px !important;">
 											<div class="secret_num" id="captcha_div"
 												style="float: left; width: 166px !important;">
-												<img src="	https://www.kmcert.com/KmcCaptcha.png
-" alt="º¸¾È¹®ÀÚ">
+												<img src="	https://www.kmcert.com/KmcCaptcha.png" alt="ë³´ì•ˆë¬¸ìž">
 											</div>
 											<div class="secuBtn"
 												style="display: inline-block; float: left; width: 80px !important; margin-left: 4px; margin-top: 5px;">
-												<a href="#" title="»õ·Î°íÄ§"><img
+												<a href="#" title="ìƒˆë¡œê³ ì¹¨"><img
 													src="https://img4.kmcert.com/kmcis/comm/images/img/refresh_big.png"
 													style="border: 1px solid gray; border-radius: 6px; width: 46%;"
-													alt="»õ·Î°íÄ§" ></a> <a rel="nofollow" href="#"
-													onclick="javascript:play_sound()" title="À½¼ºµè±â"> <img
+													alt="ìƒˆë¡œê³ ì¹¨" ></a> <a rel="nofollow" href="#"
+													onclick="javascript:play_sound()" title="ìŒì„±ë“£ê¸°"> <img
 													src="https://img4.kmcert.com/kmcis/comm/images/img/sound_big.png"
-													alt="À½¼ºµè±â"
+													alt="ìŒì„±ë“£ê¸°"
 													style="border: 1px solid gray; border-radius: 6px; width: 46%;">
 												</a>
 												<iframe name="ifmAudioCaptcha" id="ifmAudioCaptcha"
 													style="display: none;" width="0" height="0"
-													title="º¸¾È¹®ÀÚ_hiddenFrame_IE´ëÀÀ"></iframe>
+													title="ë³´ì•ˆë¬¸ìž_hiddenFrame_IEëŒ€ì‘"></iframe>
 												<span id="audioSupport" style="display: none"
-													title="º¸¾È¹®ÀÚ_À½¼º´ëÀÀ"></span>
+													title="ë³´ì•ˆë¬¸ìž_ìŒì„±ëŒ€ì‘"></span>
 												<div class="BDC_Placeholder" id="CAPTCHA_AudioPlaceholder">&nbsp;</div>
 											</div>
 										</div>
@@ -281,41 +234,23 @@
 									<div class="ipt_area" style="width: 40%">
 										<div class="input input_del">
 											<input type="text" autocomplete="secur" name="securityNum"
-												id="securityNum" placeholder="º¸¾È¹®ÀÚ ÀÔ·Â" title="º¸¾È¹®ÀÚ ÀÔ·Â"
+												id="securityNum" placeholder="ë³´ì•ˆë¬¸ìž ìž…ë ¥" title="ë³´ì•ˆë¬¸ìž ìž…ë ¥"
 												maxlength="5" value="">
 										</div>
 									</div>
-
-
 								</div>
 							</li>
-
 						</ul>
 					</fieldset>
 					<div class="certi_btn_area">
 						<ul class="btn_area2 bt2">
-
-
-
-
 							<li><button type="button" id="btnCancel"
-									class="btn_r btn_type6" onclick="top.window.close();">Ãë¼Ò</button></li>
-
-
-
-
-
-
+									class="btn_r btn_type6" onclick="top.window.close();">ì·¨ì†Œ</button></li>
 							<li><button type="button" id="btnSubmit"
-									class="btn_r btn_type btn_type3">È®ÀÎ</button></li>
-
-
-
-
+									class="btn_r btn_type btn_type3">í™•ì¸</button></li>
 						</ul>
 					</div>
 				</div>
-
 				<input type="hidden" name="reqInfo"
 					value="FF3C0E7EC1A2A8EF675600B2C421F87785F62E8E44C8B86DCD70D56AB7C7F0A568BDC8D8651D1BBF243F7C764696F8CF672D10627188AFA294140A1631209084E19FEB81795467A64615AAFDAE5B740719746E4A8EADEC98F2990469F1BA5CA8B6E1B0D03AD07AF9F52B0CA872ABCBF4E628D11D66D145166B922D22131E93C20315D4201E97AC7BA481BC177C99049AD4EACBECF473EA47BAC2C46775A8221BD8F5A215DF3535587AE4B272AB34602F057F4DF54510BAD12A74A29E8EB0577A44F136697B0150ADD38180199A806E49D46B552D45888DA8096C427FCBCC0D471EB658B188627536661EDAE7D902034DCBF4B677A1701CD4BBC6AF819EAE0766">
 				<input type="hidden" name="reqInfo1"
@@ -332,53 +267,29 @@
 					name="reqCriOSYn" value="Y"> <input type="hidden"
 					name="reqSeq" value="936733842"> <input type="hidden"
 					name="icsgCode" value="ICSG01">
-
-
 			</form>
-
 			<div class="passCertiInfo">
 				<ul>
 					<li>
 						<p>
-							PASS¾Û ¼³Ä¡ ¹× °¡ÀÔ ÈÄ ÀÌ¿ëÀÌ °¡´ÉÇÕ´Ï´Ù. <br> ¾Û¸¶ÄÏ(±¸±Û ÇÃ·¹ÀÌ½ºÅä¾î / ¾ÖÇÃ ¾Û½ºÅä¾î) ¿¡¼­
-							<span class="highlighter"><strong>¡°PASS¡±</strong> °Ë»ö!</span>
+							PASSì•± ì„¤ì¹˜ ë° ê°€ìž… í›„ ì´ìš©ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤. <br> ì•±ë§ˆì¼“(êµ¬ê¸€ í”Œë ˆì´ìŠ¤í† ì–´ / ì• í”Œ ì•±ìŠ¤í† ì–´) ì—ì„œ
+							<span class="highlighter"><strong>â€œPASSâ€</strong> ê²€ìƒ‰!</span>
 						</p>
 					</li>
 				</ul>
 			</div>
 		</section>
-
-
-
-
-
-
+		
+<!-- footer -->
 		<div class="footerBanner">
-
-			<!--a href="#">
-				<img src="https://img4.kmcert.com/kmcis/qr_web/images/adverimg_skt.png" title="SKT ÀÌº¥Æ® ¹è³Ê" alt="°³ÀÎÁ¤º¸ ÀÔ·Â¾øÀÌ 3ÃÊ¸é º»ÀÎÈ®ÀÎ ¿Ï·á!">
-			  </a-->
-
 			<a href="https://www.tauth.net/pass/bridge/link/add/A102"
 				onclick="window.open(this.href,'','width=800,height=930, scrollbars=1'); return false;"
-				title="SKT ÀÌº¥Æ® ¹è³Ê - »õÃ¢"> <img
+				title="SKT ì´ë²¤íŠ¸ ë°°ë„ˆ - ìƒˆì°½"> <img
 				src="https://img4.kmcert.com/kmcis/qr_web/images/adverimg_skt.jpg"
-				alt="¼Õ½¬¿î ¹ß±Þ, 3³â »ç¿ë ¾ÈÀüÇÏ°í °£ÆíÇÑ PASSÀÎÁõ¼­">
+				alt="ì†ì‰¬ìš´ ë°œê¸‰, 3ë…„ ì‚¬ìš© ì•ˆì „í•˜ê³  ê°„íŽ¸í•œ PASSì¸ì¦ì„œ">
 			</a>
 		</div>
-
-
-
-
-
-
-
-
-
-
 		<div id="footer">
-
-
 			<script type="text/javascript">
 				function goAgreePop(value1, value2) {
 					var UserAgent = navigator.userAgent.toLowerCase();
@@ -405,44 +316,21 @@
 					}
 				}
 			</script>
-
-
-
-
-
-
-
 			<div class="footer_kmc">
 				<a
 					href="javascript:goAgreePop('/kmcis/comm/kmcisHpUse_popUpBox.html','personal','all');"
-					title="ÀÌ¿ë¾à°ü Àü¹®º¸±â-»õÃ¢" style="color: #4F4F4F;">ÀÌ¿ë¾à°ü</a> | <a href="#"
+					title="ì´ìš©ì•½ê´€ ì „ë¬¸ë³´ê¸°-ìƒˆì°½" style="color: #4F4F4F;">ì´ìš©ì•½ê´€</a> | <a href="#"
 					onclick="window.open('http://www.sktelecom.com/view/footer/privacy.do','skt','left=0,top=0,scrollbars=yes,realzable=yes');return false;"
-					title="SKT °³ÀÎÁ¤º¸Ã³¸®¹æÄ§ Àü¹®º¸±â-»õÃ¢" style="color: #4F4F4F;"> °³ÀÎÁ¤º¸Ã³¸®¹æÄ§</a>
-				| <span style="color: #4F4F4F;">GlobalSign 256 SSL ¾ÏÈ£È­ Àû¿ë</span> <span
+					title="SKT ê°œì¸ì •ë³´ì²˜ë¦¬ë°©ì¹¨ ì „ë¬¸ë³´ê¸°-ìƒˆì°½" style="color: #4F4F4F;"> ê°œì¸ì •ë³´ì²˜ë¦¬ë°©ì¹¨</a>
+				| <span style="color: #4F4F4F;">GlobalSign 256 SSL ì•”í˜¸í™” ì ìš©</span> <span
 					class="kmc_logo"></span>
 				<div
 					style="float: right; margin-top: 50% color:#4F4F4F; width: 72px; height: 23px; overflow: hidden; line-height: 0; text-indent: -9999px"
-					title="ÇÑ±¹¸ð¹ÙÀÏÀÎÁõ ·Î°í">ÇÑ±¹¸ð¹ÙÀÏÀÎÁõ ·Î°í</div>
+					title="í•œêµ­ëª¨ë°”ì¼ì¸ì¦ ë¡œê³ ">í•œêµ­ëª¨ë°”ì¼ì¸ì¦ ë¡œê³ </div>
 			</div>
-
-
-
 		</div>
-
-
-
-
-
-		<!-- Å°º¸µåº¸¾È 6.5 REAL URL -->
-
-
-
-
+		<!-- í‚¤ë³´ë“œë³´ì•ˆ 6.5 REAL URL -->
 	</div>
-
-
-
-
 	<form name="KmcisTotFom" method="post"
 		action="https://www.kmcert.com/kmcis/web/kmcisTot.jsp">
 		<input type="hidden" name="reqInfo"
@@ -462,14 +350,11 @@
 	</script>
 <script>
 	$("#btnSubmit").on("click", function () {
-		alert("ÀÎÁõÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+		alert("ì¸ì¦ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 		location.href="agreement.jsp";
 		
 	});
 
 </script>
-
-
-
 </body>
 </html>

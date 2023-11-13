@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,16 +16,10 @@
 		  <script src="https://img4.kmcert.com/kmcis/new_web/js/jquery.min.js"></script>
 		  <script src="https://img4.kmcert.com/kmcis/new_web/js/common.js"></script>
 		  <script src="https://img4.kmcert.com/kmcis/new_web/js/design.js?ver=202303161023"></script>
-		  <title>ÀÌµ¿Åë½Å»ç ¼±ÅÃ | º»ÀÎÈ®ÀÎ¼­ºñ½º-ÇÑ±¹¸ğ¹ÙÀÏÀÎÁõ(ÁÖ)</title>
+		  <title>ì´ë™í†µì‹ ì‚¬ ì„ íƒ | ë³¸ì¸í™•ì¸ì„œë¹„ìŠ¤-í•œêµ­ëª¨ë°”ì¼ì¸ì¦(ì£¼)</title>
 		  <script type="text/javascript">
-
-			
-				
-				
-					window.moveTo("400", "60");
-				
+				window.moveTo("400", "60");
 				window.resizeTo("496","880");
-			
 
 			function winPopUpResize(){
 				var r_width
@@ -48,84 +46,59 @@
 				window.resizeTo(r_width, r_height);
 			}
 
-			// [KMD302-160063] º»ÀÎÈ®ÀÎ¼­ºñ½º Æ¯Á¤ ºê¶ó¿ìÀú(Opera) UI Resize Àû¿ë ÀÛ¾÷ 2016.11.30 kmcweb4
 			function winPopUpResizeOpera(){
 				window.moveTo("400", "60");
 				window.resizeTo("626","921");
 			}
-			// End - [KMD302-160063] º»ÀÎÈ®ÀÎ¼­ºñ½º Æ¯Á¤ ºê¶ó¿ìÀú(Opera) UI Resize Àû¿ë ÀÛ¾÷ 2016.11.30 kmcweb4
-
 
 			$(document).ready(function() {
 			  var clickNext = false;
 
-
-
-			  // SMS ÀÎÁõ ½ÃÀÛ
+			  // SMS ì¸ì¦ ì‹œì‘
 			  $('body').on('click', '#btnSms', function() {
 
-				// Åë½Å»ç ¼±ÅÃ ¿©ºÎ
+				// í†µì‹ ì‚¬ ì„ íƒ ì—¬ë¶€
 				if (agencyCheck() === false) {
 				  return;
 				}
-				// µ¿ÀÇ ¿©ºÎ
+				// ë™ì˜ ì—¬ë¶€
 				if (checkAgree() === false) {
 				  return;
 				}
-
 				commIdCheck('1');
-
-				// Áßº¹ Å¬¸¯ ¹æÁö
+				// ì¤‘ë³µ í´ë¦­ ë°©ì§€
 				if (clickNext === true) {
 				  return;
 				}
-
 				clickNext = true;
-			
 			});
 
-			  // PASS ÀÎÁõ ½ÃÀÛ
+			  // PASS ì¸ì¦ ì‹œì‘
 			  $('body').on('click', '#btnPassTran', function() {
 
-				// Åë½Å»ç ¼±ÅÃ ¿©ºÎ
+				// í†µì‹ ì‚¬ ì„ íƒ ì—¬ë¶€
 				if (agencyCheck() === false) {
 				  return;
 				}
-				// µ¿ÀÇ ¿©ºÎ
+				// ë™ì˜ ì—¬ë¶€
 				if (checkAgree() === false) {
 				  return;
 				}
 
-				// Áßº¹ Å¬¸¯ ¹æÁö
+				// ì¤‘ë³µ í´ë¦­ ë°©ì§€
 				if (clickNext === true) {
 				  return;
 				}
-
-
-/*				
-					var mvnoCheck= $(":input:radio[name=mobilecoPop]:checked").val();	// ¼±ÅÃµÈ MVNO Åë½Å»ç °ª °¡Á®¿À±â
-					var mobileco = $('input:radio[name=mobileco]:checked').val();
-					if (mobileco == "MVNO" && mvnoCheck == "SKM") {
-					  alert("ÇØ´ç ¾Ë¶ãÆùÀº PASS º»ÀÎÀÎÁõÀÌ ºÒ°¡ÇÕ´Ï´Ù.");
-					  return false;
-					}
-				
-*/
-
-
 				commIdCheck('2');
-
 				clickNext = true;
-
 			  });
 
-
-			  // ÃÊ±âÈ­
+			  // ì´ˆê¸°í™”
 			  $('input:radio[name=mobileco]').prop('checked', false);
 			  $('.check2 input').prop("checked", false).next('label').removeClass('checked');
 			  $('.btn_skip').removeClass('active');
 
-			  // Åë½Å»ç ¼±ÅÃ + ¾à°ü µ¿ÀÇ µÑ´Ù Ã¼Å©µÆÀ» °æ¿ì
+			  // í†µì‹ ì‚¬ ì„ íƒ + ì•½ê´€ ë™ì˜ ë‘˜ë‹¤ ì²´í¬ëì„ ê²½ìš°
 			  $('body').on('click', function() {
 				var mobilecoCheck = $('input:radio[name=mobileco]').is(':checked') === true;
 				var agreeCheck = $('input:checkbox[name=agree]').is(':checked') === true;
@@ -137,7 +110,7 @@
 				}
 			  });
 
-			  // µ¿ÀÇ¹® Ã¼Å© ½Ã Åë½Å»ç ¼±ÅÃ ¿©ºÎ Ã¼Å©
+			  // ë™ì˜ë¬¸ ì²´í¬ ì‹œ í†µì‹ ì‚¬ ì„ íƒ ì—¬ë¶€ ì²´í¬
 			  $('body').on('click', 'input:checkbox[name=agree]', function() {
 				if (agencyCheck() === false) {
 				  $('.check2 input').prop("checked", false).next('label').removeClass('checked');
@@ -145,7 +118,7 @@
 				}
 			  });
 
-			  // Åë½Å»ç ¼±ÅÃ ½Ã µ¿ÀÇ ÃÊ±âÈ­
+			  // í†µì‹ ì‚¬ ì„ íƒ ì‹œ ë™ì˜ ì´ˆê¸°í™”
 			  var checkMobileco = "";
 			  $('body').on('click', 'input:radio[name=mobileco]', function() {
 				var mobileco = $('input:radio[name=mobileco]:checked').val();
@@ -155,45 +128,45 @@
 				}
 			  });
 
-			  // µ¿ÀÇ¹® ·¹ÀÌ¾î ÆË¾÷
+			  // ë™ì˜ë¬¸ ë ˆì´ì–´ íŒì—…
 			  var btn_agree_popup_focus = '';
 			  $('body').on('click', '.btn_agree_popup', function() {
 				var byId = $(this).attr("id");
 				var mobileco = $('input:radio[name=mobileco]:checked').val();
 
-				// ¼±ÅÃµÈ Åë½Å»ç°¡ ¾ø´Â °æ¿ì
+				// ì„ íƒëœ í†µì‹ ì‚¬ê°€ ì—†ëŠ” ê²½ìš°
 				if (mobileco == null || mobileco == "" || mobileco == "undefined") {
-				  alert('ÀÌ¿ëÁßÀÌ½Å Åë½Å»ç¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.');
+				  alert('ì´ìš©ì¤‘ì´ì‹  í†µì‹ ì‚¬ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.');
 				  return false;
 				}
 
 				if (mobileco == "MVNO") {
 					var mobilecoPop = $('input:radio[name=mobilecoPop]:checked').val();	
 					if (mobilecoPop == null || mobilecoPop == "" || mobilecoPop == "underfind") {
-					  alert("¾Ë¶ãÆù »ç¾÷ÀÚ¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.");
+					  alert("ì•Œëœ°í° ì‚¬ì—…ìë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.");
 					  return false;
 					}
 					mobileco = mobilecoPop;
 				}
 
-				// µ¿ÀÇ Å¸ÀÌÆ² ÁöÁ¤
+				// ë™ì˜ íƒ€ì´í‹€ ì§€ì •
 				if (byId === 'agree1Pop') {
 				  agreeNo = "1";
-				  $("#agreeTitle").text("°³ÀÎÁ¤º¸ÀÌ¿ëµ¿ÀÇ");
+				  $("#agreeTitle").text("ê°œì¸ì •ë³´ì´ìš©ë™ì˜");
 				} else if (byId === 'agree2Pop') {
 				  agreeNo = "2";
-				  $("#agreeTitle").text("°íÀ¯½Äº°Á¤º¸Ã³¸®µ¿ÀÇ");
+				  $("#agreeTitle").text("ê³ ìœ ì‹ë³„ì •ë³´ì²˜ë¦¬ë™ì˜");
 				} else if (byId === 'agree3Pop') {
 				  agreeNo = "3";
-				  $("#agreeTitle").text("¼­ºñ½ºÀÌ¿ë¾à°üµ¿ÀÇ");
+				  $("#agreeTitle").text("ì„œë¹„ìŠ¤ì´ìš©ì•½ê´€ë™ì˜");
 				} else if (byId === 'agree4Pop') {
 				  agreeNo = "4";
-				  $("#agreeTitle").text("Åë½Å»çÀÌ¿ë¾à°üµ¿ÀÇ");
+				  $("#agreeTitle").text("í†µì‹ ì‚¬ì´ìš©ì•½ê´€ë™ì˜");
 				}
 				
 				else if (byId === 'agree5Pop') {
 				  agreeNo = "5";
-				  $("#agreeTitle").text("Á¦3ÀÚÁ¤º¸Á¦°øµ¿ÀÇ");
+				  $("#agreeTitle").text("ì œ3ìì •ë³´ì œê³µë™ì˜");
 				}
 				
 				var popmobileco = mobileco;
@@ -204,11 +177,11 @@
 					else if (mobileco == 'LGM')	{ popmobileco = 'LGTMVNO3rd' }
 				}
 
-				// µ¿ÀÇ ³»¿ë
+				// ë™ì˜ ë‚´ìš©
 				inAgreeContent(popmobileco, agreeNo);
 				
 
-				// ¾à°üÆË¾÷
+				// ì•½ê´€íŒì—…
 				btn_agree_popup_focus = $(this);
 
 				$('.dim').show();
@@ -217,13 +190,13 @@
 
 			  });
 
-			  // ÆË¾÷ ´İ±â ½Ã
+			  // íŒì—… ë‹«ê¸° ì‹œ
 			  $('body').on('click', '.pop-btn .agreeClose', function() {
 				pop_close();
 				btn_agree_popup_focus.focus();
 			  });
 
-			  // Åë½Å»ç ¾à°ü ·¹ÀÌ¾îÆË¾÷ ÅÇ Æ÷Ä¿½º Á¦¾î
+			  // í†µì‹ ì‚¬ ì•½ê´€ ë ˆì´ì–´íŒì—… íƒ­ í¬ì»¤ìŠ¤ ì œì–´
 			  $('.layer-pop .agreeClose').keydown(function(event) {
 				if (event.keyCode == '9' && !event.shiftKey) {
 				  event.preventDefault();
@@ -245,7 +218,7 @@
 					$('.licensee-list').each(function(){
 						$(".licensee-list li").removeClass('active');
 						
-						$('.licensee-list li').find('.arco').prop('title','Ãà¼ÒµÊ, ¼±ÅÃÇØÁ¦µÊ');
+						$('.licensee-list li').find('.arco').prop('title','ì¶•ì†Œë¨, ì„ íƒí•´ì œë¨');
 						$('.licensee-list li').find('.icon_arrow').addClass('down');
 						$('.licensee-list li .licensee_info').stop().slideUp();
 					});
@@ -317,22 +290,16 @@
 				}
 			});
 
-			
-
-			// ¾Ë¶ãÆù »ç¾÷ÀÚ ¼±ÅÃ ¹× ·¹ÀÌ¾î ´İ±â
+			// ì•Œëœ°í° ì‚¬ì—…ì ì„ íƒ ë° ë ˆì´ì–´ ë‹«ê¸°
 			function pop_select(){
 				var agencyCheck = $("input[type=radio][name=mobilecoPop]:checked").val();
 				if (agencyCheck == null || agencyCheck == "" || agencyCheck == "underfind") {
-				  alert("¾Ë¶ãÆù »ç¾÷ÀÚ¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.");
+				  alert("ì•Œëœ°í° ì‚¬ì—…ìë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.");
 				  
 				  setTimeout(function() {
 					$('#agency-and').focus();
 				  }, 100);
 				  return false;
-				//} else if (agencyCheck == "SKM") {
-				//	$('#btnPassTran').css("display", "none");
-				//} else {
-				//	$('#btnPassTran').css("display", "block");
 				}
 
 				pop_close();
@@ -342,14 +309,14 @@
 				}, 100);
 			}
 
-			// ¾Ë¶ãÆù »ç¾÷ÀÚ Ãë¼Ò ¹× ·¹ÀÌ¾î ´İ±â
+			// ì•Œëœ°í° ì‚¬ì—…ì ì·¨ì†Œ ë° ë ˆì´ì–´ ë‹«ê¸°
 			function pop_cancle(){
 				$('.check2 input').prop("checked", false).next('label').removeClass('checked');
 
 				$('.licensee-list').each(function(){
 					$(".licensee-list li").removeClass('active');
 					
-					$('.licensee-list li').find('.arco').prop('title','Ãà¼ÒµÊ, ¼±ÅÃÇØÁ¦µÊ');
+					$('.licensee-list li').find('.arco').prop('title','ì¶•ì†Œë¨, ì„ íƒí•´ì œë¨');
 					$('.licensee-list li').find('.icon_arrow').addClass('down');
 					$('.licensee-list li .licensee_info').stop().slideUp();
 				});
@@ -364,22 +331,22 @@
 				}, 100);
 			}
 
-			// Åë½Å»ç Ã¼Å© È®ÀÎ
+			// í†µì‹ ì‚¬ ì²´í¬ í™•ì¸
 			function agencyCheck() {
-			  // Ã¼Å© ¿©ºÎ È®ÀÎ
+			  // ì²´í¬ ì—¬ë¶€ í™•ì¸
 			  if ($('input:radio[name=mobileco]').is(':checked') === true) {
-				// Ã¼Å©µÈ °æ¿ì °ªÀÌ À¯È¿ÇÑÁö È®ÀÎ
+				// ì²´í¬ëœ ê²½ìš° ê°’ì´ ìœ íš¨í•œì§€ í™•ì¸
 				var agencyCheck = $("input[type=radio][name=mobileco]:checked").val();
 				if (agencyCheck == null || agencyCheck == "" || agencyCheck == "underfind") {
-				  alert("Åë½Å»ç¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.");
+				  alert("í†µì‹ ì‚¬ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.");
 				  document.frm.mobileco[0].focus();
 				  return false;
 				}
 
 				if (agencyCheck == "MVNO"){
-					var mvnoCheck= $(":input:radio[name=mobilecoPop]:checked").val();	// ¼±ÅÃµÈ MVNO Åë½Å»ç °ª °¡Á®¿À±â
+					var mvnoCheck= $(":input:radio[name=mobilecoPop]:checked").val();	// ì„ íƒëœ MVNO í†µì‹ ì‚¬ ê°’ ê°€ì ¸ì˜¤ê¸°
 					if (mvnoCheck == null || mvnoCheck == "" || mvnoCheck == "underfind") {
-					  alert("Åë½Å»ç¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.");
+					  alert("í†µì‹ ì‚¬ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.");
 					  document.frmPop.mobilecoPop[0].focus();
 					  return false;
 					}
@@ -387,129 +354,70 @@
 				return true;
 
 			  } else {
-				alert("Åë½Å»ç¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.");
+				alert("í†µì‹ ì‚¬ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.");
 				return false;
 			  }
 			}
 
-			//µ¿ÀÇ¹® Ã¼Å©
+			//ë™ì˜ë¬¸ ì²´í¬
 			function checkAgree() {
 			  if ($("#agree1").is(":checked") === false) {
-				alert('°³ÀÎÁ¤º¸ÀÌ¿ë µ¿ÀÇ¿¡ µ¿ÀÇÇØ ÁÖ½Ê½Ã¿À.');
+				alert('ê°œì¸ì •ë³´ì´ìš© ë™ì˜ì— ë™ì˜í•´ ì£¼ì‹­ì‹œì˜¤.');
 				$("#agree1").focus();
 				return false;
 			  }
 
 			  if ($("#agree2").is(":checked") === false) {
-				alert('°íÀ¯½Äº°Á¤º¸ Ã³¸® µ¿ÀÇ¿¡ µ¿ÀÇÇØ ÁÖ½Ê½Ã¿À.');
+				alert('ê³ ìœ ì‹ë³„ì •ë³´ ì²˜ë¦¬ ë™ì˜ì— ë™ì˜í•´ ì£¼ì‹­ì‹œì˜¤.');
 				$("#agree2").focus();
 				return false;
 			  }
 
 			  if ($("#agree3").is(":checked") === false) {
-				alert('¼­ºñ½º ÀÌ¿ë¾à°ü µ¿ÀÇ¿¡ µ¿ÀÇÇØ ÁÖ½Ê½Ã¿À.');
+				alert('ì„œë¹„ìŠ¤ ì´ìš©ì•½ê´€ ë™ì˜ì— ë™ì˜í•´ ì£¼ì‹­ì‹œì˜¤.');
 				$("#agree3").focus();
 				return false;
 			  }
 
 			  if ($("#agree4").is(":checked") === false) {
-				alert('Åë½Å»ç ÀÌ¿ë¾à°ü µ¿ÀÇ¿¡ µ¿ÀÇÇØ ÁÖ½Ê½Ã¿À.');
+				alert('í†µì‹ ì‚¬ ì´ìš©ì•½ê´€ ë™ì˜ì— ë™ì˜í•´ ì£¼ì‹­ì‹œì˜¤.');
 				$("#agree4").focus();
 				return false;
 			  }
 
-			  // Start - [KMD311-22400] ¾Ë¶ãÆù º»ÀÎÈ®ÀÎ ÇÁ·Î¼¼½º º¯°æ ¿äÃ»ÀÇ °Ç - 2022.09.20 kmcweb23
 			  var agencyCheck = $("input[type=radio][name=mobileco]:checked").val();
 				
 			  if (agencyCheck == 'MVNO') {
 				  if ($("#agree5").is(":checked") === false) {
-					alert('Á¦3ÀÚ Á¤º¸Á¦°ø µ¿ÀÇ¿¡ µ¿ÀÇÇØ ÁÖ½Ê½Ã¿À.');
+					alert('ì œ3ì ì •ë³´ì œê³µ ë™ì˜ì— ë™ì˜í•´ ì£¼ì‹­ì‹œì˜¤.');
 					$("#agree5").focus();
 					return false;
 				  }
 			  }
-			  // End - [KMD311-22400] ¾Ë¶ãÆù º»ÀÎÈ®ÀÎ ÇÁ·Î¼¼½º º¯°æ ¿äÃ»ÀÇ °Ç - 2022.09.20 kmcweb23
+			  // End - [KMD311-22400] ì•Œëœ°í° ë³¸ì¸í™•ì¸ í”„ë¡œì„¸ìŠ¤ ë³€ê²½ ìš”ì²­ì˜ ê±´ - 2022.09.20 kmcweb23
 			  return true;
 			}
 
-
 			function commIdCheck(type){
-
-				
 				if( sessionStorage.getItem("nProtectInstallAgree") == "Y" ){
 					sessionStorage.clear();
-				}
-				
+				}	
 			
-				var strMobile= $(":input:radio[name=mobileco]:checked").val();	// ¼±ÅÃµÈ Åë½Å»ç °ª °¡Á®¿À±â
-				var strMvno= $(":input:radio[name=mobilecoPop]:checked").val();	// ¼±ÅÃµÈ MVNO Åë½Å»ç °ª °¡Á®¿À±â
-
-				
-				
-				
-
-				// ÀÌÅë»ç ¼­ºñ½º Á¡°Ë Ã¼Å©
-/* 				var f = document.cplogn;
-
-                
-				if (strMobile == "MVNO") {
-					f.reqCommIdStated.value = strMvno;
-				} else {
-					f.reqCommIdStated.value = strMobile;
-				}
-
-				var res = checkCommId(f.reqCommIdStated.value);
-
-				if(res == '1'){
-					return;
-				}else if(res == '2'){
-			f.action = "https://www.kmcert.com/kmcis/web_v4/kmcisSms01.jsp";
-				f.submit();
-					return;
-				}else if(res == '4'){
-					f.action = "https://www.kmcert.com/kmcis/simpleCert_web_v3/kmcisApp01.jsp"; 
-				f.submit();
-					return;
-				}else{
-				}
-
-				if (strMobile == "MVNO") {
-					f.reqCommIdStated.value = strMvno;
-					f.CommId.value = strMvno;
-
-					
-					
-				} else {
-					f.CommId.value = strMobile;
-				}
-
-				if(type == '1'){
-				f.action = "https://www.kmcert.com/kmcis/web_v4/kmcisSms01.jsp"; 
-				}else if(type == '2'){
-			 	f.action = "https://www.kmcert.com/kmcis/simpleCert_web_v3/kmcisApp01.jsp";
-				}
-				f.submit();
-			}
- */
-			
+				var strMobile= $(":input:radio[name=mobileco]:checked").val();	// ì„ íƒëœ í†µì‹ ì‚¬ ê°’ ê°€ì ¸ì˜¤ê¸°
+				var strMvno= $(":input:radio[name=mobilecoPop]:checked").val();	// ì„ íƒëœ MVNO í†µì‹ ì‚¬ ê°’ ê°€ì ¸ì˜¤ê¸°
+	
 			function checkTelecom(telecom) {
 				//alert(telecom);
 				if ((telecom == 'LGT') || (telecom == 'LGM')) {
-					$('.passAuth').html('°£ÆíÀÎÁõ(PASS) ÇÏ±â');
+					$('.passAuth').html('ê°„í¸ì¸ì¦(PASS) í•˜ê¸°');
 				} else {
-					$('.passAuth').html('PASS·Î ÀÎÁõÇÏ±â');
+					$('.passAuth').html('PASSë¡œ ì¸ì¦í•˜ê¸°');
 				}
-			}
-			
+			}		
 		  </script>
 		</head>
-
 		<body ondragstart="return false" onselectstart="return false" oncontextmenu="return false" style="zoom: 1;">
-
-			<!-- ÀÌµ¿Åë½Å»ç Àå¾Ö ¾Ë¸² -->
-			
-
-
+			<!-- ì´ë™í†µì‹ ì‚¬ ì¥ì•  ì•Œë¦¼ -->
 <script type="text/javascript">
 
 
@@ -524,7 +432,6 @@
 	}
 
 </script>
-
 		  <div id="wrap">
 			<header id="header" class="step1header">
 			  <h1>
@@ -534,107 +441,83 @@
 
 			<section id="ct">
 				<fieldset class="ui_cover agency_select">
-				  <p>ÀÌ¿ëÁßÀÌ½Å Åë½Å»ç¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.</p>
-				  <legend>Åë½Å»ç ¼±ÅÃ</legend>
+				  <p>ì´ìš©ì¤‘ì´ì‹  í†µì‹ ì‚¬ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.</p>
+				  <legend>í†µì‹ ì‚¬ ì„ íƒ</legend>
 				  <ul class="agency_select__items">
 					
 					
 					<li aria-label="SK telecom">
-					  <input type="radio" name="mobileco" id="agency-sk" value="SKT" title="SK telecom ¼±ÅÃ" aria-label="SK telecom ¼±ÅÃ">
+					  <input type="radio" name="mobileco" id="agency-sk" value="SKT" title="SK telecom ì„ íƒ" aria-label="SK telecom ì„ íƒ">
 					  <label for="agency-sk" aria-hidden="true" onclick="checkTelecom('SKT')" class="ui_align_mid checked">
 						<span class="ele">
-						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_sk.png" alt="SK telecom ¼±ÅÃ" class="active firstChild">
-						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_sk_gray.png" alt="SK telecom ¹Ì¼±ÅÃ " class="lastChild">
+						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_sk.png" alt="SK telecom ì„ íƒ" class="active firstChild">
+						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_sk_gray.png" alt="SK telecom ë¯¸ì„ íƒ " class="lastChild">
 						</span>
 					  </label>
 					</li>
 					<li aria-label="KT">
-					  <input type="radio" name="mobileco" id="agency-kt" value="KTF" title="KT ¼±ÅÃ" aria-label="KT ¼±ÅÃ">
+					  <input type="radio" name="mobileco" id="agency-kt" value="KTF" title="KT ì„ íƒ" aria-label="KT ì„ íƒ">
 					  <label for="agency-kt" aria-hidden="true" onclick="checkTelecom('KTF')" class="ui_align_mid checked">
 						<span class="ele">
-						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_kt.png" alt="kt ¼±ÅÃ" class="active firstChild">
-						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_kt_gray.png" alt="kt ¹Ì¼±ÅÃ " class="lastChild">
+						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_kt.png" alt="kt ì„ íƒ" class="active firstChild">
+						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_kt_gray.png" alt="kt ë¯¸ì„ íƒ " class="lastChild">
 						</span>
 					  </label>
 					</li>
 					<li aria-label="LG U+">
-					  <input type="radio" name="mobileco" id="agency-lgu" value="LGT" title="LG U+ ¼±ÅÃ" aria-label="LG U+ ¼±ÅÃ">
+					  <input type="radio" name="mobileco" id="agency-lgu" value="LGT" title="LG U+ ì„ íƒ" aria-label="LG U+ ì„ íƒ">
 					  <label for="agency-lgu" aria-hidden="true" onclick="checkTelecom('LGT')" class="ui_align_mid checked">
 						<span class="ele">
-						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_lgu.png" alt="LG U+ ¼±ÅÃ" class="active firstChild">
-						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_lgu_gray.png" alt="LG U+ ¹Ì¼±ÅÃ " class="lastChild">
+						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_lgu.png" alt="LG U+ ì„ íƒ" class="active firstChild">
+						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_lgu_gray.png" alt="LG U+ ë¯¸ì„ íƒ " class="lastChild">
 						</span>
 					  </label>
 					</li>
-					<li aria-label="¾Ë¶ãÆù">
-					  <input type="radio" name="mobileco" id="agency-and" value="MVNO" title="¾Ë¶ãÆù ¼±ÅÃ" aria-label="¾Ë¶ãÆù ¼±ÅÃ" class="pop-btn" role="button">
+					<li aria-label="ì•Œëœ°í°">
+					  <input type="radio" name="mobileco" id="agency-and" value="MVNO" title="ì•Œëœ°í° ì„ íƒ" aria-label="ì•Œëœ°í° ì„ íƒ" class="pop-btn" role="button">
 					  <label for="agency-and" aria-hidden="true" class="ui_align_mid checked">
 						<span class="ele">
-						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_and.png" alt="¾Ë¶ãÆù ¼±ÅÃ" class="active firstChild">
-						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_and_gray.png" alt="¾Ë¶ãÆù ¹Ì¼±ÅÃ" class="lastChild">
+						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_and.png" alt="ì•Œëœ°í° ì„ íƒ" class="active firstChild">
+						  <img src="https://img4.kmcert.com/kmcis/new_web/img/logo_and_gray.png" alt="ì•Œëœ°í° ë¯¸ì„ íƒ" class="lastChild">
 						</span>
 					  </label>
 					</li>
-					
-					
 				  </ul>
 
-				  <!-- ÀüÃ¼µ¿ÀÇ -->
+				  <!-- ì „ì²´ë™ì˜ -->
 				  <ul class="agreelist all">
-					<li><span class="checkbox check2"><input type="checkbox" name="agree" id="agree_all"><label for="agree_all">ÀüÃ¼ µ¿ÀÇÇÏ±â</label><label for="agree_all">ÀüÃ¼ µ¿ÀÇ</label></span></li>
+					<li><span class="checkbox check2"><input type="checkbox" name="agree" id="agree_all"><label for="agree_all">ì „ì²´ ë™ì˜í•˜ê¸°</label><label for="agree_all">ì „ì²´ ë™ì˜</label></span></li>
 				  </ul>
 
-				  <!-- ÇÊ¼öÇ×¸ñ -->
+				  <!-- í•„ìˆ˜í•­ëª© -->
 				  <ul class="agreelist required">
 					<li>
 					  <span class="checkbox check2"><input type="checkbox" name="agree1" id="agree1" value="Y">
-						<label for="agree1">°³ÀÎÁ¤º¸ÀÌ¿ë µ¿ÀÇÇÏ±â</label>
-						<button type="button" class="btn_agree_popup" id="agree1Pop" title="°³ÀÎÁ¤º¸ÀÌ¿ëµ¿ÀÇ ·¹ÀÌ¾î ÆË¾÷ ¿­±â">°³ÀÎÁ¤º¸ÀÌ¿ëµ¿ÀÇ</button></span>
+						<label for="agree1">ê°œì¸ì •ë³´ì´ìš© ë™ì˜í•˜ê¸°</label>
+						<button type="button" class="btn_agree_popup" id="agree1Pop" title="ê°œì¸ì •ë³´ì´ìš©ë™ì˜ ë ˆì´ì–´ íŒì—… ì—´ê¸°">ê°œì¸ì •ë³´ì´ìš©ë™ì˜</button></span>
 					</li>
 					<li>
-					  <span class="checkbox check2"><input type="checkbox" name="agree2" id="agree2" value="Y"><label for="agree2">°íÀ¯½Äº°Á¤º¸Ã³¸® µ¿ÀÇÇÏ±â</label>
-						<button type="button" class="btn_agree_popup" id="agree2Pop" title="°íÀ¯½Äº°Á¤º¸Ã³¸®µ¿ÀÇ ·¹ÀÌ¾î ÆË¾÷ ¿­±â">°íÀ¯½Äº°Á¤º¸Ã³¸®µ¿ÀÇ</button></span>
+					  <span class="checkbox check2"><input type="checkbox" name="agree2" id="agree2" value="Y"><label for="agree2">ê³ ìœ ì‹ë³„ì •ë³´ì²˜ë¦¬ ë™ì˜í•˜ê¸°</label>
+						<button type="button" class="btn_agree_popup" id="agree2Pop" title="ê³ ìœ ì‹ë³„ì •ë³´ì²˜ë¦¬ë™ì˜ ë ˆì´ì–´ íŒì—… ì—´ê¸°">ê³ ìœ ì‹ë³„ì •ë³´ì²˜ë¦¬ë™ì˜</button></span>
 					</li>
 					<li>
-					  <span class="checkbox check2"><input type="checkbox" name="agree3" id="agree3" value="Y"><label for="agree3">¼­ºñ½ºÀÌ¿ë¾à°ü µ¿ÀÇÇÏ±â</label>
-						<button type="button" class="btn_agree_popup" id="agree3Pop" title="¼­ºñ½ºÀÌ¿ë¾à°üµ¿ÀÇ ·¹ÀÌ¾î ÆË¾÷ ¿­±â">¼­ºñ½ºÀÌ¿ë¾à°üµ¿ÀÇ</button></span>
+					  <span class="checkbox check2"><input type="checkbox" name="agree3" id="agree3" value="Y"><label for="agree3">ì„œë¹„ìŠ¤ì´ìš©ì•½ê´€ ë™ì˜í•˜ê¸°</label>
+						<button type="button" class="btn_agree_popup" id="agree3Pop" title="ì„œë¹„ìŠ¤ì´ìš©ì•½ê´€ë™ì˜ ë ˆì´ì–´ íŒì—… ì—´ê¸°">ì„œë¹„ìŠ¤ì´ìš©ì•½ê´€ë™ì˜</button></span>
 					</li>
 					<li>
-					  <span class="checkbox check2"><input type="checkbox" name="agree4" id="agree4" value="Y"><label for="agree4">Åë½Å»çÀÌ¿ë¾à°ü µ¿ÀÇÇÏ±â</label>
-						<button type="button" class="btn_agree_popup" id="agree4Pop" title="Åë½Å»çÀÌ¿ë¾à°üµ¿ÀÇ ·¹ÀÌ¾î ÆË¾÷ ¿­±â">Åë½Å»çÀÌ¿ë¾à°üµ¿ÀÇ</button></span>
+					  <span class="checkbox check2"><input type="checkbox" name="agree4" id="agree4" value="Y"><label for="agree4">í†µì‹ ì‚¬ì´ìš©ì•½ê´€ ë™ì˜í•˜ê¸°</label>
+						<button type="button" class="btn_agree_popup" id="agree4Pop" title="í†µì‹ ì‚¬ì´ìš©ì•½ê´€ë™ì˜ ë ˆì´ì–´ íŒì—… ì—´ê¸°">í†µì‹ ì‚¬ì´ìš©ì•½ê´€ë™ì˜</button></span>
 					</li>
 					
 					<li class="3rdagree" style="display:none">
-					  <span class="checkbox check2"><input type="checkbox" name="agree5" id="agree5" value="Y"><label for="agree5">Á¦3ÀÚÁ¤º¸Á¦°ø µ¿ÀÇÇÏ±â</label>
-						<button type="button" class="btn_agree_popup" id="agree5Pop" title="Á¦3ÀÚÁ¤º¸Á¦°øµ¿ÀÇ ·¹ÀÌ¾î ÆË¾÷ ¿­±â">Á¦3ÀÚÁ¤º¸Á¦°øµ¿ÀÇ</button></span>
-					</li>
-					
+					  <span class="checkbox check2"><input type="checkbox" name="agree5" id="agree5" value="Y"><label for="agree5">ì œ3ìì •ë³´ì œê³µ ë™ì˜í•˜ê¸°</label>
+						<button type="button" class="btn_agree_popup" id="agree5Pop" title="ì œ3ìì •ë³´ì œê³µë™ì˜ ë ˆì´ì–´ íŒì—… ì—´ê¸°">ì œ3ìì •ë³´ì œê³µë™ì˜</button></span>
+					</li>		
 				  </ul>
-
-				
-				
-				  <button type="button" id="btnPassTran" class="btn_r btn_type6 btn_r btn_skip passAuth">PASS·Î ÀÎÁõÇÏ±â</button>
-				  <button type="button" id="btnSms" class="btn_r btn_type6 btn_r btn_skip2">¹®ÀÚ(SMS)·Î ÀÎÁõÇÏ±â</button>
-				
-				
+				  <button type="button" id="btnPassTran" class="btn_r btn_type6 btn_r btn_skip passAuth">PASSë¡œ ì¸ì¦í•˜ê¸°</button>
+				  <button type="button" id="btnSms" class="btn_r btn_type6 btn_r btn_skip2">ë¬¸ì(SMS)ë¡œ ì¸ì¦í•˜ê¸°</button>
 				</fieldset>
-
-
-
-	
-		
-
-
-
-	<!-- Å°º¸µåº¸¾È 6.5 REAL URL -->
-	
-
-
-		
-	
-
-
-
+	<!-- í‚¤ë³´ë“œë³´ì•ˆ 6.5 REAL URL -->
 			</section>
 
 			<form id="cplogn" name="cplogn" method="post" action="">
@@ -646,17 +529,10 @@
 				<input type="hidden" name="reqCommIdStatedYn" value="N">
 				<input type="hidden" name="retry" id="retry" value="">
 				<input type="hidden" name="CommId" id="CommId" value="">
-
-				 
-
-				
-
 				<input type="hidden" name="reqCriOSYn" value="Y">
 			</form>
 
 			<div id="footer">
-			  		
-
 		<script type="text/javascript">
 			function goAgreePop(value1,value2){
 				var UserAgent = navigator.userAgent.toLowerCase();
@@ -672,93 +548,66 @@
 			}
 		</script>
 
-        
-        
-
-		
-		
-		
             <div class="footer_kmc">
-				<a href="javascript:goAgreePop('/kmcis/comm/kmcisHpUse_popUpBox.html','personal','all');" title="ÀÌ¿ë¾à°ü Àü¹®º¸±â-»õÃ¢" style="color:#4F4F4F;">ÀÌ¿ë¾à°ü</a> | 
-				<a href="#" onclick="javascript:goAgreePop('/kmcis/comm/kmcisHpPersonalPop_popUpBox.html?ver=20201210','personal','all');" title="°³ÀÎÁ¤º¸Ã³¸®¹æÄ§ Àü¹®º¸±â-»õÃ¢" style="color:#4F4F4F;">
-				°³ÀÎÁ¤º¸Ã³¸®¹æÄ§</a> | <span style="color:#4F4F4F;">GlobalSign 256 SSL ¾ÏÈ£È­ Àû¿ë</span>
+				<a href="javascript:goAgreePop('/kmcis/comm/kmcisHpUse_popUpBox.html','personal','all');" title="ì´ìš©ì•½ê´€ ì „ë¬¸ë³´ê¸°-ìƒˆì°½" style="color:#4F4F4F;">ì´ìš©ì•½ê´€</a> | 
+				<a href="#" onclick="javascript:goAgreePop('/kmcis/comm/kmcisHpPersonalPop_popUpBox.html?ver=20201210','personal','all');" title="ê°œì¸ì •ë³´ì²˜ë¦¬ë°©ì¹¨ ì „ë¬¸ë³´ê¸°-ìƒˆì°½" style="color:#4F4F4F;">
+				ê°œì¸ì •ë³´ì²˜ë¦¬ë°©ì¹¨</a> | <span style="color:#4F4F4F;">GlobalSign 256 SSL ì•”í˜¸í™” ì ìš©</span>
 				<span class="kmc_logo"></span>
-				<div style="float:right; margin-top:50% color:#4F4F4F; width:72px; height:23px; overflow:hidden; line-height:0; text-indent:-9999px" title="ÇÑ±¹¸ğ¹ÙÀÏÀÎÁõ ·Î°í">ÇÑ±¹¸ğ¹ÙÀÏÀÎÁõ ·Î°í</div>
+				<div style="float:right; margin-top:50% color:#4F4F4F; width:72px; height:23px; overflow:hidden; line-height:0; text-indent:-9999px" title="í•œêµ­ëª¨ë°”ì¼ì¸ì¦ ë¡œê³ ">í•œêµ­ëª¨ë°”ì¼ì¸ì¦ ë¡œê³ </div>
 			</div>
-		
-		
-
 			</div>
-
-			<!-- ¾Ë¶ãÆù ·¹ÀÌ¾î ÆË¾÷ -->
+			<!-- ì•Œëœ°í° ë ˆì´ì–´ íŒì—… -->
 			<div class="layerPopupWrap">
 			  <div class="dim"></div>
 			  <div class="layer-pop agency_select__popup">
 				<form name="frmPop" method="post" action="" autocomplete="off" onsubmit="return false;">
-				  <div class="pop-tit">¾Ë¶ãÆù »ç¾÷ÀÚ¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.</div>
+				  <div class="pop-tit">ì•Œëœ°í° ì‚¬ì—…ìë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.</div>
 				  <div class="pop-con_02">
 					<ul class="licensee-list">
 					  <li class="first-item">
 						<div class="licensee_title agency-popup-sk">
 						  
-						  <a href="#" title="¸ñ·Ï¿­±â, ¼±ÅÃÇØÁ¦µÊ" class="arco focus_sk">
-							<input type="radio" name="mobilecoPop" id="agency-popup-sk" value="SKM" title="SKT(¾Ë¶ãÆù) ¼±ÅÃ">
+						  <a href="#" title="ëª©ë¡ì—´ê¸°, ì„ íƒí•´ì œë¨" class="arco focus_sk">
+							<input type="radio" name="mobilecoPop" id="agency-popup-sk" value="SKM" title="SKT(ì•Œëœ°í°) ì„ íƒ">
 							
 							<label for="agency-popup-sk" class="checked" onclick="checkTelecom('SKM')">
 							  <span class="ele sk"><img src="https://img4.kmcert.com/kmcis/new_web/img/logo_sk.png" alt="SK telecom"></span>
-							  <span class="ele_title">»ç¾÷ÀÚ¸ñ·Ï <i class="icon_arrow down"></i> </span>
+							  <span class="ele_title">ì‚¬ì—…ìëª©ë¡ <i class="icon_arrow down"></i> </span>
 							</label>
 						  </a>
 						</div>
-						
 						<div class="licensee_info" tabindex="0">
-						  
-						  <p>¾ÆÀÌÁîºñÀü(¾ÆÀÌÁî¸ğ¹ÙÀÏ), À¯´ÏÄÄÁî(¸ğºù), ½º¸¶ÅÚ (½º¸¶ÅÚ), ¿¡½º¿ø(¾È½É¸ğ¹ÙÀÏ), LGÇï·ÎºñÀü(Çï·Î¸ğ¹ÙÀÏ), KCT(Æ¼ÇÃ·¯½º), Å«»ç¶÷(ÀÌ¾ß±â¸ğ¹ÙÀÏ), SKÅÚ¸µÅ©(SK¼¼ºì¸ğ¹ÙÀÏ), ÀÌ¸¶Æ®(ÀÌ¸¶Æ®¾Ë¶ãÆù), ÇÁ¸®ÅÚ·¹ÄŞ(ÇÁ¸®Æ¼), Á¶ÀÌÅÚ(Á¶ÀÌÅÚ), Åä½º¸ğ¹ÙÀÏ(Åä½º¸ğ¹ÙÀÏ), KB±¹¹ÎÀºÇà(¸®ºê¸ğ¹ÙÀÏ), ½ºÅ×ÀÌÁöÆÄÀÌºê(ÇÉ´ÙÀÌ·ºÆ®)</p>
+						  <p>ì•„ì´ì¦ˆë¹„ì „(ì•„ì´ì¦ˆëª¨ë°”ì¼), ìœ ë‹ˆì»´ì¦ˆ(ëª¨ë¹™), ìŠ¤ë§ˆí…” (ìŠ¤ë§ˆí…”), ì—ìŠ¤ì›(ì•ˆì‹¬ëª¨ë°”ì¼), LGí—¬ë¡œë¹„ì „(í—¬ë¡œëª¨ë°”ì¼), KCT(í‹°í”ŒëŸ¬ìŠ¤), í°ì‚¬ëŒ(ì´ì•¼ê¸°ëª¨ë°”ì¼), SKí…”ë§í¬(SKì„¸ë¸ëª¨ë°”ì¼), ì´ë§ˆíŠ¸(ì´ë§ˆíŠ¸ì•Œëœ°í°), í”„ë¦¬í…”ë ˆì½¤(í”„ë¦¬í‹°), ì¡°ì´í…”(ì¡°ì´í…”), í† ìŠ¤ëª¨ë°”ì¼(í† ìŠ¤ëª¨ë°”ì¼), KBêµ­ë¯¼ì€í–‰(ë¦¬ë¸Œëª¨ë°”ì¼), ìŠ¤í…Œì´ì§€íŒŒì´ë¸Œ(í•€ë‹¤ì´ë ‰íŠ¸)</p>
 						</div>
 					  </li>
 					  <li class="">
 						<div class="licensee_title agency-popup-kt">
-						  <a href="#" title="¸ñ·Ï¿­±â, ¼±ÅÃÇØÁ¦µÊ" class="arco">
-							<input type="radio" name="mobilecoPop" id="agency-popup-kt" value="KTM" title="KT(¾Ë¶ãÆù) ¼±ÅÃ">
+						  <a href="#" title="ëª©ë¡ì—´ê¸°, ì„ íƒí•´ì œë¨" class="arco">
+							<input type="radio" name="mobilecoPop" id="agency-popup-kt" value="KTM" title="KT(ì•Œëœ°í°) ì„ íƒ">
 							
 							<label for="agency-popup-kt" class="checked" onclick="checkTelecom('KTM')">
 							  <span class="ele kt"><img src="https://img4.kmcert.com/kmcis/new_web/img/logo_kt.png" alt="KT"></span>
-							  <span class="ele_title">»ç¾÷ÀÚ¸ñ·Ï <i class="icon_arrow down"></i> </span>
+							  <span class="ele_title">ì‚¬ì—…ìëª©ë¡ <i class="icon_arrow down"></i> </span>
 							</label>
 						  </a>
 						</div>
 						<div class="licensee_info" tabindex="0">
-						  
-						  <p>
-
-
-
-
-
-
-(ÁÖ)LGÇï·ÎºñÀü(Çï·Î¸ğ¹ÙÀÏ), (ÁÖ)´ÏÁîÅÚ·¹ÄŞ(´ÏÁî¸ğ¹ÙÀÏ), (ÁÖ)´õ¿øÇÃ·§Æû(¾ÆÀÌÇÃ·¯½ºÀ¯), (ÁÖ)¹Ì´Ï°ÔÀÌÆ®(M2¸ğ¹ÙÀÏ), (ÁÖ)½ºÅ×ÀÌÁöÆÄÀÌºê(ÇÉÇÃ·¹ÀÌ), (ÁÖ)¿ÍÀÌ¿¤·£µå(¿©À¯¾Ë¶ãÆù), (ÁÖ)À§³Ê½ºÅÚ(À£), (ÁÖ)ÆÄÀÎµğÁöÅĞ, (ÁÖ)ÇÑ±¹ÄÉÀÌºíÅÚ·¹ÄŞ(Æ¼ÇÃ·¯½º), ACNÄÚ¸®¾Æ(ÇÃ·¡½Ã¸ğ¹ÙÀÏ), KT½ºÄ«ÀÌ¶óÀÌÇÁ(½ºÄ«ÀÌ¶óÀÌÇÁ¸ğ¹ÙÀÏ), KT¿¥¸ğ¹ÙÀÏ(Kt M ¸ğ¹ÙÀÏ), KTÅÚ·¹Ä°, µå¸²¶óÀÎ(ÁÖ)(µå¸²¸ğ¹ÙÀÏ), ·ÎÄ«¸ğºô¸®Æ¼(ÁÖ), Åä½º¸ğ¹ÙÀÏ, ¾ÆÀÌµğ½ºÆÄ¿öÅÚ(ÁÖ), ¾Ø¾ËÄ¿¹Â´ÏÄÉÀÌ¼Ç(¾ØÅÚ·¹ÄŞ), ¿¡½º¿ø(¾È½É¸ğ¹ÙÀÏ), Àå¼º¸ğ¹ÙÀÏ, (ÁÖ)¼¼Á¾ÅÚ·¹ÄŞ(½º³ë¿ì¸Ç), (ÁÖ)¾¾¿£Ä¿¹Â´ÏÄÉÀÌ¼Ç(¾¾¾ØÄÄ), (ÁÖ)¾ÆÀÌÁîºñÀü(¾ÆÀÌÁî¸ğ¹ÙÀÏ), (ÁÖ)¿¡³Ø½ºÅÚ·¹ÄŞ(A¸ğ¹ÙÀÏ), (ÁÖ)¿¡ÀÌÇÁ·¯½º(¾Æ½Ã¾Æ¸ğ¹ÙÀÏ), (ÁÖ)À¯´ÏÄÄÁî(¸ğºù), (ÁÖ)Á¦ÀÌ¾¾Æ¼, (ÁÖ)ÄÚµå¸ğ¹ÙÀÏ(ÀÌÁö¸ğ¹ÙÀÏ), (ÁÖ)Å«»ç¶÷Ä¿³ØÆ®(ÀÌ¾ß±â¸ğ¹ÙÀÏ), (ÁÖ)ÇÁ¸®ÅÚ·¹ÄŞ(ÇÁ¸®Æ¼), ÇÑ±¹ÇÇ¿¥¿À(ÁÖ)(¹ë·ùÄÄ), (ÁÖ)½º¸¶ÅÚ, (ÁÖ)Æ÷ÀÎÆ®ÆÄÅ©, KB±¹¹ÎÀºÇà(¸®ºê¿¥), (ÁÖ)°í°íÆÑÅä¸®, (ÁÖ)´õÇÇ¿£¿¤, (ÁÖ)¿¡¸£¿¤, (ÁÖ)ÇÉ¼¦</p>
+						  <p>(ì£¼)LGí—¬ë¡œë¹„ì „(í—¬ë¡œëª¨ë°”ì¼), (ì£¼)ë‹ˆì¦ˆí…”ë ˆì½¤(ë‹ˆì¦ˆëª¨ë°”ì¼), (ì£¼)ë”ì›í”Œë«í¼(ì•„ì´í”ŒëŸ¬ìŠ¤ìœ ), (ì£¼)ë¯¸ë‹ˆê²Œì´íŠ¸(M2ëª¨ë°”ì¼), (ì£¼)ìŠ¤í…Œì´ì§€íŒŒì´ë¸Œ(í•€í”Œë ˆì´), (ì£¼)ì™€ì´ì—˜ëœë“œ(ì—¬ìœ ì•Œëœ°í°), (ì£¼)ìœ„ë„ˆìŠ¤í…”(ì›°), (ì£¼)íŒŒì¸ë””ì§€í„¸, (ì£¼)í•œêµ­ì¼€ì´ë¸”í…”ë ˆì½¤(í‹°í”ŒëŸ¬ìŠ¤), ACNì½”ë¦¬ì•„(í”Œë˜ì‹œëª¨ë°”ì¼), KTìŠ¤ì¹´ì´ë¼ì´í”„(ìŠ¤ì¹´ì´ë¼ì´í”„ëª¨ë°”ì¼), KTì— ëª¨ë°”ì¼(Kt M ëª¨ë°”ì¼), KTí…”ë ˆìº…, ë“œë¦¼ë¼ì¸(ì£¼)(ë“œë¦¼ëª¨ë°”ì¼), ë¡œì¹´ëª¨ë¹Œë¦¬í‹°(ì£¼), í† ìŠ¤ëª¨ë°”ì¼, ì•„ì´ë””ìŠ¤íŒŒì›Œí…”(ì£¼), ì•¤ì•Œì»¤ë®¤ë‹ˆì¼€ì´ì…˜(ì•¤í…”ë ˆì½¤), ì—ìŠ¤ì›(ì•ˆì‹¬ëª¨ë°”ì¼), ì¥ì„±ëª¨ë°”ì¼, (ì£¼)ì„¸ì¢…í…”ë ˆì½¤(ìŠ¤ë…¸ìš°ë§¨), (ì£¼)ì”¨ì—”ì»¤ë®¤ë‹ˆì¼€ì´ì…˜(ì”¨ì•¤ì»´), (ì£¼)ì•„ì´ì¦ˆë¹„ì „(ì•„ì´ì¦ˆëª¨ë°”ì¼), (ì£¼)ì—ë„¥ìŠ¤í…”ë ˆì½¤(Aëª¨ë°”ì¼), (ì£¼)ì—ì´í”„ëŸ¬ìŠ¤(ì•„ì‹œì•„ëª¨ë°”ì¼), (ì£¼)ìœ ë‹ˆì»´ì¦ˆ(ëª¨ë¹™), (ì£¼)ì œì´ì”¨í‹°, (ì£¼)ì½”ë“œëª¨ë°”ì¼(ì´ì§€ëª¨ë°”ì¼), (ì£¼)í°ì‚¬ëŒì»¤ë„¥íŠ¸(ì´ì•¼ê¸°ëª¨ë°”ì¼), (ì£¼)í”„ë¦¬í…”ë ˆì½¤(í”„ë¦¬í‹°), í•œêµ­í”¼ì— ì˜¤(ì£¼)(ë°¸ë¥˜ì»´), (ì£¼)ìŠ¤ë§ˆí…”, (ì£¼)í¬ì¸íŠ¸íŒŒí¬, KBêµ­ë¯¼ì€í–‰(ë¦¬ë¸Œì— ), (ì£¼)ê³ ê³ íŒ©í† ë¦¬, (ì£¼)ë”í”¼ì—”ì—˜, (ì£¼)ì—ë¥´ì—˜, (ì£¼)í•€ìƒ·</p>
 						</div>
 					  </li>
 					  <li class="">
 						<div class="licensee_title agency-popup-lgu">
-						  <a href="#" title="¸ñ·Ï¿­±â, ¼±ÅÃÇØÁ¦µÊ" class="arco">
-							<input type="radio" name="mobilecoPop" id="agency-popup-lgu" value="LGM" title="LGU+(¾Ë¶ãÆù) ¼±ÅÃ">
+						  <a href="#" title="ëª©ë¡ì—´ê¸°, ì„ íƒí•´ì œë¨" class="arco">
+							<input type="radio" name="mobilecoPop" id="agency-popup-lgu" value="LGM" title="LGU+(ì•Œëœ°í°) ì„ íƒ">
 							
 							<label for="agency-popup-lgu" class="checked" onclick="checkTelecom('LGM')">
 							  <span class="ele lgu"><img src="https://img4.kmcert.com/kmcis/new_web/img/logo_lgu.png" alt="LG U+"></span>
-							  <span class="ele_title">»ç¾÷ÀÚ¸ñ·Ï <i class="icon_arrow down"></i> </span>
+							  <span class="ele_title">ì‚¬ì—…ìëª©ë¡ <i class="icon_arrow down"></i> </span>
 							</label>
 						  </a>
 						</div>
-						<div class="licensee_info" tabindex="0">
-						  
-						  <p>
-
-
-
-
-
-ACNÄÚ¸®¾Æ(ÇÃ·¡½Ã¸ğ¹ÙÀÏ), (ÁÖ)¿¡³Ø½ºÅÚ·¹ÄŞ(A¸ğ¹ÙÀÏ), (ÁÖ)¿¡ÀÌÇÁ·¯½º(¾Æ½Ã¾Æ¸ğ¹ÙÀÏ), (ÁÖ)CKÄ¿¹Â½ºÆ®¸®(½´°¡¸ğ¹ÙÀÏ), SL¸®Å×ÀÏ(¼¿¸ğ¹ÙÀÏ), (ÁÖ)ÄÚµå¸ğ¹ÙÀÏ(ÀÌÁö¸ğ¹ÙÀÏ), ¿¡¸£¿¤¸ğ¹ÙÀÏ, (ÁÖ)¾ÆÀÌÁîºñÀü(¾ÆÀÌÁî¸ğ¹ÙÀÏ), (ÁÖ)ÇÉ¼¦, LGÇï·ÎºñÀü(Çï·Î¸ğ¹ÙÀÏ), ÇÑÆĞ½º¸ğ¹ÙÀÏ, (ÁÖ)º¸½º(È­ÀÎÅë½Å), »ç¶÷°ú¿¬°á, ÀÎ½ºÄÚ¸®¾Æ, Á¶ÀÌÅÚ, ±¹¹ÎÀºÇà(¸®ºê¸ğ¹ÙÀÏ), Á¦ÁÖ¹æ¼Û, (ÁÖ)ÄÚ³ª¾ÆÀÌ, (ÁÖ)KG¸ğºô¸®¾ğ½º(KG¸ğ¹ÙÀÏ), (ÁÖ)Å«»ç¶÷Ä¿³ØÆ®(ÀÌ¾ß±â¸ğ¹ÙÀÏ), Åä½º¸ğ¹ÙÀÏ, (ÁÖ)¹Ìµğ¾î·Î±×(U+À¯¸ğ¹ÙÀÏ), (ÁÖ)¸¶ºíÇÁ·Îµà½º(¸¶ºí¸µ), ´ÏÁîÅÚ·¹ÄŞ, (ÁÖ)¾Ø¾ËÄ¿¹Â´ÏÄÉÀÌ¼Ç(¾ØÅÚ·¹ÄŞ), ¿£Æ¼¿ÂÅÚ·¹ÄŞ, ¿øÅÚ·¹ÄŞ, (ÁÖ)½ºÅ×ÀÌÁöÆÄÀÌºê(ÇÉÇÃ·¹ÀÌ), ÇÑ±¹ÇÇ¿¥¿À(ÁÖ)(º§·ùÄÄ), (ÁÖ)·¹±×¿ø(¿Â±¹¹ÎÆù), ¿¡½º¿ø¾È½É¸ğ¹ÙÀÏ, ¼­°æ¸ğ¹ÙÀÏ, ¼¼Á¾ÅÚ·¹ÄŞ(½º³ë¿ì¸Ç), ½º¸¶ÅÚ, (ÁÖ)ÀÎ½ºÄÚºñ(ÇÁ¸®Æ¼), (ÁÖ)ÇÑ±¹ÄÉÀÌºíÅÚ·¹ÄŞ(Æ¼ÇÃ·¯½º), (ÁÖ)À¯´ÏÄÄÁî(¸ğºù), (ÁÖ)¿ÍÀÌµå¸ğ¹ÙÀÏ(µµ½Ã¶ô¸ğ¹ÙÀÏ), (ÁÖ)À§³Ê½ºÅÚ(well), (ÁÖ)¿ÍÀÌ¿¤·£µå(¿©À¯ÅÚ·¹ÄŞ)</p>
+						<div class="licensee_info" tabindex="0">			  
+						  <p>ACNì½”ë¦¬ì•„(í”Œë˜ì‹œëª¨ë°”ì¼), (ì£¼)ì—ë„¥ìŠ¤í…”ë ˆì½¤(Aëª¨ë°”ì¼), (ì£¼)ì—ì´í”„ëŸ¬ìŠ¤(ì•„ì‹œì•„ëª¨ë°”ì¼), (ì£¼)CKì»¤ë®¤ìŠ¤íŠ¸ë¦¬(ìŠˆê°€ëª¨ë°”ì¼), SLë¦¬í…Œì¼(ì…€ëª¨ë°”ì¼), (ì£¼)ì½”ë“œëª¨ë°”ì¼(ì´ì§€ëª¨ë°”ì¼), ì—ë¥´ì—˜ëª¨ë°”ì¼, (ì£¼)ì•„ì´ì¦ˆë¹„ì „(ì•„ì´ì¦ˆëª¨ë°”ì¼), (ì£¼)í•€ìƒ·, LGí—¬ë¡œë¹„ì „(í—¬ë¡œëª¨ë°”ì¼), í•œíŒ¨ìŠ¤ëª¨ë°”ì¼, (ì£¼)ë³´ìŠ¤(í™”ì¸í†µì‹ ), ì‚¬ëŒê³¼ì—°ê²°, ì¸ìŠ¤ì½”ë¦¬ì•„, ì¡°ì´í…”, êµ­ë¯¼ì€í–‰(ë¦¬ë¸Œëª¨ë°”ì¼), ì œì£¼ë°©ì†¡, (ì£¼)ì½”ë‚˜ì•„ì´, (ì£¼)KGëª¨ë¹Œë¦¬ì–¸ìŠ¤(KGëª¨ë°”ì¼), (ì£¼)í°ì‚¬ëŒì»¤ë„¥íŠ¸(ì´ì•¼ê¸°ëª¨ë°”ì¼), í† ìŠ¤ëª¨ë°”ì¼, (ì£¼)ë¯¸ë””ì–´ë¡œê·¸(U+ìœ ëª¨ë°”ì¼), (ì£¼)ë§ˆë¸”í”„ë¡œë“€ìŠ¤(ë§ˆë¸”ë§), ë‹ˆì¦ˆí…”ë ˆì½¤, (ì£¼)ì•¤ì•Œì»¤ë®¤ë‹ˆì¼€ì´ì…˜(ì•¤í…”ë ˆì½¤), ì—”í‹°ì˜¨í…”ë ˆì½¤, ì›í…”ë ˆì½¤, (ì£¼)ìŠ¤í…Œì´ì§€íŒŒì´ë¸Œ(í•€í”Œë ˆì´), í•œêµ­í”¼ì— ì˜¤(ì£¼)(ë²¨ë¥˜ì»´), (ì£¼)ë ˆê·¸ì›(ì˜¨êµ­ë¯¼í°), ì—ìŠ¤ì›ì•ˆì‹¬ëª¨ë°”ì¼, ì„œê²½ëª¨ë°”ì¼, ì„¸ì¢…í…”ë ˆì½¤(ìŠ¤ë…¸ìš°ë§¨), ìŠ¤ë§ˆí…”, (ì£¼)ì¸ìŠ¤ì½”ë¹„(í”„ë¦¬í‹°), (ì£¼)í•œêµ­ì¼€ì´ë¸”í…”ë ˆì½¤(í‹°í”ŒëŸ¬ìŠ¤), (ì£¼)ìœ ë‹ˆì»´ì¦ˆ(ëª¨ë¹™), (ì£¼)ì™€ì´ë“œëª¨ë°”ì¼(ë„ì‹œë½ëª¨ë°”ì¼), (ì£¼)ìœ„ë„ˆìŠ¤í…”(well), (ì£¼)ì™€ì´ì—˜ëœë“œ(ì—¬ìœ í…”ë ˆì½¤)</p>
 						</div>
 					  </li>
 					</ul>
@@ -768,15 +617,15 @@ ACNÄÚ¸®¾Æ(ÇÃ·¡½Ã¸ğ¹ÙÀÏ), (ÁÖ)¿¡³Ø½ºÅÚ·¹ÄŞ(A¸ğ¹ÙÀÏ), (ÁÖ)¿¡ÀÌÇÁ·¯½º(¾Æ½Ã¾Æ¸ğ¹ÙÀÏ)
 					<ul>
 					  
 					  
-					  <li class="firstChild"><button type="button" onclick="pop_cancle()" class="btn_r btn_type6">Ãë¼Ò</button></li>
-					  <li class="lastChild activeDarkGray"><button type="button" onclick="pop_select()" class="btn_r btn_type btn_type3 close">¼±ÅÃ</button></li>
+					  <li class="firstChild"><button type="button" onclick="pop_cancle()" class="btn_r btn_type6">ì·¨ì†Œ</button></li>
+					  <li class="lastChild activeDarkGray"><button type="button" onclick="pop_select()" class="btn_r btn_type btn_type3 close">ì„ íƒ</button></li>
 					</ul>
 				  </div>
 				</form>
 			  </div>
 			</div>
 
-			<!-- ¾à°ü ·¹ÀÌ¾î-->
+			<!-- ì•½ê´€ ë ˆì´ì–´-->
 			<div class="layerPopupWrap" id="layerAgreePop">
 			  <div class="dim" style=""></div>
 			  <div class="layer-pop agreement" style="">
@@ -785,7 +634,7 @@ ACNÄÚ¸®¾Æ(ÇÃ·¡½Ã¸ğ¹ÙÀÏ), (ÁÖ)¿¡³Ø½ºÅÚ·¹ÄŞ(A¸ğ¹ÙÀÏ), (ÁÖ)¿¡ÀÌÇÁ·¯½º(¾Æ½Ã¾Æ¸ğ¹ÙÀÏ)
 				<div class="pop-btn wide">
 				  <ul>
 					<li class="lastChild defaultBtn DefaultBtn">
-					  <button class="close agreeClose" onclick="pop_close()">´İ±â</button>
+					  <button class="close agreeClose" onclick="pop_close()">ë‹«ê¸°</button>
 					</li>
 				  </ul>
 				</div>
@@ -794,14 +643,8 @@ ACNÄÚ¸®¾Æ(ÇÃ·¡½Ã¸ğ¹ÙÀÏ), (ÁÖ)¿¡³Ø½ºÅÚ·¹ÄŞ(A¸ğ¹ÙÀÏ), (ÁÖ)¿¡ÀÌÇÁ·¯½º(¾Æ½Ã¾Æ¸ğ¹ÙÀÏ)
 
 		  </div>
 		
-	
-
 		<script>
 		  $(function() {
-
-			
-			
-
 			$(".agency-popup-sk").on('click', function(){
 				if ($(this).parent('li').hasClass('active')) {
 					$(this).find('input').prop('checked', false);
@@ -826,11 +669,7 @@ ACNÄÚ¸®¾Æ(ÇÃ·¡½Ã¸ğ¹ÙÀÏ), (ÁÖ)¿¡³Ø½ºÅÚ·¹ÄŞ(A¸ğ¹ÙÀÏ), (ÁÖ)¿¡ÀÌÇÁ·¯½º(¾Æ½Ã¾Æ¸ğ¹ÙÀÏ)
 				}
 			});
 
-			
-			
-			
-
-				/* ¾Ë¶ãÆù ¼±ÅÃ ½Ã ·¹ÀÌ¾îÆË¾÷ */
+				/* ì•Œëœ°í° ì„ íƒ ì‹œ ë ˆì´ì–´íŒì—… */
 				$('#agency-and').click(function() {
 				  $('.dim').show();
 				  $('.agency_select__popup').fadeIn();
@@ -839,16 +678,10 @@ ACNÄÚ¸®¾Æ(ÇÃ·¡½Ã¸ğ¹ÙÀÏ), (ÁÖ)¿¡³Ø½ºÅÚ·¹ÄŞ(A¸ğ¹ÙÀÏ), (ÁÖ)¿¡ÀÌÇÁ·¯½º(¾Æ½Ã¾Æ¸ğ¹ÙÀÏ)
 				  
 				  $('.3rdagree').css("display","block");
 				});
-
 				
 				$('#agency-sk').click(function() { $('.3rdagree').css("display","none"); });
 				$('#agency-kt').click(function() { $('.3rdagree').css("display","none"); });
 				$('#agency-lgu').click(function() { $('.3rdagree').css("display","none"); });
-				
-
-			
-			
-			
 
 			$('.agency_select__popup .close').click(function() {
 			  setTimeout(function() {
@@ -856,7 +689,7 @@ ACNÄÚ¸®¾Æ(ÇÃ·¡½Ã¸ğ¹ÙÀÏ), (ÁÖ)¿¡³Ø½ºÅÚ·¹ÄŞ(A¸ğ¹ÙÀÏ), (ÁÖ)¿¡ÀÌÇÁ·¯½º(¾Æ½Ã¾Æ¸ğ¹ÙÀÏ)
 			  }, 100);
 			});
 
-			/* Åë½Å»ç ½½¶óÀÌµåUP/DOWN */
+			/* í†µì‹ ì‚¬ ìŠ¬ë¼ì´ë“œUP/DOWN */
 			
 			$('.licensee_title').on('click', function(e) {
 			  e.preventDefault();
@@ -871,23 +704,23 @@ ACNÄÚ¸®¾Æ(ÇÃ·¡½Ã¸ğ¹ÙÀÏ), (ÁÖ)¿¡³Ø½ºÅÚ·¹ÄŞ(A¸ğ¹ÙÀÏ), (ÁÖ)¿¡ÀÌÇÁ·¯½º(¾Æ½Ã¾Æ¸ğ¹ÙÀÏ)
 			  if (licenseeActive == true) {
 				if ($(this).parent('li').hasClass('active')) {
 				  $('.licensee-list li').removeClass('active');
-				  $('.licensee-list li').find('.arco').prop('title','Ãà¼ÒµÊ, ¼±ÅÃÇØÁ¦µÊ');
+				  $('.licensee-list li').find('.arco').prop('title','ì¶•ì†Œë¨, ì„ íƒí•´ì œë¨');
 				  $('.licensee_info').stop().slideUp('slow', function(){ $('.licensee_info').css('overflow-y', 'scroll') });
 				  $(this).find('.icon_arrow').removeClass('up');
 				  $(this).find('.icon_arrow').addClass('down');
 				} else {
 				  $('.licensee-list li').removeClass('active');
-				  $('.licensee-list li').find('.arco').prop('title','Ãà¼ÒµÊ, ¼±ÅÃÇØÁ¦µÊ');
+				  $('.licensee-list li').find('.arco').prop('title','ì¶•ì†Œë¨, ì„ íƒí•´ì œë¨');
 				  $('.licensee_info').stop().slideUp('slow', function(){ $('.licensee_info').css('overflow-y', 'scroll') });
 				  $(this).parent('li').addClass('active');
-				  $(this).parent('li').find('.arco').prop('title','È®ÀåµÊ, ¼±ÅÃµÊ');
+				  $(this).parent('li').find('.arco').prop('title','í™•ì¥ë¨, ì„ íƒë¨');
 				  licenseeInfo.stop().slideDown();
 				  $(this).find('.icon_arrow').removeClass('down');
 				  $(this).find('.icon_arrow').addClass('up');
 				}
 			  } else if (licenseeActive == false) {
 				$(this).parent('li').addClass('active');
-				$(this).parent('li').find('.arco').prop('title','È®ÀåµÊ, ¼±ÅÃµÊ');
+				$(this).parent('li').find('.arco').prop('title','í™•ì¥ë¨, ì„ íƒë¨');
 				licenseeInfo.stop().slideDown();
 
 				$(this).find('.icon_arrow').removeClass('down');
@@ -897,7 +730,7 @@ ACNÄÚ¸®¾Æ(ÇÃ·¡½Ã¸ğ¹ÙÀÏ), (ÁÖ)¿¡³Ø½ºÅÚ·¹ÄŞ(A¸ğ¹ÙÀÏ), (ÁÖ)¿¡ÀÌÇÁ·¯½º(¾Æ½Ã¾Æ¸ğ¹ÙÀÏ)
 				  $('.licensee_title').on('click', function(e) {
 					e.preventDefault();
 					$('.licensee-list li').removeClass('active');
-					$('.licensee-list li').find('.arco').prop('title','Ãà¼ÒµÊ, ¼±ÅÃÇØÁ¦µÊ');
+					$('.licensee-list li').find('.arco').prop('title','ì¶•ì†Œë¨, ì„ íƒí•´ì œë¨');
 					$('.licensee_info').stop().slideUp('slow', function(){ $('.licensee_info').css('overflow-y', 'scroll') });
 					$(this).find('.icon_arrow').removeClass('up');
 					$(this).find('.icon_arrow').addClass('down');

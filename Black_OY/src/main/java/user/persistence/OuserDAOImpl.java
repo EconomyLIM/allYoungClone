@@ -25,8 +25,7 @@ public class OuserDAOImpl implements OuserDAO {
 	public static OuserDAOImpl getInstance() {
 		return instance;
 	}
-	
-	
+
 	//회원가입여부 체크
 	@Override
 	public OuserDTO joinCheck(Connection conn, String u_tel) throws SQLException {
@@ -80,34 +79,6 @@ public class OuserDAOImpl implements OuserDAO {
 		return rowCount;
 
 	}
-	//비밀번호 체크
-
-	@Override
-	public OuserDTO pwdCheck(Connection conn, String user_id) throws SQLException {
-		String sql = "SELECT u_pwd FROM o_user WHERE user_id = ? ";
-		ResultSet rs = null; 
-		PreparedStatement pstmt = null;
-		OuserDTO dto = null;
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, user_id);
-		rs = pstmt.executeQuery();      
-		if( rs.next() ) {
-			dto= OuserDTO.builder()
-					.user_id(rs.getString("user_id"))
-					.u_name(rs.getString("u_name"))
-					.u_pwd(rs.getString("u_pwd"))
-					.u_birth(rs.getDate("u_birth"))
-					.u_tel(rs.getString("u_tel"))
-					.u_email(rs.getString("u_email"))
-					.build();
-		}      
-		pstmt.close();
-		rs.close();
-
-		return dto;
-	}
-
-
 
 	//비밀번호 변경
 	@Override
