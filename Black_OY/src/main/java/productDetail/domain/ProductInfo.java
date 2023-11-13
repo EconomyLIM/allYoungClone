@@ -21,6 +21,7 @@ public class ProductInfo {
 	private String proName;
 	private String catSId;
 	private int proPrice;
+	private int pafterPrice;
 	private int lowPrice;
 	private int afterPrice;
 	private int prg;
@@ -28,5 +29,6 @@ public class ProductInfo {
 	private int prd;
 	private int prp;
 	private int stock;
+	private int proStock;
 	
 } // class
