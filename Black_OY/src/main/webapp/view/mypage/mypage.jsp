@@ -44,8 +44,7 @@
 						</div>
 						<p class="txt">
 							<c:forEach items="${ userInfo }" var="info">
-								<%-- 등급 --%>${ info.ugrade } <strong class="name">
-									<%-- 이름 --%>${ info.uname }</strong>님 반갑습니다.
+								<%-- 등급 --%>${ info.ugrade } <strong class="name"> <%-- 이름 --%>${ info.uname }</strong>님 반갑습니다.
 						</c:forEach>
 						</p>
 						<ul class="mem_opt">
@@ -237,8 +236,8 @@
 							data-attr="마이페이지^주문배송조회_더보기^더보기">더보기</a>
 					</div>
 					<div class="layer_pop_wrap" id="service_survey" style=""></div>
-					
-					<a href="<%-- 주문배송조회 페이지 --%>" class="order_view"
+
+					<a href="<%=contextPath %>/mypage/orderDelivery.do" class="order_view"
 						data-attr="마이페이지^주문배송조회_요약건수">
 						<ul class="mypage-step">
 							<c:forEach items="${ userOrder }" var="order">
@@ -315,7 +314,7 @@
 						</ul>
 
 					</div>
-					
+
 
 					<!-- 1:1문의 -->
 					<div class="area-over" id="cousel">
@@ -327,17 +326,28 @@
 							</div>
 							<div class="list-customer">
 								<ul>
+									<c:choose>
+										<c:when test="${ not empty userpAsk }">
+											<c:forEach items="${ userpAsk }" var="pa">
+													<li>
+														<p class="stit">
 
-									<c:if test="${ not empty userpAsk }">
-										<c:forEach items="${ userpAsk }" var="pa">
-
-
-										</c:forEach>
-									</c:if>
+															<strong style="background:#ff7f00">${ pa.paskState }</strong>
+															<a href="javascript:mypage.main.goQnaList(5100536);">${ pa.paskQuestion }</a>
+															<span class="data">${ pa.paskDate }</span>
+														</p>	
+													</li>
+												
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<li class="nodata">최근 1개월간 문의하신 내용이 없습니다.</li>
+										</c:otherwise>
+									</c:choose>
 								</ul>
 							</div>
 						</div>
-						
+
 						<!-- 상품QnA -->
 						<div class="right" id="goodsQna">
 							<div class="title-area">
@@ -348,15 +358,22 @@
 
 							<div class="list-customer">
 								<ul>
-
-									<c:if test="${ not empty userQnA }">
-										<c:forEach items="${ userQnA }" var="qna">
-
-
-										</c:forEach>
-									</c:if>
-
-
+									<c:choose>
+										<c:when test="${ not empty userQnA }">
+											<c:forEach items="${ userQnA }" var="qa">
+												<li>
+													<p class="stit">
+														<strong style="background:#ff7f00">${ qa.qnaState }</strong>
+														<a href="javascript:mypage.main.goQnaList(5100536);">${ qa.qnaQus }</a>
+														<span class="data">${ qa.qnaDate }</span>
+													</p>	
+												</li>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<li class="nodata">최근 1개월간 문의하신 내용이 없습니다.</li>
+										</c:otherwise>
+									</c:choose>
 								</ul>
 							</div>
 

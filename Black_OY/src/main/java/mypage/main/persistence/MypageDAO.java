@@ -1,13 +1,13 @@
-package mypage.persistence;
+package mypage.main.persistence;
 
 import java.sql.Connection;
 import java.util.List;
 
-import mypage.domain.MpOrderDTO;
-import mypage.domain.MpPAskDTO;
-import mypage.domain.MpPlikeDTO;
-import mypage.domain.MpQnADTO;
-import mypage.domain.MpUserInfoDTO;
+import mypage.main.domain.MpOrderStateDTO;
+import mypage.main.domain.MpPAskDTO;
+import mypage.main.domain.MpPlikeDTO;
+import mypage.main.domain.MpQnADTO;
+import mypage.main.domain.MpUserInfoDTO;
 
 
 
@@ -40,5 +40,5 @@ public interface MypageDAO {
 	int selectUserRevCount(Connection conn, String Uid) throws Exception;
 	
 	//9. 회원의 배송상태 조회
-	List<MpOrderDTO> selectUserOrderStatus(Connection conn, String Uid) throws Exception;
+	List<MpOrderStateDTO> selectUserOrderStatus(Connection conn, String Uid) throws Exception;
 }

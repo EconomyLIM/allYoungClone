@@ -1,4 +1,4 @@
-package mypage.persistence;
+package mypage.main.persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,11 +8,11 @@ import java.util.List;
 
 import com.util.JDBCUtil;
 
-import mypage.domain.MpOrderDTO;
-import mypage.domain.MpPAskDTO;
-import mypage.domain.MpPlikeDTO;
-import mypage.domain.MpQnADTO;
-import mypage.domain.MpUserInfoDTO;
+import mypage.main.domain.MpOrderStateDTO;
+import mypage.main.domain.MpPAskDTO;
+import mypage.main.domain.MpPlikeDTO;
+import mypage.main.domain.MpQnADTO;
+import mypage.main.domain.MpUserInfoDTO;
 
 
 public class MyPageDAOImpl implements MypageDAO {
@@ -237,9 +237,9 @@ public class MyPageDAOImpl implements MypageDAO {
 	@Override
 	public List<MpPAskDTO> selectUserPAsk(Connection conn, String Uid) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT pask_state, pask_content, pask_date "
-				+ " FROM PERSONAL_ASK "
-				+ " WHERE USER_ID = ? ";
+		String sql = " SELECT pask_state, pask_content, pask_date, ac_major, ac_minor, pask_ans "
+				+ " FROM personal_ask a left join ask_category c on a.ac_id=c.ac_id "
+				+ " WHERE user_id = ? ";
 		
 		ArrayList<MpPAskDTO> list = null;
 		PreparedStatement pstmt = null;
@@ -255,9 +255,12 @@ public class MyPageDAOImpl implements MypageDAO {
 			
 			do {
 				dto = new MpPAskDTO();
-				dto.setPaskQuestion(rs.getString("pask_state"));
+				dto.setPaskState(rs.getString("pask_state"));
 				dto.setPaskQuestion(rs.getString("pask_content"));
 				dto.setPaskDate(rs.getDate("pask_date"));
+				dto.setPaskMa(rs.getString("ac_major"));
+				dto.setPaskMi(rs.getString("ac_minor"));
+				dto.setPaskAns(rs.getString("pask_ans"));
 				list.add(dto);			
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
@@ -275,9 +278,12 @@ public class MyPageDAOImpl implements MypageDAO {
 	@Override
 	public List<MpQnADTO> selectUserQnA(Connection conn, String Uid) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT qa_que, qa_ans, qa_date "
-				+ " FROM qanda "
-				+ " WHERE user_id = ? ";
+		String sql = " SELECT p.pro_displ_name dn , b.brand_name bn, i.pro_displ_src img, qa_que, qa_date, qa_state, qa_ans "
+				+ " FROM qanda q left join product_display p on q.pro_displ_id = p.pro_displ_id "
+				+ "            left join brand b on p.brand_id = b.brand_id "
+				+ "            left join pro_displ_img i on p.pro_displ_id = i.pro_displ_id "
+				+ " WHERE user_id = ? "
+				+ "    and rownum = 1 ";
 		ArrayList<MpQnADTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -295,6 +301,10 @@ public class MyPageDAOImpl implements MypageDAO {
 				dto.setQnaQus(rs.getString("qa_que"));
 				dto.setQnaAns(rs.getString("qa_ans"));
 				dto.setQnaDate(rs.getDate("qa_date"));
+				dto.setQnaState(rs.getString("qa_state"));
+				dto.setQnaDisplN(rs.getString("dn"));
+				dto.setQnaBrand(rs.getString("bn"));
+				dto.setQnaImg(rs.getString("img"));
 				list.add(dto);
 			} while (rs.next());
 			JDBCUtil.close(pstmt);
@@ -337,7 +347,7 @@ public class MyPageDAOImpl implements MypageDAO {
 
 
 	@Override
-	public List<MpOrderDTO> selectUserOrderStatus(Connection conn, String Uid) throws Exception {
+	public List<MpOrderStateDTO> selectUserOrderStatus(Connection conn, String Uid) throws Exception {
 		// TODO Auto-generated method stub
 		String sql = " SELECT COUNT(CASE WHEN order_status='주문접수' THEN 1 END) AS uorderState1 , "
 				+ "        COUNT(CASE WHEN order_status='결제완료' THEN 1 END) AS uorderState2 , "
@@ -347,7 +357,7 @@ public class MyPageDAOImpl implements MypageDAO {
 				+ " FROM o_user u LEFT JOIN o_order o ON u.user_id = o.user_id "
 				+ " WHERE u.user_id = ? AND "
 				+ "    order_date BETWEEN SYSDATE - (INTERVAL '1' MONTH) AND SYSDATE ";	//최근1개월
-		ArrayList<MpOrderDTO> list = null;
+		ArrayList<MpOrderStateDTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -355,12 +365,12 @@ public class MyPageDAOImpl implements MypageDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, Uid);
 			rs = pstmt.executeQuery();
-			MpOrderDTO dto = null;
+			MpOrderStateDTO dto = null;
 		if (rs.next()) {
-			list = new ArrayList<MpOrderDTO>();
+			list = new ArrayList<MpOrderStateDTO>();
 			
 			do {
-				dto = new MpOrderDTO();
+				dto = new MpOrderStateDTO();
 				dto.setUorderState1(rs.getInt("uorderState1"));
 				dto.setUorderState2(rs.getInt("uorderState2"));
 				dto.setUorderState3(rs.getInt("uorderState3"));

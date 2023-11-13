@@ -1,4 +1,4 @@
-package mypage.command;
+package mypage.main.command;
 
 import java.sql.Connection;
 import java.util.List;
@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.util.ConnectionProvider;
 
 import command.CommandHandler;
-import mypage.domain.MpOrderDTO;
-import mypage.domain.MpPAskDTO;
-import mypage.domain.MpPlikeDTO;
-import mypage.domain.MpQnADTO;
-import mypage.domain.MpUserInfoDTO;
-import mypage.service.MypageService;
+import mypage.main.domain.MpOrderStateDTO;
+import mypage.main.domain.MpPAskDTO;
+import mypage.main.domain.MpPlikeDTO;
+import mypage.main.domain.MpQnADTO;
+import mypage.main.domain.MpUserInfoDTO;
+import mypage.main.service.MypageService;
 import user.domain.LogOnDTO;
 
 public class MyPageHandler implements CommandHandler {
@@ -45,7 +45,7 @@ public class MyPageHandler implements CommandHandler {
 		List<MpPAskDTO> userpAsk = null;
 		List<MpQnADTO> userQnA = null;
 		int userRevCount = 0;
-		List<MpOrderDTO> userOrder = null;
+		List<MpOrderStateDTO> userOrder = null;
 		
 		userInfo = service.mpUIservice(userId);
 		userPoint = service.mpUPservice(userId);
@@ -69,7 +69,7 @@ public class MyPageHandler implements CommandHandler {
 		request.setAttribute("userRevCount", userRevCount);
 		request.setAttribute("userOrder", userOrder);
 		
-		return "/view/mypage/temp.jsp";
+		return "/view/mypage/mypage.jsp";
 	}
 
 }
