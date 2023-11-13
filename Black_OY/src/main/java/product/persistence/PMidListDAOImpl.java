@@ -286,7 +286,7 @@ public class PMidListDAOImpl  implements PMidListDAO{
 			sql += " ORDER BY afterprice asc ";
 			break;
 		case 5:
-			sql += " ORDER BY (pro_price-afterprice)/pro_price*100 desc ";
+			sql += " ORDER BY (proprice-afterprice)/proprice*100 desc ";
 			break;
 		} // switch
 		sql +=  " ) t "

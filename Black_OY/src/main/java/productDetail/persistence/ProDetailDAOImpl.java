@@ -243,8 +243,9 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 	//================================ 선택한 상품 정보 보여주는 작업=====================================
 	@Override
 	public List<ProductInfo> productInfo(Connection conn, String pid) throws Exception {
-		String sql = " SELECT  pro_displ_id, pro_displ_name, brand_id, brand_name, pro_img_src, pro_id, pro_name, cat_s_id, pro_price "
-				+ ", lowprice, afterprice, prg, prc, prd, prp, stock "
+		String sql = " SELECT  pro_displ_id, pro_displ_name, brand_id, brand_name, pro_img_src, pro_id, pro_name, cat_s_id"
+				+ " , pro_price, PafterPrice "
+				+ ", lowprice, afterprice, prg, prc, prd, prp, stock, pro_stock "
 				+ " FROM proDetail "
 				+ " WHERE pro_displ_id = ? ";
 		
@@ -274,6 +275,7 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 							.proName(rs.getString("pro_name"))
 							.catSId(rs.getString("cat_s_id"))
 							.proPrice(rs.getInt("pro_price"))
+							.pafterPrice(rs.getInt("PafterPrice"))
 							.lowPrice(rs.getInt("lowprice"))
 							.afterPrice(rs.getInt("afterprice"))
 							.prg(rs.getInt("prg"))
@@ -281,6 +283,7 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 							.prd(rs.getInt("prd"))
 							.prp(rs.getInt("prp"))
 							.stock(rs.getInt("stock"))
+							.proStock(rs.getInt("pro_stock"))
 							.build();
 					
 					list.add(productInfo);

@@ -1,12 +1,14 @@
 package order.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class DeliveryDTO {
 
 	private String delivery_id;
@@ -21,6 +23,6 @@ public class DeliveryDTO {
 	private String deli_tel2;
 	private String req_select;
 	private String req_content;
-	//private int def_del;
+	private int def_del;
 	
 }

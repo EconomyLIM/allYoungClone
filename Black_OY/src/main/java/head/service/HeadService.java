@@ -6,6 +6,7 @@ import java.util.List;
 import com.util.ConnectionProvider;
 import com.util.JDBCUtil;
 
+import head.domain.EventDTO;
 import head.domain.GiftCardDTO;
 import head.persistence.HeadDAO;
 import head.persistence.HeadDAOImpl;
@@ -75,6 +76,43 @@ public class HeadService {
 		} finally {
 			JDBCUtil.close(conn);
 		}
+		
+		return dto;
+	}
+
+	public List<EventDTO> getEventList(String type) {
+		List<EventDTO> list = null;
+		
+		Connection conn = null;
+		HeadDAO dao = null;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = HeadDAOImpl.getInstance();
+			
+			list = dao.selectAllEvent(conn, type);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public EventDTO getEvent(String event_id) {
+		EventDTO dto = null;
+		Connection conn = null;
+		HeadDAO dao = null;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = HeadDAOImpl.getInstance();
+			
+			dto = dao.selectOneEvent(conn, event_id);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		return dto;
 	}
