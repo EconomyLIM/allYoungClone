@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import command.CommandHandler;
 import order.domain.DeliveryDTO;
@@ -17,7 +18,18 @@ public class OrderHandler implements CommandHandler {
 		String location = "";
 		String method = request.getMethod();
 		
-		String user_id = ((LogOnDTO)request.getSession().getAttribute("logOn")).getUser_id();
+		HttpSession session = request.getSession();
+		LogOnDTO logOnDTO = (LogOnDTO)session.getAttribute("logOn");
+		
+		if(logOnDTO == null)  {
+			return "/view/logon/logon.jsp";
+		}
+		
+		String user_id = logOnDTO.getUser_id();
+		
+		if(user_id == null)  {
+			return "/view/logon/logon.jsp";
+		}
 		
 		List<DeliveryDTO> list = null;
 		DeliveryDTO dto = null;

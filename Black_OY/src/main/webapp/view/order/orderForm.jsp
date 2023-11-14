@@ -214,38 +214,39 @@
 				$("#agree_all").prop("checked", check);
 			});
 			
+			
 			// 결제수단 선택 처리
 			$("#payMethod_11").on("click", function() {
-				$("#payMethodList > li:not(:first)").hide();
+				$("#payMethodList > li").not("#payMethodList > li.bg_area").hide();
 				$("#payMethodList > li:nth-child(2)").show();
 			});
 			$("#payMethod_25").on("click", function() {
-				$("#payMethodList > li:not(:first)").hide();
+				$("#payMethodList > li").not("#payMethodList > li.bg_area").hide();
 				$("#payMethodList > li:nth-child(8)").show();
 			});
 			$("#payMethod_26").on("click", function() {
-				$("#payMethodList > li").hide();
+				$("#payMethodList > li").not("#payMethodList > li.bg_area").hide();
 				$("#payMethodList > li:nth-child(9)").show();
 			});
 			$("#payMethod_29").on("click", function() {
-				$("#payMethodList > li").hide();
+				$("#payMethodList > li").not("#payMethodList > li.bg_area").hide();
 				$("#payMethodList > li:nth-child(10)").show();
 			});
-			$("#payMethod_25").on("click", function() {
-				$("#payMethodList > li").hide();
-				$("#payMethodList > li:nth-child(8)").show();
+			$("#payMethod_22").on("click", function() {
+				$("#payMethodList > li").not("#payMethodList > li.bg_area").hide();
+				$("#payMethodList > li:nth-child(5)").show();
 			});
-			$("#payMethod_25").on("click", function() {
-				$("#payMethodList > li").hide();
-				$("#payMethodList > li:nth-child(8)").show();
+			$("#payMethod_21").on("click", function() {
+				$("#payMethodList > li").not("#payMethodList > li.bg_area").hide();
+				$("#payMethodList > li:nth-child(4)").show();
 			});
-			$("#payMethod_25").on("click", function() {
-				$("#payMethodList > li").hide();
-				$("#payMethodList > li:nth-child(8)").show();
+			$("#payMethod_24").on("click", function() {
+				$("#payMethodList > li").not("#payMethodList > li.bg_area").hide();
+				$("#payMethodList > li:nth-child(7)").show();
 			});
-			$("#payMethod_25").on("click", function() {
-				$("#payMethodList > li").hide();
-				$("#payMethodList > li:nth-child(8)").show();
+			$("#payMethod_23").on("click", function() {
+				$("#payMethodList > li").not("#payMethodList > li.bg_area").hide();
+				$("#payMethodList > li:nth-child(6)").show();
 			});
 			
 		});

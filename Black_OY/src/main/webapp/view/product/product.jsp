@@ -335,6 +335,14 @@ $(function() {
 	 })
  })
 </script>
+
+<script>
+	$(function() {
+		$("#cartBtn").on("click", function() {
+			
+		});
+	});
+</script>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
 	<div id="Container">
 		<div id="Contents">
@@ -751,7 +759,6 @@ var o2oDeliveryYn = "";
 							<!-- <button class="btnBuy goods_buy" id="cartBtn" onClick="javascript:goods.detail.bindBtnBuy();">구매하기</button> -->
 
 							<button class="btnBuy goods_buy" id="cartBtn"
-								onclick="javascript:common.popLayer.todayDelivery.openTodayDeliveryNotice('goodsdetail.order');"
 								data-attr="상품상세^주문유형^바로구매">바로구매</button>
 							<button class="btnGift goods_gift"
 								onclick="javascript:common.popLayer.todayDelivery.openTodayDeliveryNotice('goodsdetail.gift');"
