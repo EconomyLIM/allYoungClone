@@ -245,7 +245,7 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 	public List<ProductInfo> productInfo(Connection conn, String pid) throws Exception {
 		String sql = " SELECT  pro_displ_id, pro_displ_name, brand_id, brand_name, pro_img_src, pro_id, pro_name, cat_s_id"
 				+ " , pro_price, PafterPrice "
-				+ ", lowprice, afterprice, prg, prc, prd, prp, stock, pro_stock "
+				+ ", lowprice, afterprice, prc, prd, prp, stock, pro_stock "
 				+ " FROM proDetail "
 				+ " WHERE pro_displ_id = ? ";
 		
@@ -278,7 +278,6 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 							.pafterPrice(rs.getInt("PafterPrice"))
 							.lowPrice(rs.getInt("lowprice"))
 							.afterPrice(rs.getInt("afterprice"))
-							.prg(rs.getInt("prg"))
 							.prc(rs.getInt("prc"))
 							.prd(rs.getInt("prd"))
 							.prp(rs.getInt("prp"))

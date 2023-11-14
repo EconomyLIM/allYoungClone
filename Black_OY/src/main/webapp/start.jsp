@@ -16,7 +16,7 @@
 	* {
 		box-sizing: border-box;
 	}
-
+	
 	html, body {
 		font-family: fantasy;
 		font-size: 25px;

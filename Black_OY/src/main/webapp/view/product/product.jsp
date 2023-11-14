@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/WEB-INF/inc/include.jspf"%>
 <%@ include file="/WEB-INF/inc/session_auth.jspf"%>
@@ -308,16 +309,23 @@ $(function() {
 <script>
 // 리뷰 스크립트
  $(function(){
+	 
+	 $(".prd_option_box.box_select").click(function(){
+		 $(this).addClass("open")
+	 })
+	 
 	 $("#gdasSort li a").on("click",function(){
 		 $("#gdasSort li").removeClass("on")
 		 $(this).closest("li").addClass("on")
 		 let type = $(this).attr("data-value")
-		 
-		 
+		 let pro_id = $(".prd_option_box.box_select > a").attr("id");
+		 let displ = "<%=request.getParameter("goodsNo")%>"
+		 //alert(displ)
 		 
 		 let data = {
-			 type: type
-		
+			 pro_id: pro_id,
+			 type: type,
+			 displ: displ
 		    };
 		 $.ajax({
 				url: "<%=contextPath%>/olive/reviewajax.do",
@@ -331,9 +339,132 @@ $(function() {
 		            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
 		        }
 			})
+			
+			
+			$.ajax({
+				url: "<%=contextPath%>/olive/reviewpage.do",
+				data:data,
+				cache: false,
+				success:function( response ) {
+		              $(".pageing").empty();
+		              $(".pageing").append( response );
+			           		              
+		          }
+		        , error		: function() {
+		            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+		        }
+			})
 		 
 	 })
+	 
+	 $(".sel_option_list.scrbar  a.item").on("click",function(){
+		 let pro_id = $(this).find("input[name=gdasItemNo]").val()
+		 //let type = $("#gdasSort li.on > a").attr("data-value")
+		 let displ = "<%=request.getParameter("goodsNo")%>"
+		 let txt = $(this).attr("title");
+		 let data = {
+			 pro_id: pro_id,
+			 
+			 displ: displ
+		    };
+		 $.ajax({
+				url: "<%=contextPath%>/olive/reviewajax.do",
+				data:data,
+				cache: false,
+				success:function( response ) {
+					$(".prd_option_box.box_select > a").attr("id",pro_id)
+					$(".prd_option_box.box_select > a > span.txt").text(txt);
+					$(".prd_option_box.box_select").removeClass("open");
+		              $("#gdasList").empty();
+		              $("#gdasList").append( response );
+		          }
+		        , error		: function() {
+		            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+		        }
+			})
+			
+			
+			
+			$.ajax({
+				url: "<%=contextPath%>/olive/reviewScoreajax.do",
+				data:data,
+				cache: false,
+				success:function( response ) {
+		              $("#ajax").empty();
+		              $("#ajax").append( response );
+		          }
+		        , error		: function() {
+		            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+		        }
+			})
+			
+			$.ajax({
+				url: "<%=contextPath%>/olive/reviewpage.do",
+				data:data,
+				cache: false,
+				success:function( response ) {
+		              $(".pageing").empty();
+		              $(".pageing").append( response );
+			           		              
+		          }
+		        , error		: function() {
+		            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+		        }
+			})
+	 })
+	 
+	 $(".pageing a").on("click",function(){
+		 event.preventDefault(); // 앵커의 기본 동작을 막습니다.
+		
+		 let currentpage = $(this).text()
+		 let pro_id = $(".prd_option_box.box_select > a").attr("id");
+		 let displ = "<%=request.getParameter("goodsNo")%>"
+		 let type = $("#gdasSort li.on > a").attr("data-value")
+		 //alert(currentpage+"/"+pro_id+"/"+displ+"/"+type)
+		 
+		 let data = {
+			 currentpage: currentpage,
+			 pro_id: pro_id,
+			 type: type,
+			 displ: displ
+		    };
+		 
+		 $.ajax({
+				url: "<%=contextPath%>/olive/reviewajax.do",
+				data:data,
+				cache: false,
+				success:function( response ) {
+		              $("#gdasList").empty();
+		              $("#gdasList").append( response );
+			           		              
+		          }
+		        , error		: function() {
+		            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+		        }
+			})
+			
+			$.ajax({
+				url: "<%=contextPath%>/olive/reviewpage.do",
+				data:data,
+				cache: false,
+				success:function( response ) {
+		              $(".pageing").empty();
+		              $(".pageing").append( response );
+			           		              
+		          }
+		        , error		: function() {
+		            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+		        }
+			})
+			
+		 
+	 })
+	 
+	 
+	 
  })
+ 
+ 
 </script>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
 	<div id="Container">
@@ -1094,71 +1225,46 @@ var o2oDeliveryYn = "";
 			<input type="hidden" name="itemCnt" id="itemCnt" value="3">
 
 			<div class="prd_option_box box_select">
-
-				<a href="javascript:;" class="sel_option item"> <span
-					class="opt"><img
-						src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0014/A00000014733908ko.jpg?l=ko"
-						onerror="common.errorImg(this);"></span> <span class="txt">전체</span>
-					<!-- ## 리뷰 고도화 1차 ## -->
+		
+		<a href="javascript:;" id ="ALL" class="sel_option item">
+			<span class="opt"><img src="${proDImg[0].proDImgSrc }" onerror="common.errorImg(this);"></span>
+			<span class="txt">전체</span>
+			<!-- ## 리뷰 고도화 1차 ## -->
+		</a>
+		<ul class="sel_option_list scrbar">
+			<li>
+				<a href="javascript:;" class="item" title="전체">
+					<span class="opt"><img src="${proDImg[0].proDImgSrc }" onerror="common.errorImg(this);"></span>
+					<span class="txt">전체</span>
+					<span class="num"><em>2379</em>건</span>
+					<input type="hidden" name="gdasItemNo" value="ALL">
+					<input type="hidden" name="gdasLgcGoodsNo" value="ALL">
 				</a>
-				<ul class="sel_option_list scrbar">
-					<li><a href="javascript:;" class="item"> <span class="opt"><img
-								src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0014/A00000014733908ko.jpg?l=ko"
-								onerror="common.errorImg(this);"></span> <span class="txt">전체</span>
-							<span class="num"><em>12445</em>건</span> <input type="hidden"
-							name="gdasItemNo" value="all_search"> <input
-							type="hidden" name="gdasLgcGoodsNo" value="all_search">
-					</a></li>
-
-
-					<li optgoodsinfo="A000000147339:001">
-						<!-- ## 리뷰고도화 2차## 본상품+연관상품 적용시 필요값 (상품번호:아이템번호)--> <a
-						href="javascript:;" class="item"
-						title="[찐진정 토너] 아누아 어성초 77% 토너 350ml"> <span class="opt">
-								<img
-								src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0014/A00000014733908ko.jpg?l=ko}"
-								onerror="common.errorImg(this);">
-						</span> <span class="txt">[찐진정 토너] 아누아 어성초 77% 토너 350ml</span> <span
-							class="num"><em class="txt_en">6058</em>건</span> <input
-							type="hidden" name="gdasItemNo" value="001"> <input
-							type="hidden" name="gdasLgcGoodsNo" value="8809640731129">
-
+			</li>
+			<c:forEach items="${pLists}" var="pll">
+				<li optgoodsinfo="${pll.proId }"><!-- ## 리뷰고도화 2차## 본상품+연관상품 적용시 필요값 (상품번호:아이템번호)-->
+					
+				
+					<a href="javascript:;" class="item" title="${pll.proName }">
+						<span class="opt">														
+									
+										<img src="${pll.proImg }" onerror="common.errorImg(this);">
+							
+						</span>
+						<span class="txt">${pll.proName }</span>
+						
+						<span class="num"><em class="txt_en">691</em>건</span>
+						<input type="hidden" name="gdasItemNo" value="${pll.proId }">
+                        
+						    <input type="hidden" name="gdasLgcGoodsNo" value="${pll.proId }">
+                        
 					</a>
-					</li>
-					<li optgoodsinfo="A000000162254:001">
-						<!-- ## 리뷰고도화 2차## 본상품+연관상품 적용시 필요값 (상품번호:아이템번호)--> <a
-						href="javascript:;" class="item"
-						title="아누아 어성초 77 수딩 토너 350ml 기획 (+40ml +앰플10ml)"> <span
-							class="opt"> <img
-								src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0016/A00000016225403ko.jpg?l=ko}"
-								onerror="common.errorImg(this);">
-						</span> <span class="txt">아누아 어성초 77 수딩 토너 350ml 기획 (+40ml
-								+앰플10ml)</span> <span class="num"><em class="txt_en">2936</em>건</span>
-							<input type="hidden" name="gdasItemNo" value="001"> <input
-							type="hidden" name="gdasLgcGoodsNo" value="8809640732027">
-
-					</a>
-					</li>
-					<li optgoodsinfo="A000000166675:001">
-						<!-- ## 리뷰고도화 2차## 본상품+연관상품 적용시 필요값 (상품번호:아이템번호)--> <a
-						href="javascript:;" class="item"
-						title="[리필기획] 아누아 어성초 77 수딩 토너 350ml 리필 기획세트(350ml+350ml리필)">
-							<span class="opt"> <img
-								src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0016/A00000016667505ko.jpg?l=ko}"
-								onerror="common.errorImg(this);">
-
-
-
-						</span> <span class="txt">[리필기획] 아누아 어성초 77 수딩 토너 350ml 리필
-								기획세트(350ml+350ml리필)</span> <span class="num"><em class="txt_en">3451</em>건</span>
-							<input type="hidden" name="gdasItemNo" value="001"> <input
-							type="hidden" name="gdasLgcGoodsNo" value="8809640732355">
-
-					</a>
-					</li>
-
-				</ul>
-			</div>
+				</li>
+			
+			</c:forEach>
+							
+		</ul>
+	</div>
 
 			<!-- 옵션end -->
 
@@ -1417,11 +1523,18 @@ var o2oDeliveryYn = "";
 
 
 			<!-- [D] 리뷰작성 영역 제거 review-write-delete 클래스 추가 -->
+			<div id ="ajax">
 			<div class="product_rating_area review-write-delete">
 				<div class="inner clrfix">
 					<div class="grade_img">
 						<p class="img_face">
-							<span class="grade grade5"></span><em>최고</em>
+							<c:set var="integerPart" value="${fn:split(reviewScore.averagegrade, '.')[0]}" />
+							<span class="grade grade${integerPart}"></span>
+							<em>
+							<c:if test="${reviewScore.averagegrade < 3}">최저</c:if>
+							<c:if test="${reviewScore.averagegrade >= 3 && reviewScore.averagegrade < 4}">보통</c:if>
+							<c:if test="${reviewScore.averagegrade >= 4}">최고</c:if>
+							</em>
 						</p>
 						<!-- grade5 : 최고, grade4 : 좋음, grade3 : 보통, grade2 : 별로, grade1 : 나쁨  -->
 					</div>
@@ -1573,6 +1686,8 @@ var o2oDeliveryYn = "";
 				</dl>
 			</div>
 			<!-- 만족도결과 end-->
+			</div>
+			<!-- 여기까지 -->
 			<!-- ## 리뷰 고도화 1차 ## 정렬 항목 변경 Start -->
 
 			<!-- 연관상품 포함 건수 있는 경우 표시 -->
@@ -1639,8 +1754,11 @@ var o2oDeliveryYn = "";
 			<!-- ## 리뷰 고도화 1차 ##  -->
 			<div class="review_thum">
 				<ul class="inner clrfix">
-				<c:forEach items="${reviewimg }" var="imglist">
-								<c:forEach items="${imglist }" var="img">
+				<c:set var="i" value="${0 }" />
+				<c:forEach items="${reviewimg }" var="imglist" varStatus="outloop">
+								
+								<c:forEach items="${imglist }" var="img" varStatus="Loop">
+					<c:if test="${i < 7}">				
 					<li><a href="javascript:;" data-attr="상품상세^포토모아보기^포토 클릭^1">
 
 
@@ -1652,9 +1770,31 @@ var o2oDeliveryYn = "";
 						</span>
 
 					</a></li>
+					
+					</c:if>
+					<c:set var="i" value="${i+1 }" />
+					<c:if test="${i eq 7 }">
+						<li>
+				
+					<!-- ## 리뷰 고도화 1차 ## -->
+				<a href="javascript:;" class="more" data-attr="상품상세^포토모아보기^포토더보기">
+				
+					<span>
+					<!-- ## 리뷰 고도화 1차 ## -->
+						<span><em>더보기</em></span>
+					
+						<!-- ## 리뷰 고도화 1차 ## onload , errorResizeImg -->
+						<img src="${img.rev_img_src }" class="thum" data-value="23722172_2" alt="" data-state="" onerror="common.errorResizeImg(this,120)">
+					</span>
+					
+				</a>
+			</li>
+					</c:if>
 				</c:forEach>
+				
 				</c:forEach>
-
+				
+				
 				</ul>
 			</div>
 			<!-- 사진탭 end-->
@@ -1738,7 +1878,7 @@ var o2oDeliveryYn = "";
 						<div class="review_cont">
 							<div class="score_area">
 								<span class="review_point"><span class="point"
-									style="width: 100%">5점만점에 ${review.rev_grade }점</span></span> <span class="date">${review.rev_reg }</span>
+									style="width: ${review.rev_grade*20 }%">5점만점에 ${review.rev_grade }점</span></span> <span class="date">${review.rev_reg }</span>
 							</div>
 							<!--## 리뷰 고도화 1차 ## 위치변경 -->
 							<!--## 리뷰 고도화 1차 ## 위치변경 -->
@@ -1863,19 +2003,28 @@ var o2oDeliveryYn = "";
 				</ul>
 			</div>
 			<!-- pageing start -->
-			<div class="pageing" style="display: block;">
-				<strong title="현재 페이지">1</strong> <a href="javascript:void(0);"
-					data-page-no="2">2</a> <a href="javascript:void(0);"
-					data-page-no="3">3</a> <a href="javascript:void(0);"
-					data-page-no="4">4</a> <a href="javascript:void(0);"
-					data-page-no="5">5</a> <a href="javascript:void(0);"
-					data-page-no="6">6</a> <a href="javascript:void(0);"
-					data-page-no="7">7</a> <a href="javascript:void(0);"
-					data-page-no="8">8</a> <a href="javascript:void(0);"
-					data-page-no="9">9</a> <a href="javascript:void(0);"
-					data-page-no="10">10</a> <a class="next" href="javascript:void(0);"
-					data-page-no="11">다음 10 페이지</a>
-			</div>
+			<div class="pageing" id ="<%=request.getParameter("goodsNo")%>">
+			<c:if test="${pDto.prev }">
+				<a class="prev" href="javascript:;" data-page-no="1">이전 10
+				페이지</a>
+			</c:if>
+			<c:forEach var="i" begin="${pDto.start }" end="${pDto.end }" step="1">
+				<c:choose>
+					<c:when test="${i eq pDto.currentPage}">
+						<strong title="현재 페이지">${i}</strong>
+						<%-- <a class="active" href="#">${i }</a> --%>
+					</c:when>
+					<c:otherwise>
+						<a
+							href="javascript:;">${i }</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${pDto.next }">
+				<a class="next" href="javascript:;" data-page-no="21">다음 10 페이지</a>
+			</c:if>
+			<!-- <strong title="현재 페이지">1</strong> -->
+		</div>
 		</div>
 	</div>
 			
