@@ -90,7 +90,7 @@
 					<ul>
 						<li><h2>마이 쇼핑</h2>
 							<ul>
-								<li class="subMenu"><a href="<%-- 주문/배송 페이지 --%>"
+								<li class="subMenu"><a href="<%=contextPath %>/mypage/orderDelivery/orderDelivery.do"
 									mymenuid="0101"
 									data-ref-linkurl="https://www.oliveyoung.co.kr/store/mypage/getOrderList.do"
 									data-attr="마이페이지^메뉴^주문/배송 조회" data-tracking-name="주문배송조회 클릭"
@@ -231,12 +231,12 @@
 						<h2 class="tit">
 							주문/배송 조회<em>(최근 1개월)</em>
 						</h2>
-						<a class="btnMore" id="orderListMore" href="<%-- 주문배송조회 페이지 --%>"
+						<a class="btnMore" id="orderListMore" href="<%=contextPath %>/mypage/orderDelivery/orderDelivery.do"
 							data-attr="마이페이지^주문배송조회_더보기^더보기">더보기</a>
 					</div>
 					<div class="layer_pop_wrap" id="service_survey" style=""></div>
 
-					<a href="<%=contextPath %>/mypage/orderDelivery.do" class="order_view"
+					<a href="<%=contextPath %>/mypage/orderDelivery/orderDelivery.do" class="order_view"
 						data-attr="마이페이지^주문배송조회_요약건수">
 						<ul class="mypage-step">
 							<c:forEach items="${ userOrderState }" var="order">
@@ -269,7 +269,7 @@
 								<c:forEach items="${ userPlike }" var="pl">
 									<li data-goods-no="${ pl.plpId }">
 										<div class="prd_info">
-											<a href="<%-- 해당 상품 페이지 링크 --%>" class="prd_thumb goodsList"
+											<a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${pl.plpdispId}" class="prd_thumb goodsList"
 												data-ref-goodsno="${ pl.plpId }" data-ref-dispcatno=""
 												data-ref-itemno="001"><span class="thumb_flag best">베스트</span><img
 												src="${ pl.plImgsrc }" alt="${ pl.plpdispId }"

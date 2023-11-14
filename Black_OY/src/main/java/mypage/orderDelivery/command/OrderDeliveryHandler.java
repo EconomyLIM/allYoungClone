@@ -1,6 +1,7 @@
 package mypage.orderDelivery.command;
 
 import java.sql.Connection;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,7 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.util.ConnectionProvider;
 
 import command.CommandHandler;
-import mypage.main.service.MypageService;
+import mypage.orderDelivery.domain.MPODOrderDTO;
+import mypage.orderDelivery.domain.MPODdeliveryDTO;
+import mypage.orderDelivery.domain.MPODpaymentDTO;
+import mypage.orderDelivery.service.MPOrderDeliveryService;
 
 public class OrderDeliveryHandler implements CommandHandler {
 
@@ -17,6 +21,9 @@ public class OrderDeliveryHandler implements CommandHandler {
 		// TODO Auto-generated method stub
 		
 		String userId = null;
+		
+		//주문번호 가져오는 방법 생각해보기
+		String orderId = null;
 		
 		Connection conn = ConnectionProvider.getConnection();
 		
@@ -28,7 +35,23 @@ public class OrderDeliveryHandler implements CommandHandler {
 		
 		userId = "admin";	//request.getParameter("userId");
 		
+		MPOrderDeliveryService service = MPOrderDeliveryService.getinstance();
 		
+		//초기화
+		List<MPODOrderDTO> orderList = null;
+		List<MPODOrderDTO> detailList = null;
+		List<MPODdeliveryDTO> deliveryList = null;
+		List<MPODpaymentDTO> paymentList = null;
+		
+		orderList = service.mpODorderService(userId);
+		detailList = service.mpODorderdetailService(orderId);
+		deliveryList = service.mpODdeliveryService(orderId);
+		paymentList = service.mpODpaymentService(orderId);
+		
+		request.setAttribute("orderList", orderList);
+		request.setAttribute("detailList", detailList);
+		request.setAttribute("deliveryList", deliveryList);
+		request.setAttribute("paymentList", paymentList);
 		
 		return "/view/mypage/orderDelivery.jsp";
 	}

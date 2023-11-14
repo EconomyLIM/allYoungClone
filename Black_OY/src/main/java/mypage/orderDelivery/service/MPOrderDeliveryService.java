@@ -8,6 +8,7 @@ import com.util.JDBCUtil;
 
 import mypage.orderDelivery.domain.MPODOrderDTO;
 import mypage.orderDelivery.domain.MPODdeliveryDTO;
+import mypage.orderDelivery.domain.MPODpaymentDTO;
 import mypage.orderDelivery.persistence.MPOrderDeliveryDAOImpl;
 
 
@@ -75,5 +76,21 @@ public class MPOrderDeliveryService {
 		return null;
 	}
 	//4.	주문 결제 가져오기 서비스
+	public List<MPODpaymentDTO> mpODpaymentService(String oId){
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			MPOrderDeliveryDAOImpl daoImpl = MPOrderDeliveryDAOImpl.getinstance();
+			List<MPODpaymentDTO> list = null;
+			list = daoImpl.selectUOPayment(conn, oId);
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("> MPOrderDeliveryService.mpODpaymentService Exception");
+		}finally {
+			JDBCUtil.close(conn);
+		}
+		return null;
+	}
 	
 }

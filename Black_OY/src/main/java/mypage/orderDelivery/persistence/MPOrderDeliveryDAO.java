@@ -23,6 +23,11 @@ public interface MPOrderDeliveryDAO {
 	//4. 상세보기 결제정보 가져오기(커넥션 객체, 주문id)
 	List<MPODpaymentDTO> selectUOPayment(Connection conn, String oId) throws Exception;
 	
+	//5. 지정된 날짜별로 검색된 주문상품 목록 가져오기(커넥션 객체, 회원id, 시작날짜, 종료날짜, 구매유형)
+	List<MPODOrderDTO> searchUOrder(Connection conn, String uId, int start, int end, String type) throws Exception;
+	
+	
+
 	
 	
 }

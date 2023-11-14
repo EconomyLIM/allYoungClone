@@ -26,5 +26,7 @@ public class MPODOrderDTO {
 	//상세보기 사용
 	private int uodProPrice;	//주문배송 상품판매가(상품-상품가격)
 	
+	//검색 사용
+	private String uodOrderType;//주문배송 구매유형
 	
 }

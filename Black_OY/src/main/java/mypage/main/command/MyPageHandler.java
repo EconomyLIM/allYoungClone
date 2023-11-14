@@ -33,7 +33,9 @@ public class MyPageHandler implements CommandHandler {
 		//LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
 		//userId = logOnDTO.getUser_id();
 		
+		//테스트용 고정값
 		userId = "admin";	//request.getParameter("userId");
+				
 		MypageService service = MypageService.getinstance();
 		
 		//초기화
