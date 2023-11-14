@@ -11,6 +11,7 @@ import productDetail.domain.AllCateDTO;
 import productDetail.domain.CateLDTO;
 import productDetail.domain.CateMDTO;
 import productDetail.domain.CateSDTO;
+import productDetail.domain.DetailBrandDTO;
 import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
@@ -123,8 +124,9 @@ public class ProductDetailHandler implements CommandHandler{
 		request.setAttribute("reviewimg", reviewimg);
 		}
 		
-		// ======================= 해당 상품의 리뷰 갖고오기 ===========================
-		
+		// ======================= 해당 브랜드 정보 갖고오기 ===========================
+		DetailBrandDTO detailBrandDTO = proDetailService.sDetailBrand(goodsNo);
+		request.setAttribute("detailBrandDTO", detailBrandDTO);
 
 		
 		

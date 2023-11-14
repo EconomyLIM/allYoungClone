@@ -354,11 +354,42 @@ $(function() {
 
 <script>
 	$(function() {
+		// 주문하기 버튼 클릭 처리
 		$("#cartBtn").on("click", function() {
+			let flag = false;
 			
+			/*
+				패키지가 여러개가 아닐 때는 처리 해야겠디.
+			*/
+			
+			let params = ""; 
+			let products = $(".option_add_area > div");
+			
+			for (var i = 0; i < products.length; i++) {
+				if($(products[i]).css("display") == "block") {
+					let product_id = $(products[i]).attr("id");
+					let cnt = $("#input_" + product_id).val();
+					params += "products=" + product_id + "-" + cnt + "&" ;
+					flag = true;
+				}
+			}
+			
+			params = params.substr(0, params.length-1);
+			
+			if(!flag) {
+				alert("상품을 선택해주세요.");
+				return;
+			}
+			
+			if($("#deliveDay").prop("checked")) {
+				params += "&quickYN=Y";
+			}
+			
+			location.href = "<%=contextPath%>/olive/orderForm.do?" + params;
 		});
 	});
 </script>
+
 <script>
 // 브랜드 좋아요 체크 처리(ajax)
 
