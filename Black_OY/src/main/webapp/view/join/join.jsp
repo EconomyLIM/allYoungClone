@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="/WEB-INF/inc/include.jspf" %>
 
 <!DOCTYPE html>
@@ -10,29 +11,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../../css/CJbase.css" />
-<link rel="stylesheet" href="../../css/CJparticipate.css" />
+<link rel="stylesheet" href="../css/CJbase.css"/>
+<link rel="stylesheet" href="../css/CJparticipate.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src = "https://www.cjone.com/cjmweb/js/modules/cjoneCore.js"></script>
 
 </head>
 <body>
 
-<%
-	String u_name = (String)session.getAttribute("u_name");
-	String u_birth = (String)session.getAttribute("u_birth");
-	String tel = (String)session.getAttribute("tel");
-
-    String telstr1 =tel.substring(0,4);
-    String telstr2 =tel.substring(4);
-
-    String birthstr1 = u_birth.substring(0, 4);
-    String birthstr2 = u_birth.substring(4, 6);
-    String birthstr3 = u_birth.substring(6);
-    System.out.println(birthstr1);
-    System.out.println(birthstr2);
-    System.out.println(birthstr3);
-%>
 
 		<form id="headerFrm" method="get">
 			<input type="hidden" name="h_search_keyword" id="h_search_keyword">
@@ -92,7 +78,7 @@
 						<div class="member_data">
 							<h2 class="haze">회원정보 입력</h2>
 							<div class="member_info">
-								<form id="formJoin" name="formJoin" method="post" action="<%=contextPath %>/user/join.do">
+								<form id="formJoin" name="formJoin" method="post" action="<%=contextPath %>/olive/join.do">
 									<input type="hidden" id="coopco_cd" name="coopco_cd"
 										value="7030"> <input type="hidden" id="brnd_cd"
 										name="brnd_cd" value="3000"> <input type="hidden"
@@ -172,7 +158,7 @@
 															이름</label>
 													</th>
 													<td><span class="input_txt">
-													<input type="text" name ="u_name"	readonly="" value="<%=u_name %>" class="text readonly member_name"
+													<input type="text" name ="u_name"	readonly="" value="${u_name}" class="text readonly member_name"
 															id="input_member_name"></span>
 													<!-- 에러시 .error 클래스 추가 --></td>
 												</tr>
@@ -427,21 +413,26 @@
 														</p>
 													</td>
 				
-				<script>
+			 	<script>
 				var sel;
+				var str = "${u_birth}";
+				const result1=str.substr(0,4);	
+				const result2=str.substr(4,2);		
+				const result3=str.substr(6,2);
+				
 				
 				sel = $("#birth_yy");
-				var selYYvalue ="<%=birthstr1%>";
+				var selYYvalue =result1;
 				
 				sel.find("option[value='" + selYYvalue + "']").prop("selected", true);
 				
 				sel = $("#birth_mm");
-				var selMMvalue ="<%=birthstr2%>";
+				var selMMvalue =result2;
 				
 				sel.find("option[value='" + selMMvalue + "']").prop("selected", true);
 				
 				sel = $("#birth_dd");
-				var selDDvalue ="<%=birthstr3%>";
+				var selDDvalue =result3;
 				
 				sel.find("option[value='" + selDDvalue + "']").prop("selected", true);
 				</script>
@@ -451,6 +442,7 @@
 														style="background-image: url('https://www.cjone.com/cjmweb/images/common/ico_mandatory.png'); background-repeat: no-repeat; background-position: 20px 29px;">
 														<label for="mob_no_1"><span class="haze">"필수"</span>
 															휴대전화번호</label>
+														<input type="hidden" id="u_tel" name="u_tel" value="">
 													</th>
 													<td><span class="input_txt mob_no">
 															 <input type="text" name="mob_no"id="mob_no" value="">
@@ -506,12 +498,18 @@
 					$("#email_addr2").val( $("#email_addr_opt").val() );
 				});
 				</script>
-				<script>
-				let str1 = "<%=telstr1%>";
-				let str2 = "<%=telstr2%>";
+	<script>
+	var str = "${u_tel}";
+	const result4=str.substr(0,4);		
+	const result5=str.substr(4,4);	
+				let str1 = result4;
+				let str2 = result5;
 				let strAll = "010" + str1.replace(str1, '****') +str2;
 				$("#mob_no").val(strAll);
 				</script>					
+	<script>
+		$("#u_tel").val("010-"+str1+"-"+str2);
+	</script>
 
 									<div class="btn_sec">
 										<button type="button" class="btn">취소</button>
@@ -1600,7 +1598,7 @@
 		$("#btnIdCheck").on("click", function () {
 			let user_id = $("#mbr_id").val();
 			$.ajax({
-				url: "idCheck.jsp"
+				url: "/Black_OY/view/join/idCheck.jsp"
 				, dataType: "text"
 				, type:"POST"
 				, data: {user_id:user_id}
@@ -1616,8 +1614,9 @@
 					
 					}//if	
 				}
-				, error: function () {
-					alert("error");
+				, error: function (request,status,error) {
+					   alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+
 				}
 			});
 		});

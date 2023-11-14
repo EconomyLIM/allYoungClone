@@ -95,7 +95,7 @@
 
 					<div class="location_wrap">
 						<div class="location">
-							<a href="https://www.cjone.com/cjmweb/main.do" class="home">
+							<a href="#" class="home">
 							<span class="haze">홈</span></a>
 							<a href="joinCheck.jsp" class="now"><span>회원가입</span></a>
 						</div>
@@ -4042,13 +4042,6 @@ ol, ul, li {
 
 					</div>
 					<!--//contents-->
-					<script>
-	document.getElementById("btn_agree").onclick = function () {
-		ㅣlocation.href = "/user/join.jsp";
-	}
-</script>
-
-
 
 					<!-- footer -->
 					<div id="footer">
@@ -4100,13 +4093,8 @@ function goFooterMenu(type){
 	}
 }
 </script>
-						<!-- 로그인여부 여부 체크 -->
 
-						<!-- 로그인여부 여부 체크 -->
-
-						<!--20191021 CJ ONE APP 사업자 정보 노출 전체 영역-->
 						<div class="footer_wrap">
-
 							<div class="site_info">
 								<span class="ceo_info">대표이사 유인상</span>
 								<address>주소 04323 서울시 용산구 한강대로 366 트윈시티 10층</address>
@@ -4133,73 +4121,13 @@ function goFooterMenu(type){
 							</div>
 
 						</div>
-						<!--// 20191021 CJ ONE APP 사업자 정보 노출 전체 영역 -->
-						<!-- 레이어 팝업(confirm) 내용 -->
-						<div id="div_confirm" style="display: none;">
-							<div class="ui_modal"
-								style="position: fixed; background-color: rgb(255, 255, 255); outline: none; background-clip: padding-box; top: 50%; left: 50%; margin-left: -200px; margin-top: -160px; width: 400px; z-index: 9101;"
-								tabindex="0">
 
-								<div id="layerWrap" class="custom">
-									<h1 id="h_confirm_title">알림</h1>
-
-									<div class="inner" tabindex="0">
-										<p id="p_confirm_text"></p>
-									</div>
-
-
-									<div class="btn_center">
-										<a href="javascript:closeLayerConfirm();" id="a_confirm_y"
-											class="btn"><span id="span_confirm_y">확인</span></a>
-										<button id="a_confirm_n" type="button"
-											onclick="closeLayerConfirm();" class="btn cancel">
-											<span id="span_confirm_n">취소</span>
-										</button>
-									</div>
-
-									<button id="btn_confirm_close" type="button"
-										onclick="closeLayerConfirm();" class="close">닫기</button>
-								</div>
-
-							</div>
-							<div class="ui_modal_overlay"
-								style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 9100;"></div>
-						</div>
-						<!-- //레이어 팝업(confirm) 내용 -->
-						<!-- 레이어 팝업(alert) 내용 -->
-						<div id="div_alert" style="display: none;">
-							<div class="ui_modal"
-								style="position: fixed; background-color: rgb(255, 255, 255); outline: none; background-clip: padding-box; top: 50%; left: 50%; margin-left: -200px; margin-top: -160px; width: 400px; z-index: 9101;"
-								tabindex="0">
-
-								<div id="layerWrap" class="custom">
-
-									<div class="inner" tabindex="0">
-										<p id="p_alert_text"></p>
-									</div>
-
-									<div class="btn_center">
-										<a href="javascript:closeLayerAlert();" id="a_alert"
-											class="btn close"><span id="span_alert">확인</span></a>
-									</div>
-								</div>
-
-							</div>
-							<div class="ui_modal_overlay"
-								style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 9100;"></div>
-						</div>
-						<!-- //레이어 팝업(alert) 내용 -->
 					</div>
 					<!-- //footer -->
 				</div>
 			</form>
 			<!--script 영역-->
-			<script src="/cjmweb/js/modules/cjoneCore.js"></script>
-			<script src="/cjmweb/js/modules/commonUi.js"></script>
-			<script src="/cjmweb/js/frontUi.js"></script>
-			<script src="/cjmweb/js/modules/jquery.bxslider.js"></script>
 
-			<!-- 160211 수정 -->
 
 
 
@@ -4243,7 +4171,7 @@ function goFooterMenu(type){
 	    }
 	   
 	}   
-	
+	/*
 	// 확인
 	function goSave(){
 		var brnd_cd = '3000';
@@ -4279,10 +4207,10 @@ function goFooterMenu(type){
         });
         $('#omni_agr_list').val(omniAgrChkList.substr(1));
 	
-	    $('#form1').attr('action', 'https://www.cjone.com/cjmweb/join/member-info.do');
-	    $('#form1').submit();
+ 	    $('#form1').attr('action', 'https://www.cjone.com/cjmweb/join/member-info.do');
+	    $('#form1').submit(); 
 	}
-	
+	*/
 	//통합 이용약관 체크
 	function cjoneAgrCheck(){
 		var chkagr = true;
@@ -4398,7 +4326,8 @@ function goFooterMenu(type){
 	</div>
 	<script>
 	$("#btn_agree").on("click", function () {
-		location.href = "/Black_OY/view/join/join.jsp";
+		//location.href ="join.jsp";
+		location.href = "/Black_OY/olive/agreement.do";
 	});
 
 </script>

@@ -1,6 +1,8 @@
 <%@page import="user.domain.OuserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/inc/include.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,47 +125,15 @@
 								<h2 class="haze">본인인증</h2>
 
 								<div class="certification_sec">
-
-
-
 									<p class="certi_txt">안전한 회원가입을 위한 본인인증 단계입니다. 원하시는 인증방법을
 										선택해주세요.</p>
-
-
 									<ul class="way">
-
-
-
-
-
-
-
-
-										<li class="type1"><span class="bg"></span><a
-											href="javascript:;" class="btn btn_em"
-											onclick="javascript:location.href='phone1.html' " title="새 창"><span>휴대전화
-													인증</span></a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
+										<li class="type1"><span class="bg"></span><a href="/Black_OY/view/join/verify_phfirst.jsp" class="btn btn_em"
+											title="새 창"><span>휴대전화 인증</span></a></li>
 
 										<li class="type2" style="border-right: 0px;"><span
 											class="bg"></span><a href="#" class="btn btn_em"
-											onclick="javascript:fnCheckPlusPPopup(event);" title="새 창">공동인증서
-												인증</a></li>
-
-
-
+											onclick="javascript:fnCheckPlusPPopup(event);" title="새 창">공동인증서	인증</a></li>
 									</ul>
 								</div>
 							</div>
@@ -179,26 +149,9 @@
 									</dl>
 									<div class="btn_sec">
 
-
-
-
-
-
-
-
-
-
-
-
 										<a href="javascript:;"
 											onclick="javascript:fnCheckKcbMobilePopup(event);"
-											class="btn btn_sm" title="새 창"><span class="arr">휴대전화
-												인증</span></a>
-
-
-
-
-
+											class="btn btn_sm" title="새 창"><span class="arr">휴대전화 인증</span></a>
 
 									</div>
 								</div>
@@ -280,14 +233,7 @@
 
 		<!-- footer -->
 		<div id="footer">
-
-
-
-
-
-
-
-			<!-- script type="text/javascript">if(typeof _satellite !== "undefined" && _satellite) {_satellite.pageBottom();}</script -->
+		
 			<script type="text/javascript">
 // footer 이벤트 선택 함수(1=이용약관,2=이전이용약관, 3=ARS 본인인증,4=법적고지, 5=이메일무단수집거부, 6=사이트맵, 그이외 개인정보취급)
 function goFooterMenu(type){
@@ -402,7 +348,6 @@ function goFooterMenu(type){
        </script>
 
 			<!-- 로그인여부 여부 체크 -->
-
 			<!--20191021 CJ ONE APP 사업자 정보 노출 전체 영역-->
 			<div class="footer_wrap">
 
@@ -432,71 +377,10 @@ function goFooterMenu(type){
 
 			</div>
 			<!--// 20191021 CJ ONE APP 사업자 정보 노출 전체 영역 -->
-			<!-- 레이어 팝업(confirm) 내용 -->
-			<div id="div_confirm" style="display: none;">
-				<div class="ui_modal"
-					style="position: fixed; background-color: rgb(255, 255, 255); outline: none; background-clip: padding-box; top: 50%; left: 50%; margin-left: -200px; margin-top: -160px; width: 400px; z-index: 9101;"
-					tabindex="0">
-
-					<div id="layerWrap" class="custom">
-						<h1 id="h_confirm_title">알림</h1>
-
-						<div class="inner" tabindex="0">
-							<p id="p_confirm_text"></p>
-						</div>
-
-
-						<div class="btn_center">
-							<a href="javascript:closeLayerConfirm();" id="a_confirm_y"
-								class="btn"><span id="span_confirm_y">확인</span></a>
-							<button id="a_confirm_n" type="button"
-								onclick="closeLayerConfirm();" class="btn cancel">
-								<span id="span_confirm_n">취소</span>
-							</button>
-						</div>
-
-						<button id="btn_confirm_close" type="button"
-							onclick="closeLayerConfirm();" class="close">닫기</button>
-					</div>
-
-				</div>
-				<div class="ui_modal_overlay"
-					style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 9100;"></div>
-			</div>
-			<!-- //레이어 팝업(confirm) 내용 -->
-			<!-- 레이어 팝업(alert) 내용 -->
-			<div id="div_alert" style="display: none;">
-				<div class="ui_modal"
-					style="position: fixed; background-color: rgb(255, 255, 255); outline: none; background-clip: padding-box; top: 50%; left: 50%; margin-left: -200px; margin-top: -160px; width: 400px; z-index: 9101;"
-					tabindex="0">
-
-					<div id="layerWrap" class="custom">
-
-						<div class="inner" tabindex="0">
-							<p id="p_alert_text"></p>
-						</div>
-
-						<div class="btn_center">
-							<a href="javascript:closeLayerAlert();" id="a_alert"
-								class="btn close"><span id="span_alert">확인</span></a>
-						</div>
-					</div>
-
-				</div>
-				<div class="ui_modal_overlay"
-					style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 9100;"></div>
-			</div>
-			<!-- //레이어 팝업(alert) 내용 -->
+		
 		</div>
 		<!-- //footer -->
 	</div>
-
-	<!--script 영역-->
-	<script src="/cjmweb/js/modules/cjoneCore.js"></script>
-	<script src="/cjmweb/js/modules/commonUi.js"></script>
-	<script src="/cjmweb/js/frontUi.js"></script>
-	<script src="/cjmweb/js/modules/jquery.bxslider.js"></script>
-
 	<script>
         $(function () {
             $('[data-control="hover"]').hover();
@@ -505,71 +389,7 @@ function goFooterMenu(type){
     </script>
 
 	<script type="text/javascript">
-/* 		// ipin 용 실명확인 
-		window.name ="Parent_window"; 	
-	//<![CDATA[
 
-		// 아이핀 팝업 띄우기
-		function fnIpinPopupVno(event){
-			//event.preventDefault();
-			var pop_status;
-			commSetCertificationserviceLogCate('join','ipin');
-			(event.preventDefault) ? event.preventDefault() : event.returnValue = false;
-			pop_status = window.open('/cjmweb/common/include/ipin_check.do?mode=vno&svc_cd=01&coopco_cd=7030&brnd_cd=3000&mcht_no=3000&coop_return_url=', 'popupIPIN', 'width=450,height=550,top=100,left=100,fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbars=no');
-			pop_status.focus();
-
-		}
-		function fnIpinPopupSci(event){
-			//event.preventDefault();
-			var pop_status;
-			commSetCertificationserviceLogCate('join','ipin');
-			(event.preventDefault) ? event.preventDefault() : event.returnValue = false;
-			pop_status = window.open('/cjmweb/common/include/ipin_check.do?mode=sci&svc_cd=01&coopco_cd=7030&brnd_cd=3000&mcht_no=3000&coop_return_url=', 'popupIPIN', 'width=450,height=550,top=100,left=100,fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=yes,location=no,scrollbars=no');
-			pop_status.focus();
-		}
-		
-		// 본인인증 팝업 띄우기
-		// 한신평
-		function fnCheckPlusPopup(event){
-			//event.preventDefault();
-			var pop_status;
-			commSetCertificationserviceLogCate('join','mobile');
-			(event.preventDefault) ? event.preventDefault() : event.returnValue = false;
-			pop_status = window.open('/cjmweb/common/include/cp_check.do?mode=vno&svc_cd=01&coopco_cd=7030&brnd_cd=3000&mcht_no=3000&coop_return_url=', 'popupCP', 'width=500,height=465,top=100,left=100,fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=yes,location=no,scrollbars=no');
-			pop_status.focus();
-		}
-		// 한신평 공인인증
-		function fnCheckPlusPPopup(event){
-			//event.preventDefault();
-			var pop_status;
-			commSetCertificationserviceLogCate('join','certifi');
-			(event.preventDefault) ? event.preventDefault() : event.returnValue = false;
-			pop_status = window.open('/cjmweb/common/include/cp_check.do?mode=vno&svc_cd=01&typ_cd=04&coopco_cd=7030&brnd_cd=3000&mcht_no=3000&coop_return_url=', 'popupCP', 'width=500,height=465,top=100,left=100,fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=yes,location=no,scrollbars=no');
-			pop_status.focus();
-		}
-		// 한국모바일인증
-		function fnCheckKmcPopup(event) {
-			//event.preventDefault();
-			var pop_status;
-			commSetCertificationserviceLogCate('join','mobile');
-			(event.preventDefault) ? event.preventDefault() : event.returnValue = false;
-			pop_status = window.open('/cjmweb/common/include/cp_check.do?mode=kmc&svc_cd=01&coopco_cd=7030&brnd_cd=3000&mcht_no=3000&coop_return_url=', 'popupCP', 'width=425,height=640,top=100,left=100,fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=yes,location=no,scrollbars=no');
-			pop_status.focus();
-		}
-		function fnCheckKmcPopup2() {
-			showIt('/cjmweb/common/include/cp_check.do?mode=kmc&svc_cd=01&coopco_cd=7030&brnd_cd=3000&mcht_no=3000&coop_return_url=',425,640);
-		}
-		// KCB 휴대폰인증
-		function fnCheckKcbMobilePopup(event) {
-			(event.preventDefault) ? event.preventDefault() : event.returnValue = false;
-			window.open('/cjmweb/common/include/cp_check.do?mode=kcb&svc_cd=01&coopco_cd=7030&brnd_cd=3000&mcht_no=3000', 'popupCP', 'width=430,height=640,top=100,left=100,fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=yes,location=no,scrollbars=no');
-		}
-		// KCB 카드인증
-		function fnCheckKcbCardPopup(event) {
-			(event.preventDefault) ? event.preventDefault() : event.returnValue = false;
-			window.open('/cjmweb/common/include/card_check.do?mode=kcb&svc_cd=01&coopco_cd=7030&brnd_cd=3000&mcht_no=3000', 'popupCard', 'width=430,height=712,top=100,left=100,fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=yes,location=no,scrollbars=no');
-		}
-		 */
 		// 인증기관에서 받아온값
 		function setEncInfo(enc_data, parm1, parm2, parm3, enc_com) {
 			$('#enc_data').val(enc_data);
@@ -694,11 +514,6 @@ function goFooterMenu(type){
 		<input type="hidden" id="phone_no" name="phone_no" value="">
 	</form>
 
-
-	<script type="text/javascript" data-import="true"
-		src="/cjmweb/js/modules/placeholder.js"></script>
-	<script type="text/javascript" data-import="true"
-		src="/cjmweb/js/modules/formatter.js"></script>
 </body>
 
 </html>

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.naming.NamingException;
+import javax.tools.DocumentationTool.Location;
 
 import com.util.ConnectionProvider;
 
@@ -16,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import user.domain.LogOnDTO;
 import user.domain.OuserDTO;
 
 public class OuserDAOImpl implements OuserDAO {
@@ -71,7 +73,9 @@ public class OuserDAOImpl implements OuserDAO {
 		pstmt.setString(2,  dto.getU_name() );
 		pstmt.setString(3,  dto.getU_pwd() );
 		pstmt.setString(4,  dto.getU_tel() );
-		pstmt.setDate(5,   new Date(dto.getU_birth().getTime()) );
+		java.util.Date d = dto.getU_birth() ;
+		d.setMonth(d.getMonth()-1);
+		pstmt.setDate(5,   new Date(d.getTime()) );
 		pstmt.setString(6,  dto.getU_email() );
 		rowCount = pstmt.executeUpdate();
 
@@ -82,7 +86,7 @@ public class OuserDAOImpl implements OuserDAO {
 
 	//비밀번호 변경
 	@Override
-	public int pwdUpdate(Connection conn, OuserDTO dto) throws SQLException {
+	public int pwdUpdate( Connection conn, LogOnDTO logDto) throws SQLException {
 		int rowCount = 0;
 		String sql = "UPDATE o_user SET u_pwd = ? "
 				+ " WHERE user_id = ? ";
@@ -90,9 +94,9 @@ public class OuserDAOImpl implements OuserDAO {
 		 PreparedStatement pstmt = null;
 		 
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, dto.getU_pwd());
-		pstmt.setString(2, dto.getUser_id());
-		rowCount = pstmt.executeUpdate();         
+		pstmt.setString(1, logDto.getU_pwd());
+		pstmt.setString(2, logDto.getUser_id());
+		rowCount = pstmt.executeUpdate();  
 		
 		pstmt.close();
 		return rowCount;

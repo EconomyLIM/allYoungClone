@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/inc/include.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../../css/CJbase.css" />
 <link rel="stylesheet" href="../../css/CJparticipate.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body style="">
 <!--skip navigation-->
@@ -27,8 +30,8 @@
 	<!--contents-->
 	<div id="contentsWrap">
 		<div id="contents">
-			<form method="post" id="form1" name="form1" action="/join.do">
-				<input type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
+			<form method="post" id="form1" name="form1" action="">
+- 				<input type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
 				<input type="hidden" name="brnd_cd" id="brnd_cd" value="3000">
 				<input type="hidden" name="mcht_no" id="mcht_no" value="3000">
 				<input type="hidden" name="upd_coopco_id" id="upd_coopco_id" value="">
@@ -71,7 +74,7 @@
 								<span class="input_txt w450"><input type="text" class="text" id="mob_no" name="mob_no" placeholder="휴대전화번호 뒤 7~8자리를 입력해주세요. (01X 제외)" title="휴대전화번호 뒤 7~8자리를 입력해주세요. (01X 제외)" data-format="num" maxlength="8" autocomplete="off"></span>
 								<p class="msg_info hide" id="msg_mob_no">국번제외한 휴대폰번호를 입력해주세요. (ex.010-123-5678 &gt; 1235678)</p>
 								<div class="btn_sec">
-									<a href="/Black_OY/olive/joinCheck.do" class="btn btn_em" id="btnCheRegister">가입여부 확인</a>
+									<a href="javascript:submitForm();" class="btn btn_em" id="btnCheRegister">가입여부 확인</a>
 								</div> 
 							</div>
 						</div>
@@ -145,12 +148,18 @@ function checkField(event) {
         msgElement.classList.add("hide");
     }
 }
+
 </script>
+
 <script>
-	document.getElementById("btnCheRegister").onclick = function () {
-		this.href = this.href+"?tel="+document.getElementById("mob_no").value+"&u_name="+document.getElementById("user_nm").value 
-				+"&u_birth="+document.getElementById("legl_birth_dy").value;
-	}
+function submitForm() {
+	$("#form1").attr("action", "/Black_OY/olive/joinCheck.do");
+	$("#form1").submit(); 
+}
+$("#btnCheRegister").on("click", function (event) {
+	event.preventDefault();
+	submitForm();
+});	
 </script>
 </body>
 </html>

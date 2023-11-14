@@ -744,7 +744,7 @@
 		</script>
 <script>
 	$("#btnSms").on("click", function () {
-		location.href = "phone2.html";
+		location.href = "verify_phlast.jsp";
 	});
 </script>
 
