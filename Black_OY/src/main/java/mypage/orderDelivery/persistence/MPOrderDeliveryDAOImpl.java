@@ -289,7 +289,7 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 				+ "    LEFT JOIN refund r ON o.order_id = r.order_id "
 				+ "    left join payment pm on o.order_id = pm.order_id "
 				+ "    where user_id = ? "
-				+ "        and order_date between to_date( ? ,'YYYYMMDD' ) and to_date( ? , 'YYYYMMDD') "
+				+ "        and order_date between to_date( ? ,'YYYY-MM-DD' ) and to_date( ? , 'YYYY-MM-DD') "
 				+ "        and order_type = ? "
 				+ ") subquery "
 				+ "WHERE rn = 1  ";

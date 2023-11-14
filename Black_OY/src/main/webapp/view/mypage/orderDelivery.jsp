@@ -223,18 +223,6 @@
 				
 				<div class="mypage-conts">
 				<script src="https://static.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.header.js?dumm=202311090001"></script>
-				<script>
-					$(window).ready(function(){
-						mypage.header.init();
-					});
-				</script>
-				
-
-
-
-
-
-
 
 
 	<div class="title-area2">
