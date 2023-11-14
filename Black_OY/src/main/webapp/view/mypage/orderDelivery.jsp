@@ -23,7 +23,7 @@
 
 			<div class="mypage-head rate_04">
 				<h1 class="tit">
-					<a href="https://www.oliveyoung.co.kr/store/mypage/myPageMain.do">마이페이지</a>
+					<a href="<%=contextPath %>/mypage/main/mypageMain.do">마이페이지</a>
 				</h1>
 
 				<div class="grd-box">
@@ -223,18 +223,6 @@
 				
 				<div class="mypage-conts">
 				<script src="https://static.oliveyoung.co.kr/pc-static-root/js/mypage/mypage.header.js?dumm=202311090001"></script>
-				<script>
-					$(window).ready(function(){
-						mypage.header.init();
-					});
-				</script>
-				
-
-
-
-
-
-
 
 
 	<div class="title-area2">
@@ -323,34 +311,9 @@
 		  <!-- 2016-12-23 수정 -->
 		<button type="button" class="btnLookup" id="do-search-period">조회</button>
 	</fieldset>
-<script type="text/javascript" src="https://static.oliveyoung.co.kr/pc-static-root/js/common/searchPeriod.js?dumm=202311090001"></script>
-<%-- <script>
-//[3394070] 올영체험단 리뷰 배너 오류 문의 件 요청으로 올영체험단 리뷰는 시작시 12개월로 선택되게 조건 변경 되어 START_DATE, END_DATE 변경
-START_DATE   = '';//<- 위에 선택된 날짜 입력
-END_DATE     = '';//<- 위에 선택된 날짜 입력
-ollyoungYn = '';
 
-$(document).ready(function(){
-	var cnslChk = "";
-	var startYear = 2012
-	var thisYear = new Date().getFullYear();
-
-	if(!common.isEmpty(cnslChk)) startYear = 2014;
-	$("#cal-start-year,#cal-end-year").empty();
-	while (startYear <= thisYear) {
-		$("#cal-start-year,#cal-end-year").append("<option value='"+startYear+"'>"+startYear+"</option>");
-		startYear++
-	}
-
-	setTimeout(function() {
-		SearchPeriod.init();
-	},500);
-});
-</script> --%>
 <script>
-	//선택된 시작년월일, 종료년월일, 구매유형 -> get방식으로 다시호출
-</script>
-<script>
+
 //처음 접속시 날짜 설정
 $(document).ready(function () {
 	var today = new Date();
@@ -398,8 +361,7 @@ $(document).ready(function () {
 	$("#cal-end-day").val(tday).prop("selected", true);
 	
 });
-</script>
-<script>
+
 //마지막 날짜 구하기 메서드
 function getLastDay(year, month){
 	let d = new Date(year, month)
@@ -407,10 +369,9 @@ function getLastDay(year, month){
 	return d.getDate();
 	}
 	
-</script>
-<script>
-//날짜값을 변경할 경우
 
+//날짜값을 변경할 경우
+	//시작일
 	$("#cal-start-year, #cal-start-month").on("change", function() {
 		let syear = $("#cal-start-year option:selected").val();
 		let smonth = $("#cal-start-month option:selected").val();		
@@ -425,7 +386,7 @@ function getLastDay(year, month){
 
 	});
 		
-	
+	//종료일
 	$("#cal-end-year, #cal-end-month").on("change", function() {
 		let eyear = $("#cal-end-year option:selected").val();
 		let emonth = $("#cal-end-month option:selected").val();
@@ -443,10 +404,29 @@ function getLastDay(year, month){
 // 탐색 배너의 모든 버튼 클릭 시
 	$(".search-period.mgT30 button").on("click", function() {
 		<%-- get방식으로 전송 --%>
-		<%-- 버튼은 class="on" 부여, 구매유형은 class="on"의 data-order-type의 속성값을 searchOrderType="" --%>
-		<%-- 구매기간은 class="on" data-month 속성값을 searchMonth=""--%>
-
-		<%-- ?searchMonth=-3&startDate=2023-08-14&endDate=2023-11-14&searchOrderType=10 --%>
+		
+		//구매기간, 구매유형 버튼
+		$(this).parent().siblings(".on").removeClass("on");
+		$(this).parent().addClass("on");
+		
+		var today = new Date();
+		var tyear = today.getFullYear();
+		var tMonth = today.getMonth();
+		
+		//구매기간이라면
+		if ($(this).parents("ul").hasClass("select-month")) {
+			
+			let datemonth = $(this).attr("data-month")
+			if (datemonth == "-12") {
+				$("#cal-start-year").val(tyear - 1).prop("selected", true);
+				$("#cal-start-month").val(tMonth + 1).prop("selected", true);
+			} else {				
+				$("#cal-start-month").val(tMonth + 1 + Number(datemonth)).prop("selected", true);
+			}
+							
+		} 
+		
+		// 선택된 시작,종료일
 		let syear = $("#cal-start-year option:selected").val();
 		let smonth = $("#cal-start-month option:selected").val();		
 		let sdate = $("#cal-start-day option:selected").val()
@@ -458,12 +438,13 @@ function getLastDay(year, month){
 		let startDate = `\${syear}-\${smonth}-\${sdate}`;
 		let endDate = `\${eyear}-\${emonth}-\${edate}`;
 		
+		//구매기간, 구매조건 선택사항
 		let searchMonth = $(".select-month li.on button ").attr("data-month")
-		let searchOrderType = $(".select-type button").attr("data-order_type");
-
-		alert(searchMonth)
+		let searchOrderType = $(".select-type li.on button").attr("data-order_type");
 		
+		//url 작성
 		let url = `orderDelivery.do?searchMonth=\${searchMonth}&startDate=\${startDate}&endDate=\${endDate}&searchOrderType=\${searchOrderType}`
+		
 		location.href = url;
 	})
 
@@ -528,15 +509,15 @@ function getLastDay(year, month){
 	
 	
 									<a class="thum"
-										href="javascript:mypage.orderList.goGoodDetail('A000000163041','', 'Order',{t_page : '마이페이지_주문배송조회', t_click:'주문배송조회_상품상세'});">
+										href="<%-- 상품상세페이지 이동 --%>">
 										<img
-										src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0016/A00000016304111ko.jpg?l=ko"
+										src="<%-- 상품 이미지 경로 --%>"
 										alt="[11월 올영픽] [서현pick]콜레올로지 600mg*30정(15일분)+컷팅젤리2포 기획"
 										onerror="common.errorImg(this);">
 									</a>
 									<div class="textus">
 										<a class=""
-											href="javascript:mypage.orderList.goGoodDetail('A000000163041','', 'Order',{t_page : '마이페이지_주문배송조회', t_click:'주문배송조회_상품상세'});">
+											href="<%-- 상품상세페이지 이동 --%>">
 											<span class="tit">푸드올로지</span> <span class="txt">[11월
 												올영픽] [서현pick]콜레올로지 600mg*30정(15일분)+컷팅젤리2포 기획</span>
 										</a> <span class="color1sSize"><i class="tit">옵션</i>콜레올로지
