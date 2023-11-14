@@ -30,12 +30,12 @@ public class MyPageHandler implements CommandHandler {
 		//회원id가져오기
 		
 		// 현재 로그인 한 유저 id 가져올려면 아래 코드 쓰면 됨
-		LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
-		userId = logOnDTO.getUser_id();
+		//LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
+		//userId = logOnDTO.getUser_id();
 		
 
 		//테스트용 고정값
-		//userId = "admin";	//request.getParameter("userId");
+		userId = "admin";	//request.getParameter("userId");
 
 		MypageService service = MypageService.getinstance();
 		
@@ -44,20 +44,20 @@ public class MyPageHandler implements CommandHandler {
 		int userPoint = 0;
 		int userCoupon = 0;
 		int userDeposit = 0;
+		int userRevCount = 0;
 		List<MpPlikeDTO> userPlike = null;
 		List<MpPAskDTO> userpAsk = null;
 		List<MpQnADTO> userQnA = null;
-		int userRevCount = 0;
 		List<MpOrderStateDTO> userOrderState = null;
 		
 		userInfo = service.mpUIservice(userId);
 		userPoint = service.mpUPservice(userId);
 		userCoupon = service.mpUCservice(userId);
 		userDeposit = service.mpUDservice(userId);
+		userRevCount = service.mpURservice(userId);
 		userPlike = service.mpUPLservice(userId);
 		userpAsk = service.mpUPAservice(userId);
 		userQnA = service.mpUQnAservice(userId);
-		userRevCount = service.mpURservice(userId);
 		userOrderState = service.mpUOservice(userId);
 		
 		
@@ -66,10 +66,10 @@ public class MyPageHandler implements CommandHandler {
 		request.setAttribute("userPoint", userPoint);
 		request.setAttribute("userCoupon", userCoupon);
 		request.setAttribute("userDeposit", userDeposit);
+		request.setAttribute("userRevCount", userRevCount);
 		request.setAttribute("userPlike", userPlike);
 		request.setAttribute("userpAsk", userpAsk);
 		request.setAttribute("userQnA", userQnA);
-		request.setAttribute("userRevCount", userRevCount);
 		request.setAttribute("userOrderState", userOrderState);
 		
 		return "/view/mypage/mypage.jsp";
