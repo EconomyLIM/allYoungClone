@@ -17,7 +17,7 @@
 <body>
 	<jsp:include page="/layout/head_main.jsp"></jsp:include>
 
-	<div>
+	<div id ="Wrapper">
 		<div id="Container">
 
 			<div id="Contents">

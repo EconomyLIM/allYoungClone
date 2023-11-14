@@ -858,7 +858,7 @@
                     </li>
                     <li style="">
                         <a onclick=""
-                            href="#"><span>이벤트</span>
+                            href="<%=contextPath %>/olive/event.do"><span>이벤트</span>
                         </a>
                     </li>
                 </ul>

@@ -197,7 +197,7 @@
         
 		// 취소
 		function goCancel() {
-			$("#form1").attr("action", "/usermodify.jsp");
+			$("#form1").attr("action", "usermodify.jsp");
 			$("#form1").submit();
 			 
 		} 

@@ -40,7 +40,7 @@ public class BasketListHandler implements CommandHandler{
 			LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
 			user_id = logOnDTO.getUser_id();
 			productid = request.getParameter("productid");
-			quickyn = request.getParameter("quickyn");
+			quickyn = request.getParameter("quickyn");	
 			System.out.println(quickyn);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -129,7 +129,11 @@
     </div>
     <!-- //footer -->
 </div>
-
+<script>
+$('#btnCheRegister').keydown(function(event) {
+	if (event.keyCode == 13) submitForm();
+});
+</script>
 <script>
 // 가입여부 확인 입력오류 메세지 출력
 document.getElementById("user_nm").addEventListener("input", checkField);

@@ -83,11 +83,10 @@
 												<td>
 													<div class="input_group">
 														<!-- 160616_수정 -->
-														<span class="input_txt w250"><input type="password"
-															id="new_pwd" name="new_pwd" class="text"
-															placeholder="새 비밀번호를 입력해주세요."></span> <span
-															class="pwd_lv"><em id="msg_pwd">강도 : 약함</em></span>
-														<!-- //160616_수정 -->
+														<span class="input_txt w250">
+														<input type="password" id="new_pwd" name="new_pwd" class="text"
+															placeholder="새 비밀번호를 입력해주세요."></span>
+															<span class="pwd_lv"><em id="msg_pwd">강도 : 약함</em></span>
 													</div>
 												</td>
 											</tr>
@@ -125,8 +124,7 @@
 							<!-- // 이용안내 -->
 							<div class="btn_sec">
 								<button type="button" class="btn" onclick="goCancel()">나중에</button>
-								<button type="button" class="btn btn_em" onclick="goChange()">비밀번호
-									변경</button>
+								<button type="button" class="btn btn_em" onclick="goChange()">비밀번호 변경</button>
 							</div>
 						</div>
 					</div>
@@ -161,62 +159,7 @@
 				</div>
 
 			</div>
-			<!--// 20191021 CJ ONE APP 사업자 정보 노출 전체 영역 -->
-
-			<div id="div_confirm" style="display: none;">
-				<div class="ui_modal"
-					style="position: fixed; background-color: rgb(255, 255, 255); outline: none; background-clip: padding-box; top: 50%; left: 50%; margin-left: -200px; margin-top: -160px; width: 400px; z-index: 9101;"
-					tabindex="0">
-
-					<div id="layerWrap" class="custom">
-						<h1 id="h_confirm_title">알림</h1>
-
-						<div class="inner" tabindex="0">
-							<p id="p_confirm_text"></p>
-						</div>
-
-
-						<div class="btn_center">
-							<a href="javascript:closeLayerConfirm();" id="a_confirm_y"
-								class="btn"><span id="span_confirm_y">확인</span></a>
-							<button id="a_confirm_n" type="button"
-								onclick="closeLayerConfirm();" class="btn cancel">
-								<span id="span_confirm_n">취소</span>
-							</button>
-						</div>
-
-						<button id="btn_confirm_close" type="button"
-							onclick="closeLayerConfirm();" class="close">닫기</button>
-					</div>
-
-				</div>
-				<div class="ui_modal_overlay"
-					style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 9100;"></div>
-			</div>
-			<!-- //레이어 팝업(confirm) 내용 -->
-			<!-- 레이어 팝업(alert) 내용 -->
-			<div id="div_alert" style="display: none;">
-				<div class="ui_modal"
-					style="position: fixed; background-color: rgb(255, 255, 255); outline: none; background-clip: padding-box; top: 50%; left: 50%; margin-left: -200px; margin-top: -160px; width: 400px; z-index: 9101;"
-					tabindex="0">
-
-					<div id="layerWrap" class="custom">
-
-						<div class="inner" tabindex="0">
-							<p id="p_alert_text"></p>
-						</div>
-
-						<div class="btn_center">
-							<a href="javascript:closeLayerAlert();" id="a_alert"
-								class="btn close"><span id="span_alert">확인</span></a>
-						</div>
-					</div>
-
-				</div>
-				<div class="ui_modal_overlay"
-					style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 9100;"></div>
-			</div>
-			<!-- //레이어 팝업(alert) 내용 -->
+			<!--//CJ ONE APP 사업자 정보 노출 전체 영역 -->
 		</div>
 		<!-- //footer -->
 	</div>
@@ -237,7 +180,7 @@
 				msgStr = "";
 			}
 		}
-		// 패스워드 강도 체크  2012.1.5
+		// 패스워드 강도 체크  
 		var pwStrength = false;
 		function checkPassword() {
 			pwStrength = false;
@@ -340,42 +283,6 @@
 			if (flag == "invalid") {
 				return;
 			}
-
-			var param = $("#form1").serialize();
-			$.ajax({
-						url : "https://www.cjone.com/cjmweb/member/change-passwd-action.do",
-						dataType : 'json',
-						async : false,
-						type : 'POST',
-						data : param,
-						error : function(xhr) {
-							alert('xhr (' + xhr.status + ':' + xhr.statusText
-									+ ':' + xhr.responseText + ')');
-							$("#bef_pwd").val('');
-							$("#new_pwd").val('');
-							$("#new_pwd_check").val('');
-						},
-						success : function(data) {
-							if (data.reqBox.str_msg != ''
-									&& data.reqBox.str_msg != null
-									&& data.reqBox.str_msg != 'undefined') {
-								var str_msg = "" + data.reqBox.str_msg;
-								str_msg = str_msg.replace(/\\n/g, '\n');
-								$("#bef_pwd").val('');
-								$("#new_pwd").val('');
-								$("#new_pwd_check").val('');
-								$("#bef_pwd").focus();
-								alert(str_msg);
-								return;
-							} else {
-								$('#form2')
-										.attr('action',
-												'https://www.cjone.com/cjmweb/member/change-passwd/finish.do');
-								$('#form2').submit();
-							}
-						}
-					});
-		}
 
 		// 취소
 		function goCancel() {

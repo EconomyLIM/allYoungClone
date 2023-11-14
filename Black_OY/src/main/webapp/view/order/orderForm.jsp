@@ -10,16 +10,45 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="/Black_OY/js/head.js"></script>
-<link rel="stylesheet" href="/BlackOY/css/style.css">
+<link rel="stylesheet" href="/Black_OY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
+
+	<script>
+		$(function() {
+			$("#btn_door_manner_temp1").on("click", function() {
+				$("#visitTypeDescExist").css("display", "table-row")
+				$("#visitTypeDescExist > th").text("공동현관 비밀번호");
+			});
+			
+			$("#btn_door_manner_temp2").on("click", function() {
+				$("#visitTypeDescExist").css("display", "table-row")
+				$("#visitTypeDescExist > th").text("경비실 호출 방법");
+			});
+			
+			$("#btn_door_manner_temp3").on("click", function() {
+				$("#visitTypeDescExist").hide();
+			});
+			
+			$("#btn_door_manner_temp4").on("click", function() {
+				$("#visitTypeDescExist").css("display", "table-row")
+				$("#visitTypeDescExist > th").text("기타 상세 내용");
+			});
+		})
+	</script>
+
 <jsp:include page="/layout/head.jsp"></jsp:include>
-<div>
+
+<div id="Wrapper">
+	<div id="skip_navi"><a href="#Container">본문바로가기</a></div>
+<form name="ssologinfrm" action="https://www.oliveyoung.co.kr/store/login/ssoLogin.do" method="post">
+<input type="hidden" id="cjssoq" name="cjssoq">
+</form>
+
 <div id="Container">
 	<!-- #Contents -->
 	<div id="Contents">
-		
 		<!-- title_box -->
 		<div class="title_box">
 			<h1>주문/결제</h1>
@@ -33,26 +62,26 @@
 		
 		<form name="pickupOrderForm" id="pickupOrderForm">
 		</form>
-		<form name="orderForm" id="orderForm">
+		<form name="orderForm" id="orderForm" method="post" action="https://www.oliveyoung.co.kr/store/order/setOrderRequest.do" target="setOrderRequest">
 			<input type="hidden" id="o2oGiftBoxAmtRm" name="o2oGiftBoxAmtRm" value="30000">
 			<input type="hidden" id="o2oGiftBoxAmtDc" name="o2oGiftBoxAmtDc" value="2000">
 			<input type="hidden" id="o2oGiftBoxAmtDf" name="o2oGiftBoxAmtDf" value="2000">
 			<input type="hidden" id="o2oGiftBoxAmt" name="o2oGiftBoxAmt" value="0">
-			<input type="hidden" id="quickYn" name="quickYn" value="N">
+			<input type="hidden" id="quickYn" name="quickYn" value="Y">
 			<input type="hidden" id="pickupDirectYn" name="pickupDirectYn" value="N">
-			<input type="hidden" id="quickInfoYn" name="quickInfoYn" value="N">
+			<input type="hidden" id="quickInfoYn" name="quickInfoYn" value="Y">
 			<input type="hidden" id="ocbValidChk" name="ocbValidChk" value="N">
 			
-			<input type="hidden" id="o2oVisitTypeVal" name="o2oVisitTypeVal" value="3">
+			<input type="hidden" id="o2oVisitTypeVal" name="o2oVisitTypeVal" value="4">
 			<!-- 최근 직접 입력한 배송메시지 카운트 : 직접 입력한 배송메시지가 있으면 3개 까지 화면에 노출한다.-->
 			<input type="hidden" id="mhCnt" name="mhCnt" value="0">
 
 			<!-- 2020-08-06 o2oJJ 24H 주문 가능한지 여부, 주문서 진입시 오늘드림인지 여부 -->
-			<input type="hidden" id="orgIs24HCheckable" name="orgIs24HCheckable" value="N">
-			<input type="hidden" id="is24HCheckable" name="is24HCheckable" value="N">
+			<input type="hidden" id="orgIs24HCheckable" name="orgIs24HCheckable" value="Y">
+			<input type="hidden" id="is24HCheckable" name="is24HCheckable" value="Y">
 			<input type="hidden" id="orgQuickYn" name="orgQuickYn" value="N">
-			<input type="hidden" id="quick24hdisplay" name="quick24hdisplay" value="">
-			<input type="hidden" id="default24HHardSet" name="default24HHardSet" value="">
+			<input type="hidden" id="quick24hdisplay" name="quick24hdisplay" value="Y">
+			<input type="hidden" id="default24HHardSet" name="default24HHardSet" value="N">
 
 			<!-- 주문자 정보 -->
 			<h2 class="sub-title2 mgT20" style="display: none;">주문자정보</h2><!-- 2017-02-21 수정 : mgT20 클래스 추가 -->
@@ -65,15 +94,15 @@
 				<tbody>
 				<tr>
 					<th scope="row">주문자명</th>
-					<td><input type="text" id="ordManNm" name="ordManNm" value="신기범" class="inpH28" title="주문자명을 입력해주세요." this="주문자명은" style="width:200px"></td><!-- id와 label for를 맞춰주세요 (임시로 넣어둠) -->
+					<td><input type="text" id="ordManNm" name="ordManNm" value="" class="inpH28" title="주문자명을 입력해주세요." this="주문자명은" style="width:200px"></td><!-- id와 label for를 맞춰주세요 (임시로 넣어둠) -->
 				</tr>
 				<tr>
 					<th scope="row">휴대폰</th>
 					<td>
 						<select id="ordManCellSctNo" name="ordManCellSctNo" class="selH28" title="주문자 휴대폰 번호 앞자리를 선택해주세요." style="width:90px">
-							<option value="">선택</option>
+							<option value="" selected="selected">선택</option>
 							
-								<option value="010" selected="selected">010</option>
+								<option value="010" >010</option>
 							
 								<option value="011">011</option>
 							
@@ -140,24 +169,23 @@
 								<option value="0507">0507</option>
 							
 						</select>
-						- <input type="text" id="ordManCellTxnoNo" name="ordManCellTxnoNo" value="7477" class="inpH28" title="주문자 휴대폰 번호 가운데 자리를 입력해주세요." this="주문자 휴대폰 번호 가운데 자리는" style="width:90px">
-						- <input type="text" id="ordManCellEndNo" name="ordManCellEndNo" value="0938" class="inpH28" title="주문자 휴대폰 번호 마지막 4자리를 입력해주세요." this="주문자 휴대폰 번호 마지막 자리는" style="width:90px">
+						- <input type="text" id="ordManCellTxnoNo" name="ordManCellTxnoNo" value="" class="inpH28" title="주문자 휴대폰 번호 가운데 자리를 입력해주세요." this="주문자 휴대폰 번호 가운데 자리는" style="width:90px">
+						- <input type="text" id="ordManCellEndNo" name="ordManCellEndNo" value="" class="inpH28" title="주문자 휴대폰 번호 마지막 4자리를 입력해주세요." this="주문자 휴대폰 번호 마지막 자리는" style="width:90px">
 					</td>
 				</tr>
 				<tr>
 					<th scope="row">이메일</th>
 					<td>
-						
-						
-						<input type="hidden" id="ordManEmailAddr" name="ordManEmailAddr" value="pilot0311@naver.com" title="주문자 이메일 주소를 입력해주세요.">
-						<input type="text" id="ordManEmailAddrId" value="pilot0311" class="inpH28" title="주문자 이메일 주소를 입력해주세요." this="주문자 이메일 주소는" style="width:120px">
-						@ <input type="text" id="ordManEmailAddrDmn" value="naver.com" class="inpH28" title="이메일도메인을 입력해주세요." this="이메일도메인은" style="width:120px" disabled="">
+
+						<input type="hidden" id="ordManEmailAddr" name="ordManEmailAddr" value="" title="주문자 이메일 주소를 입력해주세요.">
+						<input type="text" id="ordManEmailAddrId" value="" class="inpH28" title="주문자 이메일 주소를 입력해주세요." this="주문자 이메일 주소는" style="width:120px">
+						@ <input type="text" id="ordManEmailAddrDmn" value="n" class="inpH28" title="이메일도메인을 입력해주세요." this="이메일도메인은" style="width:120px" disabled="">
 						<select id="ordManEmailAddrDmn_select" class="selH28" title="주문자 이메일 주소 도메인을 선택해주세요." style="width:120px">
-							<option value="">직접 입력하기</option>
+							<option value="" selected="selected">직접 입력하기</option>
 							
 								<option value="hanmir.com">hanmir.com</option>
 							
-								<option value="naver.com" selected="selected">naver.com</option>
+								<option value="naver.com" >naver.com</option>
 							
 								<option value="hanmail.net">hanmail.net</option>
 							
@@ -206,7 +234,7 @@
 				<tr>
 					<th scope="row">배송지선택</th>
 					<td>
-						<span class="chk_area mgzero"><input type="radio" checked="checked" id="btn_dlvp_exist" name="inpAddrSel" value="" targetid="exist" data-attr="배송지정보^1_배송지선택"><label for="btn_dlvp_exist">기존 배송지</label></span>
+						<span class="chk_area mgzero"><input type="radio" id="btn_dlvp_exist" name="inpAddrSel" value="" targetid="exist" data-attr="배송지정보^1_배송지선택"><label for="btn_dlvp_exist">기존 배송지</label></span>
 						<!-- 2020-08-04 o2oJJ 24H 화면 제어로 인한 주석 처리 -->
 						
 							<span class="chk_area"><input type="radio" id="btn_dlvp_new" name="inpAddrSel" value="" targetid="new" data-attr="배송지정보^1_배송지선택"><label for="btn_dlvp_new">신규 배송지</label></span>
@@ -216,35 +244,19 @@
 							<!--[오늘드림 구매에서 일반배송으로 주문서 들어왔을때 선택한 배송지 셋팅을 위해서 사용 :jwkim]-->
 							<input type="hidden" name="selectDlvSeq" value="">
 							<select id="dlvpSelect" name="mbrDlvpSeq" class="selH28" title="배송지를 선택해주세요." style="width:200px" data-attr="배송지정보^1_배송지선택">
-								
-							<c:forEach items="${ dlist }" var="deli">
-								<option value="${deli.delivery_id }">${deli.deli_name }</option>
-							</c:forEach>
-								
 							</select>
 						</div>
 					</td>
 				</tr>
 
-				
-				
-				
 				<!-- // 2020-08-04 o2oJJ 24H 추가 -->
-				
-				
-				
 
-				
-
-				
-				
 					<!--// 2019-11-15 추가 (오늘드림배송 시)-->
 					<tr type="exist" style="display: table-row;">
 						<th scope="row">배송지명</th>
-						<td id="dlvpNm_exist_span">스크립트 처리</td>
-						<input type="hidden" id="dlvpNm_exist" name="dlvpNm" value="qwe" title="배송지명을 입력해주세요." style="width:200px" this="배송지명은">
+						<td id="dlvpNm_exist_span"></td>
+						<input type="hidden" id="dlvpNm_exist" name="dlvpNm" value="" title="배송지명을 입력해주세요." style="width:200px" this="배송지명은">
 					</tr>
-				
 
 				<!-- 2019-11-15 추가 (오늘드림배송 시) -->
 				<!-- <tr class="o2o_dlv_area" style="display:none;">
@@ -264,7 +276,7 @@
 
 				<!-- [3659045] 오늘드림 주문서 페이지 UI 변경 건 -->
 				<tr id="o2o_dlv_area" style="display:none;">
-					<input type="hidden" id="dueDt" value="2023/11/09 11:10:29">
+					<input type="hidden" id="dueDt" value="2023/11/13 12:17:38">
 					<input type="hidden" id="o2oDeliveryScheduleDt" name="o2oDeliveryScheduleDt" value="">
 					<th scope="row"><label for="inpAddrNm">배송방법</label></th>
 					<td class="todayTime">
@@ -313,7 +325,7 @@
 							</tr>
 							</tbody>
 						</table>
-						<p class="charge" id="dlv_dlexPayAmt1" style="display:none;"><span id="dlv_dlexPayAmt2"></span><a href="javascript:void(0);" onclick="fnLayerSet('todayDlvCostNoti', 'open');"></a></p>
+						<p class="charge" id="dlv_dlexPayAmt1" style="display:none;"><span id="dlv_dlexPayAmt2">배송비 : 0원</span><a href="javascript:void(0);" onclick="fnLayerSet('todayDlvCostNoti', 'open');"></a></p>
 						<ul class="notice">
 정							<li>모든 배송은 비대면으로 진행됩니다.</li>
 						</ul>
@@ -423,7 +435,7 @@
 				<tr id="pickupHide1" type="exist" style="display: table-row;">
 					<th scope="row">받는분</th>
 					<td class="imp_data"><!-- 2017-01-18 추가 : 필수입력사항 아이콘 추가 -->
-						<input type="text" id="rmitNm_exist" name="rmitNm" value="${sessionScope.logOn.u_name}" orgvalue="" class="inpH28" title="받는분 이름을 입력해주세요." style="width:200px" this="받는분 이름은" data-attr="배송지정보^1_받는분">
+						<input type="text" id="rmitNm_exist" name="rmitNm" value="" orgvalue="" class="inpH28" title="받는분 이름을 입력해주세요." style="width:200px" this="받는분 이름은" data-attr="배송지정보^1_받는분">
 						<span class="chk_area"><input type="checkbox" id="copyToDlvp_exist" targetid="exist"> <label for="copyToDlvp_exist">주문자정보와 동일</label></span><!-- 2017-01-18 수정 : 위치변경 -->
 					</td>
 				</tr>
@@ -431,9 +443,9 @@
 					<th scope="row">연락처1</th>
 					<td class="imp_data"><!-- 2017-01-18 추가 : 필수입력사항 아이콘 추가 -->
 						<select id="rmitCellSctNo_exist" name="rmitCellSctNo" class="selH28" title="연락처1 앞자리를 선택해주세요." style="width:90px" orgvalue="" data-attr="배송지정보^1_연락처1">
-							<option value="">선택</option>
+							<option value="" selected="selected">선택</option>
 							
-								<option value="010" selected="selected">010</option>
+								<option value="010" >010</option>
 							
 								<option value="011">011</option>
 							
@@ -500,11 +512,8 @@
 								<option value="0507">0507</option>
 							
 						</select>
-						<c:set var="dlist0" value="${dlist[0]}" />
-						<c:set var="tel" value="${dlist0.deli_tel}" />
-						<c:set var="telparts" value="${fn:split(tel, '-')}" />
-						- <input type="text" id="rmitCellTxnoNo_exist" name="rmitCellTxnoNo" value="${telparts[1] }" orgvalue="" class="inpH28" title="연락처1 가운데 자리를 입력해주세요." this="연락처1 가운데 자리는" style="width:90px" data-attr="배송지정보^1_연락처1">
-						- <input type="text" id="rmitCellEndNo_exist" name="rmitCellEndNo" value="${telparts[2] }" orgvalue="" class="inpH28" title="연락처1 마지막 4자리를 입력해주세요." this="연락처1 마지막 자리는" style="width:90px" data-attr="배송지정보^1_연락처1">
+						- <input type="text" id="rmitCellTxnoNo_exist" name="rmitCellTxnoNo" value="" orgvalue="" class="inpH28" title="연락처1 가운데 자리를 입력해주세요." this="연락처1 가운데 자리는" style="width:90px" data-attr="배송지정보^1_연락처1">
+						- <input type="text" id="rmitCellEndNo_exist" name="rmitCellEndNo" value="" orgvalue="" class="inpH28" title="연락처1 마지막 4자리를 입력해주세요." this="연락처1 마지막 자리는" style="width:90px" data-attr="배송지정보^1_연락처1">
 						<!-- <span class="chk_area"><input type="checkbox" id="chkSafe_exist" name="chkSafe" value="123" /> <label for="chkSafe">안심번호 사용</label></span> -->
 						<span class="info_security"><button type="button" data-rel="layer" data-target="securityInfo" class="chk_area">안심번호 서비스 안내</button></span>
 					</td>
@@ -582,44 +591,42 @@
 								<option value="0507">0507</option>
 							
 						</select>
-						
 						- <input type="text" id="rmitTelTxnoNo_exist" name="rmitTelTxnoNo" value="" class="inpH28" title="연락처2 가운데 자리를 입력해주세요." this="연락처2 가운데 자리는" style="width:90px">
 						- <input type="text" id="rmitTelEndNo_exist" name="rmitTelEndNo" value="" class="inpH28" title="연락처2 마지막 4자리를 입력해주세요." this="연락처2 마지막 자리는" style="width:90px">
 					</td>
 				</tr>
-				<c:forEach items="${ dlist }" var="deli">
-				<tr id="pickupHide4" class = "${deli.delivery_id }" type="exist" style="display: none;">
+				<tr id="pickupHide4" type="exist" style="display: table-row;">
 					<th scope="row">주소</th>
 					<td class="imp_data"><!-- 2017-01-25 수정 : 클래스 추가 -->
-						<input type="text" id="stnmRmitPostNo_exist" name="rmitPostNo" value="${deli.deli_zip }" class="inpH28" title="우편번호를 검색해주세요." style="width:90px" readonly="readonly">
-						<input type="hidden" id="rmitPostNo_exist" name="stnmRmitPostNo" value="${deli.deli_zip }" title="우편번호를 검색해주세요.">
+						<input type="text" id="stnmRmitPostNo_exist" name="rmitPostNo" value="" class="inpH28" title="우편번호를 검색해주세요." style="width:90px" readonly="readonly">
+						<input type="hidden" id="rmitPostNo_exist" name="stnmRmitPostNo" value="" title="우편번호를 검색해주세요.">
 						
 							<!-- // 2020-08-05 o2oJJ 24H에서의 우편번호 찾기 버튼 제어를 위해서 기존 버튼 hide 처리후 제어 버튼 추가 -->
 							<button type="button" class="btnSmall wGreen w100" id="search-zipcode-pop_exist" style="display:none;" data-attr="배송지정보^1_주소"><span>우편번호 찾기 (기존)</span></button>
 							<button type="button" class="btnSmall wGreen w100" id="search-zipcode-pop_exist_r" data-attr="배송지정보^1_주소"><span>우편번호 찾기</span></button>
 						
 						<div class="addr_box">
-							<input type="hidden" id="stnmRmitPostAddr_exist" name="stnmRmitPostAddr" value="${deli.deli_road_addr }" class="inpH28" title="우편번호를 검색해주세요." readonly="readonly">
-							<input type="hidden" id="rmitBaseAddr_exist" name="rmitPostAddr" value="${deli.deli_addr }" class="inpH28" title="우편번호를 검색해주세요." readonly="readonly">
+							<input type="hidden" id="stnmRmitPostAddr_exist" name="stnmRmitPostAddr" value="" class="inpH28" title="우편번호를 검색해주세요." readonly="readonly">
+							<input type="hidden" id="rmitBaseAddr_exist" name="rmitPostAddr" value="" class="inpH28" title="우편번호를 검색해주세요." readonly="readonly">
 							<!-- 주소 입력 시 보여지는 부분 -->
 							<p class="addr_new">
 								<span class="tx_tit">도로명</span> :
-								<span class="tx_addr" id="stnmPostAddr_exist">${deli.deli_road_addr }</span><!--  도로명주소를 넣어주세요 -->
+								<span class="tx_addr" id="stnmPostAddr_exist"></span><!--  도로명주소를 넣어주세요 -->
 							</p>
 							<p class="addr_old">
 								<span class="tx_tit">지번</span> :
-								<span class="tx_addr" id="baseAddr_exist">${deli.deli_addr }</span><!--  지번주소를 넣어주세요 -->
+								<span class="tx_addr" id="baseAddr_exist"></span><!--  지번주소를 넣어주세요 -->
 							</p>
 							<!--// 주소 입력 시 보여지는 부분 -->
 						</div>
-						<input type="text" id="tempRmitDtlAddr_exist" value="${deli.deli_baddr}" class="inpH28" title="상세주소를 입력해주세요." style="width:500px;" this="상세 주소는" maxlength="30">
-						<input type="hidden" id="stnmRmitDtlAddr_exist" name="stnmRmitDtlAddr" value="${deli.deli_baddr}" orgvalue="${deli.deli_baddr}" class="inpH28" title="상세주소를 입력해주세요." style="width:500px" this="상세 주소는">
-						<input type="hidden" id="rmitDtlAddr_exist" name="rmitDtlAddr" value="${deli.deli_baddr}" orgvalue="${deli.deli_baddr} class="inpH28" title="상세주소를 입력해주세요." style="width:500px">
-						<input type="hidden" id="emdNm_exist" name="emdNm" value="신월동">
-						<input type="hidden" id="admrNm_exist" name="admrNm" value="신월6동">
+						<input type="text" id="tempRmitDtlAddr_exist" value="." class="inpH28" title="상세주소를 입력해주세요." style="width:500px;" this="상세 주소는" maxlength="30">
+						<input type="hidden" id="stnmRmitDtlAddr_exist" name="stnmRmitDtlAddr" value="." orgvalue="." class="inpH28" title="상세주소를 입력해주세요." style="width:500px" this="상세 주소는">
+						<input type="hidden" id="rmitDtlAddr_exist" name="rmitDtlAddr" value="." orgvalue="." class="inpH28" title="상세주소를 입력해주세요." style="width:500px">
+						<input type="hidden" id="emdNm_exist" name="emdNm" value="신림동">
+						<input type="hidden" id="admrNm_exist" name="admrNm" value="신사동">
 					</td>
 				</tr>
-				</c:forEach>
+				
 				<!-- 2017-01-18 추가 (신규 배송지 선택 시) -->
 				<tr type="new" class="new_order_area" style="display: none;">
 					<th scope="row">배송지명</th>
@@ -835,24 +842,7 @@
 					<tr>
 						<th scope="row">배송 메시지</th>
 						<td>
-							<select id="mbrMemoCont" class="selH28" title="택배배송 메시지를 선택해주세요." style="width:350px" data-attr="배송요청사항^배송메세지">
-								<option value="MH">배송메시지를 선택해주세요.</option>
-								
-									<option value="10">부재시 경비실에 맡겨주세요.</option>
-								
-									<option value="20">부재시 문앞에 놓아주세요.</option>
-								
-									<option value="30">파손의 위험이 있는 상품이오니,  배송 시 주의해주세요.</option>
-								
-									<option value="40">배송전에 연락주세요.</option>
-								
-									<option value="50">택배함에 넣어주세요.</option>
-								
-								
-								
-									<option value="O2O">직접 입력하기</option>
-								
-							</select>
+							<select id="mbrMemoCont" class="selH28" title="택배배송 메시지를 선택해주세요." style="width:350px" data-attr="배송요청사항^배송메세지"><option name="배송메시지를 선택해주세요." value="MH">배송메시지를 선택해주세요.</option><option value="10">그냥 문 앞에 놓아 주시면 돼요.</option>/n<option value="40">직접 받을게요.(부재 시 문앞)</option>/n<option value="30">벨을 누르지 말아주세요.</option>/n<option value="20">도착 후 전화주시면 직접 받으러 갈게요. </option>/n<option value="O2O">직접 입력하기</option></select>
 							<input type="text" name="mbrMemoCont" value="" class="inpH28 mgT6" title="배송메시지를 입력해주세요." style="width:700px; display: none;">
 						</td>
 					</tr>
@@ -861,18 +851,18 @@
 					</tbody>
 				</table>
 				<!-- 2020-08-14 o2oJJ 24H 체크박스 추가 -->
-				<h2 class="sub-title2 mgT15 o2o_24h_chk_area" style="display:none;">
+				<h2 class="sub-title2 mgT15 o2o_24h_chk_area" style="">
 				<span class="onedayChk">
 					<input type="checkbox" id="o2o24HChk" name="o2o24HChk" targetid="exist">
 					<label for="o2o24HChk">
 						<span class="topTxt">오늘드림으로 바로 받아보시겠어요?</span>
-						<span class="sbTxt"><span id="delidayInfo">오늘</span> 까지 배송해드려요!<span style="color : blue"><strong>&nbsp;&nbsp;( 배송비 무료)</strong></span></span>
+						<span class="sbTxt"><span id="delidayInfo" style="color: rgb(0, 0, 255);"><strong> 금일 자정</strong></span> 까지 배송해드려요!<span style="color : blue"><strong>&nbsp;&nbsp;( 배송비 무료)</strong></span></span>
 					</label>
-					<input type="hidden" id="strNo24H" name="strNo24H">
+					<input type="hidden" id="strNo24H" name="strNo24H" value="DD2A">
 				</span>
 				</h2>
 				
-				<table id="tabDoorInfo" class="tbl_inp_form important front-door-input divider">
+				<table id="tabDoorInfo" class="tbl_inp_form important">
 					<colgroup>
 						<col style="width:170px">
 						<col style="width:*">
@@ -884,32 +874,24 @@
 					
 					<tr type="exist" class="quick_area">
 						<th scope="row">공동현관 출입방법</th>
-						
 						<td class="imp_data">
-							<span class="chk_area mgzero"><input type="radio" id="btn_door_manner_temp1" name="o2oVisitTypeSp" value="1" <c:if test="${dlist[0].req_select eq '1'}">checked</c:if> data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp1">비밀번호</label></span>
-							<span class="chk_area"><input type="radio" id="btn_door_manner_temp2" name="o2oVisitTypeSp" value="2" <c:if test="${dlist[0].req_select eq '2'}">checked</c:if> data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp2">경비실 호출</label></span>
-							<span class="chk_area"><input type="radio" id="btn_door_manner_temp3" name="o2oVisitTypeSp" value="3" <c:if test="${dlist[0].req_select eq '3'}">checked</c:if> data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp3">자유출입가능</label></span>
-							<span class="chk_area"><input type="radio" id="btn_door_manner_temp4" name="o2oVisitTypeSp" value="4" <c:if test="${dlist[0].req_select eq '4'}">checked</c:if> data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp4">기타사항</label></span>
+							<span class="chk_area mgzero"><input type="radio" id="btn_door_manner_temp1" name="o2oVisitTypeSp" value="1" checked="" data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp1">비밀번호</label></span>
+							<span class="chk_area"><input type="radio" id="btn_door_manner_temp2" name="o2oVisitTypeSp" value="2" data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp2">경비실 호출</label></span>
+							<span class="chk_area"><input type="radio" id="btn_door_manner_temp3" name="o2oVisitTypeSp" value="3" data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp3">자유출입가능</label></span>
+							<span class="chk_area"><input type="radio" id="btn_door_manner_temp4" name="o2oVisitTypeSp" value="4"  data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp4">기타사항</label></span>
 						</td>
 					</tr>
-					<tr type="exist" class="quick_area" id="visitTypeDescExist" style="display: table-row;">
-						<th scope="row">
-							
-								
-								
-								
-								공동현관 비밀번호
-							
-						</th>
+					<tr type="exist" class="quick_area" id="visitTypeDescExist">
+						<th scope="row">기타 상세 내용</th>
 						<td class="imp_data">
-							<input type="text" id="door_type_exist" name="o2oVisitTypeDesc" value="${dlist[0].req_content}" class="inpH28" title="공동현관 출입방법 상세내용." style="width: 500px" data-attr="배송지정보^2_공동현관 비밀번호" disabled="disabled">
+							<input type="text" id="door_type_exist" name="o2oVisitTypeDesc" value="" class="inpH28" title="공동현관 출입방법 상세내용." style="width: 500px" data-attr="배송지정보^2_공동현관 비밀번호">
 						</td>
 					</tr>
 
 					<tr type="exist" class="quick_area">
 						<th scope="row">출입정보 저장</th>
 						<td class="access-rules">
-							<span class="chk_area mgzero"><input type="checkbox" id="o2oVisitSaveInfo" name="o2oVisitSaveInfo" value="Y" checked="" data-attr="배송지정보^2_출입정보 저장 동의"> <label for="o2oVisitSaveInfo">개인정보 수집 및 이용 동의 (선택)</label></span>
+							<span class="chk_area mgzero"><input type="checkbox" id="o2oVisitSaveInfo" name="o2oVisitSaveInfo" value="Y" data-attr="배송지정보^2_출입정보 저장 동의"> <label for="o2oVisitSaveInfo">개인정보 수집 및 이용 동의 (선택)</label></span>
 							<ul>
 								<li>수집 목적 : 상품 구매 시 배송 처리</li>
 								<li>수집 항목 : 공동현관 출입방법, 비밀번호</li>
@@ -928,76 +910,18 @@
 			<!--// 배송 요청사항 -->
 			
 				<div class="orderConBanner" id="orderConBanner" style="display:none">
-					
-						
-						
+	
 							<img src="https://image.oliveyoung.co.kr/uploads/images/editor/QuickUpload/SYS/image/20220216232240/qksa_20220216232240.jpg">
-						
-					
+
 				</div>
-			
 
 			<!-- 주문상품정보 -->
 			<!-- <h2 class="sub-title2 underline">주문상품정보</h2> --><!-- 2017-01-24 수정 : 해당 타이틀 삭제 -->
-			 
-			
-			
-				
-			
 
-			 
-			
-			
-			
-			 
-			
 			<!-- fix/3275248 bmiy20 cjone point 적립불가건에 대해 사용 불가 처리 추가 -->
-			  
-			  
 
-			
-				
-				
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-
-					
-					
-					
-					
 					<!-- 2020-08-04 o2oJJ 24H 화면 제어로 인한 주석 처리 -->
-					
-					
-					
 
-					
-					
-						
-							
-								
-									
-									
-										
-									
-								
-								
-							
-							
-						
 						<h2 class="sub-title2">
 								올리브영 배송상품
 							
@@ -1037,52 +961,38 @@
 						</thead>
 						<tbody>
 					
-					
-						
-						<c:set var="salePrice" value="${0}" scope="page" />
-						<c:set var="totalPrice" value="${0}" scope="page" />
-						<c:forEach items="${ blist }" var="bpl">
-							<c:set var="totalPrice" value="${totalPrice + (bpl.proPrice * bpl.product_cnt)}" scope="page" />
-							<c:set var="salePrice" value="${salePrice + (bpl.afterPrice * bpl.product_cnt)}" scope="page" />
 							<tr>
 						
 					
-					<input type="hidden" name="cartNo" value="679179789">
+					<input type="hidden" name="cartNo" value="681801107">
 					<!-- 2020-08-05 o2oJJ 상품 수량 추가 -->
-					<td colspan="5" dispcatno="" stdcatno="010101" goodsno="${bpl.productID }" itemno="001" entrno="C18617" brndcd="3854" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="1" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0016/A00000016043610ko.jpg?l=ko" goodsnm="그레이멜린 알래스카85 내추럴 토너500ml" cartno="679179789" purchasetype="N"><!-- 2017-01-13 수정 -->
+					<td colspan="5" dispcatno="" stdcatno="010102" goodsno="A000000184129" itemno="001" entrno="C19275" brndcd="3440" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="1" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko" goodsnm="에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)" cartno="681801107" purchasetype="N"><!-- 2017-01-13 수정 -->
 						<div class="tbl_cont_area">
-							
-							
-								
+
 								<div class="tbl_cell w700"><!-- 2017-01-24 수정 : 클래스명 변경 -->
 									
 									
 									<div class="prd_info">
 										<div class="prd_img">
-											<img src="${bpl.displImgSrc }" alt="장바구니 상품 임시 이미지" onerror="common.errorImg(this);">
+											<img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko" alt="장바구니 상품 임시 이미지" onerror="common.errorImg(this);">
 										</div>
 										<div class="prd_name">
 											
-											<span>${bpl.brandName }</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
-											<p>${bpl.displProName }</p>
+											<span>에스트라</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
+											<p>에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)</p>
 										</div>
 										<p class="prd_opt">
 											
+												<i class="tit">옵션</i>에스트라 아토베리어 로션 기획
+											
 										</p>
 										<p class="prd_flag">
+
+												<span class="icon_flag sale">세일</span>
+
+												<span class="icon_flag gift">증정</span><!-- 14 -->
 											
-											<c:if test="${bpl.pdc eq 1}">
-															<span class="icon_flag sale">세일</span>
-														</c:if>
-														<c:if test="${bpl.prc eq 1}">
-															<span class="icon_flag coupon">쿠폰</span>
-														</c:if>
-														<c:if test="${bpl.pmp eq 1 }">
-															<span class="icon_flag gift">증정</span>
-														</c:if>
-														<c:if test="${bpl.stock > 0}">
-															<span class="icon_flag delivery">오늘드림</span>
-														</c:if>
+												<span class="icon_flag delivery">오늘드림</span><!-- 15 -->
 											
 										</p>
 										<!--//fix/3275248 bmiy20 cjone point 적립불가건에 대해 사용 불가 처리 추가-->
@@ -1094,9 +1004,9 @@
 								<!-- 2019-11-15 추가 (오늘드림배송 선물포장) End -->
 								<div class="tbl_cell w110">
 									<!-- <span class="org_price" style="display: none;"><span class="tx_num" id="normPrc_"></span>원</span> --><!-- 2017-01-24 수정 : 삭제 -->
-									<span class="cur_price"><span class="tx_num">${bpl.proPrice }</span>원</span>
+									<span class="cur_price"><span class="tx_num">31,000</span>원</span>
 								</div>
-								<div class="tbl_cell w100">${bpl.product_cnt}</div>
+								<div class="tbl_cell w100">1</div>
 								<!-- 2017-01-24 수정 : 삭제
                                 <div class="tbl_cell w120">
                                     <p class="prd_delivery">
@@ -1108,38 +1018,22 @@
                                 </div>
                                 -->
 								<div class="tbl_cell w110">
-									
-									
-									
-									
-									
-									<span class="org_price"><span class="tx_num" id="normPrc_A000000160436/001">${bpl.proPrice }</span>원</span><!-- 2017-01-24 수정 : 추가 -->
-									<span class="pur_price"><span class="tx_num" id="salePrc_A000000160436/001">${bpl.afterPrice }</span>원</span>
-									<input type="hidden" id="orgNormPrc_A000000160436/001" value="${bpl.proPrice }">
-									<input type="hidden" id="orgSalePrc_A000000160436/001" value="${bpl.afterPrice }">
-									<input type="hidden" id="imdtDscntAmt_A000000160436/001" value="0">
-								
-									
-										
+
+									<span class="org_price"><span class="tx_num" id="normPrc_A000000184129/001">31,000</span>원</span><!-- 2017-01-24 수정 : 추가 -->
+									<span class="pur_price"><span class="tx_num" id="salePrc_A000000184129/001">23,200</span>원</span>
+									<input type="hidden" id="orgNormPrc_A000000184129/001" value="31000">
+									<input type="hidden" id="orgSalePrc_A000000184129/001" value="23200">
+									<input type="hidden" id="imdtDscntAmt_A000000184129/001" value="0">
+
 								</div>
 							</div>
 							
 					</td>
 					</tr>
 					<!--// 1+1 행사 상품인 경우 -->
-					</c:forEach>
-				
-					
-
 					
 						</tbody>
 						</table>
-					
-				
-				
-				
-
-				
 					<script type="text/javascript">
 						$("#giftBoxYn_temp").attr("disabled", true);
 						$("#giftBoxYn_temp").attr("checked", false);
@@ -1158,14 +1052,11 @@
 			<!--// 증정품 -->
 			
 			<!-- 쿠폰 및 포인트, 결제수단, 결제정보 -->
-			<div class="order_payment_box relArea">
+			<div class="order_payment_box">
 				<div class="left_area">
 					<!-- 쿠폰할인정보 -->
 					<h2 class="sub-title2 width-inline">쿠폰할인정보</h2>
 					<a href="javascript:;" data-rel="layer" data-target="userCpPop" class="couponView" data-attr="쿠폰할인정보^보유쿠폰">
-						보유쿠폰
-						
-							&nbsp;(1)
 						
 					</a>
 					<table class="tbl_inp_form type2">
@@ -1180,16 +1071,13 @@
 								<div class="bg_area"><!-- 2017-01-18 수정 : 클래스 추가 -->
 									<input type="radio" id="autoDiscount" name="Discount_Benefits" value="auto" checked="checked" data-attr="쿠폰할인정보^혜택받기"><label for="autoDiscount">최대 할인 추천받기</label>
 									<input type="radio" id="manualDiscount" name="Discount_Benefits" value="manual" class="mgL20" data-attr="쿠폰할인정보^혜택받기"><label for="manualDiscount">혜택 직접 선택하기</label>
-									<p class="tx_right tx_discount"><span class="tx_num" id="totCpnAplyAmt">- 4,000</span>원</p>
+									<p class="tx_right tx_discount"><span class="tx_num" id="totCpnAplyAmt">0</span>원</p>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">상품별 할인</th>
 							<td id="dwnldCouponList">
-								
-									
-									
 										<div>
 											<select class="selH28 mgT5" style="width:300px" disabled="disabled" data-attr="쿠폰할인정보^상품별할인">
 												<option>적용할 수 있는 쿠폰이 없습니다.</option>
@@ -1205,31 +1093,12 @@
 							<th scope="row">주문별 할인</th>
 							<td id="paymentCouponList">
 								<!-- 주문별 할인목록 영역 -->
-								
-									
-										
 										<div>
-											<select name="couponList[0].promChk" class="selH28" style="width:300px" index="0" data-attr="쿠폰할인정보^주문별할인">
-												<option value="N" promno="" promaplyseq="">적용안함</option>
-												
-													
-													
-													
-													<option value="Y" rtamtval="4000" promno="C000000079414" promaplyseq="586780403" promkndcd="C105" promnm="[신규가입] 3만원 이상 4,000원 할인" minpuramt="30000" certcpnyn="N" certcpnno="" cjonecpnno="" o2ocpnsp="N_N_N" aplyavailyn="Y">[신규가입] 3만원 이상 4,000원 할인</option>
-												
+											<select class="selH28" style="width:300px" disabled="disabled" data-attr="쿠폰할인정보^주문별할인">
+												<option>적용할 수 있는 쿠폰이 없습니다.</option>
 											</select>
-											<input type="hidden" name="couponList[0].goodsNo" value="">
-											<input type="hidden" name="couponList[0].itemNo" value="">
-											<input type="hidden" name="couponList[0].promNo" value="C000000079414">
-											<input type="hidden" name="couponList[0].promAplySeq" value="586780403">
-											<input type="hidden" name="couponList[0].promKndCd" value="C105">
-											<input type="hidden" name="couponList[0].entrNo" value="">
-											<p class="tx_right tx_discount2"><span class="tx_num" id="cpnDscntAmt_0_span">- 4,000</span>원</p>
-											<input type="hidden" id="cpnDscntAmt_0" name="cpnDscntAmt" value="4000" disabled="disabled">
 										</div>
-									
-									
-								
+
 								<!--// 주문별 할인목록 영역 -->
 							</td>
 						</tr>
@@ -1239,14 +1108,10 @@
 								<th scope="row">배송비 쿠폰</th>
 								<td id="dlexCouponList_hd">
 									<div>
-										
-											
 											
 												<select id="selDelCoupon" class="selH28 mgT5" style="width:300px" disabled="disabled" data-attr="쿠폰할인정보^배송비쿠폰">
 													<option>적용할 수 있는 쿠폰이 없습니다.</option>
 												</select>
-											
-										
 									</div>
 								</td>
 							</tr>
@@ -1255,7 +1120,7 @@
 						<!--// 2017-01-18 수정 : 배송비 할인 영역 변경 -->
 						</tbody>
 					</table>
-					<input type="hidden" id="couponCnt" value="1">
+					<input type="hidden" id="couponCnt" value="0">
 					<!--// 쿠폰할인정보 -->
 
 					<!-- 포인트사용 --><!-- 2017-01-18 수정 : 전액사용 버튼이 input 뒤로 위치 변경됨 -->
@@ -1340,26 +1205,6 @@
 
 					<!-- 결제수단 선택 -->
 					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-
-					
-						
-					
-
-					
-						
-					
-
 					<div class="title_wrap" id="payMethod_div" style="display: block;">
 						<h2 class="sub-title2">결제수단 선택</h2>
 						<p class="sub_area" style="display: none;">
@@ -1496,7 +1341,7 @@
 									<th scope="row">할부종류</th>
 									<td>
 										<div>
-											<select id="instMmCnt" name="instMmCnt" class="selH28" style="width:200px" data-attr="결제수단선택^할부종류">
+											<select id="instMmCnt" name="instMmCnt" class="selH28" style="width:200px" data-attr="결제수단선택^할부종류" disabled="">
 												<option value="00">일시불</option>
 												<option value="02" targetid="nint2MmYn">2개월</option>
 												<option value="03" targetid="nint3MmYn">3개월</option>
@@ -1658,7 +1503,7 @@
 									<th scope="row">입금기한</th>
 									<td>
 										<div>
-											2023.11.10
+											2023.11.14
 										</div>
 									</td>
 								</tr>
@@ -1684,7 +1529,7 @@
 									<th scope="row">입금자명</th>
 									<td>
 										<div>
-											<input type="text" id="NameDepositor" name="morcManNm" value="신기범" class="inpH28" title="입금자명을 입력해주세요." style="width:200px" data-attr="결제수단선택^입금자명" disabled="disabled">
+											<input type="text" id="NameDepositor" name="morcManNm" value="이상문" class="inpH28" title="입금자명을 입력해주세요." style="width:200px" data-attr="결제수단선택^입금자명" disabled="disabled">
 										</div>
 									</td>
 								</tr>
@@ -1692,23 +1537,11 @@
 								<tr>
 									<td colspan="2">
 										<div class="info_dot_list_area">
-											
-												
-													
-														
-															
-																
+
 																	<ul>
 	<li><span style="color:#757d86">은행별로 입금가능시간이 다를 수 있습니다.</span></li>
 </ul>
 
-																	
-																
-															
-														
-													
-												
-											
 											<ul>
 												<li>주문일 기준 다음날(24시간 이내)까지 입금이 되지 않으면 주문 취소 처리됩니다.</li>
 											</ul>
@@ -1839,12 +1672,7 @@
 						<li paymethod="25" style="display: none;">
 							<div class="other_cash_box">
 								<div class="info_dot_list_area">
-									
-										
-											
-												
-													
-														
+
 															<ul>
 	<li><strong>&lt;11월 PAYCO 결제혜택&gt;</strong></li>
 	<li>23.11.01(수) ~ 11.30(목)</li>
@@ -1863,13 +1691,6 @@
 																		}catch(e){console.log(e);}
 																	});
 																</script>
-															
-														
-													
-												
-											
-										
-									
 									<ul>
 										<li>PAYCO는 NHN엔터테인먼트에서 제공하는 안전한 간편결제 서비스로 올리브영몰에서는 신용카드 결제가 가능합니다.</li>
 										<li>신용카드 등록 시 휴대폰과 카드명의자가 동일해야합니다. (모든 신용/체크카드 가능)</li>
@@ -1884,12 +1705,6 @@
 						<li paymethod="26" style="display: none;">
 							<div class="other_kakao_box">
 								<div class="info_dot_list_area">
-									
-										
-											
-												
-													
-														
 															<ul>
 	<li><span style="color:#757d86"><span style="font-family:맑은 고딕"><strong>&lt;카카오페이 유의사항&gt;</strong></span></span></li>
 	<li><span style="color:#757d86"><span style="font-family:맑은 고딕">무이자할부는 카카오페이 모바일 결제창에서 선택하실 수 있습니다.</span></span></li>
@@ -1898,14 +1713,6 @@
 	<li><span style="color:#757d86"><span style="font-family:맑은 고딕">카드 영수증 및 현금영수증 확인은&nbsp;카카오페이 홈페이지에서 확인 가능합니다.(카카오페이 홈 &gt; 설정 &gt; 결제내역)</span></span></li>
 	<li><span style="color:#757d86"><span style="font-family:맑은 고딕">카카오페이 고객센터 : 1644-7405</span></span></li>
 </ul>
-
-															
-														
-													
-												
-											
-										
-									
 								</div>
 							</div>
 						</li>
@@ -1915,12 +1722,6 @@
 						<li paymethod="29" style="display: none;">
 							<div class="other_kakao_box">
 								<div class="info_dot_list_area">
-									
-										
-											
-												
-													
-														
 															<ul>
 	<li><strong>&lt;네이버페이 상시혜택&gt;</strong></li>
 	<li><strong>네이버 검색 통해 올리브영에서 구매 시, 기본 혜택 1%가 적립됩니다</strong></li>
@@ -1932,8 +1733,6 @@
 	<li>현금영수증 확인은 네이버페이 홈페이지에서 확인 가능합니다&nbsp;(네이버페이 홈 &gt; 결제내역)</li>
 	<li>네이버페이 고객센터 : 1588-3819</li>
 </ul>
-
-															
 																<script type="text/javascript">
 																	// 결제수단 혜택 플래그
 																	$(document).ready(function(){
@@ -1942,10 +1741,6 @@
 																		}catch(e){console.log(e);}
 																	});
 																</script>
-															
-														
-													
-														
 															<ul>
 	<li><span style="color:#757d86;"><strong>&lt;은행 별 시스템 점검 안내&gt;</strong></span></li>
 	<li><span style="color:#757d86;">점검 시간 내 네이버페이 계좌 결제, 취소 및 신규 등록이 원활하지 않을 수 있습니다. 다른 결제수단을 이용해주세요.<br>
@@ -1960,14 +1755,6 @@
 	<span style="color:#757d86;"><span style="color:#757d86;"><span style="color:#757d86;"><span style="color:#757d86;"><span style="color:#757d86;"><span style="color:#757d86;"><span style="color:#757d86;"><span style="color:#757d86;">농협은행: 11/20(월)&nbsp;오전 0시~오전 4시</span></span></span></span></span></span></span></span></span><br>
 	<span style="color:#757d86;">유안타증권: 11/25(토) 오전 8시~오후 11시</span></li>
 </ul>
-
-															
-														
-													
-												
-											
-										
-									
 								</div>
 							</div>
 						</li>
@@ -1976,12 +1763,6 @@
 						<!-- 결제혜택 정보 -->
 						<li class="ad_info_area">
 							<div class="ad_info">
-								
-
-									
-
-								
-
 								<!-- <div class="txt">
 									<span class="icon">국민카드 4만원 이상 결제 시 3천원 청구 할인</span>
 									<button type="button" class="btn_info" onclick="layTooltip('lay_tooltip_01');">카드 혜택 레이어 팝업</button>
@@ -1996,11 +1777,6 @@
 
 						<li class="ad_info_area">
 							<div class="ad_info">
-
-								
-									
-								
-
 							</div>
 						</li>
 						<!-- //결제혜택 정보 -->
@@ -2114,9 +1890,9 @@
 												<option value="0507">0507</option>
 											
 										</select>
-										- <input type="text" id="dispCashReceiptInfo12" value="7477" class="inpH28" title="현금영수증 휴대폰 가운데 자리를 입력해주세요." this="현금영수증 휴대폰 가운데 자리는" style="width:90px" data-attr="현금영수증신청^휴대폰" disabled="">
-										- <input type="text" id="dispCashReceiptInfo13" value="0938" class="inpH28" title="현금영수증 휴대폰 마지막 4자리수를 입력해주세요." this="현금영수증 휴대폰 마지막 자리는" style="width:90px" data-attr="현금영수증신청^휴대폰" disabled="">
-										<input type="hidden" id="crPhoneNumber" name="crIssuMeanNo" value="01074770938" disabled="">
+										- <input type="text" id="dispCashReceiptInfo12" value="5549" class="inpH28" title="현금영수증 휴대폰 가운데 자리를 입력해주세요." this="현금영수증 휴대폰 가운데 자리는" style="width:90px" data-attr="현금영수증신청^휴대폰" disabled="">
+										- <input type="text" id="dispCashReceiptInfo13" value="7526" class="inpH28" title="현금영수증 휴대폰 마지막 4자리수를 입력해주세요." this="현금영수증 휴대폰 마지막 자리는" style="width:90px" data-attr="현금영수증신청^휴대폰" disabled="">
+										<input type="hidden" id="crPhoneNumber" name="crIssuMeanNo" value="01055497526" disabled="">
 									</div>
 								</td>
 							</tr>
@@ -2157,13 +1933,13 @@
 					<ul class="total_payment_box">
 						<li>
 							<span class="tx_tit">총 상품금액</span>
-							<span class="tx_cont"><span class="tx_num">${totalPrice }</span>원</span>
-							<input type="hidden" name="goodsAmt" value="${totalPrice }">
+							<span class="tx_cont"><span class="tx_num">0</span>원</span>
+							<input type="hidden" name="goodsAmt" value="0">
 						</li>
 						<li>
 							<span class="tx_tit">쿠폰할인금액</span><!-- 2017-01-18 수정 : 문구수정 -->
-							<span class="tx_cont colorOrange"><span class="tx_num" id="totDscntAmt_span">- ${totalPrice - salePrice }</span>원</span>
-							<input type="hidden" name="descentAmt" value="4000">
+							<span class="tx_cont colorOrange"><span class="tx_num" id="totDscntAmt_span">0</span>원</span>
+							<input type="hidden" name="descentAmt" value="0">
 							<input type="hidden" id="imdtDscntAmt" value="0">
 						</li>
 						
@@ -2205,10 +1981,10 @@
 						</li>
 						<li class="total">
 							<span class="tx_tit">최종 결제금액</span>
-							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">${salePrice }</span>원</span>
-							<input type="hidden" name="remainAmt" value="311400">
-							<input type="hidden" name="ordPayAmt" value="311400">
-							<input type="hidden" name="goodsNm" value="그레이멜린 알래스카85 내추럴 토너500ml 외 3건">
+							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">0</span>원</span>
+							<input type="hidden" name="remainAmt" value="0">
+							<input type="hidden" name="ordPayAmt" value="0">
+							<input type="hidden" name="goodsNm" value="에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)">
 						</li>
 						
 						<li> <!-- 3440969_PM작업시 오늘드림 레이어 팝업 노출 요청 건 -->
@@ -2219,13 +1995,13 @@
 
 					<div class="add_chk_area">
 						<p class="inchk clrfix">
-							<input type="checkbox" id="savePayMethodYn" name="savePayMethodYn" value="Y" checked="checked" paymeancd="" acqrcd="" instmmcnt="" pntuseyn="" bnkcd="" morcmannm="" data-attr="최종결제정보^빠른모드">
+							<input type="checkbox" id="savePayMethodYn" name="savePayMethodYn" value="Y" checked="checked" paymeancd="11" acqrcd="LGC" instmmcnt="0" pntuseyn="N" bnkcd="" morcmannm="" data-attr="최종결제정보^빠른모드">
 							<!-- <input type="checkbox" id="fastpaySave" name="" value=""> -->
 							<label for="savePayMethodYn">지금 설정을 다음 주문에도 사용하겠습니다.<br>(빠른 모드)</label>
 						</p>
 					</div>
 
-					<div class="agree_payment_box" id="agreeList">
+					<div class="agree_payment_box open" id="agreeList">
 						<div class="all_agree_cont">
 							<p>주문 상품정보 및 결제대행 서비스 이용약관에 모두 동의하십니까?</p><!-- 2017-01-18 수정 : 문구수정 -->
 							<input type="checkbox" id="agree_all" name="TrrmsCheck1ed" value="" data-attr="최종결제정보^결제대행동의"> <label for="agree_all">모두 동의</label>
@@ -2268,21 +2044,794 @@
 	</div>
 	<!-- //#Contents -->
 </div>
+<!-- //#Container -->
+
+<!-- 올리브영 기프트카드 팝업 -->
+<div class="layer_pop_wrap w680" id="OliveGiftInfo" style="display: none;">
+	<div class="layer_cont cjGiftcard">
+		<h2 class="gift_title">나의 올리브영 기프트카드 <span class="total">총 <em class="tx_num" id="oyGiftQty">0</em>장</span></h2>
+		<!--  -->
+		<div class="gift_inner">
+			<p class="total_price"><em class="tx_num" id="oyGiftAmt">0</em>원</p>
+			<p class="link_div">
+				<!-- <a href="https://www.cjone.com/cjmweb/cash/cashreg.do" class="link_01" target="_blank">기프트카드 등록</a> -->
+				<a href="https://www.oliveyoung.co.kr/store/myGiftCard/getMyGiftCardReg.do" target="_blank" class="link_01">기프트카드 등록</a>
+				<!-- <a href="https://www.cjone.com/cjmweb/cash/cashmain.do" class="link_02" target="_blank"> 내 기프트카드 상세보기</a> -->
+				<a href="https://www.oliveyoung.co.kr/store/myGiftCard/getMyGiftCard.do" target="_blank" class="link_02"> 내 기프트카드 상세보기</a>
+			</p>
+			<div class="info_div">
+				<ol>
+					<li>CJ 기프트카드/ 올리브영 기프트카드만 사용이 가능합니다.</li>
+					<li>기프트카드의 유효기간은 5년입니다.</li>
+					<li>기프트카드의 잔액 환불은 최종 충전 후 합계 잔액의 60%이상을 사용한 경우에 한하여 신청이 가능합니다.</li>
+					<li>기프트카드 관련 문의는 나이스정보통신 1644-9760,  올리브네트웍스 1577-8888로 연락주세요.<br>
+						(상담시간 평일 09:00 - 18:00 / 토, 일, 공휴일 휴무)<br><br>
+						<a href="http://www.ennice.co.kr/nonUser/refundVoucher.do#noback" class="link_03" target="_blank">환불신청하기</a>
+					</li>
+				</ol>
+			</div>
+		</div>
+		<!--//  -->
+		<button class="layer_close">창 닫기</button>
+	</div>
 </div>
+<!--// 올리브영 기프트카드 팝업 -->
+
+<!-- CJ 기프트카드 팝업 -->
+<div class="layer_pop_wrap w680" id="CJGiftInfo" style="display: none;">
+	<div class="layer_cont cjGiftcard">
+		<h2 class="gift_title">나의 <span class="tx_num">CJ</span> 기프트카드 <span class="total">총 <em class="tx_num" id="cjGiftQty">0</em>장</span></h2>
+		<!--  -->
+		<div class="gift_inner">
+			<p class="total_price"><em class="tx_num" id="cjGiftAmt">0</em>원</p>
+			<p class="link_div">
+				<!-- <a href="https://www.cjone.com/cjmweb/cash/cashreg.do" class="link_01" target="_blank">기프트카드 등록</a> -->
+				<a href="https://www.oliveyoung.co.kr/store/myGiftCard/getMyGiftCardReg.do" target="_blank" class="link_01">기프트카드 등록</a>
+				<!-- a href="https://www.cjone.com/cjmweb/cash/cashmain.do" class="link_02" target="_blank"> 내 기프트카드 상세보기</a> -->
+				<a href="https://www.oliveyoung.co.kr/store/myGiftCard/getMyGiftCard.do" target="_blank" class="link_02"> 내 기프트카드 상세보기</a>
+			</p>
+			<div class="info_div">
+				<ol>
+					<li>CJ 기프트카드/ 올리브영 기프트카드만 사용이 가능합니다.</li>
+					<li>기프트카드의 유효기간은 5년입니다.</li>
+					<li>기프트카드의 잔액 환불은 최종 충전 후 합계 잔액의 60%이상을 사용한 경우에 한하여 신청이 가능합니다.</li>
+					<li>기프트카드 관련 문의는 나이스정보통신 1644-9760,  올리브네트웍스 1577-8888로 연락주세요.<br>
+						(상담시간 평일 09:00 - 18:00 / 토, 일, 공휴일 휴무)<br><br>
+						<a href="http://www.ennice.co.kr/nonUser/refundVoucher.do#noback" class="link_03" target="_blank">환불신청하기</a>
+					</li>
+				</ol>
+			</div>
+		</div>
+		<!--//  -->
+		<button class="layer_close">창 닫기</button>
+	</div>
+</div>
+<!--// CJ 기프트카드 팝업 -->
+
+<!-- 안심번호 서비스 안내 팝업 -->
+<div class="layer_pop_wrap w680" id="securityInfo" style="display: none;">
+	<div class="layer_cont">
+		<h2 class="layer_title">안심번호 서비스 안내</h2>
+		<!-- 스크롤 영역 -->
+		<div class="security_info">
+			올리브영 고객님의 개인정보보호를 위해 상품 주문시 고객님의 휴대폰 및 전화번호를 1회성 임시번호<br>
+			(050X-XXX-XXX)로 변환하여 사용하는 서비스입니다.<br>
+			협력사 / 택배사에 050X 안심번호가 전달되므로 만일에 발생할 수 있는 개인정보 유출을 사전에<br>
+			차단할 수 있습니다.<br>
+			(올리브영 또는 택배사 내부 사정으로 인하여 서비스 지원이 제한될 수 있습니다.)
+		</div>
+		<!--// 스크롤 영역 -->
+		<button class="layer_close">창 닫기</button>
+	</div>
+</div>
+<!--// 안심번호 서비스 안내 팝업 -->
+
+
+<!-- 컬쳐랜드 로그인 팝업 -->
+<div class="layer_pop_wrap w490" id="cultureLandLoginPop" style="display: none;">
+	<div class="layer_cont">
+		<h2 class="layer_title">컬쳐랜드 로그인</h2>
+		<div class="loginArea">
+			<form class="loginForm">
+				<ul>
+					<li>
+						<input type="text" id="cultureLandLoginId" value="" title="아이디를 입력해 주세요." placeholder="아이디">
+					</li>
+					<li>
+						<input type="password" id="cultureLandLoginPw" value="" title="비밀번호를 입력해 주세요." placeholder="비밀번호" autocomplete="off">
+					</li>
+				</ul>
+				<div class="btnArea">
+					<button type="button" class="btnGreen" id="cultureLandLogin_btn">로그인</button>
+				</div>
+				<div class="linkChk">
+					<div class="link">
+						<a href="https://www.cultureland.co.kr/customer/finduser/findID_main.asp" target="_blank">아이디 찾기</a>
+						<a href="https://www.cultureland.co.kr/customer/finduser/findPW_main.asp" target="_blank">비밀번호 찾기</a>
+					</div>
+				</div>
+				<p class="tx_login_info mgT10">컬쳐캐쉬를 사용하기 위해서는 컬쳐랜드 로그인이 필요합니다.</p>
+			</form>
+		</div>
+
+		<button type="button" class="layer_close" id="cultureLandLoginPop_close">창 닫기</button>
+	</div>
+</div>
+<!--// 컬쳐랜드 로그인 팝업 -->
+
+<!-- 전자금융거래 기본약관 팝업 -->
+<div class="layer_pop_wrap w490" id="bookAndLifeLoginPop" style="display: none;">
+	<div class="layer_cont">
+		<h2 class="layer_title">북앤라이프 로그인</h2>
+		<div class="loginArea">
+			<form class="loginForm">
+				<ul>
+					<li>
+						<input type="text" id="bookAndLifeLoginId" value="" title="아이디를 입력해 주세요." placeholder="아이디">
+					</li>
+					<li>
+						<input type="password" id="bookAndLifeLoginPw" value="" title="비밀번호를 입력해 주세요." placeholder="비밀번호" autocomplete="off">
+					</li>
+				</ul>
+				<div class="btnArea">
+					<button type="button" class="btnGreen" id="bookAndLifeLogin_btn">로그인</button>
+				</div>
+				<div class="linkChk">
+					<div class="link">
+						<a href="https://www.booknlife.com/hp/findId.do" target="_blank">아이디/비밀번호 찾기</a>
+					</div>
+				</div>
+				<p class="tx_login_info mgT10">북앤라이프 캐쉬를 사용하기 위해서는 북앤라이프 로그인이 필요합니다.</p><!-- 2017-01-18 수정 : <br />삭제 -->
+			</form>
+		</div>
+
+		<button type="button" class="layer_close" id="bookAndLifeLoginPop_close">창 닫기</button>
+	</div>
+</div>
+<!--// 전자금융거래 기본약관 팝업 -->
+
+<!-- 현대카드 M포인트 사용안내 팝업 -->
+<div class="layer_pop_wrap w650" id="mHPointInfo" style="display: none;">
+	<div class="layer_cont">
+		<h2 class="layer_title" id="pntInfoMsgLayerTitle"></h2>
+		<div class="mhy_point" id="pntInfoMsgLayer"></div>
+		<button type="button" class="layer_close">창 닫기</button>
+	</div>
+</div>
+<!--// 현대카드 M포인트 사용안내 팝업 -->
+
+<!-- 배송비 상세정보 안내 팝업 -->
+<div class="layer_pop_wrap w410" id="deliveryInfo" style="z-index: 999; display: none;">
+	<div class="layer_cont" id="getDlexDtlPopAjax">
+		<h2 class="layer_title">배송비 상세정보</h2>
+		
+		<!-- 스크롤 영역 -->
+		<div class="layer_scroll_box type2 mgT20">
+			<h3 class="layer_sub_title">올리브영 배송상품</h3>
+			<ul class="delivery_info_list" id="hdDlexList">
+
+				<li type="base" entrno="0" dlexcpnyn="N">
+					<div>
+						<span class="tx_tit">일반상품 배송비</span> 
+						<input type="hidden" name="dlexAmt" value="0" orgvalue="0" targetid="0_0" disabled="disabled">
+						<span class="tx_cont">
+							<span class="tx_num" id="dlexAmt_hd_base">0</span>원
+						</span>
+					</div>
+				
+					<div class="add_cont">
+						<span class="tx_tit">기본 배송비</span> 
+						<span class="tx_cont">
+							<span class="tx_num" id="0_0">0</span>원
+						</span>
+						
+					</div>
+
+				</li>
+				<li class="total">
+					<div>
+						<span class="tx_tit">총 배송비</span>
+						<span class="tx_cont">
+							<span class="tx_num" id="totDlexAmt_hd_span">0</span>원
+							<br>
+							<span type="coupon" entrno="0" style="display: none;">(무료배송 쿠폰/도서산간배송비 적용 제외)</span>
+						</span>
+					</div>
+				</li>
+			</ul>
+			<!--// 올리브영 배송상품 배송비 목록 -->
+		</div>
+		<!--// 스크롤 영역 -->
+		
+		<div class="total_delivery_price">
+			<span class="tx_tit">합계</span> 
+			<span class="tx_cont"><span class="tx_num" id="totDlexAmt_span">0</span>원</span>
+		</div>
+		<input type="hidden" id="totDlexAmt_hd" value="0">
+		<input type="hidden" id="totDlexAmt_entr" value="0">
+		<input type="hidden" id="totDlexAmt" value="0">
+		<button class="layer_close" onclick="javascript:$('#deliveryInfo').hide(); $('.dimm').remove();">창 닫기</button>
+</div>
+</div>
+<!--// 배송비 상세정보 안내 팝업 -->
+
+<!-- 전자금융거래 기본약관 팝업 -->
+<div class="layer_pop_wrap w650" id="eCommerceTerm" style="display: none;">
+	<div class="layer_cont">
+		<h2 class="layer_title">전자금융거래 기본약관</h2>
+
+		<div class="term_scroll_box">
+			<!-- 약관내용이 들어갑니다. -->
+		</div>
+		<div class="layer_btn_area">
+			<button type="button" class="btnMedium fullGreen"><span>확인</span></button>
+		</div>
+		<button type="button" class="layer_close">창 닫기</button>
+	</div>
+</div>
+<!--// 전자금융거래 기본약관 팝업 -->
+<!-- 개인정보 수집 및 이용동의 팝업 -->
+<div class="layer_pop_wrap w650" id="personalTerm" style="display: none;">
+	<div class="layer_cont">
+		<h2 class="layer_title">개인정보 수집 및 이용동의</h2>
+
+		<div class="term_scroll_box">
+			<!-- 약관내용이 들어갑니다. -->
+		</div>
+		<div class="layer_btn_area">
+			<button type="button" class="btnMedium fullGreen"><span>확인</span></button>
+		</div>
+		<button type="button" class="layer_close">창 닫기</button>
+	</div>
+</div>
+<!--// 개인정보 수집 및 이용동의 팝업 -->
+<!-- 개인정보 제공 및 위탁동의 팝업 -->
+<div class="layer_pop_wrap w650" id="provideTerm" style="display: none;">
+	<div class="layer_cont">
+		<h2 class="layer_title">개인정보 제공 및 위탁동의</h2>
+
+		<div class="term_scroll_box">
+			<!-- 약관내용이 들어갑니다. -->
+		</div>
+		<div class="layer_btn_area">
+			<button type="button" class="btnMedium fullGreen"><span>확인</span></button>
+		</div>
+		<button type="button" class="layer_close">창 닫기</button>
+	</div>
+</div>
+<!--// 개인정보 제공 및 위탁동의 팝업 -->
+<!-- 증정품 팝업 -->
+<div class="layer_pop_wrap" id="PresentPopup" style="width: 700px; margin-left: -350px; z-index: 999; display: none;">
+	<div class="layer_cont">
+		<div class="pad30">
+			<h2 class="layer_title">증정품 확인</h2>
+			<!-- 스크롤 영역 -->
+			<div class="layer_scroll_box type2">
+				<div class="PresentPopup" id="getGiftListAjax">
+<!-- 필수 증정품 -->
+
+				<div class="order_title">
+					<span class="tx_order_info">구매조건에 따라 아래 증정품을 받으실 수 있습니다.</span>
+				</div>
+					<div class="tit_info">
+	                    <div class="tarea">
+							<b class="txt">전 회원 스킨케어 상품 1개 이상 구매시
+						</b></div><b class="txt">
+					</b></div><b class="txt">
+					<ul class="gift_list">
+							<li>
+								<div for="G000000024352" class="gift_box">
+									<input type="radio" id="G000000024352" class="input-radio" name="G000000024352" dupprstpsbyn="Y" goodsno="F000000190858" aeevtno="G000000024352" drtpuryn="" prstqty="0" style="display: none;" disabled="disabled">
+									<span class="img">
+										<img src="https://static.oliveyoung.co.kr/pc-static-root/image/product/icon_free_gift_bg.jpg" alt="증정품 이미지">
+					
+										<span>소진완료</span>
+					
+									</span>
+									스킨케어 카테고리 구매 시 수분착붙 선크림 1매&nbsp;증정　
+									<div class="qty"><em class="tit">수량</em><em>1</em>개</div>
+								
+							</div></li>
+							<li>
+								<div for="G000000024353" class="gift_box">
+									<input type="radio" id="G000000024353" class="input-radio" name="G000000024353" dupprstpsbyn="Y" goodsno="F000000190857" aeevtno="G000000024353" drtpuryn="" prstqty="0" style="display: none;" disabled="disabled">
+									<span class="img">
+										<img src="https://static.oliveyoung.co.kr/pc-static-root/image/product/icon_free_gift_bg.jpg" alt="증정품 이미지">
+					
+										<span>소진완료</span>
+					
+									</span>
+									스킨케어 카테고리 구매 시 리페어 밀키 크림 1매&nbsp;증정　
+									<div class="qty"><em class="tit">수량</em><em>1</em>개</div>
+								
+							</div></li>
+				</ul>
+<!-- //필수 증정품 -->
+<!-- 선택 증정품 -->
+
+<!-- //선택 증정품 -->
+				<input type="hidden" id="giftCnt" value="2">
+				<input type="hidden" id="giftYn" value="N">
+</b></div>
+			</div>
+			<!--// 스크롤 영역 -->
+			<div class="order_btn_area">
+				<button class="btnGray" id="btnClose">이전</button> <button class="btnGreen" id="btnSubmit">확인</button>
+			</div>
+		</div>
+		<dl class="info_dot_list">
+			<dt>이용안내</dt>
+			<dd>증정품은 최종 결제금액 기준으로 제공됩니다.</dd>
+			<dd>증정품은 주문 번호 당 1 개씩 증정이 기본이며 구매 상품 n개당 N개씩 증정되는 경우도 있습니다 .(구매 전 상세 내용을 필히 참고 해주세요.)</dd>
+			<dd>본 행사는 온라인몰 단독 행사로 매장 행사와 상이할 수 있습니다.</dd>
+			<dd>증정품은 판매 상품과 별개로 한정 운영되며 조기 소진될 수 있습니다.</dd>
+			<dd>고객님의 정확한 증정품 내역은 주문 후 '주문상세내역'에서 확인해주세요.</dd>
+			<dd>반품 시 증정품도 함께 반품해주셔야 합니다.</dd>
+			<dd>오늘드림으로 주문 시 증정품이 제공되지 않습니다.</dd>
+			<dd>증정품은 증정 대상 회원에 한하여 제공됩니다.</dd>
+			<dd>일부 제휴 업체 직배송 상품은 증정대상에서 제외됩니다.</dd>
+			<dd>온라인몰 증정 소진 시 별도 고지 없이 행사 종료 될 수 있습니다.</dd>
+			<dd>정확한 증정품 내역은 주문 후 '주문상세내역'에서 확인할 수 있습니다.</dd>
+		</dl>
+		<button class="layer_close">창 닫기</button>
+	</div>
+</div>
+<!-- //증정품 팝업 -->
+
+
+<!-- 3440969_PM작업시 오늘드림 레이어 팝업 노출 요청 건 -->
+<div class="layer_pop_wrap w490" id="todayDeliveryNotice" style="z-index: 999; display: none;" data-ref-comparekey="todayDeliveryNotice"></div>
+<!-- 당일배송 서비스 안내 (주문서)-->
+<div class="layer_pop_wrap w490" id="infoTodayDeliveryOrder" style="z-index: 999; display: none; left: 50%; margin-left: -245px; top: 1906.5px;" data-ref-comparekey="infoTodayDeliveryOrder">
+	<div class="layer_cont2">
+		<h2 class="layer_title" name="todayD">오늘드림 서비스 안내</h2>
+		<div class="layer_desc3">
+			<!-- 빠름의 경우 -->
+			<ul class="info_dash_list fwb" id="o2oDlvSp1" style="display: none;">
+				<li><b>서비스 특성 상 상품 준비가 빠르게 진행되며, 상품 준비 단계에서는 주문을 취소하실 수 없습니다.</b></li>
+				<li><b>교환/반품은 마이페이지 - 주문내역에서 교환/반품 신청을 통해 처리할 수 있으며,<br>별도 신청 없이 오프라인 매장에서의 처리는 불가합니다.</b></li>
+				<li><b>온라인 단독 증정품은 제공되지 않으며, 온/오프라인 공통 증정품은 오늘드림 센터 재고 소진 시 증정되지 않습니다.</b></li>
+				<li>오늘드림은 비대면 서비스로 별도의 연락없이 문 앞에 배송합니다.</li>
+				<li>부정확한 배송지 정보의 경우 반송처리 될 수 있으며, 이 경우 반품비가 부과될 수 있습니다.</li>
+				<li>일반 배송비 쿠폰은 오늘드림 주문에 적용되지 않습니다.</li>
+				<li>기상상태 및 배송사 사정에 따라 배송이 지연 또는 주문이 취소 될 수 있습니다.</li>
+				<li>주문 확인 시 재고가 부족한 경우, 부득이하게 주문이 취소될 수 있습니다.</li>
+			</ul>
+			<!-- 미드나잇의 경우  -->
+			<ul class="listBlit mgT15" id="o2oDlvSp5" style="display: none;">
+				<li><b>서비스 특성 상 상품 준비가 빠르게 진행되며, 상품 준비 단계에서는 주문을 취소하실 수 없습니다.</b></li>
+				<li><b>교환/반품은 마이페이지 - 주문내역에서 교환/반품 신청을 통해 처리할 수 있으며,<br>별도 신청 없이 오프라인 매장에서의 처리는 불가합니다.</b></li>
+				<li><b>온라인 단독 증정품은 제공되지 않으며, 온/오프라인 공통 증정품은 오늘드림 센터 재고 소진 시 증정되지 않습니다.</b></li>
+				<li>오늘드림은 비대면 서비스로 별도의 연락없이 문 앞에 배송합니다.</li>
+				<li>부정확한 배송지 정보의 경우 반송처리 될 수 있으며, 이 경우 반품비가 부과될 수 있습니다.</li>
+				<li>일반 배송비 쿠폰은 오늘드림 주문에 적용되지 않습니다.</li>
+				<li>기상상태 및 배송사 사정에 따라 배송이 지연 또는 주문이 취소 될 수 있습니다.</li>
+				<li>주문 확인 시 재고가 부족한 경우, 부득이하게 주문이 취소될 수 있습니다.</li>
+			</ul>
+			<!-- 3!4!의 경우  -->
+			<ul class="listBlit mgT15" id="o2oDlvSp4" style="display: none;">
+				<li><b>서비스 특성 상 상품 준비가 빠르게 진행되며, 상품 준비 단계에서는 주문을 취소하실 수 없습니다.</b></li>
+				<li><b>교환/반품은 마이페이지 - 주문내역에서 교환/반품 신청을 통해 처리할 수 있으며,<br>별도 신청 없이 오프라인 매장에서의 처리는 불가합니다.</b></li>
+				<li><b>온라인 단독 증정품은 제공되지 않으며, 온/오프라인 공통 증정품은 오늘드림 센터 재고 소진 시 증정되지 않습니다.</b></li>
+				<li>오늘드림은 비대면 서비스로 별도의 연락없이 문 앞에 배송합니다.</li>
+				<li>부정확한 배송지 정보의 경우 반송처리 될 수 있으며, 이 경우 반품비가 부과될 수 있습니다.</li>
+				<li>일반 배송비 쿠폰은 오늘드림 주문에 적용되지 않습니다.</li>
+				<li>기상상태 및 배송사 사정에 따라 배송이 지연 또는 주문이 취소 될 수 있습니다.</li>
+				<li>주문 확인 시 재고가 부족한 경우, 부득이하게 주문이 취소될 수 있습니다.</li>
+			</ul>
+			<!-- 2020-08-10 o2oJJ 24H -->
+			<ul class="listBlit mgT15" id="o2oDlvSp6" style="">
+				<li>당일 오후 4시까지 주문 시 당일 자정 전까지 배송되며, 오후 4시 이후 주문 시 다음날 자정 전까지 배송됩니다.</li>
+				<li><b>오늘드림 센터에서 배송되는 서비스 특성 상 상품 준비가 빠르게 진행되며, 상품 준비 단계에서는 주문을 취소하실 수 없습니다.</b></li>
+				<li><b>교환/반품은 마이페이지-주문내역에서 교환/반품 신청을 통해 처리할 수 있으며, 별도 신청 없이 오프라인 매장에서의 처리는 불가합니다.</b></li>
+				<li><b>증정품은 오늘드림 센터 재고 소진 시 제공되지 않습니다.</b></li>
+				<li>오늘드림은 비대면 서비스로 별도의 연락없이 문 앞에 배송합니다.</li>
+				<li>부정확한 배송지 정보의 경우 반송 처리될 수 있으며, 반품비가 부과될 수 있습니다.</li>
+				<li>기상상태에 따라 배송이 지연될 수 있습니다.</li>
+				<li>주문 확인 시 재고가 부족하거나, 배송사의 사정에 따라 다시 택배 배송으로 변경될 수 있습니다.</li>
+			</ul>
+			<div class="layer_btn_area">
+				<button class="btnMedium btnGreenW w120" id="stopToday" onclick="javascript:common.popLayer.todayDelivery.openQuickPopTodayForNoti();">오늘 하루 안보기</button>
+				<button class="btnMedium fullGreen w120" id="btnConfirm" onclick="javascript:common.popLayer.todayDelivery.layerCloseForNoti();">확인</button>
+				<button class="btnMedium btnGreenW w120" id="stopGiftToday" style="display:none;">오늘 하루 안보기</button>
+				<button class="btnMedium fullGreen w120" id="btnGiftConfirm" style="display:none;">확인</button>
+			</div>
+		</div>
+		<button class="layer_close type2" id="btnLayerClose" onclick="javascript:$(this).closest('.layer_pop_wrap').hide();$('.dimm').remove();">창 닫기</button>
+		<button class="layer_close type2" id="btnGiftLayerClose" style="display: none;">창 닫기</button>
+	</div>
+</div>
+<!--// 당일배송 서비스 안내 -->
+
+<!-- 선물포장 서비스 유의사항 -->
+<div class="layer_pop_wrap w490" id="infoGiftBoxOrder" style="z-index: 999; display: none;" data-ref-comparekey="infoGiftBoxOrder">
+	<div class="layer_cont2">
+		<h2 class="layer_title">선물포장 서비스 </h2>
+		<div class="layer_desc3">
+			<!--
+			<h5 class="stit">포장 가능한 상품들을 확인해주세요</h5>
+			<div class="layer_scroll_box mgT10 type3">
+				<div class="item_table_list">
+					<table>
+						<caption></caption>
+						<colgroup><col style="width:85px" /><col style="width:*" /></colgroup>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			-->
+			<h5 class="stit mgT15">선물포장 서비스 유의사항</h5>
+			<p class="img_info mgT15"><img src="/pc-static-root/image/comm/img_gift_info.jpg" alt=""></p>
+			<ul class="dot_list mgT25">
+				<li>상품의 사이즈와 수량 및 박스 보유여부에 따라  기프트박스가 랜덤으로 선택됩니다.</li>
+				<li>상품 개별 포장이 아닌 포장 요청 상품들이 하나의 기프트박스에 포장되며,<br>함께 포장이 불가한 상품의 경우 포장에서 제외되어 발송 될 수 있습니다</li>
+				<li>상품의 교환/반품은 온라인몰 교환/반품 절차와 동일합니다.<br>(매장에서 선물 포장 시 동봉되는 교환증은 제공되지 않습니다.)</li>
+				<li>선물포장비는 오프라인 매장과 상이할 수 있습니다.</li>
+				<li>다음의 경우 포장이 불가하며, 별도 알림 없이 포장 제외되어 배송됩니다, 이 경우 포장비는 예치금으로 환불되며 고객센터에서 안내 드릴 예정입니다.
+					<ul class="dash_list">
+						<li class="no">- 상품의 사이즈가 기프트 박스보다 큰 경우 <br>(기프트 박스 최대 사이즈 : 가로29*세로21*높이9)</li>
+						<li class="no">- 기프트 박스가 소진된 경우 (매장 별 상이)</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="layer_btn_area mgT25">
+				<button class="btnMedium btnGreenW w120" id="stopToday" onclick="javascript:forder.orderForm.giftBoxPopToday();">오늘 하루 안보기</button>
+				<button class="btnMedium fullGreen w120" id="btnConfirm" onclick="javascript:forder.orderForm.layerClose();">확인</button>
+			</div>
+
+		</div>
+		<button class="layer_close type2" onclick="javascript:forder.orderForm.layerClose();">창 닫기</button>
+	</div>
+</div>
+<div class="layer_pop_wrap w490" id="infoGiftBoxOrderIcon" style="z-index: 999; display: none;">
+	<div class="layer_cont2">
+		<h2 class="layer_title">선물포장 서비스 </h2>
+		<div class="layer_desc3">
+			<h5 class="stit">포장 가능한 상품들을 확인해주세요</h5>
+			<div class="layer_scroll_box mgT10 type3">
+				<div class="item_table_list">
+					<table>
+						<caption></caption>
+						<colgroup><col style="width:85px"><col style="width:*"></colgroup>
+						<tbody>
+						
+						</tbody>
+					</table>
+				</div><!-- //item_table_list -->
+			</div>
+			<h5 class="stit mgT15">선물포장 서비스 유의사항</h5>
+			<p class="img_info mgT15"><img src="/pc-static-root/image/comm/img_gift_info.jpg" alt=""></p>
+			<ul class="dot_list mgT25">
+				<li>상품 개별 포장이 아닌 한 박스에 대상 상품이 모두 포장됩니다.</li>
+				<li>한 박스로 포장이 어려운 경우, 여러 개의 박스로 포장이 될 수 있습니다.</li>
+				<li>상품의 사이즈와 수량에 따라 기프트 박스가 랜덤으로 선택됩니다. </li>
+				<li>다음의 경우 포장이 불가하며 별도 알림없이 배송됩니다.
+					<ul class="dash_list">
+						<li class="no">- 상품의 사이즈가 기프트 박스보다 큰 경우 <br>(기프트 박스 최대 사이즈 : 가로29*세로21*높이9)</li>
+						<li class="no">- 상품의 수량이 과도하게 많은 경우</li>
+						<li class="no">- 기프트 박스가 소진된 경우 (매장 별 상이)</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="layer_btn_area mgT25">
+				<button class="btnMedium fullGreen w120" id="btnConfirm" onclick="javascript:forder.orderForm.layerClose();">확인</button>
+			</div>
+
+		</div>
+		<button class="layer_close type2" onclick="javascript:forder.orderForm.layerClose();">창 닫기</button>
+	</div>
+</div>
+<!-- //선물포장 서비스 유의사항 -->
+
+<!-- S 일구매제한 레이어 팝업 -->
+<div class="layer_pop_wrap w480" id="buyLimit02" style="margin-left: -240px; z-index: 999; display: none;" tabindex="0">
+	<div class="layer_cont2">
+		<h2 class="layer_title alignCenter">안내</h2>
+		<div class="layer_desc2">
+			<!-- S 일구매제한 안내문구 -->
+			<div>
+				<p class="txtcu alignCenter">올리브영 온라인몰을 이용해 주셔서 감사합니다</p>
+				<p class="txtcu mgT10 alignCenter">대량 구매 상담이 필요하신 경우</p>
+				<p class="txtcu alignCenter">1:1 문의 남겨주시면 안내 해 드리겠습니다.</p>
+			</div>
+			<!-- S 일구매제한 안내문구 -->
+			<div class="area2sButton">
+				<a href="#none" class="btnGreen" onclick="location.href='https://www.oliveyoung.co.kr/store/counsel/getQnaForm.do';">1:1 문의하기</a>
+				<a href="#none" class="btnGreen" onclick="javascript:forder.orderForm.layerClose();">확인</a>
+			</div>
+		</div>
+		<button class="layer_close type2" onclick="javascript:forder.orderForm.layerClose();">창 닫기</button>
+	</div>
+</div>
+<!-- E 일구매제한 레이어 팝업 -->
+
+<!-- 1일 구매제한 레이어 팝업 -->
+<div class="layer_pop_wrap w480" id="buyLimit" style="margin-left: -240px; z-index: 999; display: none;" tabindex="0">
+	<div class="layer_cont2">
+		<h2 class="layer_title">주문 안내</h2>
+		<div class="layer_desc2">
+			<div>
+				<p class="txtcu"><span id="lp_goodsNm">$상품명</span>은 <span id="lp_ordLmtDay">$N</span>일 최대 <span id="lp_ordLmtMaxQty">$최대수량</span>개 까지만 구매 할 수 있습니다.</p>
+				<p class="txtcu mgT10">대량구매를 원하시는 경우 고객센터(1522-0882) 또는 <a href="https://www.oliveyoung.co.kr/store/counsel/getQnaForm.do">1:1문의</a>를 이용해주세요.</p>
+
+			</div>
+			<div class="area2sButton">
+				<a href="#none" class="btnGreen" onclick="javascript:forder.orderForm.layerClose();">확인</a>
+			</div>
+		</div>
+		<button class="layer_close type2" onclick="javascript:forder.orderForm.layerClose();">창 닫기</button>
+	</div>
+</div>
+<!-- //1일 구매제한 레이어 팝업 -->
+<!-- 재판매 구매제한 레이어 팝업 -->
+<div class="layer_pop_wrap w480" id="b2bLimit" style="margin-left: -240px; z-index: 999; display: none;" tabindex="0">
+	<div class="layer_cont2">
+		<h2 class="layer_title">주문 안내</h2>
+		<div class="layer_desc2">
+			<div>
+				<p class="txtcu">고객님은 B2B 거래건으로 의심되어 올리브영 사이트 주문이 불가합니다.</p>
+				<p class="txtcu">관련하여 문의사항이 있으시다면 고객센터로 문의 부탁드립니다.</p>
+			</div>
+			<div class="area2sButton">
+				<a href="#none" class="btnGreen" onclick="javascript:forder.orderForm.layerClose();">확인</a>
+			</div>
+		</div>
+		<button class="layer_close type2" onclick="javascript:forder.orderForm.layerClose();">창 닫기</button>
+	</div>
+</div>
+<!-- //재판매 구매제한 레이어 팝업 -->
+<!-- 재판매 구매제한 레이어 팝업 -->
+<div class="layer_pop_wrap w480" id="evtLimit" style="margin-left: -240px; z-index: 999; display: none;" tabindex="0">
+	<div class="layer_cont2">
+		<h2 class="layer_title">주문 안내</h2>
+		<div class="layer_desc2">
+			<div>
+				<p class="txtcu"><span id="evt_goodsNm">$상품명</span>은 구디백 구매 자격을 확인해주세요.</p>
+			</div>
+			<div class="area2sButton">
+				<a href="#none" class="btnGreen" onclick="javascript:forder.orderForm.layerClose();">확인</a>
+			</div>
+		</div>
+		<button class="layer_close type2" onclick="javascript:forder.orderForm.layerClose();">창 닫기</button>
+	</div>
+</div>
+<!-- //재판매 구매제한 레이어 팝업 -->
+<!-- 매장픽업서비스 안내 팝업 -->
+<div class="layer_pop_wrap storePickPop" id="aboutPickup" style="z-index: 999; display: none;" data-ref-comparekey="aboutPickup">
+	<div class="layer_cont">
+		<h2 class="layer_title2">픽업 서비스 안내</h2>
+		<div class="popCont">
+			<p>온라인에서 주문 후 매장에 방문하시어 상품을 픽업하시는<br>
+				서비스입니다.</p>
+			<div class="process_box">
+				<div class="processList prc01">
+					<span>상품구매</span>
+				</div>
+				<i class="next">다음단계</i>
+				<div class="processList prc02">
+					<span>교환권받기</span>
+				</div>
+				<i class="next">다음단계</i>
+				<div class="processList prc03">
+					<span>매장방문</span>
+				</div>
+				<i class="next">다음단계</i>
+				<div class="processList prc04">
+					<span>상품픽업</span>
+				</div>
+			</div>
+			<ul class="list_buldot">
+				<li>매장별 보유 재고는 상이할 수 있습니다.</li>
+			</ul>
+			<div class="layer_btn_area">
+				<button class="btnMedium fullGreen w120 layer_close" onclick="javascript:$('#aboutPickup').hide(); $('.dimm').remove();">확인</button>
+			</div>
+		</div>
+		<button class="layer_close type2" onclick="javascript:$('#aboutPickup').hide(); $('.dimm').remove();">창 닫기</button>
+	</div>
+</div>
+<!--// 매장픽업서비스 안내 팝업 -->
+<!-- 오늘드림 배송비 안내 팝업 -->
+<div class="layer_pop_wrap todayDlvCostNoti" id="todayDlvCostNoti" style="z-index: 999; display: none;" data-ref-comparekey="todayDlvCostNoti">
+	<div class="layer_cont">
+		<h2 class="layer_title2">오늘드림 배송비 안내</h2>
+		<div class="pop-conts">
+			<div class="scroll-area type2" style="max-height:490px;">
+				<!-- 1set start -->
+				<ul class="todayDelivery">
+					<li>
+						주문 후 +3시간 (빠름 배송)
+						<p>3만원 이상 주문 시 무료배송 / 3만원 미만 5,000원  </p>
+					</li>
+					<li>
+						낮 3-4시 (3!4! 배송)
+						<p>3만원 이상 주문 시 무료배송 / 3만원 미만 2,500원  </p>
+					</li>
+					<li>
+						밤 10-12시 (미드나잇 배송)
+						<p>3만원 이상 주문 시 무료배송 / 3만원 미만 2,500원  </p>
+					</li>
+				</ul>
+				<!-- //1set end -->
+
+			</div>
+		</div>
+		<button class="layer_close type2" onclick="javascript:$('#todayDlvCostNoti').hide(); $('.dimm').remove();">창 닫기</button>
+	</div>
+</div>
+<!-- 20210226 픽업 서비스 결제 안내 팝업 (픽업서비스 퍼블리싱) -->
+<div class="layer_pop_wrap w490" id="resultPickup" style="z-index: 999; display: none;" data-ref-comparekey="resultPickup">
+	<div class="pickup-wrap">
+		<h2 class="layer_title">픽업 서비스 안내</h2>
+		<div class="pickup-wrap__cont">
+			<div class="service-noti">
+				<ul class="pament-noti">
+					<li>픽업 바코드는 주문 완료 후 최대 24시간 이내 발송됩니다.</li>
+					<li><b>상품 수령은 픽업 바코드 수신 이후 가능하며, 3일 내에 매장에 방문하여 상품을 찾아가시면 됩니다.</b></li>
+					<li><b>교환/반품은 마이페이지 - 주문내역에서 교환/반품 신청을 통해 처리할 수 있으며,별도 신청 없이 오프라인 매장에서의 처리는 불가합니다.</b></li>
+					<li><b>온라인 단독 증정품은 제공되지 않으며, 온/오프라인 공통 증정품은 매장 재고 소진 시 증정되지 않습니다.</b></li>
+					<li>주문 확인 시 재고가 부족한 경우, 부득이하게 주문이 취소될 수 있습니다.</li>
+				</ul>
+				<div class="layer_btn_area pickup-btn">
+					<button class="btnMedium fullGreen w155" id="resultPickupSubmit" onclick="javascript:order.pickup.pickupOrderSubmit();">확인</button>
+					<button class="btnMedium fullGreen w155" id="resultPickupGiftSubmit" style="display:none;">확인</button>
+				</div>
+			</div>
+		</div>
+		<button class="layer_close type2" onclick="javascript:common.popLayer.todayDelivery.layerCloseWithoutSend();">창 닫기</button>
+	</div>
+</div>
+<!-- // 20210226 픽업 서비스 결제 안내 팝업 (픽업서비스 퍼블리싱) -->
+<!-- 20210226 픽업 지점 선택 안내 팝업 (픽업서비스 퍼블리싱) -->
+<div class="layer_pop_wrap w490" id="choicePickup" style="z-index: 999; display: none;" data-ref-comparekey="choicePickup">
+	<div class="pickup-wrap">
+		<h2 class="layer_title">픽업 서비스 안내</h2>
+		<div class="pickup-wrap__cont">
+			<div class="choice-noti">
+				<p class="choice-store"><span class="choice-store__name">'동대문역사문화공원역점'</span>으로 픽업하시겠습니까?</p>
+				<div class="layer_btn_area pickup-btn">
+					<button class="btnMedium fullGreen w155" onclick="javascript:selectPickupStore();">확인</button>
+				</div>
+			</div>
+		</div>
+		<button class="layer_close type2" onclick="javascript:$('#choicePickup').hide(); $('.dimm').remove();">창 닫기</button>
+	</div>
+</div>
+<!-- // 20210226 픽업 지점 선택 안내 팝업 (픽업서비스 퍼블리싱) -->
+<!-- 20210226 일부상품 재고 부족 상품 안내 팝업 (픽업서비스 퍼블리싱) -->
+<div class="layer_pop_wrap w490" id="stockPickup" style="z-index: 999; display: none;" data-ref-comparekey="stockPickup">
+	<div class="pickup-wrap">
+		<h2 class="layer_title">픽업 서비스 안내</h2>
+		<div class="pickup-wrap__cont">
+			<div class="service-noti">
+				<p class="service-noti__top">선택해주신 매장에 <span>재고 일부가 부족</span>합니다.<br>주문 가능한 상품만 결제하시겠습니까?</p>
+				<dl class="stock-list">
+					<dt class="stock-list__tit">재고부족 상품 <span id="soldoutQty">3개</span></dt>
+					<dd class="stock-list__cnt">
+					</dd>
+				</dl>
+				<div class="layer_btn_area pickup-btn">
+					<button class="btnMedium fullGreen w155" onclick="javascript:order.pickup.getOrderFormPickup();">확인</button>
+				</div>
+			</div>
+		</div>
+		<button class="layer_close type2" onclick="javascript:$('#stockPickup').hide();$('.dimm').remove();">창 닫기</button>
+	</div>
+</div>
+<!-- // 20210226 일부상품 재고 부족 상품 안내 팝업 (픽업서비스 퍼블리싱) -->
+<!-- [3605144] 주문서 내 보유쿠폰 노출 기능 개발 요청 건 팝업 -->
+<div class="layer_pop_wrap userCp" id="userCpPop" "="" style="display: none; margin-left: -290px; top: 1576px;" tabindex="0">
+<div class="layer_cont">
+	<h2 class="layer_title">보유쿠폰&nbsp;(2)</h2>
+	<!-- 스크롤 영역 -->
+	<div class="popCont">
+		<p>적용 가능한 쿠폰은 결제 금액에 따라 변경될 수 있습니다.</p>
+		<div class="listCoupon_wrp mCustomScrollbar _mCS_2 mCS_no_scrollbar"><div id="mCSB_2" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 0px;" tabindex="0"><div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+			<ul class="listCoupon" id="onCpnList" name="onCpnList">
+
+							<li data-cpn-status="disabled">
+								<div class="couponBox">
+
+															<span class="coupon-inner price">
+
+														4,000
+														
+															<em>원</em>
+												</span>
+								</div>
+								<div class="couponInfo">
+									<h3>[신규가입] 3만원 이상 4,000원 할인</h3>
+									<p>
+											30,000원 이상
+									</p>
+									<p class="data">
+										<!-- <span>사용기간</span> -->
+										
+											2023.10.20
+											~2023.11.19
+										
+									</p>
+								</div>
+							</li>
+						
+							<li data-cpn-status="disabled">
+								<div class="couponBox">
+									<span class="coupon-inner today free"> 무료배송
+
+												</span>
+								</div>
+								<div class="couponInfo">
+									<h3>[BABY] 오늘드림 무료배송 쿠폰</h3>
+									<p>
+											10,000원 이상
+									</p>
+									<p class="data">
+										<!-- <span>사용기간</span> -->
+										
+											2023.07.04
+											~2023.12.31
+										
+									</p>
+								</div>
+							</li>
+			</ul>
+		</div><div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
+	</div>
+	<!--// 스크롤 영역 -->
+	<button class="layer_close">창 닫기</button>
+</div>
+</div>
+<!-- [3605144] 주문서 내 보유쿠폰 노출 기능 개발 요청 건 팝업 -->
+
+
+	<div class="laytoast" id="brandOff" style="display: none;">
+		<div class="inner">
+			<p class="txt_recom txt_01">브랜드<br><em>좋아요</em></p>
+		</div>
+	</div>
+	<div class="laytoast on" id="brandOn" style="display: none;">
+		<div class="inner">
+			<p class="txt_recom txt_01">브랜드<br><em>좋아요</em></p>
+		</div>
+	</div>
+	<!-- 브랜드 찜 확인 레이어 -->
+	<div class="layerAlim brand zzimOn" style="display:none;"><!-- zzimOn / zzimOff -->
+	 <span class="icon"></span>
+	 <p>브랜드<strong>좋아요</strong></p>
+	</div>
+
+	<div class="layerAlim brand zzimOff" style="display:none;"><!-- zzimOn / zzimOff -->
+	 <span class="icon"></span>
+	 <p>브랜드<strong>좋아요</strong></p>
+	</div>
+	<!-- 브랜드 찜 확인 레이어 -->
+	
+	<!-- 찜 확인 레이어 -->
+	<div class="layerAlim zzimOn wishPrd" style="display:none;">
+		<span class="icon"></span>
+		<p class="one"><strong>좋아요</strong></p>
+	</div>
+	<!--// 찜 확인 레이어 -->
+	
+	<!-- 찜 취소 레이어 -->
+	<div class="layerAlim zzimOff wishPrd" style="display:none;">
+		<span class="icon"></span>
+		<p class="one"><strong>좋아요</strong></p>
+	</div>
+	<!--// 찜 취소 레이어 -->
+
+	<!-- 2017-02-23 수정 : TOP 바로가기 버튼 추가 -->
+	<div id="directTop" style="display: none;">
+		<button><span></span>TOP</button>
+	</div>
+	<!--/ㅁ 2017-02-23 수정 : TOP 바로가기 버튼 추가 -->
+	
+</div>
+
+</div>
+
 <jsp:include page="/layout/footer.jsp"></jsp:include>
-<script>
-	$(function(){
-		
-		let delid = $("#dlvpSelect").val();
-		
-		$("tr#pickupHide4."+delid).css("display","table-row");
-		
-		$("#dlvpSelect").on("change",function(){
-			delid = $("#dlvpSelect").val();
-			$("tr#pickupHide4").css("display","none");
-			$("tr#pickupHide4."+delid).css("display","table-row");
-		})
-	})
-</script>
 </body>
 </html>
