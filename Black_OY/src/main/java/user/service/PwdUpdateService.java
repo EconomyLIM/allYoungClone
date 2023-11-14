@@ -1,38 +1,34 @@
 package user.service;
-
 import java.sql.Connection;
+import java.util.List;
 
 import com.util.ConnectionProvider;
-
-import user.domain.OuserDTO;
+import user.domain.LogOnDTO;
 import user.persistence.OuserDAOImpl;
 
-public class JoinService {
+public class PwdUpdateService {
 
-	private JoinService() {}
-	private static JoinService instance = null;
-	
-	public static JoinService getInstance() {
+
+	private PwdUpdateService() {}
+	private static PwdUpdateService instance = null;
+
+	public static PwdUpdateService getInstance() {
 		if (instance == null) {
-			instance = new JoinService();
+			instance = new PwdUpdateService();
 		}
 		return instance;
 	}
-	
-	public int addUser( OuserDTO dto) {
+
+	public int PwdUpdate( LogOnDTO logDto) {
 		Connection conn = null;
 		int rowCount = 0;
 		try {
 			conn = ConnectionProvider.getConnection();
 			OuserDAOImpl dao = OuserDAOImpl.getInstance();
-			rowCount =  dao.join(conn, dto);
-			
+			rowCount =  dao.pwdUpdate(conn, logDto);
 		} catch (Exception e) {
 			e.printStackTrace();
-		
 		}
 		return rowCount;
-		
-	}
-	
+	} 
 }

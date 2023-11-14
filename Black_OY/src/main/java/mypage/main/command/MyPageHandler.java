@@ -30,13 +30,13 @@ public class MyPageHandler implements CommandHandler {
 		//회원id가져오기
 		
 		// 현재 로그인 한 유저 id 가져올려면 아래 코드 쓰면 됨
-		//LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
-		//userId = logOnDTO.getUser_id();
+		LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
+		userId = logOnDTO.getUser_id();
 		
-		//테스트용 고정값
-		userId = "admin";	//request.getParameter("userId");
-				
-		MypageService service = MypageService.getinstance();
+
+		//userId = "admin";	//request.getParameter("userId");
+		
+
 		
 		//초기화
 		List<MpUserInfoDTO> userInfo = null;

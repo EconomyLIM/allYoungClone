@@ -105,13 +105,13 @@ input[type='submit'], input[type='button'], button {cursor:pointer}
 .radio_btn, .check_box {display:inline-block; position:relative; height:16px; padding-left:0; line-height:16px; zoom:1;}
 .radio_btn .chk, .check_box .chk {display:none;}
 .radio_btn a,
-.check_box a {display:inline-block; width:16px; height:16px; background:url('/cjmweb/images/common/bg_form.png') no-repeat; vertical-align:middle;}
+.check_box a {display:inline-block; width:16px; height:16px; background:url('https://www.cjone.com/cjmweb/images/common/bg_form.png') no-repeat; vertical-align:middle;}
 .radio_btn label, .check_box label {cursor:pointer;}
 .radio_btn.on a {background-position:0 -16px;}
 .check_box.on a {background-position:0 -16px;}
 
 .radio_btn.dis span,
-.check_box.dis span {display:inline-block; width:16px; height:16px; background:url('/cjmweb/images/common/bg_form.png') no-repeat 0 -32px; vertical-align:middle; cursor:auto;}
+.check_box.dis span {display:inline-block; width:16px; height:16px; background:url('https://www.cjone.com/cjmweb/images/common/bg_form.png') no-repeat 0 -32px; vertical-align:middle; cursor:auto;}
 .radio_btn.dis.check span,
 .check_box.dis.check span {background-position:0 -48px;}
 .radio_btn.dis .ico,
@@ -138,7 +138,7 @@ select {margin:0; -webkit-border-radius:0; font-family:'nbgr';}
 .select_wrap a {display:block; color:#555; font-size:14px;}
 .select_wrap a span {display:block;}
 .select_wrap .item_seleced {padding:0 10px;}
-.select_wrap .item_seleced a {height:32px; padding-right:20px; background:url('/cjmweb/images/common/ico_arrow_down.png') no-repeat 100% 14px; line-height:32px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; word-wrap:normal;}
+.select_wrap .item_seleced a {height:32px; padding-right:20px; background:url('https://www.cjone.com/cjmweb/images/common/ico_arrow_down.png') no-repeat 100% 14px; line-height:32px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; word-wrap:normal;}
 .select_wrap .item_list_wrap {display:none; position:absolute; top:32px; right:-1px; left:-1px; background-color:#fff; overflow:hidden;}
 .select_wrap .item_list_wrap .item_list {max-height:150px; border:1px solid #ddd; overflow:hidden;}
 .select_wrap .item_list_wrap .item_list .on {text-decoration:underline;}
@@ -209,8 +209,8 @@ table th {color:#222; font-weight:normal;}
 .table_row .input td,
 .table_col .input td {padding-top:15px; padding-bottom:15px;}
 
-.table_col .input.msg th {background-image:url('/cjmweb/images/common/ico_mandatory.png'); background-repeat:no-repeat; background-position:20px 29px;}
-.table_col th.mandatory {background-image:url('/cjmweb/images/common/ico_mandatory.png'); background-repeat:no-repeat; background-position:20px 29px;}
+.table_col .input.msg th {background-image:url('https://www.cjone.com/cjmweb/images/common/ico_mandatory.png'); background-repeat:no-repeat; background-position:20px 29px;}
+.table_col th.mandatory {background-image:url('https://www.cjone.com/cjmweb/images/common/ico_mandatory.png'); background-repeat:no-repeat; background-position:20px 29px;}
 
 /* 레이어팝업에서 테이블 Case */
 /* 가로형 테이블 Resize */
@@ -254,7 +254,7 @@ table th {color:#222; font-weight:normal;}
 .board_list a.focus {text-decoration:underline;}
 .board_list .notice {color:#ee6900;}
 /* 쿠폰 고도화 시작 */
-.board_list th .sort { color: #222; padding-right: 14px; background: url(/cjmweb/images/common/ico_sort.png) no-repeat center right; }
+.board_list th .sort { color: #222; padding-right: 14px; background: url(https://www.cjone.com/cjmweb/images/common/ico_sort.png) no-repeat center right; }
 .board_list td .ell { display: block; white-space: nowrap; text-overflow: ellipsis; width: 250px; overflow: hidden; margin:auto;}
 /* 쿠폰 고도화 끝 */
 .list_accordion {border-top:1px solid #222;}
@@ -267,7 +267,7 @@ table th {color:#222; font-weight:normal;}
 .faq_list .question_wrap button {width:100%; font-size:16px; text-align:left; line-height:1.5; word-break:break-all; white-space:normal;}
 .faq_list .question_wrap .title {display:block; padding:0 30px 0 36px; color:#555; zoom:1;}
 .faq_list .question_wrap .ico {position:absolute; top:18px; left:20px;}
-.faq_list .question_wrap .btn {position:absolute; top:25px; right:20px; min-width:0; width:12px; height:12px; padding:0; border:0 none; background:url('/cjmweb/images/common/btn_accordion.png') no-repeat; text-indent:-9999em; transition:all 0s ease 0s;}
+.faq_list .question_wrap .btn {position:absolute; top:25px; right:20px; min-width:0; width:12px; height:12px; padding:0; border:0 none; background:url('https://www.cjone.com/cjmweb/images/common/btn_accordion.png') no-repeat; text-indent:-9999em; transition:all 0s ease 0s;}
 .faq_list .question_wrap .state_ico {display:inline-block; width:auto; min-width:44px; height:20px; margin-right:6px; border-radius:2px; background-color:#239eca; color:#fff; font-size:11px; font-family:dotum; text-align:center; line-height:20px; vertical-align:middle; zoom:1;}
 .faq_list .question_wrap .state_ico.accept {background-color:#15a984;}
 .faq_list .question_wrap .state_ico.end {background-color:#ee6900;}
@@ -279,13 +279,13 @@ table th {color:#222; font-weight:normal;}
 .faq_list .answer_wrap .answer .faq_link.hover,
 .faq_list .answer_wrap .answer .faq_link.focus {text-decoration:underline;}
 .faq_list .answer_wrap .ico {position:absolute; top:18px; left:55px;}
-.faq_list .answer_wrap .advice_link_box {display:inline-block; margin-left:8px; padding-left:10px; background:url('/cjmweb/images/common/ico_dot.png') no-repeat 0 13px; zoom:1;}
+.faq_list .answer_wrap .advice_link_box {display:inline-block; margin-left:8px; padding-left:10px; background:url('https://www.cjone.com/cjmweb/images/common/ico_dot.png') no-repeat 0 13px; zoom:1;}
 .faq_list .answer_wrap .day {padding-top:21px;}
 
 .faq_list .answer_wrap.my_q {padding-left:55px;}
 .faq_list .answer_wrap.my_q .ico {left:20px;}
 
-.faq_list .answer_wrap .reply {position:relative; margin:10px 0 0 -35px; padding:18px 0 0 55px; background:url('/cjmweb/images/common/bg_dotline.png') repeat-x;}
+.faq_list .answer_wrap .reply {position:relative; margin:10px 0 0 -35px; padding:18px 0 0 55px; background:url('https://www.cjone.com/cjmweb/images/common/bg_dotline.png') repeat-x;}
 .faq_list .answer_wrap.my_q .reply .ico {top:22px; left:36px;}
 
 .faq_list .on .btn {background-position:0 -12px;}
@@ -331,8 +331,8 @@ button.btn {min-width:160px; height:40px; *line-height:36px;}
 button.btn.btn_sm {height:30px; line-height:27px;}
 button.btn.btn_sm[disabled]{background:#efefef;color:#888;} /* 쿠폰 고도화 추가 */
 .btn.btn_sm.hover, .btn.btn_sm.focus {border-color:#000; color:#000;}
-.btn.btn_sm .arr {padding-right:8px; padding-left:0; background:url('/cjmweb/images/common/ico_btn_arrow.png') no-repeat right 10px; line-height:2.1;}
-.btn.btn_sm.hover .arr, .btn.btn_sm.focus .arr {background-image:url('/cjmweb/images/common/ico_btn_arrow_on.png');}
+.btn.btn_sm .arr {padding-right:8px; padding-left:0; background:url('https://www.cjone.com/cjmweb/images/common/ico_btn_arrow.png') no-repeat right 10px; line-height:2.1;}
+.btn.btn_sm.hover .arr, .btn.btn_sm.focus .arr {background-image:url('https://www.cjone.com/cjmweb/images/common/ico_btn_arrow_on.png');}
 
 tr.input .btn_sm {height:32px;line-height:32px;}
 tr.input button.btn_sm {height:34px;}
@@ -353,25 +353,25 @@ button.btn_big, button.btn_embig {height:45px; line-height:45px;}
 .btn.transparent.focus,
 .btn.transparent.hover{background-color:transparent;}
 
-.btn_big .arr {display:inline-block; padding-right:8px; padding-left:0; background:url('/cjmweb/images/common/ico_btn_arrow.png') no-repeat right center;}
+.btn_big .arr {display:inline-block; padding-right:8px; padding-left:0; background:url('https://www.cjone.com/cjmweb/images/common/ico_btn_arrow.png') no-repeat right center;}
 .ie7 .btn_big .arr {display:inline; zoom:1;}
-.btn_big .arr.back {padding-right:0; padding-left:8px; background:url('/cjmweb/images/common/ico_btn_arrow_back.png') no-repeat left center;}
+.btn_big .arr.back {padding-right:0; padding-left:8px; background:url('https://www.cjone.com/cjmweb/images/common/ico_btn_arrow_back.png') no-repeat left center;}
 
 button.btn_more {width:310px; height:50px; border:1px solid #ddd; background-color:#f8f8f8;}
 
 /* 아웃링크 */
-.btn .out {display:inline-block; padding-right:15px; background:url('/cjmweb/images/common/ico_out_link.png') no-repeat right center; }
+.btn .out {display:inline-block; padding-right:15px; background:url('https://www.cjone.com/cjmweb/images/common/ico_out_link.png') no-repeat right center; }
 .ie7 .btn .out {display:inline; zoom:1;}
 
 .link_txt {display:inline-block; min-width:10px; color:#555; transition:all .5s;}
 .link_txt.uline {border-bottom:1px solid #555; text-decoration:none;}
-.link_txt .arr {display:block; padding-right:8px; background:url('/cjmweb/images/common/ico_btn_arrow.png') no-repeat right 50%;}
+.link_txt .arr {display:block; padding-right:8px; background:url('https://www.cjone.com/cjmweb/images/common/ico_btn_arrow.png') no-repeat right 50%;}
 .link_txt.hover,
 .link_txt.focus {color:#000; text-decoration:none;}
-.link_txt.hover .arr, .link_txt.focus .arr {background-image:url('/cjmweb/images/common/ico_btn_arrow_on.png');}
-.link_txt .arr.em {background:url('/cjmweb/images/common/ico_btn_arrow_em.png') no-repeat right 50%;}
+.link_txt.hover .arr, .link_txt.focus .arr {background-image:url('https://www.cjone.com/cjmweb/images/common/ico_btn_arrow_on.png');}
+.link_txt .arr.em {background:url('https://www.cjone.com/cjmweb/images/common/ico_btn_arrow_em.png') no-repeat right 50%;}
 .link_txt.hover .arr.em,
-.link_txt.focus .arr.em {background-image:url('/cjmweb/images/common/ico_btn_arrow_em.png');}
+.link_txt.focus .arr.em {background-image:url('https://www.cjone.com/cjmweb/images/common/ico_btn_arrow_em.png');}
 
 .btn_center {padding-top:30px; text-align:center;}
 

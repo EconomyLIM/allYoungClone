@@ -1,14 +1,15 @@
 <%@page import="user.domain.OuserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/inc/include.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../../css/CJbase.css" />
-<link rel="stylesheet" href="../../css/CJparticipate.css" />
+<link rel="stylesheet" href="../css/CJbase.css" />
+<link rel="stylesheet" href="../css/CJparticipate.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <body style="height: 914px;">
 	<!--skip navigation-->
@@ -45,7 +46,7 @@
 			
 		</div>
 		<div id="contentsWrap">
-			<form id="form1" method="post" action="">
+			<form id="form1" method="post" action="<%=contextPath %>/user/pwdCheck.do">
 				<input type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
 				<input type="hidden" name="brnd_cd" id="brnd_cd" value="3000">
 				<input type="hidden" name="mcht_no" id="mcht_no" value="3000">
@@ -85,7 +86,7 @@
 							</div>
 							<div class="btn_center">
 								<button type="button" onclick="javascript:goCancel();" class="btn">취소</button>
-								<button type="button" onclick="javascript:pwdCheck();" class="btn btn_em">확인</button>
+								<button type="button" id ="btnPwdCheck" onclick="javascript:pwdCheck();" class="btn btn_em">확인</button>
 							</div>
 						</div>
 					</div>
@@ -196,81 +197,26 @@
         
 		// 취소
 		function goCancel() {
-			$("#form1").attr("action", "/cjmweb/main.do");
+			$("#form1").attr("action", "/usermodify.jsp");
 			$("#form1").submit();
 			 
 		} 
-		
-		// 비밀번호 확인 
-		function pwdCheck() {
-			if($("#pwd").val() == ""){
-				alert('비밀번호를 입력해 주세요.');
-				$("#pwd").focus();
-			}else{
-				//var params = encodeURI($('#form1').serialize());
-				$('#security_pwd').val(BASE64.encode($('#pwd').val()));
-				var params = $('#form1').serialize();
-				$.ajax({
-			 		url: "/Black_OY/user/pwdCheck.do",	
-			 		data: params,
-			 		dataType: "json",		 		
-			 		type:"post",
-			 		async: false,
-			 		success: function(data) {
-			 			var str_msg ="" + data.reqBox.str_msg;
-			 			if(data.reqBox.result_code == "2" ){
-			 				// 비밀번호 틀릴경우
-			 				if( str_msg != "undefined" && str_msg != null && str_msg != '' ){
-			 					str_msg = str_msg.replace(/\\n/g, '\n');
-			 					alert(str_msg);
-			 				}
+	//비밀번호 체크
 
-			 		}, 
-			 		error: function(xhr) {
-			 		      //에러
-			 	    }
-			 	});
-			}
+    function pwdCheck() {
+        var u_pwd = $("#pwd").val();
+        if (u_pwd == "") {
+            alert("비밀번호를 입력해 주세요.");
+        } else if ( u_pwd != "${logOn.u_pwd}"){
+        	alert("비밀번호가 일치하지 않습니다.");	
+        }
+        return true;
+	}
+    $("#btnPwdCheck").on("click", function () {
+		if (pwdCheck() ) {
+			location.href = "/Black_OY/view/usermodify/info_modification.jsp";
 		}
-		//비밀번호 체크
-		function chkPwd() {
-			
-			var userckpwd = $("#pwd_check").val();
-			var userid = $("#mbr_id").val();
-			var pwdPattern = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
-			var num = userpwd.search(/[0-9]/g);
-			var eng = userpwd.search(/[a-z]/ig);
-			var spe = userpwd.search(/[!"#$%&'()*+,-./:;<=>?@[]^_`{|}~]/gi);
-			
-			if (userpwd.length<8 || userpwd.length>12) {
-				alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
-				$("#msg_pwd").removeClass("hide");
-				$("#pwd").focus();
-				return false;
-			} else if ((num < 0 && eng < 0) || (eng < 0 && spe < 0)
-					|| (spe < 0 && num < 0)) {
-				alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
-				$("#msg_pwd").removeClass("hide");
-				$("#pwd").focus();
-				return false;
-			} else if (/(\w)\1\1\1/.test(userpwd)) {
-				alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
-				$("#msg_pwd").removeClass("hide");
-				$("#pwd").focus();
-				return false;
-			} else if (userpwd.search(userid) > -1) {
-				alert("비밀번호 설정 시 아이디와 4자리 이상 동일한 문자 또는 숫자를 사용할 수 없습니다.");
-				$("#msg_pwd").removeClass("hide");
-				$("#pwd").focus();
-				return false;
-			} else if ( userpwd !=userckpwd){
-				alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-				$("#msg_pwd_check").removeClass("hide");
-				$("#pwd").focus();
-				return false;
-			}
-			return true;
-		}
+	});
     </script>
 
 </body>

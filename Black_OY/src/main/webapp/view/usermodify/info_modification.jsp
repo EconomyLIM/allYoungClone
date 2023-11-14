@@ -13,21 +13,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <body>
-<%
-	String u_name = (String)session.getAttribute("u_name");
-	String user_id = (String)session.getAttribute("user_id");
-	String u_pwd = (String)session.getAttribute("u_pwd");
-	String u_tel = (String)session.getAttribute("u_tel");
-	String u_email = (String)session.getAttribute("u_email");
-	System.out.println(u_name);
-	System.out.println(user_id);
-	System.out.println(u_pwd);
-	System.out.println(u_tel);
-	System.out.println(u_email);
-	
-
-%>
-
 	<!--skip navigation-->
 	<div class="skipNavi">
 		<a href="#contentsWrap">본문으로 바로가기</a>
@@ -151,7 +136,7 @@
 												<th scope="row">이름</th>
 												<td>
 													<div class="input_group">
-														<span id="hg_nm_area"></span> <a href="#"
+														<span id="hg_nm_area">${logOn.u_name }</span><a href="#"
 															class="btn btn_sm" id="lnChangeName"><span
 															class="arr">변경하기</span></a>
 													</div>
@@ -161,7 +146,7 @@
 
 											<tr>
 												<th scope="row">아이디</th>
-												<td><span id="mbr_id_area"><%=user_id %></span></td>
+												<td><span id="mbr_id_area">${logOn.user_id }</span></td>
 											</tr>
 
 											<tr class="input">
@@ -532,7 +517,7 @@
 															style="background-color: rgb(235, 235, 228)">
 															<div class="item_seleced">
 																<a href="#15" title="생년월일 중 일 선택 목록 열기"
-																	data-title="생년월일 중 일 선택">15<span class="haze">선택됨</span></a>
+																	data-title="생년월일 중 일 선택"><span class="haze">선택됨</span></a>
 															</div>
 															<div class="item_list_wrap ">
 																<div class="item_list ui_scrollarea">
@@ -599,7 +584,7 @@
 												<th scope="row"><label for="mob_no_1">휴대전화번호</label></th>
 												<td>
 													<div>
-														<span class="input_txt w100 phon_write" id="mobileNoInfo"><%=u_tel %></span>
+														<span class="input_txt w100 phon_write" id="mobileNoInfo">${logOn.u_tel}</span>
 														<input type="hidden" name="mob_no_1"
 															id="mob_no_1" value="010" disabled="disabled">
 															<input type="hidden" name="mob_no_2" id="mob_no_2" value="****"
@@ -623,7 +608,7 @@
 														<span class="input_txt w110" data-skin="form"> <input
 															type="text" class="text small" title="이메일 아이디 입력"
 															placeholder="이메일 아이디" data-format="email"
-															name="email_addr1" id="email_addr1" value="jy*******"
+															name="email_addr1" id="email_addr1" value=""
 															disabled="disabled" autocomplete="off">
 														</span> <span class="symbol">@</span> <span
 															class="input_txt w110"> <input type="text"
@@ -704,7 +689,7 @@
 												<th scope="row"><label for="pwd">비밀번호</label></th>
 												<td>
 													<div>
-														<div class="input_group hide" data-handler="trPwdCheck">
+														<div class="input_group" data-handler="trPwdCheck">
 															<span class="input_txt w250"><input
 																type="password" class="text" placeholder="비밀번호를 입력해주세요."
 																maxlength="50" name="pwd" id="pwd"></span> <span
@@ -719,7 +704,7 @@
 																<span class="arr">변경하기</span>
 															</button>
 														</div>
-														<div class="msg_desc hide" data-handler="trPwdCheck">
+														<div class="msg_desc " data-handler="trPwdCheck">
 															<ul class="bul_list sub_txt">
 																<li class="dot_arr">영문자, 숫자, 특수문자 조합하여 8~12자리어야
 																	합니다.</li>
@@ -733,7 +718,7 @@
 													</div>
 												</td>
 											</tr>
-											<tr class="input new_pw hide" id="trPwdCheck"
+											<tr class="input new_pw " id="trPwdCheck"
 												data-handler="trPwdCheck">
 												<th scope="row"><label for="pwd_check">비밀번호 확인</label>
 												</th>

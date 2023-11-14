@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/inc/include.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../../css/CJbase.css" />
 <link rel="stylesheet" href="../../css/CJparticipate.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body style="">
 <!--skip navigation-->
@@ -15,10 +18,6 @@
 </div>
 <!--//skip navigation-->
 <div id="bodyWrap" class="wide">
-
-	<!--header-->
-
-
     <!--header-->
         <div id="part_headerWrap">
             <div class="part_header_wrap">
@@ -26,15 +25,13 @@
                     <div id="coop_header_wrap"><p class="part_logo">건강한 아름다움을 제안하는 글로벌 라이프스타일 플랫폼<img src="https://www.cjone.com/cjmweb/upfile/20191007_1837101.png" alt="올리브영"></p></div>
             </div>
         </div>
-    
-
 	<!--//header-->
 
 	<!--contents-->
 	<div id="contentsWrap">
 		<div id="contents">
-			<form method="post" id="form1" name="form1" action="/join.do">
-				<input type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
+			<form method="post" id="form1" name="form1" action="">
+- 				<input type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
 				<input type="hidden" name="brnd_cd" id="brnd_cd" value="3000">
 				<input type="hidden" name="mcht_no" id="mcht_no" value="3000">
 				<input type="hidden" name="upd_coopco_id" id="upd_coopco_id" value="">
@@ -77,7 +74,7 @@
 								<span class="input_txt w450"><input type="text" class="text" id="mob_no" name="mob_no" placeholder="휴대전화번호 뒤 7~8자리를 입력해주세요. (01X 제외)" title="휴대전화번호 뒤 7~8자리를 입력해주세요. (01X 제외)" data-format="num" maxlength="8" autocomplete="off"></span>
 								<p class="msg_info hide" id="msg_mob_no">국번제외한 휴대폰번호를 입력해주세요. (ex.010-123-5678 &gt; 1235678)</p>
 								<div class="btn_sec">
-									<a href="/Black_OY/user/joinCheck.do" class="btn btn_em" id="btnCheRegister">가입여부 확인</a>
+									<a href="javascript:submitForm();" class="btn btn_em" id="btnCheRegister">가입여부 확인</a>
 								</div> 
 							</div>
 						</div>
@@ -108,7 +105,6 @@
 
 	<!-- footer -->
 <div id="footer">
- 
 <div class="footer_wrap">			
 	  
 	<div class="site_info">
@@ -127,55 +123,9 @@
 		<span class="img"><img src="https://www.cjone.com/cjmweb/images/common/logo_cjolivenetworks_footer.png" alt="CJ 올리브넥트웍스"></span>
 		Copyright (c)2016 CJ OLIVENETWORKS. All Rights Reserved
 	</p>
-	
 	<div class="fixedTop" data-control="goTop" style="bottom: 50px;"><a href="#headerWrap" title="페이지 처음으로 이동"><span class="haze">TOP</span></a></div>
 	
 </div>
-<!--// 20191021 CJ ONE APP 사업자 정보 노출 전체 영역 -->
-<!-- 레이어 팝업(confirm) 내용 -->
-<div id="div_confirm" style="display: none;">
-	<div class="ui_modal" style="position: fixed; background-color: rgb(255, 255, 255); outline: none; background-clip: padding-box; top: 50%; left: 50%; margin-left: -200px; margin-top: -160px; width: 400px; z-index: 9101;" tabindex="0">
-
-		<div id="layerWrap" class="custom">
-		 	<h1 id="h_confirm_title">알림</h1>
-
-			<div class="inner" tabindex="0">
-				<p id="p_confirm_text"></p>
-			</div>
-			
-
-			<div class="btn_center">
-				<a href="javascript:closeLayerConfirm();" id="a_confirm_y" class="btn"><span id="span_confirm_y">확인</span></a>
-				<button id="a_confirm_n" type="button" onclick="closeLayerConfirm();" class="btn cancel"><span id="span_confirm_n">취소</span></button>
-			</div>
-
-			<button id="btn_confirm_close" type="button" onclick="closeLayerConfirm();" class="close">닫기</button>
-		</div>
-
-	</div>
-	<div class="ui_modal_overlay" style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 9100;"></div>
-</div>
-<!-- //레이어 팝업(confirm) 내용 -->
-<!-- 레이어 팝업(alert) 내용 -->
-<div id="div_alert" style="display: none;">
-	<div class="ui_modal" style="position: fixed; background-color: rgb(255, 255, 255); outline: none; background-clip: padding-box; top: 50%; left: 50%; margin-left: -200px; margin-top: -160px; width: 400px; z-index: 9101;" tabindex="0">
-
-		<div id="layerWrap" class="custom">
-
-			<div class="inner" tabindex="0">
-				<p id="p_alert_text"></p>
-			</div>
-
-			<div class="btn_center">
-				<a href="javascript:closeLayerAlert();" id="a_alert" class="btn close"><span id="span_alert">확인</span></a>
-			</div>
-		</div>
-		
-
-	</div>
-	<div class="ui_modal_overlay" style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 9100;"></div>
-</div>
-<!-- //레이어 팝업(alert) 내용 -->
     </div>
     <!-- //footer -->
 </div>
@@ -198,14 +148,18 @@ function checkField(event) {
         msgElement.classList.add("hide");
     }
 }
+
 </script>
+
 <script>
-	document.getElementById("btnCheRegister").onclick = function () {
-		this.href = this.href+"?tel="+document.getElementById("mob_no").value+"&u_name="+document.getElementById("user_nm").value 
-				+"&u_birth="+document.getElementById("legl_birth_dy").value;
-	}
+function submitForm() {
+	$("#form1").attr("action", "/Black_OY/olive/joinCheck.do");
+	$("#form1").submit(); 
+}
+$("#btnCheRegister").on("click", function (event) {
+	event.preventDefault();
+	submitForm();
+});	
 </script>
-
-
 </body>
 </html>
