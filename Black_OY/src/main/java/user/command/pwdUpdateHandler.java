@@ -44,14 +44,12 @@ public class pwdUpdateHandler implements CommandHandler{
 		Connection conn = ConnectionProvider.getConnection();
 		PwdUpdateService service = PwdUpdateService.getInstance();
 
-		conn.close();
-
-		
-
-		session = request.getSession();
-
-
-		return null;
-	}
+		//비밀번호 수정 완료 >
+			String location ="" ;
+			if (rowCount ==1) {
+				location = "/Black_OY/olive/LogOn.do";
+			}
+			return location;
+		}
 	}
 }
