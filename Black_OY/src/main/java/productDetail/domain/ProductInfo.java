@@ -24,7 +24,6 @@ public class ProductInfo {
 	private int pafterPrice;
 	private int lowPrice;
 	private int afterPrice;
-	private int prg;
 	private int prc;
 	private int prd;
 	private int prp;

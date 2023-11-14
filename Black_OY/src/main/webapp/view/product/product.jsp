@@ -458,7 +458,8 @@ $(function () {
 </script>
     <script>
     /* 페이지에 나갈때 세션 삭제 */
-        $(window).on('unload', function() {
+        $('[data-deleteSession]').on('click', function(e) {
+                e.preventDefault();  // 기본 동작 막기
             // 페이지를 떠날 때 서버로 요청을 보냄
             var sessionName = '<%= session.getAttribute(request.getParameter("goodsNo")) %>';
             $.ajax({
@@ -491,7 +492,7 @@ $(function () {
 									<c:forEach items="${cLList}" var="cll">
 										<li id="${cll.cLId}"><a
 											href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${cll.cLId}"
-											class="goods_category1">${cll.cLName}</a></li>
+											class="goods_category1" data-deleteSession>${cll.cLName}</a></li>
 									</c:forEach>
 								</c:if>
 							</ul>
@@ -503,7 +504,7 @@ $(function () {
 									<c:forEach items="${cMList}" var="cml">
 										<li id="${cml.cmId}"><a
 											href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${allCateDTO.catLId}${cml.cmId}&sort=1"
-											class="goods_category2">${cml.cmName}</a></li>
+											class="goods_category2" data-deleteSession>${cml.cmName}</a></li>
 									</c:forEach>
 								</c:if>
 							</ul>
@@ -515,7 +516,7 @@ $(function () {
 									<c:forEach items="${cSList}" var="csl">
 										<li id="${csl.csId}"><a
 											href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${allCateDTO.catLId}${allCateDTO.catSId}${csl.csId}&sort=1"
-											class="goods_category3">${csl.csName}</a></li>
+											class="goods_category3" data-deleteSession>${csl.csName}</a></li>
 									</c:forEach>
 								</c:if>
 							</ul>
