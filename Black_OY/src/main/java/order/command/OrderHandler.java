@@ -1,5 +1,6 @@
 package order.command;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,8 @@ public class OrderHandler implements CommandHandler {
 		}
 		
 		String user_id = logOnDTO.getUser_id();
+		String[] product_id = request.getParameterValues("products");
+		System.out.println("product_id =" +  Arrays.toString(product_id));
 		
 		if(user_id == null)  {
 			return "/view/logon/logon.jsp";

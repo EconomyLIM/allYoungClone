@@ -1005,11 +1005,8 @@
 					<!-- 2020-08-04 o2oJJ 24H 화면 제어로 인한 주석 처리 -->
 
 						<h2 class="sub-title2">
-								올리브영 배송상품
-							
-							
-								<em class="gift" id="giftNoti2" style="display: none;">* 증정품은 결제 시 확인하실 수 있습니다.</em>
-							
+							올리브영 배송상품
+							<em class="gift" id="giftNoti2" style="display: none;">* 증정품은 결제 시 확인하실 수 있습니다.</em>
 						</h2><!-- 2017-01-24 수정 : 타이틀 마크업 수정 및 클래스명 변경 -->
 						<table class="tbl_prd_list">
 						<caption>올리브영 배송상품 주문상품 목록</caption>
@@ -1043,75 +1040,49 @@
 						</thead>
 						<tbody>
 					
-							<tr>
-						
-					
-					<input type="hidden" name="cartNo" value="681801107">
-					<!-- 2020-08-05 o2oJJ 상품 수량 추가 -->
-					<td colspan="5" dispcatno="" stdcatno="010102" goodsno="A000000184129" itemno="001" entrno="C19275" brndcd="3440" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="1" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko" goodsnm="에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)" cartno="681801107" purchasetype="N"><!-- 2017-01-13 수정 -->
-						<div class="tbl_cont_area">
-
-								<div class="tbl_cell w700"><!-- 2017-01-24 수정 : 클래스명 변경 -->
-									
-									
-									<div class="prd_info">
-										<div class="prd_img">
-											<img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko" alt="장바구니 상품 임시 이미지" onerror="common.errorImg(this);">
-										</div>
-										<div class="prd_name">
-											
-											<span>에스트라</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
-											<p>에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)</p>
-										</div>
-										<p class="prd_opt">
-											
-												<i class="tit">옵션</i>에스트라 아토베리어 로션 기획
-											
-										</p>
-										<p class="prd_flag">
-
+						<tr>
+						<input type="hidden" name="cartNo" value="681801107">
+						<!-- 2020-08-05 o2oJJ 상품 수량 추가 -->
+						<td colspan="5" dispcatno="" stdcatno="010102" goodsno="A000000184129" itemno="001" entrno="C19275" brndcd="3440" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="1" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko" goodsnm="에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)" cartno="681801107" purchasetype="N"><!-- 2017-01-13 수정 -->
+							<div class="tbl_cont_area">
+									<div class="tbl_cell w700"><!-- 2017-01-24 수정 : 클래스명 변경 -->
+										<div class="prd_info">
+											<div class="prd_img">
+												<img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko" alt="장바구니 상품 임시 이미지" onerror="common.errorImg(this);">
+											</div>
+											<div class="prd_name">
+												
+												<span>에스트라</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
+												<p>에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)</p>
+											</div>
+											<p class="prd_opt">											
+												<i class="tit">옵션</i>에스트라 아토베리어 로션 기획											
+											</p>
+											<p class="prd_flag">
 												<span class="icon_flag sale">세일</span>
-
 												<span class="icon_flag gift">증정</span><!-- 14 -->
-											
-												<span class="icon_flag delivery">오늘드림</span><!-- 15 -->
-											
-										</p>
-										<!--//fix/3275248 bmiy20 cjone point 적립불가건에 대해 사용 불가 처리 추가-->
-										
+												<span class="icon_flag delivery">오늘드림</span><!-- 15 -->	
+											</p>
+											<!--//fix/3275248 bmiy20 cjone point 적립불가건에 대해 사용 불가 처리 추가-->
+										</div>
+									</div>
+									<!-- 2019-11-15 추가 (오늘드림배송 선물포장) Start -->
+									
+									<!-- 2019-11-15 추가 (오늘드림배송 선물포장) End -->
+									<div class="tbl_cell w110">
+										<span class="cur_price"><span class="tx_num">31,000</span>원</span>
+									</div>
+									<div class="tbl_cell w100">1</div>
+									<div class="tbl_cell w110">
+										<span class="org_price"><span class="tx_num" id="normPrc_A000000184129/001">31,000</span>원</span><!-- 2017-01-24 수정 : 추가 -->
+										<span class="pur_price"><span class="tx_num" id="salePrc_A000000184129/001">23,200</span>원</span>
+										<input type="hidden" id="orgNormPrc_A000000184129/001" value="31000">
+										<input type="hidden" id="orgSalePrc_A000000184129/001" value="23200">
+										<input type="hidden" id="imdtDscntAmt_A000000184129/001" value="0">
 									</div>
 								</div>
-								<!-- 2019-11-15 추가 (오늘드림배송 선물포장) Start -->
-								
-								<!-- 2019-11-15 추가 (오늘드림배송 선물포장) End -->
-								<div class="tbl_cell w110">
-									<!-- <span class="org_price" style="display: none;"><span class="tx_num" id="normPrc_"></span>원</span> --><!-- 2017-01-24 수정 : 삭제 -->
-									<span class="cur_price"><span class="tx_num">31,000</span>원</span>
-								</div>
-								<div class="tbl_cell w100">1</div>
-								<!-- 2017-01-24 수정 : 삭제
-                                <div class="tbl_cell w120">
-                                    <p class="prd_delivery">
-                                        <strong>
-                                            무료배송
-                                        </strong>
-                                        도서·산간 제외
-                                    </p>
-                                </div>
-                                -->
-								<div class="tbl_cell w110">
-
-									<span class="org_price"><span class="tx_num" id="normPrc_A000000184129/001">31,000</span>원</span><!-- 2017-01-24 수정 : 추가 -->
-									<span class="pur_price"><span class="tx_num" id="salePrc_A000000184129/001">23,200</span>원</span>
-									<input type="hidden" id="orgNormPrc_A000000184129/001" value="31000">
-									<input type="hidden" id="orgSalePrc_A000000184129/001" value="23200">
-									<input type="hidden" id="imdtDscntAmt_A000000184129/001" value="0">
-
-								</div>
-							</div>
-							
-					</td>
-					</tr>
+							</td>
+						</tr>
 					<!--// 1+1 행사 상품인 경우 -->
 					
 						</tbody>
