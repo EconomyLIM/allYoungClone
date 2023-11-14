@@ -509,15 +509,15 @@ function getLastDay(year, month){
 	
 	
 									<a class="thum"
-										href="javascript:mypage.orderList.goGoodDetail('A000000163041','', 'Order',{t_page : '마이페이지_주문배송조회', t_click:'주문배송조회_상품상세'});">
+										href="<%-- 상품상세페이지 이동 --%>">
 										<img
-										src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0016/A00000016304111ko.jpg?l=ko"
+										src="<%-- 상품 이미지 경로 --%>"
 										alt="[11월 올영픽] [서현pick]콜레올로지 600mg*30정(15일분)+컷팅젤리2포 기획"
 										onerror="common.errorImg(this);">
 									</a>
 									<div class="textus">
 										<a class=""
-											href="javascript:mypage.orderList.goGoodDetail('A000000163041','', 'Order',{t_page : '마이페이지_주문배송조회', t_click:'주문배송조회_상품상세'});">
+											href="<%-- 상품상세페이지 이동 --%>">
 											<span class="tit">푸드올로지</span> <span class="txt">[11월
 												올영픽] [서현pick]콜레올로지 600mg*30정(15일분)+컷팅젤리2포 기획</span>
 										</a> <span class="color1sSize"><i class="tit">옵션</i>콜레올로지
