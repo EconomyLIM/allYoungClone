@@ -10,6 +10,7 @@ import productDetail.domain.AllCateDTO;
 import productDetail.domain.CateLDTO;
 import productDetail.domain.CateMDTO;
 import productDetail.domain.CateSDTO;
+import productDetail.domain.DetailBrandDTO;
 import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
@@ -197,7 +198,28 @@ public class ProDetailService {
 		
 	} // sDetailExImg
 	
-	
+	public DetailBrandDTO sDetailBrand(String displId) {
+		
+		Connection conn = null;
+		DetailBrandDTO detailBrandDTO = null;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			ProDetailDAOImpl proDetailDAOImpl = ProDetailDAOImpl.getInstance();
+			detailBrandDTO = proDetailDAOImpl.detailBrand(conn, displId);
+			
+		}catch (Exception e) {
+			
+			System.out.println("ProDetailSerivce sDetailExImg Exception");
+			e.printStackTrace();
+			
+		} finally {
+			JDBCUtil.close(conn);
+		} // try_catch
+		
+		return detailBrandDTO;
+		
+	} // sDetailBrand
 	
 	
 	

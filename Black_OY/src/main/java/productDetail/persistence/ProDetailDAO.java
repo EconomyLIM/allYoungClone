@@ -7,6 +7,7 @@ import productDetail.domain.AllCateDTO;
 import productDetail.domain.CateLDTO;
 import productDetail.domain.CateMDTO;
 import productDetail.domain.CateSDTO;
+import productDetail.domain.DetailBrandDTO;
 import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
@@ -34,15 +35,12 @@ public interface ProDetailDAO {
 	
 	// 6. 해당 상품의 표시 이미지 갖고오기
 	public List<ProDisplImgDTO> productImgs(Connection conn, String displId) throws Exception;
-	
-
-	// 리뷰에 쓸 sql
-	//Select rev_id, pro_displ_id, user_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2, rev_grade_3 from review  where pro_displ_id = 'pd_00000006';
-
-	//Select rev_img_src from review_img where rev_id = rev_id;
 
 	// 7. 해당 상품의 설명 이미지 갖고오기
 	public List<DetailExImgDTO> detailExImg(Connection conn, String displId) throws Exception;
+	
+	// 8. 해당 상품의 브랜드 정보 갖고오기
+	public DetailBrandDTO detailBrand(Connection conn, String displId) throws Exception;
 	
 
 	
