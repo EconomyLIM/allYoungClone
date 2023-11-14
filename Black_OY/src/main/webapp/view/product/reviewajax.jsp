@@ -59,7 +59,7 @@
 						<div class="review_cont">
 							<div class="score_area">
 								<span class="review_point"><span class="point"
-									style="width: 100%">5점만점에 ${review.rev_grade }점</span></span> <span class="date">${review.rev_reg }</span>
+									style="width: ${review.rev_grade*20 }%">5점만점에 ${review.rev_grade }점</span></span> <span class="date">${review.rev_reg }</span>
 							</div>
 							<!--## 리뷰 고도화 1차 ## 위치변경 -->
 							<!--## 리뷰 고도화 1차 ## 위치변경 -->

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,18 +24,116 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 	
 	@Override
-	public List<ReviewDTO> reviewList(Connection conn, String pro_displ_id, String type) {
+	public List<ReviewDTO> reviewList(Connection conn, String pro_displ_id, String type, String proid, int currentPage, int numberPerPage) {
 		ArrayList<ReviewDTO> reviewlist = null;
 		ReviewDTO reviewDTO = null;
 		
-		String sql = " select rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2,rev_grade_3, pro_id "
-				+ " from review where pro_displ_id = ? ";
+		int begin = (currentPage -1) * numberPerPage + 1;
+		int end = begin + numberPerPage -1 ;
+		
+		String sql = " SELECT * From ( SELECT ROWNUM no, t.* FROM( SELECT * FROM review ";
+		//String sql = " select rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2,rev_grade_3, pro_id "
+			//	+ " from review  ";
+				
+				if (!(proid.equals("ALL"))) {
+					sql+= " where pro_displ_id = ? AND pro_id = ?  ";
+				}else {
+					sql += " where pro_displ_id = ? ";
+				}
 		
 				if (type.equals("02")) {
 					sql += " order by rev_reg DESC ";
 				}else {
 					sql += " order by rev_like DESC ";
 				}
+				
+				sql += " )t )b where b.no  BETWEEN ? AND ? ";
+		
+		String rev_id;
+		String user_id;
+		//String pro_displ_id; 
+		int rev_like;
+		String rev_content;
+		int rev_grade;
+		Date rev_reg;
+		int rev_grade_1;
+		int rev_grade_2;
+		int rev_grade_3;
+		String pro_id;
+		
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		
+		//int temp =2;
+		System.out.println(sql);
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, pro_displ_id);
+			psmt.setInt(2, begin);
+			psmt.setInt(3, end);
+			
+			if (!(proid.equals("ALL"))) {
+				psmt.setString(2, proid);
+				psmt.setInt(3, begin);
+				psmt.setInt(4, end);
+			}
+			
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				reviewlist = new ArrayList<ReviewDTO>();
+				do {
+					 rev_id = rs.getString("rev_id");
+					 user_id = rs.getString("user_id");
+					//String pro_displ_id; 
+					rev_like = rs.getInt("rev_like");
+					 rev_content = rs.getString("rev_content");
+					 rev_grade = rs.getInt("rev_grade");
+					 rev_reg = rs.getDate("rev_reg");
+					 rev_grade_1 = rs.getInt("rev_grade_1");
+					 rev_grade_2 = rs.getInt("rev_grade_2");
+					 rev_grade_3 = rs.getInt("rev_grade_3");
+					 pro_id = rs.getString("pro_id");
+					 
+					 reviewDTO = new ReviewDTO(rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2, rev_grade_3, pro_id);
+					 reviewlist.add(reviewDTO);
+					
+				} while (rs.next());
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("reviewdaoimpl sql 오류");
+		}finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		}
+		
+		return reviewlist;
+	}
+	
+	// 리뷰 이미지 모아보기용
+	@Override
+	public List<ReviewDTO> reviewList(Connection conn, String pro_displ_id, String proid) {
+		ArrayList<ReviewDTO> reviewlist = null;
+		ReviewDTO reviewDTO = null;
+		
+		
+		
+		
+		String sql = " select rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2,rev_grade_3, pro_id "
+				+ " from review  ";
+				
+				if (!(proid.equals("ALL"))) {
+					sql+= " where pro_displ_id = ? AND pro_id = ?  ";
+				}else {
+					sql += " where pro_displ_id = ? ";
+				}
+		
+				
+				
 				
 		
 		String rev_id;
@@ -52,9 +151,18 @@ public class ReviewDAOImpl implements ReviewDAO {
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
+		
+		
+		System.out.println(sql);
+		
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, pro_displ_id);
+			
+			if (!(proid.equals("ALL"))) {
+				psmt.setString(2, proid);
+			}
+			
 			rs = psmt.executeQuery();
 			if (rs.next()) {
 				reviewlist = new ArrayList<ReviewDTO>();
@@ -137,7 +245,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public ReviewScoreDTO reviewScore(Connection conn, String pro_displ_id) {
+	public ReviewScoreDTO reviewScore(Connection conn, String pro_displ_id, String pro_id) {
 		// TODO Auto-generated method stub
 		ReviewScoreDTO reviewScoreDTO = null;
 		String sql = " SELECT "
@@ -156,7 +264,13 @@ public class ReviewDAOImpl implements ReviewDAO {
 				+ "  COALESCE(SUM(CASE WHEN rev_grade_3 = 2 THEN 1 ELSE 0 END) / COUNT(*) * 100, 0) AS grade3_2_ratio, "
 				+ "  COALESCE(SUM(CASE WHEN rev_grade_3 = 1 THEN 1 ELSE 0 END) / COUNT(*) * 100, 0) AS grade3_1_ratio, "
 				+ "  AVG(COALESCE(rev_grade, 0)) AS averagegrade "
-				+ "  FROM review where pro_displ_id = ? ";                      
+				+ "  FROM review ";                 
+		
+		if (!(pro_id.equals("ALL"))) {
+			sql+= " where pro_displ_id = ? AND pro_id = ?  ";
+		}else {
+			sql += " where pro_displ_id = ? ";
+		}
 		
 		 int grade_5_ratio;
 		 int grade_4_ratio;
@@ -181,6 +295,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 			
 			 psmt = conn.prepareStatement(sql);
 				psmt.setString(1, pro_displ_id);
+				
+				if (!(pro_id.equals("ALL"))) {
+					psmt.setString(2, pro_id);
+				}
+				
 				rs = psmt.executeQuery();
 			 if (rs.next()) {
 				
@@ -214,5 +333,76 @@ public class ReviewDAOImpl implements ReviewDAO {
 		
 		return reviewScoreDTO;
 	}
+
+	@Override
+	public int getTotalReviewPages(Connection conn, String pro_displ_id, String proid, int numberPerPage)
+			throws SQLException {
+		int totalPages = 0;
+
+		String sql = " SELECT CEIL( COUNT(*)/ ? ) "
+				+ " FROM review ";
+				
+		if (!(proid.equals("ALL"))) {
+			sql+= " where pro_displ_id = ? AND pro_id = ?  ";
+		}else {
+			sql += " where pro_displ_id = ? ";
+		}
+		
+
+		PreparedStatement pstmt = null;
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, numberPerPage);		
+		pstmt.setString(2, pro_displ_id);
+		if (!(proid.equals("ALL"))) {
+			pstmt.setString(3, proid);		
+		}
+		
+			
+		
+		ResultSet rs =  pstmt.executeQuery();
+
+		if( rs.next() )  totalPages = rs.getInt(1);
+
+		JDBCUtil.close(pstmt);
+		JDBCUtil.close(rs);
+		JDBCUtil.close(conn);
+
+		return totalPages;
+	} // getTotalPages
+
+	@Override
+	public int getTotalReviewRecords(Connection conn, String pro_displ_id, String proid) throws SQLException {
+		// TODO Auto-generated method stub
+		int totalRecords = 0;
+		
+		String sql = " SELECT COUNT(*) "
+				+ " FROM review ";
+
+		if (!(proid.equals("ALL"))) {
+			sql+= " where pro_displ_id = ? AND pro_id = ?  ";
+		}else {
+			sql += " where pro_displ_id = ? ";
+		}
+
+		PreparedStatement pstmt = null;
+		pstmt = conn.prepareStatement(sql);		
+		pstmt.setString(1, pro_displ_id);		
+		
+		if (!(proid.equals("ALL"))) {
+			pstmt.setString(2, proid);		
+		}
+		
+		ResultSet rs =  pstmt.executeQuery();
+
+		if( rs.next() )  totalRecords = rs.getInt(1);
+
+		JDBCUtil.close(pstmt);
+		JDBCUtil.close(rs);
+		JDBCUtil.close(conn);
+		
+		return totalRecords;
+	}
+	
 
 }

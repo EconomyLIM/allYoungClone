@@ -15,6 +15,7 @@ import productDetail.domain.AllCateDTO;
 import productDetail.domain.CateLDTO;
 import productDetail.domain.CateMDTO;
 import productDetail.domain.CateSDTO;
+import productDetail.domain.DetailBrandDTO;
 import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
@@ -245,7 +246,7 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 	public List<ProductInfo> productInfo(Connection conn, String pid) throws Exception {
 		String sql = " SELECT  pro_displ_id, pro_displ_name, brand_id, brand_name, pro_img_src, pro_id, pro_name, cat_s_id"
 				+ " , pro_price, PafterPrice "
-				+ ", lowprice, afterprice, prg, prc, prd, prp, stock, pro_stock "
+				+ ", lowprice, afterprice, prc, prd, prp, stock, pro_stock "
 				+ " FROM proDetail "
 				+ " WHERE pro_displ_id = ? ";
 		
@@ -278,7 +279,6 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 							.pafterPrice(rs.getInt("PafterPrice"))
 							.lowPrice(rs.getInt("lowprice"))
 							.afterPrice(rs.getInt("afterprice"))
-							.prg(rs.getInt("prg"))
 							.prc(rs.getInt("prc"))
 							.prd(rs.getInt("prd"))
 							.prp(rs.getInt("prp"))
@@ -466,6 +466,51 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 		
 		return list;
 	} // detailExImg
+
+	@Override
+	public DetailBrandDTO detailBrand(Connection conn, String displId) throws Exception {
+
+		String sql = " SELECT b.brand_id, b.brand_name, bl.brand_logo_src "
+				+ "FROM product_display pd "
+				+ "JOIN brand b ON pd.brand_id = b.brand_id "
+				+ "LEFT JOIN brand_logo bl ON b.brand_id = bl.brand_id "
+				+ "WHERE pro_displ_id = ? ";
+		
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		DetailBrandDTO detailBrandDTO = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, displId);
+			rs = pstmt.executeQuery();
+			System.out.println(">>ProDetailDAOImpl detailBrand...");
+			
+			if (rs.next()) {
+				
+				detailBrandDTO = DetailBrandDTO.builder()
+						.brandId(rs.getString("brand_id"))
+						.brandName(rs.getString("brand_name"))
+						.brandLogoSrc(rs.getString("brand_logo_src"))
+						.build();
+				
+			} // if
+			
+		} catch (SQLException e) {
+			System.out.println(">proDetailDAOImpl detailBrand SQLException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">proDetailDAOImpl detailBrand Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		} //try_catch
+		
+		return detailBrandDTO;
+	} //detailBrand
 
 	
 
