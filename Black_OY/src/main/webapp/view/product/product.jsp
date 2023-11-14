@@ -1,3 +1,5 @@
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
 <%@page import="productDetail.domain.ProductInfo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,6 +9,20 @@
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/WEB-INF/inc/include.jspf"%>
 <%@ include file="/WEB-INF/inc/session_auth.jspf"%>
+<%
+    String productId = request.getParameter("goodsNo"); // 상품 식별자
+
+    // 현재 상품 페이지에 대한 세션 Set을 가져옴
+    Set<String> usersOnPage = (Set<String>) application.getAttribute(productId);
+
+    // 새로운 사용자 세션 ID를 현재 페이지 세션 Set에 추가
+    HttpSession session2 = request.getSession();
+    if (usersOnPage == null) {
+        usersOnPage = new HashSet<>();
+        application.setAttribute(productId, usersOnPage);
+    }
+    usersOnPage.add(session2.getId());
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -466,6 +482,93 @@ $(function() {
  
  
 </script>
+<script>
+// 브랜드 좋아요 체크 처리(ajax)
+
+$(function () {
+	
+	 checkLikeStatus();
+
+     // 좋아요 버튼 클릭 이벤트 처리
+     $("#brnd_wish").click(function () {
+    	 /* alert('brnd_wish'); */
+         toggleLikeStatus();
+     });
+     	
+}) // function
+
+	function checkLikeStatus() {
+		$.ajax({
+			url:"<%=contextPath%>/GetDBLAjax",
+			method:"GET",
+			cache:false,
+			dataType : 'text',
+			data:{brandId:"${detailBrandDTO.brandId}"},
+			success: function (result) {
+				console.log(result);
+				if (result === "true") {
+					 	
+		               $("#brnd_wish").addClass("on");
+		         } else {
+		               $("#brnd_wish").removeClass("on");
+		           }
+			} , error : function (data, textStatus) {
+				console.log('error');
+            } // success , error
+            
+		}) // ajax
+	} // checkLikeStatus
+	
+    function toggleLikeStatus() {
+		
+	$.ajax({
+		url: "<%=contextPath%>/GetDBLAjax",
+		method:"POST",
+		cache:false,
+		dataType : 'text',
+		data:{brandId:"${detailBrandDTO.brandId}"},
+		success: function (result) {
+
+			if (result === "true" ) {
+				console.log('toggleLikeStatus:');
+				$("#brandOn").show();
+				$("#brandOn").fadeOut(2000);   
+				
+                $("#brnd_wish").addClass("on");
+            } else {
+            	console.log('toggleLikeStatus: ' + result);
+            	$("#brandOff").show();
+            	$("#brandOff").fadeOut(2000);
+                $("#brnd_wish").removeClass("on");
+            } //if
+		}, error : function (data, textStatus) {
+			console.log('error');
+        } // success , error
+	}) // ajax
+	} // toggleLikeStatus
+	
+</script>
+    <script>
+    /* 페이지에 나갈때 세션 삭제 */
+        $('[data-deleteSession]').on('click', function(e) {
+                e.preventDefault();  // 기본 동작 막기
+            // 페이지를 떠날 때 서버로 요청을 보냄
+            var sessionName = '<%= session.getAttribute(request.getParameter("goodsNo")) %>';
+            $.ajax({
+                url: '<%=contextPath%>RemoveSessionServlet?sessionName=' + sessionName,
+                cache:false,
+                type: 'GET',
+                async: false, // 동기식 요청
+                success: function(response) {
+                    console.log("요청 성공");  // 성공 시 로그 출력
+                    console.log(url);  // 성공 시 로그 출력
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("요청 실패:", textStatus, errorThrown);  // 실패 시 에러 로그 출력
+                }
+            });
+        });
+    </script>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
 	<div id="Container">
 		<div id="Contents">
@@ -481,7 +584,7 @@ $(function() {
 									<c:forEach items="${cLList}" var="cll">
 										<li id="${cll.cLId}"><a
 											href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${cll.cLId}"
-											class="goods_category1">${cll.cLName}</a></li>
+											class="goods_category1" data-deleteSession>${cll.cLName}</a></li>
 									</c:forEach>
 								</c:if>
 							</ul>
@@ -493,7 +596,7 @@ $(function() {
 									<c:forEach items="${cMList}" var="cml">
 										<li id="${cml.cmId}"><a
 											href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${allCateDTO.catLId}${cml.cmId}&sort=1"
-											class="goods_category2">${cml.cmName}</a></li>
+											class="goods_category2" data-deleteSession>${cml.cmName}</a></li>
 									</c:forEach>
 								</c:if>
 							</ul>
@@ -505,7 +608,7 @@ $(function() {
 									<c:forEach items="${cSList}" var="csl">
 										<li id="${csl.csId}"><a
 											href="<%=contextPath %>/view/product/pmidlistproduct.do?displNum=${allCateDTO.catLId}${allCateDTO.catSId}${csl.csId}&sort=1"
-											class="goods_category3">${csl.csName}</a></li>
+											class="goods_category3" data-deleteSession>${csl.csName}</a></li>
 									</c:forEach>
 								</c:if>
 							</ul>
@@ -563,7 +666,7 @@ $(function() {
 				<div class="right_area">
 					<div class="prd_info">
 						<p class="prd_brand">
-							<a href="#" id="moveBrandShop" class="pd_arrow_link">가히</a>
+							<a href=".do?brandId=${pLists[0].brandId}" id="moveBrandShop" class="pd_arrow_link">${pLists[0].brandName}</a>
 						</p>
 						<p class="prd_name">${pLists[0].displName }</p>
 						<!-- 202005 상품개선 : 추가 -->
@@ -632,8 +735,8 @@ $(function() {
 
 						</p>
 						<div class="viewArea" id="div_goodsViewNumArea"
-							style="display: none;">
-							<span><span class="viewNum" id="goodsViewNum"></span>명이
+							style="display: block;">
+							<span><span class="viewNum" id="goodsViewNum"><%= usersOnPage.size() %></span>명이
 								보고있어요</span>
 						</div>
 						<!-- 프로 모션 쿠폰영역-->
@@ -648,33 +751,38 @@ $(function() {
 								</p>
 								<p></p>
 								<ul class="bl_list">
-									<li><span>일반배송</span>
-										<div>
-											2,500원 ( 20,000 원 이상 무료배송 ) <br>
-											<em>올리브영 배송 </em> <em>평균 3일 이내 배송</em>
-											<!-- 												<b>무료배송</b>  -->
-											<!-- 														 <br><b>업체배송</b> -->
-											<!-- 															<em><b>합배송 불가</b></em> -->
-											<!-- 															<em><b>합배송 불가</b></em> -->
-										</div></li>
-									<li><span>오늘드림</span>
-										<div>
-											2,500원 또는 5,000원 <a href="#" onclick="todayDeliveryPop()"
-												class="ico_info">배송정보 안내 레이어열기</a>
-										</div></li>
+									
+									
+										<c:choose>
+											<c:when test="${empty sessionScope.logOn }">
+											<li>
+												<span>일반배송</span>
+													<div>2,500원( 20,000 원 이상 무료배송 )
+														<br><em>올리브영  배송 </em>
+														<em>평균 3일 이내 배송</em>
+																<!-- <b>무료배송</b>  -->
+																<!--  <br><b>업체배송</b> -->
+																<!-- <em><b>합배송 불가</b></em> -->
+																<!-- <em><b>합배송 불가</b></em> -->
+													</div>
+											</li>
+											</c:when>
+											<c:otherwise>
+												<li>
+												<span>일반배송</span>
+													<div>2,500원( 20,000 원 이상 무료배송 )
+														<br><em>올리브영  배송 </em>
+														<em>평균 3일 이내 배송</em>
+																<!-- <b>무료배송</b>  -->
+																<!--  <br><b>업체배송</b> -->
+																<!-- <em><b>합배송 불가</b></em> -->
+																<!-- <em><b>합배송 불가</b></em> -->
+													</div>
+											</li>
+											</c:otherwise>
+										</c:choose>
 									<!-- 202005 상품개선 : 오늘드림 빠름배송 -->
-									<li class="liQuickAI" style=""><span class="tx_tit">
-											오늘드림 빠름 배송 AI 예측 <!-- 202005 상품개선 : 자세히 보기 위치 변경 --> <a
-											href="javascript:goods.detail.todayDelivery.openQuickDeliAI();"
-											class="ico_infoMore">자세히 보기</a>
-									</span>
-										<p class="tx_addre">
-											<span>┖ </span><span class="quickUsrAddr">서울 강동구 </span> 기준
-											<!-- 202005 상품개선 : tx_cont 위치 변경 -->
-											<span class="tx_cont"> <span class="span_dlvTitlNm">1~2시간
-													내</span> <span class="span_maxDeliPer">60%</span>
-											</span>
-										</p></li>
+									
 									<li><span>픽업</span>
 										<div>
 											배송비 조건 없음 <a
@@ -690,11 +798,28 @@ $(function() {
 										THE CJ 카드 추가 10%할인 <a href="#" onclick="card_infoPop()"
 											class="ico_info">카드혜택가 안내 레이어 열기</a>
 									</p>
+									<c:choose>
+									<c:when test="${empty sessionScope.logOn }">
+										<p>
+											CJ ONE 포인트 <span class=""></span>
+											최대  1% 적립 예상
+											<a href="#" onclick="cjone_pointPop();" class="ico_info">CJ ONE 포인트 예상적립 레이어 열기</a>
+										</p>
+									</c:when>
+									<c:otherwise>
 									<p>
-										CJ ONE 포인트 <span class="color-5">BABY OLIVE</span> 0.5% 적립 예상
-										<a href="#" class="ico_info" onclick="cjone_pointPop()">CJ
+										CJ ONE 포인트 
+										<span class="color-5">${sessionScope.logOn.grade_id}</span>
+										<c:if test="${sessionScope.logOn.grade_id eq 'BABY OLIVE'}">0.5% 적립 예상</c:if>
+										<c:if test="${sessionScope.logOn.grade_id eq 'PINK OLIVE'}">0.5% 적립 예상</c:if>
+										<c:if test="${sessionScope.logOn.grade_id eq 'GREEN OLIVE'}">1% 적립 예상</c:if>
+										<c:if test="${sessionScope.logOn.grade_id eq 'BLACK OLIVE'}">1% 적립 예상</c:if>
+										<c:if test="${sessionScope.logOn.grade_id eq 'GOLD OLIVE'}">1% 적립 예상</c:if>
+										<a href="#" class="ico_info" onclick="cjone_pointPop();">CJ
 											ONE 포인트 예상적립 레이어 열기</a>
 									</p>
+									</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
 						</div>
@@ -822,7 +947,8 @@ var o2oDeliveryYn = "";
 								<dl>
 									<dd>
 										<a
-											href="javascript:goods.detail.todayDelivery.openQuickPopMidle('question');"
+											href="#"
+											onclick="todayDeliveryPop();"
 											class="ico_info_view">오늘드림 안내 레이어열기</a>
 									</dd>
 								</dl>
@@ -917,7 +1043,7 @@ var o2oDeliveryYn = "";
 								<!-- 수량(일반)E -->
 
 								<!-- 수량(개당)S -->
-								<span class="txt">전 회원 가히 상품 구매 상품 1개당, <span class="num">증정품
+								<span class="txt">전 회원 ${detailBrandDTO.brandName } 상품 구매 상품 1개당, <span class="num">증정품
 										1개</span> 선착순 증정
 								</span>
 
@@ -994,14 +1120,14 @@ var o2oDeliveryYn = "";
 					<!-- 202005 상품개선 : 브랜드 좋아요 추가 -->
 					<div class="brand_like">
 						<p class="inner">
-							<a href="javascript:;" id="moveBrandShop_like"
+							<a href=".do?${detailBrandDTO.brandId }" id="moveBrandShop_like"
 								class="link arr goods_brand"> <!-- 								<span class="img" style="background-image:url('/pc-static-root/image/product/img_brand_default.png')"></span> -->
 								<span class="logo"
-								style="background-image: url('https://image.oliveyoung.co.kr/uploads/images/onlBrandMgmt/2023/3/667175229883283657.jpg')"></span>
-								<em>가히 브랜드관</em>
+								style="background-image: ${detailBrandDTO.brandLogoSrc}')"></span>
+								<em>${detailBrandDTO.brandName } 브랜드관</em>
 							</a>
 							<button type="button" id="brnd_wish" data-ref-onlbrndcd="A003585"
-								class="icon goods_brandlike " data-attr="상품상세^브랜드관좋아요^가히">좋아요
+								class="icon goods_brandlike " data-attr="상품상세^브랜드관좋아요^${detailBrandDTO.brandName }">좋아요
 								해제됨</button>
 						</p>
 					</div>
@@ -1764,9 +1890,9 @@ var o2oDeliveryYn = "";
 
 							<span> <!-- ## 리뷰 고도화 1차 ## onload , errorResizeImg --> <img
 								src="${img.rev_img_src }"
-								onload="common.imgLoads(this,120);" class="thum"
+								class="thum"
 								data-value="23587524_1" alt="" data-state=""
-								onerror="common.errorResizeImg(this,120)">
+								>
 						</span>
 
 					</a></li>
@@ -1843,8 +1969,6 @@ var o2oDeliveryYn = "";
 									onclick="goods.gdas.hadleClickProductDetailReviewerProfile('QjdncktGcWptUk5vclBWbnM2NkN6QT09', { t_page: '상품상세', t_click: '리뷰어_리뷰어프로필', t_profile_name: '글리스', t_review_rank_name: '19'})"
 									data-attr="상품상세^리뷰어프로필^프로필이미지 또는 닉네임 클릭"> <img
 									src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2023/11/04/1699105876598.png"
-									onerror="common.errorProfileImg(this);"
-									onload="common.onLoadProfileImg(this, 60)"
 									style="display: none;">
 									<div class="thum">
 										<span class="bg"></span> <img
@@ -1967,7 +2091,7 @@ var o2oDeliveryYn = "";
 												src="${img.rev_img_src }"
 												onload="common.imgLoads(this,165);" data-value="23082403_1"
 												class="thum" alt=""
-												onerror="common.errorResizeImg(this,165)"></span></a></li>
+												></span></a></li>
 												</c:if>
 									</c:forEach>
 									</c:forEach>
@@ -2296,6 +2420,18 @@ var o2oDeliveryYn = "";
 
 			<button class="layer_close type2" onclick="card_infoPopDown()">창
 				닫기</button>
+		</div>
+	</div>
+	<!-- 브랜드off 작업 -->
+	<div class="laytoast" id="brandOff" style="display: none;">
+		<div class="inner">
+			<p class="txt_recom txt_01">브랜드<br><em>좋아요</em></p>
+		</div>
+	</div>
+	<!-- 브랜드on 작업 -->
+	<div class="laytoast on" id="brandOn" style="display: none;">
+		<div class="inner">
+			<p class="txt_recom txt_01">브랜드<br><em>좋아요</em></p>
 		</div>
 	</div>
 </body>

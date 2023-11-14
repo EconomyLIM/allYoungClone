@@ -94,6 +94,8 @@ public class HeadService {
 			
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
 		}
 		return list;
 	}
@@ -111,6 +113,8 @@ public class HeadService {
 			
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
 		}
 		
 		
