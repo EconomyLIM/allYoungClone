@@ -569,6 +569,44 @@ $(function () {
             });
         });
     </script>
+    <script>
+    // 상품설명/리뷰 등 탭클릭 액션
+    $(function(){
+		$("#tabList li").click(function(){
+			let id = $(this).attr("id");
+			
+			$("#tabList li").removeClass("on");			
+			$(this).addClass("on")
+			if (id == "productInfo") {
+				showDiv(1)
+			}
+			if (id == "buyInfo") {
+				showDiv(2)	
+			}
+			if (id == "reviewInfo") {
+				showDiv(3)
+}
+			if (id == "qnaInfo") {
+				showDiv(4)	
+}
+		})
+    })
+    
+    function showDiv(index) {
+        const divs = document.querySelectorAll('.tabConts.prd_detail_cont'); // 모든 div 요소 선택
+
+        // index는 1부터 시작하므로 실제 인덱스는 index - 1이 됨
+        for (let i = 0; i < divs.length; i++) {
+            if (i === index - 1) {
+                divs[i].classList.add("show"); // 선택된 div 보이기
+            } else {
+                divs[i].classList.remove("show"); // 선택되지 않은 div 감추기
+            }
+        }
+    }
+
+    
+    </script>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
 	<div id="Container">
 		<div id="Contents">
@@ -1334,7 +1372,7 @@ var o2oDeliveryYn = "";
 			<!--// 구매정보 컨텐츠 영역 -->
 			
 			<!-- 리뷰 영역 -->
-<div class="tabConts prd_detail_cont show" id="gdasContentsArea">
+<div class="tabConts prd_detail_cont" id="gdasContentsArea">
 		<div class="review_wrap renew review-reward-notice">
 			<!-- ## 리뷰 고도화 1차 : 영역 부모 div 추가 ## -->
 
