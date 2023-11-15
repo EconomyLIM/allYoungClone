@@ -1,4 +1,4 @@
-package mypage.domain;
+package mypage.main.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

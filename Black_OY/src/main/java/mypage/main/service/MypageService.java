@@ -1,4 +1,4 @@
-package mypage.service;
+package mypage.main.service;
 
 import java.sql.Connection;
 import java.util.List;
@@ -6,12 +6,12 @@ import java.util.List;
 import com.util.ConnectionProvider;
 import com.util.JDBCUtil;
 
-import mypage.domain.MpOrderDTO;
-import mypage.domain.MpPAskDTO;
-import mypage.domain.MpPlikeDTO;
-import mypage.domain.MpQnADTO;
-import mypage.domain.MpUserInfoDTO;
-import mypage.persistence.MyPageDAOImpl;
+import mypage.main.domain.MpOrderStateDTO;
+import mypage.main.domain.MpPAskDTO;
+import mypage.main.domain.MpPlikeDTO;
+import mypage.main.domain.MpQnADTO;
+import mypage.main.domain.MpUserInfoDTO;
+import mypage.main.persistence.MyPageDAOImpl;
 
 
 
@@ -184,12 +184,12 @@ public class MypageService {
 	}
 	
 	//	9.	주문현황 가져오기 서비스
-	public List<MpOrderDTO> mpUOservice(String Uid){
+	public List<MpOrderStateDTO> mpUOservice(String Uid){
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			MyPageDAOImpl daoImpl = MyPageDAOImpl.getinstance();
-			List<MpOrderDTO> list = null;
+			List<MpOrderStateDTO> list = null;
 			list = daoImpl.selectUserOrderStatus(conn, Uid);
 			return list;
 		} catch (Exception e) {
