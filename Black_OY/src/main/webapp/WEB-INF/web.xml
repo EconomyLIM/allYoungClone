@@ -42,7 +42,6 @@
 	<filter-mapping>
 		<filter-name>loginCheckFilter</filter-name>
 		<url-pattern>/olive/basket.do</url-pattern>
-
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 	
