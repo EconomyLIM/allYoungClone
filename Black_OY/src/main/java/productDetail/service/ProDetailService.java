@@ -12,9 +12,12 @@ import productDetail.domain.CateMDTO;
 import productDetail.domain.CateSDTO;
 import productDetail.domain.DetailBrandDTO;
 import productDetail.domain.DetailExImgDTO;
+import productDetail.domain.DetailInfoDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
 import productDetail.domain.ProductPromo;
+import productDetail.domain.QnADetailDTO;
+import productDetail.domain.WrtieQnaDTO;
 import productDetail.persistence.ProDetailDAOImpl;
 
 public class ProDetailService {
@@ -198,6 +201,7 @@ public class ProDetailService {
 		
 	} // sDetailExImg
 	
+	//====================== 해당 상품의 브랜드 정보를 갖고오는 작업 =========================
 	public DetailBrandDTO sDetailBrand(String displId) {
 		
 		Connection conn = null;
@@ -221,12 +225,96 @@ public class ProDetailService {
 		
 	} // sDetailBrand
 	
+	//====================== 해당 상품의 구매(상세) 정보를 갖고오는 작업 =========================
+	public DetailInfoDTO sDetailInfo (String displId) {
+		
+		Connection conn = null;
+		DetailInfoDTO detailInfoDTO = null;
+		
+		try {
+		
+			conn = ConnectionProvider.getConnection();
+			ProDetailDAOImpl proDetailDAOImpl = ProDetailDAOImpl.getInstance();
+			detailInfoDTO = proDetailDAOImpl.detailInfo(conn, displId);
+			System.out.println("> sDetailInfo Service call ");
+		} catch (Exception e) {
+			System.out.println("ProDetailSerivce sDetailInfo Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		} // try_catch
+		
+		return detailInfoDTO;
+	} // sDetailInfo
 	
+	//====================== 해당 상품의 QNA를 갖고오는 작업 =========================
+	public List<QnADetailDTO> sDetailQna(String displId) {
+		
+		Connection conn = null;
+		List<QnADetailDTO> list = null;
+		
+		try {
+			
+			conn = ConnectionProvider.getConnection();
+			ProDetailDAOImpl proDetailDAOImpl = ProDetailDAOImpl.getInstance();
+			list = proDetailDAOImpl.detailQna(conn, displId);
+			System.out.println("> sDetailInfo Service call..");
+			
+		} catch (Exception e) {
+			System.out.println("ProDetailSerivce sDetailQna Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		} // try_catch
+		
+		return list;
+	} // sDetailQna
 	
+	//====================== 해당 QNA를 삭제하는 작업 =========================
+	public int sDeleteQna (String qnaId) {
+		Connection conn = null;
+		int rowCnt = 0;
+		
+		try {
+			
+			conn = ConnectionProvider.getConnection();
+			ProDetailDAOImpl proDetailDAOImpl = ProDetailDAOImpl.getInstance();
+			rowCnt = proDetailDAOImpl.deleteQna(conn, qnaId);
+			System.out.println("> sDetailInfo sDeleteQna call..");
+			
+		} catch (Exception e) {
+			System.out.println("ProDetailSerivce sDeleteQna Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		} // try_catch
+		
+		return rowCnt; 
+		
+	} // sDeleteQna
 	
-	
-	
-	
+	//====================== QNA를 등록하는 작업 =========================
+	public int sWriteQna (WrtieQnaDTO writeQna) {
+		
+		int rowCnt = 0;
+		Connection conn = null;
+		
+		try {
+			
+			conn = ConnectionProvider.getConnection();
+			ProDetailDAOImpl proDetailDAOImpl = ProDetailDAOImpl.getInstance();
+			rowCnt = proDetailDAOImpl.writeQna(conn, writeQna);
+			System.out.println("> sDetailInfo sWriteQna call..");
+			
+		} catch (Exception e) {
+			System.out.println("ProDetailSerivce sWriteQna Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		} // try_catch
+		
+		return rowCnt; 
+	} // sWriteQna
 	
 	
 	
