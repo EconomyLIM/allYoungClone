@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="/BlackOY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
 
-<style>
+<style>	
 	* {
 		box-sizing: border-box;
 	}
-
+	
 	html, body {
 		font-family: fantasy;
 		font-size: 25px;
@@ -45,9 +45,18 @@
 </head>
 <body>
 <div>
-<a href="/Black_OY/view/product/pmidlistproduct.do">dd</a>
+
+
+<a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=00010002&sort=1&currentpage=1&brandId=br_00000108&brandId=br_00000107">Mid,smallproductList</a>
+<br>
+<a href="<%=contextPath%>/olive/productDetail.do?displNum=00010002">productDetail</a>
+<br>
+<a href="<%=contextPath%>/olive/review.do">review</a>
+<img src="images/productDisplay/pthi_101.jpg" alt="123"></img>
+<br>
 <br>
 <a href="<%=contextPath %>/olive/main.do">main page</a>
+
 
 </div>
 </body>
