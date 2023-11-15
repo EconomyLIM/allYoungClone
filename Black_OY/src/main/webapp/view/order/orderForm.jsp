@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="/WEB-INF/inc/include.jspf" %>
 <%@ include file="/WEB-INF/inc/session_auth.jspf" %>
@@ -14,6 +15,102 @@
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
+
+	<script>
+		// form check
+		function formCheck() {
+			if($("#btn_dlvp_exist").prop("checked")) {
+				if($("#rmitNm_exist").val() == "") {
+					alert($("#rmitNm_exist").attr("title"));
+					$("#rmitNm_exist").focus();
+					return false;
+				} else if($("#rmitCellSctNo_exist").val() == "") {
+					alert($("#rmitCellSctNo_exist").attr("title"));
+					$("#rmitCellSctNo_exist").focus();
+					return false;
+				} else if($("#rmitCellTxnoNo_exist").val() == "") {
+					alert($("#rmitCellTxnoNo_exist").attr("title"));
+					$("#rmitCellTxnoNo_exist").focus();
+					return false;
+				} else if($("#rmitCellEndNo_exist").val() == "") {
+					alert($("#rmitCellEndNo_exist").attr("title"));
+					$("#rmitCellEndNo_exist").focus();
+					return false;
+				} else if($("#stnmRmitPostNo_exist").val() == "") {
+					alert($("#stnmRmitPostNo_exist").attr("title"));
+					return false;
+				} else if($("#tempRmitDtlAddr_exist").val() == "") {
+					alert($("#tempRmitDtlAddr_exist").attr("title"));
+					return false;
+				} 
+			} else if($("#btn_dlvp_new").prop("checked")) {
+				if($("#dlvpNm_new").val() == "") {
+					alert($("#dlvpNm_new").attr("title"));
+					$("#dlvpNm_new").focus();
+					return false;
+				} else if($("#rmitNm_new").val() == "") {
+					alert($("#rmitNm_new").attr("title"));
+					$("#rmitNm_new").focus();
+					return false;
+				} else if($("#rmitCellSctNo_new").val() == "") {
+					alert($("#rmitCellSctNo_new").attr("title"));
+					$("#rmitCellSctNo_new").focus();
+					return false;
+				} else if($("#rmitCellTxnoNo_new").val() == "") {
+					alert($("#rmitCellTxnoNo_new").attr("title"));
+					$("#rmitCellTxnoNo_new").focus();
+					return false;
+				} else if($("#rmitCellEndNo_new").val() == "") {
+					alert($("#rmitCellEndNo_new").attr("title"));
+					$("#rmitCellEndNo_new").focus();
+					return false;
+				} else if($("#stnmRmitPostNo_new").val() == "") {
+					alert($("#stnmRmitPostNo_new").attr("title"));
+					$("#stnmRmitPostNo_new").focus();
+					return false;
+				} else if($("#tempRmitDtlAddr_new").val() == "") {
+					alert($("#tempRmitDtlAddr_new").attr("title"));
+					$("#tempRmitDtlAddr_new").focus();
+					return false;
+				}
+			}
+			
+			if($("#btn_door_manner_temp1").prop("checked") && $("#door_type_exist").val() == "") {
+				alert("공동현관 비밀번호를 입력하세요.");
+				$("#door_type_exist").focus();
+				return false;
+			} else if($("#btn_door_manner_temp2").prop("checked") && $("#door_type_exist").val() == "") {
+				alert("경비실 호출 방법을 입력하세요.");
+				$("#door_type_exist").focus();
+				return false;
+			} else if($("#btn_door_manner_temp4").prop("checked") && $("#door_type_exist").val() == "") {
+				alert("기타 상세 내용을 입력하세요.");
+				$("#door_type_exist").focus();
+				return false;
+			} 
+			
+			if($("#payMethod_11").prop("checked") && $("#acqrCd").val() == "") {
+				alert("결제하실 카드를 선택하세요.");
+				return false;
+			}
+			
+			if($("#agree_1").prop("checked") == false) {
+				alert($("#agree_1").attr("title"));
+				return false;
+			} else if($("#agree_2_1").prop("checked") == false) {
+				alert($("#agree_2_1").attr("title"));
+				return false;
+			} else if($("#agree_2_2").prop("checked") == false) {
+				alert($("#agree_2_2").attr("title"));
+				return false;
+			} else if($("#agree_2_3").prop("checked") == false) {
+				alert($("#agree_2_3").attr("title"));
+				return false;
+			}
+				
+			return true;
+		}
+	</script>
 
 	<script>
 		$(function() {
@@ -85,6 +182,26 @@
 				$("#rmitTelEndNo_exist").val(tel2s[2]);
 			}
 			
+			// 신규 배송지 클릭 했을 때
+			$("#btn_dlvp_new").on("click", function() {
+				$(".new_order_area").show();
+				$("#dlvpInfo > tbody > tr").not(".new_order_area").hide();
+				$("#dlvpInfo > tbody > tr:nth-child(1)").show();
+				$(".new_order_area input,select").prop("disabled", false);
+				$("#dlvpSelect").hide();
+			});
+			
+			// 기본 배송지 클릭 했을 때
+			$("#btn_dlvp_exist").on("click", function() {
+				$(".new_order_area").hide();
+				$("#dlvpInfo > tbody > tr").not(".new_order_area").show();
+				$("#o2o_dlv_area").hide();
+				$("#pickupStore").hide();
+				$("#pickupStoreList").hide();
+				$(".new_order_area input,select").prop("disabled", true);
+				$("#dlvpSelect").show();
+			})
+			
 			// 배송지 선택에서 바뀔 시 ajax 처리
 			$("#dlvpSelect").on("change", function() {
 				$.ajax({
@@ -147,6 +264,15 @@
 				}
 			}
 			$("#door_type_exist").val('${dto.req_content}');
+			
+			// 배송 메시지 -> 직접 입력하기 눌렀을 때
+			$("#mbrMemoCont").on("change", function() {
+				if($(this).val() == "직접입력하기") {
+					$("#pickupHide5 > table:nth-child(2) > tbody > tr > td > input").show();
+				} else {
+					$("#pickupHide5 > table:nth-child(2) > tbody > tr > td > input").hide();
+				}
+			});
 			
 			// 공동현관출입방법 체크 박스 클릭 시
 			$("#btn_door_manner_temp1").on("click", function() {
@@ -249,7 +375,79 @@
 				$("#payMethodList > li:nth-child(6)").show();
 			});
 			
+			
+			// 결제하기 버튼 클릭 했을 때
+			$("#btnPay").on("click", function() {
+				if(formCheck()) {
+					alert("결제 가능~~");
+					$("#orderForm").submit();
+				}
+			});
+			
+			
+			// 총 배송비 상세보기 팝업 창
+			$("#orderForm > div.order_payment_box > div.right_area > ul > li.line_top2 > span.tx_tit > button")
+				.on("click", function() {
+					$("#deliveryInfo").show();
+					$("body").append(dimm);
+				});
+			
+			$("#getDlexDtlPopAjax > button").on("click", function() {
+				$("#deliveryInfo").hide();
+				$(".dimm").remove();
+			})
+			
+			// 상품이 로딩되고 최종 결제 정보에 업데이트하기
+			let pur_price = $(".pur_price");
+			let totalPrice = 0;
+			for (var i = 0; i < pur_price.length; i++) {
+				totalPrice += parseInt($(pur_price[i]).find("span").data("price"));
+			}
+			
+			$("#orderForm > div.order_payment_box > div.right_area > ul > li:nth-child(1) > span.tx_cont > span")
+				.text(totalPrice);
+			$("#totPayAmt_sum_span").text(totalPrice);
+			$("#totalPrice").val(totalPrice);
+			$("#totalPay").val(totalPrice);
+			
+			
+			
+			
+			// 오늘드림을 누르고 왔을 때
+			let quickYN = '${quickYN}';
+			if(quickYN == 'Y') {
+				$("#o2o_dlv_area").show();
+				$("#dlvpInfo > tbody > tr:nth-child(1)").hide();
+				$(".sub-title2.mgT15.o2o_24h_chk_area").hide();
+				$("#search-zipcode-pop_exist_r").hide();
+			}
+			
+			// 오늘드림, 픽업 버튼을 눌렀을 때 
+			$("#todayToggle").on("click", function() {
+				$("#pickupDlvpNm").show();
+				$("#o2o_dlv_area").show();
+				$("#pickupHide1").show();
+				$("#pickupHide2").show();
+				$("#pickupHide3").show();
+				$("#pickupHide4").show();
+				$("#pickupStoreList").hide();
+			});
+			
+			$("#pickupToggle").on("click", function() {
+				$("#dlvpInfo > tbody > tr").hide();
+				$("#pickupStoreList").show();
+			});
+			
+			// 선물포장 서비스 팝업창
+			$("#gift_wrapping_01").on("click", function() {
+				$("#infoGiftBoxOrder").show();
+				$("body").append(dimm);
+			});
+			
+			// 여기부터
+			/* $("#infoGiftBoxOrder > div > button").on("click") */
 		});
+		
 		
 	</script>
 
@@ -277,7 +475,7 @@
 		
 		<form name="pickupOrderForm" id="pickupOrderForm">
 		</form>
-		<form name="orderForm" id="orderForm" method="post" action="https://www.oliveyoung.co.kr/store/order/setOrderRequest.do" target="setOrderRequest">
+		<form name="orderForm" id="orderForm" method="post" action="<%=contextPath %>/olive/orderForm.do" target="setOrderRequest">
 			<input type="hidden" id="o2oGiftBoxAmtRm" name="o2oGiftBoxAmtRm" value="30000">
 			<input type="hidden" id="o2oGiftBoxAmtDc" name="o2oGiftBoxAmtDc" value="2000">
 			<input type="hidden" id="o2oGiftBoxAmtDf" name="o2oGiftBoxAmtDf" value="2000">
@@ -924,7 +1122,18 @@
 					<tr>
 						<th scope="row">배송 메시지</th>
 						<td>
-							<select id="mbrMemoCont" class="selH28" title="택배배송 메시지를 선택해주세요." style="width:350px" data-attr="배송요청사항^배송메세지"><option name="배송메시지를 선택해주세요." value="MH">배송메시지를 선택해주세요.</option><option value="10">그냥 문 앞에 놓아 주시면 돼요.</option>/n<option value="40">직접 받을게요.(부재 시 문앞)</option>/n<option value="30">벨을 누르지 말아주세요.</option>/n<option value="20">도착 후 전화주시면 직접 받으러 갈게요. </option>/n<option value="O2O">직접 입력하기</option></select>
+							<select id="mbrMemoCont" class="selH28" title="택배배송 메시지를 선택해주세요." style="width:350px" data-attr="배송요청사항^배송메세지" name="deliMsg">
+								<option name="배송메시지를 선택해주세요." value="">배송메시지를 선택해주세요.</option>
+								<option value="그냥 문 앞에 놓아 주시면 돼요.">그냥 문 앞에 놓아 주시면 돼요.</option>
+								/n
+								<option value="직접 받을게요.(부재 시 문앞)">직접 받을게요.(부재 시 문앞)</option>
+								/n
+								<option value="벨을 누르지 말아주세요.">벨을 누르지 말아주세요.</option>
+								/n
+								<option value="도착 후 전화주시면 직접 받으러 갈게요.">도착 후 전화주시면 직접 받으러 갈게요. </option>
+								/n
+								<option value="직접 입력하기">직접 입력하기</option>
+							</select>
 							<input type="text" name="mbrMemoCont" value="" class="inpH28 mgT6" title="배송메시지를 입력해주세요." style="width:700px; display: none;">
 						</td>
 					</tr>
@@ -957,16 +1166,16 @@
 					<tr type="exist" class="quick_area">
 						<th scope="row">공동현관 출입방법</th>
 						<td class="imp_data">
-							<span class="chk_area mgzero"><input type="radio" id="btn_door_manner_temp1" name="o2oVisitTypeSp" value="1" checked="" data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp1">비밀번호</label></span>
-							<span class="chk_area"><input type="radio" id="btn_door_manner_temp2" name="o2oVisitTypeSp" value="2" data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp2">경비실 호출</label></span>
-							<span class="chk_area"><input type="radio" id="btn_door_manner_temp3" name="o2oVisitTypeSp" value="3" data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp3">자유출입가능</label></span>
-							<span class="chk_area"><input type="radio" id="btn_door_manner_temp4" name="o2oVisitTypeSp" value="4"  data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp4">기타사항</label></span>
+							<span class="chk_area mgzero"><input type="radio" id="btn_door_manner_temp1" name="o2oVisitTypeSp" value="비밀번호" checked="" data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp1">비밀번호</label></span>
+							<span class="chk_area"><input type="radio" id="btn_door_manner_temp2" name="o2oVisitTypeSp" value="경비실 호출" data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp2">경비실 호출</label></span>
+							<span class="chk_area"><input type="radio" id="btn_door_manner_temp3" name="o2oVisitTypeSp" value="자유출입가능" data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp3">자유출입가능</label></span>
+							<span class="chk_area"><input type="radio" id="btn_door_manner_temp4" name="o2oVisitTypeSp" value="기타사항"  data-attr="배송지정보^2_공동현관 출입방법"><label for="btn_door_manner_temp4">기타사항</label></span>
 						</td>
 					</tr>
 					<tr type="exist" class="quick_area" id="visitTypeDescExist">
 						<th scope="row">기타 상세 내용</th>
 						<td class="imp_data">
-							<input type="text" id="door_type_exist" name="o2oVisitTypeDesc" value="" class="inpH28" title="공동현관 출입방법 상세내용." style="width: 500px" data-attr="배송지정보^2_공동현관 비밀번호">
+							<input type="text" id="door_type_exist" name="o2oVisitTypeDesc" class="inpH28" title="공동현관 출입방법 상세내용." style="width: 500px" data-attr="배송지정보^2_공동현관 비밀번호">
 						</td>
 					</tr>
 
@@ -1005,7 +1214,24 @@
 					<!-- 2020-08-04 o2oJJ 24H 화면 제어로 인한 주석 처리 -->
 
 						<h2 class="sub-title2">
-							올리브영 배송상품
+							<c:choose>
+								<c:when test="${quickYN eq 'Y' }">
+									오늘드림 배송상품
+									<dl class="gift_area">
+										<dt>
+											<input type="checkbox" name="giftBoxYn_temp" id="giftBoxYn_temp" data-attr="배송요청사항^선물포장서비스" disabled="disabled" style="cursor: not-allowed;"><label for="giftBoxYn_temp" class="gift_boxTit">선물포장 서비스</label>
+											<input type="hidden" name="giftBoxYn" id="giftBoxYn" value="N">
+										</dt>
+										<dd id="gift_wrapping_01">정보
+											<div class="sv_infos">가능한 상품들을 선물 포장하여<br>준비해드립니다. 하단의 포장 가능<br>상품을 확인해주세요!</div>
+										</dd>
+									</dl>
+								</c:when>
+								<c:otherwise>
+									올리브영 배송상품
+								</c:otherwise>
+							</c:choose>
+							
 							<em class="gift" id="giftNoti2" style="display: none;">* 증정품은 결제 시 확인하실 수 있습니다.</em>
 						</h2><!-- 2017-01-24 수정 : 타이틀 마크업 수정 및 클래스명 변경 -->
 						<table class="tbl_prd_list">
@@ -1017,10 +1243,6 @@
 							<!-- 2019-11-15 추가 (오늘드림배송 선물포장) End -->
 							<col style="width:110px">
 							<col style="width:100px">
-							<!--
-                            2017-01-24 수정 : 삭제
-                            <col style="width:120px" />
-                            -->
 							<col style="width:110px">
 						</colgroup>
 						<thead>
@@ -1031,58 +1253,54 @@
 							<!-- 2019-11-15 추가 (오늘드림배송 선물포장) End -->
 							<th scope="col">판매가</th>
 							<th scope="col">수량</th>
-							<!--
-                            2017-01-24 수정 : 배송정보 삭제
-                            <th scope="col">배송정보</th>
-                            -->
 							<th scope="col">구매가</th><!-- 2017-01-24 수정 : 문구수정 -->
 						</tr>
 						</thead>
 						<tbody>
-					
-						<tr>
-						<input type="hidden" name="cartNo" value="681801107">
-						<!-- 2020-08-05 o2oJJ 상품 수량 추가 -->
-						<td colspan="5" dispcatno="" stdcatno="010102" goodsno="A000000184129" itemno="001" entrno="C19275" brndcd="3440" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="1" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko" goodsnm="에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)" cartno="681801107" purchasetype="N"><!-- 2017-01-13 수정 -->
-							<div class="tbl_cont_area">
-									<div class="tbl_cell w700"><!-- 2017-01-24 수정 : 클래스명 변경 -->
-										<div class="prd_info">
-											<div class="prd_img">
-												<img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko" alt="장바구니 상품 임시 이미지" onerror="common.errorImg(this);">
+						<c:forEach items="${productList }" var="list">
+							<tr>
+								<td colspan="5" itemno="001" entrno="C19275" brndcd="3440" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="1" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko"  purchasetype="N"><!-- 2017-01-13 수정 -->
+									<input type="hidden" name="pr_cnt" value="${list.proId }-${list.cnt}">
+									<div class="tbl_cont_area">
+											<div class="tbl_cell w700"><!-- 2017-01-24 수정 : 클래스명 변경 -->
+												<div class="prd_info">
+													<div class="prd_img">
+														<img src="${list.proImg }" alt="장바구니 상품 임시 이미지" onerror="common.errorImg(this);">
+													</div>
+													<div class="prd_name">
+														
+														<span>${list.brandName }</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
+														<p>${list.proName }</p>
+													</div>
+													<p class="prd_opt">											
+														<i class="tit">옵션</i>${list.displName }											
+													</p>
+													<p class="prd_flag">
+														<span class="icon_flag sale">세일</span>
+														<span class="icon_flag gift">증정</span><!-- 14 -->
+														<span class="icon_flag delivery">오늘드림</span><!-- 15 -->	
+													</p>
+													<!--//fix/3275248 bmiy20 cjone point 적립불가건에 대해 사용 불가 처리 추가-->
+												</div>
 											</div>
-											<div class="prd_name">
-												
-												<span>에스트라</span><!-- 2017-01-26 수정 : 브랜드명 분리 -->
-												<p>에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)</p>
+											<!-- 2019-11-15 추가 (오늘드림배송 선물포장) Start -->
+											
+											<!-- 2019-11-15 추가 (오늘드림배송 선물포장) End -->
+											<div class="tbl_cell w110">
+												<span class="cur_price"><span class="tx_num"><fmt:formatNumber value="${list.proPrice }" pattern="#,##0" /></span>원</span>
 											</div>
-											<p class="prd_opt">											
-												<i class="tit">옵션</i>에스트라 아토베리어 로션 기획											
-											</p>
-											<p class="prd_flag">
-												<span class="icon_flag sale">세일</span>
-												<span class="icon_flag gift">증정</span><!-- 14 -->
-												<span class="icon_flag delivery">오늘드림</span><!-- 15 -->	
-											</p>
-											<!--//fix/3275248 bmiy20 cjone point 적립불가건에 대해 사용 불가 처리 추가-->
+											<div class="tbl_cell w100">${list.cnt }</div>
+											<div class="tbl_cell w110">
+												<span class="org_price"><span class="tx_num" id="normPrc_A000000184129/001"><fmt:formatNumber value="${list.proPrice*list.cnt }" pattern="#,##0" /></span>원</span><!-- 2017-01-24 수정 : 추가 -->
+												<span class="pur_price"><span class="tx_num" id="salePrc_A000000184129/001" data-price="${list.pafterPrice*list.cnt }"><fmt:formatNumber value="${list.pafterPrice*list.cnt }" pattern="#,##0" /></span>원</span>
+												<input type="hidden" id="orgNormPrc_A000000184129/001" value="31000">
+												<input type="hidden" id="orgSalePrc_A000000184129/001" value="23200">
+												<input type="hidden" id="imdtDscntAmt_A000000184129/001" value="0">
+											</div>
 										</div>
-									</div>
-									<!-- 2019-11-15 추가 (오늘드림배송 선물포장) Start -->
-									
-									<!-- 2019-11-15 추가 (오늘드림배송 선물포장) End -->
-									<div class="tbl_cell w110">
-										<span class="cur_price"><span class="tx_num">31,000</span>원</span>
-									</div>
-									<div class="tbl_cell w100">1</div>
-									<div class="tbl_cell w110">
-										<span class="org_price"><span class="tx_num" id="normPrc_A000000184129/001">31,000</span>원</span><!-- 2017-01-24 수정 : 추가 -->
-										<span class="pur_price"><span class="tx_num" id="salePrc_A000000184129/001">23,200</span>원</span>
-										<input type="hidden" id="orgNormPrc_A000000184129/001" value="31000">
-										<input type="hidden" id="orgSalePrc_A000000184129/001" value="23200">
-										<input type="hidden" id="imdtDscntAmt_A000000184129/001" value="0">
-									</div>
-								</div>
-							</td>
-						</tr>
+									</td>
+								</tr>
+						</c:forEach>
 					<!--// 1+1 행사 상품인 경우 -->
 					
 						</tbody>
@@ -1268,27 +1486,27 @@
 						<li class="bg_area"><!-- 2017-01-18 수정 : 클래스 추가 -->
 							<input type="hidden" id="payCouponIndex" value="" paycd="">
 							<input type="hidden" id="easyPayCd" value="">
-							<span><input type="radio" id="payMethod_11" name="payMethod" value="11" cashreceipt="N" checked="checked" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_11" for="payMethod_11">신용카드</label></span>
+							<span><input type="radio" id="payMethod_11" name="payMethod" value="신용카드" cashreceipt="N" checked="checked" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_11" for="payMethod_11">신용카드</label></span>
 
 							
-								<span class="pay_24h_sh" style="display: none;"><input type="radio" id="payMethod_61" name="payMethod" value="61" cashreceipt="Y" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_61" for="payMethod_61">무통장입금</label></span>
+							<span class="pay_24h_sh" style="display: none;"><input type="radio" id="payMethod_61" name="payMethod" value="61" cashreceipt="Y" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_61" for="payMethod_61">무통장입금</label></span>
 							
 
 							<!-- 2017-04-18 추가 -->
-							<span><input type="radio" id="payMethod_25" name="payMethod" value="25" cashreceipt="N" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_25" for="payMethod_25">PAYCO<span class="flag bn">혜택</span></label></span>
+							<span><input type="radio" id="payMethod_25" name="payMethod" value="PAYCO" cashreceipt="N" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_25" for="payMethod_25">PAYCO<span class="flag bn">혜택</span></label></span>
 							<!-- //2017-04-18 추가 -->
-							<span><input type="radio" id="payMethod_26" name="payMethod" value="26" cashreceipt="N" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_26" for="payMethod_26">카카오페이</label></span>
+							<span><input type="radio" id="payMethod_26" name="payMethod" value="카카오페이" cashreceipt="N" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_26" for="payMethod_26">카카오페이</label></span>
 							<!-- 20201021 배포에선 네이버페이 노출 제외 -->
-							<span><input type="radio" id="payMethod_29" name="payMethod" value="29" cashreceipt="N" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_29" for="payMethod_29">네이버페이<span class="flag bn">혜택</span></label></span>
+							<span><input type="radio" id="payMethod_29" name="payMethod" value="네이버페이" cashreceipt="N" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_29" for="payMethod_29">네이버페이<span class="flag bn">혜택</span></label></span>
 
-							<span><input type="radio" id="payMethod_22" name="payMethod" value="22" cashreceipt="N" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_22" for="payMethod_22">휴대폰결제</label></span>
+							<span><input type="radio" id="payMethod_22" name="payMethod" value="휴대폰결제" cashreceipt="N" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_22" for="payMethod_22">휴대폰결제</label></span>
 
-							<span><input type="radio" id="payMethod_21" name="payMethod" value="21" cashreceipt="Y" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_21" for="payMethod_21">계좌이체</label></span>
+							<span><input type="radio" id="payMethod_21" name="payMethod" value="계좌이체" cashreceipt="Y" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_21" for="payMethod_21">계좌이체</label></span>
 
 							<!-- 2017-01-18 수정 : 문화상품권/도서상품권 선택 삭제 -->
 							<!-- 2017-02-14 수정 : 문화상품권/도서상품권 선택 재추가 -->
-							<span><input type="radio" id="payMethod_24" name="payMethod" value="24" cashreceipt="Y" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_24" for="payMethod_24">도서상품권</label></span>
-							<span><input type="radio" id="payMethod_23" name="payMethod" value="23" cashreceipt="N" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_23" for="payMethod_23">문화상품권</label></span>
+							<span><input type="radio" id="payMethod_24" name="payMethod" value="도서상품권" cashreceipt="Y" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_24" for="payMethod_24">도서상품권</label></span>
+							<span><input type="radio" id="payMethod_23" name="payMethod" value="문화상품권" cashreceipt="N" data-attr="결제수단선택^결제수단선택"><label id="payMethodLabel_23" for="payMethod_23">문화상품권</label></span>
 						</li>
 						<!-- 신용카드 선택 시 -->
 						<li paymethod="11" style="display: list-item;">
@@ -1560,24 +1778,7 @@
 										</div>
 									</td>
 								</tr>
-								<!--
-								2017-01-18 수정 : 무통장 입금 시 휴대폰정보 입력 영역 삭제
-								<tr>
-									<th scope="row">휴대폰</th>
-									<td>
-										<div>
-											<select name=""  class="selH28" title="휴대폰 이동통신번호를 선택해주세요." style="width:90px">
-												<option value="">010</option>
-												<option value="">011</option>
-												<option value="">016</option>
-												<option value="">019</option>
-											</select>
-											 - <input type="text" name="" value="1234" class="inpH28" title="휴대폰 두번째자리를 입력해주세요." style="width:90px" />
-											 - <input type="text" name="" value="5678" class="inpH28" title="휴대폰 마지막자리를 입력해주세요." style="width:90px" />
-										</div>
-									</td>
-								</tr>
-								 -->
+							
 								<tr>
 									<th scope="row">입금자명</th>
 									<td>
@@ -1987,7 +2188,7 @@
 						<li>
 							<span class="tx_tit">총 상품금액</span>
 							<span class="tx_cont"><span class="tx_num">0</span>원</span>
-							<input type="hidden" name="goodsAmt" value="0">
+							<input type="hidden" id="totalPrice" name="totalPrice" value="">
 						</li>
 						<li>
 							<span class="tx_tit">쿠폰할인금액</span><!-- 2017-01-18 수정 : 문구수정 -->
@@ -1999,7 +2200,7 @@
 						<li class="line_top2">
 							<span class="tx_tit">총 배송비 <button type="button" class="btnSmall wGray" onclick="fnLayerSet('deliveryInfo', 'open');"><span>상세보기</span></button></span>
 							<span class="tx_cont"><span class="tx_num" id="dlexPayAmt_span">0</span>원</span>
-							<input type="hidden" name="dlexPayAmt" value="0">
+							<input type="hidden" name="deli_price" value="0">
 						</li>
 						
 						<li id="oyGiftCardAplyAmt_li" style="display: none;">
@@ -2035,6 +2236,7 @@
 						<li class="total">
 							<span class="tx_tit">최종 결제금액</span>
 							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">0</span>원</span>
+							<input type="hidden" id="totalPay" name="totalPay" value="">
 							<input type="hidden" name="remainAmt" value="0">
 							<input type="hidden" name="ordPayAmt" value="0">
 							<input type="hidden" name="goodsNm" value="에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)">
@@ -2254,7 +2456,7 @@
 <!--// 현대카드 M포인트 사용안내 팝업 -->
 
 <!-- 배송비 상세정보 안내 팝업 -->
-<div class="layer_pop_wrap w410" id="deliveryInfo" style="z-index: 999; display: none;">
+<div class="layer_pop_wrap w410" id="deliveryInfo" style="z-index: 999; display: none; margin-left: -205px; top: 1706px;">
 	<div class="layer_cont" id="getDlexDtlPopAjax">
 		<h2 class="layer_title">배송비 상세정보</h2>
 		
@@ -2501,22 +2703,9 @@
 	<div class="layer_cont2">
 		<h2 class="layer_title">선물포장 서비스 </h2>
 		<div class="layer_desc3">
-			<!--
-			<h5 class="stit">포장 가능한 상품들을 확인해주세요</h5>
-			<div class="layer_scroll_box mgT10 type3">
-				<div class="item_table_list">
-					<table>
-						<caption></caption>
-						<colgroup><col style="width:85px" /><col style="width:*" /></colgroup>
-						<tbody>
-							
-						</tbody>
-					</table>
-				</div>
-			</div>
-			-->
+			
 			<h5 class="stit mgT15">선물포장 서비스 유의사항</h5>
-			<p class="img_info mgT15"><img src="/pc-static-root/image/comm/img_gift_info.jpg" alt=""></p>
+			<p class="img_info mgT15"><img src="https://www.oliveyoung.co.kr/pc-static-root/image/comm/img_gift_info.jpg" alt=""></p>
 			<ul class="dot_list mgT25">
 				<li>상품의 사이즈와 수량 및 박스 보유여부에 따라  기프트박스가 랜덤으로 선택됩니다.</li>
 				<li>상품 개별 포장이 아닌 포장 요청 상품들이 하나의 기프트박스에 포장되며,<br>함께 포장이 불가한 상품의 경우 포장에서 제외되어 발송 될 수 있습니다</li>
