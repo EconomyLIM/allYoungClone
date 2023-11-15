@@ -514,6 +514,8 @@ $(function() {
 			
 			if($("#deliveDay").prop("checked")) {
 				params += "&quickYN=Y";
+			} else {
+				params += "&quickYN=N";
 			}
 			
 			location.href = "<%=contextPath%>/olive/orderForm.do?" + params;
