@@ -19,13 +19,13 @@ public class PwdUpdateService {
 		return instance;
 	}
 
-	public int PwdUpdate( LogOnDTO logDto) {
-		Connection conn = null;
+	public int PwdUpdate( String user_id, String newPwd) {
+		Connection conn = null; 
 		int rowCount = 0;
 		try {
 			conn = ConnectionProvider.getConnection();
 			OuserDAOImpl dao = OuserDAOImpl.getInstance();
-			rowCount =  dao.pwdUpdate(conn, logDto);
+			rowCount =  dao.pwdUpdate(conn, user_id, newPwd);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -86,7 +86,7 @@ public class OuserDAOImpl implements OuserDAO {
 
 	//비밀번호 변경
 	@Override
-	public int pwdUpdate( Connection conn, LogOnDTO logDto) throws SQLException {
+	public int pwdUpdate( Connection conn, String user_id, String newPwd) throws SQLException {
 		int rowCount = 0;
 		String sql = "UPDATE o_user SET u_pwd = ? "
 				+ " WHERE user_id = ? ";
@@ -94,8 +94,8 @@ public class OuserDAOImpl implements OuserDAO {
 		 PreparedStatement pstmt = null;
 		 
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, logDto.getU_pwd());
-		pstmt.setString(2, logDto.getUser_id());
+		pstmt.setString(1, newPwd);
+		pstmt.setString(2, user_id);
 		rowCount = pstmt.executeUpdate();  
 		
 		pstmt.close();
