@@ -54,7 +54,7 @@ public class BrandService {
 		}
 		return null;
 	}
-/*
+ 
 	////브랜드제품  인기순 리스트 가져오기  , 베스트 상품 
 	public List<BrandDTO> getProductsByCategory(String brandId, String catSId) throws Exception {
 		List<BrandDTO> products = new ArrayList<>();
@@ -62,7 +62,7 @@ public class BrandService {
 
 		try {
 			conn = ConnectionProvider.getConnection();
-			products = brandDAO.getProductsByCategory(conn,brandId, catSId);
+			products = brandDAO.getBestBrandpro(brandId, catSId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("> BrandService.getProductsByCategory_Exception");
@@ -72,7 +72,7 @@ public class BrandService {
 
 		return products;
 	}
-	*/
+ 
 	
 
 	////구달 브랜드 제품 신상품 순으로 가져오기
