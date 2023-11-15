@@ -14,9 +14,11 @@ import productDetail.domain.CateMDTO;
 import productDetail.domain.CateSDTO;
 import productDetail.domain.DetailBrandDTO;
 import productDetail.domain.DetailExImgDTO;
+import productDetail.domain.DetailInfoDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
 import productDetail.domain.ProductPromo;
+import productDetail.domain.QnADetailDTO;
 import productDetail.service.ProDetailService;
 import review.domain.ReviewDTO;
 import review.domain.ReviewImgDTO;
@@ -161,8 +163,15 @@ public class ProductDetailHandler implements CommandHandler{
 		DetailBrandDTO detailBrandDTO = proDetailService.sDetailBrand(goodsNo);
 		request.setAttribute("detailBrandDTO", detailBrandDTO);
 
+		// ======================= 해당 브랜드 정보 갖고오기 ===========================
+		DetailInfoDTO detailInfoDTO = proDetailService.sDetailInfo(goodsNo);
+		request.setAttribute("detailInfoDTO", detailInfoDTO);
 		
+		// ======================= 해당 브랜드 QnA 갖고오기 ===========================
+		List<QnADetailDTO> qnaList = proDetailService.sDetailQna(goodsNo);
+		request.setAttribute("qnaList", qnaList);
 		
+
 		
 		
 		
