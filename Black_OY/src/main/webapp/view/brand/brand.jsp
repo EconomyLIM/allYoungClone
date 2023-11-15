@@ -1964,9 +1964,9 @@
 					<ul class="cate_list_box">
 						<li class="first on"><a href="javascript:;"
 							data-ref-dispcatno="">전체</a></li>
-						<li><a href="javascript:skin();" data-ref-dispcatno="10000010001">스킨케어</a></li>
-						<li><a href="javascript:mask();" data-ref-dispcatno="10000010009">마스크팩</a></li>
-						<li><a href="javascript:sun();" data-ref-dispcatno="10000010011">선케어</a></li>
+						<li><a href="javascript:;" data-ref-dispcatno="10000010001">스킨케어</a></li>
+						<li><a href="javascript:;" data-ref-dispcatno="10000010009">마스크팩</a></li>
+						<li><a href="javascript:;" data-ref-dispcatno="10000010011">선케어</a></li>
 						<li class="disabled">&nbsp;</li>
 						<!-- 2017-02-03 빈 태그일때 class=disabled 추가 -->
 
@@ -2008,7 +2008,7 @@
 							id="goodsTrackingCd" name="goodsTrackingCd" value="">
 
 <ul class="prod-list goodsProd">
-						<c:forEach items="${ bsbrand }" var="dto" varStatus="status">
+						<c:forEach items="${ brandDetails  }" var="dto" varStatus="status">
 
 							
 								<li data-goods-idx="1">
