@@ -83,9 +83,9 @@
 							</ul></li>
 						<li><h2>마이 활동</h2>
 							<ul>
-								<li class="subMenu"><a href=" <%-- 1:1문의 페이지 --%>"
+								<li class="subMenu"><a href="<%=contextPath %>/olive/pAskList.do"
 									mymenuid="0401"
-									data-ref-linkurl="https://www.oliveyoung.co.kr/store/counsel/getQnaList.do"
+									data-ref-linkurl="<%=contextPath %>/olive/pAskList.do"
 									data-attr="마이페이지^메뉴^1:1문의내역" data-tracking-name="1대1문의 클릭"
 									data-tracking-properties="t_page=마이페이지&amp;t_click=문의현황_1대1문의">1:1문의내역</a></li>
 
@@ -120,9 +120,9 @@
 							</ul></li>
 						<li><h2>마이 정보</h2>
 							<ul>
-								<li class="subMenu"><a href="<%-- 회원정보 수정 페이지 --%>"
+								<li class="subMenu"><a href="<%=contextPath %>/olive/usermodify.do"
 									mymenuid="0501"
-									data-ref-linkurl="https://www.oliveyoung.co.kr/store/mypage/getMktReceiptInfo.do"
+									data-ref-linkurl="<%=contextPath %>/olive/usermodify.do"
 									data-attr="마이페이지^메뉴^회원정보 수정"
 									data-tracking-properties="t_page=마이페이지&amp;t_click=회원정보수정">회원정보
 										수정</a></li>

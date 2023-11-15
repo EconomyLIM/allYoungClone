@@ -133,7 +133,7 @@
 							<div class="title-area">
 								<h2 class="tit">1 : 1 문의내역</h2>
 								<a class="btnMore" id="qnaListMore"
-									href="<%--  고객센터 1:1문의하기 페이지 --%>">더보기</a>
+									href="<%=contextPath %>/olive/pAskList.do">더보기</a>
 							</div>
 							<div class="list-customer">
 								<ul>

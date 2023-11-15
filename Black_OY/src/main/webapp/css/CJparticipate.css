@@ -99,7 +99,7 @@
 .certification_sec .certi_txt.check .s_txt span.multi_line {display:block;}
 .certification_sec .btn_sec {margin-top:30px;}
 .certification_sec .btn_sec .btn {font-size:14px;}
-.certification_sec .certi_txt span.ico {display:block; position:absolute; width:88px; height:88px; margin-left:-44px; background:url('/cjmweb/images/member/bg_member.png') no-repeat 0 -350px; top:0; left:50%;}
+.certification_sec .certi_txt span.ico {display:block; position:absolute; width:88px; height:88px; margin-left:-44px; background:url('https://www.cjone.com/cjmweb/images/member/bg_member.png') no-repeat 0 -350px; top:0; left:50%;}
 .certification_sec .certi_txt.wake span.ico {background-position:0 -350px;}
 .certification_sec .member_data {width:520px; margin:30px auto 0; padding:20px 0; background:#fff; text-align:center;}
 .certification_sec .member_data dl {display:inline-block; *padding-left:153px;}
