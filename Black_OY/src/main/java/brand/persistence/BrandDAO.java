@@ -13,27 +13,26 @@ public interface BrandDAO {
 	//상단 브랜드 정보 가져오기 
 	BrandDTO getBrands(String brandId) throws Exception; 
 
-   // 브랜드제품  인기순 리스트 가져오기  , 베스트 상품 
+	//브랜드제품  인기순 리스트 가져오기  , 베스트 상품 
 	List<BrandDTO> getBestBrandpro(String brand_Id, String category_s_Id) throws Exception;
 
-	//	//판매순 
-	List<BrandDTO> getsellProduct(String brandId, String categoryId) throws Exception;
-
 	//스킨케어 , 마스크팩, 선크림 소카테고리별 상품 가져오기
-//	List<BrandDTO> getCATEBrandsDetail() throws Exception;
+	List<BrandDTO> getCATEBrandsDetail() throws Exception;
 
+	//구달 브랜드 제품 신상품 순으로 가져오기 
+	List<BrandDTO> getNewBrandsDetail() throws Exception;
 
 	// 브랜드 제품 낮은가격순으로 가져오기
-//	List<BrandDTO> getProductsByCategory(String brandId, String catSId) throws Exception;
+	List<BrandDTO> getProductsByCategory(String brandId, String catSId) throws Exception;
 
 	// 리뷰 가져오기  상품표시이미지, 평점, 도움돼요수 , 리뷰내용
-//	List<BrandDTO> getreviews() throws Exception;
+	List<BrandDTO> getreviews() throws Exception;
 
 	//판매순 
-//	List<BrandDTO> getsellProduct(Connection conn,  String brand_Id, String category_s_Id) throws Exception;
+	List<BrandDTO> getsellProduct(Connection conn,  String brand_Id, String category_s_Id) throws Exception;
      
 	////구달 브랜드 제품 신상품 순으로 가져오기 
-//	List<BrandDTO> getNewBrandsDetail(String brand_Id) throws Exception;
+	List<BrandDTO> getNewBrandsDetail(String brand_Id) throws Exception;
  
 
 

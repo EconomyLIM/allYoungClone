@@ -9,12 +9,9 @@ import productDetail.domain.CateMDTO;
 import productDetail.domain.CateSDTO;
 import productDetail.domain.DetailBrandDTO;
 import productDetail.domain.DetailExImgDTO;
-import productDetail.domain.DetailInfoDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
 import productDetail.domain.ProductPromo;
-import productDetail.domain.QnADetailDTO;
-import productDetail.domain.WrtieQnaDTO;
 
 public interface ProDetailDAO {
 	
@@ -45,17 +42,6 @@ public interface ProDetailDAO {
 	// 8. 해당 상품의 브랜드 정보 갖고오기
 	public DetailBrandDTO detailBrand(Connection conn, String displId) throws Exception;
 	
-	// 9. 해당상품의 정보 갖고오기
-	public DetailInfoDTO detailInfo(Connection conn, String displId) throws Exception;
-	
-	// 10. 해당상품의 QnA 갖고오기
-	public List<QnADetailDTO> detailQna (Connection conn, String displId) throws Exception;
-	
-	// 11. 해당 상품의 QnA 삭제하기
-	public int deleteQna(Connection conn, String qnaId) throws Exception;
-	
-	// 12. 해당 상품의 QnA 등록하기
-	public int writeQna(Connection conn, WrtieQnaDTO wrtie ) throws Exception;
 
 	
 } // interface
