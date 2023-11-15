@@ -177,6 +177,7 @@
 														<strong style="background:#ff7f00">${ qa.qnaState }</strong>
 														<a href="<%-- QnA페이지 - 해당QnA페이지로 이동 --%>">${ qa.qnaQus }</a>
 														<span class="data">${ qa.qnaDate }</span>
+														
 													</p>	
 												</li>
 											</c:forEach>
