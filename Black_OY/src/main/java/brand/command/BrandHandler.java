@@ -102,7 +102,7 @@ public class BrandHandler implements CommandHandler {
 
 	}
 	
-	*/
+	
 
 
 
