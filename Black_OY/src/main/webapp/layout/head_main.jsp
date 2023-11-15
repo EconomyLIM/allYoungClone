@@ -13,6 +13,46 @@
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
+<script>
+	$(function() {
+		let storesNames = [];
+		
+		// 로그인이 되어 있을 시
+		// 관심매장 이름 리스트 얻어오기
+		if(${not empty logOn}) {
+			$.ajax({
+				type : 'post'
+				, async : false
+				, cache: false
+				, url : '/Black_OY/olive/attShopAjax.do'
+				, dataType : 'json'
+				, data : { user_id : '${logOn.user_id}' }
+				, success : function(data) {
+					if(data.storeNames != "no") {
+						let storeNames = []
+						for (var i = 0; i < data.storeNames.length; i++) {
+							storeNames.push(data.storeNames[i]);
+						}
+						$(".store .alim_box").html(`<p class="store_desc"><span>${logOn.u_name}</span>님께서 등록하신 관심매장<br><span>\${storeNames.join(",")}</span>의 <br> 최근 행사공지가 없습니다.</p>` 
+										+ '<button class="mymenu_btn" onclick="javascript:;">다른매장 소식보기</button>')
+					} else {
+						$(".store .alim_box").html('<p class="store_desc"><span>${logOn.u_name}</span>님의 관심매장을 등록해 주세요.<br>새로운 이벤트와 세일행사를 빠르게 알려드립니다.</p>'
+								+ `<button class="mymenu_btn" onclick="javascript:location.href='/Black_OY/olive/getStoreMain.do'";>관심매장 등록하기</button>`)
+					}
+					 //console.log(data);
+	            }
+				, error : function (data, textStatus) {
+					console.log(data);
+	                console.log('error');
+	            }
+			});
+		} else {
+			$(".store .alim_box").html('<p class="store_desc"><span>로그인</span>하시면 자주가는 매장을<br>관심 매장으로 설정 할 수 있습니다.</p>'
+					+ `<button class="mymenu_btn" onclick="javascript:location.href='/Black_OY/olive/LogOn.do';">로그인</button>`);
+		}
+		
+	})
+</script>
     <!-- 3200210 큐레이션 개선 관련 건-레코벨 데이터 송부 
 <input type="hidden" id="skinType" name="skinType" value="" />
 <input type="hidden" id="skinTorn" name="skinTorn" value="" />
@@ -183,15 +223,39 @@
         <div id="Header">
             <div class="top_util">
                 <ul class="menu_list" id="menu_list_header">
-                    <li class="join"><a
-                            href="#"
-                            data-attr="공통^헤더^회원가입">회원가입</a></li>
-                    <li class="login"><a
-                            href="#"
-                            data-attr="공통^헤더^로그인">로그인</a></li>
-                    <li class="cart"><a
-                            href="#"
-                            data-attr="공통^헤더^장바구니">장바구니<span id="cartToCnt"></span></a></li>
+                    <c:choose>
+						<c:when test="${empty sessionScope.logOn }">
+							<li class="join"><a href="#" data-attr="공통^헤더^회원가입">회원가입</a></li>
+							<li class="login"><a href="<%=contextPath%>/olive/LogOn.do"
+								data-attr="공통^헤더^로그인">로그인</a></li>
+						</c:when>
+						<c:otherwise>
+
+							<li class="logout">
+								<strong>${sessionScope.logOn.grade_id}&nbsp; 
+                  ${sessionScope.logOn.u_name}</strong> <a 
+               href="<%=contextPath %>/olive/Logout.do" data-attr="공통^헤더^로그아웃">로그아웃</a></li>
+								<li class="mypage"><a onclick="" href="<%=contextPath %>/mypage/mypageMain.do" data-attr="공통^헤더^마이페이지">마이페이지</a></li>
+
+						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${empty sessionScope.logOn }">
+							<li class="cart"><a href="<%=contextPath%>/olive/basket.do"
+						data-attr="공통^헤더^장바구니">장바구니								
+									<span id="cartToCnt"></span>
+					</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="cart"><a href="<%=contextPath%>/olive/basket.do"
+						data-attr="공통^헤더^장바구니">장바구니								
+									<span id="cartToCnt">
+										(${sessionScope.basketlistcnt[0] + sessionScope.basketlistcnt[1]})
+									</span>
+					</a></li>
+						</c:otherwise>
+					</c:choose>
                     <li class="order"><a
                             onclick=""
                             href="#"
@@ -202,7 +266,7 @@
                             data-attr="공통^헤더^고객센터">고객센터</a></li>
                     <li class="store"><a
                             onclick=""
-                            href="#"
+                            href="<%=contextPath%>/olive/getStoreMain.do"
                             data-attr="공통^헤더^매장안내">매장안내</a></li>
                     <li class="global"><a
                             onclick=""
@@ -324,9 +388,23 @@
                     <li class="store ">
                         <a onclick=""
                             href="#" class="mymenu_layer" title="관심 매장소식 자세히보기 열기/닫기">관심 매장소식</a>
-                        <div class="alim_box">
-                            <p class="store_desc"><span>로그인</span>하시면 자주가는 매장을 <br>관심 매장으로 설정 할 수 있습니다.</p>
-                            <button class="mymenu_btn" onclick="javascript:common.link.moveLoginPage();">로그인</button>
+                        <div class="alim_box"> 
+                        	<%-- <c:choose>
+                        		<c:when test="${not empty logOn }">
+                        			<c:choose>
+                        				<c:when test="">
+                        					
+                        				</c:when>
+                        				<c:otherwise>
+                        				
+                        				</c:otherwise>
+                        			</c:choose>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<p class="store_desc"><span>로그인</span>하시면 자주가는 매장을<br>관심 매장으로 설정 할 수 있습니다.</p>
+                        			<button class="mymenu_btn" onclick="javascript:location.href='/Black_OY/olive/logOn.do';">로그인</button>
+                        		</c:otherwise>
+                        	</c:choose> --%>
                         </div>
                     </li>
                     <li class="recent">
@@ -357,13 +435,13 @@
                                         href="#"
                                         data-ref-dispcatno="10000010001" data-attr="공통^드로우^스킨케어">스킨케어</a></p>
                                 <ul>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00010001&sort=1"
                                             data-ref-dispcatno="100000100010008" data-attr="공통^드로우^스킨케어_토너/로션/올인원"
                                             data-trk="/">토너/로션/올인원</a></li>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00010002&sort=1"
                                             data-ref-dispcatno="100000100010009" data-attr="공통^드로우^스킨케어_에센스/크림"
                                             data-trk="/">에센스/크림</a></li>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00010003&sort=1"
                                             data-ref-dispcatno="100000100010010" data-attr="공통^드로우^스킨케어_미스트/오일"
                                             data-trk="/">미스트/오일</a></li>
                                 </ul>
@@ -388,7 +466,7 @@
                                         href="#"
                                         data-ref-dispcatno="10000010010" data-attr="공통^드로우^클렌징">클렌징</a></p>
                                 <ul>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=00010008"
                                             data-ref-dispcatno="100000100100001" data-attr="공통^드로우^클렌징_클렌징폼/젤"
                                             data-trk="/">클렌징폼/젤</a></li>
                                     <li><a href="#"
@@ -770,21 +848,17 @@
                     </li>
                     <li style="">
                         <a onclick=""
-                            href="#"
-                            data-ref-linkurl="giftCardGuide/getGiftCardGuide.do"
-                            data-attr="공통^GNB^기프트카드"><span>기프트카드</span>
+                            href="<%=contextPath %>/olive/giftCardMain.do"><span>기프트카드</span>
                         </a>
                     </li>
                     <li style="">
                         <a onclick=""
-                            href="#"
-                            data-ref-linkurl="main/getMembership.do" data-attr="공통^GNB^멤버십/쿠폰"><span>멤버십/쿠폰</span>
+                            href="<%=contextPath %>/olive/membership.do"><span>멤버십/쿠폰</span>
                         </a>
                     </li>
                     <li style="">
                         <a onclick=""
-                            href="#"
-                            data-ref-linkurl="main/getEventList.do" data-attr="공통^GNB^이벤트"><span>이벤트</span>
+                            href="<%=contextPath %>/olive/event.do"><span>이벤트</span>
                         </a>
                     </li>
                 </ul>
@@ -1137,6 +1211,7 @@
             <!-- //[3553186] 온라인몰 전시 카테고리 개편 일괄 작업 요청의 건 -->
             <!-- 메인 카테고리 목록 -->
         </div>
+        
     </div>
 </body>
 </html>
