@@ -45,7 +45,7 @@
 					type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
 				<input type="hidden" name="brnd_cd" id="brnd_cd" value="3000">
 				<input type="hidden" name="coop_return_url" id="coop_return_url"
-					value="https://www.oliveyoung.co.kr/store/mypage/getMktReceiptInfo.do?refresh=Y">
+					value="">
 				<div id="contents">
 					<div class="location_wrap">
 						<div class="location">
