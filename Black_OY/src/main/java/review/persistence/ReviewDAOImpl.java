@@ -403,6 +403,67 @@ public class ReviewDAOImpl implements ReviewDAO {
 		
 		return totalRecords;
 	}
+
+	@Override
+	public ReviewDTO review(Connection conn, String rev_id) {
+		ReviewDTO reviewDTO = null;
+		String sql = " select * from review where rev_id = ? ";
+		//String rev_id;
+		String user_id;
+		String pro_displ_id; 
+		int rev_like;
+		String rev_content;
+		int rev_grade;
+		Date rev_reg;
+		int rev_grade_1;
+		int rev_grade_2;
+		int rev_grade_3;
+		String pro_id;
+		
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		
+		
+		System.out.println(sql);
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, rev_id);
+			
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				
+				
+					 rev_id = rs.getString("rev_id");
+					 user_id = rs.getString("user_id");
+					  pro_displ_id = rs.getString("pro_displ_id");
+					rev_like = rs.getInt("rev_like");
+					 rev_content = rs.getString("rev_content");
+					 rev_grade = rs.getInt("rev_grade");
+					 rev_reg = rs.getDate("rev_reg");
+					 rev_grade_1 = rs.getInt("rev_grade_1");
+					 rev_grade_2 = rs.getInt("rev_grade_2");
+					 rev_grade_3 = rs.getInt("rev_grade_3");
+					 pro_id = rs.getString("pro_id");
+					 
+					 reviewDTO = new ReviewDTO(rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2, rev_grade_3, pro_id);
+					
+					
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("reviewdaoimpl sql 오류");
+		}finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		}
+		
+		return reviewDTO;
+	}
 	
 
 }
