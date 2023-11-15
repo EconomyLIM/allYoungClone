@@ -583,8 +583,9 @@ $(document).ready(function() {
 		
 		$(".cartBtn").click(function(){
 			
+			
+			
 			addModalBackdrop();
-
 			
 			let displID = $(this).attr("id");
 			
