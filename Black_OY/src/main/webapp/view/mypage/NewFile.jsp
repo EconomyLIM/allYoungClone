@@ -18,7 +18,7 @@
 		
 </div>
 
-<a href="<%=contextPath %>/mypage/mypageMain.do">마이페이지</a>
+<a href="<%=contextPath %>/mypage/main/mypageMain.do">마이페이지</a>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>

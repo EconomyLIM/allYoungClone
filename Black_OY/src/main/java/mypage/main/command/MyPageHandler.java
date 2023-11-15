@@ -1,4 +1,4 @@
-package mypage.command;
+package mypage.main.command;
 
 import java.sql.Connection;
 import java.util.List;
@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.util.ConnectionProvider;
 
 import command.CommandHandler;
-import mypage.domain.MpOrderDTO;
-import mypage.domain.MpPAskDTO;
-import mypage.domain.MpPlikeDTO;
-import mypage.domain.MpQnADTO;
-import mypage.domain.MpUserInfoDTO;
-import mypage.service.MypageService;
+import mypage.main.domain.MpOrderStateDTO;
+import mypage.main.domain.MpPAskDTO;
+import mypage.main.domain.MpPlikeDTO;
+import mypage.main.domain.MpQnADTO;
+import mypage.main.domain.MpUserInfoDTO;
+import mypage.main.service.MypageService;
 import user.domain.LogOnDTO;
 
 public class MyPageHandler implements CommandHandler {
@@ -33,7 +33,10 @@ public class MyPageHandler implements CommandHandler {
 		//LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
 		//userId = logOnDTO.getUser_id();
 		
+
+		//테스트용 고정값
 		userId = "admin";	//request.getParameter("userId");
+
 		MypageService service = MypageService.getinstance();
 		
 		//초기화
@@ -41,21 +44,21 @@ public class MyPageHandler implements CommandHandler {
 		int userPoint = 0;
 		int userCoupon = 0;
 		int userDeposit = 0;
+		int userRevCount = 0;
 		List<MpPlikeDTO> userPlike = null;
 		List<MpPAskDTO> userpAsk = null;
 		List<MpQnADTO> userQnA = null;
-		int userRevCount = 0;
-		List<MpOrderDTO> userOrder = null;
+		List<MpOrderStateDTO> userOrderState = null;
 		
 		userInfo = service.mpUIservice(userId);
 		userPoint = service.mpUPservice(userId);
 		userCoupon = service.mpUCservice(userId);
 		userDeposit = service.mpUDservice(userId);
+		userRevCount = service.mpURservice(userId);
 		userPlike = service.mpUPLservice(userId);
 		userpAsk = service.mpUPAservice(userId);
 		userQnA = service.mpUQnAservice(userId);
-		userRevCount = service.mpURservice(userId);
-		userOrder = service.mpUOservice(userId);
+		userOrderState = service.mpUOservice(userId);
 		
 		
 		
@@ -63,13 +66,13 @@ public class MyPageHandler implements CommandHandler {
 		request.setAttribute("userPoint", userPoint);
 		request.setAttribute("userCoupon", userCoupon);
 		request.setAttribute("userDeposit", userDeposit);
+		request.setAttribute("userRevCount", userRevCount);
 		request.setAttribute("userPlike", userPlike);
 		request.setAttribute("userpAsk", userpAsk);
 		request.setAttribute("userQnA", userQnA);
-		request.setAttribute("userRevCount", userRevCount);
-		request.setAttribute("userOrder", userOrder);
+		request.setAttribute("userOrderState", userOrderState);
 		
-		return "/view/mypage/temp.jsp";
+		return "/view/mypage/mypage.jsp";
 	}
 
 }

@@ -32,6 +32,14 @@ usersOnPage.add(session2.getId());
 <script src="/Black_OY/js/head.js"></script>
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
+
+<!-- <script text="text/javascript" src="/Black_OY/js/slick.min.js"></script> -->
+
+<link rel="stylesheet" type="text/css"
+	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 </head>
 <body>
 	<script>
@@ -478,6 +486,8 @@ $(function() {
 	 
 	 
 	 
+	 
+	 
  })
  
  
@@ -636,6 +646,7 @@ $(function () {
 				}
 			})
 		})
+
 
 		function showDiv(index) {
 			const divs = document.querySelectorAll('.tabConts.prd_detail_cont'); // 모든 div 요소 선택
@@ -802,6 +813,101 @@ $(function () {
 		        });
 		})
 	})
+
+
+		function showDiv(index) {
+			const divs = document.querySelectorAll('.tabConts.prd_detail_cont'); // 모든 div 요소 선택
+
+			// index는 1부터 시작하므로 실제 인덱스는 index - 1이 됨
+			for (let i = 0; i < divs.length; i++) {
+				if (i === index - 1) {
+					divs[i].classList.add("show"); // 선택된 div 보이기
+				} else {
+					divs[i].classList.remove("show"); // 선택되지 않은 div 감추기
+				}
+			}
+		}
+	</script>
+	<script>
+	// 리뷰 팝업창
+	$(function(){
+		$(document).on("click", ".review_thum > .inner.clrfix li:not(.more)", function() {
+		 let rev_id = $(this).find("img").data("value")
+		 var index = $(".review_thum > .inner.clrfix li").index($(this));
+		 console.log(index)
+		 
+		 let data = {
+				 rev_id: rev_id,
+				 index: index
+			    };
+			 
+				
+				$.ajax({
+					url: "<%=contextPath%>/olive/reviewimg.do",
+					data:data,
+					cache: false,
+					success:function( response ) {
+			              $(".info_area.scrbar").empty();
+			              $(".info_area.scrbar").append( response );
+			              $("#layerWrap850:not(.photo)").show()
+			     		 slide(index);
+			              console.log("t: "+index)  		              
+			          }
+			        , error		: function() {
+			            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+			        }
+				})
+		 //alert(value)
+		 
+	 })
+	 
+	 $(".ButtonClose").click(function(){
+		 $("#layerWrap850").hide()
+	 })
+	 
+	 function slide(index){
+		$('.slider-nav').slick('goTo', index);
+	}
+	 
+		$(".more").click(function(){
+			$("#layerWrap850.photo").show()
+		})
+		$(".photo li").click(function(){
+			var index = $(".photo li").index($(this));
+			let rev_id = $(this).find("img").data("value")
+			console.log(index);
+			
+			let data = {
+					 rev_id: rev_id,
+					 index: index
+				    };
+				 
+					
+					$.ajax({
+						url: "<%=contextPath%>/olive/reviewimg.do",
+						data:data,
+						cache: false,
+						success:function( response ) {
+							 $(".photo").hide()
+				              $(".info_area.scrbar").empty();
+				              $(".info_area.scrbar").append( response );
+				              $("#layerWrap850:not(.photo)").show()
+				              
+				     		 slide(index);
+				                         
+				          }
+				        , error		: function() {
+				            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+				        }
+					})
+		})
+		
+		 $(".ButtonClose.photoClose").click(function(){
+		 $(".photo").hide()
+	 })
+		
+	})
+
 	</script>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
 	<div id="Container">
@@ -1610,6 +1716,8 @@ $(function () {
 			</div>
 			<!--// 구매정보 컨텐츠 영역 -->
 
+
+
 			<!-- 리뷰 영역 -->
 			<div class="tabConts prd_detail_cont" id="gdasContentsArea">
 				<div class="review_wrap renew review-reward-notice">
@@ -1661,6 +1769,76 @@ $(function () {
 
 						</ul>
 					</div>
+
+					<!-- 옵션end -->
+
+					<!-- 필터 start -->
+					<!-- ## 리뷰 고도화 1차 : 삭제  ##  -->
+					<!-- <div class="cate_align_box prodLine"> -->
+					<!-- <div class="align_sort">
+		<ul id="gdasSort">
+			<li><a href="javascript:;" data-value="02">최신순</a></li>
+			<li><a href="javascript:;" data-value="01">도움순</a></li>
+			<li><a href="javascript:;" data-value="03">높은 별점순</a></li>
+			<li><a href="javascript:;" data-value="04">낮은 별점순</a></li>
+		</ul>
+	</div> -->
+
+
+
+			<!-- 리뷰 영역 -->
+			<div class="tabConts prd_detail_cont" id="gdasContentsArea">
+				<div class="review_wrap renew review-reward-notice">
+					<!-- ## 리뷰 고도화 1차 : 영역 부모 div 추가 ## -->
+
+
+
+					<!-- 올영 체험단 배너 -->
+					<!-- 옵션start -->
+					<input type="hidden" name="gdasItemNo" id="gdasItemNo"
+						value="all_search"> <input type="hidden"
+						name="gdasLgcGoodsNo" id="gdasLgcGoodsNo" value="all_search">
+					<input type="hidden" name="selectedNum" id="selectedNum"
+						value="12445">
+					<!-- //## 리뷰 고도화 1차 ## 추가 -->
+					<input type="hidden" name="itemCnt" id="itemCnt" value="3">
+
+					<div class="prd_option_box box_select">
+
+						<a href="javascript:;" id="ALL" class="sel_option item"> <span
+							class="opt"><img src="${proDImg[0].proDImgSrc }"
+								onerror="common.errorImg(this);"></span> <span class="txt">전체</span>
+							<!-- ## 리뷰 고도화 1차 ## -->
+						</a>
+						<ul class="sel_option_list scrbar">
+							<li><a href="javascript:;" class="item" title="전체"> <span
+									class="opt"><img src="${proDImg[0].proDImgSrc }"
+										onerror="common.errorImg(this);"></span> <span class="txt">전체</span>
+									<span class="num"><em>2379</em>건</span> <input type="hidden"
+									name="gdasItemNo" value="ALL"> <input type="hidden"
+									name="gdasLgcGoodsNo" value="ALL">
+							</a></li>
+							<c:forEach items="${pLists}" var="pll">
+								<li optgoodsinfo="${pll.proId }">
+									<!-- ## 리뷰고도화 2차## 본상품+연관상품 적용시 필요값 (상품번호:아이템번호)--> <a
+									href="javascript:;" class="item" title="${pll.proName }"> <span
+										class="opt"> <img src="${pll.proImg }"
+											onerror="common.errorImg(this);">
+
+									</span> <span class="txt">${pll.proName }</span> <span class="num"><em
+											class="txt_en">691</em>건</span> <input type="hidden"
+										name="gdasItemNo" value="${pll.proId }"> <input
+										type="hidden" name="gdasLgcGoodsNo" value="${pll.proId }">
+
+								</a>
+								</li>
+
+
+							</c:forEach>
+
+						</ul>
+					</div>
+
 
 					<!-- [D] 리뷰작성 영역 제거 review-write-delete 클래스 추가 -->
 					<div id="ajax">
@@ -1724,6 +1902,225 @@ $(function () {
 												<span style="height: ${reviewScore.grade_4_ratio }%;"></span>
 											</div> <span class="txt">4점</span></li>
 
+
+										<li><span class="per">${reviewScore.grade_3_ratio }%</span>
+											<div class="graph">
+												<span style="height: ${reviewScore.grade_3_ratio }%;"></span>
+											</div> <span class="txt">3점</span></li>
+
+
+										<li><span class="per">${reviewScore.grade_2_ratio }%</span>
+											<div class="graph">
+												<span style="height: ${reviewScore.grade_2_ratio }%;"></span>
+											</div> <span class="txt">2점</span></li>
+
+
+										<li><span class="per">${reviewScore.grade_1_ratio }%</span>
+											<div class="graph">
+												<span style="height: ${reviewScore.grade_1_ratio }%;"></span>
+											</div> <span class="txt">1점</span></li>
+									</ul>
+								</div>
+
+							</div>
+						</div>
+
+
+						<!--평균별점집계 end-->
+
+						<!-- 만족도결과 start-->
+						<!-- <h3 class="tit_type poll_tit">고객 만족도</h3> -->
+						<!-- ## 리뷰 고도화 1차 ## -->
+						<div class="poll_all clrfix">
+							<dl class="poll_type2 type3">
+								<dt>
+									<span>피부타입</span>
+								</dt>
+								<dd>
+									<ul class="list">
+										<li><span class="txt">건성에 좋아요</span>
+											<div class="graph">
+												<span style="width: ${reviewScore.grade1_3_ratio }%;"></span>
+											</div> <em class="per" data-value="19">${reviewScore.grade1_3_ratio }%</em></li>
+										<li><span class="txt">복합성에 좋아요</span>
+											<div class="graph">
+												<span style="width: ${reviewScore.grade1_2_ratio }%;"></span>
+											</div> <em class="per" data-value="60">${reviewScore.grade1_2_ratio }%</em></li>
+										<li><span class="txt">지성에 좋아요</span>
+											<div class="graph">
+												<span style="width: ${reviewScore.grade1_1_ratio }%;"></span>
+											</div> <em class="per" data-value="21">${reviewScore.grade1_1_ratio }%</em></li>
+=======
+					<!-- <h3 class="tit_type thum_tit">리뷰 이미지</h3 -->
+					<!-- ## 리뷰 고도화 1차 ##  -->
+
+
+					<!-- 사진탭 end-->
+
+					<!-- 상품평 등록제한 카테고리 안내 문구 -->
+					<!-- ## 리뷰 고도화 1차 ## -->
+
+					<!-- ## 리뷰 고도화 1차 ## -->
+					<!-- 상품평 등록제한 카테고리 안내 문구 -->
+					<!-- ## 리뷰 고도화 2차## 
+	1. 연관상품 추가 : (정상계정)
+	2. 탭 건수 : 실시간조회(정상계정)
+	3. 별점 : 집계조회(정상계정)
+	4: 만족도 : 집계 조회(정상계정)
+	5. 옵션별 건수 :  실시간조회 (정상계정)
+ -->
+					<!--평균별점집계 start-->
+
+
+					<!-- [D] 리뷰작성 영역 제거 review-write-delete 클래스 추가 -->
+					<div id="ajax">
+						<div class="product_rating_area review-write-delete">
+							<div class="inner clrfix">
+								<div class="grade_img">
+									<p class="img_face">
+										<c:set var="integerPart"
+											value="${fn:split(reviewScore.averagegrade, '.')[0]}" />
+										<span class="grade grade${integerPart}"></span> <em> <c:if
+												test="${reviewScore.averagegrade < 3}">최저</c:if> <c:if
+												test="${reviewScore.averagegrade >= 3 && reviewScore.averagegrade < 4}">보통</c:if>
+											<c:if test="${reviewScore.averagegrade >= 4}">최고</c:if>
+										</em>
+									</p>
+									<!-- grade5 : 최고, grade4 : 좋음, grade3 : 보통, grade2 : 별로, grade1 : 나쁨  -->
+								</div>
+								<div class="star_area">
+									<p class="total">
+										총 <em>${reviewcnt }</em>건
+									</p>
+									<!-- ## 리뷰 고도화 2차 ## 리뷰 전체 건수(본상품+연관상품) -->
+									<p class="num">
+										<strong>${reviewScore.averagegrade }</strong><span>점</span>
+									</p>
+									<ul class="star_list">
+
+
+										<c:forEach begin="1" end="${reviewScore.averagegrade}"
+											varStatus="loop">
+											<li><span class="rating"></span><img
+												src="https://static.oliveyoung.co.kr/pc-static-root/image//product/bg_rating_star.png"></li>
+										</c:forEach>
+
+										<c:set var="decimalPart"
+											value="${reviewScore.averagegrade mod 1 }" />
+
+										<c:if test="${decimalPart gt 0 }">
+											<li><span class="rating"
+												style="width:${decimalPart*100}%;"></span><img
+												src="https://static.oliveyoung.co.kr/pc-static-root/image//product/bg_rating_star.png"></li>
+										</c:if>
+
+										<c:forEach begin="1" end="${5 - reviewScore.averagegrade}"
+											varStatus="loop">
+											<li><span class="rating" style="width: 0%;"></span><img
+												src="https://static.oliveyoung.co.kr/pc-static-root/image//product/bg_rating_star.png"></li>
+										</c:forEach>
+									</ul>
+								</div>
+								<div class="graph_area">
+									<ul class="graph_list">
+										<li><span class="per">${reviewScore.grade_5_ratio }%</span>
+											<div class="graph">
+												<span style="height: ${reviewScore.grade_5_ratio }%;"></span>
+											</div> <span class="txt">5점</span></li>
+
+										<li><span class="per">${reviewScore.grade_4_ratio }%</span>
+											<div class="graph">
+												<span style="height: ${reviewScore.grade_4_ratio }%;"></span>
+											</div> <span class="txt">4점</span></li>
+
+									</ul>
+								</dd>
+							</dl>
+							<dl class="poll_type2 type3">
+								<dt>
+									<span>피부고민</span>
+								</dt>
+								<dd>
+									<ul class="list">
+										<li><span class="txt">보습에 좋아요</span>
+											<div class="graph">
+												<span style="width: ${reviewScore.grade2_3_ratio }%;"></span>
+											</div> <em class="per" data-value="21">${reviewScore.grade2_3_ratio }%</em></li>
+										<li><span class="txt">진정에 좋아요</span>
+											<div class="graph">
+												<span style="width: ${reviewScore.grade2_2_ratio }%;"></span>
+											</div> <em class="per" data-value="79">${reviewScore.grade2_2_ratio }%</em></li>
+										<li><span class="txt">주름/미백에 좋아요</span>
+											<div class="graph">
+												<span style="width: ${reviewScore.grade2_1_ratio }%;"></span>
+											</div> <em class="per" data-value="1">${reviewScore.grade2_1_ratio }%</em></li>
+									</ul>
+								</dd>
+							</dl>
+							<dl class="poll_type2 type3">
+								<dt>
+									<span>자극도</span>
+								</dt>
+								<dd>
+									<ul class="list">
+										<li><span class="txt">자극없이 순해요</span>
+											<div class="graph">
+												<span style="width: ${reviewScore.grade3_3_ratio }%;"></span>
+											</div> <em class="per" data-value="76">${reviewScore.grade3_3_ratio }%</em></li>
+										<li><span class="txt">보통이에요</span>
+											<div class="graph">
+												<span style="width: ${reviewScore.grade3_2_ratio }%;"></span>
+											</div> <em class="per" data-value="24">${reviewScore.grade3_2_ratio }%</em></li>
+										<li><span class="txt">자극이 느껴져요</span>
+											<div class="graph">
+												<span style="width: ${reviewScore.grade3_1_ratio }%;"></span>
+											</div> <em class="per" data-value="1">${reviewScore.grade3_1_ratio }%</em></li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+						<!-- 만족도결과 end-->
+					</div>
+					<!-- 여기까지 -->
+					<!-- ## 리뷰 고도화 1차 ## 정렬 항목 변경 Start -->
+
+					<!-- 연관상품 포함 건수 있는 경우 표시 -->
+
+					<div class="cate_align_box prodLine review_N2" id="searchType">
+						<!-- ## 리뷰고도화 2차 ## 클래스 "review_N2" 추가-->
+						<div class="align_sort">
+							<!-- 리뷰 고도화 1차 : 항목 변경 -->
+							<ul id="gdasSort">
+								<li class="is-layer on"><a href="javascript:;"
+									data-value="01" data-sort-type-code="useful"
+									data-attr="상품상세^리뷰정렬^유용한순">유용한순</a>
+									<button type="button" class="btn-open-layer">
+										<span>자세히 보기</span>
+									</button>
+									<div class="comment-layer">리뷰의 글자수, '도움이 돼요'수 , 등록된 사진,
+										최신 작성일등을 점수화하여 올리브영이 추천하는 리뷰를 정렬합니다.</div></li>
+								<li><a href="javascript:;" data-value="01"
+									data-sort-type-code="help" data-attr="상품상세^리뷰정렬^도움순">도움순</a></li>
+								<li><a href="javascript:;" data-value="02"
+									data-sort-type-code="latest" data-attr="상품상세^리뷰정렬^최신순">최신순</a></li>
+							</ul>
+							<!-- // 리뷰 고도화 1차 : 항목 변경 -->
+						</div>
+
+						<!--## 리뷰고도화 2차 ## 추가 S -->
+						<div class="review_N2 checkbox_wrap">
+							<input type="checkbox" name="searchType" id="searchType_1"
+								checked="checked" value="100" data-attr="상품상세^리뷰검색필터_유형^포토리뷰"><label>포토리뷰</label>
+						</div>
+						<div class="review_N2 checkbox_wrap">
+							<input type="checkbox" name="searchType" id="searchType_2"
+								checked="checked" value="200" data-attr="상품상세^리뷰검색필터_유형^일반리뷰"><label>일반리뷰</label>
+						</div>
+						<div class="review_N2 checkbox_wrap">
+							<input type="checkbox" name="searchType" id="searchType_3"
+								checked="checked" value="50" data-attr="상품상세^리뷰검색필터_유형^올영체험단"><label>체험단</label>
+						</div>
+						<!-- ## 리뷰고도화 2차 ## 추가 E -->
 
 										<li><span class="per">${reviewScore.grade_3_ratio }%</span>
 											<div class="graph">
@@ -1862,7 +2259,6 @@ $(function () {
 								checked="checked" value="50" data-attr="상품상세^리뷰검색필터_유형^올영체험단"><label>체험단</label>
 						</div>
 						<!-- ## 리뷰고도화 2차 ## 추가 E -->
-
 						<!-- 오프라인 리뷰 -->
 						<input type="hidden" name="showFilter" id="showFilter" value="Y">
 						<div class="align_filter ">
@@ -1898,7 +2294,7 @@ $(function () {
 										<li><a href="javascript:;"
 											data-attr="상품상세^포토모아보기^포토 클릭^1"> <span> <!-- ## 리뷰 고도화 1차 ## onload , errorResizeImg -->
 													<img src="${img.rev_img_src }" class="thum"
-													data-value="23587524_1" alt="" data-state="">
+													data-value="${img.rev_id }" alt="" data-state="">
 											</span>
 
 										</a></li>
@@ -1906,7 +2302,8 @@ $(function () {
 									</c:if>
 									<c:set var="i" value="${i+1 }" />
 									<c:if test="${i eq 7 }">
-										<li>
+
+										<li class="more">
 											<!-- ## 리뷰 고도화 1차 ## --> <a href="javascript:;" class="more"
 											data-attr="상품상세^포토모아보기^포토더보기"> <span> <!-- ## 리뷰 고도화 1차 ## -->
 													<span><em>더보기</em></span> <!-- ## 리뷰 고도화 1차 ## onload , errorResizeImg -->
@@ -2150,6 +2547,7 @@ $(function () {
 				</div>
 			</div>
 
+
 			<!--  ====QNA=========================================  -->
 			<div class="tabConts prd_detail_cont show" id="qnaContentsArea">
 				<div class="prd_qna_tit">
@@ -2213,6 +2611,249 @@ $(function () {
 			</div>
 
 			<!-- QNA END -->
+=======
+
+			<!--  리뷰 팝업 창 -->
+			<div class="layer_pop_wrap w850" id="layerWrap850"
+				style="z-index: 999; display: none; left: 50%; margin-left: -425px; top: 2169.5px; margin-top: -371px;">
+
+				<div class="popup-contents"
+					style="top: 0; width: 850px; margin-left: -425px;">
+					<div class="pop-conts type40">
+						<h1 class="ptit">포토 상세</h1>
+						<div class="photo_view_area clrfix renew">
+							<div class="view_area">
+								<div class="thumb_slide slider-for">
+
+
+									<c:set var="i" value="${0 }" />
+									<c:forEach items="${reviewimg }" var="imglist">
+
+										<c:forEach items="${imglist }" var="img">
+
+											<div style="width: 500px;">
+												<span class="base"> <img
+													src="https://static.oliveyoung.co.kr/pc-static-root/image//comm/bg_2_2.png"
+													alt="">
+												</span> <img alt="" class="bigImg ${i }" name="${i }"
+													data-value="${img.rev_id }" src="${img.rev_img_src }">
+											</div>
+											<c:set var="i" value="${i + 1 }" />
+										</c:forEach>
+									</c:forEach>
+
+
+
+
+								</div>
+								<!-- 여기 까지 -->
+								<div class="thums_slide slider-nav">
+
+
+									<c:forEach items="${reviewimg }" var="imglist">
+
+										<c:forEach items="${imglist }" var="img">
+
+											<div>
+												<input type="hidden"
+													value="https://image.oliveyoung.co.kr/uploads/images/gdasEditor/2023/11/15/1699976348720.png"
+													tabindex="0"> <img alt="" name="23745102"
+													data-attr="상품상세^포토상세^포토상세이동_포토"
+													data-value="23745102_2_23727075_1"
+													onload="common.imgLoads(this,80);"
+													onerror="common.errorResizeImg(this,80)"
+													src="${img.rev_img_src }">
+											</div>
+										</c:forEach>
+									</c:forEach>
+
+								</div>
+
+
+							</div>
+
+							<!-- //view E -->
+
+							<div class="info_area scrbar">
+								<div class="photo_detail" id="photoDetail">
+									<div class="review_summary photo" id="photoDetail">
+										<div class="user clrfix  ">
+											<a href="javascript:;"
+												onclick="goods.gdas.handleClickReviewPhotoDetailReviewerProfile('aTJNaDhBM0V5QStaeWYrWXdXaWFPZz09', {t_page: '포토상세', t_click: '리뷰포토상세_리뷰어프로필', t_profile_name: 'Mizthecat', goodsNo: 'A000000190051', goodsname: '[윈터 PICK] 마몽드 포어 슈링커 바쿠치올 크림 60ml 단독기획 (+30ml 추가증정)', t_review_rank_name: '1172'});"
+												data-attr="상품상세^포토상세^리뷰어프로필클릭"> <img
+												src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2023/07/31/1690732966938.png"
+												onerror="common.errorProfileImg(this);"
+												style="display: none;"
+												onload="common.onLoadProfileImg(this, 60);">
+												<div class="thum">
+													<span class="bg"></span> <img
+														src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2023/07/31/1690732966938.png?RS=60x79&amp;CS=60x60"
+														class="profileThum_s"
+														style="background: url(https://static.oliveyoung.co.kr/pc-static-root/image/comm/my_picture_base.jpg) no-repeat 0 0; background-size: 60px">
+												</div>
+											</a>
+											<p class="info_user">
+												<a href="javascript:;"
+													onclick="goods.gdas.handleClickReviewPhotoDetailReviewerProfile('aTJNaDhBM0V5QStaeWYrWXdXaWFPZz09', {t_page: '포토상세', t_click: '리뷰포토상세_리뷰어프로필', t_profile_name: 'Mizthecat', goodsNo: 'A000000190051', goodsname: '[윈터 PICK] 마몽드 포어 슈링커 바쿠치올 크림 60ml 단독기획 (+30ml 추가증정)', t_review_rank_name: '1172'});"
+													class="id" data-attr="상품상세^포토상세^리뷰어프로필클릭">Mizthecat</a> <a
+													href="javascript:;"
+													onclick="goods.gdas.handleClickTopReviewer({t_page: '포토상세', t_click: '리뷰포토상세_탑리뷰어순위', t_review_rank_name: '1172'})"
+													class="top">TOP 1172</a>
+											</p>
+											<!-- 리뷰 고도화 2차 추가 S-->
+											<!-- 리뷰 고도화 2차 추가 E-->
+											<p class="tag">
+												<span>트러블성</span> <span>겨울쿨톤</span> <span>각질</span> <span>모공</span>
+											</p>
+										</div>
+										<div class="score_area addOY">
+											<span class="review_point"><span class="point"
+												style="width: 100%">5점만점에 5점</span></span> <span class="date">2023.11.15</span>
+											<span class="ico_oyGroup">체험단</span>
+										</div>
+										<div class="txt_inner">사랑스러운 윈터가 모델이라니,,, 마몽드 프로모션 팀 일
+											잘하네요...!! 예전에도 마몽드 레티놀 토너를 토너패드로 만들어서 잘 썼는데 크림도 나왔네요. 레티놀이 쓰는
+											사람에 따라 조금 자극적이라고 느낄 수도 있다고 하는데, 저는 피부가 예민한 편인데도 자극적이라고 느끼진
+											못했어요! 참고하시길,,,</div>
+										<div class="review_tag"></div>
+										<p class="txt_beauty">* 본 상품 후기는 체험단으로 선정되어 CJ올리브영으로부터 위
+											상품을 무료로 제공받아 작성한 것입니다.</p>
+										<div class="poll_sample">
+											<dl class="poll_type1">
+												<dt>
+													<span>피부타입</span>
+												</dt>
+												<dd>
+													<span class="txt">복합성에 좋아요</span>
+												</dd>
+											</dl>
+											<dl class="poll_type1">
+												<dt>
+													<span>피부고민</span>
+												</dt>
+												<dd>
+													<span class="txt">주름/미백에 좋아요</span>
+												</dd>
+											</dl>
+											<dl class="poll_type1">
+												<dt>
+													<span>자극도</span>
+												</dt>
+												<dd>
+													<span class="txt">자극없이 순해요</span>
+												</dd>
+											</dl>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<button type="button" class="ButtonClose"
+							onclick="goods.gdas.photo.closePhotoDetail('summary_thumb');">팝업창
+							닫기</button>
+					</div>
+				</div>
+
+				<script type="text/javascript">
+      $.noConflict();
+</script>
+
+				<script>
+$(function(){
+	
+	 $('.slider-for').slick({
+		  slidesToShow: 1,
+		  slidesToScroll: 1,
+		  infinite : true,
+		  arrows: true,
+		  fade: true,
+		  asNavFor: '.slider-nav'
+		 
+		  
+		  
+		});
+		$('.slider-nav').slick({
+		  slidesToShow: 6,
+		  slidesToScroll: 1,
+		  infinite : true,
+		  asNavFor: '.slider-for',
+		  arrows: false,
+		  dots: false,
+		  centerMode: false,
+		  focusOnSelect: true
+		});
+		
+		
+		$('.slider-for').on('afterChange', function(event, slick, currentSlide, nextSlide){
+			let rev_id = $(`img.bigImg[name=\${currentSlide}]`).data("value");
+			
+			let data = {
+				 rev_id: rev_id,
+			    };
+			 
+				
+				$.ajax({
+					url: "<%=contextPath%>/olive/reviewimg.do",
+					data:data,
+					cache: false,
+					success:function( response ) {
+			              $(".info_area.scrbar").empty();
+			              $(".info_area.scrbar").append( response );
+				           		              
+			          }
+			        , error		: function() {
+			            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+			        }
+				})
+			
+		})
+		
+})
+</script>
+
+			</div>
+
+			<div class="layer_pop_wrap w850 photo" id="layerWrap850"
+				style="z-index: 999; display: none; left: 50%; margin-left: -425px; top: 2236.5px; margin-top: -361px;">
+
+				<div class="popup-contents"
+					style="top: 0; width: 850px; margin-left: -425px;">
+					<div class="pop-conts">
+						<h1 class="ptit">사진목록</h1>
+						<div class="photo_list_cont">
+							<div class="photo_list scrbar">
+								<ul class="inner" id="photoList">
+								<c:forEach items="${reviewimg }" var="imglist">
+								<c:forEach items="${imglist }" var="img">
+									<li><a href="javascript:;"> <span class="thum">
+												<img style="width: 80px;"
+												src="${img.rev_img_src }"
+												onload="common.imgLoads(this,80);" class="review_img"
+												alt="썸네일 이미지" data-attr="상품상세^포토목록^포토 클릭"
+												data-value="${img.rev_id }" data-state=""
+												onerror="common.errorResizeImg(this,80)">
+										</span>
+									</a></li>
+									</c:forEach>
+									</c:forEach>
+								</ul>
+							</div>
+						</div>
+						<button type="button" class="ButtonClose photoClose">팝업창 닫기</button>
+					</div>
+				</div>
+
+
+				<input type="hidden" id="goodsNo" name="goodsNo"
+					value="A000000156230"> <input type="hidden" id="gdasSeq"
+					name="gdasSeq" value="23744547"> <input type="hidden"
+					id="fileSeq" name="fileSeq" value="0">
+
+
+
+
+			</div>
+
 		</div>
 	</div>
 	<div class="layer_pop_wrap" id="layer_pop_wrap"
@@ -2471,7 +3112,7 @@ $(function () {
 
 			<dl class="card_info_data">
 				<dt>THE CJ카드</dt>
-				<dd>결제 시 10% 할인 (BC 카드 제외)</dd>
+				<dd>결제 시 10% 할인 (BC 카드 제외)</dd
 			</dl>
 
 

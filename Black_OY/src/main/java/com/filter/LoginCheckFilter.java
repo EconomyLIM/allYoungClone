@@ -43,6 +43,7 @@ public class LoginCheckFilter implements Filter {
 		if (isLogon) {
 			chain.doFilter(request, response);
 		} else {
+			System.out.println("로그인 하세요");
 			String referer = req.getRequestURI(); // /jspPro/days07/board/write.jsp
 			session.setAttribute("refer", referer);
 			String location = "/Black_OY/olive/LogOn.do";

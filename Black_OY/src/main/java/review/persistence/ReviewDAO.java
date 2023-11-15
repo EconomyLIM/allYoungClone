@@ -12,6 +12,8 @@ public interface ReviewDAO {
 
 	List<ReviewDTO> reviewList(Connection conn, String pro_displ_id, String type, String pro_id, int currentPage, int numberPerPage);
 	
+	ReviewDTO review(Connection conn, String rev_id);
+	
 	List<ReviewDTO> reviewList(Connection conn, String pro_displ_id, String pro_id);
 	
 	List<ReviewImgDTO> reviewimg(Connection conn, String rev_id);

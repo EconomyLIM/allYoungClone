@@ -20,7 +20,7 @@
 	#basketOption{
 	position: fixed;
 top: 50%;
-left: 50%;
+left: 65%;
 -webkit-transform: translate(-50%, -50%);
 -moz-transform: translate(-50%, -50%);
 -ms-transform: translate(-50%, -50%);

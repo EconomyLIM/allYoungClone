@@ -1,12 +1,10 @@
 package user.service;
 
 import java.sql.Connection;
-import java.util.List;
 
 import com.util.ConnectionProvider;
 
 import user.domain.OuserDTO;
-import user.persistence.LogOnDAOImpl;
 import user.persistence.OuserDAOImpl;
 
 public class JoinService {
@@ -35,6 +33,6 @@ public class JoinService {
 		}
 		return rowCount;
 		
-	} // logselectservice
+	}
 	
 }
