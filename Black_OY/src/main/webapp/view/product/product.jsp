@@ -44,7 +44,7 @@ usersOnPage.add(session2.getId());
 <body>
 	<script>
 $(function () {
-	console.log(window.location.href);
+	// console.log(window.location.href);
 	$(".loc_history>li").mouseover(function () {
 		$(this).addClass("active");
 		$("history_cate_box").css("display","block");
@@ -524,6 +524,8 @@ $(function() {
 			
 			if($("#deliveDay").prop("checked")) {
 				params += "&quickYN=Y";
+			} else {
+				params += "&quickYN=N";
 			}
 			
 			location.href = "<%=contextPath%>/olive/orderForm.do?" + params;
@@ -645,18 +647,8 @@ $(function () {
 			})
 		})
 
-		function showDiv(index) {
-			const divs = document.querySelectorAll('.tabConts.prd_detail_cont'); // 모든 div 요소 선택
 
-			// index는 1부터 시작하므로 실제 인덱스는 index - 1이 됨
-			for (let i = 0; i < divs.length; i++) {
-				if (i === index - 1) {
-					divs[i].classList.add("show"); // 선택된 div 보이기
-				} else {
-					divs[i].classList.remove("show"); // 선택되지 않은 div 감추기
-				}
-			}
-		}
+	
 	</script>
 	<script>
 	// 리뷰 팝업창
@@ -740,6 +732,174 @@ $(function () {
 	
 	
 	
+
+
+		function showDiv(index) {
+			const divs = document.querySelectorAll('.tabConts.prd_detail_cont'); // 모든 div 요소 선택
+
+			// index는 1부터 시작하므로 실제 인덱스는 index - 1이 됨
+			for (let i = 0; i < divs.length; i++) {
+				if (i === index - 1) {
+					divs[i].classList.add("show"); // 선택된 div 보이기
+				} else {
+					divs[i].classList.remove("show"); // 선택되지 않은 div 감추기
+				}
+			}
+		}
+	</script>
+	<script>
+	/*  QnA 스크립트 */
+	$(function() {
+		$('.completeBind').on('click', function(e) {
+			e.preventDefault();
+			if ($(this).closest('li').hasClass('show')) {
+				$(this).closest('li').removeClass('show');
+			}else{
+				$(this).closest('li').addClass('show');
+			}
+			
+		}) // completeBind
+		
+		$('.btnInquiry.goods_qna_inquiry').on('click', function() {
+			
+			$('#pop_cont').show();
+			$('.dimm').show();
+			$('#sForm')[0].reset();
+		}) // btnInquiry
+		
+		
+
+	}) //function
+	
+	// qna 삭제
+	function deleteQna(qnaId) {
+		var confirmDelete = confirm("삭제하시겠습니까?");
+		 if (confirmDelete) {
+           
+	         console.log(qnaId)
+	         
+	         $.ajax({
+	                type: "POST", // 또는 "GET"
+	                url: "<%=contextPath%>/DeleteQna",
+	                data: { qnaId: qnaId },
+	                success: function(response) {
+	                	
+	                    console.log("삭제 성공");
+	                    window.location.href = window.location.href; 
+	                    // 원하는 동작 수행
+	                },
+	                error: function(error) {
+	                    console.log("삭제 실패");
+	                    window.location.href = window.location.href; 
+	                    // 에러 처리
+	                }
+	            });
+		 } // if
+           
+        
+	} // deleteQna
+	
+	function qnaPopDown() {
+		$('#pop_cont').hide();
+		$('.dimm').hide();
+		$('.radioGT1 label:nth-child(1)').removeClass('checked');
+		$('#cancel').prop("disabled",true);
+		$('#reg').prop("disabled",true);
+		$('.mypage-qna-write').addClass('disabled');
+		$('.reviews-write').addClass('disabled');
+		$('.reviews-write > textarea').prop('disabled', true);
+	}
+	</script>
+	<script>
+	/*  QnA 스크립트 */
+	$(function() {
+		$('.radioGT1 label:nth-child(1)').on('click', function() {
+			$(this).addClass('checked');	
+			$('.reviews-write').removeClass('disabled');
+			$('.mypage-qna-write').removeClass('disabled');
+			$('.reviews-write textarea').prop("disabled",false);
+			$('#cancel').prop("disabled",false);
+			$('#reg').prop("disabled",false);
+		})
+		
+		$('.radioGT1 label:nth-child(2)').on('click', function() {
+			$(this).addClass('checked');
+			$('.radioGT1 label:nth-child(1)').removeClass('checked');
+			$('.alertPop.isOpen').show();
+		})
+		
+		
+		var maxChars = 250;
+
+	    $("#gdasCont").on("input", function () {
+	        var curLength = $(this).val().length;
+	        $("#curTxtLength").text(curLength);
+
+	        // 250자를 넘으면 입력 취소
+	        if (curLength > maxChars) {
+	            $(this).val(function(_, val) {
+	            	alert('250자 이내로 작성해주세요.');
+	                return val.slice(0, maxChars);
+	                
+	            });
+	        }
+	    });
+
+	    $("#gdasCont").on("keypress", function (e) {
+	        // 텍스트가 삭제될 때 입력 취소
+	        if (e.which === 8) { // 8은 백스페이스 키의 ASCII 코드
+	            var curLength = $(this).val().length;
+	            if (curLength <= maxChars) {
+	                $("#curTxtLength").text(curLength);
+	            }
+	        }
+	    });
+		
+	})
+	</script>
+	<script>
+	/*  QnA 스크립트 */
+	$(function() {
+		$('.btnMedium.wGreen.btnClose').on('click', function() {
+			$('.alertPop.isOpen').hide();
+			$('.radioGT1 label:nth-child(2)').removeClass('checked');
+			$('.radioGT1 label:nth-child(1)').addClass('checked');
+			$('.reviews-write').removeClass('disabled');
+			$('.mypage-qna-write').removeClass('disabled');
+			$('.reviews-write textarea').prop("disabled",false);
+			$('#cancel').prop("disabled",false);
+			$('#reg').prop("disabled",false);
+		})
+		
+		$('#reg').on('click', function () {
+			var userId = '${logOn.user_id}';
+			var productId = $("#goodsNo").val();
+			var contentVal = $("#gdasCont").val();
+			var goodsNo = '<%=request.getParameter("goodsNo")%>';
+			
+			 $.ajax({
+		            type: "POST",
+		            url: "<%=contextPath%>/WriteQna", 
+		            data: {
+		                userId: userId,
+		                displId: productId,
+		                contentVal: contentVal,
+		                goodsNo : goodsNo
+		            },
+		            success: function(response) {
+		                console.log("리뷰 등록 성공");
+		                window.location.href = window.location.href;
+		                // 리뷰 등록 성공 시 원하는 동작 수행
+		            },
+		            error: function(error) {
+		                console.log("리뷰 등록 실패");
+		                // 리뷰 등록 실패 시 에러 처리
+		                window.location.href = window.location.href;
+		            }
+		        });
+		})
+	})
+
 	</script>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
 	<div id="Container">
@@ -1318,7 +1478,8 @@ $(function () {
 				<li id="reviewInfo"><a href="javascript:;"
 					class="goods_reputation" data-attr="상품상세^상품상세_SortingTab^리뷰">리뷰<span>(216)</span></a></li>
 				<li id="qnaInfo"><a href="javascript:;" class="goods_qna"
-					data-attr="상품상세^상품상세_SortingTab^Q&amp;A">Q&amp;A<span>(2)</span></a></li>
+					data-attr="상품상세^상품상세_SortingTab^Q&amp;A">Q&amp;A<span><c:if
+								test="${not empty qnaList}">(${qnaList.size()})</c:if> </span></a></li>
 			</ul>
 			<div class="tabConts prd_detail_cont show">
 				<div class="detail_area">
@@ -1387,7 +1548,58 @@ $(function () {
 			<div class="tabConts prd_detail_cont">
 				<h3 class="detail_tit">상품정보 제공고시</h3>
 				<div id="kcInfo"></div>
-				<div id="artcInfo"></div>
+				<!-- 상품정보 -->
+				<div id="artcInfo">
+					<dl class="detail_info_list">
+					</dl>
+					<dl class="detail_info_list">
+						<dt>내용물의 용량 또는 중량</dt>
+						<dd>${detailInfoDTO.capacity}</dd>
+					</dl>
+					<dl class="detail_info_list">
+						<dt>제품 주요 사양</dt>
+						<dd>${detailInfoDTO.reqirement}</dd>
+					</dl>
+					<dl class="detail_info_list">
+						<dt>사용기한(또는 개봉 후 사용기간)</dt>
+						<dd>${detailInfoDTO.useDate}</dd>
+
+					</dl>
+					<dl class="detail_info_list">
+						<dt>사용방법</dt>
+						<dd>${detailInfoDTO.use}<br>
+						</dd>
+					</dl>
+					<dl class="detail_info_list">
+						<dt>화장품제조업자,화장품책임판매업자 및 맞춤형화장품판매업자</dt>
+						<dd>${detailInfoDTO.company}</dd>
+					</dl>
+					<dl class="detail_info_list">
+						<dt>제조국</dt>
+						<dd>${detailInfoDTO.country}</dd>
+					</dl>
+					<dl class="detail_info_list">
+						<dt>화장품법에 따라 기재해야 하는 모든 성분</dt>
+						<dd>${detailInfoDTO.ingredient}</dd>
+					</dl>
+					<dl class="detail_info_list">
+						<dt>기능성 화장품 식품의약품안전처 심사필 여부</dt>
+						<dd>${detailInfoDTO.whether}</dd>
+					</dl>
+					<dl class="detail_info_list">
+						<dt>사용할 때의 주의사항</dt>
+						<dd>${detailInfoDTO.caution}</dd>
+					</dl>
+					<dl class="detail_info_list">
+						<dt>품질보증기준</dt>
+						<dd>${detailInfoDTO.quality}</dd>
+					</dl>
+					<dl class="detail_info_list">
+						<dt>소비자상담 전화번호</dt>
+						<dd>${detailInfoDTO.tel}</dd>
+					</dl>
+				</div>
+				<!-- 배송안내 -->
 				<h3 class="detail_tit mgT40">배송안내</h3>
 				<dl class="detail_info_list" id="dlexAjaxInfo">
 					<dt>배송비/배송가능일</dt>
@@ -1495,6 +1707,7 @@ $(function () {
 				</dl>
 			</div>
 			<!--// 구매정보 컨텐츠 영역 -->
+
 
 			<!-- 리뷰 영역 -->
 			<div class="tabConts prd_detail_cont" id="gdasContentsArea">
@@ -2537,8 +2750,75 @@ $(function(){
 
 
 
-			<!-- QNA  -->
-			<div class="tabConts prd_detail_cont" id="qnaContentsArea"></div>
+			
+
+
+			
+
+			<!--  ====QNA=========================================  -->
+			<div class="tabConts prd_detail_cont show" id="qnaContentsArea">
+				<div class="prd_qna_tit">
+					<p onclick="common.link.moveCounselListPage();"
+						style="cursor: pointer;">★ 상품 문의사항이 아닌 반품/교환관련 문의는 고객센터 1:1
+						문의를 이용해주세요.</p>
+					<button class="btnInquiry goods_qna_inquiry" onclick="">상품문의</button>
+				</div>
+				<ul class="prd_qna_list" id="prd_qna_list">
+					<c:if test="${not empty qnaList }">
+						<c:forEach items="${qnaList}" var="qna">
+							<li class="">
+								<div class="qna_tit_box">
+									<p class="qna_question">
+										<c:if test="${not empty qna.answer}">
+											<span class="qna_flag complete">답변완료</span>
+											<a href="#" class="completeBind">${qna.question }</a>
+										</c:if>
+										<c:if test="${empty qna.answer}">
+											<span class="qna_flag">답변대기</span>
+											<a href="#" class="completeBind">${qna.question} </a>
+										</c:if>
+									</p>
+									<p class="tx_userid">
+										<c:set var="userId"
+											value="${fn:substring(qna.userId, 0, fn:length(qna.userId) - 4)}****" />
+										<span>${userId}</span>
+										<c:if test="${not empty sessionScope.logOn }">
+											<c:if test="${sessionScope.logOn.user_id eq qna.userId}">
+												<button class="btnSmall fullGray" onclick="">수정</button>
+												<button class="btnSmall fullGray" onclick="deleteQna('${qna.qnaId}');">삭제</button>
+											</c:if>
+										</c:if>
+									</p>
+									<p class="tx_date">${qna.regDate}</p>
+								</div>
+								<div class="qna_answer_box">
+									<div class="tx_question">
+										<span class="ico_qna question">질문</span> ${qna.question}
+									</div>
+									<div class="tx_answer">
+										<c:if test="${not empty qna.answer}">
+											<span class="ico_qna answer">답변</span>
+											${qna.answer}
+										</c:if>
+										<c:if test="${empty qna.answer}">
+										</c:if>
+									</div>
+								</div>
+							</li>
+						</c:forEach>
+					</c:if>
+
+				</ul>
+				<div class="pageing">
+
+					<strong title="현재 페이지">1</strong>
+
+				</div>
+
+			</div>
+
+			<!-- QNA END -->
+
 		</div>
 	</div>
 	<div class="layer_pop_wrap" id="layer_pop_wrap"
@@ -2823,5 +3103,73 @@ $(function(){
 			</p>
 		</div>
 	</div>
+	
+	<!-- === Q&A 쓰기 팝업 =====================  -->
+	
+	<div class="popup-contents" id="pop_cont" style="top: 1300px; display: none; width: 650px; margin: -258px 0px 0px -325px; z-index: 999; left: 50%;">
+	<div class="pop-conts">
+		<form name="sForm" id="sForm">
+			<input type="hidden" name="gdasSeq" id="gdasSeq" value="">
+						<input type="hidden" name="goodsNo" id="goodsNo" value="${pLists[0].displId}">
+			<h1 class="ptit">상품 Q&amp;A 작성</h1>
+	
+			<!-- [s] 2021.04.19 modify -->
+			<div class="mypage-qna-write disabled">
+				<div class="optionSec">
+					<h3>아래의 문의 유형을 선택해주세요.</h3>
+					<div class="radioGT1">
+						<label><input type="radio" name="prdTypeSelect" id="prdTypeSelect1"><span>상품문의</span></label>
+						<label><input type="radio" name="prdTypeSelect" id="prdTypeSelect2"><span>주문 상품문의</span></label>
+					</div>
+					<p class="txt">성분, 사용법, 구성 등 상품 관련 문의를 남겨주세요. 배송/교환/반품 문의는 ‘주문상품문의’를 선택해주세요.</p>
+				</div>
+	
+				<p class="common4s-text">${pLists[0].displName }</p>
+	
+				<!-- 등록제한이 없는 한줄상품평 작성 -->
+				<div class="reviews-write disabled">
+					<textarea cols="5" rows="1" id="gdasCont" name="gdasCont" placeholder="Q&amp;A 게시판에서는 고객님의 정보 확인이 어려우므로 배송문의 등은 1:1 게시판 이용 부탁드립니다." disabled=""></textarea>
+					<p><span id="curTxtLength">0</span>자/250자</p>
+				</div>
+				<!-- 등록제한이 없는 한줄상품평 작성 -->
+	
+				<div class="btnGroup">
+					<button id="cancel" type="button" class="btnGray" onclick="qnaPopDown()" disabled="disabled">취소</button>
+					<button id="reg" type="button" class="btnGreen" onclick="" disabled="disabled">등록</button>				
+				</div>
+				<div class="usage-guide">
+					<h2 class="stit">이용안내</h2>
+					<ul>
+						<li>재판매글, 상업성 홍보글, 미풍양속을 해치는 글 등 상품 Q&amp;A의 취지에 어긋나는 글은 삭제될 수 있습니다.</li>
+					</ul>
+				</div>
+			</div>
+			<!-- [e] 2021.04.19 modify -->
+	
+			<button type="button" class="ButtonClose" onclick="qnaPopDown();">팝업창 닫기</button>
+			<!-- [s] 2021.04.19 add -->
+			<div class="alertPop">
+				<p class="txt">해당 상품의 배송/교환/반품 문의를 위해<br>1:1문의 게시판을 이용해주세요.</p>
+				<p class="btnGroup">
+					<button type="button" class="btnMedium wGreen btnClose">취소</button>
+					<button id="btnCounsel" type="button" class="btnMedium btnGreen">1:1문의 바로가기</button>
+				</p>
+			</div>
+		</form>
+		<!-- [e] 2021.04.19 add -->
+	</div>
+
+	<script>
+		
+	</script>
+<div class="alertPop isOpen" style="display: none">
+				<p class="txt">해당 상품의 배송/교환/반품 문의를 위해<br>1:1문의 게시판을 이용해주세요.</p>
+				<p class="btnGroup">
+					<button type="button" class="btnMedium wGreen btnClose">취소</button>
+					<button id="btnCounsel" type="button" class="btnMedium btnGreen">1:1문의 바로가기</button>
+				</p>
+			</div>
+</div>
+	<!-- === Q&A 쓰기 팝업 종료=====================  -->
 </body>
 </html>
