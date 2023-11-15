@@ -38,7 +38,7 @@ public class WriteQna extends HttpServlet {
 		String goodsNo = request.getParameter("goodsNo");
 		
 		WrtieQnaDTO writeQna = WrtieQnaDTO.builder()
-				.displId(displId)
+				.displId(goodsNo)
 				.userId(userId)
 				.contentVal(question)
 				.build();
