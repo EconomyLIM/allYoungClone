@@ -259,9 +259,10 @@ public class OrderDAOImpl implements OrderDAO {
 	public int insertOrder(Connection conn, Map<String, Object> map) {
 		int rowCount = 0;
 		
-		String sql = "INSERT INTO o_order(order_id, user_id, delivery_id, delivery_date, order_status, delivery_msg, visit_pwd, col, order_type) "
+		String sql = "INSERT INTO o_order(order_id, user_id, delivery_id, delivery_date, order_status, delivery_msg, visit_pwd, col"
+				+ " , order_type, today_opt, packaging_opt) "
 				+ " VALUES('or_'||TO_CHAR(order_seq.NEXTVAL, 'FM00000000'), ?, ? "
-				+ ", ?, ?, ?, ?, ?, ?)";
+				+ ", ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement pstmt = null;
 		
@@ -279,6 +280,8 @@ public class OrderDAOImpl implements OrderDAO {
 			pstmt.setString(6, (String)map.get("visit_how"));
 			pstmt.setString(7, (String)map.get("visit_pwd"));
 			pstmt.setString(8, "온라인");
+			pstmt.setString(9, (String)map.get("today_opt"));
+			pstmt.setString(10, (String)map.get("packaging_opt"));
 			
 			rowCount = pstmt.executeUpdate();
 			
@@ -295,9 +298,9 @@ public class OrderDAOImpl implements OrderDAO {
 	public int insertPayment(Connection conn, Map<String, Object> map) throws Exception {
 		int rowCount = 0;
 		
-		String sql = "INSERT INTO payment(pay_id, order_id, total_price, pay_price, pay_type, saved_money, card_type) "
+		String sql = "INSERT INTO payment(pay_id, order_id, total_price, pay_price, pay_type, saved_money, card_type, inst_type) "
 				+ " VALUES('pa_'||TO_CHAR(pay_seq.NEXTVAL, 'FM00000000'), 'or_'||TO_CHAR(order_seq.CURRVAL, 'FM00000000')"
-				+ " , ?, ?, ?, ?, ?)";
+				+ " , ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement pstmt = null;
 		
@@ -308,6 +311,7 @@ public class OrderDAOImpl implements OrderDAO {
 			pstmt.setString(3, (String)map.get("pay_type"));
 			pstmt.setInt(4, (int)((Integer)map.get("totalPay")*0.005));
 			pstmt.setString(5, (String)map.get("card_type"));
+			pstmt.setString(6, (String)map.get("inst_type"));
 			
 			
 			rowCount = pstmt.executeUpdate();

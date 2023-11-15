@@ -431,11 +431,13 @@
 				$("#pickupHide3").show();
 				$("#pickupHide4").show();
 				$("#pickupStoreList").hide();
+				$("#pickupYN").val("N");
 			});
 			
 			$("#pickupToggle").on("click", function() {
 				$("#dlvpInfo > tbody > tr").hide();
 				$("#pickupStoreList").show();
+				$("#pickupYN").val("Y");
 			});
 			
 			// 선물포장 서비스 팝업창
@@ -444,8 +446,16 @@
 				$("body").append(dimm);
 			});
 			
-			// 여기부터
-			/* $("#infoGiftBoxOrder > div > button").on("click") */
+			
+			$("#infoGiftBoxOrder > div > button").on("click", function() {
+				$("#infoGiftBoxOrder").hide();
+				$(".dimm").remove();
+			});
+			
+			$("#btnConfirm1").on("click", function() {
+				$("#infoGiftBoxOrder").hide();
+				$(".dimm").remove();
+			})
 		});
 		
 		
@@ -572,6 +582,7 @@
 								<li class="active"><a href="javascript:void(0);" title="오늘드림"><span>오늘드림</span></a></li>
 								<li id="pickupToggle" data-attr="배송방법^픽업"><a href="javascript:void(0);" title="픽업"><span>픽업</span></a></li>
 							</ul>
+								<input type="hidden" name="pickupYN" id="pickupYN" value="N">
 						</div>
 
 						<table class="timeTable">
@@ -1214,6 +1225,7 @@
 					<!-- 2020-08-04 o2oJJ 24H 화면 제어로 인한 주석 처리 -->
 
 						<h2 class="sub-title2">
+							<input type="hidden" name="quickYN" id="quickYN" value="${quickYN}">
 							<c:choose>
 								<c:when test="${quickYN eq 'Y' }">
 									오늘드림 배송상품
@@ -1613,15 +1625,15 @@
 									<td>
 										<div>
 											<select id="instMmCnt" name="instMmCnt" class="selH28" style="width:200px" data-attr="결제수단선택^할부종류" disabled="">
-												<option value="00">일시불</option>
-												<option value="02" targetid="nint2MmYn">2개월</option>
-												<option value="03" targetid="nint3MmYn">3개월</option>
-												<option value="04" targetid="nint4MmYn">4개월</option>
-												<option value="05" targetid="nint5MmYn">5개월</option>
-												<option value="06" targetid="nint6MmYn">6개월</option>
-												<option value="07" targetid="nint7MmYn">7개월</option>
-												<option value="08" targetid="nint8MmYn">8개월</option>
-												<option value="09" targetid="nint9MmYn">9개월</option>
+												<option value="0">일시불</option>
+												<option value="2" targetid="nint2MmYn">2개월</option>
+												<option value="3" targetid="nint3MmYn">3개월</option>
+												<option value="4" targetid="nint4MmYn">4개월</option>
+												<option value="5" targetid="nint5MmYn">5개월</option>
+												<option value="6" targetid="nint6MmYn">6개월</option>
+												<option value="7" targetid="nint7MmYn">7개월</option>
+												<option value="8" targetid="nint8MmYn">8개월</option>
+												<option value="9" targetid="nint9MmYn">9개월</option>
 												<option value="10" targetid="nint10MmYn">10개월</option>
 												<option value="11" targetid="nint11MmYn">11개월</option>
 												<option value="12" targetid="nint12MmYn">12개월</option>
@@ -2193,8 +2205,7 @@
 						<li>
 							<span class="tx_tit">쿠폰할인금액</span><!-- 2017-01-18 수정 : 문구수정 -->
 							<span class="tx_cont colorOrange"><span class="tx_num" id="totDscntAmt_span">0</span>원</span>
-							<input type="hidden" name="descentAmt" value="0">
-							<input type="hidden" id="imdtDscntAmt" value="0">
+							<input type="hidden" id="cd_price" name="cd_price" value="0">
 						</li>
 						
 						<li class="line_top2">
@@ -2214,6 +2225,7 @@
 						<li>
 							<span class="tx_tit"><span class="tx_num">CJ ONE</span> 포인트</span>
 							<span class="tx_cont colorOrange"><span class="tx_num" id="cjonePntAplyAmt_span">0</span>원</span>
+							<input type="hidden" id="point_price" name="point_price" value="0">
 						</li>
 						<!-- 임직원일 경우 -->
 						<li id="cafeteriaPntAplyAmt_li" style="display: none;">
@@ -2687,7 +2699,7 @@
 			</ul>
 			<div class="layer_btn_area">
 				<button class="btnMedium btnGreenW w120" id="stopToday" onclick="javascript:common.popLayer.todayDelivery.openQuickPopTodayForNoti();">오늘 하루 안보기</button>
-				<button class="btnMedium fullGreen w120" id="btnConfirm" onclick="javascript:common.popLayer.todayDelivery.layerCloseForNoti();">확인</button>
+				<button class="btnMedium fullGreen w120" id="btnConfirm">확인</button>
 				<button class="btnMedium btnGreenW w120" id="stopGiftToday" style="display:none;">오늘 하루 안보기</button>
 				<button class="btnMedium fullGreen w120" id="btnGiftConfirm" style="display:none;">확인</button>
 			</div>
@@ -2720,7 +2732,7 @@
 			</ul>
 			<div class="layer_btn_area mgT25">
 				<button class="btnMedium btnGreenW w120" id="stopToday" onclick="javascript:forder.orderForm.giftBoxPopToday();">오늘 하루 안보기</button>
-				<button class="btnMedium fullGreen w120" id="btnConfirm" onclick="javascript:forder.orderForm.layerClose();">확인</button>
+				<button class="btnMedium fullGreen w120" id="btnConfirm1">확인</button>
 			</div>
 
 		</div>
