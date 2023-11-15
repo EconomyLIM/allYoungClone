@@ -14,9 +14,35 @@
 </head>
 <body>
 <jsp:include page="/layout/head.jsp"></jsp:include>
-<div>
 
-</div>
+
+	<div id="Container">
+
+		<div id="Contents">
+
+			<jsp:include page="/view/mypage/layout/mypagehead.jsp" flush="false"></jsp:include>
+
+			<div class="mypage-ix">
+				
+				<%-- mypage-lnb --%>
+				<jsp:include page="/view/mypage/layout/mypageside.jsp" flush="false"></jsp:include>
+				
+				
+				<div class="mypage-conts">
+				<!-- 여기에 마이페이지 컨텐츠 작성 -->
+				
+				
+				
+				</div>
+				
+			</div>
+
+		</div>
+
+	</div>
+
+
+
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>

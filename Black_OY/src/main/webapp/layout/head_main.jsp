@@ -225,7 +225,7 @@
                 <ul class="menu_list" id="menu_list_header">
                     <c:choose>
 						<c:when test="${empty sessionScope.logOn }">
-							<li class="join"><a href="#" data-attr="공통^헤더^회원가입">회원가입</a></li>
+							<li class="join"><a href="../view/join/joinCheck.jsp" data-attr="공통^헤더^회원가입">회원가입</a></li>
 							<li class="login"><a href="<%=contextPath%>/olive/LogOn.do"
 								data-attr="공통^헤더^로그인">로그인</a></li>
 						</c:when>
@@ -235,7 +235,7 @@
 								<strong>${sessionScope.logOn.grade_id}&nbsp; 
                   ${sessionScope.logOn.u_name}</strong> <a 
                href="<%=contextPath %>/olive/Logout.do" data-attr="공통^헤더^로그아웃">로그아웃</a></li>
-								<li class="mypage"><a onclick="" href="<%=contextPath %>/mypage/mypageMain.do" data-attr="공통^헤더^마이페이지">마이페이지</a></li>
+								<li class="mypage"><a onclick="" href="<%=contextPath %>/mypage/main/mypageMain.do" data-attr="공통^헤더^마이페이지">마이페이지</a></li>
 
 						</c:otherwise>
 					</c:choose>

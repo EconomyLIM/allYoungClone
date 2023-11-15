@@ -40,7 +40,7 @@ public class JoinHandler implements CommandHandler{
 		 int u_Ybirth = Integer.parseInt( request.getParameter("birth_yy") );
 		 int u_Mbirth = Integer.parseInt(request.getParameter("birth_mm") );
 		 int u_Dbirth = Integer.parseInt(request.getParameter("birth_dd") );
-		 String u_tel=  request.getParameter("mob_no");
+		 String u_tel=  request.getParameter("u_tel");
 		 String u_email=  request.getParameter("email_addr1")+"@"+request.getParameter("email_addr2");
 
 		 OuserDTO dto = OuserDTO.builder()
