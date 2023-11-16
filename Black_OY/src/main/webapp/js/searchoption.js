@@ -136,7 +136,7 @@ function navigateToURL(url) {
 	// 탐색 배너의 모든 버튼 클릭 시
 		$(".search-period.mgT30 button").on("click", function() {
 			
-			if(!dateCheck()) return;
+			
 			
 			var urlFromJSP = myPageURL;
 			
@@ -156,6 +156,7 @@ function navigateToURL(url) {
 					$("#cal-start-year").val(tyear - 1).prop("selected", true);
 					$("#cal-start-month").val(tMonth + 1).prop("selected", true);
 				} else {				
+					$("#cal-start-year").val(tyear).prop("selected", true);
 					$("#cal-start-month").val(tMonth + 1 + Number(datemonth)).prop("selected", true);
 				}
 								
@@ -178,14 +179,19 @@ function navigateToURL(url) {
 			let searchMonth = $(".select-month li.on button ").attr("data-month")
 			let searchOrderType = $(".select-type li.on button").attr("data-order_type");
 			
-			//url 작성
-			var url = urlFromJSP + "?searchMonth=" + searchMonth + "&startDate=" + startDate + "&endDate=" + endDate + "&searchOrderType=" + searchOrderType;
+			if(dateCheck()){
+				//url 작성
+				var url = urlFromJSP + "?searchMonth=" + searchMonth + "&startDate=" + startDate + "&endDate=" + endDate + "&searchOrderType=" + searchOrderType;
+				
+				navigateToURL(url);
 			
-			navigateToURL(url);
+			} 
+			
+
 			
 		});
 		
-		var dateCheck = function(){
+var dateCheck = function(){
 			let syear = $("#cal-start-year option:selected").val();
 			let smonth = $("#cal-start-month option:selected").val().padStart(2, '0');		
 			let sdate = $("#cal-start-day option:selected").val().padStart(2, '0');
@@ -197,27 +203,33 @@ function navigateToURL(url) {
 			let startDate = `${syear}-${smonth}-${sdate}`;
 			
 			let endDate = `${eyear}-${emonth}-${edate}`;
-			
-			let today = new Date();
-			let date12 = new Date().getFullYear() + 1;
 						
-			if(endDate < startDate){
+			let date12 = new Date(endDate);
+			date12.setFullYear(date12.getFullYear() + 1);
+			date12.setDate(date12.getDate() + 1);
+			
+			var today = new Date();
+			let s = new Date(startDate);
+			let e = new Date(endDate);
+
+			
+			if(s > e){
 				alert("검색 종료일이 검색 시작일보다 늦어야됩니다.");
 				return false;
 			}
 			
-			if(startDate < today ){
+			if(s > today ){
 				alert("검색 시작일이 오늘보다 빨라야됩니다.");
 				return false;
 			}
 			
-			if(endDate < today){
+			if(e >= today){
 				alert("검색 종료일이 오늘보다 빨라야 됩니다.");
 				return false;
 			}
 			
-			if( endDate - startDate < endDate - date12){
-				alert("최대 선택 가능 일수는 1년입니다");
+			if( Math.abs(e - s) > Math.abs(date12 - e)  ){
+				alert("검색기간은 최대 1년 입니다.");
 				return false;
 			}
 			return true;				

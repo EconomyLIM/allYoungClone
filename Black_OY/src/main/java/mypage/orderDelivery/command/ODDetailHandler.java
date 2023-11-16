@@ -17,23 +17,18 @@ import mypage.orderDelivery.domain.MPODpaymentDTO;
 import mypage.orderDelivery.service.MPOrderDeliveryService;
 import user.domain.LogOnDTO;
 
-public class OrderDeliveryHandler implements CommandHandler {
+public class ODDetailHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
-
 		String userId = null;
 		
-		String start = null;
-		String end = null;
-		String type = null;
-		
-		//주문번호 가져오는 방법 생각해보기
 		String orderId = null;
 		
-		Connection conn = ConnectionProvider.getConnection();
+		orderId = request.getParameter("orderId");
+		
 		
 		//회원id가져오기
 		
@@ -41,18 +36,19 @@ public class OrderDeliveryHandler implements CommandHandler {
 		LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
 		userId = logOnDTO.getUser_id();
 		
-		//userId = "admin";			
+		//userId = "admin";	
 		
-		//검색에 필요한 요소 가져오기
-		start = request.getParameter("startDate");
-		end = request.getParameter("endDate");
-		type = request.getParameter("searchOrderType");
+		Connection conn = ConnectionProvider.getConnection();
 		
-	
 		MPOrderDeliveryService service = MPOrderDeliveryService.getinstance();
 		MypageService mpservice = MypageService.getinstance();
 		
+		
 		//초기화
+		//주문배송
+		List<MPODOrderDTO> detailList = null;
+		List<MPODdeliveryDTO> deliveryList = null;
+		List<MPODpaymentDTO> paymentList = null;
 		//유저정보
 		List<MpUserInfoDTO> userInfo = null;
 		int userPoint = 0;
@@ -60,10 +56,12 @@ public class OrderDeliveryHandler implements CommandHandler {
 		int userDeposit = 0;
 		int userRevCount = 0;
 
-		//주문배송
-		List<MPODOrderDTO> orderList = null;
-
+	
 		
+		//주문배송
+		detailList = service.mpODorderdetailService(orderId);
+		deliveryList = service.mpODdeliveryService(orderId);
+		paymentList = service.mpODpaymentService(orderId);
 		//유저정보
 		userInfo = mpservice.mpUIservice(userId);
 		userPoint = mpservice.mpUPservice(userId);
@@ -71,34 +69,22 @@ public class OrderDeliveryHandler implements CommandHandler {
 		userDeposit = mpservice.mpUDservice(userId);
 		userRevCount = mpservice.mpURservice(userId);
 		
-		//주문배송		
-		if (start == null) {			
-			orderList = service.mpODorderService(userId);
-		} else if (type.equals("")) {			
-			orderList = service.mpODorderSearchService(userId, start, end);
-			
-		} else if (type.equals("10")) {
-			type = "온라인";
-			orderList = service.mpODorderSearchService(userId, start, end, type);
-			
-		}  else {
-			type = "매장";
-			orderList = service.mpODorderSearchService(userId, start, end, type);
-			
-		}
+	
 		
-		
+		//주문배송
+		request.setAttribute("detailList", detailList);
+		request.setAttribute("deliveryList", deliveryList);
+		request.setAttribute("paymentList", paymentList);
 		//유저정보
 		request.setAttribute("userInfo", userInfo);
 		request.setAttribute("userPoint", userPoint);
 		request.setAttribute("userCoupon", userCoupon);
 		request.setAttribute("userDeposit", userDeposit);
 		request.setAttribute("userRevCount", userRevCount);
+	
 		
-		//주문배송
-		request.setAttribute("orderList", orderList);
 		
-		return "/view/mypage/orderDelivery.jsp";
+		return "/view/mypage/orderDeliveryDetail.jsp";
 		//}//if
 	}//process
 	

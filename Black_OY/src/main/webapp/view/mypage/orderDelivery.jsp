@@ -111,12 +111,13 @@
 	
 									<li class="color1s">${ ol.uodOrderId }</li>
 	
-									<li><a href="javascript:void(0);" class="btnDetail"
+									<li><a href="#" class="btnDetail"
 										data-oper-dt="2023.11.03" data-origin-bizpl-cd=""
 										data-pos-no="" data-receipt-no="" data-deal-sp=""
 										data-frst-receipt-no=""
-										onclick="<%-- 주문 상세보기 페이지 --%>">상세보기</a>
+										onclick="javascript:redirectDetail('${ol.uodOrderId}')">상세보기</a>
 									</li>
+										
 	
 								</ul>
 							</td>
@@ -205,7 +206,12 @@
 		</div>
 
 	</div>
-
+<script>
+	function redirectDetail(orderId) {
+		var url = '<%= contextPath %>/olive/orderDeliveryDetail.do' + '?orderId=' + encodeURIComponent(orderId);
+		location.href = url;
+	}
+</script>
 
 
 <jsp:include page="/layout/footer.jsp"></jsp:include>
