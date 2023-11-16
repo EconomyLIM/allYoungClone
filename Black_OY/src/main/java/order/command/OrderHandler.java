@@ -1,6 +1,7 @@
 package order.command;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -110,24 +111,41 @@ public class OrderHandler implements CommandHandler {
 			 */
 			String today_opt = request.getParameter("quickYN");				// 오늘 드림 여부
 			String pickupYN = request.getParameter("pickupYN");				// 픽업 여부
-			String packaging_opt = request.getParameter("giftBoxYn_temp"); 	// 선물 포장 여부
+			String packaging_opt = request.getParameter("giftBoxYn"); 		// 선물 포장 여부
 			String inst_type = request.getParameter("instMmCnt");			// 할부종류
-			String cd_price = request.getParameter("cd_price"); // 쿠폰할인금액
-			String point_price = request.getParameter("point_price"); // 포인트 결제 금액
+			String cd_price = request.getParameter("cd_price"); 			// 쿠폰할인금액
+			String point_price = request.getParameter("point_price"); 		// 포인트 결제 금액
 			
 			
 			/*
 			 * 오늘드림 선택 시 가져와야할 파라미터
-			 * 1. 
-			 * 
-			 * 
+			 * 1. 배송 구분
 			 */
+			String today_param = request.getParameter("dlv_nextdayDlvSp3"); // ex) 금일-34배송
+			String today_type = today_param.split("-")[1];					// 배송 구분
+			
+			
+			/*
+			 * 오늘드림 설정
+			 */
+			if(today_opt.equals("Y")) {
+				String region = request.getParameter("region");		// 고객 주소 동네
+				region = region.split(" ")[1];
+				// 걸린 시간 그룹
+				// 배송 예정 일시
+				String today_del_date;
+				Date d = new Date();
+				
+				// 오늘 드림 주문 여부
+				// 오늘 드림 도착 시간
+			}
 			
 			
 			/*
 			 * 픽업 선택 시 가져와야할 파라미터
 			 * 1. 매장 ID
 			 */
+			String store_id = request.getParameter("mapList");
 			
 			
 			System.out.println("delivery_id : " + delivery_id
@@ -164,6 +182,7 @@ public class OrderHandler implements CommandHandler {
 			map.put("cd_price", Integer.parseInt(cd_price));
 			map.put("inst_type", inst_type);
 			map.put("point_price", Integer.parseInt(point_price));
+			map.put("store_id", store_id);
 			
 			
 			boolean flag = service.orderService(map);

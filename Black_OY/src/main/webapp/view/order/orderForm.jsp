@@ -455,7 +455,42 @@
 			$("#btnConfirm1").on("click", function() {
 				$("#infoGiftBoxOrder").hide();
 				$(".dimm").remove();
-			})
+			});
+			
+			
+			
+			// 오늘드림 여부 Y라면 
+			// 오늘드림 시간 설정
+			let d = new Date();
+			let month = d.getMonth()+1;
+			let date = d.getDate();
+			let h = d.getHours();
+			let m = d.getMinutes();
+			
+			$("#dlv_time2").text(`\${h+2}:\${m} ~ \${h+3}:\${m}`);
+			
+			$("#dlv_today").text(`\${month}/\${date}일 (\${"일월화수목금토".charAt(d.getDay())})`);
+			$("#dlv_nextday").text(`\${month}/\${date+1}일 (\${"일월화수목금토".charAt(d.getDay()+1)})`);
+			
+			// 오늘 드림 라디오버튼 처리
+			if(h >= 13) {
+				$("#dlv_nextdayDlvSp1 > input").prop("disabled", false);
+			} else {
+				$("#dlv_todayDlvSp1 > input").prop("disabled", false);
+			}
+			
+			if(h >= 20) {
+				$("#dlv_nextdayDlvSp2 > input").prop("disabled", false);
+			} else {
+				$("#dlv_todayDlvSp2 > input").prop("disabled", false);
+			}
+			
+			if(h >= 20) {
+				$("#dlv_nextdayDlvSp3 > input").prop("disabled", false);
+			} else {
+				$("#dlv_todayDlvSp3 > input").prop("disabled", false);
+			}
+			
 		});
 		
 		
@@ -601,18 +636,30 @@
 							<tbody>
 							<tr>
 								<td id="dlv_time1">11:00 ~ 13:00</td>
-								<td id="dlv_todayDlvSp1"></td>
-								<td id="dlv_nextdayDlvSp1"></td>
+								<td id="dlv_todayDlvSp1">
+									<input type="radio" class="rad18" name="temp_chk" disabled="" value="금일-34배송">
+								</td>
+								<td id="dlv_nextdayDlvSp1">
+									<input type="radio" class="rad18" name="temp_chk" disabled="" value="익일-34배송">
+								</td>
 							</tr>
 							<tr>
-								<td id="dlv_time2">15:00 ~ 16:00</td>
-								<td id="dlv_todayDlvSp2"></td>
-								<td id="dlv_nextdayDlvSp2"></td>
+								<td id="dlv_time2"></td>
+								<td id="dlv_todayDlvSp2">
+									<input type="radio" class="rad18" name="temp_chk" disabled="" value="금일-빠름배송">
+								</td>
+								<td id="dlv_nextdayDlvSp2">
+									<input type="radio" class="rad18" name="temp_chk" disabled="" value="익일-빠름배송">
+								</td>
 							</tr>
 							<tr>
 								<td id="dlv_time3">22:00 ~ 24:00</td>
-								<td id="dlv_todayDlvSp3"></td>
-								<td id="dlv_nextdayDlvSp3"></td>
+								<td id="dlv_todayDlvSp3">
+									<input type="radio" class="rad18" name="temp_chk" disabled="" value="금일-미드나잇배송">
+								</td>
+								<td id="dlv_nextdayDlvSp3">
+									<input type="radio" class="rad18" name="temp_chk" disabled="" value="익일-미드나잇배송">
+								</td>
 							</tr>
 							</tbody>
 						</table>
@@ -903,6 +950,7 @@
 							<p class="addr_new">
 								<span class="tx_tit">도로명</span> :
 								<span class="tx_addr" id="stnmPostAddr_exist">${dto.deli_road_addr }</span><!--  도로명주소를 넣어주세요 -->
+								<input type="hidden" name="region" id="region" value="${dto.deli_road_addr }">
 							</p>
 							<p class="addr_old">
 								<span class="tx_tit">지번</span> :

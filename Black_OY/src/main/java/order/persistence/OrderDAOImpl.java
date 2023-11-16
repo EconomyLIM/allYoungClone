@@ -410,13 +410,14 @@ public class OrderDAOImpl implements OrderDAO {
 	public int insertPickup(Connection conn, Map<String, Object> map) throws Exception {
 		int rowCount = 0;
 		
-		String sql = "";
+		String sql = "INSERT INTO pickup(픽업ID, 주문ID, 매장ID) "
+				+ " VALUES('op_'||TO_CHAR(op_seq.NEXTVAL, 'FM00000000'), order_seq.CURRVAR, ?)";
 		
 		PreparedStatement pstmt = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+			pstmt.setString(1, (String)map.get("store_id"));
 			rowCount = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
