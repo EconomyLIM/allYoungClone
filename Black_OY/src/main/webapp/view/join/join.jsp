@@ -512,7 +512,7 @@
 	</script>
 
 									<div class="btn_sec">
-										<button type="button" class="btn">취소</button>
+										<button type="button" class="btn" id="btncancel">취소</button>
 										<button type="button" class="btn btn_em" id="btnok">등록</button>
 									</div>
 									<div class="box_gray box_btm">
@@ -1653,6 +1653,10 @@ var edomain = $("#email_addr_opt").val();
 });
 </script> -->
 <script>
+$('#new_pwd_check').keydown(function(event) {
+	if (event.keyCode == 13) chkPwd();
+});
+
 	//비밀번호 체크
 	function chkPwd() {
 		var userpwd = $("#pwd").val();
@@ -1698,7 +1702,11 @@ var edomain = $("#email_addr_opt").val();
 		}
 	});
 </script>
-
+<script>
+	$("#btncancel").on("click", function () {
+		
+	})
+</script>
 <%
 	session.removeAttribute("u_name");
 	session.removeAttribute("u_birth");

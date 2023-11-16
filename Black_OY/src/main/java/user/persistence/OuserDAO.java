@@ -13,7 +13,7 @@ public interface OuserDAO {
 	//회원가입
 	int join( Connection conn, OuserDTO dto) throws SQLException;
 	//비밀번호 변경
-	int pwdUpdate(Connection conn, LogOnDTO logDto) throws SQLException;
+	int pwdUpdate(Connection conn, String user_id, String newPwd) throws SQLException;
 	//회원정보수정
 	
 }
