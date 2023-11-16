@@ -15,7 +15,6 @@
 </head>
 <body>
 <jsp:include page="/layout/head.jsp"></jsp:include>
-<xmp>주문배송 뷰</xmp>
 
 
 	<div id="Container">
