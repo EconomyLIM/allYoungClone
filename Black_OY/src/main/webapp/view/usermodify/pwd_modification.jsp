@@ -1,6 +1,8 @@
 <%@page import="user.domain.OuserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/inc/include.jspf" %>
+<%@ include file="/WEB-INF/inc/session_auth.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,13 +39,13 @@
 
 		<!-- contents -->
 		<div id="contentsWrap">
-			<form id="form1" name="form1" method="post">
+			<form id="form1" name="form1" method="post" action="<%=contextPath %>/olive/pwdUpdate.do">
 				<input type="hidden" name="return_url" id="return_url" value="">
 				<input type="hidden" name="pwd" id="pwd" value=""> <input
 					type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
 				<input type="hidden" name="brnd_cd" id="brnd_cd" value="3000">
 				<input type="hidden" name="coop_return_url" id="coop_return_url"
-					value="https://www.oliveyoung.co.kr/store/mypage/getMktReceiptInfo.do?refresh=Y">
+					value="">
 				<div id="contents">
 					<div class="location_wrap">
 						<div class="location">
@@ -123,8 +125,8 @@
 							</div>
 							<!-- // 이용안내 -->
 							<div class="btn_sec">
-								<button type="button" class="btn" onclick="goCancel()">나중에</button>
-								<button type="button" class="btn btn_em" onclick="goChange()">비밀번호 변경</button>
+								<button type="button" class="btn" id="btnCancel">나중에</button>
+								<button type="button" class="btn btn_em" id="btnChange">비밀번호 변경</button>
 							</div>
 						</div>
 					</div>
@@ -165,8 +167,8 @@
 	</div>
 
 	<script type="text/javascript">
-		$('#new_pwd_check').keydown(function(event) {
-			if (event.keyCode == 13) goChange();
+ 		$('#new_pwd_check').keydown(function(event) {
+			if (event.keyCode == 13) chkPwd();
 		});
 
 		// cabs lock 체크
@@ -232,7 +234,7 @@
 			}//end else                   
 		}
 
-		var temp_check = 0;
+/* 		var temp_check = 0;
 		function goChange() {
 
 			if ($("#bef_pwd").val() == "") {
@@ -270,40 +272,84 @@
 				}, 0);
 				return;
 			}
-
-			// 기존비밀번호와 신규비밀번호가 동일여부 체크
-			if ($("#bef_pwd").val() == $('#new_pwd').val()) {
-				$("#bef_pwd").focus();
-				alert("현재 비밀번호와 동일한 비밀번호는 사용할 수 없습니다.");
-				$("#form1")[0].reset();
-				return;
-			}
-
 			checkPasswordValid();
 			if (flag == "invalid") {
 				return;
 			}
-
+ */
 		// 취소
-		function goCancel() {
+		/* function goCancel() {
 			if (!confirm('비밀번호 변경을 취소하시겠습니까?'))
 				return;
-			var returnURL = 'http://www.oliveyoung.co.kr';
-			returnURL = 'https://www.oliveyoung.co.kr/store/mypage/getMktReceiptInfo.do?refresh=Y';
+			var returnURL = 'usermodify.jsp';
 			if (returnURL != null && returnURL != '') {
 				location.href = returnURL;
 			} else {
-				location.href = "https://www.cjone.com/cjmweb/main.do";
+				location.href = "/Black_OY/olive/main.do";
 			}
-		}
-	</script>
+		} */
+		$("#btnCancel").on("click", function () {
+			alert('비밀번호 변경을 취소하시겠습니까?');
 
+		});
+	</script>
+<script>
+	//비밀번호 체크
+	function chkPwd() {
+		var befpwd = $("#bef_pwd").val();
+		var userpwd = $("#new_pwd").val();
+		var userckpwd = $("#new_pwd_check").val();
+		var userid = "${logOn.user_id}";
+		var pwdPattern = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
+		var num = userpwd.search(/[0-9]/g);
+		var eng = userpwd.search(/[a-z]/ig);
+		var spe = userpwd.search(/[!"#$%&'()*+,-./:;<=>?@[]^_`{|}~]/gi);
+		
+		if (befpwd == userpwd) {
+			alert("현재 비밀번호와 동일한 비밀번호는 사용할 수 없습니다.");
+			$("#new_pwd").focus();
+			return false;
+		} else if (userpwd.length<8 || userpwd.length>12) {
+			alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
+			$("#msg_pwd").removeClass("hide");
+			$("#new_pwd").focus();
+			return false;
+		} else if ((num < 0 && eng < 0) || (eng < 0 && spe < 0)
+				|| (spe < 0 && num < 0)) {
+			alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
+			$("#msg_pwd").removeClass("hide");
+			$("#new_pwd").focus();
+			return false;
+		} else if (/(\w)\1\1\1/.test(userpwd)) {
+			alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
+			$("#msg_pwd").removeClass("hide");
+			$("#new_pwd").focus();
+			return false;
+		} else if (userpwd.search(userid) > -1) {
+			alert("비밀번호 설정 시 아이디와 4자리 이상 동일한 문자 또는 숫자를 사용할 수 없습니다.");
+			$("#msg_pwd").removeClass("hide");
+			$("#new_pwd").focus();
+			return false;
+		} else if ( userpwd !=userckpwd){
+			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+			$("#msg_pwd_check").removeClass("hide");
+			$("#new_pwd").focus();
+			return false;
+		}
+		return true;
+	}
+	$("#btnChange").on("click", function () {
+		if (chkPwd() ) {
+			$("#form1").submit();
+		}
+	});
+</script>
 	<form method="post" name="form2" id="form2">
 		<input type="hidden" id="coopco_cd" name="coopco_cd" value="7030">
 		<input type="hidden" id="brnd_cd" name="brnd_cd" value="3000">
 		<input type="hidden" id="mcht_no" name="mcht_no" value="">
 		<input 	type="hidden" id="coop_return_url" name="coop_return_url"
-			value="https://www.oliveyoung.co.kr/store/mypage/getMktReceiptInfo.do?refresh=Y">
+			value="">
 	</form>
 </body>
 </html>
