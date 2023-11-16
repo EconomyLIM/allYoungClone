@@ -11,7 +11,7 @@ function navigateToURL(url) {
 		var tYear =	today.getFullYear();
 		var tMonth = today.getMonth();
 		var tday = today.getDate();
-			
+		
 		//년,월,일 날짜 option 생성
 		//1. 년		
 		for (var i = 2012; i <= tYear; i++) {
@@ -136,6 +136,8 @@ function navigateToURL(url) {
 	// 탐색 배너의 모든 버튼 클릭 시
 		$(".search-period.mgT30 button").on("click", function() {
 			
+			if(!dateCheck()) return;
+			
 			var urlFromJSP = myPageURL;
 			
 			//구매기간, 구매유형 버튼
@@ -182,4 +184,42 @@ function navigateToURL(url) {
 			navigateToURL(url);
 			
 		});
+		
+		var dateCheck = function(){
+			let syear = $("#cal-start-year option:selected").val();
+			let smonth = $("#cal-start-month option:selected").val().padStart(2, '0');		
+			let sdate = $("#cal-start-day option:selected").val().padStart(2, '0');
+			
+			let eyear = $("#cal-end-year option:selected").val();
+			let emonth = $("#cal-end-month option:selected").val().padStart(2, '0');		
+			let edate = $("#cal-end-day option:selected").val().padStart(2, '0');
+			
+			let startDate = `${syear}-${smonth}-${sdate}`;
+			
+			let endDate = `${eyear}-${emonth}-${edate}`;
+			
+			let today = new Date();
+			let date12 = new Date().getFullYear() + 1;
+						
+			if(endDate < startDate){
+				alert("검색 종료일이 검색 시작일보다 늦어야됩니다.");
+				return false;
+			}
+			
+			if(startDate < today ){
+				alert("검색 시작일이 오늘보다 빨라야됩니다.");
+				return false;
+			}
+			
+			if(endDate < today){
+				alert("검색 종료일이 오늘보다 빨라야 됩니다.");
+				return false;
+			}
+			
+			if( endDate - startDate < endDate - date12){
+				alert("최대 선택 가능 일수는 1년입니다");
+				return false;
+			}
+			return true;				
+		}
 	

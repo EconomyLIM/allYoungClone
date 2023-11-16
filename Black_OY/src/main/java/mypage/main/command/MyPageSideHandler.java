@@ -9,6 +9,7 @@ import com.util.ConnectionProvider;
 
 import command.CommandHandler;
 import mypage.main.service.MypageService;
+import user.domain.LogOnDTO;
 
 public class MyPageSideHandler implements CommandHandler {
 

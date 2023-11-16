@@ -40,21 +40,13 @@ public class MyPageHandler implements CommandHandler {
 		MypageService service = MypageService.getinstance();
 		
 		//초기화
-		List<MpUserInfoDTO> userInfo = null;
-		int userPoint = 0;
-		int userCoupon = 0;
-		int userDeposit = 0;
-		int userRevCount = 0;
+		
 		List<MpPlikeDTO> userPlike = null;
 		List<MpPAskDTO> userpAsk = null;
 		List<MpQnADTO> userQnA = null;
 		List<MpOrderStateDTO> userOrderState = null;
 		
-		userInfo = service.mpUIservice(userId);
-		userPoint = service.mpUPservice(userId);
-		userCoupon = service.mpUCservice(userId);
-		userDeposit = service.mpUDservice(userId);
-		userRevCount = service.mpURservice(userId);
+	
 		userPlike = service.mpUPLservice(userId);
 		userpAsk = service.mpUPAservice(userId);
 		userQnA = service.mpUQnAservice(userId);
@@ -62,11 +54,7 @@ public class MyPageHandler implements CommandHandler {
 		
 		
 		
-		request.setAttribute("userInfo", userInfo);
-		request.setAttribute("userPoint", userPoint);
-		request.setAttribute("userCoupon", userCoupon);
-		request.setAttribute("userDeposit", userDeposit);
-		request.setAttribute("userRevCount", userRevCount);
+		
 		request.setAttribute("userPlike", userPlike);
 		request.setAttribute("userpAsk", userpAsk);
 		request.setAttribute("userQnA", userQnA);
