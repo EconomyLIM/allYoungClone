@@ -17,9 +17,12 @@ import productDetail.domain.CateMDTO;
 import productDetail.domain.CateSDTO;
 import productDetail.domain.DetailBrandDTO;
 import productDetail.domain.DetailExImgDTO;
+import productDetail.domain.DetailInfoDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
 import productDetail.domain.ProductPromo;
+import productDetail.domain.QnADetailDTO;
+import productDetail.domain.WrtieQnaDTO;
 
 public class ProDetailDAOImpl implements ProDetailDAO{
 	
@@ -467,6 +470,7 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 		return list;
 	} // detailExImg
 
+	//============================ 선택한 상품의 브랜드 정보(이름, 로고, 아이디) 갖고오는 작업===============================
 	@Override
 	public DetailBrandDTO detailBrand(Connection conn, String displId) throws Exception {
 
@@ -511,6 +515,174 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 		
 		return detailBrandDTO;
 	} //detailBrand
+
+	// ============================== 선택한 상품의 구매 정보 갖고오는 작업===============================
+	@Override
+	public DetailInfoDTO detailInfo(Connection conn, String displId) throws Exception {
+		
+		String sql = " SELECT PDI_CAPACITY, PDI_REQIREMENT, PDI_DATE, PDI_USE , PDI_COMPANY "
+				+ " ,PDI_COUNTRY, PDI_INGREDIENT, PDI_WHETHER, PDI_CAUTION, PDI_QUALITY, PDI_TEL "
+				+ " FROM pro_disp_info "
+				+ " WHERE pro_displ_id = ? ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		DetailInfoDTO detailInfoDTO = null;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, displId);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				System.out.println(">>ProDetailDAOImpl detailInfo...");
+				
+				detailInfoDTO = DetailInfoDTO.builder()
+						.capacity(rs.getString("PDI_CAPACITY"))
+						.reqirement(rs.getString("PDI_REQIREMENT"))
+						.useDate(rs.getString("PDI_DATE"))
+						.use(rs.getString("PDI_USE"))
+						.company(rs.getString("PDI_COMPANY"))
+						.country(rs.getString("PDI_COUNTRY"))
+						.ingredient(rs.getString("PDI_INGREDIENT"))
+						.whether(rs.getString("PDI_WHETHER"))
+						.caution(rs.getString("PDI_CAUTION"))
+						.quality(rs.getString("PDI_QUALITY"))
+						.tel(rs.getString("PDI_TEL"))
+						.build();
+				
+			} // if
+		} catch (SQLException e) {
+			System.out.println(">proDetailDAOImpl detailInfo SQLException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">proDetailDAOImpl detailInfo Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		} //try_catch
+		
+		return detailInfoDTO;
+	} // detailInfo
+
+	// ============================== 선택한 상품의 QnA 갖고오는 작업===============================
+	@Override
+	public List<QnADetailDTO> detailQna(Connection conn, String displId) throws Exception {
+		
+		String sql = "SELECT QAID, USER_ID, QA_QUE, QA_ANS, QA_DATE, QA_STATE "
+				+ " FROM QANDA "
+				+ " WHERE PRO_DISPL_ID = ? "
+				+ " ORDER BY qa_date desc ";
+		
+		PreparedStatement pstmt = null;
+		QnADetailDTO qnADetailDTO = null;
+		List<QnADetailDTO> list = null;
+		ResultSet rs = null;
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyy.MM.dd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, displId);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					
+					qnADetailDTO = QnADetailDTO.builder()
+							.qnaId(rs.getString("QAID"))
+							.userId(rs.getString("USER_ID"))
+							.question(rs.getString("QA_QUE"))
+							.answer(rs.getString("QA_ANS"))
+							.regDate(rs.getDate("QA_DATE") != null ? sdf.format(new Date( rs.getDate("QA_DATE").getTime())) : null)
+							.state(rs.getString("QA_STATE"))
+							.build();
+					
+					list.add(qnADetailDTO);
+					
+				} while (rs.next());
+				System.out.println(">> proDetailDAOImpl detailQna... ");
+			} // if
+			
+		} catch (SQLException e) {
+			System.out.println(">proDetailDAOImpl detailQna SQLException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">proDetailDAOImpl detailQna Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		} //try_catch
+		
+		return list;
+	} // detailQna
+
+	// ============================== 선택한 QnA를 삭제하는 작업===============================
+	@Override
+	public int deleteQna(Connection conn, String qnaId) throws Exception {
+		
+		String sql = " DELETE FROM QANDA "
+				+ " WHERE QAID = ? ";
+		
+		PreparedStatement pstmt = null;
+		int rowCnt = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, qnaId);
+			rowCnt = pstmt.executeUpdate();
+			
+			System.out.println(">> proDetailDAOImpl deleteQna... ");
+			
+		} catch (SQLException e) {
+			System.out.println(">proDetailDAOImpl deleteQna SQLException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">proDetailDAOImpl deleteQna Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(conn);
+		} //try_catch
+		
+		return rowCnt;
+	} // deleteQna
+
+	// ============================== QnA를 등록하는 작업===============================
+	@Override
+	public int writeQna(Connection conn, WrtieQnaDTO writeQna) throws Exception {
+		String sql = "INSERT INTO qanda VALUES('qna_'||qanda_seq.nextval, ?, ?, ?, null, SYSDATE, '답변 대기' )";
+		
+		PreparedStatement pstmt = null;
+		int rowCnt = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, writeQna.getDisplId());
+			pstmt.setString(2, writeQna.getUserId());
+			pstmt.setString(3, writeQna.getContentVal());
+			
+			rowCnt = pstmt.executeUpdate();
+			System.out.println(">> proDetailDAOImpl writeQna... ");
+		} catch (SQLException e) {
+			System.out.println(">proDetailDAOImpl writeQna SQLException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">proDetailDAOImpl writeQna Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(conn);
+		} //try_catch
+		
+		return rowCnt;
+	} // writeQna
 
 	
 

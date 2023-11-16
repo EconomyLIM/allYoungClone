@@ -138,5 +138,19 @@ public class ReviewService {
 		return temp;
 	} // GTPSurvice
 	
+	public ReviewDTO reviewService(String rev_id) {
+		ReviewDTO reviewDTO = null;
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			ReviewDAOImpl reviewDAOImpl = ReviewDAOImpl.getInstance();
+			reviewDTO = reviewDAOImpl.review(conn, rev_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return reviewDTO;
+		
+	}
 
 }
