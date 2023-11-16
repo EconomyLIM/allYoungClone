@@ -1,4 +1,4 @@
-package mypage.command;
+package mypage.customer.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
