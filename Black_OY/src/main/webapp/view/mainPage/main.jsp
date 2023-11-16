@@ -11,13 +11,17 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="/Black_OY/js/head.js"></script>
 <script src="/Black_OY/js/mainPage.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <link rel="stylesheet" href="/BlackOY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
 	<jsp:include page="/layout/head_main.jsp"></jsp:include>
 
-	<div id ="Wrapper">
+	<div id="Wrapper">
 		<div id="Container">
 
 			<div id="Contents">
@@ -393,438 +397,57 @@
 									</button>
 								</div>
 								<div class="curation_slide type03">
-									<ul id="main_curation02_01"
-										class="slide_list slick_slider slick-initialized slick-slider"
-										name="section1">
-										<div aria-live="polite" class="slick-list">
-											<div class="slick-track" role="listbox"
-												style="opacity: 1; width: 2550px;">
-												<li data-page-no="1"
-													class="slick-slide slick-current slick-active"
-													data-slick-index="0" aria-hidden="false"
-													style="width: 510px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;"
-													tabindex="-1" role="option"
-													aria-describedby="slick-slide50">
-													<ul class="curation_list">
+									<ul id="main_curation02_01" class="slide_list" name="section1">
+									
+												<!-- for each 시작  -->
+												<c:if test="${not empty pdList}">
+													<c:forEach var="i" varStatus="outerLoop" begin="1" end="5">
+														<c:set var="innerLoopBegin"
+															value="${(outerLoop.index - 1) * 2}" />
+														<c:set var="innerLoopEnd"
+															value="${(outerLoop.index * 2) -1}" />
+														<li data-page-no="${outerLoop}"
+															style="width: 510px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;" >
+															<ul class="curation_list">
+																<c:forEach items="${pdList }" var="pli"
+																	begin="${innerLoopBegin}" end="${innerLoopEnd}"
+																	varStatus="innerLoop">
 
-														<li class="curation_item" data-idx="0"><a
-															href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000174066&amp;dispCatNo=90000010001&amp;trackingCd=Home_Curation1_1&amp;curation=like&amp;egcode=a016_a016&amp;rccode=pc_main_01_c&amp;egrankcode=5&amp;t_page=홈&amp;t_click=큐레이션1_상품상세&amp;t_number=1"
-															name="Home_Curation1_1" class="item a_detail"
-															data-ref-goodsno="A000000174066" data-egrank="5"
-															data-egcode="a016_a016"
-															data-attr="홈^큐레이션1^[NEW 컬러 추가] 하트퍼센트 도트 온 무드 립펜슬(17colors)^1"
-															data-impression="A000000174066^홈_큐레이션1^1"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="0"
-															onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000174066&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;홈_큐레이션1&quot;, &quot;1&quot;);common.wlog(&quot;home_curation1_prod1&quot;);common.link.moveGoodsDetailCuration(&quot;A000000174066&quot;, &quot;90000010001&quot;,&quot;like&quot;,&quot;pc_main_01_c&quot;, &quot;a016_a016&quot;, &quot;5&quot;, &quot;Home_Curation1_1&quot;);"
-															data-impression-visibility="1"><span
-																class="thumb_flag best">베스트</span><span class="thumImg"><img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017406610ko.jpg?l=ko"
-																	alt="[NEW 컬러 추가] 하트퍼센트 도트 온 무드 립펜슬(17colors)"
-																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
-																	<p class="tx_name">[NEW 컬러 추가] 하트퍼센트 도트 온 무드
-																		립펜슬(17colors)</p>
-																</div>
-																<p class="prd_price">
-																	<span class="tx_cur"><span class="tx_num">14,000</span>원
-																	</span>
-																</p>
-																<p class="prd_flag">
-																	<span class="icon_flag delivery">오늘드림</span>
-																</p></a>
-														<button type="button" class="btnbag"
-																onclick="common.gf_regCart(this); return false;"
-																data-goods-no="A000000174066" data-item-no="001"
-																tabindex="0" data-rccode="pc_main_01_c">장바구니 담기</button>
+																	<li class="curation_item" data-idx="${innerLoop}">
+																		<a href="#"
+																		name ="Home_Curation1_1" 
+																		class="item a_detail"
+																		data-ref-goodsno="${pli.displId }" onclick=""
+																		> <span
+																			class="thumb_flag best">베스트</span> <span
+																			class="thumImg"> <img
+																				src="${pli.displImgSrc }" alt="${pli.displProName}"
+																				onerror="common.errorImg(this);" />
+																		</span>
+																			<div class="prd_name">
+																				<p class="tx_name">${pli.displProName}</p>
+																			</div>
+																			<p class="prd_price">
+																				<span class="tx_cur"><span class="tx_num">${pli.afterPrice }</span>원
+																				</span>
+																			</p> <c:if test="${pli.stock eq 1}">
+																				<p class="prd_flag">
+																					<span class="icon_flag delivery">오늘드림</span>
+																				</p>
+																			</c:if>
+																	</a>
+																		<button type="button" class="btnbag"
+																			onclick="; return false;"
+																			data-goods-no="${pli.displId }">장바구니 담기</button>
+																	</li>
 
+																</c:forEach>
+															</ul>
 														</li>
+													</c:forEach>
 
-
-
-														<li class="curation_item" data-idx="1"><a
-															href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000188688&amp;dispCatNo=90000010001&amp;trackingCd=Home_Curation1_1&amp;curation=like&amp;egcode=a016_a016&amp;rccode=pc_main_01_c&amp;egrankcode=14&amp;t_page=홈&amp;t_click=큐레이션1_상품상세&amp;t_number=2"
-															name="Home_Curation1_1" class="item a_detail"
-															data-ref-goodsno="A000000188688" data-egrank="14"
-															data-egcode="a016_a016"
-															data-attr="홈^큐레이션1^[데이지PICK/모공탄력]닥터지 블랙스네일 레티놀 앰플 기획(앰플 50ml 대용량 +크림 15ml)^2"
-															data-impression="A000000188688^홈_큐레이션1^2"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="0"
-															onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000188688&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;홈_큐레이션1&quot;, &quot;2&quot;);common.wlog(&quot;home_curation1_prod1&quot;);common.link.moveGoodsDetailCuration(&quot;A000000188688&quot;, &quot;90000010001&quot;,&quot;like&quot;,&quot;pc_main_01_c&quot;, &quot;a016_a016&quot;, &quot;14&quot;, &quot;Home_Curation1_1&quot;);"
-															data-impression-visibility="1"><span class="thumImg"><img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018868809ko.jpg?l=ko"
-																	alt="[데이지PICK/모공탄력]닥터지 블랙스네일 레티놀 앰플 기획(앰플 50ml 대용량 +크림 15ml)"
-																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
-																	<p class="tx_name">[데이지PICK/모공탄력]닥터지 블랙스네일 레티놀 앰플
-																		기획(앰플 50ml 대용량 +크림 15ml)</p>
-																</div>
-																<p class="prd_price">
-																	<span class="tx_org"><span class="tx_num">29,000</span>원
-																	</span><span class="tx_cur"><span class="tx_num">20,450</span>원
-																	</span>
-																</p>
-																<p class="prd_flag">
-																	<span class="icon_flag sale">세일</span><span
-																		class="icon_flag coupon">쿠폰</span><span
-																		class="icon_flag delivery">오늘드림</span>
-																</p></a>
-														<button type="button" class="btnbag"
-																onclick="common.gf_regCart(this); return false;"
-																data-goods-no="A000000188688" data-item-no="001"
-																tabindex="0" data-rccode="pc_main_01_c">장바구니 담기</button>
-
-														</li>
-
-													</ul>
-												</li>
-												<li data-page-no="2" class="slick-slide"
-													data-slick-index="1" aria-hidden="true"
-													style="width: 510px; position: relative; left: -510px; top: 0px; z-index: 998; opacity: 0;"
-													tabindex="-1" role="option"
-													aria-describedby="slick-slide51">
-													
-													<ul class="curation_list">
-
-														<li class="curation_item" data-idx="2"><a
-															href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000190449&amp;dispCatNo=90000010001&amp;trackingCd=Home_Curation1_2&amp;curation=like&amp;egcode=a016_a016&amp;rccode=pc_main_01_c&amp;egrankcode=8&amp;t_page=홈&amp;t_click=큐레이션1_상품상세&amp;t_number=3"
-															name="Home_Curation1_2" class="item a_detail"
-															data-ref-goodsno="A000000190449" data-egrank="8"
-															data-egcode="a016_a016"
-															data-attr="홈^큐레이션1^[블프특가][NEW]브링그린 징크테카1.2%흔적세럼25mL 더블기획^3"
-															data-impression="A000000190449^홈_큐레이션1^3"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="-1"
-															onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000190449&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;홈_큐레이션1&quot;, &quot;3&quot;);common.wlog(&quot;home_curation1_prod2&quot;);common.link.moveGoodsDetailCuration(&quot;A000000190449&quot;, &quot;90000010001&quot;,&quot;like&quot;,&quot;pc_main_01_c&quot;, &quot;a016_a016&quot;, &quot;8&quot;, &quot;Home_Curation1_2&quot;);"
-															data-impression-visibility="1"><span
-																class="thumb_flag best">베스트</span><span class="thumImg"><img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019044902ko.jpg?l=ko"
-																	alt="[블프특가][NEW]브링그린 징크테카1.2%흔적세럼25mL 더블기획"
-																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
-																	<p class="tx_name">[블프특가][NEW]브링그린 징크테카1.2%흔적세럼25mL
-																		더블기획</p>
-																</div>
-																<p class="prd_price">
-																	<span class="tx_org"><span class="tx_num">39,600</span>원
-																	</span><span class="tx_cur"><span class="tx_num">23,040</span>원
-																	</span>
-																</p>
-																<p class="prd_flag">
-																	<span class="icon_flag sale">세일</span><span
-																		class="icon_flag coupon">쿠폰</span><span
-																		class="icon_flag delivery">오늘드림</span>
-																</p></a>
-														<button type="button" class="btnbag"
-																onclick="common.gf_regCart(this); return false;"
-																data-goods-no="A000000190449" data-item-no="001"
-																tabindex="-1" data-rccode="pc_main_01_c">장바구니
-																담기</button></li>
-
-
-
-														<li class="curation_item" data-idx="3"><a
-															href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000188988&amp;dispCatNo=90000010001&amp;trackingCd=Home_Curation1_2&amp;curation=like&amp;egcode=a016_a016&amp;rccode=pc_main_01_c&amp;egrankcode=7&amp;t_page=홈&amp;t_click=큐레이션1_상품상세&amp;t_number=4"
-															name="Home_Curation1_2" class="item a_detail"
-															data-ref-goodsno="A000000188988" data-egrank="7"
-															data-egcode="a016_a016"
-															data-attr="홈^큐레이션1^클리오 프로아이팔레트에어 싱글 섀도우 증정기획/단품^4"
-															data-impression="A000000188988^홈_큐레이션1^4"
-															data-ref-dispcatno="90000010001" data-ref-itemno="006"
-															tabindex="-1"
-															onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000188988&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;홈_큐레이션1&quot;, &quot;4&quot;);common.wlog(&quot;home_curation1_prod2&quot;);common.link.moveGoodsDetailCuration(&quot;A000000188988&quot;, &quot;90000010001&quot;,&quot;like&quot;,&quot;pc_main_01_c&quot;, &quot;a016_a016&quot;, &quot;7&quot;, &quot;Home_Curation1_2&quot;);"
-															data-impression-visibility="1"><span
-																class="thumb_flag best">베스트</span><span class="thumImg"><img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018898810ko.jpg?l=ko"
-																	alt="클리오 프로아이팔레트에어 싱글 섀도우 증정기획/단품"
-																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
-																	<p class="tx_name">클리오 프로아이팔레트에어 싱글 섀도우 증정기획/단품</p>
-																</div>
-																<p class="prd_price">
-																	<span class="tx_org"><span class="tx_num">34,000</span>원
-																	</span><span class="tx_cur"><span class="tx_num">22,610</span>원
-																	</span>
-																</p>
-																<p class="prd_flag">
-																	<span class="icon_flag sale">세일</span><span
-																		class="icon_flag coupon">쿠폰</span><span
-																		class="icon_flag delivery">오늘드림</span>
-																</p></a>
-														<button type="button" class="btnbag"
-																onclick="common.gf_regCart(this); return false;"
-																data-goods-no="A000000188988" data-item-no="001"
-																tabindex="-1" data-rccode="pc_main_01_c">장바구니
-																담기</button></li>
-
-													</ul>
-												</li>
-												<li data-page-no="3" class="slick-slide"
-													data-slick-index="2" aria-hidden="true"
-													style="width: 510px; position: relative; left: -1020px; top: 0px; z-index: 998; opacity: 0;"
-													tabindex="-1" role="option"
-													aria-describedby="slick-slide52">
-													<ul class="curation_list">
-
-														<li class="curation_item" data-idx="4"><a
-															href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000183197&amp;dispCatNo=90000010001&amp;trackingCd=Home_Curation1_3&amp;curation=like&amp;egcode=a016_a016&amp;rccode=pc_main_01_c&amp;egrankcode=12&amp;t_page=홈&amp;t_click=큐레이션1_상품상세&amp;t_number=5"
-															name="Home_Curation1_3" class="item a_detail"
-															data-ref-goodsno="A000000183197" data-egrank="12"
-															data-egcode="a016_a016"
-															data-attr="홈^큐레이션1^[후니언픽] 이니스프리 비타C 그린티 엔자임 잡티 세럼 기획 30ml+7ml^5"
-															data-impression="A000000183197^홈_큐레이션1^5"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="-1"
-															onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000183197&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;홈_큐레이션1&quot;, &quot;5&quot;);common.wlog(&quot;home_curation1_prod3&quot;);common.link.moveGoodsDetailCuration(&quot;A000000183197&quot;, &quot;90000010001&quot;,&quot;like&quot;,&quot;pc_main_01_c&quot;, &quot;a016_a016&quot;, &quot;12&quot;, &quot;Home_Curation1_3&quot;);"
-															data-impression-visibility="1"><span class="thumImg"><img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018319758ko.jpg?l=ko"
-																	alt="[후니언픽] 이니스프리 비타C 그린티 엔자임 잡티 세럼 기획 30ml+7ml"
-																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
-																	<p class="tx_name">[후니언픽] 이니스프리 비타C 그린티 엔자임 잡티 세럼
-																		기획 30ml+7ml</p>
-																</div>
-																<p class="prd_price">
-																	<span class="tx_org"><span class="tx_num">38,000</span>원
-																	</span><span class="tx_cur"><span class="tx_num">28,500</span>원
-																	</span>
-																</p>
-																<p class="prd_flag">
-																	<span class="icon_flag sale">세일</span><span
-																		class="icon_flag coupon">쿠폰</span><span
-																		class="icon_flag delivery">오늘드림</span>
-																</p></a>
-														<button type="button" class="btnbag"
-																onclick="common.gf_regCart(this); return false;"
-																data-goods-no="A000000183197" data-item-no="001"
-																tabindex="-1" data-rccode="pc_main_01_c">장바구니
-																담기</button></li>
-
-
-
-														<li class="curation_item" data-idx="5"><a
-															href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000189028&amp;dispCatNo=90000010001&amp;trackingCd=Home_Curation1_3&amp;curation=like&amp;egcode=a016_a016&amp;rccode=pc_main_01_c&amp;egrankcode=2&amp;t_page=홈&amp;t_click=큐레이션1_상품상세&amp;t_number=6"
-															name="Home_Curation1_3" class="item a_detail"
-															data-ref-goodsno="A000000189028" data-egrank="2"
-															data-egcode="a016_a016"
-															data-attr="홈^큐레이션1^[NEW/구효민개발협업] 하트퍼센트 도트 온 무드 듀이 멜팅 립스틱 1.5g 5종 택1^6"
-															data-impression="A000000189028^홈_큐레이션1^6"
-															data-ref-dispcatno="90000010001" data-ref-itemno="002"
-															tabindex="-1"
-															onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000189028&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;홈_큐레이션1&quot;, &quot;6&quot;);common.wlog(&quot;home_curation1_prod3&quot;);common.link.moveGoodsDetailCuration(&quot;A000000189028&quot;, &quot;90000010001&quot;,&quot;like&quot;,&quot;pc_main_01_c&quot;, &quot;a016_a016&quot;, &quot;2&quot;, &quot;Home_Curation1_3&quot;);"
-															data-impression-visibility="1"><span
-																class="thumb_flag best">베스트</span><span class="thumImg"><img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018902809ko.jpg?l=ko"
-																	alt="[NEW/구효민개발협업] 하트퍼센트 도트 온 무드 듀이 멜팅 립스틱 1.5g 5종 택1"
-																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
-																	<p class="tx_name">[NEW/구효민개발협업] 하트퍼센트 도트 온 무드 듀이
-																		멜팅 립스틱 1.5g 5종 택1</p>
-																</div>
-																<p class="prd_price">
-																	<span class="tx_org"><span class="tx_num">15,000</span>원
-																	</span><span class="tx_cur"><span class="tx_num">13,500</span>원
-																	</span>
-																</p>
-																<p class="prd_flag">
-																	<span class="icon_flag sale">세일</span><span
-																		class="icon_flag delivery">오늘드림</span>
-																</p></a>
-														<button type="button" class="btnbag"
-																onclick="common.gf_regCart(this); return false;"
-																data-goods-no="A000000189028" data-item-no="001"
-																tabindex="-1" data-rccode="pc_main_01_c">장바구니
-																담기</button></li>
-
-													</ul>
-												</li>
-												<li data-page-no="4" class="slick-slide"
-													data-slick-index="3" aria-hidden="true"
-													style="width: 510px; position: relative; left: -1530px; top: 0px; z-index: 998; opacity: 0;"
-													tabindex="-1" role="option"
-													aria-describedby="slick-slide53">
-													<ul class="curation_list">
-
-														<li class="curation_item" data-idx="6"><a
-															href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000175878&amp;dispCatNo=90000010001&amp;trackingCd=Home_Curation1_4&amp;curation=like&amp;egcode=a016_a016&amp;rccode=pc_main_01_c&amp;egrankcode=9&amp;t_page=홈&amp;t_click=큐레이션1_상품상세&amp;t_number=7"
-															name="Home_Curation1_4" class="item a_detail"
-															data-ref-goodsno="A000000175878" data-egrank="9"
-															data-egcode="a016_a016"
-															data-attr="홈^큐레이션1^[대용량] 파티온 노스카나인 트러블 세럼 단독 기획(50ml+15ml)^7"
-															data-impression="A000000175878^홈_큐레이션1^7"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="-1"
-															onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000175878&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;홈_큐레이션1&quot;, &quot;7&quot;);common.wlog(&quot;home_curation1_prod4&quot;);common.link.moveGoodsDetailCuration(&quot;A000000175878&quot;, &quot;90000010001&quot;,&quot;like&quot;,&quot;pc_main_01_c&quot;, &quot;a016_a016&quot;, &quot;9&quot;, &quot;Home_Curation1_4&quot;);"
-															data-impression-visibility="1"><span
-																class="thumb_flag best">베스트</span><span class="thumImg"><img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017587818ko.jpg?l=ko"
-																	alt="[대용량] 파티온 노스카나인 트러블 세럼 단독 기획(50ml+15ml)"
-																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
-																	<p class="tx_name">[대용량] 파티온 노스카나인 트러블 세럼 단독
-																		기획(50ml+15ml)</p>
-																</div>
-																<p class="prd_price">
-																	<span class="tx_org"><span class="tx_num">38,000</span>원
-																	</span><span class="tx_cur"><span class="tx_num">28,200</span>원
-																	</span>
-																</p>
-																<p class="prd_flag">
-																	<span class="icon_flag sale">세일</span><span
-																		class="icon_flag coupon">쿠폰</span><span
-																		class="icon_flag delivery">오늘드림</span>
-																</p></a>
-														<button type="button" class="btnbag"
-																onclick="common.gf_regCart(this); return false;"
-																data-goods-no="A000000175878" data-item-no="001"
-																tabindex="-1" data-rccode="pc_main_01_c">장바구니
-																담기</button></li>
-
-
-
-														<li class="curation_item" data-idx="7"><a
-															href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000188459&amp;dispCatNo=90000010001&amp;trackingCd=Home_Curation1_4&amp;curation=like&amp;egcode=a016_a016&amp;rccode=pc_main_01_c&amp;egrankcode=27&amp;t_page=홈&amp;t_click=큐레이션1_상품상세&amp;t_number=8"
-															name="Home_Curation1_4" class="item a_detail"
-															data-ref-goodsno="A000000188459" data-egrank="27"
-															data-egcode="a016_a016"
-															data-attr="홈^큐레이션1^에이오유 글로이 틴트 밤 3.5g 3종 택1^8"
-															data-impression="A000000188459^홈_큐레이션1^8"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="-1"
-															onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000188459&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;홈_큐레이션1&quot;, &quot;8&quot;);common.wlog(&quot;home_curation1_prod4&quot;);common.link.moveGoodsDetailCuration(&quot;A000000188459&quot;, &quot;90000010001&quot;,&quot;like&quot;,&quot;pc_main_01_c&quot;, &quot;a016_a016&quot;, &quot;27&quot;, &quot;Home_Curation1_4&quot;);"
-															data-impression-visibility="1"><span class="thumImg"><img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018845905ko.jpg?l=ko"
-																	alt="에이오유 글로이 틴트 밤 3.5g 3종 택1"
-																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
-																	<p class="tx_name">에이오유 글로이 틴트 밤 3.5g 3종 택1</p>
-																</div>
-																<p class="prd_price">
-																	<span class="tx_cur"><span class="tx_num">15,400</span>원
-																	</span>
-																</p>
-																<p class="prd_flag">
-																	<span class="icon_flag delivery">오늘드림</span>
-																</p></a>
-														<button type="button" class="btnbag"
-																onclick="common.gf_regCart(this); return false;"
-																data-goods-no="A000000188459" data-item-no="001"
-																tabindex="-1" data-rccode="pc_main_01_c">장바구니
-																담기</button></li>
-
-													</ul>
-												</li>
-												<li data-page-no="5" class="slick-slide"
-													data-slick-index="4" aria-hidden="true"
-													style="width: 510px; position: relative; left: -2040px; top: 0px; z-index: 998; opacity: 0;"
-													tabindex="-1" role="option"
-													aria-describedby="slick-slide54">
-													<ul class="curation_list">
-
-														<li class="curation_item" data-idx="8"><a
-															href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000189004&amp;dispCatNo=90000010001&amp;trackingCd=Home_Curation1_5&amp;curation=like&amp;egcode=a016_a016&amp;rccode=pc_main_01_c&amp;egrankcode=22&amp;t_page=홈&amp;t_click=큐레이션1_상품상세&amp;t_number=9"
-															name="Home_Curation1_5" class="item a_detail"
-															data-ref-goodsno="A000000189004" data-egrank="22"
-															data-egcode="a016_a016"
-															data-attr="홈^큐레이션1^[블프특가][NEW]바이오힐보 판테셀 리페어시카 크림미스트 120mL+120mL 기획^9"
-															data-impression="A000000189004^홈_큐레이션1^9"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="-1"
-															onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000189004&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;홈_큐레이션1&quot;, &quot;9&quot;);common.wlog(&quot;home_curation1_prod5&quot;);common.link.moveGoodsDetailCuration(&quot;A000000189004&quot;, &quot;90000010001&quot;,&quot;like&quot;,&quot;pc_main_01_c&quot;, &quot;a016_a016&quot;, &quot;22&quot;, &quot;Home_Curation1_5&quot;);"
-															data-impression-visibility="1"><span
-																class="thumb_flag best">베스트</span><span class="thumImg"><img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018900402ko.jpg?l=ko"
-																	alt="[블프특가][NEW]바이오힐보 판테셀 리페어시카 크림미스트 120mL+120mL 기획"
-																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
-																	<p class="tx_name">[블프특가][NEW]바이오힐보 판테셀 리페어시카 크림미스트
-																		120mL+120mL 기획</p>
-																</div>
-																<p class="prd_price">
-																	<span class="tx_org"><span class="tx_num">36,000</span>원
-																		~</span><span class="tx_cur"><span class="tx_num">23,280</span>원
-																		~</span>
-																</p>
-																<p class="prd_flag">
-																	<span class="icon_flag sale">세일</span><span
-																		class="icon_flag coupon">쿠폰</span><span
-																		class="icon_flag delivery">오늘드림</span>
-																</p></a>
-														<button type="button" class="btnbag"
-																onclick="common.gf_regCart(this); return false;"
-																data-goods-no="A000000189004" data-item-no="001"
-																tabindex="-1" data-rccode="pc_main_01_c">장바구니
-																담기</button></li>
-
-
-
-														<li class="curation_item" data-idx="9"><a
-															href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000140183&amp;dispCatNo=90000010001&amp;trackingCd=Home_Curation1_5&amp;curation=like&amp;egcode=a016_a016&amp;rccode=pc_main_01_c&amp;egrankcode=3&amp;t_page=홈&amp;t_click=큐레이션1_상품상세&amp;t_number=10"
-															name="Home_Curation1_5" class="item a_detail"
-															data-ref-goodsno="A000000140183" data-egrank="3"
-															data-egcode="a016_a016"
-															data-attr="홈^큐레이션1^[한정기획]로레알파리 헤어오일 100ml 9종^10"
-															data-impression="A000000140183^홈_큐레이션1^10"
-															data-ref-dispcatno="90000010001" data-ref-itemno="018"
-															tabindex="-1"
-															onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000140183&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;홈_큐레이션1&quot;, &quot;10&quot;);common.wlog(&quot;home_curation1_prod5&quot;);common.link.moveGoodsDetailCuration(&quot;A000000140183&quot;, &quot;90000010001&quot;,&quot;like&quot;,&quot;pc_main_01_c&quot;, &quot;a016_a016&quot;, &quot;3&quot;, &quot;Home_Curation1_5&quot;);"
-															data-impression-visibility="1"><span
-																class="thumb_flag best">베스트</span><span class="thumImg"><img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0014/A000000140183106ko.jpg?l=ko"
-																	alt="[한정기획]로레알파리 헤어오일 100ml 9종"
-																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
-																	<p class="tx_name">[한정기획]로레알파리 헤어오일 100ml 9종</p>
-																</div>
-																<p class="prd_price">
-																	<span class="tx_org"><span class="tx_num">22,000</span>원
-																		~</span><span class="tx_cur"><span class="tx_num">13,790</span>원
-																		~</span>
-																</p>
-																<p class="prd_flag">
-																	<span class="icon_flag sale">세일</span><span
-																		class="icon_flag coupon">쿠폰</span><span
-																		class="icon_flag gift">증정</span><span
-																		class="icon_flag delivery">오늘드림</span>
-																</p></a>
-														<button type="button" class="btnbag"
-																onclick="common.gf_regCart(this); return false;"
-																data-goods-no="A000000140183" data-item-no="001"
-																tabindex="-1" data-rccode="pc_main_01_c">장바구니
-																담기</button></li>
-
-													</ul>
-												</li>
-											</div>
-										</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+												</c:if>
+								
 									</ul>
 								</div>
 
@@ -835,8 +458,56 @@
 												class="current" id="contsInfoBeginNum">1</span>5</em></span>
 									</button>
 								</div>
+<script type="text/javascript">
+      $.noConflict();
+</script>
+<script>
+ $('#main_curation02_01').slick({
+		dots: false,
+		arrows: false,
+		fade: true,
+		infinite: true,
+		speed: 100,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		draggable: false
+	});
+    
+    $('#main_curation02_01 a.item').each(function(i){
+        var _item = $(this);			
+        var _data_goodsno = _item.attr('data-ref-goodsno');
+		var _data_dispCatNo = _item.attr('data-ref-dispCatNo');
+		var egcode = _item.attr("data-egcode");
+	    var egrank = _item.attr("data-egrank");
+		var trackingCd = _item.attr("name");
 
+		_item.attr('onclick','javascript:gtm.goods.callGoodsGtmInfo("'+_data_goodsno+'", "", "ee-productClick", "홈_큐레이션1", "' + $(this).attr('data-attr').split('^')[3] + '");common.wlog("home_curation1_prod'+trackingCd.substr(trackingCd.length-1, 1)+'");common.link.moveGoodsDetailCuration("'+_data_goodsno+'", "'+_data_dispCatNo+'","like","'+rccode+'", "'+egcode+'", "'+egrank+'", "'+trackingCd+'");');
+	});
+    
+    $("#main_curation02_01").find(".btnbag").each(function() {
+    	$(this).attr("data-rccode", rccode);
+    });
 
+	$('#refBtn').on('click', function () {
+		var $this = $(this);
+
+		var totalPage = Number($this.data('total-page'));
+		var currentPage = Number($this.data('current-page'));
+
+		$('#main_curation02_01').slick('slickNext');
+
+		if (currentPage < totalPage) {
+			currentPage++;
+		} else {
+			currentPage = 1;
+		}
+
+		$this.data('current-page', currentPage);
+		$this.find('.current').html(currentPage);
+		common.reqAmplitude('큐레이션1_다른상품추천_클릭', {entry_source: '홈', click_source: '큐레이션1_다른상품추천', number: currentPage});
+	});
+
+</script>
 								<script type="text/javascript">
 $(document).ready(function(){
 	var recoMbrNo = '';
@@ -861,9 +532,9 @@ $(document).ready(function(){
 		fade: true,
 		infinite: true,
 		speed: 100,
-		slidesToShow: 1,
+		slidesToShow: 2,
 		slidesToScroll: 1,
-		draggable: false
+		draggable: true
 	});
     
     $('#main_curation02_01 a.item').each(function(i){
@@ -1000,7 +671,7 @@ $(document).ready(function(){
 																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0015/A00000015210212ko.jpg?l=ko"
 																	alt="[코어탄력세럼] 아이소이 불가리안 로즈 인텐시브 리프팅 세럼 20ml 기획 (20ml+탄력스팟 3ml)"
 																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
+																<div class="prd_name">
 																	<p class="tx_name">[코어탄력세럼] 아이소이 불가리안 로즈 인텐시브 리프팅
 																		세럼 20ml 기획 (20ml+탄력스팟 3ml)</p>
 																</div>
@@ -1013,7 +684,7 @@ $(document).ready(function(){
 																	<span class="icon_flag sale">세일</span><span
 																		class="icon_flag delivery">오늘드림</span>
 																</p></a>
-														<button type="button" class="btnbag"
+															<button type="button" class="btnbag"
 																onclick="common.gf_regCart(this); return false;"
 																data-goods-no="A000000152102" data-item-no="001"
 																tabindex="0" data-rccode="pc_main_02_c">장바구니 담기</button>
@@ -1038,7 +709,7 @@ $(document).ready(function(){
 																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0015/A00000015416947ko.jpg?l=ko"
 																	alt="[1등 집착헤어팩]어노브 딥 데미지 트리트먼트 EX&nbsp;(본품207ml+100ml 추가 증정)"
 																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
+																<div class="prd_name">
 																	<p class="tx_name">[1등 집착헤어팩]어노브 딥 데미지 트리트먼트
 																		EX&nbsp;(본품207ml+100ml 추가 증정)</p>
 																</div>
@@ -1052,7 +723,7 @@ $(document).ready(function(){
 																		class="icon_flag gift">증정</span><span
 																		class="icon_flag delivery">오늘드림</span>
 																</p></a>
-														<button type="button" class="btnbag"
+															<button type="button" class="btnbag"
 																onclick="common.gf_regCart(this); return false;"
 																data-goods-no="A000000154169" data-item-no="001"
 																tabindex="0" data-rccode="pc_main_02_c">장바구니 담기</button>
@@ -1085,7 +756,7 @@ $(document).ready(function(){
 																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017579532ko.jpg?l=ko"
 																	alt="[리뷰이벤트/NEW] 롬앤 글래스팅 멜팅 밤"
 																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
+																<div class="prd_name">
 																	<p class="tx_name">[리뷰이벤트/NEW] 롬앤 글래스팅 멜팅 밤</p>
 																</div>
 																<p class="prd_price">
@@ -1098,7 +769,7 @@ $(document).ready(function(){
 																		class="icon_flag gift">증정</span><span
 																		class="icon_flag delivery">오늘드림</span>
 																</p></a>
-														<button type="button" class="btnbag"
+															<button type="button" class="btnbag"
 																onclick="common.gf_regCart(this); return false;"
 																data-goods-no="A000000175795" data-item-no="001"
 																tabindex="-1" data-rccode="pc_main_02_c">장바구니
@@ -1121,7 +792,7 @@ $(document).ready(function(){
 																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018922314ko.jpg?l=ko"
 																	alt="[한정기획] 아이소이 BR 블레미쉬 케어 흔적크림35ml 기획(+20ml 추가증정)"
 																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
+																<div class="prd_name">
 																	<p class="tx_name">[한정기획] 아이소이 BR 블레미쉬 케어 흔적크림35ml
 																		기획(+20ml 추가증정)</p>
 																</div>
@@ -1135,7 +806,7 @@ $(document).ready(function(){
 																		class="icon_flag coupon">쿠폰</span><span
 																		class="icon_flag delivery">오늘드림</span>
 																</p></a>
-														<button type="button" class="btnbag"
+															<button type="button" class="btnbag"
 																onclick="common.gf_regCart(this); return false;"
 																data-goods-no="A000000189223" data-item-no="001"
 																tabindex="-1" data-rccode="pc_main_02_c">장바구니
@@ -1167,7 +838,7 @@ $(document).ready(function(){
 																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017142211ko.jpg?l=ko"
 																	alt="[1&amp;1] 어노브 실크 오일 에센스 더블 기획세트 (70ml+70ml)"
 																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
+																<div class="prd_name">
 																	<p class="tx_name">[1&amp;1] 어노브 실크 오일 에센스 더블 기획세트
 																		(70ml+70ml)</p>
 																</div>
@@ -1179,7 +850,7 @@ $(document).ready(function(){
 																	<span class="icon_flag gift">증정</span><span
 																		class="icon_flag delivery">오늘드림</span>
 																</p></a>
-														<button type="button" class="btnbag"
+															<button type="button" class="btnbag"
 																onclick="common.gf_regCart(this); return false;"
 																data-goods-no="A000000171422" data-item-no="001"
 																tabindex="-1" data-rccode="pc_main_02_c">장바구니
@@ -1203,7 +874,7 @@ $(document).ready(function(){
 																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016828767ko.jpg?l=ko"
 																	alt="[11월 올영픽/올리브영 단독기획]바이오더마 아토덤 울트라 크림 500ml+200ml"
 																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
+																<div class="prd_name">
 																	<p class="tx_name">[11월 올영픽/올리브영 단독기획]바이오더마 아토덤 울트라
 																		크림 500ml+200ml</p>
 																</div>
@@ -1218,7 +889,7 @@ $(document).ready(function(){
 																		class="icon_flag gift">증정</span><span
 																		class="icon_flag delivery">오늘드림</span>
 																</p></a>
-														<button type="button" class="btnbag"
+															<button type="button" class="btnbag"
 																onclick="common.gf_regCart(this); return false;"
 																data-goods-no="A000000168287" data-item-no="001"
 																tabindex="-1" data-rccode="pc_main_02_c">장바구니
@@ -1250,7 +921,7 @@ $(document).ready(function(){
 																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017182031ko.jpg?l=ko"
 																	alt="[로운PICK]일소 네추럴 마일드 클리어 노우즈 팩 5매입"
 																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
+																<div class="prd_name">
 																	<p class="tx_name">[로운PICK]일소 네추럴 마일드 클리어 노우즈 팩 5매입</p>
 																</div>
 																<p class="prd_price">
@@ -1262,7 +933,7 @@ $(document).ready(function(){
 																	<span class="icon_flag sale">세일</span><span
 																		class="icon_flag delivery">오늘드림</span>
 																</p></a>
-														<button type="button" class="btnbag"
+															<button type="button" class="btnbag"
 																onclick="common.gf_regCart(this); return false;"
 																data-goods-no="A000000171820" data-item-no="001"
 																tabindex="-1" data-rccode="pc_main_02_c">장바구니
@@ -1286,7 +957,7 @@ $(document).ready(function(){
 																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018412902ko.jpg?l=ko"
 																	alt="에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)"
 																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
+																<div class="prd_name">
 																	<p class="tx_name">에스트라 아토베리어365 로션 150ml 기획
 																		(+하이드로에센스 25ml+무기자차선크림10ml 증정)</p>
 																</div>
@@ -1301,7 +972,7 @@ $(document).ready(function(){
 																		class="icon_flag gift">증정</span><span
 																		class="icon_flag delivery">오늘드림</span>
 																</p></a>
-														<button type="button" class="btnbag"
+															<button type="button" class="btnbag"
 																onclick="common.gf_regCart(this); return false;"
 																data-goods-no="A000000184129" data-item-no="001"
 																tabindex="-1" data-rccode="pc_main_02_c">장바구니
@@ -1333,7 +1004,7 @@ $(document).ready(function(){
 																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018912610ko.jpg?l=ko"
 																	alt="필리밀리 히팅 뷰러 2종 택1 (충전타입/건전지타입)"
 																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
+																<div class="prd_name">
 																	<p class="tx_name">필리밀리 히팅 뷰러 2종 택1 (충전타입/건전지타입)</p>
 																</div>
 																<p class="prd_price">
@@ -1343,7 +1014,7 @@ $(document).ready(function(){
 																<p class="prd_flag">
 																	<span class="icon_flag delivery">오늘드림</span>
 																</p></a>
-														<button type="button" class="btnbag"
+															<button type="button" class="btnbag"
 																onclick="common.gf_regCart(this); return false;"
 																data-goods-no="A000000189126" data-item-no="001"
 																tabindex="-1" data-rccode="pc_main_02_c">장바구니
@@ -1367,7 +1038,7 @@ $(document).ready(function(){
 																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0011/A00000011987119ko.jpg?l=ko"
 																	alt="W.DRESSROOM 퍼퓸드 핸드크림 5종 택 1"
 																	onerror="common.errorImg(this);"></span>
-															<div class="prd_name">
+																<div class="prd_name">
 																	<p class="tx_name">W.DRESSROOM 퍼퓸드 핸드크림 5종 택 1</p>
 																</div>
 																<p class="prd_price">
@@ -1379,7 +1050,7 @@ $(document).ready(function(){
 																	<span class="icon_flag sale">세일</span><span
 																		class="icon_flag delivery">오늘드림</span>
 																</p></a>
-														<button type="button" class="btnbag"
+															<button type="button" class="btnbag"
 																onclick="common.gf_regCart(this); return false;"
 																data-goods-no="A000000119871" data-item-no="001"
 																tabindex="-1" data-rccode="pc_main_02_c">장바구니
@@ -1505,114 +1176,6 @@ $(document).ready(function(){
 
 				<!-- 큐레이션 E -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				<!-- 추천 기획전 -->
 				<div class="main_plan_banner">
 					<h3 class="main_sub_tit">
@@ -1620,15 +1183,6 @@ $(document).ready(function(){
 					</h3>
 					<div class="recomm_plan">
 						<ul class="recomm_plan_list">
-
-
-
-
-
-
-
-
-
 
 							<li><a
 								onclick="common.reqAmplitude('위클리스페셜 배너 클릭', {entry_source: '홈', click_source: 'weeklyspecial', banner_name: '광채나는글로우
@@ -1648,19 +1202,6 @@ $(document).ready(function(){
 									</div>
 							</a></li>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 							<li><a
 								onclick="common.reqAmplitude('위클리스페셜 배너 클릭', {entry_source: '홈', click_source: 'weeklyspecial', banner_name: '1등 샴푸 라보에이치
 ', banner_number: '2'});"
@@ -1678,26 +1219,6 @@ $(document).ready(function(){
 										</dl>
 									</div>
 							</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 						</ul>
@@ -1719,38 +1240,12 @@ $(document).ready(function(){
 						<div
 							class="slick_slider slick-initialized slick-slider slick-dotted"
 							id="mainPlanSlider">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 							<div aria-live="polite" class="slick-list draggable">
 								<div class="slick-track" role="listbox"
 									style="opacity: 1; width: 6240px; transform: translate3d(-1040px, 0px, 0px);">
 									<div class="slider_unit  slick-slide slick-cloned"
 										data-slick-index="-2" aria-hidden="true" style="width: 520px;"
 										tabindex="-1">
-
-
-
-
-
-
-
-
-
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/5933098486848573045.jpg');">
@@ -1771,19 +1266,7 @@ $(document).ready(function(){
 											</div>
 										</div>
 
-
-
-
-
-
-
-
 										<ul class="cate_prd_list">
-
-
-
-
-
 											<li>
 
 												<div class="prd_info ">
@@ -1806,7 +1289,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[대용량] 넘버즈인 1번 말끔 순삭 클렌징 오일 400ml 대용량 기획^1"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">넘버즈인</span>
-														<p class="tx_name">[대용량] 넘버즈인 1번 말끔 순삭 클렌징 오일 400ml
+															<p class="tx_name">[대용량] 넘버즈인 1번 말끔 순삭 클렌징 오일 400ml
 																대용량 기획</p></a>
 													</div>
 													<button class="btn_zzim jeem"
@@ -1863,7 +1346,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^비플레인 녹두 약산성 클렌징폼 160ml + 40ml 기획^2"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">비플레인</span>
-														<p class="tx_name">비플레인 녹두 약산성 클렌징폼 160ml + 40ml 기획</p></a>
+															<p class="tx_name">비플레인 녹두 약산성 클렌징폼 160ml + 40ml 기획</p></a>
 													</div>
 													<button class="btn_zzim jeem"
 														data-ref-goodsno="A000000187479" tabindex="-1">
@@ -1968,7 +1451,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^아이오페 스템3 크림 50ml^1"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">아이오페</span>
-														<p class="tx_name">아이오페 스템3 크림 50ml</p></a>
+															<p class="tx_name">아이오페 스템3 크림 50ml</p></a>
 													</div>
 													<button class="btn_zzim jeem"
 														data-ref-goodsno="A000000191177" tabindex="-1">
@@ -2023,7 +1506,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[채정안PICK/단독기획] CKD&nbsp;레티노콜라겐 저분자&nbsp;300&nbsp;크림&nbsp;40ml&nbsp;기획&nbsp;(40ml+10ml)^2"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">CKD</span>
-														<p class="tx_name">[채정안PICK/단독기획] CKD&nbsp;레티노콜라겐
+															<p class="tx_name">[채정안PICK/단독기획] CKD&nbsp;레티노콜라겐
 																저분자&nbsp;300&nbsp;크림&nbsp;40ml&nbsp;기획&nbsp;(40ml+10ml)</p></a>
 													</div>
 													<button class="btn_zzim jeem"
@@ -2131,7 +1614,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[11월 블프특가]아이디얼 포 맨 시카 흔적 올인원 플루이드 한정기획(75mL 증정)^1"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="0"><span class="tx_brand">아이디얼포맨</span>
-														<p class="tx_name">[11월 블프특가]아이디얼 포 맨 시카 흔적 올인원 플루이드
+															<p class="tx_name">[11월 블프특가]아이디얼 포 맨 시카 흔적 올인원 플루이드
 																한정기획(75mL 증정)</p></a>
 													</div>
 													<button class="btn_zzim jeem"
@@ -2189,7 +1672,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[11월 블프특가]아이디얼 포 맨&nbsp;퍼펙트 올인원 탄력 기획(올인원 30ml+탄력크림 30ml 증정)^2"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="0"><span class="tx_brand">아이디얼포맨</span>
-														<p class="tx_name">[11월 블프특가]아이디얼 포 맨&nbsp;퍼펙트 올인원 탄력
+															<p class="tx_name">[11월 블프특가]아이디얼 포 맨&nbsp;퍼펙트 올인원 탄력
 																기획(올인원 30ml+탄력크림 30ml 증정)</p></a>
 													</div>
 													<button class="btn_zzim jeem"
@@ -2298,7 +1781,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^밀카 초콜릿 4종 패키지 기획 313g^1"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="0"><span class="tx_brand">밀카</span>
-														<p class="tx_name">밀카 초콜릿 4종 패키지 기획 313g</p></a>
+															<p class="tx_name">밀카 초콜릿 4종 패키지 기획 313g</p></a>
 													</div>
 													<button class="btn_zzim jeem"
 														data-ref-goodsno="A000000191890" tabindex="0">
@@ -2354,7 +1837,7 @@ $(document).ready(function(){
 															data-ref-dispcatno="90000010001" data-ref-itemno="003"
 															data-trk="null" tabindex="0"><span class="tx_brand">딜라이트
 																프로젝트</span>
-														<p class="tx_name">딜라이트 프로젝트 더티초코 디저트 3종</p></a>
+															<p class="tx_name">딜라이트 프로젝트 더티초코 디저트 3종</p></a>
 													</div>
 													<button class="btn_zzim jeem"
 														data-ref-goodsno="A000000189568" tabindex="0">
@@ -2460,7 +1943,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[11월올영픽] 마르시끄 링클 리페어 주름패치(미간, 팔자, 이마) 3종 택 1^1"
 															data-ref-dispcatno="90000010001" data-ref-itemno="002"
 															data-trk="null" tabindex="-1"><span class="tx_brand">마르시끄</span>
-														<p class="tx_name">[11월올영픽] 마르시끄 링클 리페어 주름패치(미간, 팔자,
+															<p class="tx_name">[11월올영픽] 마르시끄 링클 리페어 주름패치(미간, 팔자,
 																이마) 3종 택 1</p></a>
 													</div>
 													<button class="btn_zzim jeem"
@@ -2517,7 +2000,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[11월올영픽] 마르시끄 링클 리페어 미간 주름패치 33개^2"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">마르시끄</span>
-														<p class="tx_name">[11월올영픽] 마르시끄 링클 리페어 미간 주름패치 33개</p></a>
+															<p class="tx_name">[11월올영픽] 마르시끄 링클 리페어 미간 주름패치 33개</p></a>
 													</div>
 													<button class="btn_zzim jeem"
 														data-ref-goodsno="A000000181613" tabindex="-1">
@@ -2624,7 +2107,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[블프특가][샤워젤 증정] CK 캘빈클라인 One EDT 50ml^1"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">캘빈클라인</span>
-														<p class="tx_name">[블프특가][샤워젤 증정] CK 캘빈클라인 One EDT
+															<p class="tx_name">[블프특가][샤워젤 증정] CK 캘빈클라인 One EDT
 																50ml</p></a>
 													</div>
 													<button class="btn_zzim jeem"
@@ -2682,7 +2165,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[블프특가] 버버리 브리트쉬어 EDT 30ml^2"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">버버리</span>
-														<p class="tx_name">[블프특가] 버버리 브리트쉬어 EDT 30ml</p></a>
+															<p class="tx_name">[블프특가] 버버리 브리트쉬어 EDT 30ml</p></a>
 													</div>
 													<button class="btn_zzim jeem"
 														data-ref-goodsno="A000000186891" tabindex="-1">
@@ -2788,7 +2271,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[올영단독/대용량] 일리윤 세라마이드 아토 로션기획(600ML+600ML)^1"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">일리윤</span>
-														<p class="tx_name">[올영단독/대용량] 일리윤 세라마이드 아토
+															<p class="tx_name">[올영단독/대용량] 일리윤 세라마이드 아토
 																로션기획(600ML+600ML)</p></a>
 													</div>
 													<button class="btn_zzim jeem"
@@ -2844,7 +2327,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[1+1기획] 라보에이치 두피강화 캡슐트리트먼트 탈모증상완화 200ml 더블기획^2"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">라보에이치</span>
-														<p class="tx_name">[1+1기획] 라보에이치 두피강화 캡슐트리트먼트 탈모증상완화
+															<p class="tx_name">[1+1기획] 라보에이치 두피강화 캡슐트리트먼트 탈모증상완화
 																200ml 더블기획</p></a>
 													</div>
 													<button class="btn_zzim jeem"
@@ -2954,7 +2437,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[NEW 힙행열차]페리페라 잉크무드글로이밤 ^1"
 															data-ref-dispcatno="90000010001" data-ref-itemno="005"
 															data-trk="null" tabindex="-1"><span class="tx_brand">페리페라</span>
-														<p class="tx_name">[NEW 힙행열차]페리페라 잉크무드글로이밤</p></a>
+															<p class="tx_name">[NEW 힙행열차]페리페라 잉크무드글로이밤</p></a>
 													</div>
 													<button class="btn_zzim jeem"
 														data-ref-goodsno="A000000174272" tabindex="-1">
@@ -3011,7 +2494,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[NEW 힙행열차]페리페라 올테이크무드팔레트^2"
 															data-ref-dispcatno="90000010001" data-ref-itemno="013"
 															data-trk="null" tabindex="-1"><span class="tx_brand">페리페라</span>
-														<p class="tx_name">[NEW 힙행열차]페리페라 올테이크무드팔레트</p></a>
+															<p class="tx_name">[NEW 힙행열차]페리페라 올테이크무드팔레트</p></a>
 													</div>
 													<button class="btn_zzim jeem"
 														data-ref-goodsno="A000000136296" tabindex="-1">
@@ -3117,7 +2600,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[대용량] 넘버즈인 1번 말끔 순삭 클렌징 오일 400ml 대용량 기획^1"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">넘버즈인</span>
-														<p class="tx_name">[대용량] 넘버즈인 1번 말끔 순삭 클렌징 오일 400ml
+															<p class="tx_name">[대용량] 넘버즈인 1번 말끔 순삭 클렌징 오일 400ml
 																대용량 기획</p></a>
 													</div>
 													<button class="btn_zzim jeem"
@@ -3174,7 +2657,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^비플레인 녹두 약산성 클렌징폼 160ml + 40ml 기획^2"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">비플레인</span>
-														<p class="tx_name">비플레인 녹두 약산성 클렌징폼 160ml + 40ml 기획</p></a>
+															<p class="tx_name">비플레인 녹두 약산성 클렌징폼 160ml + 40ml 기획</p></a>
 													</div>
 													<button class="btn_zzim jeem"
 														data-ref-goodsno="A000000187479" tabindex="-1">
@@ -3279,7 +2762,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^아이오페 스템3 크림 50ml^1"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">아이오페</span>
-														<p class="tx_name">아이오페 스템3 크림 50ml</p></a>
+															<p class="tx_name">아이오페 스템3 크림 50ml</p></a>
 													</div>
 													<button class="btn_zzim jeem"
 														data-ref-goodsno="A000000191177" tabindex="-1">
@@ -3334,7 +2817,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[채정안PICK/단독기획] CKD&nbsp;레티노콜라겐 저분자&nbsp;300&nbsp;크림&nbsp;40ml&nbsp;기획&nbsp;(40ml+10ml)^2"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">CKD</span>
-														<p class="tx_name">[채정안PICK/단독기획] CKD&nbsp;레티노콜라겐
+															<p class="tx_name">[채정안PICK/단독기획] CKD&nbsp;레티노콜라겐
 																저분자&nbsp;300&nbsp;크림&nbsp;40ml&nbsp;기획&nbsp;(40ml+10ml)</p></a>
 													</div>
 													<button class="btn_zzim jeem"
@@ -3410,7 +2893,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[11월 블프특가]아이디얼 포 맨 시카 흔적 올인원 플루이드 한정기획(75mL 증정)^1"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">아이디얼포맨</span>
-														<p class="tx_name">[11월 블프특가]아이디얼 포 맨 시카 흔적 올인원 플루이드
+															<p class="tx_name">[11월 블프특가]아이디얼 포 맨 시카 흔적 올인원 플루이드
 																한정기획(75mL 증정)</p></a>
 													</div>
 													<button class="btn_zzim jeem"
@@ -3468,7 +2951,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^[11월 블프특가]아이디얼 포 맨&nbsp;퍼펙트 올인원 탄력 기획(올인원 30ml+탄력크림 30ml 증정)^2"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">아이디얼포맨</span>
-														<p class="tx_name">[11월 블프특가]아이디얼 포 맨&nbsp;퍼펙트 올인원 탄력
+															<p class="tx_name">[11월 블프특가]아이디얼 포 맨&nbsp;퍼펙트 올인원 탄력
 																기획(올인원 30ml+탄력크림 30ml 증정)</p></a>
 													</div>
 													<button class="btn_zzim jeem"
@@ -3548,7 +3031,7 @@ $(document).ready(function(){
 															data-attr="홈^인기행사만 모았어요^밀카 초콜릿 4종 패키지 기획 313g^1"
 															data-ref-dispcatno="90000010001" data-ref-itemno="001"
 															data-trk="null" tabindex="-1"><span class="tx_brand">밀카</span>
-														<p class="tx_name">밀카 초콜릿 4종 패키지 기획 313g</p></a>
+															<p class="tx_name">밀카 초콜릿 4종 패키지 기획 313g</p></a>
 													</div>
 													<button class="btn_zzim jeem"
 														data-ref-goodsno="A000000191890" tabindex="-1">
@@ -3598,7 +3081,7 @@ $(document).ready(function(){
 															data-ref-dispcatno="90000010001" data-ref-itemno="003"
 															data-trk="null" tabindex="-1"><span class="tx_brand">딜라이트
 																프로젝트</span>
-														<p class="tx_name">딜라이트 프로젝트 더티초코 디저트 3종</p></a>
+															<p class="tx_name">딜라이트 프로젝트 더티초코 디저트 3종</p></a>
 													</div>
 													<button class="btn_zzim jeem"
 														data-ref-goodsno="A000000189568" tabindex="-1">
@@ -4081,7 +3564,7 @@ $(document).ready(function(){
 											data-attr="홈^MD가추천해요^라이블링 클렌즈 15ml*30포 3종(레몬맛,자몽맛,청사과맛) 택1 ^1"
 											data-ref-dispcatno="90000010001" data-ref-itemno="001"
 											data-trk="null"><span class="tx_brand">라이블링</span>
-										<p class="tx_name">라이블링 클렌즈 15ml*30포 3종(레몬맛,자몽맛,청사과맛) 택1</p></a>
+											<p class="tx_name">라이블링 클렌즈 15ml*30포 3종(레몬맛,자몽맛,청사과맛) 택1</p></a>
 									</div>
 									<p class="prd_price">
 										<span class="tx_org"><span class="tx_num">29,900</span>원
@@ -4128,7 +3611,7 @@ $(document).ready(function(){
 											data-attr="홈^MD가추천해요^[블프특가] 필리밀리 아이브러시 프로 컬렉션(5종)(단품/컬러에디션)^2"
 											data-ref-dispcatno="90000010001" data-ref-itemno="002"
 											data-trk="null"><span class="tx_brand">필리밀리</span>
-										<p class="tx_name">[블프특가] 필리밀리 아이브러시 프로 컬렉션(5종)(단품/컬러에디션)</p></a>
+											<p class="tx_name">[블프특가] 필리밀리 아이브러시 프로 컬렉션(5종)(단품/컬러에디션)</p></a>
 									</div>
 									<p class="prd_price">
 										<span class="tx_org"><span class="tx_num">28,000</span>원
@@ -4209,7 +3692,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^[올리브영 단독/대용량]바이오더마 센시비오 H2O 850ml ^9"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">바이오더마</span>
-												<p class="tx_name">[올리브영 단독/대용량]바이오더마 센시비오 H2O 850ml</p></a>
+													<p class="tx_name">[올리브영 단독/대용량]바이오더마 센시비오 H2O 850ml</p></a>
 											</div>
 											<button class="btn_zzim jeem"
 												data-ref-goodsno="A000000130319" tabindex="-1">
@@ -4268,7 +3751,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^오쏘몰 이뮨 멀티비타민&amp;미네랄 14입+1입 증정 기획 (2주분)^10"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">오쏘몰</span>
-												<p class="tx_name">오쏘몰 이뮨 멀티비타민&amp;미네랄 14입+1입 증정 기획
+													<p class="tx_name">오쏘몰 이뮨 멀티비타민&amp;미네랄 14입+1입 증정 기획
 														(2주분)</p></a>
 											</div>
 											<button class="btn_zzim jeem"
@@ -4327,7 +3810,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^[한정기획] 아이소이 10년간, 1등 잡티세럼 20ml+20ml+15ml 증량 기획^11"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">아이소이</span>
-												<p class="tx_name">[한정기획] 아이소이 10년간, 1등 잡티세럼
+													<p class="tx_name">[한정기획] 아이소이 10년간, 1등 잡티세럼
 														20ml+20ml+15ml 증량 기획</p></a>
 											</div>
 											<button class="btn_zzim jeem"
@@ -4386,7 +3869,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^[한정기획] 모로칸오일 트리트먼트 루미너스 원더 세트(오일50ml+오일15ml+펌프)^12"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">모로칸오일</span>
-												<p class="tx_name">[한정기획] 모로칸오일 트리트먼트 루미너스 원더
+													<p class="tx_name">[한정기획] 모로칸오일 트리트먼트 루미너스 원더
 														세트(오일50ml+오일15ml+펌프)</p></a>
 											</div>
 											<button class="btn_zzim jeem"
@@ -4446,7 +3929,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^[세레나데 재출시/NEW컬러]에스쁘아 꾸뛰르 립틴트 블러벨벳 5.5g^1"
 													data-ref-dispcatno="90000010001" data-ref-itemno="008"
 													data-trk="null" tabindex="0"><span class="tx_brand">에스쁘아</span>
-												<p class="tx_name">[세레나데 재출시/NEW컬러]에스쁘아 꾸뛰르 립틴트 블러벨벳
+													<p class="tx_name">[세레나데 재출시/NEW컬러]에스쁘아 꾸뛰르 립틴트 블러벨벳
 														5.5g</p></a>
 											</div>
 											<button class="btn_zzim jeem"
@@ -4504,7 +3987,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^나랑드사이다 180ml 캔 30입 1박스^2"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="0"><span class="tx_brand">동아오츠카</span>
-												<p class="tx_name">나랑드사이다 180ml 캔 30입 1박스</p></a>
+													<p class="tx_name">나랑드사이다 180ml 캔 30입 1박스</p></a>
 											</div>
 											<button class="btn_zzim jeem"
 												data-ref-goodsno="B000000187961" tabindex="0">
@@ -4559,7 +4042,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^랑방 모던 프린세스 EDP 30ml^3"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="0"><span class="tx_brand">랑방</span>
-												<p class="tx_name">랑방 모던 프린세스 EDP 30ml</p></a>
+													<p class="tx_name">랑방 모던 프린세스 EDP 30ml</p></a>
 											</div>
 											<button class="btn_zzim jeem"
 												data-ref-goodsno="A000000192374" tabindex="0">
@@ -4618,7 +4101,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^[권은비 PICK] 나인위시스 하이드라 수분 앰플 나노 플러스 30ml 더블기획^4"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="0"><span class="tx_brand">나인위시스</span>
-												<p class="tx_name">[권은비 PICK] 나인위시스 하이드라 수분 앰플 나노 플러스
+													<p class="tx_name">[권은비 PICK] 나인위시스 하이드라 수분 앰플 나노 플러스
 														30ml 더블기획</p></a>
 											</div>
 											<button class="btn_zzim jeem"
@@ -4679,7 +4162,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^[NEW애교살컬러] 투쿨포스쿨 프로타주 펜슬^5"
 													data-ref-dispcatno="90000010001" data-ref-itemno="013"
 													data-trk="null" tabindex="-1"><span class="tx_brand">투쿨포스쿨</span>
-												<p class="tx_name">[NEW애교살컬러] 투쿨포스쿨 프로타주 펜슬</p></a>
+													<p class="tx_name">[NEW애교살컬러] 투쿨포스쿨 프로타주 펜슬</p></a>
 											</div>
 											<button class="btn_zzim jeem"
 												data-ref-goodsno="A000000120656" tabindex="-1">
@@ -4736,7 +4219,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^에스트라 아토베리어365 크림 80ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)^6"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">에스트라</span>
-												<p class="tx_name">에스트라 아토베리어365 크림 80ml 기획 (+하이드로에센스
+													<p class="tx_name">에스트라 아토베리어365 크림 80ml 기획 (+하이드로에센스
 														25ml+무기자차선크림10ml 증정)</p></a>
 											</div>
 											<button class="btn_zzim jeem"
@@ -4795,7 +4278,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^ZEROBASEONE - 2집 미니앨범 MELTING POINT 디지팩 ver.^7"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">제로베이스원</span>
-												<p class="tx_name">ZEROBASEONE - 2집 미니앨범 MELTING POINT
+													<p class="tx_name">ZEROBASEONE - 2집 미니앨범 MELTING POINT
 														디지팩 ver.</p></a>
 											</div>
 											<button class="btn_zzim jeem"
@@ -4848,7 +4331,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^[심톨 PICK/한정기획]바이오더마 시카비오 포마드 100ml 더블기획^8"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">바이오더마</span>
-												<p class="tx_name">[심톨 PICK/한정기획]바이오더마 시카비오 포마드 100ml
+													<p class="tx_name">[심톨 PICK/한정기획]바이오더마 시카비오 포마드 100ml
 														더블기획</p></a>
 											</div>
 											<button class="btn_zzim jeem"
@@ -4909,7 +4392,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^[올리브영 단독/대용량]바이오더마 센시비오 H2O 850ml ^9"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">바이오더마</span>
-												<p class="tx_name">[올리브영 단독/대용량]바이오더마 센시비오 H2O 850ml</p></a>
+													<p class="tx_name">[올리브영 단독/대용량]바이오더마 센시비오 H2O 850ml</p></a>
 											</div>
 											<button class="btn_zzim jeem"
 												data-ref-goodsno="A000000130319" tabindex="-1">
@@ -4940,13 +4423,6 @@ $(document).ready(function(){
 
 									</li>
 
-
-
-
-
-
-
-
 									<li class="flag">
 
 										<div class="prd_info ">
@@ -4968,7 +4444,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^오쏘몰 이뮨 멀티비타민&amp;미네랄 14입+1입 증정 기획 (2주분)^10"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">오쏘몰</span>
-												<p class="tx_name">오쏘몰 이뮨 멀티비타민&amp;미네랄 14입+1입 증정 기획
+													<p class="tx_name">오쏘몰 이뮨 멀티비타민&amp;미네랄 14입+1입 증정 기획
 														(2주분)</p></a>
 											</div>
 											<button class="btn_zzim jeem"
@@ -4999,13 +4475,6 @@ $(document).ready(function(){
 
 									</li>
 
-
-
-
-
-
-
-
 									<li class="flag">
 
 										<div class="prd_info ">
@@ -5027,7 +4496,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^[한정기획] 아이소이 10년간, 1등 잡티세럼 20ml+20ml+15ml 증량 기획^11"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">아이소이</span>
-												<p class="tx_name">[한정기획] 아이소이 10년간, 1등 잡티세럼
+													<p class="tx_name">[한정기획] 아이소이 10년간, 1등 잡티세럼
 														20ml+20ml+15ml 증량 기획</p></a>
 											</div>
 											<button class="btn_zzim jeem"
@@ -5058,13 +4527,6 @@ $(document).ready(function(){
 
 									</li>
 
-
-
-
-
-
-
-
 									<li class="flag">
 
 										<div class="prd_info ">
@@ -5086,7 +4548,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^[한정기획] 모로칸오일 트리트먼트 루미너스 원더 세트(오일50ml+오일15ml+펌프)^12"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">모로칸오일</span>
-												<p class="tx_name">[한정기획] 모로칸오일 트리트먼트 루미너스 원더
+													<p class="tx_name">[한정기획] 모로칸오일 트리트먼트 루미너스 원더
 														세트(오일50ml+오일15ml+펌프)</p></a>
 											</div>
 											<button class="btn_zzim jeem"
@@ -5145,7 +4607,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^[세레나데 재출시/NEW컬러]에스쁘아 꾸뛰르 립틴트 블러벨벳 5.5g^1"
 													data-ref-dispcatno="90000010001" data-ref-itemno="008"
 													data-trk="null" tabindex="-1"><span class="tx_brand">에스쁘아</span>
-												<p class="tx_name">[세레나데 재출시/NEW컬러]에스쁘아 꾸뛰르 립틴트 블러벨벳
+													<p class="tx_name">[세레나데 재출시/NEW컬러]에스쁘아 꾸뛰르 립틴트 블러벨벳
 														5.5g</p></a>
 											</div>
 											<button class="btn_zzim jeem"
@@ -5203,7 +4665,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^나랑드사이다 180ml 캔 30입 1박스^2"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">동아오츠카</span>
-												<p class="tx_name">나랑드사이다 180ml 캔 30입 1박스</p></a>
+													<p class="tx_name">나랑드사이다 180ml 캔 30입 1박스</p></a>
 											</div>
 											<button class="btn_zzim jeem"
 												data-ref-goodsno="B000000187961" tabindex="-1">
@@ -5258,7 +4720,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^랑방 모던 프린세스 EDP 30ml^3"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">랑방</span>
-												<p class="tx_name">랑방 모던 프린세스 EDP 30ml</p></a>
+													<p class="tx_name">랑방 모던 프린세스 EDP 30ml</p></a>
 											</div>
 											<button class="btn_zzim jeem"
 												data-ref-goodsno="A000000192374" tabindex="-1">
@@ -5317,7 +4779,7 @@ $(document).ready(function(){
 													data-attr="홈^이상품어때요^[권은비 PICK] 나인위시스 하이드라 수분 앰플 나노 플러스 30ml 더블기획^4"
 													data-ref-dispcatno="90000010001" data-ref-itemno="001"
 													data-trk="null" tabindex="-1"><span class="tx_brand">나인위시스</span>
-												<p class="tx_name">[권은비 PICK] 나인위시스 하이드라 수분 앰플 나노 플러스
+													<p class="tx_name">[권은비 PICK] 나인위시스 하이드라 수분 앰플 나노 플러스
 														30ml 더블기획</p></a>
 											</div>
 											<button class="btn_zzim jeem"
