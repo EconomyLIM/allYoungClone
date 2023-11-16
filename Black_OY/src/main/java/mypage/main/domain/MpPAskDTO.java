@@ -19,4 +19,5 @@ public class MpPAskDTO {
 	private String paskAns;			//1:1문의 답변
 	private String paskId;			// 1:1문의 ID
 	private String paskImg;		// 1:1문의 첨부이미지
+	private String paskcateId;		// 1:1문의 카테고리 ID
 }

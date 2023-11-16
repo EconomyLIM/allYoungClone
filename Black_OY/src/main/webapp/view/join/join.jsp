@@ -492,7 +492,7 @@
 									</tbody>
 									</table>
 									</div>
-				<script>
+			<script>
 				$("#email_addr2").val( $("#email_addr_opt").val() );
 				$("#email_addr_opt").change(function () {
 					$("#email_addr2").val( $("#email_addr_opt").val() );
@@ -506,7 +506,7 @@
 				let str2 = result5;
 				let strAll = "010" + str1.replace(str1, '****') +str2;
 				$("#mob_no").val(strAll);
-				</script>					
+	</script>					
 	<script>
 		$("#u_tel").val("010-"+str1+"-"+str2);
 	</script>
@@ -778,7 +778,7 @@
 					}
 				});
 
-		// 오프라인 회원정보
+	/* 	// 오프라인 회원정보
 		function setUserInfo() {
 			// 기본정보 hidden
 			if ('' != '') {
@@ -866,7 +866,7 @@
 				$('#birth_dd').val('');
 			}
 
-		}
+		} */
 
 		// 이메일 셋팅
 		function setEmail() {
@@ -930,7 +930,7 @@
 				pwStrength = true;
 			}
 		}
-
+/* 
 		function checkPasswordRule() {
 			if ($('#pwd').val() == "") {
 				alert("msg_pwd", "비밀번호를 입력해 주세요.");
@@ -966,16 +966,16 @@
 
 			}
 		}
-
-		function checkPwd2() {
+ */
+/* 		function checkPwd2() {
 			if ($("#pwd").val() != $("#pwd_check").val()) {
 				alertMsg('msg_pwd_check', "입력하신 비밀번호가 일치하지 않습니다. 다시 확인해 주세요.")
 			} else {
 				$("#msg_pwd_check").hide();
 			}
-		}
+		} */
 
-		function chkEmailDomain() {
+	/* 	function chkEmailDomain() {
 			if ($('#email_addr_opt').val() == '0' && $('#email_addr2').val()) {
 				$.ajax({
 					url : '/cjmweb/common/check-email-available.do',
@@ -996,15 +996,15 @@
 				});
 			}
 		}
-
-		function showCupoon() {
+ */
+/* 		function showCupoon() {
 			alert("생일쿠폰 보기!!");
 		}
 
 		function showMemory() {
 			alert("기념일서비스보기 보기!!");
 		}
-
+ */
 		// 취소
 		function goCancel() {
 			if (!confirm('회원가입을 취소하시겠습니까?'))
@@ -1330,11 +1330,6 @@
 							alert(str_msg);
 						}
 					});
-		}
-
-		function alertMsg(objId, ErrMsg) {
-			$("#" + objId).html(ErrMsg);
-			$("#" + objId).show();
 		}
 
 		function showErrorMsg(occur_loc, occur_msg) {
