@@ -23,7 +23,7 @@ public class PaskListHandler implements CommandHandler {
 		Connection conn = ConnectionProvider.getConnection();
 		
 		LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
-		
+		userId = logOnDTO.getUser_id();
 		MypageService service = MypageService.getinstance();
 		
 		List<MpPAskDTO> userpAsk = null;

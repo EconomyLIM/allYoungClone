@@ -16,14 +16,11 @@
 </head>
 <body>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
+	
 <div id="Contents">
 			<div class="sub_title_area customer">
 				<h1>고객센터 <span>무엇을 도와드릴까요?</span></h1>
 			</div>
-
-		
-
-
 
 		<ul class="comm1sTabs threeSet customer">
 			<li id="tabFaq"><a href="javascript:common.faq.getFaqList('99');">FAQ</a></li>
@@ -43,11 +40,10 @@
 						<td>
 							<select id="cnslLrgCate" name="cnslLrgCd" title="문의유형 항목을 선택하세요" style="width:192px;">
 								<option value="" selected="selected">선택해주세요</option>
-								<option value="200">온라인몰</option>
-								<option value="300">오늘드림</option>
-								<option value="400">매장</option>
 							</select>
-							<select id="cnslMidCate" name="cnslMidCd" title="문의유형 항목을 선택하세요" style="width:192px;"><option value="">선택해주세요</option><option value="301" name="300">주문/결제</option><option value="302" name="300">배송문의</option><option value="303" name="300">취소/교환/환불</option><option value="304" name="300">이벤트</option></select>
+							<select id="cnslMidCate" name="cnslMidCd" title="문의유형 항목을 선택하세요" style="width:192px;">
+							<option value="">선택해주세요</option>
+							</select>
 <!-- 							<span class="store_off"><input type="checkbox" id="offLine" name="offlineYn" value="Y"><label for="offLine">오프라인 매장 문의</label></span> -->
 						</td>
 					</tr>
@@ -125,16 +121,16 @@
 									</select>
 									<input type="hidden" id="cellSctNo" value="010">
 									<span class="des">-</span>
-									<input type="tel" class="sms" name="cellTxnoNo" value="7367" title="휴대폰 가운데 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
+									<input type="tel" class="sms" name="cellTxnoNo" id="mid" value="" title="휴대폰 가운데 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
 									<span class="des">-</span>
-									<input type="tel" class="sms" name="cellEndNo" value="8785" title="휴대폰 마지막 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
+									<input type="tel" class="sms" name="cellEndNo" id="end" value="" title="휴대폰 마지막 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
 								</li>
 								<li>
 									<input type="checkbox" id="NoticeEmail" name="emailRcvYn" value="Y" class="chkSmall"><label for="NoticeEmail">E-mail</label>
 									<input type="text" title="아이디를 입력하세요" class="email" name="emailAddr1" placeholder="아이디를 입력하세요" style="width:152px;ime-mode:disabled;" disabled="disabled">
 									<span class="des">@</span>
 									<input type="text" class="email" name="emailAddr2" title="직접 입력 하세요" placeholder="직접 입력 하세요" style="width:140px;ime-mode:disabled;" disabled="disabled">
-									<input type="hidden" name="emailAddr" value="jybee2301@naver.com">
+									<input type="hidden" name="emailAddr" value="">
 									<select title="도메인 주소를 선택하세요." class="email" style="width:122px;" id="emailAddrSelect" disabled="disabled" selected="selected">
 										<option value="-1" selected="selected">직접입력</option>
 										<option value="hanmail.net">hanmail.net</option>
@@ -169,5 +165,79 @@
 	
 	</div>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
+
+		<script>
+		var email = "${logOn.u_email}";
+		var arr = email.split('@', 2);
+		var emailadd1 = arr[0];
+		var emailadd2 = arr[1];
+		
+		$("#emailAddr1").val(emailadd1);
+		$("#emailAddr2").val(emailadd2);
+
+		$("#emailAddrSelect").change(function () {
+		$("#email_addr2").val( $("#emailAddrSelect").val() );
+		});
+				</script>
+	<script>
+	var str = "${logOn.u_tel}";
+	var arr = email.split('-', 3);
+	var start = arr[0];
+	var mid = arr[1];
+	var end = arr[2];
+
+	$("#rgnNoSelect").val(start);
+	$("#mid").val(mid);
+	$("#end").val(end);
+	</script>					
+<script>
+	$(function () {
+		$.ajax({
+			type : 'get'
+			, async : false
+			, cache: false
+			, url : '/Black_OY/olive/paskmaj.do'
+			, dataType : 'json'
+			, data : {}
+			, success : function(data) {
+				//console.log(data);
+				var major1 = $("<option>").val(data.major1).text(data.major1);
+				var major2 =$("<option>").val(data.major2).text(data.major2);
+				var major3 =$("<option>").val(data.major3).text(data.major3);
+				$("#cnslLrgCate").append(major1).append(major2).append(major3);
+				//console.log (data[0]);
+	        }
+			, error : function (data, textStatus) {
+				console.log('error');
+	        }
+		});
+		
+		$("#cnslLrgCate").on("change", function () {
+			var selectedMajor = $(this).val();
+			if ( selectedMajor == "" ){
+				return;
+			}
+			//alert("event");
+			$.ajax({
+				type : 'get'
+				, async : false
+				, cache: false
+				, url : '/Black_OY/olive/paskmin.do'
+				, dataType : 'json'
+				, data : { /* ac_major : selectedMajor */}
+				, success : function(data) {
+					console.log(data);
+		        }
+				, error : function (data, textStatus) {
+					console.log('error');
+		        }
+			});
+		});
+	});
+
+	
+</script>
+
+
 </body>
 </html>
