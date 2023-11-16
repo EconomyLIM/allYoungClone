@@ -153,7 +153,7 @@ public class ProductDetailHandler implements CommandHandler{
 		
 		request.setAttribute("pDto", pageDTO);
 		request.setAttribute("totalRecords", totalRecords);			
-		request.setAttribute("reviewcnt", reviewlist.size());
+		request.setAttribute("reviewcnt", reviewlistall.size());
 		request.setAttribute("reviewlist", reviewlist);
 		request.setAttribute("reviewScore", reviewScoreDTO);
 		request.setAttribute("reviewimg", reviewimg);

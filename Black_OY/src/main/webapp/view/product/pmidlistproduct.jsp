@@ -588,9 +588,10 @@ $(document).ready(function() {
 			addModalBackdrop();
 			
 			let displID = $(this).attr("id");
-			
+			let url = window.location.href
 			let data = {
-					displID: displID
+					displID: displID,
+					url: url
 				}
 			
 			$.ajax({
@@ -599,13 +600,21 @@ $(document).ready(function() {
 				url: "<%=contextPath%>/olive/itemlist.do",
 				data:data,
 				cache: false,
+				beforeSend: function(xmlHttpRequest) {
+			        xmlHttpRequest.setRequestHeader("AJAX", "true");
+			    },
 				success:function( response ) {
 		              $("#displItem").empty();
 		              $("#displItem").append( response );
 		              
 		          }
-		        , error		: function() {
+		        , error		: function(xhr, textStatus, error) {
+		        	if (xhr.status == 500) {
+		                alert("Login Session Expired");
+		                window.location.href = "/Black_OY/view/logon/logon.jsp";
+		            }else {
 		            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+		            }
 		        }
 			})
 		});

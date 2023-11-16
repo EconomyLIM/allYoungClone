@@ -13,6 +13,7 @@
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
+
 <script>
 	$(function() {
 		let storesNames = [];
@@ -449,16 +450,16 @@
                                         href="#"
                                         data-ref-dispcatno="10000010009" data-attr="공통^드로우^마스크팩">마스크팩</a></p>
                                 <ul>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00020004&sort=1"
                                             data-ref-dispcatno="100000100090001" data-attr="공통^드로우^마스크팩_시트팩"
                                             data-trk="/">시트팩</a></li>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00020005&sort=1"
                                             data-ref-dispcatno="100000100090004" data-attr="공통^드로우^마스크팩_패드"
                                             data-trk="/">패드</a></li>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00020006&sort=1"
                                             data-ref-dispcatno="100000100090002" data-attr="공통^드로우^마스크팩_페이셜팩"
                                             data-trk="/">페이셜팩</a></li>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00020007&sort=1"
                                             data-ref-dispcatno="100000100090003" data-attr="공통^드로우^마스크팩_코팩/패치"
                                             data-trk="/">코팩/패치</a></li>
                                 </ul>
@@ -466,13 +467,13 @@
                                         href="#"
                                         data-ref-dispcatno="10000010010" data-attr="공통^드로우^클렌징">클렌징</a></p>
                                 <ul>
-                                    <li><a href="<%=contextPath%>/view/product/pmidlistproduct.do?displNum=00010008"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00030008&sort=1"
                                             data-ref-dispcatno="100000100100001" data-attr="공통^드로우^클렌징_클렌징폼/젤"
                                             data-trk="/">클렌징폼/젤</a></li>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00030009&sort=1"
                                             data-ref-dispcatno="100000100100002" data-attr="공통^드로우^클렌징_오일/워터/리무버"
                                             data-trk="/">오일/워터/리무버</a></li>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00030010&sort=1"
                                             data-ref-dispcatno="100000100100003" data-attr="공통^드로우^클렌징_필링/패드"
                                             data-trk="/">필링/패드</a></li>
                                 </ul>
@@ -480,10 +481,10 @@
                                         href="#"
                                         data-ref-dispcatno="10000010011" data-attr="공통^드로우^선케어">선케어</a></p>
                                 <ul>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00040011&sort=1"
                                             data-ref-dispcatno="100000100110001" data-attr="공통^드로우^선케어_선블록"
                                             data-trk="/">선블록</a></li>
-                                    <li><a href="#"
+                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00040012&sort=1"
                                             data-ref-dispcatno="100000100110002" data-attr="공통^드로우^선케어_태닝/애프터선"
                                             data-trk="/">태닝/애프터선</a></li>
                                 </ul>

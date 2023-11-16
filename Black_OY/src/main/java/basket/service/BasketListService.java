@@ -139,4 +139,52 @@ public class BasketListService {
 		return 0;
 	}
 	
+	
+	
+	public int basketCheckService(String user_id, String productid, String quickYn) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			BasketDAOImpl basketDAOImpl = BasketDAOImpl.getInstance();
+			int row = basketDAOImpl.basketCheck(conn, user_id, productid, quickYn);
+			return row;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn);
+		}
+		return 0;
+	}
+	// 장바구니 업데이트
+	public int basketUpdateService(String user_id, String productid, String quickYn, int cnt) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			BasketDAOImpl basketDAOImpl = BasketDAOImpl.getInstance();
+			int row = basketDAOImpl.basketUpdate(conn, user_id, productid, quickYn, cnt);
+			return row;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn);
+		}
+		return 0;
+	}
+	
+	// 장바구니 추가
+	public int basketinsertService(String user_id, String productid, String quickYn, int cnt) {
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			BasketDAOImpl basketDAOImpl = BasketDAOImpl.getInstance();
+			int row = basketDAOImpl.basketinsert(conn, user_id, productid, quickYn, cnt);
+			return row;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn);
+		}
+		return 0;
+	}
+	
 }
