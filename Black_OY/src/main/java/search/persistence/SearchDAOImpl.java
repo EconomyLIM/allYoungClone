@@ -10,6 +10,7 @@ import java.util.List;
 import com.util.JDBCUtil;
 
 import product.domain.PlowcateDTO;
+import search.domain.BrandSearchDTO;
 
 public class SearchDAOImpl implements SearchDAO{
 
@@ -58,6 +59,43 @@ public class SearchDAOImpl implements SearchDAO{
 		}// try_catch
 
 		return list;
+	}
+
+	@Override
+	public BrandSearchDTO brandSearch(Connection conn, String word) {
+		// TODO Auto-generated method stub
+		String sql = " select b.brand_id, brand_name, i.brand_logo_src from brand b join brand_logo i on b.brand_id = i.brand_id where brand_name = ? ";
+		BrandSearchDTO brandSearchDTO = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String displ = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, word); 
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				
+				brandSearchDTO = BrandSearchDTO.builder()
+						.brand_id(rs.getString("brand_id"))
+						.brand_name(rs.getString("brand_name"))
+						.brand_img_src(rs.getString("brand_logo_src"))
+						.build();				
+
+			} // if
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("> SearchDAOImpl SQLException");
+		} catch (Exception e) {
+			System.out.println("> SearchDAOImpl Exception");
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		}// try_catch
+
+		return brandSearchDTO;
 	}
 
 }

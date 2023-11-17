@@ -290,14 +290,16 @@
 						<div class="layer_inner">
 							<!-- 2017-02-07 수정 : 자동완성기능 영역 -->
 							<div class="auto_search_cont">
+							<div id ='output'>
 								<div class="brand_area" id="ark_brand"></div>
-								<div class="auto_list" id="ark_w">
-									<ul id ="output">
+								<div class="auto_list" id="ark_w" display="none">
+									<ul>
 										<li id="bg0" onclick="onClickKeywordSearch('로션','0');"
 											onmouseover="onMouseOverKeyword(0);"
 											style="background-color: rgb(255, 255, 255); cursor: pointer;"><a
 											href="#" data-attr="통합^통합검색_자동완성키워드^로션"><span>로션</span></a></li>
 									</ul>
+								</div>
 								</div>
 							</div>
 							<!--// 2017-02-07 수정 : 자동완성기능 영역 -->
@@ -896,12 +898,17 @@
 	</div>
 	<script>
 	$(document).ready(function(){
-		
-		$('#query').keyup(function(){
+		$("#query").click(function(){
 			var val =$('#query').val();
-			if (val) {
-				$("#w_search_box > div.placeholder_area > label").text("");
-			}
+			console.log(val)
+		if (val) {
+			$("#w_search_box > div.placeholder_area > label").text("");
+			$("#searchPop").removeClass("on");
+			$("#w_pop_cont").css("display","none");
+			$("#searchRecent").removeClass("on");
+			$("#recent_cont").css("display","none");
+			$(".search_tab").css("display","none");
+			$("#ark_w").css("display","block");
 			$.ajax({ //ajax를 활용하여 서블릿으로 키워드 전달 
 				type: 'get',
 				url : "<%=contextPath%>/olive/search.do",
@@ -912,6 +919,38 @@
 					$("#output").append(response);
 				}
 			})
+		}else{
+			$("#output").empty();
+			$("#ark_w").css("display","none");
+		}
+		
+	})
+		$('#query').keyup(function(){
+			var val =$('#query').val();
+			
+			if (val) {
+				$("#w_search_box > div.placeholder_area > label").text("");
+				$("#searchPop").removeClass("on");
+				$("#w_pop_cont").css("display","none");
+				$("#searchRecent").removeClass("on");
+				$("#recent_cont").css("display","none");
+				$(".search_tab").css("display","none");
+				$("#ark_w").css("display","block");
+				$.ajax({ //ajax를 활용하여 서블릿으로 키워드 전달 
+					type: 'get',
+					url : "<%=contextPath%>/olive/search.do",
+					dataType: 'text',
+					data : {word : val},
+					success : function(response){ //통신 성공 시  기능 
+						$("#output").empty();
+						$("#output").append(response);
+					}
+				})
+			}else{
+				$("#output").empty();
+				$("#ark_w").css("display","none");
+			}
+			
 		})
 	})
 	</script>

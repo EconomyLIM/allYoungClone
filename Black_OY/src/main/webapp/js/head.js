@@ -67,10 +67,28 @@ $("li.store>.mymenu_layer").mouseover(function(){
         
 // 검색창 클릭시
 		$(".placeholder_area").click(function(){
+			var val =$('#query').val();
+			console.log(val)
+		if (val) {
+			$("#w_search_box > div.placeholder_area > label").text("");
+			$("#searchPop").removeClass("on");
+			$("#w_pop_cont").css("display","none");
+			$("#searchRecent").removeClass("on");
+			$("#recent_cont").css("display","none");
+			$(".search_tab").css("display","none");
+			$("#ark_w").css("display","block");
+			$(".placeholder_area>label[for='query']").addClass("hide");
+			$(".search_box").addClass("active");
+			
+		}else{
+			$("#output").empty();
+			$("#ark_w").css("display","none");
 			$(".search_box").addClass("active");
 			$(".placeholder_area>label[for='query']").addClass("hide");
 			$(".search_tab").css("display","block");
 			$("#w_pop_cont").css("display","block");
+		}
+			
 		})
 // 급상승 검색어 클릭시
 		$("#searchRecent").click(function(){
