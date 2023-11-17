@@ -22,7 +22,9 @@ public class LikeDAOImpl implements LikeDAO {
 	@Override
 	public List<MpPlikeDTO> selectPlike(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT pdi.pro_displ_src src , b.brand_name bname, pd.pro_displ_name displname  "
+		String sql = " SELECT pdi.pro_displ_src src , b.brand_name bname, pd.pro_displ_name displname "
+				+ "				 , cs.cat_s_id csid "
+				+ "              , cm.cat_m_id cmid	 "
 				+ "				 ,a.pro_price pricep  "
 				+ "				 ,  "
 				+ "				 NVL(CASE   "
@@ -59,8 +61,10 @@ public class LikeDAOImpl implements LikeDAO {
 				+ "				 JOIN pro_prom pm ON pd.pro_displ_id = pm.pro_displ_id "
 				+ "				 LEFT JOIN prom_c prc ON pm.prom_c_id = prc.prom_c_id  "
 				+ "				 LEFT JOIN prom_d prd ON prd.prom_d_id = pm.prom_d_id  "
-				+ "			 LEFT JOIN prom_p prp ON prp.prom_p_id = pm.prom_p_id  "
-				+ "			 LEFT JOIN store_stock ss ON p.pro_id = ss.pro_id  "
+				+ "			 	 LEFT JOIN prom_p prp ON prp.prom_p_id = pm.prom_p_id  "
+				+ "			 	 LEFT JOIN store_stock ss ON p.pro_id = ss.pro_id  "
+				+ "			 	 LEFT JOIN cate_s cs on p.cat_s_id = cs.cat_s_id "
+				+ "              LEFT JOIN cate_m cm on cs.cat_m_id = cm.cat_m_id "
 				+ "				  JOIN (  "
 				+ "				     SELECT pro_displ_id, pro_price,   "
 				+ "			         RANK() OVER (PARTITION BY pro_displ_id ORDER BY pro_price DESC) as price_rank  "
@@ -85,6 +89,8 @@ public class LikeDAOImpl implements LikeDAO {
 				dto.setPlImgsrc(rs.getString("src"));
 				dto.setPlbrand(rs.getString("bname"));
 				dto.setPlpdispN(rs.getString("displname"));
+				dto.setPlcsid(rs.getString("csid"));
+				dto.setPlcmid(rs.getString("cmid"));
 				dto.setPlpricep(rs.getString("pricep"));
 				dto.setPlpricea(rs.getString("afterprice"));
 				dto.setPlpdispId(rs.getString("displid"));
@@ -142,7 +148,7 @@ public class LikeDAOImpl implements LikeDAO {
 	public int deletePlikeAll(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		String sql = " DELETE FROM p_like "
-				+ " AND user_id = ? ";
+				+ " WHERE user_id = ? ";
 		PreparedStatement pstmt = null;
 		int rownum = 0;
 		try {
@@ -170,7 +176,7 @@ public class LikeDAOImpl implements LikeDAO {
 		// TODO Auto-generated method stub
 		String sql = " SELECT brand_name, brand_like, brand_img_src "
 				+ " FROM b_like l left join brand b on l.brand_id = b.brand_id "
-				+ "                left join brand_img i on b.brand_id = i.brand_id; "
+				+ "                left join brand_img i on b.brand_id = i.brand_id "
 				+ " WHERE user_id = ? ";
 		ArrayList<BLikeDTO> list = null;
 		PreparedStatement pstmt = null;
@@ -187,7 +193,7 @@ public class LikeDAOImpl implements LikeDAO {
 			do {
 				dto = new BLikeDTO();
 				dto.setBrandN(rs.getString("brand_name"));
-				dto.setBLikeamount(rs.getInt("brand_like"));
+				dto.setBAmount(rs.getInt("brand_like"));
 				dto.setBDisplsrc(rs.getString("brand_img_src"));
 				list.add(dto);
 			} while (rs.next());
@@ -238,7 +244,7 @@ public class LikeDAOImpl implements LikeDAO {
 	public int deleteBlikeAll(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		String sql = " DELETE FROM b_like "
-				+ "    and user_id = ? ";
+				+ "  WHERE user_id = ? ";
 		PreparedStatement pstmt = null;
 		int rownum = 0;
 		try {
