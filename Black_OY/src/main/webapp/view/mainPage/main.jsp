@@ -9,15 +9,142 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-migrate-3.3.2.min.js"></script>
 <script src="/Black_OY/js/head.js"></script>
 <script src="/Black_OY/js/mainPage.js"></script>
 <link rel="stylesheet" type="text/css"
    href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
 <link rel="stylesheet" href="/Black_OY/css/style.css">
+<!-- <link rel="stylesheet" href="/Black_OY/css/mainscrollbar.css"> -->
+<script src="https://static.oliveyoung.co.kr/pc-static-root/js/common/publish/jquery.mCustomScrollbar.concat.min.js"></script>
 <title>블랙올리브영 온라인몰</title>
 </head>
+<script>
+/* 비슷한 회원 상품 뷰 팝업창 스크립트 */
+
+$(function() {
+	$('#crt_more_p002').on('click', function() {
+		$('#crtPopWrap').show();
+	})
+	$('.layer_close.type4').on('click', function() {
+		$('#crtPopWrap').hide();
+	})
+  
+})
+</script>
+<script>
+/* 스크롤 스크립트 */
+
+/* $(function() {
+  var isPopupScrolling = false;
+
+  // 함수를 이용하여 팝업창을 중앙에 위치시키는 코드
+  function centerPopup() {
+    var $popupContainer = $("#mCSB_2_container");
+    var windowHeight = $(window).height();
+    var popupHeight = $popupContainer.height();
+    var topPosition = Math.max(0, (windowHeight - popupHeight) / 2);
+
+    $popupContainer.css({
+      'top': topPosition + 'px',
+    });
+
+    // 스크롤 바 위치 업데이트
+    updateScrollbarPosition();
+  }
+
+  // 함수를 이용하여 스크롤 바 위치를 업데이트하는 코드
+  function updateScrollbarPosition() {
+    var $popupContainer = $("#mCSB_2_container");
+    var $scrollbar = $("#mCSB_2_scrollbar_vertical");
+    var $dragger = $("#mCSB_2_dragger_vertical");
+
+    var containerTop = parseInt($popupContainer.css('top'));
+    var draggerTop = -containerTop * ($dragger.height() - $scrollbar.height()) / ($popupContainer.height() - $(window).height());
+
+    $dragger.css('top', draggerTop + 'px');
+  }
+
+  // 마우스 휠 이벤트 핸들러
+  $('#mCSB_2').on('mousewheel', function(event, delta) {
+    if (isPopupScrolling) {
+      // 팝업이 스크롤 가능한 상태일 때 팝업 스크롤 처리
+      var $popupContainer = $("#mCSB_2_container");
+      var currentTop = parseInt($popupContainer.css('top'));
+      var maxTop = 0;
+      currentTop -= delta * 10;
+      currentTop = Math.min(currentTop, maxTop);
+
+      $popupContainer.css({
+        'top': currentTop + 'px',
+      });
+
+      // 스크롤 바 위치 업데이트
+      updateScrollbarPosition();
+
+      // 스크롤 중인 경우 클래스 추가
+      $('#mCSB_2_scrollbar_vertical').addClass('mCSB_scrollTools_onDrag');
+
+      // 스크롤이 끝나면 클래스 제거
+      clearTimeout($.data(this, 'scrollTimer'));
+      $.data(this, 'scrollTimer', setTimeout(function() {
+        $('#mCSB_2_scrollbar_vertical').removeClass('mCSB_scrollTools_onDrag');
+      }, 250)); // 250ms 동안 스크롤이 없으면 스크롤 종료로 간주
+    } else {
+      // 팝업이 스크롤 불가능한 상태일 때 전체 창 스크롤 처리
+      var $body = $("body");
+      var scrollTop = $body.scrollTop();
+      scrollTop -= delta * 10;
+      scrollTop = Math.max(scrollTop, 0);
+
+      $body.scrollTop(scrollTop);
+    }
+  });
+
+  // crtPopWrap 클릭 이벤트 핸들러
+  $("#crtPopWrap").on('click', function() {
+    // 팝업창을 스크롤 가능한 상태로 변경
+    isPopupScrolling = true;
+
+    // body에 overflow를 숨기는 스타일 추가
+    $("body").css({
+      'overflow': 'hidden',
+    });
+
+    // 팝업창을 중앙에 위치시키는 함수 호출
+    centerPopup();
+  });
+
+  // 바디 태그 클릭 이벤트 핸들러
+  $("body").on('click', function(event) {
+    if (!$(event.target).closest("#crtPopWrap").length) {
+      // 팝업 외부를 클릭하면 팝업을 고정시키고 전체 창이 스크롤 가능하도록 설정
+      isPopupScrolling = false;
+
+      $(".layer_pop_wrap").css({
+        'position': 'fixed',
+        'z-index': 1000,
+      });
+
+      // body의 overflow를 초기값으로 복원
+      $("body").css({
+        'overflow': 'auto',
+      });
+    }
+  });
+
+  // 창 크기가 변경될 때 팝업을 중앙에 위치시키는 이벤트 핸들러 등록
+  $(window).on('resize', function() {
+    if (isPopupScrolling) {
+      centerPopup();
+    }
+  });
+}); */
+$(function() {
+	
+})
+ </script>
 <body>
 	<jsp:include page="/layout/head_main.jsp"></jsp:include>
 
@@ -392,7 +519,7 @@
 
 
 									<button class="moreBtn" id="crt_more_p002"
-										onclick="common.reqAmplitude('큐레이션1_더보기 클릭', {entry_source: '홈', click_source: '큐레이션1_더보기'});">
+										onclick="">
 										<span>더보기</span>
 									</button>
 								</div>
@@ -7308,4 +7435,282 @@ $(document).ready(function(){
 	</div>
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
+<!-- 유사한 고객 추천 상품 팝업 -->
+<div class="layer_pop_wrap" id="crtPopWrap" style="top: 1%; width: 849px; display: block; left: 50%; margin-left: -424.5px; margin-top: 353px;">
+	<script src="https://static.oliveyoung.co.kr/pc-static-root/js/store/jquery.mCustomScrollbar.concat.min.js"></script>
+	<style media data-href="/Black_OY/css/mainscrollbar.css"></style>
+	<div class="layer_cont4 w900">
+
+
+<h1 class="layer_title4" id="popTitle">고객님에게 추천드리는 상품</h1>
+	
+		<div class="curation_topInfo">
+			<div class="topTtl">
+				큐레이션<span>고객님을 위한 추천</span>
+				<div class="toolTipArea">
+					<a href="javascript:;" class="curation_toolTip"></a>
+					<div class="toolTipBox">
+						<div class="toolTipInner" id="tooltipTxt">AI 추천 알고리즘으로 분석하여 <br>고객님의 성향에 맞게 추천드리는 상품이에요</div>
+					</div>
+				</div>
+			</div>
+		
+				<div class="curation_recomendBox">
+					<div>
+
+						<div class="subTtl">로그인하고 나에게 맞는 추천상품 보기</div>
+						<a href="#" class="tagBtn">로그인</a>
+					</div>
+				</div>
+	
+		</div>
+	
+		<div class="curaListBox mCustomScrollbar _mCS_5">
+		<div id="mCSB_5" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 505px;" tabindex="0">
+		<div id="mCSB_5_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
+	
+			<ul class="curaList curation_area" id="curation_ulList_p002">
+
+				<li class="slide_list">
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000180410&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=13&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=1" class="item a_detail" data-ref-goodsno="A000000180410" data-egrank="13" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[한정기획/더보이즈 현재PICK]앰플엔 세라마이드샷 앰플 100ml 기획(100ml+10ml)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=1" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000180410&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;13&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=1&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018041043ko.jpg?l=ko" alt="[한정기획/더보이즈 현재PICK]앰플엔 세라마이드샷 앰플 100ml 기획(100ml+10ml)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[한정기획/더보이즈 현재PICK]앰플엔 세라마이드샷 앰플 100ml 기획(100ml+10ml)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">18,900</span>원 </span><span class="tx_cur"><span class="tx_num">15,200</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000180410" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000180410" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000184128&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=2&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=2" class="item a_detail" data-ref-goodsno="A000000184128" data-egrank="2" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^에스트라 아토베리어365 크림 80ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=2" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000184128&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;2&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=2&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018412802ko.jpg?l=ko" alt="에스트라 아토베리어365 크림 80ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">에스트라 아토베리어365 크림 80ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">31,000</span>원 </span><span class="tx_cur"><span class="tx_num">24,800</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000184128" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000184128" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000158636&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=25&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=3" class="item a_detail" data-ref-goodsno="A000000158636" data-egrank="25" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^디오디너리 히알루로닉 애시드 2% + B5 30ml" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=3" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000158636&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;25&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=3&quot;); return false;" name="Home_Curation1_More"><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0015/A00000015863602ko.jpg?l=ko" alt="디오디너리 히알루로닉 애시드 2% + B5 30ml" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">디오디너리 히알루로닉 애시드 2% + B5 30ml</p></div><p class="prd_price"><span class="tx_cur"><span class="tx_num">11,000</span>원 </span></p><p class="prd_flag"><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000158636" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000158636" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000166675&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=11&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=4" class="item a_detail" data-ref-goodsno="A000000166675" data-egrank="11" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[리필기획] 아누아 어성초 77 수딩 토너 350ml 리필 기획세트(350ml+350ml리필)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=4" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000166675&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;11&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=4&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016667505ko.jpg?l=ko" alt="[리필기획] 아누아 어성초 77 수딩 토너 350ml 리필 기획세트(350ml+350ml리필)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[리필기획] 아누아 어성초 77 수딩 토너 350ml 리필 기획세트(350ml+350ml리필)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">49,000</span>원 </span><span class="tx_cur"><span class="tx_num">34,000</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000166675" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000166675" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+				</li>
+
+				<li class="slide_list">
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000191387&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=26&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=5" class="item a_detail" data-ref-goodsno="A000000191387" data-egrank="26" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[NEW] 아비브 부활초 비피다 세럼 퍼밍 드롭 50ml" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=5" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000191387&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;26&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=5&quot;); return false;" name="Home_Curation1_More"><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019138702ko.jpg?l=ko" alt="[NEW] 아비브 부활초 비피다 세럼 퍼밍 드롭 50ml" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[NEW] 아비브 부활초 비피다 세럼 퍼밍 드롭 50ml</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">32,000</span>원 </span><span class="tx_cur"><span class="tx_num">21,280</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000191387" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000191387" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000145579&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=15&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=6" class="item a_detail" data-ref-goodsno="A000000145579" data-egrank="15" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^라운드랩 자작나무 수분크림 (본품80ml+20ml 추가 증정)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=6" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000145579&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;15&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=6&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0014/A00000014557922ko.jpg?l=ko" alt="라운드랩 자작나무 수분크림 (본품80ml+20ml 추가 증정)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">라운드랩 자작나무 수분크림 (본품80ml+20ml 추가 증정)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">32,000</span>원 </span><span class="tx_cur"><span class="tx_num">25,600</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000145579" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000145579" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000189261&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=13&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=7" class="item a_detail" data-ref-goodsno="A000000189261" data-egrank="13" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[단독기획] 토리든 다이브인 저분자 히알루론산 세럼 50ml 리필기획(+리필팩 50ml)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=7" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000189261&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;13&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=7&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018926111ko.jpg?l=ko" alt="[단독기획] 토리든 다이브인 저분자 히알루론산 세럼 50ml 리필기획(+리필팩 50ml)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[단독기획] 토리든 다이브인 저분자 히알루론산 세럼 50ml 리필기획(+리필팩 50ml)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">36,000</span>원 </span><span class="tx_cur"><span class="tx_num">27,000</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000189261" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000189261" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000190958&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=4&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=8" class="item a_detail" data-ref-goodsno="A000000190958" data-egrank="4" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[NEW] 아비브 부활초 비피다 세럼 퍼밍 드롭 50ml 기획(+부활초 크림 30ml 증정)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=8" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000190958&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;4&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=8&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019095803ko.jpg?l=ko" alt="[NEW] 아비브 부활초 비피다 세럼 퍼밍 드롭 50ml 기획(+부활초 크림 30ml 증정)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[NEW] 아비브 부활초 비피다 세럼 퍼밍 드롭 50ml 기획(+부활초 크림 30ml 증정)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">32,000</span>원 </span><span class="tx_cur"><span class="tx_num">21,280</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000190958" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000190958" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+				</li>
+
+				<li class="slide_list">
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000169186&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=24&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=9" class="item a_detail" data-ref-goodsno="A000000169186" data-egrank="24" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^피지오겔 DMT 베이비 인텐시브 크림 100ml" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=9" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000169186&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;24&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=9&quot;); return false;" name="Home_Curation1_More"><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016918601ko.jpg?l=ko" alt="피지오겔 DMT 베이비 인텐시브 크림 100ml" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">피지오겔 DMT 베이비 인텐시브 크림 100ml</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">33,000</span>원 </span><span class="tx_cur"><span class="tx_num">23,100</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000169186" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000169186" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000175878&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=20&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=10" class="item a_detail" data-ref-goodsno="A000000175878" data-egrank="20" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[대용량] 파티온 노스카나인 트러블 세럼 단독 기획(50ml+15ml)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=10" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000175878&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;20&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=10&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017587818ko.jpg?l=ko" alt="[대용량] 파티온 노스카나인 트러블 세럼 단독 기획(50ml+15ml)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[대용량] 파티온 노스카나인 트러블 세럼 단독 기획(50ml+15ml)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">38,000</span>원 </span><span class="tx_cur"><span class="tx_num">28,200</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000175878" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000175878" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000189429&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=38&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=11" class="item a_detail" data-ref-goodsno="A000000189429" data-egrank="38" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^아벤느 이드랑스 부스트 세럼 10ml+10ml 더블 기획" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=11" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000189429&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;38&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=11&quot;); return false;" name="Home_Curation1_More"><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018942901ko.jpg?l=ko" alt="아벤느 이드랑스 부스트 세럼 10ml+10ml 더블 기획" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">아벤느 이드랑스 부스트 세럼 10ml+10ml 더블 기획</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">36,000</span>원 </span><span class="tx_cur"><span class="tx_num">27,400</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000189429" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000189429" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000174273&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=13&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=12" class="item a_detail" data-ref-goodsno="A000000174273" data-egrank="13" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[단독기획] 아이소이 10년간, 1등 잡티세럼 30ml 기획(+아이크림5ml 증정)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=12" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000174273&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;13&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=12&quot;); return false;" name="Home_Curation1_More"><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017427310ko.jpg?l=ko" alt="[단독기획] 아이소이 10년간, 1등 잡티세럼 30ml 기획(+아이크림5ml 증정)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[단독기획] 아이소이 10년간, 1등 잡티세럼 30ml 기획(+아이크림5ml 증정)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">43,500</span>원 </span><span class="tx_cur"><span class="tx_num">34,800</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000174273" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000174273" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+				</li>
+
+				<li class="slide_list">
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000166590&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=21&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=13" class="item a_detail" data-ref-goodsno="A000000166590" data-egrank="21" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[NEW] 라운드랩 소나무 진정 시카 앰플 기획 (+진정 크림 10ml 증정)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=13" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000166590&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;21&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=13&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016659010ko.jpg?l=ko" alt="[NEW] 라운드랩 소나무 진정 시카 앰플 기획 (+진정 크림 10ml 증정)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[NEW] 라운드랩 소나무 진정 시카 앰플 기획 (+진정 크림 10ml 증정)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">24,000</span>원 </span><span class="tx_cur"><span class="tx_num">19,600</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000166590" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000166590" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000189488&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=32&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=14" class="item a_detail" data-ref-goodsno="A000000189488" data-egrank="32" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[리뉴업] 더랩바이블랑두 저분자 히알루론산 딥 토너 200ml + 50ml 기획" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=14" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000189488&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;32&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=14&quot;); return false;" name="Home_Curation1_More"><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018948809ko.jpg?l=ko" alt="[리뉴업] 더랩바이블랑두 저분자 히알루론산 딥 토너 200ml + 50ml 기획" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[리뉴업] 더랩바이블랑두 저분자 히알루론산 딥 토너 200ml + 50ml 기획</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">23,000</span>원 </span><span class="tx_cur"><span class="tx_num">15,990</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000189488" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000189488" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000189837&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=4&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=15" class="item a_detail" data-ref-goodsno="A000000189837" data-egrank="4" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[흔적미백] 넘버즈인 5번 글루타치온C 흔적 앰플 30ml+30ml 듀오기획" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=15" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000189837&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;4&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=15&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018983703ko.jpg?l=ko" alt="[흔적미백] 넘버즈인 5번 글루타치온C 흔적 앰플 30ml+30ml 듀오기획" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[흔적미백] 넘버즈인 5번 글루타치온C 흔적 앰플 30ml+30ml 듀오기획</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">46,000</span>원 </span><span class="tx_cur"><span class="tx_num">30,600</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000189837" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000189837" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000188682&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=12&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=16" class="item a_detail" data-ref-goodsno="A000000188682" data-egrank="12" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[한정기획] 피지오겔 레드수딩 AI 크림 100ml+30ml 증정 기획" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=16" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000188682&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;12&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=16&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018868202ko.jpg?l=ko" alt="[한정기획] 피지오겔 레드수딩 AI 크림 100ml+30ml 증정 기획" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[한정기획] 피지오겔 레드수딩 AI 크림 100ml+30ml 증정 기획</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">49,900</span>원 </span><span class="tx_cur"><span class="tx_num">29,900</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000188682" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000188682" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+				</li>
+
+				<li class="slide_list">
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000191774&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=5&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=17" class="item a_detail" data-ref-goodsno="A000000191774" data-egrank="5" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[피부결] 넘버즈인 3번 보들보들 결 세럼 50ml 기획 (+15ml 증정)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=17" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000191774&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;5&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=17&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019177402ko.jpg?l=ko" alt="[피부결] 넘버즈인 3번 보들보들 결 세럼 50ml 기획 (+15ml 증정)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[피부결] 넘버즈인 3번 보들보들 결 세럼 50ml 기획 (+15ml 증정)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">30,000</span>원 </span><span class="tx_cur"><span class="tx_num">21,830</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000191774" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000191774" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000012880&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=25&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=18" class="item a_detail" data-ref-goodsno="A000000012880" data-egrank="25" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^피지오겔 DMT 페이셜 크림 75ml" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=18" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000012880&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;25&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=18&quot;); return false;" name="Home_Curation1_More"><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0001/A00000001288002ko.jpg?l=ko" alt="피지오겔 DMT 페이셜 크림 75ml" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">피지오겔 DMT 페이셜 크림 75ml</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">25,500</span>원 </span><span class="tx_cur"><span class="tx_num">20,400</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000012880" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000012880" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000181062&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=23&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=19" class="item a_detail" data-ref-goodsno="A000000181062" data-egrank="23" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^아이소이 속보습, 100시간 장수진 수분크림 70ml 기획(+수분앰플 10ml)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=19" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000181062&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;23&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=19&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018106213ko.jpg?l=ko" alt="아이소이 속보습, 100시간 장수진 수분크림 70ml 기획(+수분앰플 10ml)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">아이소이 속보습, 100시간 장수진 수분크림 70ml 기획(+수분앰플 10ml)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">36,000</span>원 </span><span class="tx_cur"><span class="tx_num">27,000</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000181062" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000181062" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000190051&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=3&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=20" class="item a_detail" data-ref-goodsno="A000000190051" data-egrank="3" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[윈터 PICK] 마몽드 포어 슈링커 바쿠치올 크림 60ml 단독기획 (+30ml 추가증정)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=20" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000190051&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;3&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=20&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019005123ko.jpg?l=ko" alt="[윈터 PICK] 마몽드 포어 슈링커 바쿠치올 크림 60ml 단독기획 (+30ml 추가증정)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[윈터 PICK] 마몽드 포어 슈링커 바쿠치올 크림 60ml 단독기획 (+30ml 추가증정)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">38,000</span>원 </span><span class="tx_cur"><span class="tx_num">26,600</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000190051" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000190051" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+				</li>
+
+				<li class="slide_list">
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000147809&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=15&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=21" class="item a_detail" data-ref-goodsno="A000000147809" data-egrank="15" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[형원PICK] 웰라쥬 리얼 히알루로닉 블루 100 앰플 100ml 기획 (+원데이키트2ea)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=21" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000147809&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;15&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=21&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0014/A00000014780915ko.jpg?l=ko" alt="[형원PICK] 웰라쥬 리얼 히알루로닉 블루 100 앰플 100ml 기획 (+원데이키트2ea)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[형원PICK] 웰라쥬 리얼 히알루로닉 블루 100 앰플 100ml 기획 (+원데이키트2ea)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">28,000</span>원 </span><span class="tx_cur"><span class="tx_num">22,400</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000147809" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000147809" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000166510&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=20&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=22" class="item a_detail" data-ref-goodsno="A000000166510" data-egrank="20" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^차앤박(CNP) 프로폴리스 에너지 앰플 미스트 250ml" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=22" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000166510&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;20&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=22&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016651002ko.jpg?l=ko" alt="차앤박(CNP) 프로폴리스 에너지 앰플 미스트 250ml" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">차앤박(CNP) 프로폴리스 에너지 앰플 미스트 250ml</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">25,000</span>원 </span><span class="tx_cur"><span class="tx_num">11,850</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000166510" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000166510" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000171556&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=40&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=23" class="item a_detail" data-ref-goodsno="A000000171556" data-egrank="40" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^식물나라 프로폴리스 워터리 멀티 오일 더블기획50mL*2" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=23" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000171556&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;40&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=23&quot;); return false;" name="Home_Curation1_More"><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017155602ko.jpg?l=ko" alt="식물나라 프로폴리스 워터리 멀티 오일 더블기획50mL*2" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">식물나라 프로폴리스 워터리 멀티 오일 더블기획50mL*2</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">28,800</span>원 </span><span class="tx_cur"><span class="tx_num">18,800</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000171556" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000171556" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000175198&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=22&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=24" class="item a_detail" data-ref-goodsno="A000000175198" data-egrank="22" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[NEW]닥터자르트 세라마이딘 스킨 베리어 모이스처라이징 크림 50ml" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=24" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000175198&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;22&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=24&quot;); return false;" name="Home_Curation1_More"><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017519811ko.jpg?l=ko" alt="[NEW]닥터자르트 세라마이딘 스킨 베리어 모이스처라이징 크림 50ml" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[NEW]닥터자르트 세라마이딘 스킨 베리어 모이스처라이징 크림 50ml</p></div><p class="prd_price"><span class="tx_cur"><span class="tx_num">48,000</span>원 </span></p><p class="prd_flag"><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000175198" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000175198" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+				</li>
+
+				<li class="slide_list">
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000190166&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=10&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=25" class="item a_detail" data-ref-goodsno="A000000190166" data-egrank="10" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[대용량/키링 증정] 리얼베리어 익스트림 크림 70ml 1+1 기획 (벨리곰 콜라보)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=25" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000190166&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;10&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=25&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019016603ko.jpg?l=ko" alt="[대용량/키링 증정] 리얼베리어 익스트림 크림 70ml 1+1 기획 (벨리곰 콜라보)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[대용량/키링 증정] 리얼베리어 익스트림 크림 70ml 1+1 기획 (벨리곰 콜라보)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">38,000</span>원 </span><span class="tx_cur"><span class="tx_num">29,500</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000190166" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000190166" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000190132&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=10&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=26" class="item a_detail" data-ref-goodsno="A000000190132" data-egrank="10" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[선물세트] 닥터지 블랙 스네일 옴므 프레스티지 3종세트(토너150ml+에멀전150ml+클렌징폼70ml)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=26" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000190132&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;10&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=26&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019013204ko.jpg?l=ko" alt="[선물세트] 닥터지 블랙 스네일 옴므 프레스티지 3종세트(토너150ml+에멀전150ml+클렌징폼70ml)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[선물세트] 닥터지 블랙 스네일 옴므 프레스티지 3종세트(토너150ml+에멀전150ml+클렌징폼70ml)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">34,000</span>원 </span><span class="tx_cur"><span class="tx_num">31,900</span>원 </span></p><p class="prd_flag"><span class="icon_flag coupon">쿠폰</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000190132" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000190132" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000182581&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=21&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=27" class="item a_detail" data-ref-goodsno="A000000182581" data-egrank="21" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[단독기획]닥터자르트 시카페어 인텐시브 수딩 리페어 크림 기획(50ml+15ml*2ea)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=27" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000182581&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;21&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=27&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018258101ko.jpg?l=ko" alt="[단독기획]닥터자르트 시카페어 인텐시브 수딩 리페어 크림 기획(50ml+15ml*2ea)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[단독기획]닥터자르트 시카페어 인텐시브 수딩 리페어 크림 기획(50ml+15ml*2ea)</p></div><p class="prd_price"><span class="tx_cur"><span class="tx_num">49,000</span>원 </span></p><p class="prd_flag"><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000182581" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000182581" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000188240&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=7&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=28" class="item a_detail" data-ref-goodsno="A000000188240" data-egrank="7" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[서강준 Pick] 성분에디터 그린토마토 포어 리프팅 앰플 플러스 30ml 더블 기획" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=28" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000188240&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;7&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=28&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018824005ko.jpg?l=ko" alt="[서강준 Pick] 성분에디터 그린토마토 포어 리프팅 앰플 플러스 30ml 더블 기획" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[서강준 Pick] 성분에디터 그린토마토 포어 리프팅 앰플 플러스 30ml 더블 기획</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">25,900</span>원 </span><span class="tx_cur"><span class="tx_num">17,200</span>원 </span></p><p class="prd_flag"><span class="icon_flag coupon">쿠폰</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000188240" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000188240" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+				</li>
+
+				<li class="slide_list">
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000165598&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=12&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=29" class="item a_detail" data-ref-goodsno="A000000165598" data-egrank="12" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[단독기획] 토리든 다이브인 저분자 히알루론산 수딩크림 더블기획 (100ml+100ml)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=29" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000165598&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;12&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=29&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016559824ko.jpg?l=ko" alt="[단독기획] 토리든 다이브인 저분자 히알루론산 수딩크림 더블기획 (100ml+100ml)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[단독기획] 토리든 다이브인 저분자 히알루론산 수딩크림 더블기획 (100ml+100ml)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">42,000</span>원 </span><span class="tx_cur"><span class="tx_num">29,400</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000165598" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000165598" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000184191&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=27&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=30" class="item a_detail" data-ref-goodsno="A000000184191" data-egrank="27" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^에스트라 아토베리어365 하이드로에센스 200ml 기획 (+크림 30ml+무기자차선크림3ml 증정)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=30" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000184191&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;27&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=30&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018419102ko.jpg?l=ko" alt="에스트라 아토베리어365 하이드로에센스 200ml 기획 (+크림 30ml+무기자차선크림3ml 증정)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">에스트라 아토베리어365 하이드로에센스 200ml 기획 (+크림 30ml+무기자차선크림3ml 증정)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">32,000</span>원 </span><span class="tx_cur"><span class="tx_num">24,000</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000184191" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000184191" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000159783&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=19&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=31" class="item a_detail" data-ref-goodsno="A000000159783" data-egrank="19" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[단독기획] 토니모리 원더 세라마이드 모찌 토너 (본품500ml+100ml)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=31" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000159783&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;19&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=31&quot;); return false;" name="Home_Curation1_More"><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0015/A00000015978327ko.jpg?l=ko" alt="[단독기획] 토니모리 원더 세라마이드 모찌 토너 (본품500ml+100ml)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[단독기획] 토니모리 원더 세라마이드 모찌 토너 (본품500ml+100ml)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">15,000</span>원 </span><span class="tx_cur"><span class="tx_num">12,000</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000159783" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000159783" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000189769&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=8&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=32" class="item a_detail" data-ref-goodsno="A000000189769" data-egrank="8" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[민동성공동개발] 메디필 히알루론산 레이어 물톡스 앰플 더블 기획 30ml " data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=32" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000189769&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;8&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=32&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018976914ko.jpg?l=ko" alt="[민동성공동개발] 메디필 히알루론산 레이어 물톡스 앰플 더블 기획 30ml " onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[민동성공동개발] 메디필 히알루론산 레이어 물톡스 앰플 더블 기획 30ml</p></div><p class="prd_price"><span class="tx_cur"><span class="tx_num">34,000</span>원 </span></p><p class="prd_flag"><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000189769" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000189769" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+				</li>
+
+				<li class="slide_list">
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000156842&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=2&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=33" class="item a_detail" data-ref-goodsno="A000000156842" data-egrank="2" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[11월 올영픽/화장솜 증정기획]바이오더마 하이드라비오 에센스로션 200ml(화장솜 증정)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=33" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000156842&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;2&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=33&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0015/A00000015684228ko.jpg?l=ko" alt="[11월 올영픽/화장솜 증정기획]바이오더마 하이드라비오 에센스로션 200ml(화장솜 증정)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[11월 올영픽/화장솜 증정기획]바이오더마 하이드라비오 에센스로션 200ml(화장솜 증정)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">35,000</span>원 </span><span class="tx_cur"><span class="tx_num">22,710</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000156842" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000156842" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000185995&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=28&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=34" class="item a_detail" data-ref-goodsno="A000000185995" data-egrank="28" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^이니스프리 레티놀 시카 흔적 앰플 30ml 기획 (+7ml 증정)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=34" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000185995&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;28&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=34&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018599518ko.jpg?l=ko" alt="이니스프리 레티놀 시카 흔적 앰플 30ml 기획 (+7ml 증정)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">이니스프리 레티놀 시카 흔적 앰플 30ml 기획 (+7ml 증정)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">40,000</span>원 </span><span class="tx_cur"><span class="tx_num">30,000</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000185995" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000185995" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000190691&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=35&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=35" class="item a_detail" data-ref-goodsno="A000000190691" data-egrank="35" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[한정기획/1+1] 스킨푸드 로열허니 프로폴리스 인리치 에센스 50ml 리필기획" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=35" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000190691&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;35&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=35&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019069103ko.jpg?l=ko" alt="[한정기획/1+1] 스킨푸드 로열허니 프로폴리스 인리치 에센스 50ml 리필기획" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[한정기획/1+1] 스킨푸드 로열허니 프로폴리스 인리치 에센스 50ml 리필기획</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">32,000</span>원 </span><span class="tx_cur"><span class="tx_num">20,800</span>원 </span></p><p class="prd_flag"><span class="icon_flag coupon">쿠폰</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000190691" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000190691" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000190116&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=39&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=36" class="item a_detail" data-ref-goodsno="A000000190116" data-egrank="39" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[한정기획] 아이소이 10년간, 1등 잡티세럼 20ml+20ml+15ml 증량 기획" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=36" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000190116&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;39&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=36&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019011612ko.jpg?l=ko" alt="[한정기획] 아이소이 10년간, 1등 잡티세럼 20ml+20ml+15ml 증량 기획" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[한정기획] 아이소이 10년간, 1등 잡티세럼 20ml+20ml+15ml 증량 기획</p></div><p class="prd_price"><span class="tx_cur"><span class="tx_num">54,000</span>원 </span></p><p class="prd_flag"><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000190116" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000190116" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+				</li>
+
+				<li class="slide_list">
+			
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000184129&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=14&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=37" class="item a_detail" data-ref-goodsno="A000000184129" data-egrank="14" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=37" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000184129&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;14&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=37&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018412902ko.jpg?l=ko" alt="에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">31,000</span>원 </span><span class="tx_cur"><span class="tx_num">23,200</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000184129" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000184129" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+
+					<div class="box">
+						<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000190824&amp;dispCatNo=90000010001&amp;egcode=a016_a016&amp;egrankcode=9&amp;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=38" class="item a_detail" data-ref-goodsno="A000000190824" data-egrank="9" data-egcode="a016_a016" data-attr="장바구니^추천상품팝업^[곰민영 PICK/디퓨저 선착순 증정] 한율 어린쑥 수분진정크림 55ml+25ml+마스크팩 기획" data-impression="null" data-tracking-param="t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=38" onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000190824&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;9&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=38&quot;); return false;" name="Home_Curation1_More"><span class="thumb_flag best">베스트</span><span class="thumImg"><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019082407ko.jpg?l=ko" alt="[곰민영 PICK/디퓨저 선착순 증정] 한율 어린쑥 수분진정크림 55ml+25ml+마스크팩 기획" onerror="common.errorImg(this);" class="mCS_img_loaded"></span><div class="prd_name"><p class="tx_name">[곰민영 PICK/디퓨저 선착순 증정] 한율 어린쑥 수분진정크림 55ml+25ml+마스크팩 기획</p></div><p class="prd_price"><span class="tx_org"><span class="tx_num">38,000</span>원 </span><span class="tx_cur"><span class="tx_num">28,200</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span><span class="icon_flag gift">증정</span><span class="icon_flag delivery">오늘드림</span></p></a><button class="btn_zzim jeem" data-ref-goodsno="A000000190824" data-rccode="pc_main_01_c"><span>찜하기전</span></button><button type="button" class="btnbag2" onclick="common.gf_regCart(this); return false;" data-goods-no="A000000190824" data-item-no="001" data-rccode="pc_main_01_c">장바구니 담기</button>					
+
+					</div>
+			
+				</li>
+			
+			
+					
+			</ul>
+	
+		</div><div id="mCSB_5_scrollbar_vertical" class="mCSB_scrollTools mCSB_5_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;"><div class="mCSB_draggerContainer"><div id="mCSB_5_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px; display: block; height: 80px; max-height: 465px;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
+		
+		<button class="layer_close type4" onclick="">창 닫기</button>
+<input type="hidden" id="recoGoodsYn" value="Y">
+
+</div>
+</div>
+
 </html>
