@@ -51,10 +51,10 @@ public class BasketListHandler implements CommandHandler{
 		List<BasketDTO> list = null;
 		BasketListService basketListService = BasketListService.getInstance();
 		LogOnService logOnService = LogOnService.getInstance();
-		if (quickyn == null || quickyn.equals("")) {
+		if (quickyn == null || quickyn.isEmpty()) {
 			quickyn = "N";
 		}
-		System.out.println(quickyn);
+		System.out.println("handler:"+quickyn);
 		if (productid != null) {
 			int row = basketListService.basketListDeleteService(user_id, productid, quickyn);
 			List<Integer> cnt = logOnService.basketcntService(user_id);
