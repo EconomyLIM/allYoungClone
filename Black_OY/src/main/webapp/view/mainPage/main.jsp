@@ -13,6 +13,13 @@
 <script src="/Black_OY/js/mainPage.js"></script>
 <link rel="stylesheet" href="/BlackOY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
+<link rel="stylesheet" type="text/css"
+	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<script type="text/javascript">
+      $.noConflict();
+</script>
 </head>
 <body>
 	<jsp:include page="/layout/head_main.jsp"></jsp:include>
@@ -863,7 +870,7 @@ $(document).ready(function(){
 		speed: 100,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		draggable: false
+		draggable: true
 	});
     
     $('#main_curation02_01 a.item').each(function(i){
