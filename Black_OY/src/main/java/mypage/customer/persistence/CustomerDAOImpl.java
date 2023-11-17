@@ -10,8 +10,10 @@ import java.util.Map;
 
 import com.util.JDBCUtil;
 
+import mypage.customer.domain.FaqDTO;
 import mypage.main.domain.MpPAskDTO;
 import mypage.orderDelivery.domain.MPODOrderDTO;
+import store.domain.StoreTimeDTO;
 import user.domain.LogOnDTO;
 import user.persistence.OuserDAOImpl;
 
@@ -83,7 +85,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 		}
 		
 		} catch (Exception e) {
-			System.out.println("> MyPageDAOImpl_selectUserPAsk() Exception");
+			e.printStackTrace();
+			System.out.println("> CustomerDAOImpl_selectUserPAsk() Exception");
 		}
 		return list;
 		
@@ -141,6 +144,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		}
 		
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("> CustomerDAOImpl_selectOrderList() Exception");
 		}
 		return list;
@@ -168,7 +172,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("> MyPageDAOImpl_getmajCate() Exception");
+			System.out.println("> CustomerDAOImpl_getmajCate() Exception");
 		} finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
@@ -202,7 +206,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("> MyPageDAOImpl_getminCate() Exception");
+			System.out.println("> CustomerDAOImpl_getminCate() Exception");
 		} finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
@@ -211,5 +215,48 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return list;
 	}
 
-
+	@Override
+	public List<FaqDTO> faqKeyword(Connection conn, String faqkeyword) throws Exception {
+		ArrayList<FaqDTO> list = null;
+		
+		String pattern = "%" + faqkeyword + "%";
+		String sql = " SELECT t.faq_title, t.fac_content "
+		+ "FROM ( "
+		+ "SELECT faq_title , fac_content "
+		+ "FROM faq "
+		+ "WHERE faq_title LIKE ? "
+		+ "ORDER BY faq_title "
+		+ " ) t "
+		+ "WHERE ROWNUM <=2 ";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		FaqDTO dto = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pattern);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					dto = new FaqDTO();
+					dto.setFaq_title(rs.getString("faq_title"));
+					dto.setFac_content(rs.getString("fac_content"));
+					list.add(dto);
+				} while ( rs.next() );
+				
+			} // if
+			System.out.println(list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+		}// try_catch
+		
+		return list;
+	}
 }

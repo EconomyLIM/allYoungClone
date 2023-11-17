@@ -15,7 +15,7 @@ import mypage.customer.service.CustomerService;
 import net.sf.json.JSONObject;
 
 @WebServlet("/olive/paskmaj.do")
-public class PaskAjax extends HttpServlet {
+public class PaskmajAjax extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

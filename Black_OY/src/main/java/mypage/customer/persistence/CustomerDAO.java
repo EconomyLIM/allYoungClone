@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import mypage.customer.domain.FaqDTO;
 import mypage.main.domain.MpPAskDTO;
 import mypage.orderDelivery.domain.MPODOrderDTO;
 import user.domain.LogOnDTO;
@@ -20,4 +21,6 @@ public interface CustomerDAO {
 	List<String> getmajCate(Connection conn) throws Exception;
 	// 문의 카테고리 minor
 	List<String> getminCate(Connection conn, String ac_major) throws Exception;
+	// 문의 키워드
+	List<FaqDTO> faqKeyword(Connection conn, String faq_title) throws Exception;
 }

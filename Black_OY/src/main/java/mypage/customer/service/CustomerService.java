@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.util.ConnectionProvider;
 
+import mypage.customer.domain.FaqDTO;
 import mypage.customer.persistence.CustomerDAO;
 import mypage.customer.persistence.CustomerDAOImpl;
 import mypage.main.domain.MpPAskDTO;
@@ -60,6 +61,21 @@ public class CustomerService {
 			conn = ConnectionProvider.getConnection();
 			CustomerDAO dao = CustomerDAOImpl.getInstance();
 			list = dao.getminCate( conn, ac_major);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;	
+	}
+	
+	public List<FaqDTO> getKeyword(String faqkeyword) {
+		Connection conn = null;
+		List<FaqDTO> list = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			CustomerDAOImpl dao = CustomerDAOImpl.getInstance();
+			list = dao.faqKeyword( conn, faqkeyword);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
