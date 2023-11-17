@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/inc/include.jspf" %>
+<%@ include file="/WEB-INF/inc/session_auth.jspf" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -135,36 +137,23 @@
 						<div class="regi_complete">
 							<span class="bg face_type2"></span>
 							<p class="h2_tit">회원님의 정보가 수정되었습니다.</p>
-
-
-
-
 							<p class="fc_gray">잠시 후 올리브영 페이지로 이동됩니다. [바로가기] 버튼을 클릭하시면 바로
 								이동됩니다.</p>
 
 							<div class="btn_center">
 
 
-								<a href="usermodify.jsp"
+								<a href="<%=contextPath %>/olive/usermodify.do"
 									class="btn btn_em" title="올리브영 웹사이트">바로가기</a>
 								<script type="text/javascript">
-									setInterval(
-											function() {
-												window.location.href = "https://www.oliveyoung.co.kr/store/mypage/getMktReceiptInfo.do?refresh=Y";
-											}, 5000);
+									setTimeout(() => {
+				    	  				window.location.href="<%=contextPath %>/olive/usermodify.do";
+									}, 5000); 
 								</script>
-
-
-
 							</div>
-
-
-
 						</div>
-
 						<!--banner type a-->
 						<div class="banner_sec">
-
 
 							<!--banner type a-->
 						</div>
@@ -176,62 +165,6 @@
 
 		<div id="footer">
 
-
-
-
-
-
-
-			<!-- script type="text/javascript">if(typeof _satellite !== "undefined" && _satellite) {_satellite.pageBottom();}</script -->
-			<script type="text/javascript">
-				// footer 이벤트 선택 함수(1=이용약관,2=이전이용약관, 3=ARS 본인인증,4=법적고지, 5=이메일무단수집거부, 6=사이트맵, 그이외 개인정보취급)
-				function goFooterMenu(type) {
-					var pageUrl = "";
-					if ("1" == type) {
-						pageUrl = "https://www.cjone.com/cjmweb/terms.do?type="
-								+ type;
-						location.href = pageUrl;
-					} else if ("2" == type) {
-						pageUrl = "https://www.cjone.com/cjmweb/previous-terms.do?type="
-								+ type;
-						location.href = pageUrl;
-					} else if ("3" == type) {
-						pageUrl = "/cjmweb/layer/verify-account.do?type="
-								+ type;
-						cjone.openModal(pageUrl);
-					} else if ("4" == type) {
-						pageUrl = "/cjmweb/layer/legal-notices.do?type=" + type;
-						cjone.openModal(pageUrl);
-					} else if ("5" == type) {
-						pageUrl = "/cjmweb/layer/email-security.do?type="
-								+ type;
-						cjone.openModal(pageUrl);
-					} else if ("6" == type) {
-						pageUrl = "https://www.cjone.com/cjmweb/sitemap.do?type="
-								+ type;
-						location.href = pageUrl;
-					} else if ("7" == type) {
-						pageUrl = "/cjmweb/layer/isms-p.do?type=" + type;
-						cjone.openModal(pageUrl);
-					}
-					// 등록일 format(yyyymmdd)
-					else {
-						if ("" == type) {
-							pageUrl = "https://www.cjone.com/cjmweb/privacy.do?privacyDate="
-									+ type + "&recent_yn=Y";
-
-							location.href = pageUrl;
-						} else {
-							pageUrl = "https://www.cjone.com/cjmweb/privacy.do?privacyDate="
-									+ type + "&recent_yn=N";
-							location.href = pageUrl;
-						}
-					}
-				}
-			</script>
-			<!-- 로그인여부 여부 체크 -->
-
-			<!-- 로그인여부 여부 체크 -->
 
 			<!--20191021 CJ ONE APP 사업자 정보 노출 전체 영역-->
 			<div class="footer_wrap">
@@ -262,82 +195,8 @@
 
 			</div>
 			<!--// 20191021 CJ ONE APP 사업자 정보 노출 전체 영역 -->
-			<!-- 레이어 팝업(confirm) 내용 -->
-			<div id="div_confirm" style="display: none;">
-				<div class="ui_modal"
-					style="position: fixed; background-color: rgb(255, 255, 255); outline: none; background-clip: padding-box; top: 50%; left: 50%; margin-left: -200px; margin-top: -160px; width: 400px; z-index: 9101;"
-					tabindex="0">
-
-					<div id="layerWrap" class="custom">
-						<h1 id="h_confirm_title">알림</h1>
-
-						<div class="inner" tabindex="0">
-							<p id="p_confirm_text"></p>
-						</div>
-
-
-						<div class="btn_center">
-							<a href="javascript:closeLayerConfirm();" id="a_confirm_y"
-								class="btn"><span id="span_confirm_y">확인</span></a>
-							<button id="a_confirm_n" type="button"
-								onclick="closeLayerConfirm();" class="btn cancel">
-								<span id="span_confirm_n">취소</span>
-							</button>
-						</div>
-
-						<button id="btn_confirm_close" type="button"
-							onclick="closeLayerConfirm();" class="close">닫기</button>
-					</div>
-
-				</div>
-				<div class="ui_modal_overlay"
-					style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 9100;"></div>
-			</div>
-			<!-- //레이어 팝업(confirm) 내용 -->
-			<!-- 레이어 팝업(alert) 내용 -->
-			<div id="div_alert" style="display: none;">
-				<div class="ui_modal"
-					style="position: fixed; background-color: rgb(255, 255, 255); outline: none; background-clip: padding-box; top: 50%; left: 50%; margin-left: -200px; margin-top: -160px; width: 400px; z-index: 9101;"
-					tabindex="0">
-
-					<div id="layerWrap" class="custom">
-
-						<div class="inner" tabindex="0">
-							<p id="p_alert_text"></p>
-						</div>
-
-						<div class="btn_center">
-							<a href="javascript:closeLayerAlert();" id="a_alert"
-								class="btn close"><span id="span_alert">확인</span></a>
-						</div>
-					</div>
-
-				</div>
-				<div class="ui_modal_overlay"
-					style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 9100;"></div>
-			</div>
-			<!-- //레이어 팝업(alert) 내용 -->
 		</div>
-
 	</div>
-	<!--script 영역-->
-	<script src="/cjmweb/js/modules/cjoneCore.js"></script>
-	<script src="/cjmweb/js/modules/commonUi.js"></script>
-	<script src="/cjmweb/js/frontUi.js"></script>
-	<script src="/cjmweb/js/modules/jquery.bxslider.js"></script>
 
-	<script>
-		//      function redirection(){
-		//     	
-		//     	    	setInterval(function () {window.location.href='http://www.oliveyoung.co.kr';}, 5000);
-		//     	
-
-		//      }    
-
-		//      function goMain() {
-		// 		location.href='/cjmweb/';
-		// 	}
-	</script>
-	<!--//script 영역-->
 </body>
 </html>

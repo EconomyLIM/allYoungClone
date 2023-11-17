@@ -133,7 +133,7 @@
 							<div class="title-area">
 								<h2 class="tit">1 : 1 문의내역</h2>
 								<a class="btnMore" id="qnaListMore"
-									href="<%--  고객센터 1:1문의하기 페이지 --%>">더보기</a>
+									href="<%=contextPath %>/olive/pAskList.do">더보기</a>
 							</div>
 							<div class="list-customer">
 								<ul>
@@ -177,6 +177,7 @@
 														<strong style="background:#ff7f00">${ qa.qnaState }</strong>
 														<a href="<%-- QnA페이지 - 해당QnA페이지로 이동 --%>">${ qa.qnaQus }</a>
 														<span class="data">${ qa.qnaDate }</span>
+														
 													</p>	
 												</li>
 											</c:forEach>

@@ -2,6 +2,8 @@
 <%@page import="user.domain.OuserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/inc/include.jspf" %>
+<%@ include file="/WEB-INF/inc/session_auth.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -4378,6 +4380,17 @@ function goFooterMenu(type){
         });
     }
 </script>
+
+<script>
+$("#btn_submit").on("click", function () {
+	if (chkPwd() ) {
+		$("#mobChgForm").submit();
+	}
+});
+</script>
+
+
+
 	<style>
 .ie8Lbls {
 	font-size: 10px;

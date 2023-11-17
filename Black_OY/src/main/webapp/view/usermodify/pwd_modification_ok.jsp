@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/inc/include.jspf" %>
+<%@ include file="/WEB-INF/inc/session_auth.jspf" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,8 +19,8 @@
 	type="images/x-ico" />
 <link rel="alternate"
 	href="https://m.cjone.com:8443/cjmmobile/setup/memberInfoupdate.do?return_url=close" />
-<link rel="stylesheet" href="../../css/CJbase.css" />
-<link rel="stylesheet" href="../../css/CJparticipate.css" />
+<link rel="stylesheet" href="../css/CJbase.css" />
+<link rel="stylesheet" href="../css/CJparticipate.css" />
 <script>
 	// google analytics 사용안함 처리했을 때 ga function이 없어서 에러나던 부분 처리.
 	window.ga = function() {
@@ -113,10 +115,12 @@ var digitalData={
 							<p class="h2_tit"><em class="em">회원정보가 수정</em>되었습니다.</p>
 							<p class="h_desc">잠시 후 올리브영 페이지로 이동됩니다. [바로가기] 버튼을 클릭하시면 바로 이동됩니다.</p>
 							<div class="btn_center">
-								<a href="https://www.oliveyoung.co.kr/store/mypage/getMktReceiptInfo.do?refresh=Y" class="btn btn_em" title="올리브영 웹사이트">바로가기</a>
+								<a href="<%=contextPath %>/olive/usermodify.do" class="btn btn_em" title="올리브영 웹사이트">바로가기</a>
 							</div>
 							<script type="text/javascript">
-				    	  		setInterval(function () {window.location.href="https://www.oliveyoung.co.kr/store/mypage/getMktReceiptInfo.do?refresh=Y";}, 5000);  
+				    	  		setTimeout(() => {
+				    	  			window.location.href="<%=contextPath %>/olive/usermodify.do";
+								}, 5000); 
 			                 </script>	
 						</div>
 				</div>
@@ -127,15 +131,8 @@ var digitalData={
 	
 	<!-- footer -->
     <div id="footer">
-		
 
-
-
-
-
-
-
-<!--20191021 CJ ONE APP 사업자 정보 노출 전체 영역-->
+<!-- CJ ONE APP 사업자 정보 노출 전체 영역-->
 <div class="footer_wrap">			
 	  
 	<div class="site_info">
@@ -158,7 +155,7 @@ var digitalData={
 	<div class="fixedTop" data-control="goTop" ><a href="#headerWrap" title="페이지 처음으로 이동"><span class="haze">TOP</span></a></div>
 	
 </div>
-<!--// 20191021 CJ ONE APP 사업자 정보 노출 전체 영역 -->
+<!--CJ ONE APP 사업자 정보 노출 전체 영역 -->
 	</div>	 
 	<!-- //footer -->  	
 </div>
