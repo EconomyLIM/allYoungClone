@@ -81,7 +81,7 @@ public class MainService {
 				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
 				
 				cateMList = daoImpl.getMidList(conn, userId); // 중분류 카테고리 갖고오기
-				cnt = daoImpl.getListCount(conn, cateMList); // 전체 총 레코드 수 
+//				cnt = daoImpl.getListCount(conn, cateMList); // 전체 총 레코드 수 
 				
 				
 				recommendProduct = daoImpl.recommendProduct(conn, cateMList);
