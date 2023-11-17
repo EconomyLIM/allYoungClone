@@ -82,325 +82,329 @@ $(document).ready(() => {
 			<div id="Contents">
 				<div class="main_full_banner">
 					<div
-						class="banner_wrap slick_slider slick-initialized slick-slider"
+						class="banner_wrap slick_slider"
 						id="mainFullSlider">
-						<button type="button" data-role="none"
-							class="slick-prev slick-arrow" aria-label="Previous"
-							role="button" style="display: block;">이전 슬라이드</button>
-
-
-						<div aria-live="polite" class="slick-list draggable">
-							<div class="slick-track" role="listbox"
-								style="opacity: 1; width: 22350px;">
-								<div class="slick-slide" data-slick-index="0" aria-hidden="true"
-									style="width: 1490px; position: relative; left: 0px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide00">
+	
+						
+								<div>
 
 
 									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '블랙프라이데이&nbsp;인덱스_조홍주', banner_number: '1'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103450001&amp;trackingCd=Home_Planshop1_1_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=블랙프라이데이&nbsp;인덱스_조홍주&amp;t_number=1"
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '어워즈&nbsp;사전컴_우종웅', banner_number: '1'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103390003&amp;trackingCd=Home_Planshop1_1_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=어워즈&nbsp;사전컴_우종웅&amp;t_number=1"
+										class="banner_link" data-attr="홈^메인롤링배너^어워즈&nbsp;사전컴_우종웅^1"
+										data-trk="/" tabindex="-1">
+										<p class="banner_desc">
+
+
+
+
+
+											<span class="tit">어워즈&amp;페스타 </span> <strong>올리브영 <br>어워즈&amp;페스타
+												<br>커밍쑨
+											</strong> <span>11/22 티켓 오픈</span>
+										</p> <img
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/653735444005136341.jpg"
+										alt="어워즈&nbsp;사전컴_우종웅">
+									</a>
+								</div>
+								<div>
+
+
+									<a
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '2차&nbsp;H캠페인_임예원', banner_number: '2'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103570001&amp;trackingCd=Home_Planshop1_2_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=2차&nbsp;H캠페인_임예원&amp;t_number=2"
+										class="banner_link" data-attr="홈^메인롤링배너^2차&nbsp;H캠페인_임예원^2"
+										data-trk="/" tabindex="-1">
+										<p class="banner_desc">
+
+
+
+
+											<span class="tit" style="color: #fff;">헬시어터 </span> <strong
+												style="color: #fff;">건강한 <br>하루를 위한 <br>역대급
+												혜택
+											</strong> <span style="color: #fff;">반얀트리 호텔 경품 이벤트</span>
+										</p> <img
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/5931696340363851923.jpg"
+										alt="2차&nbsp;H캠페인_임예원">
+									</a>
+								</div>
+								<div>
+
+
+									<a
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '헬시트렌드_김서현', banner_number: '3'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103460003&amp;trackingCd=Home_Planshop1_3_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=헬시트렌드_김서현&amp;t_number=3"
+										class="banner_link" data-attr="홈^메인롤링배너^헬시트렌드_김서현^3"
+										data-trk="/" tabindex="-1">
+										<p class="banner_desc">
+
+
+
+
+											<span class="tit">헬시트렌드</span> <strong>요즘 사랑받는<br>헬시
+												아이템을<br>알려드려요
+											</strong> <span>베스트아이템 확인하기</span>
+										</p> <img
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/3077674251044505639.jpg"
+										alt="헬시트렌드_김서현">
+									</a>
+								</div>
+								<div>
+
+
+									<a
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1103-0101_최아형_신상로그온', banner_number: '4'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102700128&amp;trackingCd=Home_Planshop1_4_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1103-0101_최아형_신상로그온&amp;t_number=4"
+										class="banner_link" data-attr="홈^메인롤링배너^1103-0101_최아형_신상로그온^4"
+										data-trk="/" tabindex="-1">
+										<p class="banner_desc">
+
+
+
+
+											<span class="tit" style="color: #fff;">디마르3</span> <strong
+												style="color: #fff;">저자극으로<br>채우는<br>모공의
+												밀도
+											</strong> <span style="color: #fff;">최대 25% 할인</span>
+										</p> <img
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/6150652034891406938.jpg"
+										alt="1103-0101_최아형_신상로그온">
+									</a>
+								</div>
+								<div>
+
+
+									<a
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '브랜드위크플러스_아비브_정유빈, 이주은', banner_number: '5'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103110012&amp;trackingCd=Home_Planshop1_5_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=브랜드위크플러스_아비브_정유빈, 이주은&amp;t_number=5"
 										class="banner_link"
-										data-attr="홈^메인롤링배너^블랙프라이데이&nbsp;인덱스_조홍주^1" data-trk="/"
+										data-attr="홈^메인롤링배너^브랜드위크플러스_아비브_정유빈, 이주은^5" data-trk="/"
 										tabindex="-1">
 										<p class="banner_desc">
-											<span class="tit" style="color: #fff;">올영 블프 </span> <strong
-												style="color: #fff;">일년에 단 한번<br>올영 <br>블랙프라이데이
-											</strong> <span style="color: #fff;">최대 60%할인</span>
+
+
+
+
+											<span class="tit">브랜드위크플러스 </span> <strong>내 피부 <br>밀착
+												케어 <br>껌딱지 팩
+											</strong> <span>아비브 베스트셀러 53% 할인</span>
 										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/8723336747874487057.jpg"
-										alt="블랙프라이데이&nbsp;인덱스_조홍주">
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/4600563008412392921.jpg"
+										alt="브랜드위크플러스_아비브_정유빈, 이주은">
 									</a>
 								</div>
-								<div class="slick-slide slick-current slick-active"
-									data-slick-index="1" aria-hidden="false"
-									style="width: 1490px; position: relative; left: -1490px; top: 0px; z-index: 999; opacity: 1;"
-									tabindex="-1" role="option" aria-describedby="slick-slide01">
-
-									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '올!블랙&nbsp;일주일특가_임민경', banner_number: '2'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103450005&amp;trackingCd=Home_Planshop1_2_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=올!블랙&nbsp;일주일특가_임민경&amp;t_number=2"
-										class="banner_link" data-attr="홈^메인롤링배너^올!블랙&nbsp;일주일특가_임민경^2"
-										data-trk="/" tabindex="0">
-										<p class="banner_desc">
-
-
-											<span class="tit" style="color: #fff;">올영 블프</span> <strong
-												style="color: #fff;">일주일간<br>만나는<br>블랙프라이데이
-											</strong> <span style="color: #fff;">카테고리별 맞춤템 추천</span>
-										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/4202070695246429681.jpg"
-										alt="올!블랙&nbsp;일주일특가_임민경">
-									</a>
-								</div>
-								<div class="slick-slide" data-slick-index="2" aria-hidden="true"
-									style="width: 1490px; position: relative; left: -2980px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide02">
+								<div>
 
 
 									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '올!블랙&nbsp;럭스에디트_임민경', banner_number: '3'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103450003&amp;trackingCd=Home_Planshop1_3_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=올!블랙&nbsp;럭스에디트_임민경&amp;t_number=3"
-										class="banner_link" data-attr="홈^메인롤링배너^올!블랙&nbsp;럭스에디트_임민경^3"
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1103-0502_유선경_메인A', banner_number: '6'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102790143&amp;trackingCd=Home_Planshop1_6_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1103-0502_유선경_메인A&amp;t_number=6"
+										class="banner_link" data-attr="홈^메인롤링배너^1103-0502_유선경_메인A^6"
 										data-trk="/" tabindex="-1">
 										<p class="banner_desc">
 
-											<span class="tit" style="color: #fff;">올영 블프</span> <strong
-												style="color: #fff;">프리미엄도<br>블랙<br>프라이데이
-											</strong> <span style="color: #fff;">최대 50%할인</span>
+
+											<span class="tit">바이오더마</span> <strong>겨울철<br>보습<br>치트키
+											</strong> <span>최대 38%할인</span>
 										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/2300464335791787914.jpg"
-										alt="올!블랙&nbsp;럭스에디트_임민경">
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/4060185891014733473.jpg"
+										alt="1103-0502_유선경_메인A">
 									</a>
 								</div>
-								<div class="slick-slide" data-slick-index="3" aria-hidden="true"
-									style="width: 1490px; position: relative; left: -4470px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide03">
+								<div>
 
 
 									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '올!블랙&nbsp;LASK&nbsp;PICK_조홍주', banner_number: '4'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103450004&amp;trackingCd=Home_Planshop1_4_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=올!블랙&nbsp;LASK&nbsp;PICK_조홍주&amp;t_number=4"
-										class="banner_link"
-										data-attr="홈^메인롤링배너^올!블랙&nbsp;LASK&nbsp;PICK_조홍주^4"
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1103-5101_이보미_메인B', banner_number: '7'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102870143&amp;trackingCd=Home_Planshop1_7_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1103-5101_이보미_메인B&amp;t_number=7"
+										class="banner_link" data-attr="홈^메인롤링배너^1103-5101_이보미_메인B^7"
 										data-trk="/" tabindex="-1">
 										<p class="banner_desc">
 
-											<span class="tit" style="color: #fff;">올영 블프</span> <strong
-												style="color: #fff;">마지막<br>기회를<br>잡아요
-											</strong> <span style="color: #fff;">라스트픽 최대 70%할인</span>
+
+
+
+											<span class="tit">테라브레스</span> <strong>캔디 하나로<br>입
+												안이<br>상쾌해요
+											</strong> <span>최대 9%할인</span>
 										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/7314032448921968159.jpg"
-										alt="올!블랙&nbsp;LASK&nbsp;PICK_조홍주">
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/5289701893443559245.jpg"
+										alt="1103-5101_이보미_메인B">
 									</a>
 								</div>
-								<div class="slick-slide" data-slick-index="4" aria-hidden="true"
-									style="width: 1490px; position: relative; left: -5960px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide04">
+								<div>
+
+									<a
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1103-0301_정유빈', banner_number: '8'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102720112&amp;trackingCd=Home_Planshop1_8_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1103-0301_정유빈&amp;t_number=8"
+										class="banner_link" data-attr="홈^메인롤링배너^1103-0301_정유빈^8"
+										data-trk="/" tabindex="-1">
+										<p class="banner_desc">
+
+
+
+
+											<span class="tit" style="color: #fff;">스킨푸드</span> <strong
+												style="color: #fff;">할머니<br>손길로<br>특별해졌어요
+											</strong> <span style="color: #fff;">최대 35%할인</span>
+										</p> <img
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/3119814144171462271.jpg"
+										alt="1103-0301_정유빈">
+									</a>
+								</div>
+								<div>
+
+									<a
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1103-1202_김윤전', banner_number: '9'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102770090&amp;trackingCd=Home_Planshop1_9_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1103-1202_김윤전&amp;t_number=9"
+										class="banner_link" data-attr="홈^메인롤링배너^1103-1202_김윤전^9"
+										data-trk="/" tabindex="-1">
+										<p class="banner_desc">
+
+
+
+
+
+
+											<span class="tit">더툴랩</span> <strong>올드머니룩의<br>우아한
+												<br>피부 비결
+											</strong> <span>최대 20%할인</span>
+										</p> <img
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/3935496298988215085.jpg"
+										alt="1103-1202_김윤전">
+									</a>
+								</div>
+								<div>
 
 
 									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1101-4001_김진주', banner_number: '5'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?&amp;dispCatNo=500000102830105&amp;trackingCd=Home_Planshop1_5_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1101-4001_김진주&amp;t_number=5"
-										class="banner_link" data-attr="홈^메인롤링배너^1101-4001_김진주^5"
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1103-4001_김진주', banner_number: '10'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102830115&amp;trackingCd=Home_Planshop1_10_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1103-4001_김진주&amp;t_number=10"
+										class="banner_link" data-attr="홈^메인롤링배너^1103-4001_김진주^10"
 										data-trk="/" tabindex="-1">
 										<p class="banner_desc">
 
-											<span class="tit">올영PICK</span> <strong>식욕 돋는<br>가을에도<br>가벼워요
-											</strong> <span>최대 30%할인</span>
+
+
+
+											<span class="tit">푸드올로지 </span> <strong>패딩을 입어도 <br>관리는
+												<br>계속 돼요
+											</strong> <span>최대 33%할인</span>
 										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/6883018551140974566.jpg"
-										alt="1101-4001_김진주">
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/3291683415220620540.jpg"
+										alt="1103-4001_김진주">
 									</a>
 								</div>
-								<div class="slick-slide" data-slick-index="5" aria-hidden="true"
-									style="width: 1490px; position: relative; left: -7450px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide05">
+								<div>
 
 
 									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1101-5001_박수영', banner_number: '6'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102860107&amp;trackingCd=Home_Planshop1_6_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1101-5001_박수영&amp;t_number=6"
-										class="banner_link" data-attr="홈^메인롤링배너^1101-5001_박수영^6"
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1103-5201_도고운', banner_number: '11'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102840175&amp;trackingCd=Home_Planshop1_11_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1103-5201_도고운&amp;t_number=11"
+										class="banner_link" data-attr="홈^메인롤링배너^1103-5201_도고운^11"
 										data-trk="/" tabindex="-1">
 										<p class="banner_desc">
 
-											<span class="tit">올영PICK</span> <strong>소중한<br>내
-												몸을 위한 <br>베스트
+
+											<span class="tit">헬시픽</span> <strong>한장으로<br>꿀잠
+												<br>자요
 											</strong> <span>최대 50%할인</span>
 										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/1906276245925733345.jpg"
-										alt="1101-5001_박수영">
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/7817085398333037106.jpg"
+										alt="1103-5201_도고운">
 									</a>
 								</div>
-								<div class="slick-slide" data-slick-index="6" aria-hidden="true"
-									style="width: 1490px; position: relative; left: -8940px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide06">
-
+								<div>
 
 									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1101-5101_이보미', banner_number: '7'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?&amp;dispCatNo=500000102870136&amp;trackingCd=Home_Planshop1_7_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1101-5101_이보미&amp;t_number=7"
-										class="banner_link" data-attr="홈^메인롤링배너^1101-5101_이보미^7"
-										data-trk="/" tabindex="-1">
-										<p class="banner_desc">
-											<span class="tit">올영PICK</span> <strong>망설임 없는<br>환한
-												<br>미소를 위해
-											</strong> <span>최대 40%할인</span>
-										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/7700232044241564509.jpg"
-										alt="1101-5101_이보미">
-									</a>
-								</div>
-								<div class="slick-slide" data-slick-index="7" aria-hidden="true"
-									style="width: 1490px; position: relative; left: -10430px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide07">
-
-
-									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1101-4002_김진주', banner_number: '8'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?&amp;dispCatNo=500000102830106&amp;trackingCd=Home_Planshop1_8_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1101-4002_김진주&amp;t_number=8"
-										class="banner_link" data-attr="홈^메인롤링배너^1101-4002_김진주^8"
-										data-trk="/" tabindex="-1">
-										<p class="banner_desc">
-											<span class="tit">올영PICK</span> <strong>비타민 <br>먹을<br>시간이에요
-											</strong> <span>최대 27%할인</span>
-										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/4721278876185545783.jpg"
-										alt="1101-4002_김진주">
-									</a>
-								</div>
-								<div class="slick-slide" data-slick-index="8" aria-hidden="true"
-									style="width: 1490px; position: relative; left: -11920px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide08">
-
-
-									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1101-4003_김진주', banner_number: '9'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?&amp;dispCatNo=500000102830107&amp;trackingCd=Home_Planshop1_9_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1101-4003_김진주&amp;t_number=9"
-										class="banner_link" data-attr="홈^메인롤링배너^1101-4003_김진주^9"
-										data-trk="/" tabindex="-1">
-										<p class="banner_desc">
-											<span class="tit">올영PICK</span> <strong>맛있게<br>즐기는<br>나만의
-												건강루틴
-											</strong> <span>건강/일반식품 최대 54%할인</span>
-										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/4765328226824824908.jpg"
-										alt="1101-4003_김진주">
-									</a>
-								</div>
-								<div class="slick-slide" data-slick-index="9" aria-hidden="true"
-									style="width: 1490px; position: relative; left: -13410px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide09">
-
-
-									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1101-5201_도고운', banner_number: '10'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102840166&amp;trackingCd=Home_Planshop1_10_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1101-5201_도고운&amp;t_number=10"
-										class="banner_link" data-attr="홈^메인롤링배너^1101-5201_도고운^10"
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1103-3003_서지민', banner_number: '12'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102800132&amp;trackingCd=Home_Planshop1_12_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1103-3003_서지민&amp;t_number=12"
+										class="banner_link" data-attr="홈^메인롤링배너^1103-3003_서지민^12"
 										data-trk="/" tabindex="-1">
 										<p class="banner_desc">
 
-											<span class="tit">올영PICK</span> <strong>포근한<br>가을밤을<br>만들어
-												드려요
-											</strong> <span>꿀잠 아이템 최대 32%할인</span>
+
+
+
+											<span class="tit">도브</span> <strong>도브 비누의<br>촉촉함을
+												담아<br>부드럽게
+											</strong> <span>최대 30%할인</span>
 										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/3639582332837492395.jpg"
-										alt="1101-5201_도고운">
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/6428830692051751812.jpg"
+										alt="1103-3003_서지민">
 									</a>
 								</div>
-								<div class="slick-slide" data-slick-index="10"
-									aria-hidden="true"
-									style="width: 1490px; position: relative; left: -14900px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide010">
+								<div>
+
 
 									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1101-5102_이보미', banner_number: '11'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?&amp;dispCatNo=500000102870137&amp;trackingCd=Home_Planshop1_11_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1101-5102_이보미&amp;t_number=11"
-										class="banner_link" data-attr="홈^메인롤링배너^1101-5102_이보미^11"
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1103-2002_박선정', banner_number: '13'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102710089&amp;trackingCd=Home_Planshop1_13_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1103-2002_박선정&amp;t_number=13"
+										class="banner_link" data-attr="홈^메인롤링배너^1103-2002_박선정^13"
 										data-trk="/" tabindex="-1">
 										<p class="banner_desc">
 
-											<span class="tit">올영PICK</span> <strong>필요한 부위에<br>맞춤형으로<br>케어해요
-											</strong> <span>구강/위생 최대 28%할인</span>
+
+
+
+
+											<span class="tit">그라펜</span> <strong>스모키한<br>레더의
+												질감을<br>입어요
+											</strong> <span>최대 25%할인</span>
 										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/8448469040515196412.jpg"
-										alt="1101-5102_이보미">
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/447175101725971236.jpg"
+										alt="1103-2002_박선정">
 									</a>
 								</div>
-								<div class="slick-slide" data-slick-index="11"
-									aria-hidden="true"
-									style="width: 1490px; position: relative; left: -16390px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide011">
+								<div>
 
 
 									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1101-0501_유선경', banner_number: '12'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102790136&amp;trackingCd=Home_Planshop1_12_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1101-0501_유선경&amp;t_number=12"
-										class="banner_link" data-attr="홈^메인롤링배너^1101-0501_유선경^12"
-										data-trk="/" tabindex="-1">
-										<p class="banner_desc">
-
-											<span class="tit">올영PICK</span> <strong>어떤 순간에도<br>촉촉함과<br>함께
-											</strong> <span>환절기 보습템 최대 31%할인</span>
-										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/6322194808716433120.jpg"
-										alt="1101-0501_유선경">
-									</a>
-								</div>
-								<div class="slick-slide" data-slick-index="12"
-									aria-hidden="true"
-									style="width: 1490px; position: relative; left: -17880px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide012">
-
-
-									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1101-1005_권세희', banner_number: '13'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102750243&amp;trackingCd=Home_Planshop1_13_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1101-1005_권세희&amp;t_number=13"
-										class="banner_link" data-attr="홈^메인롤링배너^1101-1005_권세희^13"
-										data-trk="/" tabindex="-1">
-										<p class="banner_desc">
-
-											<span class="tit">클리오</span> <strong>클리오의<br>30주년을<br>축하해주세요
-											</strong> <span>최대 48%할인</span>
-										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/7905671513428280498.jpg"
-										alt="1101-1005_권세희">
-									</a>
-								</div>
-								<div class="slick-slide" data-slick-index="13"
-									aria-hidden="true"
-									style="width: 1490px; position: relative; left: -19370px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide013">
-
-
-									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '1101-2001_권수진', banner_number: '14'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102710084&amp;trackingCd=Home_Planshop1_14_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=1101-2001_권수진&amp;t_number=14"
-										class="banner_link" data-attr="홈^메인롤링배너^1101-2001_권수진^14"
-										data-trk="/" tabindex="-1">
-										<p class="banner_desc">
-
-											<span class="tit" style="color: #fff;">오딧세이</span> <strong
-												style="color: #fff;">빛나는<br>그의<br>피부를 위해
-											</strong> <span style="color: #fff;">최대 23%할인</span>
-										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/8917852394022671155.jpg"
-										alt="1101-2001_권수진">
-									</a>
-								</div>
-								<div class="slick-slide" data-slick-index="14"
-									aria-hidden="true"
-									style="width: 1490px; position: relative; left: -20860px; top: 0px; z-index: 998; opacity: 0; transition: opacity 500ms ease 0s;"
-									tabindex="-1" role="option" aria-describedby="slick-slide014">
-
-
-									<a
-										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '올영라이브&nbsp;<비거너리바이달바>_박하연', banner_number: '15'});"
-										href="https://www.oliveyoung.co.kr/store/event/getEventDetail.do?evtNo=00000000020135&amp;trackingCd=Home_Planshop1_15_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=올영라이브&nbsp;<비거너리바이달바>_박하연&amp;t_number=15"
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '위시리스트(Luxe&nbsp;Edit)&nbsp;어반디케이&nbsp;AD_한수연', banner_number: '14'});"
+										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103440005&amp;trackingCd=Home_Planshop1_14_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=위시리스트(Luxe&nbsp;Edit)&nbsp;어반디케이&nbsp;AD_한수연&amp;t_number=14"
 										class="banner_link"
-										data-attr="홈^메인롤링배너^올영라이브&nbsp;<비거너리바이달바>_박하연^15" data-trk="/"
-										tabindex="-1">
+										data-attr="홈^메인롤링배너^위시리스트(Luxe&nbsp;Edit)&nbsp;어반디케이&nbsp;AD_한수연^14"
+										data-trk="/" tabindex="-1">
 										<p class="banner_desc">
 
 
-											<span class="tit" style="color: #fff;">11데이트</span> <strong
-												style="color: #fff;">블랙프라이데이<br>특별기획<br>라이브방송
-											</strong> <span style="color: #fff;">비거너리바이달바 최대 45% 할인</span>
+											<span class="tit" style="color: #fff;">위시리스트 </span> <strong
+												style="color: #fff;">달빛 담은 <br>글리터 <br>메이크업
+											</strong> <span style="color: #fff;">어반디케이 최대 20% 할인</span>
 										</p> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/1781365443609865.jpg"
-										alt="올영라이브&nbsp;<비거너리바이달바>_박하연">
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/1477833300405135853.jpg"
+										alt="위시리스트(Luxe&nbsp;Edit)&nbsp;어반디케이&nbsp;AD_한수연">
 									</a>
 								</div>
-							</div>
-						</div>
+								<div>
 
-						<button type="button" data-role="none"
-							class="slick-next slick-arrow" aria-label="Next" role="button"
-							style="display: block;">다음 슬라이드</button>
-						<button id="mainSliderBtn">멈춤</button>
+									<a
+										onclick="common.reqAmplitude('홈_메인롤링 배너 클릭', {entry_source: '홈', click_source: '메인롤링배너', banner_name: '올영라이브&nbsp;<신상티켓팅>_박하연', banner_number: '15'});"
+										href="https://www.oliveyoung.co.kr/store/event/getEventDetail.do?evtNo=00000000020146&amp;trackingCd=Home_Planshop1_15_PROD&amp;t_page=홈&amp;t_click=메인롤링배너&amp;t_banner_name=올영라이브&nbsp;<신상티켓팅>_박하연&amp;t_number=15"
+										class="banner_link"
+										data-attr="홈^메인롤링배너^올영라이브&nbsp;<신상티켓팅>_박하연^15" data-trk="/"
+										tabindex="0">
+										<p class="banner_desc">
+
+											<span class="tit">11월 신상티켓팅</span> <strong>단 한시간동안<br>무료로
+												받고<br>체험해 보세요
+											</strong> <span>1025개 준비했어요</span>
+										</p> <img
+										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/1813961769727922649.jpg"
+										alt="올영라이브&nbsp;<신상티켓팅>_박하연">
+									</a>
+								</div>
+
+
+
+
+
+						
+						<button id="mainSliderBtn" style="z-index: 9999;">멈춤</button>
 						<p class="slick-paging">
-							<span class="cur_no">2</span>/15
+							<span class="cur_no">15</span>/15
 						</p>
 					</div>
 				</div>
@@ -7344,7 +7348,18 @@ $('#main_curation02_01').slick({
 				//common.reqAmplitude('큐레이션1_다른상품추천_클릭', {entry_source: '홈', click_source: '큐레이션1_다른상품추천', number: currentPage});
 			}); 
 	   
-	
+	    	 
+	    	 
+	    	 $('#mainFullSlider').slick({
+	    			arrows: true,
+	    			fade: true,
+	    			infinite: true,
+	    			speed: 1000,
+	    			slidesToShow: 1,
+	    			slidesToScroll: 1,
+	    			draggable: true,
+	    			dots: true
+	    		});
 </script>
 </body>
 <!-- 유사한 고객 추천 상품 팝업 -->
@@ -8868,7 +8883,7 @@ $('#main_curation02_01').slick({
 
 							</div>
 						</li>
-				</ul>
+					</ul>
 
 				</div>
 				<div id="mCSB_2_scrollbar_vertical"
