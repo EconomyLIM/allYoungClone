@@ -684,6 +684,36 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 		return rowCnt;
 	} // writeQna
 
+	// ================== (데이터 수집) 사용자가 조회했던 중분류 카테고리 갖고오기 ===================
+	@Override
+	public int collectView(Connection conn, String userId, String cateM) throws Exception {
+		String sql = " INSERT INTO USER_VIEW "
+				+ " VALUES( UVIEW_SEQ.nextval, ? ,? ) ";
+		PreparedStatement pstmt = null;
+		int rowCnt = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, cateM);
+			
+			rowCnt = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println(">proDetailDAOImpl collectView SQLException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">proDetailDAOImpl collectView Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(conn);
+		} //try_catch
+		
+		return rowCnt;
+	}
+
 	
 
 	

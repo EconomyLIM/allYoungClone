@@ -57,5 +57,7 @@ public interface ProDetailDAO {
 	// 12. 해당 상품의 QnA 등록하기
 	public int writeQna(Connection conn, WrtieQnaDTO wrtie ) throws Exception;
 
+	// 13. (데이터 수집) 사용자가 조회했던 중분류 카테고리 갖고오기
+	public int collectView(Connection conn, String userId, String cateM) throws Exception;
 	
 } // interface

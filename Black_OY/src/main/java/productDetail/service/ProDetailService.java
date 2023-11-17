@@ -316,7 +316,29 @@ public class ProDetailService {
 		return rowCnt; 
 	} // sWriteQna
 	
-	
+	// ================== (데이터 수집) 사용자가 조회했던 중분류 카테고리 갖고오기 ===================
+	public int sCollectView (String userId, String cateM) {
+		Connection conn = null;
+		int rowCnt = 0;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			ProDetailDAOImpl proDetailDAOImpl = ProDetailDAOImpl.getInstance();
+			rowCnt = proDetailDAOImpl.collectView(conn, userId, cateM);
+			
+			System.out.println("> sDetailInfo sCollectView call..");
+			if (rowCnt == 1) {
+				System.out.println("> sDetailInfo sCollectView Insert Success..");
+			}
+		} catch (Exception e) {
+			System.out.println("ProDetailSerivce sCollectView Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		} // try_catch
+		
+		return rowCnt;
+	} // sCollectView
 	
 	
 	
