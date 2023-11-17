@@ -526,8 +526,44 @@ $(function() {
 				params += "&quickYN=N";
 			}
 			
-			location.href = "<%=contextPath%>/olive/orderForm.do?" + params;
+			location.href = "<%=contextPath%>/olive/orderForm.do?" + params + "&click=바로구메";
 		});
+		
+		// 선물하기 눌렀을 때
+		$(".btnGift.goods_gift").on("click", function() {
+			let flag = false;
+			
+			/*
+				패키지가 여러개가 아닐 때는 처리 해야겠디.
+			*/
+			
+			let params = ""; 
+			let products = $(".option_add_area > div");
+			
+			for (var i = 0; i < products.length; i++) {
+				if($(products[i]).css("display") == "block") {
+					let product_id = $(products[i]).attr("id");
+					let cnt = $("#input_" + product_id).val();
+					params += "products=" + product_id + "-" + cnt + "&" ;
+					flag = true;
+				}
+			}
+			
+			params = params.substr(0, params.length-1);
+			
+			if(!flag) {
+				alert("상품을 선택해주세요.");
+				return;
+			}
+			
+			if($("#deliveDay").prop("checked")) {
+				params += "&quickYN=Y";
+			} else {
+				params += "&quickYN=N";
+			}
+			
+			location.href = "<%=contextPath%>/olive/orderForm.do?" + params + "&click=선물하기";
+		})
 	});
 </script>
 
@@ -1468,9 +1504,7 @@ $(function () {
 
 							<button class="btnBuy goods_buy" id="cartBtn"
 								data-attr="상품상세^주문유형^바로구매">바로구매</button>
-							<button class="btnGift goods_gift"
-								onclick="javascript:common.popLayer.todayDelivery.openTodayDeliveryNotice('goodsdetail.gift');"
-								data-attr="상품상세^주문유형^선물하기">선물하기</button>
+							<button class="btnGift goods_gift">선물하기</button>
 							<button class="btnSoldout dupItem goods_cart"
 								style="display: none;" onclick="javascript:;">일시품절</button>
 							<button class="goods_buy btnReStock" style="display: none;"

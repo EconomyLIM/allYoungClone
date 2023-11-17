@@ -40,6 +40,7 @@ public class OrderHandler implements CommandHandler {
 		
 		
 		if(method.equals("GET")) {
+			String click = request.getParameter("click");
 			String[] products = request.getParameterValues("products");
 			String quickYN = request.getParameter("quickYN"); // 오늘드림 여부
 			
@@ -73,6 +74,10 @@ public class OrderHandler implements CommandHandler {
 			request.setAttribute("list", list);
 			request.setAttribute("productList", productList);
 			request.setAttribute("dto", dto);
+			
+			if(click.equals("선물하기")) {
+				return "/view/order/orderGiftForm.jsp";
+			}
 			
 			location = "/view/order/orderForm.jsp";
 		} else { // POST
@@ -151,11 +156,11 @@ public class OrderHandler implements CommandHandler {
 				String currStr = currDate.getHours() + "" + currDate.getMinutes();
 				String todayStr = today_arrive.getHours() + "" + today_arrive.getMinutes();
 				int diff = Integer.parseInt(todayStr) - Integer.parseInt(currStr);
-				if(diff < 100) {
+				if(addHour == 1) {
 					hour_group = "1시간 이내";
-				} else if(diff < 200) {
+				} else if(addHour == 2) {
 					hour_group = "1시간~2시간";
-				} else if(diff < 300) {
+				} else if(addHour == 3) {
 					hour_group = "2시간~3시간";
 				}
 				

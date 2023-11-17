@@ -75,6 +75,13 @@
 				}
 			}
 			
+			if('${quick}' == 'Y') {
+				if($("#o2o_dlv_area > td > table > tbody  input:checked").length < 1) {
+					alert("배송 구분을 선택하세요");
+					return false;
+				}
+			} 
+			
 			if($("#btn_door_manner_temp1").prop("checked") && $("#door_type_exist").val() == "") {
 				alert("공동현관 비밀번호를 입력하세요.");
 				$("#door_type_exist").focus();
