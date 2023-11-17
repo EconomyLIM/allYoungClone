@@ -455,7 +455,84 @@
 			$("#btnConfirm1").on("click", function() {
 				$("#infoGiftBoxOrder").hide();
 				$(".dimm").remove();
+			});
+			
+			
+			
+			// 오늘드림 여부 Y라면 
+			// 오늘드림 시간 설정
+			let d = new Date();
+			let month = d.getMonth()+1;
+			let date = d.getDate();
+			let h = d.getHours();
+			let m = d.getMinutes();
+			
+			$("#dlv_time2").text(`\${h+2}:\${m} ~ \${h+3}:\${m}`);
+			
+			$("#dlv_today").text(`\${month}/\${date}일 (\${"일월화수목금토".charAt(d.getDay())})`);
+			$("#dlv_nextday").text(`\${month}/\${date+1}일 (\${"일월화수목금토".charAt(d.getDay()+1)})`);
+			
+			// 오늘 드림 라디오버튼 처리
+			// 34배송
+			if(h >= 13) {
+				$("#dlv_nextdayDlvSp1 > input").prop("disabled", false);
+			} else {
+				$("#dlv_todayDlvSp1 > input").prop("disabled", false);
+			}
+			
+			// 빠른배송
+			if(h >= 20) {
+				$("#dlv_nextdayDlvSp2 > input").prop("disabled", false);
+			} else {
+				$("#dlv_todayDlvSp2 > input").prop("disabled", false);
+			}
+			
+			// 미드나잇
+			if(h >= 20) {
+				$("#dlv_nextdayDlvSp3 > input").prop("disabled", false);
+			} else {
+				$("#dlv_todayDlvSp3 > input").prop("disabled", false);
+			}
+			
+			// 저녁 8시 넘어가면 픽업 버튼 숨기기
+			if(h >= 20) {
+				$("#pickupToggle").hide();
+			}
+			
+			
+			// 오늘 드림 시 배송비 팝업창
+			$("#o2o_dlv_area > td > table > tbody > tr input").on("click", function() {
+				$("#dlv_dlexPayAmt1").show();
+			});
+			
+			$("#dlv_dlexPayAmt1").on("click", function() {
+				$("#todayDlvCostNoti").show();
+				$("body").append(dimm);
+			});
+			
+			
+			// 오늘드림 배송비 업데이트
+			let product_price = $("#orderForm > div.order_payment_box > div.right_area > ul > li:nth-child(1) > span.tx_cont > span").text()
+			let deli_price;
+			
+			$("tbody input").on("click", function() {
+				if(product_price < 30000) {
+					let price = $(this).data("price")
+					$("#dlv_dlexPayAmt2").text("배송비 : " + price + "원");
+					$("#dlexPayAmt_span").text(price);
+					$("#totPayAmt_sum_span").text(totalPrice + price);
+					$("#totDlexAmt_span").text(price);
+					$("#dlexAmt_hd_base").text(price);
+					$("#0_0").text(price);
+					$("#totDlexAmt_hd_span").text(price);
+					$("#hdDlexList > li.total > div > span.tx_cont > span:nth-child(3)").hide();
+					$("#hdDlexList > li:nth-child(1) > div.add_cont > span.tx_cont > span:nth-child(3)").show();
+				}
 			})
+			
+			
+			
+			
 		});
 		
 		
@@ -601,18 +678,30 @@
 							<tbody>
 							<tr>
 								<td id="dlv_time1">11:00 ~ 13:00</td>
-								<td id="dlv_todayDlvSp1"></td>
-								<td id="dlv_nextdayDlvSp1"></td>
+								<td id="dlv_todayDlvSp1">
+									<input type="radio" class="rad18" name="temp_chk" data-price="2500" disabled="" value="금일-34배송">
+								</td>
+								<td id="dlv_nextdayDlvSp1">
+									<input type="radio" class="rad18" name="temp_chk" data-price="2500" disabled="" value="익일-34배송">
+								</td>
 							</tr>
 							<tr>
-								<td id="dlv_time2">15:00 ~ 16:00</td>
-								<td id="dlv_todayDlvSp2"></td>
-								<td id="dlv_nextdayDlvSp2"></td>
+								<td id="dlv_time2"></td>
+								<td id="dlv_todayDlvSp2">
+									<input type="radio" class="rad18" name="temp_chk" data-price="5000" disabled="" value="금일-빠름배송">
+								</td>
+								<td id="dlv_nextdayDlvSp2">
+									<input type="radio" class="rad18" name="temp_chk" data-price="5000" disabled="" value="익일-빠름배송">
+								</td>
 							</tr>
 							<tr>
 								<td id="dlv_time3">22:00 ~ 24:00</td>
-								<td id="dlv_todayDlvSp3"></td>
-								<td id="dlv_nextdayDlvSp3"></td>
+								<td id="dlv_todayDlvSp3">
+									<input type="radio" class="rad18" name="temp_chk" data-price="2500" disabled="" value="금일-미드나잇배송">
+								</td>
+								<td id="dlv_nextdayDlvSp3">
+									<input type="radio" class="rad18" name="temp_chk" data-price="2500" disabled="" value="익일-미드나잇배송">
+								</td>
 							</tr>
 							</tbody>
 						</table>
@@ -903,6 +992,7 @@
 							<p class="addr_new">
 								<span class="tx_tit">도로명</span> :
 								<span class="tx_addr" id="stnmPostAddr_exist">${dto.deli_road_addr }</span><!--  도로명주소를 넣어주세요 -->
+								<input type="hidden" name="region" id="region" value="${dto.deli_road_addr }">
 							</p>
 							<p class="addr_old">
 								<span class="tx_tit">지번</span> :
@@ -2474,7 +2564,17 @@
 		
 		<!-- 스크롤 영역 -->
 		<div class="layer_scroll_box type2 mgT20">
-			<h3 class="layer_sub_title">올리브영 배송상품</h3>
+			<h3 class="layer_sub_title">
+			<c:choose>
+				<c:when test="${quickYN eq 'Y'}">
+					오늘드림
+				</c:when>
+				<c:otherwise>
+					올리브영 
+				</c:otherwise>
+			</c:choose>
+			
+			배송상품</h3>
 			<ul class="delivery_info_list" id="hdDlexList">
 
 				<li type="base" entrno="0" dlexcpnyn="N">
@@ -2483,6 +2583,8 @@
 						<input type="hidden" name="dlexAmt" value="0" orgvalue="0" targetid="0_0" disabled="disabled">
 						<span class="tx_cont">
 							<span class="tx_num" id="dlexAmt_hd_base">0</span>원
+							<br>
+							<span type="condition" style="display: none">(30,000원 이상 무료배송)</span>
 						</span>
 					</div>
 				
@@ -2501,7 +2603,7 @@
 						<span class="tx_cont">
 							<span class="tx_num" id="totDlexAmt_hd_span">0</span>원
 							<br>
-							<span type="coupon" entrno="0" style="display: none;">(무료배송 쿠폰/도서산간배송비 적용 제외)</span>
+							<span type="coupon" entrno="0" style="display: block;">(무료배송 쿠폰/도서산간배송비 적용 제외)</span>
 						</span>
 					</div>
 				</li>
@@ -2888,7 +2990,7 @@
 </div>
 <!--// 매장픽업서비스 안내 팝업 -->
 <!-- 오늘드림 배송비 안내 팝업 -->
-<div class="layer_pop_wrap todayDlvCostNoti" id="todayDlvCostNoti" style="z-index: 999; display: none;" data-ref-comparekey="todayDlvCostNoti">
+<div class="layer_pop_wrap todayDlvCostNoti" id="todayDlvCostNoti" style="z-index: 999; display: none; margin-left: -208.5px; top: 495.5px; " data-ref-comparekey="todayDlvCostNoti">
 	<div class="layer_cont">
 		<h2 class="layer_title2">오늘드림 배송비 안내</h2>
 		<div class="pop-conts">

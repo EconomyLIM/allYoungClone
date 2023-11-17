@@ -40,4 +40,10 @@ public interface OrderDAO {
 	// 10. 결제 후 유저 포인트 업데이트
 	int updateUserPoint(Connection conn, String user_id, int point) throws Exception;
 
+	int insertToday(Connection conn, Map<String, Object> map) throws Exception;
+	
+	// 12. 픽업 insert
+	int insertPickup(Connection conn, Map<String, Object> map) throws Exception;
+
+
 }

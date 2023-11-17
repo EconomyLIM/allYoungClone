@@ -52,7 +52,6 @@
 <a href="<%=contextPath%>/olive/productDetail.do?displNum=00010002">productDetail</a>
 <br>
 <a href="<%=contextPath%>/olive/review.do">review</a>
-<img src="images/productDisplay/pthi_101.jpg" alt="123"></img>
 <br>
 <br>
 <a href="<%=contextPath %>/olive/main.do">main page</a>
