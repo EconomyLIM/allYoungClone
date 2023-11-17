@@ -33,7 +33,7 @@ public class LoginCheckFilter implements Filter {
 		// 
 		String auth = null;
 		boolean isLogon = false; // 인증 true, false
-		
+		String ajaxCall = (String) req.getHeader("AJAX");
 		HttpSession session = req.getSession(false);
 		if (session != null && (session.getAttribute("logOn")) != null) {
 			// 인증처리가 된 상태
@@ -45,8 +45,13 @@ public class LoginCheckFilter implements Filter {
 		} else {
 			System.out.println("로그인 하세요");
 			String referer = req.getRequestURI(); // /jspPro/days07/board/write.jsp
+			if ("true".equals(ajaxCall)) {
+				referer = req.getParameter("url");
+				res.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // 500 에러 전송
+			}
 			session.setAttribute("refer", referer);
 			String location = "/Black_OY/olive/LogOn.do";
+			
 			res.sendRedirect(location);
 		} //if/else
 		

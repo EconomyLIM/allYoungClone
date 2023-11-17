@@ -61,9 +61,9 @@ public class BasketDAOImpl implements BasketDAO{
 		
 		sql += " on pro_id = product_id " 
 			+" where user_id = ? "
-			+" GROUP BY brand_name, pro_displ_name, cat_l_id, cat_m_id, cat_s_id,\r\n"
-			+ "      pro_price, afterprice, pro_displ_id, pro_id,\r\n"
-			+ "      prc, pdc, pmp, stock, ordercnt, pro_displ_like,\r\n"
+			+" GROUP BY brand_name, pro_displ_name, cat_l_id, cat_m_id, cat_s_id, 	"
+			+ "      pro_price, afterprice, pro_displ_id, pro_id, "
+			+ "      prc, pdc, pmp, stock, ordercnt, pro_displ_like, "
 			+ "      pro_reg, basket_id, user_id, product_cnt, pro_name ";
 		
 		PreparedStatement psmt = null;
@@ -144,11 +144,12 @@ public class BasketDAOImpl implements BasketDAO{
 	@Override
 	public int basketDelete(Connection conn, String user_id, String product_id, String quickyn) {
 		String sql = "DELETE from ";
+		
 		if (quickyn != null && quickyn.equals("Y")) {
 			sql+=  " BASKET_TD ";
-		}else if(quickyn == null || quickyn.equals("") ||quickyn.equals("N") ){
+		}else {
 			sql+= " BASKET ";
-		}		
+		}	
 		sql += " WHERE user_id = ? AND product_id = ? ";
 		PreparedStatement psmt = null;
 		try {
@@ -303,6 +304,105 @@ public class BasketDAOImpl implements BasketDAO{
 			
 			psmt.setString(1, user_id);
 			psmt.setString(2, productid);
+			int row  = psmt.executeUpdate();
+			
+			return row;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(conn);
+		}
+		return 0;
+	}
+	
+	// 아이템 수량 + 오늘드림 여부
+	@Override
+	public int basketCheck(Connection conn, String user_id, String productid, String quickYn) {
+		// TODO Auto-generated method stub
+		String sql = " Select user_id, product_id, product_cnt from ";
+				if (quickYn != null && quickYn.equals("Y")) {
+					sql+=  " BASKET_TD ";
+				}else if(quickYn == null || quickYn.equals("") ||quickYn.equals("N") ){
+					sql+= " BASKET ";
+				}
+		
+		sql+= "where user_id = ? AND product_id = ? ";
+		
+		PreparedStatement psmt = null;
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, user_id);
+			psmt.setString(2, productid);
+			
+			int row  = psmt.executeUpdate();
+			
+			return row;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(conn);
+		}
+		return 0;
+	}
+
+	@Override
+	public int basketUpdate(Connection conn, String user_id, String productid, String quickYn, int cnt) {
+		// TODO Auto-generated method stub
+		String sql = " UPDATE ";
+		
+		if (quickYn != null && quickYn.equals("Y")) {
+			sql+=  " BASKET_TD ";
+		}else if(quickYn == null || quickYn.equals("") ||quickYn.equals("N") ){
+			sql+= " BASKET ";
+		}
+		sql+= " SET product_cnt = ? WHERE user_id = ? AND product_id = ? ";
+		PreparedStatement psmt = null;
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, cnt);
+			psmt.setString(2, user_id);
+			psmt.setString(3, productid);
+			int row  = psmt.executeUpdate();
+			
+			return row;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(conn);
+		}
+		return 0;
+	}
+
+	@Override
+	public int basketinsert(Connection conn, String user_id, String productid, String quickYn, int cnt) {
+		// TODO Auto-generated method stub
+		String sql = " INSERT INTO";
+		
+		if (quickYn != null && quickYn.equals("Y")) {
+			sql+=  " BASKET_TD ";
+			sql+= " (basket_id, user_id, product_id, product_cnt) ";
+			sql+= " VALUES ('tb_' || TO_CHAR(basket_seq.NEXTVAL, 'FM00000000'), ?, ?, ?) ";
+		}else if(quickYn == null || quickYn.equals("") ||quickYn.equals("N") ){
+			sql+= " BASKET ";
+			sql+= " (basket_id, user_id, product_id, product_cnt) ";
+			sql+= " VALUES ('nb_' || TO_CHAR(basket_seq.NEXTVAL, 'FM00000000'), ?, ?, ?) ";
+		}
+		
+				
+		PreparedStatement psmt = null;
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, user_id);
+			psmt.setString(2, productid);
+			psmt.setInt(3, cnt);
 			int row  = psmt.executeUpdate();
 			
 			return row;

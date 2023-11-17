@@ -669,8 +669,7 @@
 		    });
 		});
 		
-		$(".btnOrangeW").html("선택주문("+selected+")");
-
+		
 	})
 	</script>
 	
@@ -702,6 +701,63 @@ $(document).ready(function() {
     	//alert("basketType: " + basketType);
     	 window.location.href = "<%=contextPath%>/olive/basket.do?quickyn=" + basketType;
 	})
+
+
+	$("button.btnOrange").click(function() {
+		let products = $("#Contents > table > tbody > tr");
+		let params = ""; 
+		for (var i = 0; i < products.length; i++) {
+				let product_id = $(products[i]).attr("goodsno");
+				let cnt = $(products[i]).find('select').val();
+				params += "products=" + product_id + "-" + cnt + "&" ;
+		}
+		
+		params = params.substr(0, params.length-1);
+		
+		
+		
+		
+			params += "&quickYN="+"<%=quickyn%>";
+		
+		console.log(params)
+		location.href = "<%=contextPath%>/olive/orderForm.do?" + params + "&click=장바구니";
+	})
+	
+	$("button.btnOrangeW").click(function() {
+		let products = $("#Contents > table > tbody > tr");
+		
+		let params = ""; 
+		for (var i = 0; i < products.length; i++) {
+			if ($(products[i]).find('input[type=checkbox]').prop('checked')) {
+				let product_id = $(products[i]).attr("goodsno");
+				let cnt = $(products[i]).find('select').val();
+				params += "products=" + product_id + "-" + cnt + "&" ;	
+			}
+				
+		}	
+		params = params.substr(0, params.length-1);
+		
+			params += "&quickYN="+"<%=quickyn%>";
+		
+		console.log(params)
+		location.href = "<%=contextPath%>/olive/orderForm.do?" + params + "&click=장바구니";
+	})
+	
+	$("button.btnSmall.wGreen").click(function() {
+		let products = $(this).closest('tr');
+		let params = "";
+				let product_id = $(products).attr("goodsno");
+				let cnt = $(products).find('select').val();
+				params += "products=" + product_id + "-" + cnt + "&" ;	
+			
+		params = params.substr(0, params.length-1);
+		
+			params += "&quickYN="+"<%=quickyn%>";
+		
+		console.log(params)
+		location.href = "<%=contextPath%>/olive/orderForm.do?" + params + "&click=장바구니";
+	})
+	
     
 });
 </script>
