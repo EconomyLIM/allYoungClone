@@ -486,8 +486,6 @@ $(function() {
 	 
 	 
 	 
-	 
-	 
  })
  
  
@@ -534,16 +532,95 @@ $(function() {
 </script>
 
 	<script>
+// 장바구니 추가
+	$(function() {
+		// 장바구니 추가 버튼 클릭 처리
+		$("#btnBasket").on("click", function() {
+			let flag = false;
+			/*
+				패키지가 여러개가 아닐 때는 처리 해야겠디.
+			*/
+
+			let params = ""; 
+			let products = $(".option_add_area > div");
+			
+			for (var i = 0; i < products.length; i++) {
+				if($(products[i]).css("display") == "block") {
+					let product_id = $(products[i]).attr("id");
+					let cnt = $("#input_" + product_id).val();
+					params += "products=" + product_id + "-" + cnt + "&" ;
+					flag = true;
+				}
+			}
+			
+			params = params.substr(0, params.length-1);
+			
+			if(!flag) {
+				alert("상품을 선택해주세요.");
+				return;
+			}
+			
+			if($("#deliveDay").prop("checked")) {
+				params += "&quickYN=Y";
+			} else {
+				params += "&quickYN=N";
+			}
+			let url = window.location.href;
+			params += '&url='+url;
+			$.ajax({
+				url:"<%=contextPath%>/olive/basketitemadd.do",
+				method:"GET",
+				beforeSend: function(xmlHttpRequest) {
+			        xmlHttpRequest.setRequestHeader("AJAX", "true");
+			    },
+				cache:false,
+				dataType : 'text',
+				data:params,
+				success: function (result) {
+					$("#basketOption").show(); 		
+			         
+				} , error		: function(xhr, textStatus, error) {
+		        	if (xhr.status == 500) {
+		                alert("Login Session Expired");
+		                window.location.href = "/Black_OY/view/logon/logon.jsp";
+		            }else {
+		            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
+		            }
+		        }
+	            
+			}) // ajax
+			
+		});
+		
+		$(".btnlG01.pdzero.w130").click(function(){
+			$("#basketOption").hide();
+		})
+		$(".ButtonClose").click(function(){
+			$("#basketOption").hide();
+		})
+		$("#basketgo").click(function(){
+			location.href = "<%=contextPath%>/olive/basket.do";
+		})
+	});
+</script>
+
+	<script>
 // 브랜드 좋아요 체크 처리(ajax)
 
 $(function () {
 	
 	 checkLikeStatus();
+	 checkLikeItemStatus();
 
      // 좋아요 버튼 클릭 이벤트 처리
      $("#brnd_wish").click(function () {
     	 /* alert('brnd_wish'); */
          toggleLikeStatus();
+     });
+     // 상품 좋아요 클릭 이벤트
+     $(".btnZzim.goods_wish").click(function () {
+    	 /* alert('brnd_wish'); */
+         toggleLikeItemStatus();
      });
      	
 }) // function
@@ -597,6 +674,64 @@ $(function () {
         } // success , error
 	}) // ajax
 	} // toggleLikeStatus
+	
+	
+	// 상품 좋아요
+	
+	function checkLikeItemStatus() {
+		let proid = "<%=request.getParameter("goodsNo")%>"
+		let url = window.location.href
+		let data = {
+				proid: proid,
+				url: url
+		}
+		$.ajax({
+			url:"<%=contextPath%>/GetDILAjax",
+			method:"GET",
+			cache:false,
+			data: data,
+			success: function (result) {
+				console.log(result);
+				if (result === "true") {
+					 	
+		               $(".btnZzim.goods_wish").addClass("zzimOn");
+		         } else {
+		               $(".btnZzim.goods_wish").removeClass("zzimOn");
+		           }
+			} , error : function (data, textStatus) {
+				console.log('error');
+            } // success , error
+            
+		}) // ajax
+	} // checkLikeItemStatus
+	
+	function toggleLikeItemStatus() {
+		
+		$.ajax({
+			url: "<%=contextPath%>/GetDILAjax",
+			method:"POST",
+			cache:false,
+			dataType : 'text',
+			data:{proid:"<%=request.getParameter("goodsNo")%>"},
+			success: function (result) {
+
+				if (result === "true" ) {
+					console.log('toggleLikeStatus:');
+					$(".layerAlim.zzimOn.wishPrd").show();
+					$(".layerAlim.zzimOn.wishPrd").fadeOut(2000);   
+					
+	                $(".btnZzim.goods_wish").addClass("zzimOn");
+	            } else {
+	            	console.log('toggleLikeStatus: ' + result);
+	            	$(".layerAlim.zzimOff.wishPrd").show();
+	            	$(".layerAlim.zzimOff.wishPrd").fadeOut(2000);
+	                $(".btnZzim.goods_wish").removeClass("zzimOn");
+	            } //if
+			}, error : function (data, textStatus) {
+				console.log('error');
+	        } // success , error
+		}) // ajax
+		} // toggleLikeItemStatus
 	
 </script>
 	<script>
@@ -978,8 +1113,9 @@ $(function () {
 						<!-- 평점 및 리뷰 건수 추가 -->
 						<p id="repReview">
 							<strong>고객 리뷰</strong> <span class="review_point"> <span
-								class="point" style="width: 98.0%"> </span>
-							</span> <b> 4.9 </b> <em>(216건)</em>
+								class="point" style="width: ${reviewScore.averagegrade*20 }%">
+							</span>
+							</span> <b> ${reviewScore.averagegrade } </b> <em>(${reviewcnt }건)</em>
 						</p>
 						<!-- 위치 변경 <p><a href="#" class="btn_off_store" data-rel="layer" data-target="offlineStore">올리브영 오프라인 매장 재고확인</a></p>-->
 						<p>
@@ -1326,8 +1462,7 @@ $(function () {
 						<!-- 20191213 e -->
 
 						<div class="prd_btn_area new-style type1">
-							<button class="btnBasket  goods_cart"
-								onclick="javascript:common.popLayer.todayDelivery.openTodayDeliveryNotice('goodsdetail.cart');"
+							<button class="btnBasket  goods_cart" id="btnBasket"
 								data-attr="상품상세^주문유형^장바구니">장바구니</button>
 							<!-- <button class="btnBuy goods_buy" id="cartBtn" onClick="javascript:goods.detail.bindBtnBuy();">구매하기</button> -->
 
@@ -1476,7 +1611,7 @@ $(function () {
 				<li id="buyInfo"><a href="javascript:;" class="goods_buyinfo"
 					data-attr="상품상세^상품상세_SortingTab^구매정보">구매정보</a></li>
 				<li id="reviewInfo"><a href="javascript:;"
-					class="goods_reputation" data-attr="상품상세^상품상세_SortingTab^리뷰">리뷰<span>(216)</span></a></li>
+					class="goods_reputation" data-attr="상품상세^상품상세_SortingTab^리뷰">리뷰<span>(${reviewcnt })</span></a></li>
 				<li id="qnaInfo"><a href="javascript:;" class="goods_qna"
 					data-attr="상품상세^상품상세_SortingTab^Q&amp;A">Q&amp;A<span><c:if
 								test="${not empty qnaList}">(${qnaList.size()})</c:if> </span></a></li>
@@ -2716,23 +2851,23 @@ $(function(){
 						<div class="photo_list_cont">
 							<div class="photo_list scrbar">
 								<ul class="inner" id="photoList">
-								<c:forEach items="${reviewimg }" var="imglist">
-								<c:forEach items="${imglist }" var="img">
-									<li><a href="javascript:;"> <span class="thum">
-												<img style="width: 80px;"
-												src="${img.rev_img_src }"
-												onload="common.imgLoads(this,80);" class="review_img"
-												alt="썸네일 이미지" data-attr="상품상세^포토목록^포토 클릭"
-												data-value="${img.rev_id }" data-state=""
-												onerror="common.errorResizeImg(this,80)">
-										</span>
-									</a></li>
-									</c:forEach>
+									<c:forEach items="${reviewimg }" var="imglist">
+										<c:forEach items="${imglist }" var="img">
+											<li><a href="javascript:;"> <span class="thum">
+														<img style="width: 80px;" src="${img.rev_img_src }"
+														onload="common.imgLoads(this,80);" class="review_img"
+														alt="썸네일 이미지" data-attr="상품상세^포토목록^포토 클릭"
+														data-value="${img.rev_id }" data-state=""
+														onerror="common.errorResizeImg(this,80)">
+												</span>
+											</a></li>
+										</c:forEach>
 									</c:forEach>
 								</ul>
 							</div>
 						</div>
-						<button type="button" class="ButtonClose photoClose">팝업창 닫기</button>
+						<button type="button" class="ButtonClose photoClose">팝업창
+							닫기</button>
 					</div>
 				</div>
 
@@ -2750,10 +2885,10 @@ $(function(){
 
 
 
-			
 
 
-			
+
+
 
 			<!--  ====QNA=========================================  -->
 			<div class="tabConts prd_detail_cont show" id="qnaContentsArea">
@@ -2785,7 +2920,8 @@ $(function(){
 										<c:if test="${not empty sessionScope.logOn }">
 											<c:if test="${sessionScope.logOn.user_id eq qna.userId}">
 												<button class="btnSmall fullGray" onclick="">수정</button>
-												<button class="btnSmall fullGray" onclick="deleteQna('${qna.qnaId}');">삭제</button>
+												<button class="btnSmall fullGray"
+													onclick="deleteQna('${qna.qnaId}');">삭제</button>
 											</c:if>
 										</c:if>
 									</p>
@@ -3103,73 +3239,135 @@ $(function(){
 			</p>
 		</div>
 	</div>
-	
-	<!-- === Q&A 쓰기 팝업 =====================  -->
-	
-	<div class="popup-contents" id="pop_cont" style="top: 1300px; display: none; width: 650px; margin: -258px 0px 0px -325px; z-index: 999; left: 50%;">
-	<div class="pop-conts">
-		<form name="sForm" id="sForm">
-			<input type="hidden" name="gdasSeq" id="gdasSeq" value="">
-						<input type="hidden" name="goodsNo" id="goodsNo" value="${pLists[0].displId}">
-			<h1 class="ptit">상품 Q&amp;A 작성</h1>
-	
-			<!-- [s] 2021.04.19 modify -->
-			<div class="mypage-qna-write disabled">
-				<div class="optionSec">
-					<h3>아래의 문의 유형을 선택해주세요.</h3>
-					<div class="radioGT1">
-						<label><input type="radio" name="prdTypeSelect" id="prdTypeSelect1"><span>상품문의</span></label>
-						<label><input type="radio" name="prdTypeSelect" id="prdTypeSelect2"><span>주문 상품문의</span></label>
-					</div>
-					<p class="txt">성분, 사용법, 구성 등 상품 관련 문의를 남겨주세요. 배송/교환/반품 문의는 ‘주문상품문의’를 선택해주세요.</p>
-				</div>
-	
-				<p class="common4s-text">${pLists[0].displName }</p>
-	
-				<!-- 등록제한이 없는 한줄상품평 작성 -->
-				<div class="reviews-write disabled">
-					<textarea cols="5" rows="1" id="gdasCont" name="gdasCont" placeholder="Q&amp;A 게시판에서는 고객님의 정보 확인이 어려우므로 배송문의 등은 1:1 게시판 이용 부탁드립니다." disabled=""></textarea>
-					<p><span id="curTxtLength">0</span>자/250자</p>
-				</div>
-				<!-- 등록제한이 없는 한줄상품평 작성 -->
-	
-				<div class="btnGroup">
-					<button id="cancel" type="button" class="btnGray" onclick="qnaPopDown()" disabled="disabled">취소</button>
-					<button id="reg" type="button" class="btnGreen" onclick="" disabled="disabled">등록</button>				
-				</div>
-				<div class="usage-guide">
-					<h2 class="stit">이용안내</h2>
-					<ul>
-						<li>재판매글, 상업성 홍보글, 미풍양속을 해치는 글 등 상품 Q&amp;A의 취지에 어긋나는 글은 삭제될 수 있습니다.</li>
-					</ul>
-				</div>
-			</div>
-			<!-- [e] 2021.04.19 modify -->
-	
-			<button type="button" class="ButtonClose" onclick="qnaPopDown();">팝업창 닫기</button>
-			<!-- [s] 2021.04.19 add -->
-			<div class="alertPop">
-				<p class="txt">해당 상품의 배송/교환/반품 문의를 위해<br>1:1문의 게시판을 이용해주세요.</p>
-				<p class="btnGroup">
-					<button type="button" class="btnMedium wGreen btnClose">취소</button>
-					<button id="btnCounsel" type="button" class="btnMedium btnGreen">1:1문의 바로가기</button>
-				</p>
-			</div>
-		</form>
-		<!-- [e] 2021.04.19 add -->
-	</div>
 
-	<script>
+	<!-- === Q&A 쓰기 팝업 =====================  -->
+
+	<div class="popup-contents" id="pop_cont"
+		style="top: 1300px; display: none; width: 650px; margin: -258px 0px 0px -325px; z-index: 999; left: 50%;">
+		<div class="pop-conts">
+			<form name="sForm" id="sForm">
+				<input type="hidden" name="gdasSeq" id="gdasSeq" value=""> <input
+					type="hidden" name="goodsNo" id="goodsNo"
+					value="${pLists[0].displId}">
+				<h1 class="ptit">상품 Q&amp;A 작성</h1>
+
+				<!-- [s] 2021.04.19 modify -->
+				<div class="mypage-qna-write disabled">
+					<div class="optionSec">
+						<h3>아래의 문의 유형을 선택해주세요.</h3>
+						<div class="radioGT1">
+							<label><input type="radio" name="prdTypeSelect"
+								id="prdTypeSelect1"><span>상품문의</span></label> <label><input
+								type="radio" name="prdTypeSelect" id="prdTypeSelect2"><span>주문
+									상품문의</span></label>
+						</div>
+						<p class="txt">성분, 사용법, 구성 등 상품 관련 문의를 남겨주세요. 배송/교환/반품 문의는
+							‘주문상품문의’를 선택해주세요.</p>
+					</div>
+
+					<p class="common4s-text">${pLists[0].displName }</p>
+
+					<!-- 등록제한이 없는 한줄상품평 작성 -->
+					<div class="reviews-write disabled">
+						<textarea cols="5" rows="1" id="gdasCont" name="gdasCont"
+							placeholder="Q&amp;A 게시판에서는 고객님의 정보 확인이 어려우므로 배송문의 등은 1:1 게시판 이용 부탁드립니다."
+							disabled=""></textarea>
+						<p>
+							<span id="curTxtLength">0</span>자/250자
+						</p>
+					</div>
+					<!-- 등록제한이 없는 한줄상품평 작성 -->
+
+					<div class="btnGroup">
+						<button id="cancel" type="button" class="btnGray"
+							onclick="qnaPopDown()" disabled="disabled">취소</button>
+						<button id="reg" type="button" class="btnGreen" onclick=""
+							disabled="disabled">등록</button>
+					</div>
+					<div class="usage-guide">
+						<h2 class="stit">이용안내</h2>
+						<ul>
+							<li>재판매글, 상업성 홍보글, 미풍양속을 해치는 글 등 상품 Q&amp;A의 취지에 어긋나는 글은 삭제될
+								수 있습니다.</li>
+						</ul>
+					</div>
+				</div>
+				<!-- [e] 2021.04.19 modify -->
+
+				<button type="button" class="ButtonClose" onclick="qnaPopDown();">팝업창
+					닫기</button>
+				<!-- [s] 2021.04.19 add -->
+				<div class="alertPop">
+					<p class="txt">
+						해당 상품의 배송/교환/반품 문의를 위해<br>1:1문의 게시판을 이용해주세요.
+					</p>
+					<p class="btnGroup">
+						<button type="button" class="btnMedium wGreen btnClose">취소</button>
+						<button id="btnCounsel" type="button" class="btnMedium btnGreen">1:1문의
+							바로가기</button>
+					</p>
+				</div>
+			</form>
+			<!-- [e] 2021.04.19 add -->
+		</div>
+
+		<script>
 		
 	</script>
-<div class="alertPop isOpen" style="display: none">
-				<p class="txt">해당 상품의 배송/교환/반품 문의를 위해<br>1:1문의 게시판을 이용해주세요.</p>
-				<p class="btnGroup">
-					<button type="button" class="btnMedium wGreen btnClose">취소</button>
-					<button id="btnCounsel" type="button" class="btnMedium btnGreen">1:1문의 바로가기</button>
-				</p>
-			</div>
-</div>
+		<div class="alertPop isOpen" style="display: none">
+			<p class="txt">
+				해당 상품의 배송/교환/반품 문의를 위해<br>1:1문의 게시판을 이용해주세요.
+			</p>
+			<p class="btnGroup">
+				<button type="button" class="btnMedium wGreen btnClose">취소</button>
+				<button id="btnCounsel" type="button" class="btnMedium btnGreen">1:1문의
+					바로가기</button>
+			</p>
+		</div>
+	</div>
 	<!-- === Q&A 쓰기 팝업 종료=====================  -->
+
+	<!--  ========장바구니 추가 클릭 팝업 ========== -->
+	<div class="layer_pop_wrap w490" id="basketOption"
+		style="z-index: 999; display: none; left: 50%; margin-left: -245px; top: 492px;"
+		data-quick-yn="N">
+
+		<div class="popup-contents"
+			style="top: 50%; width: 534px; margin: -365px 0 0 -268px;">
+			<div class="pop-conts">
+				<h1 class="ptit">선택완료</h1>
+
+				<div class="popCont contPd01">
+					<p class="txt_onbag">
+					<p class="txt_onbag">장바구니에 추가되었습니다.</p>
+					</p>
+				</div>
+
+				<div class="area2sButton pdTz">
+					<button class="btnlG01 pdzero w130">
+						<span>쇼핑계속하기</span>
+					</button>
+					<button class="btnG01 pdzero w130" id="basketgo">
+						<span>장바구니 확인</span>
+					</button>
+				</div>
+
+				<button type="button" class="ButtonClose"
+					onclick="fnLayerSet('basketOption', 'close');common.wlog('goods_cart_curation_popup_close');">팝업창
+					닫기</button>
+			</div>
+		</div>
+
+	</div>
+	<!--  ========상품 좋아요 클릭 팝업 ========== -->
+	<div class="layerAlim zzimOn wishPrd" style="display: none;">
+		<span class="icon"></span>
+		<p class="one"><strong>좋아요</strong></p>
+	</div>
+	
+	<div class="layerAlim zzimOff wishPrd" style="display: none;">
+		<span class="icon"></span>
+		<p class="one"><strong>좋아요</strong></p>
+	</div>
 </body>
 </html>

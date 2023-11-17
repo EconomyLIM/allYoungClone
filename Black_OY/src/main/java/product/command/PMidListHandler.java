@@ -151,11 +151,11 @@ public class PMidListHandler implements CommandHandler{
 			mnameiddto = pmidsurvice.selectCurNameS(cateM);
 			
 			if (brandIds != null) {
-				totalRecords = pmidsurvice.GTRService(group, cateM, brandIds); // 총레코드 수 가져오는 서비스 
-				totalpage = pmidsurvice.GTPService(group, perPage, cateM, brandIds); // 몇페이지 나오는지 구하는 서비스
+				totalRecords = pmidsurvice.GTRService(group, cateS, brandIds); // 총레코드 수 가져오는 서비스 
+				totalpage = pmidsurvice.GTPService(group, perPage, cateS, brandIds); // 몇페이지 나오는지 구하는 서비스
 			} else {
-				totalRecords = pmidsurvice.GTRService(group, cateM); // 총레코드 수 가져오는 서비스 
-				totalpage = pmidsurvice.GTPService(group, perPage, cateM); // 몇페이지 나오는지 구하는 서비스
+				totalRecords = pmidsurvice.GTRService(group, cateS); // 총레코드 수 가져오는 서비스 
+				totalpage = pmidsurvice.GTPService(group, perPage, cateS); // 몇페이지 나오는지 구하는 서비스
 			} //ifelse
 			
 			pageDTO = new PageDTO(currentPage, perPage, numberOfPageBlock, totalpage);

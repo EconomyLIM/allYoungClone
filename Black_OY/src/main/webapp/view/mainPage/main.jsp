@@ -9,13 +9,13 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-migrate-3.3.2.min.js"></script>
 <script src="/Black_OY/js/head.js"></script>
 <script src="/Black_OY/js/mainPage.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<script type="text/javascript"
-	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<link rel="stylesheet" href="/BlackOY/css/style.css">
+   href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<link rel="stylesheet" href="/Black_OY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
@@ -414,7 +414,7 @@
 																	varStatus="innerLoop">
 
 																	<li class="curation_item" data-idx="${innerLoop}">
-																		<a href="#"
+																		<a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${pli.displId}"
 																		name ="Home_Curation1_1" 
 																		class="item a_detail"
 																		data-ref-goodsno="${pli.displId }" onclick=""
@@ -428,13 +428,35 @@
 																				<p class="tx_name">${pli.displProName}</p>
 																			</div>
 																			<p class="prd_price">
-																				<span class="tx_cur"><span class="tx_num">${pli.afterPrice }</span>원
+																			<c:if test="${pli.proPrice ne pli.afterPrice }">
+																			<span class="tx_org">
+																					<span class="tx_num">${pli.proPrice}</span>원 
 																				</span>
-																			</p> <c:if test="${pli.stock eq 1}">
-																				<p class="prd_flag">
-																					<span class="icon_flag delivery">오늘드림</span>
-																				</p>
+																				<span class="tx_cur">
+																					<span class="tx_num">${pli.afterPrice }
+																				</span>원 
+																				</span>
 																			</c:if>
+																			<c:if test="${pli.proPrice eq pli.afterPrice }">
+																			<span class="tx_org">
+																					<span class="tx_num">${pli.proPrice}</span>원 
+																				</span>
+																			</c:if>
+																				</p>
+																				<p class="prd_flag">
+																			<c:if test="${pli.pdc eq 1 }">
+																				<span class="icon_flag sale">세일</span>
+																			</c:if>
+																			<c:if test="${pli.prc eq 1 }">
+																			<span class="icon_flag coupon">쿠폰</span>
+																			</c:if>
+																			<c:if test="${pli.pmp eq 1 }">
+																				<span class="icon_flag gift">증정</span>
+																			</c:if>
+																			<c:if test="${pli.stock eq 1}">
+																					<span class="icon_flag delivery">오늘드림</span>
+																			</c:if>
+																				</p>
 																	</a>
 																		<button type="button" class="btnbag"
 																			onclick="; return false;"
@@ -458,57 +480,76 @@
 												class="current" id="contsInfoBeginNum">1</span>5</em></span>
 									</button>
 								</div>
+<!-- 상품 추천 스크립트 -->
 <script type="text/javascript">
       $.noConflict();
 </script>
-<script>
- $('#main_curation02_01').slick({
-		dots: false,
-		arrows: false,
-		fade: true,
-		infinite: true,
-		speed: 100,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		draggable: false
-	});
-    
-    $('#main_curation02_01 a.item').each(function(i){
-        var _item = $(this);			
-        var _data_goodsno = _item.attr('data-ref-goodsno');
-		var _data_dispCatNo = _item.attr('data-ref-dispCatNo');
-		var egcode = _item.attr("data-egcode");
-	    var egrank = _item.attr("data-egrank");
-		var trackingCd = _item.attr("name");
+<script >
 
-		_item.attr('onclick','javascript:gtm.goods.callGoodsGtmInfo("'+_data_goodsno+'", "", "ee-productClick", "홈_큐레이션1", "' + $(this).attr('data-attr').split('^')[3] + '");common.wlog("home_curation1_prod'+trackingCd.substr(trackingCd.length-1, 1)+'");common.link.moveGoodsDetailCuration("'+_data_goodsno+'", "'+_data_dispCatNo+'","like","'+rccode+'", "'+egcode+'", "'+egrank+'", "'+trackingCd+'");');
-	});
-    
-    $("#main_curation02_01").find(".btnbag").each(function() {
-    	$(this).attr("data-rccode", rccode);
-    });
+		
+	    
+	 $('#main_curation02_01 a.item').each(function(i){
+	        var _item = $(this);			
+	        var _data_goodsno = _item.attr('data-ref-goodsno');
+			var _data_dispCatNo = _item.attr('data-ref-dispCatNo');
+			var egcode = _item.attr("data-egcode");
+		    var egrank = _item.attr("data-egrank");
+			var trackingCd = _item.attr("name");
 
-	$('#refBtn').on('click', function () {
-		var $this = $(this);
+			//_item.attr('onclick','javascript:gtm.goods.callGoodsGtmInfo("'+_data_goodsno+'", "", "ee-productClick", "홈_큐레이션1", "' + $(this).attr('data-attr').split('^')[3] + '");common.wlog("home_curation1_prod'+trackingCd.substr(trackingCd.length-1, 1)+'");common.link.moveGoodsDetailCuration("'+_data_goodsno+'", "'+_data_dispCatNo+'","like","'+rccode+'", "'+egcode+'", "'+egrank+'", "'+trackingCd+'");');
+		}); 
+	    
+	    $("#main_curation02_01").find(".btnbag").each(function() {
+	    	/* $(this).attr("data-rccode", rccode); */
+	    });
+	
+	    jQuery.noConflict();
+	    jQuery(document).ready(function($) {
+	    	$('#refBtn').on('click', function () {
+	    		
+	    		$('#main_curation02_01').slick({
+	    			dots: false,
+	    	/* 		arrows: true, */
+	    			fade: true,
+	    			infinite: true,
+	    			speed: 100,
+	    			slidesToShow: 1,
+	    			slidesToScroll: 1,
+	    			draggable: true
+	    	 		//nextArrow: $('.btnRef > button') 
+	    			
+	    		});
+				
+				var $this = $(this);
 
-		var totalPage = Number($this.data('total-page'));
-		var currentPage = Number($this.data('current-page'));
+				var totalPage = Number($this.data('total-page'));
+				var currentPage = Number($this.data('current-page'));
+				/* alert('123'); */
+				$('#main_curation02_01').slick('slickNext');
+				/* $('#main_curation02_01').slick('goTo', 3); */
 
-		$('#main_curation02_01').slick('slickNext');
+				if (currentPage < totalPage) {
+					currentPage++;
+				} else {
+					currentPage = 1;
+				}
 
-		if (currentPage < totalPage) {
-			currentPage++;
-		} else {
-			currentPage = 1;
-		}
+				$this.data('current-page', currentPage);
+				$this.find('.current').html(currentPage);
+				//common.reqAmplitude('큐레이션1_다른상품추천_클릭', {entry_source: '홈', click_source: '큐레이션1_다른상품추천', number: currentPage});
+			});
+	    });
+		
+		
 
-		$this.data('current-page', currentPage);
-		$this.find('.current').html(currentPage);
-		common.reqAmplitude('큐레이션1_다른상품추천_클릭', {entry_source: '홈', click_source: '큐레이션1_다른상품추천', number: currentPage});
-	});
+	
+	
+
+ 
 
 </script>
-								<script type="text/javascript">
+
+<!-- 								<script type="text/javascript">
 $(document).ready(function(){
 	var recoMbrNo = '';
 	var showType = ''; 
@@ -599,7 +640,7 @@ $(document).ready(function(){
 
 	//오특 플래그
 	common.gnb.todaySpecial.setTodaySpecialFlag('.a_detail .newOyflag');
-});
+}); -->
 </script>
 
 
@@ -607,21 +648,6 @@ $(document).ready(function(){
 						</div>
 						<div class="inner">
 							<div class="curation_slide type03" id="recobell_area2">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 								<div class="tit_type03">
 									<span id="rectypeTitle">고객님을 위한 추천 상품</span>
@@ -635,15 +661,6 @@ $(document).ready(function(){
 									<ul id="main_curation03_01"
 										class="slide_list slick_slider slick-initialized slick-slider"
 										name="section1">
-
-
-
-
-
-
-
-
-
 
 										<div aria-live="polite" class="slick-list">
 											<div class="slick-track" role="listbox"
@@ -1074,8 +1091,9 @@ $(document).ready(function(){
 
 
 								<input type="hidden" id="rectype" name="rectype" value="p001">
-								<script type="text/javascript">
-$(document).ready(function(){
+								
+<script type="text/javascript">
+/* $(document).ready(function(){
     var recoGoodsList2Length = "29";
 	if(recoGoodsList2Length > 0){
 	    // 로딩바 제거 및 레코벨 상품 영역 show
@@ -1165,7 +1183,7 @@ $(document).ready(function(){
 	//오특 플래그
 	common.gnb.todaySpecial.setTodaySpecialFlag('.a_detail .newOyflag');
 
-});
+}); */
 </script>
 
 							</div>
