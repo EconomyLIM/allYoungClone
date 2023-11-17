@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import basket.domain.BasketDTO;
 import basket.service.BasketListService;
 import command.CommandHandler;
+import search.domain.BrandSearchDTO;
 import search.service.SearchService;
 import user.domain.LogOnDTO;
 import user.service.LogOnService;
@@ -34,11 +35,13 @@ public class SearchHandler implements CommandHandler{
 		List<String> list = null;
 		SearchService searchService = SearchService.getinstance();
 		
-		
+		BrandSearchDTO brandSearchDTO = null;
 		
 		list = searchService.searchWordService(word);
+		brandSearchDTO = searchService.BrandsearchWordService(word);
+		request.setAttribute("word", word);
 		request.setAttribute("list", list);
-		
+		request.setAttribute("brandSearch", brandSearchDTO);
 		request.getRequestDispatcher("/layout/search.jsp").forward(request, response);
 		
 		return null;

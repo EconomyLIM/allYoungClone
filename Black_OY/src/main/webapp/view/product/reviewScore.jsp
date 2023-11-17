@@ -4,16 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="/WEB-INF/inc/include.jspf" %>
 <%@ include file="/WEB-INF/inc/session_auth.jspf" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="/Black_OY/js/head.js"></script>
-<link rel="stylesheet" href="/BlackOY/css/style.css">
-<title>블랙올리브영 온라인몰</title>
-</head>
-<body>
+
+
 
 
 <div class="product_rating_area review-write-delete">
@@ -179,5 +171,3 @@
 			</div>
 
 
-</body>
-</html>

@@ -72,7 +72,7 @@ public class BasketDAOImpl implements BasketDAO{
 		String displImgSrc;
 		String brandName;
 		String displProName;
-		String lId;
+		String lid;
 		String midId;
 		String sId;
 		String proPrice;
@@ -107,7 +107,7 @@ public class BasketDAOImpl implements BasketDAO{
 					displImgSrc = rs.getString("pro_displ_src");
 					brandName = rs.getString("brand_name");
 					displProName = rs.getString("pro_displ_name");
-					lId = rs.getString("cat_l_id");
+					lid = rs.getString("cat_l_id");
 					midId = rs.getString("cat_m_id");
 					sId = rs.getString("cat_s_id");
 					proPrice = rs.getString("pro_price");
@@ -125,7 +125,7 @@ public class BasketDAOImpl implements BasketDAO{
 					product_cnt = rs.getInt("product_cnt");
 					pro_name = rs.getString("pro_name");
 					
-					basketDTO = new  BasketDTO(displImgSrc, brandName, displProName, lId, midId, sId, proPrice, afterPrice, displId, productID, prc, pdc, pmp, stock, displLike, ordercnt, proReg, basket_id, user_id, product_cnt, pro_name);
+					basketDTO = new  BasketDTO(displImgSrc, brandName, displProName, lid, midId, sId, proPrice, afterPrice, displId, productID, prc, pdc, pmp, stock, displLike, ordercnt, proReg, basket_id, user_id, product_cnt, pro_name);
 					basketList.add(basketDTO);
 				}while(rs.next());
 			}

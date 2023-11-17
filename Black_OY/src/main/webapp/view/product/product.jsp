@@ -858,9 +858,7 @@ $(function () {
 		 $("#layerWrap850").hide()
 	 })
 	 
-	 function slide(index){
-		$('.slider-nav').slick('goTo', index);
-	}
+	 
 	 
 		$(".more").click(function(){
 			$("#layerWrap850.photo").show()
@@ -3403,5 +3401,11 @@ $(function(){
 		<span class="icon"></span>
 		<p class="one"><strong>좋아요</strong></p>
 	</div>
+	<script>
+	
+	function slide(index){
+		$('.slider-nav').slick('goTo', index);
+	}
+	</script>
 </body>
 </html>
