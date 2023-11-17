@@ -379,7 +379,7 @@
 							
 					
 						<div class="area1sButton mgT40">
-							<a href="<%=contextPath %>/mypage/orderDelivery/orderDelivery.do" class="btnGray">목록</a>
+							<a href="<%=contextPath %>/olive/orderDelivery.do" class="btnGray">목록</a>
 						</div>
 						
 				

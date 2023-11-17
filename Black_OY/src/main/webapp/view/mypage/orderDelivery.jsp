@@ -151,7 +151,7 @@
 	
 	
 										<button type="button" class="btn_bag mgT10" name="Order"
-											onclick="<%-- 해당 상품을 장바구니에 추가하는 스크립트 --%>"
+											onclick="modalcall()"
 											data-goods-no="A000000163041" data-item-no="006"
 											data-quick-yn="N">
 											<span>장바구니 담기</span>
@@ -212,6 +212,19 @@
 		location.href = url;
 	}
 </script>
+
+<script>
+   function modalcall() {
+    $( "#dialog-message" ).dialog({
+      modal: true,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  } 
+  </script>
 
 
 <jsp:include page="/layout/footer.jsp"></jsp:include>

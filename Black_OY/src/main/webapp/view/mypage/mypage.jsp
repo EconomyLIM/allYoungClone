@@ -39,12 +39,12 @@
 						<h2 class="tit">
 							주문/배송 조회<em>(최근 1개월)</em>
 						</h2>
-						<a class="btnMore" id="orderListMore" href="<%=contextPath %>/mypage/orderDelivery/orderDelivery.do"
+						<a class="btnMore" id="orderListMore" href="<%=contextPath %>/olive/orderDelivery.do"
 							data-attr="마이페이지^주문배송조회_더보기^더보기">더보기</a>
 					</div>
 					<div class="layer_pop_wrap" id="service_survey" style=""></div>
 
-					<a href="<%=contextPath %>/mypage/orderDelivery/orderDelivery.do" class="order_view"
+					<a href="<%=contextPath %>/olive/orderDelivery.do" class="order_view"
 						data-attr="마이페이지^주문배송조회_요약건수">
 						<ul class="mypage-step">
 							<c:forEach items="${ userOrderState }" var="order">
