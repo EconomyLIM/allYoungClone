@@ -564,9 +564,9 @@
 																</div>
 															</div>
 														</div>
-														<span class="symbol">일</span> <a
-															href="https://www.cjone.com/cjmweb/my-one/coupon.do?cpn_type_cd=15"
-															class="btn btn_sm"><span class="arr">생일쿠폰 확인하기</span></a>
+														<span class="symbol">일</span> 
+														<!-- <a href="https://www.cjone.com/cjmweb/my-one/coupon.do?cpn_type_cd=15"
+															class="btn btn_sm"><span class="arr">생일쿠폰 확인하기</span></a> -->
 													</div>
 													<div class="birthday_select" id="birthday_default"
 														style="display: block">

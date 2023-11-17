@@ -150,7 +150,10 @@ public class MyPageDAOImpl implements MypageDAO {
 	public List<MpPlikeDTO> selectUserPlike(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		String sql = " SELECT ROWNUM "
-				+ " ,pdi.pro_displ_src src , b.brand_name bname, pd.pro_displ_name displname "
+				+ " ,pdi.pro_displ_src src , b.brand_name bname"
+				+ "  , cs.cat_s_id csid "
+				+ "  , cm.cat_m_id cmid "
+				+ " , pd.pro_displ_name displname "
 				+ " ,a.pro_price pricep "
 				+ " , "
 				+ " NVL(CASE  "
@@ -189,6 +192,8 @@ public class MyPageDAOImpl implements MypageDAO {
 				+ " LEFT JOIN prom_d prd ON prd.prom_d_id = pm.prom_d_id "
 				+ " LEFT JOIN prom_p prp ON prp.prom_p_id = pm.prom_p_id "
 				+ " LEFT JOIN store_stock ss ON p.pro_id = ss.pro_id "
+				+ " LEFT JOIN cate_s cs on p.cat_s_id = cs.cat_s_id "
+				+ " LEFT JOIN cate_m cm on cs.cat_m_id = cm.cat_m_id "
 				+ "  JOIN ( "
 				+ "     SELECT pro_displ_id, pro_price,  "
 				+ "         RANK() OVER (PARTITION BY pro_displ_id ORDER BY pro_price DESC) as price_rank "
@@ -211,6 +216,8 @@ public class MyPageDAOImpl implements MypageDAO {
 				dto = new MpPlikeDTO();
 				dto.setRowNum(rs.getInt("ROWNUM"));
 				dto.setPlImgsrc(rs.getString("src"));
+				dto.setPlcsid(rs.getString("csid"));
+				dto.setPlcmid(rs.getString("cmid"));
 				dto.setPlbrand(rs.getString("bname"));
 				dto.setPlpdispN(rs.getString("displname"));
 				dto.setPlpricep(rs.getString("pricep"));

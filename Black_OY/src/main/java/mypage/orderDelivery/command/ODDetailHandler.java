@@ -41,6 +41,7 @@ public class ODDetailHandler implements CommandHandler {
 		Connection conn = ConnectionProvider.getConnection();
 		
 		MPOrderDeliveryService service = MPOrderDeliveryService.getinstance();
+		
 		MypageService mpservice = MypageService.getinstance();
 		
 		

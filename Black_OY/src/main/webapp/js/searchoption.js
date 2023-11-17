@@ -147,6 +147,7 @@ function navigateToURL(url) {
 			var today = new Date();
 			var tyear = today.getFullYear();
 			var tMonth = today.getMonth();
+			var tday = today.getDate();
 			
 			//구매기간이라면
 			if ($(this).parents("ul").hasClass("select-month")) {
@@ -155,9 +156,11 @@ function navigateToURL(url) {
 				if (datemonth == "-12") {
 					$("#cal-start-year").val(tyear - 1).prop("selected", true);
 					$("#cal-start-month").val(tMonth + 1).prop("selected", true);
+					$("#cal-start-day").val(tday).prop("selected", true);
 				} else {				
 					$("#cal-start-year").val(tyear).prop("selected", true);
 					$("#cal-start-month").val(tMonth + 1 + Number(datemonth)).prop("selected", true);
+					$("#cal-start-day").val(tday).prop("selected", true);					
 				}
 								
 			} 
@@ -176,7 +179,7 @@ function navigateToURL(url) {
 			let endDate = `${eyear}-${emonth}-${edate}`;
 			
 			//구매기간, 구매조건 선택사항
-			let searchMonth = $(".select-month li.on button ").attr("data-month")
+			let searchMonth = $(".select-month li.on button ").attr("data-month");
 			let searchOrderType = $(".select-type li.on button").attr("data-order_type");
 			
 			if(dateCheck()){

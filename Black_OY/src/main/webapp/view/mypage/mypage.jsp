@@ -65,59 +65,65 @@
 					<div class="title-area mgT15">
 						<h2 class="tit">좋아요</h2>
 						<a class="btnMore" id="wishListMore"
-							href="javascript:common.link.moveWishList(getEventParameterString({t_page: '마이페이지', t_click: '좋아요'}))">더보기</a>
+							href="<%= contextPath %>/olive/Like.do">더보기</a>
 					</div>
 
 					<!-- 좋아요 상품 목록 -->
+					
 					<div class="list-four">
 
 						<ul class="cate_prd_list" id="wishList" name="wishList">
-							<!-- 상품 4개 일때 -->
-							<c:if test="${ not empty userPlike }">
-								<c:forEach items="${ userPlike }" var="pl">
-									<li data-goods-no="${ pl.plpId }">
-										<div class="prd_info">
-											<a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${pl.plpdispId}" class="prd_thumb goodsList"
-												data-ref-goodsno="${ pl.plpId }" data-ref-dispcatno=""
-												data-ref-itemno="001"><span class="thumb_flag best">베스트</span><img
-												src="${ pl.plImgsrc }" alt="${ pl.plpdispId }"
-												onerror="common.errorImg(this);"></a>
-											<div class="prd_name">
-												<a href="<%-- 상품 페이지 이동 --%>" class="goodsList"
+														
+							<c:choose>
+								<c:when test="${ not empty userPlike }">
+									<c:forEach items="${ userPlike }" var="pl">
+										<li data-goods-no="${ pl.plpId }">
+											<div class="prd_info">
+												<a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${pl.plpdispId}&displNum=${pl.plcsid}${pl.plcmid}" class="prd_thumb goodsList"
 													data-ref-goodsno="${ pl.plpId }" data-ref-dispcatno=""
-													data-ref-itemno="001"><span class="tx_brand">${ pl.plbrand }</span>
-													<p class="tx_name">${ pl.plpdispN }</p></a>
+													data-ref-itemno="001"><span class="thumb_flag best">베스트</span><img
+													src="${ pl.plImgsrc }" alt="${ pl.plpdispId }"
+													onerror="common.errorImg(this);"></a>
+												<div class="prd_name">
+													<a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${pl.plpdispId}&displNum=${pl.plcsid}${pl.plcmid}" class="goodsList"
+														data-ref-goodsno="${ pl.plpId }" data-ref-dispcatno=""
+														data-ref-itemno="001"><span class="tx_brand">${ pl.plbrand }</span>
+														<p class="tx_name">${ pl.plpdispN }</p></a>
+												</div>
+												<button class="btn_zzim jeem on"
+													data-ref-goodsno="A000000190116">
+													<span>찜하기후</span>
+												</button>
+												<p class="prd_price">
+													<span class="tx_org"><span class="tx_num">${ pl.plpricep }</span>원
+													</span><span class="tx_cur"><span class="tx_num">${ pl.plpricea }</span>원
+													</span>
+												</p>
+												<p class="prd_flag">
+													<c:if test="${ pl.pmd eq 1 }">
+														<span class="icon_flag sale">세일</span>
+													</c:if>
+													<c:if test="${ pl.pmp eq 1 }">
+														<span class="icon_flag gift">증정</span>
+													</c:if>
+													<c:if test="${ pl.pmc eq 1 }">
+														<span class="icon_flag coupon">쿠폰</span>
+													</c:if>
+													<c:if test="${	pl.stock > 0}">
+														<span class="icon_flag delivery">오늘드림</span>
+													</c:if>
+												</p>
 											</div>
-											<button class="btn_zzim jeem on"
-												data-ref-goodsno="A000000190116">
-												<span>찜하기후</span>
-											</button>
-											<p class="prd_price">
-												<span class="tx_org"><span class="tx_num">${ pl.plpricep }</span>원
-												</span><span class="tx_cur"><span class="tx_num">${ pl.plpricea }</span>원
-												</span>
-											</p>
-											<p class="prd_flag">
-												<c:if test="${ pl.pmd eq 1 }">
-													<span class="icon_flag sale">세일</span>
-												</c:if>
-												<c:if test="${ pl.pmp eq 1 }">
-													<span class="icon_flag gift">증정</span>
-												</c:if>
-												<c:if test="${ pl.pmc eq 1 }">
-													<span class="icon_flag coupon">쿠폰</span>
-												</c:if>
-												<c:if test="${	pl.stock > 0}">
-													<span class="icon_flag delivery">오늘드림</span>
-												</c:if>
-											</p>
-										</div>
-
-									</li>
-								</c:forEach>
-
-							</c:if>
-
+	
+										</li>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<li class="nodata">좋아요 상품이 없습니다.</li>
+								</c:otherwise>
+							
+							</c:choose>
+							
 						</ul>
 
 					</div>
