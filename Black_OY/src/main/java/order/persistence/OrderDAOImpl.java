@@ -298,9 +298,9 @@ public class OrderDAOImpl implements OrderDAO {
 	public int insertPayment(Connection conn, Map<String, Object> map) throws Exception {
 		int rowCount = 0;
 		
-		String sql = "INSERT INTO payment(pay_id, order_id, total_price, pay_price, pay_type, saved_money, card_type, inst_type) "
+		String sql = "INSERT INTO payment(pay_id, order_id, total_price, pay_price, delivery_price, cd_price, point_price, pay_type, saved_money, card_type, inst_type) "
 				+ " VALUES('pa_'||TO_CHAR(pay_seq.NEXTVAL, 'FM00000000'), 'or_'||TO_CHAR(order_seq.CURRVAL, 'FM00000000')"
-				+ " , ?, ?, ?, ?, ?, ?)";
+				+ " , ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement pstmt = null;
 		
@@ -308,10 +308,13 @@ public class OrderDAOImpl implements OrderDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (Integer)map.get("totalPrice"));
 			pstmt.setInt(2, (Integer)map.get("totalPay"));
-			pstmt.setString(3, (String)map.get("pay_type"));
-			pstmt.setInt(4, (int)((Integer)map.get("totalPay")*0.005));
-			pstmt.setString(5, (String)map.get("card_type"));
-			pstmt.setString(6, (String)map.get("inst_type"));
+			pstmt.setInt(3,  (Integer)map.get("delivery_price"));
+			pstmt.setInt(4, (Integer)map.get("cd_price"));
+			pstmt.setInt(5, (Integer)map.get("point_price"));
+			pstmt.setString(6, (String)map.get("pay_type"));
+			pstmt.setInt(7, (int)((Integer)map.get("totalPay")*0.005));
+			pstmt.setString(8, (String)map.get("card_type"));
+			pstmt.setString(9, (String)map.get("inst_type"));
 			
 			
 			rowCount = pstmt.executeUpdate();
@@ -402,6 +405,58 @@ public class OrderDAOImpl implements OrderDAO {
 		
 		return rowCount;
 	}
+	
+	@Override
+	public int insertToday(Connection conn, Map<String, Object> map) throws Exception {
+		int rowCount = 0;
+		
+		String sql = "INSERT INTO today_delivery(today_id, order_id, user_addr, hour_group, today_type, today_del_date, today_arrive) "
+				+ " VALUES('td_'||TO_CHAR(td_seq.NEXTVAL, 'FM00000000'), order_seq.CURRVAR, ?, ?, ?, ?, ?)";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String)map.get("user_addr"));
+			pstmt.setString(2, (String)map.get("hour_group"));
+			pstmt.setString(3, (String)map.get("today_type"));
+			pstmt.setString(4, (String)map.get("today_del_date"));
+			pstmt.setDate(5, new java.sql.Date(((Date)map.get("today_arrive")).getTime()));
+			rowCount = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+		}
+		
+		return rowCount;
+	}
+
+	@Override
+	public int insertPickup(Connection conn, Map<String, Object> map) throws Exception {
+		int rowCount = 0;
+		
+		String sql = "INSERT INTO pickup(pickup_id, order_id, store_id) "
+				+ " VALUES('op_'||TO_CHAR(op_seq.NEXTVAL, 'FM00000000'), order_seq.CURRVAR, ?)";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String)map.get("store_id"));
+			rowCount = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+		}
+		
+		return rowCount;
+	}
+
+	
 
 
 }

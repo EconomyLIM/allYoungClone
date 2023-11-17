@@ -43,7 +43,7 @@ $(function() {
 	
 	/* 큐레이션 S 구현 */ 
 	// 다른상품 추천해드릴게요 눌렀을 때
-	$("#refBtn").on("click", function() {
+/*	$("#refBtn").on("click", function() {
 		let slides = $("#main_curation02_01 .slick-slide").length;
 		let slick_index = $("#mainFullSlider .slick-slide.slick-active").data("slick-index");
 		let index = (slick_index+1)%slides;
@@ -63,7 +63,7 @@ $(function() {
 			});
 			
 		$("#contsInfoBeginNum").html(`${index+1}`);
-	});
+	});*/
 });
 
 // 매개변수를 안주면 현재페이지+1
