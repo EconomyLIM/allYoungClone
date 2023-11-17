@@ -193,8 +193,8 @@ public class LikeDAOImpl implements LikeDAO {
 			do {
 				dto = new BLikeDTO();
 				dto.setBrandN(rs.getString("brand_name"));
-				dto.setBAmount(rs.getInt("brand_like"));
-				dto.setBDisplsrc(rs.getString("brand_img_src"));
+				dto.setBamount(rs.getInt("brand_like"));
+				dto.setBdisplsrc(rs.getString("brand_img_src"));
 				list.add(dto);
 			} while (rs.next());
 			JDBCUtil.close(pstmt);

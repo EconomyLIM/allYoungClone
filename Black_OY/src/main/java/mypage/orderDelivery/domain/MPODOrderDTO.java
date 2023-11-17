@@ -15,6 +15,9 @@ public class MPODOrderDTO {
 	private String uodOrderId;	//주문배송 주문id
 	private String uodBrand;	//주문배송 브랜드명
 	private String uodDisplN;	//주문배송 상품표시명
+	private String uodDispId;	//주문배송 상품표시id
+	private String uodcsid;		//주문배송 상품소분류
+	private String uodcmid;		//주문배송 상품중분류
 	private String uodDisplsrc;	//주문배송 상품표시이미지경로
 	private String uodProN;		//주문배송 상품이름
 	private int uodamount;		//주문배송 수량(주문상품-상품수량)

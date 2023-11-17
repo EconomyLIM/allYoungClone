@@ -38,16 +38,15 @@
 				     
 				     
 					<ul class="comm1sTabs mgzero">
-						<li><a href="<%-- 상품 좋아요 페이지 이동 --%>" class="movePrdWish">상품</a></li>
+						<li><a href="<%= contextPath%>/olive/Like.do" class="movePrdWish">상품</a></li>
 						<li class="on"><a>브랜드</a></li>
-						<li><a href="#" class="moveBrndWish">브랜드</a></li>
 					</ul>
 					
 					 <c:set value="${ bLike }" var="blike" />
 					
 					<div class="result-common">
 						<span class="num">
-							<strong>전체 <em>${ fn:length(plike) }</em>개</strong>
+							<strong>전체 <em>${ fn:length(blike) }</em>개</strong>
 						</span>
 						
 						<button type="button" class="all-delete">전체 삭제</button>
@@ -68,7 +67,7 @@
 																${ bl.brandN }
 															</a>
 														</p>
-														<p class="txt">좋아요 <span>${ bl.bLikeamount }</span>
+														<p class="txt">좋아요 <span>${ bl.bamount }</span>
 															<button type="button" class="btnlike">좋아요</button>
 														</p>
 													</div>	
@@ -77,7 +76,7 @@
 															
 															
 																
-																<img onerror="this.src='https://static.oliveyoung.co.kr/pc-static-root/image/temp/img_brand_no.jpg'" src="${ bl.bDisplsrc }" alt="${ bl.brandN }">
+																<img onerror="this.src='https://static.oliveyoung.co.kr/pc-static-root/image/temp/img_brand_no.jpg'" src="${ bl.bdisplsrc }" alt="${ bl.brandN }">
 															
 															
 															
