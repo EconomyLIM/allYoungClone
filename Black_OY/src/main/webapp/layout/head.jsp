@@ -229,33 +229,32 @@
 						</c:when>
 						<c:otherwise>
 
-							<li class="logout">
-								<strong>${sessionScope.logOn.grade_id}&nbsp; 
-                  ${sessionScope.logOn.u_name}</strong> <a 
-               href="<%=contextPath %>/olive/Logout.do" data-attr="공통^헤더^로그아웃">로그아웃</a></li>
-								<li class="mypage"><a onclick="" href="<%=contextPath %>/mypage/mypageMain.do" data-attr="공통^헤더^마이페이지">마이페이지</a></li>
+							<li class="logout"><strong>${sessionScope.logOn.grade_id}&nbsp;
+									${sessionScope.logOn.u_name}</strong> <a
+								href="<%=contextPath%>/olive/Logout.do" data-attr="공통^헤더^로그아웃">로그아웃</a></li>
+							<li class="mypage"><a onclick=""
+								href="<%=contextPath%>/mypage/mypageMain.do"
+								data-attr="공통^헤더^마이페이지">마이페이지</a></li>
 
 						</c:otherwise>
 					</c:choose>
-					
+
 					<c:choose>
 						<c:when test="${empty sessionScope.logOn }">
 							<li class="cart"><a href="<%=contextPath%>/olive/basket.do"
-						data-attr="공통^헤더^장바구니">장바구니								
-									<span id="cartToCnt"></span>
-					</a></li>
+								data-attr="공통^헤더^장바구니">장바구니 <span id="cartToCnt"></span>
+							</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="cart"><a href="<%=contextPath%>/olive/basket.do"
-						data-attr="공통^헤더^장바구니">장바구니								
-									<span id="cartToCnt">
+								data-attr="공통^헤더^장바구니">장바구니 <span id="cartToCnt">
 										(${sessionScope.basketlistcnt[0] + sessionScope.basketlistcnt[1]})
-									</span>
-					</a></li>
+								</span>
+							</a></li>
 						</c:otherwise>
 					</c:choose>
 
-					
+
 
 					<li class="order"><a onclick="" href="#"
 						data-attr="공통^헤더^주문배송">주문배송</a></li>
@@ -292,7 +291,14 @@
 							<!-- 2017-02-07 수정 : 자동완성기능 영역 -->
 							<div class="auto_search_cont">
 								<div class="brand_area" id="ark_brand"></div>
-								<div class="auto_list" id="ark_w"></div>
+								<div class="auto_list" id="ark_w">
+									<ul id ="output">
+										<li id="bg0" onclick="onClickKeywordSearch('로션','0');"
+											onmouseover="onMouseOverKeyword(0);"
+											style="background-color: rgb(255, 255, 255); cursor: pointer;"><a
+											href="#" data-attr="통합^통합검색_자동완성키워드^로션"><span>로션</span></a></li>
+									</ul>
+								</div>
 							</div>
 							<!--// 2017-02-07 수정 : 자동완성기능 영역 -->
 							<!-- 최근 검색어 -->
@@ -481,67 +487,83 @@
 				<a href="#" id="btnGnbOpen" class="">카테고리</a>
 				<!-- 전체 카테고리 레이어 -->
 				<div class="layer_all_menu" id="gnbAllMenu">
-                    <ul class="all_menu_wrap">
-                        <li>
-                            <h2>뷰티</h2>
-                            <div class="sub_menu_box">
-                                <p class="sub_depth"><a
-                                        href="#"
-                                        data-ref-dispcatno="10000010001" data-attr="공통^드로우^스킨케어">스킨케어</a></p>
-                                <ul>
-                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00010001&sort=1"
-                                            data-ref-dispcatno="100000100010008" data-attr="공통^드로우^스킨케어_토너/로션/올인원"
-                                            data-trk="/">토너/로션/올인원</a></li>
-                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00010002&sort=1"
-                                            data-ref-dispcatno="100000100010009" data-attr="공통^드로우^스킨케어_에센스/크림"
-                                            data-trk="/">에센스/크림</a></li>
-                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00010003&sort=1"
-                                            data-ref-dispcatno="100000100010010" data-attr="공통^드로우^스킨케어_미스트/오일"
-                                            data-trk="/">미스트/오일</a></li>
-                                </ul>
-                                <p class="sub_depth"><a
-                                        href="#"
-                                        data-ref-dispcatno="10000010009" data-attr="공통^드로우^마스크팩">마스크팩</a></p>
-                                <ul>
-                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00020004&sort=1"
-                                            data-ref-dispcatno="100000100090001" data-attr="공통^드로우^마스크팩_시트팩"
-                                            data-trk="/">시트팩</a></li>
-                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00020005&sort=1"
-                                            data-ref-dispcatno="100000100090004" data-attr="공통^드로우^마스크팩_패드"
-                                            data-trk="/">패드</a></li>
-                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00020006&sort=1"
-                                            data-ref-dispcatno="100000100090002" data-attr="공통^드로우^마스크팩_페이셜팩"
-                                            data-trk="/">페이셜팩</a></li>
-                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00020007&sort=1"
-                                            data-ref-dispcatno="100000100090003" data-attr="공통^드로우^마스크팩_코팩/패치"
-                                            data-trk="/">코팩/패치</a></li>
-                                </ul>
-                                <p class="sub_depth"><a
-                                        href="#"
-                                        data-ref-dispcatno="10000010010" data-attr="공통^드로우^클렌징">클렌징</a></p>
-                                <ul>
-                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00030008&sort=1"
-                                            data-ref-dispcatno="100000100100001" data-attr="공통^드로우^클렌징_클렌징폼/젤"
-                                            data-trk="/">클렌징폼/젤</a></li>
-                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00030009&sort=1"
-                                            data-ref-dispcatno="100000100100002" data-attr="공통^드로우^클렌징_오일/워터/리무버"
-                                            data-trk="/">오일/워터/리무버</a></li>
-                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00030010&sort=1"
-                                            data-ref-dispcatno="100000100100003" data-attr="공통^드로우^클렌징_필링/패드"
-                                            data-trk="/">필링/패드</a></li>
-                                </ul>
-                                <p class="sub_depth"><a
-                                        href="#"
-                                        data-ref-dispcatno="10000010011" data-attr="공통^드로우^선케어">선케어</a></p>
-                                <ul>
-                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00040011&sort=1"
-                                            data-ref-dispcatno="100000100110001" data-attr="공통^드로우^선케어_선블록"
-                                            data-trk="/">선블록</a></li>
-                                    <li><a href="<%=contextPath %>/olive/pmidlistproduct.do?displNum=00040012&sort=1"
-                                            data-ref-dispcatno="100000100110002" data-attr="공통^드로우^선케어_태닝/애프터선"
-                                            data-trk="/">태닝/애프터선</a></li>
-                                </ul>
-                            </div>
+					<ul class="all_menu_wrap">
+						<li>
+							<h2>뷰티</h2>
+							<div class="sub_menu_box">
+								<p class="sub_depth">
+									<a href="#" data-ref-dispcatno="10000010001"
+										data-attr="공통^드로우^스킨케어">스킨케어</a>
+								</p>
+								<ul>
+									<li><a
+										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00010001&sort=1"
+										data-ref-dispcatno="100000100010008"
+										data-attr="공통^드로우^스킨케어_토너/로션/올인원" data-trk="/">토너/로션/올인원</a></li>
+									<li><a
+										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00010002&sort=1"
+										data-ref-dispcatno="100000100010009"
+										data-attr="공통^드로우^스킨케어_에센스/크림" data-trk="/">에센스/크림</a></li>
+									<li><a
+										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00010003&sort=1"
+										data-ref-dispcatno="100000100010010"
+										data-attr="공통^드로우^스킨케어_미스트/오일" data-trk="/">미스트/오일</a></li>
+								</ul>
+								<p class="sub_depth">
+									<a href="#" data-ref-dispcatno="10000010009"
+										data-attr="공통^드로우^마스크팩">마스크팩</a>
+								</p>
+								<ul>
+									<li><a
+										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00020004&sort=1"
+										data-ref-dispcatno="100000100090001"
+										data-attr="공통^드로우^마스크팩_시트팩" data-trk="/">시트팩</a></li>
+									<li><a
+										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00020005&sort=1"
+										data-ref-dispcatno="100000100090004"
+										data-attr="공통^드로우^마스크팩_패드" data-trk="/">패드</a></li>
+									<li><a
+										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00020006&sort=1"
+										data-ref-dispcatno="100000100090002"
+										data-attr="공통^드로우^마스크팩_페이셜팩" data-trk="/">페이셜팩</a></li>
+									<li><a
+										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00020007&sort=1"
+										data-ref-dispcatno="100000100090003"
+										data-attr="공통^드로우^마스크팩_코팩/패치" data-trk="/">코팩/패치</a></li>
+								</ul>
+								<p class="sub_depth">
+									<a href="#" data-ref-dispcatno="10000010010"
+										data-attr="공통^드로우^클렌징">클렌징</a>
+								</p>
+								<ul>
+									<li><a
+										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00030008&sort=1"
+										data-ref-dispcatno="100000100100001"
+										data-attr="공통^드로우^클렌징_클렌징폼/젤" data-trk="/">클렌징폼/젤</a></li>
+									<li><a
+										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00030009&sort=1"
+										data-ref-dispcatno="100000100100002"
+										data-attr="공통^드로우^클렌징_오일/워터/리무버" data-trk="/">오일/워터/리무버</a></li>
+									<li><a
+										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00030010&sort=1"
+										data-ref-dispcatno="100000100100003"
+										data-attr="공통^드로우^클렌징_필링/패드" data-trk="/">필링/패드</a></li>
+								</ul>
+								<p class="sub_depth">
+									<a href="#" data-ref-dispcatno="10000010011"
+										data-attr="공통^드로우^선케어">선케어</a>
+								</p>
+								<ul>
+									<li><a
+										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00040011&sort=1"
+										data-ref-dispcatno="100000100110001"
+										data-attr="공통^드로우^선케어_선블록" data-trk="/">선블록</a></li>
+									<li><a
+										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00040012&sort=1"
+										data-ref-dispcatno="100000100110002"
+										data-attr="공통^드로우^선케어_태닝/애프터선" data-trk="/">태닝/애프터선</a></li>
+								</ul>
+							</div>
 							<div class="sub_menu_box">
 								<p class="sub_depth">
 									<a href="#" data-ref-dispcatno="10000010008"
@@ -827,7 +849,8 @@
 					<li style=""><a onclick="" href="#"
 						data-ref-linkurl="main/getMembership.do" data-attr="공통^GNB^멤버십/쿠폰"><span>멤버십/쿠폰</span>
 					</a></li>
-					<li style=""><a onclick="" href="<%=contextPath %>/olive/event.do"
+					<li style=""><a onclick=""
+						href="<%=contextPath%>/olive/event.do"
 						data-ref-linkurl="main/getEventList.do" data-attr="공통^GNB^이벤트"><span>이벤트</span>
 					</a></li>
 				</ul>
@@ -871,6 +894,29 @@
 
 		</div>
 	</div>
+	<script>
+	$(document).ready(function(){
+		
+		$('#query').keyup(function(){
+			var val =$('#query').val();
+			if (val) {
+				$("#w_search_box > div.placeholder_area > label").text("");
+			}
+			$.ajax({ //ajax를 활용하여 서블릿으로 키워드 전달 
+				type: 'get',
+				url : "<%=contextPath%>/olive/search.do",
+				dataType: 'text',
+				data : {word : val},
+				success : function(response){ //통신 성공 시  기능 
+					$("#output").empty();
+					$("#output").append(response);
+				}
+			})
+		})
+	})
+	</script>
+
+
 </body>
 
 </html>

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import basket.domain.BasketDTO;
 import basket.service.BasketListService;
 import command.CommandHandler;
-
+import main.service.MainService;
 import product.domain.PMidListDTO;
 import product.domain.PbrandListDTO;
 import product.domain.PlowcateDTO;
@@ -61,6 +61,12 @@ public class BasketListHandler implements CommandHandler{
 			session.setAttribute("basketlistcnt", cnt);
 			
 		}
+		
+		MainService mainService = MainService.getinstance();
+		List<PMidListDTO> pdList = mainService.simmilarBuy(user_id);
+		
+		request.setAttribute("pdList", pdList);
+		
 		List<Integer> cnt = logOnService.basketcntService(user_id);
 		session.setAttribute("basketlistcnt", cnt);
 		
