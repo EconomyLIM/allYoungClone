@@ -54,8 +54,8 @@
 							<input type="hidden" id="svcEvtAgrYnVal" value="Y">
 							<p class="pos_chk">
 								<input type="checkbox" id="svcEvtAgrYn" class="chkSmall"
-									title="서비스·이벤트 정보 수신 동의 (선택)" checked="checked"><label
-									for="svcEvtAgrYn">동의합니다</label>
+									title="서비스·이벤트 정보 수신 동의 (선택)" checked="checked">
+									<label for="svcEvtAgrYn">동의합니다</label>
 							</p>
 						</div>
 
@@ -418,13 +418,17 @@
 					<!-- 위치정보 이용 동의 영역 -->
 
 					<div class="area1sButton pdzero mgT30">
-						<a href="javascript:;" class="btnGreen45 w150"
-							onclick="javascript:customer.mktRcvSend();return false;">저장</a>
+						<a href="javascript:;" class="btnGreen45 w150" id="save">저장</a>
 					</div>
 				</div>
 			</div>
-
 		</div>
+	<script>
+	$("#save").on("click", function (event) {
+		event.preventDefault();
+		alert("저장되었습니다.");
+	});
+	</script>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>

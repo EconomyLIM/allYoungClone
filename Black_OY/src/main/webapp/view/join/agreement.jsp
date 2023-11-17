@@ -157,6 +157,12 @@
 											}); */
 										</script>
 										<script>
+											$("#checkedAll").on("click", function (event) {
+												event.preventDefault();
+												alert("event");
+											});
+										</script>
+										<script>
 											$(".radio_btn").on("click", function () {
 												$(this).addClass("on");
 										});
@@ -1417,9 +1423,9 @@
 														class="em">미 동의 시 회원가입을 하실 수 없습니다.</strong>
 												</p>
 
-												<a href="#" onclick="javascript:viewAgrAll('view_agr_10','viewall00');"
+<!-- 												<a href="#" onclick="javascript:viewAgrAll('view_agr_10','viewall00');"
 													id="viewall00" class="btn btn_sm view_all"
-													data-control="modal">전문보기</a>
+													data-control="modal">전문보기</a> -->
 												<div class="radio_agreement">
 													<span class="radio_btn " data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -1427,10 +1433,11 @@
 														<span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
 														<input type="radio" class="chk"
 														id="svcuse_agr_typ_cd_0_disagree"
-														name="svcuse_agr_typ_cd_0" checked="checked"> <label
-														for="svcuse_agr_typ_cd_0_disagree"><span
-															class="ico"></span>미동의</label>
-													</span> <span class="radio_btn on" data-skin="accept"
+														name="svcuse_agr_typ_cd_0" checked="checked"> 
+														<label for="svcuse_agr_typ_cd_0_disagree">
+														<span class="ico"></span>미동의</label>
+													</span> 
+													<span class="radio_btn on" data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
 														<!-- <a href="#"> --> <span class="haze">동의</span><!-- </a> -->
 														<span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -1486,10 +1493,10 @@
 													이용자는 개인정보 수집 및 활용(필수)에 대한 동의를 거부할 권리가 있으나, <strong
 														class="em">미 동의 시 회원가입을 하실 수 없습니다.</strong>
 												</p>
-												<a href="#"
+<!-- 												<a href="#"
 													onclick="javascript:viewAgrAll('view_agr_11','viewall01');"
 													id="viewall01" class="btn btn_sm view_all"
-													data-control="modal">전문보기</a>
+													data-control="modal">전문보기</a> -->
 												<div class="radio_agreement">
 													<span class="radio_btn " data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -1563,10 +1570,10 @@
 
 
 
-												<a href="#"
+<!-- 												<a href="#"
 													onclick="javascript:viewAgrAll('view_agr_30','viewall02');"
 													id="viewall02" class="btn btn_sm view_all"
-													data-control="modal">전문보기</a>
+													data-control="modal">전문보기</a> -->
 												<div class="radio_agreement">
 													<span class="radio_btn " data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -1636,10 +1643,10 @@
 												</ul>
 
 
-												<a href="#"
+<!-- 												<a href="#"
 													onclick="javascript:viewAgrAll('view_agr_40','viewall03');"
 													id="viewall03" class="btn btn_sm view_all"
-													data-control="modal">전문보기</a>
+													data-control="modal">전문보기</a> -->
 												<div class="radio_agreement">
 													<span class="radio_btn " data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -1749,9 +1756,9 @@
 														</div>
 													</div>
 												</div>
-												<a href="#" class="btn btn_sm view_all" data-control="modal"
+<!-- 												<a href="#" class="btn btn_sm view_all" data-control="modal"
 													id="agr99_viewall"
-													onclick="javascript:viewCoopcoAgr99('7030', '98', 'agr99_viewall')">전문보기</a>
+													onclick="javascript:viewCoopcoAgr99('7030', '98', 'agr99_viewall')">전문보기</a> -->
 												<p class="s_txt">
 													이용자는 CJ ONE 서비스 이용약관에 대한 동의를 거부할 권리가 있으나, <strong
 														class="em">미 동의 시 회원가입을 하실 수 없습니다.</strong>
@@ -1852,9 +1859,9 @@
 															</div>
 														</div>
 													</div>
-													<a href="#" class="btn btn_sm view_all"
+													<!-- <a href="#" class="btn btn_sm view_all"
 														data-control="modal" id="agr99_sub1_viewall"
-														onclick="viewCoopcoAgr99('7030', '99', 'agr99_sub1_viewall')">전문보기</a>
+														onclick="viewCoopcoAgr99('7030', '99', 'agr99_sub1_viewall')">전문보기</a> -->
 													<p class="s_txt">
 														이용자는 CJ ONE 서비스 이용약관에 대한 동의를 거부할 권리가 있으나, <strong
 															class="em">미 동의 시 회원가입을 하실 수 없습니다.</strong>
@@ -2865,10 +2872,10 @@ ol, ul, li {
 													</div>
 													<p class="s_txt">이용자는 해당 약관에 대한 동의를 거부할 권리가 있으나, 미 동의시
 														회원가입을 하실 수 없습니다.</p>
-													<a href="#" class="btn btn_sm view_all"
+													<!-- <a href="#" class="btn btn_sm view_all"
 														data-control="modal"
 														onclick="javascript:viewCoopcoAgr('7030', '10','coopcoviewall00');"
-														id="coopcoviewall00">전문보기</a>
+														id="coopcoviewall00">전문보기</a> -->
 													<div class="radio_agreement">
 														<span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -3000,10 +3007,10 @@ ol, ul, li {
 													</div>
 													<p class="s_txt">이용자는 해당 약관에 대한 동의를 거부할 권리가 있으나, 미 동의시
 														회원가입을 하실 수 없습니다.</p>
-													<a href="#" class="btn btn_sm view_all"
+													<!-- <a href="#" class="btn btn_sm view_all"
 														data-control="modal"
 														onclick="javascript:viewCoopcoAgr('7030', '20','coopcoviewall01');"
-														id="coopcoviewall01">전문보기</a>
+														id="coopcoviewall01">전문보기</a> -->
 													<div class="radio_agreement">
 														<span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -3175,9 +3182,9 @@ ol, ul, li {
 															동의 사항으로 회원은 개인정보의 제공에 대한 동의를 거부할 수 있으며, 거부하시는 경우 관련 이벤트 및
 															프로모션 등 참여가 제한될 수 있으나 CJ ONE 멤버십 서비스 이용에는 영향을 미치지 않습니다.</li>
 													</ul>
-													<a href="javascript:void(0);" class="btn btn_sm view_all"
+													<!-- <a href="javascript:void(0);" class="btn btn_sm view_all"
 														data-control="modal"
-														onclick="omniTerms('10', '7060', '6040');">전문보기</a>
+														onclick="omniTerms('10', '7060', '6040');">전문보기</a> -->
 													<div class="radio_agreement">
 														<span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -3291,9 +3298,9 @@ ol, ul, li {
 															동의 사항으로 회원은 개인정보의 제공에 대한 동의를 거부할 수 있으며, 거부하시는 경우 관련 이벤트 및
 															프로모션 등 참여가 제한될 수 있으나 CJ ONE 멤버십 서비스 이용에는 영향을 미치지 않습니다.</li>
 													</ul>
-													<a href="javascript:void(0);" class="btn btn_sm view_all"
+													<!-- <a href="javascript:void(0);" class="btn btn_sm view_all"
 														data-control="modal"
-														onclick="omniTerms('10', '7130', '1301');">전문보기</a>
+														onclick="omniTerms('10', '7130', '1301');">전문보기</a> -->
 													<div class="radio_agreement">
 														<span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -3411,9 +3418,9 @@ ol, ul, li {
 															동의 사항으로 회원은 개인정보의 제공에 대한 동의를 거부할 수 있으며, 거부하시는 경우 관련 이벤트 및
 															프로모션 등 참여가 제한될 수 있으나 CJ ONE 멤버십 서비스 이용에는 영향을 미치지 않습니다.</li>
 													</ul>
-													<a href="javascript:void(0);" class="btn btn_sm view_all"
+													<!-- <a href="javascript:void(0);" class="btn btn_sm view_all"
 														data-control="modal"
-														onclick="omniTerms('10', '7040', '4070');">전문보기</a>
+														onclick="omniTerms('10', '7040', '4070');">전문보기</a> -->
 													<div class="radio_agreement">
 														<span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -3532,9 +3539,9 @@ ol, ul, li {
 															동의 사항으로 회원은 개인정보의 제공에 대한 동의를 거부할 수 있으며, 거부하시는 경우 관련 이벤트 및
 															프로모션 등 참여가 제한될 수 있으나 CJ ONE 멤버십 서비스 이용에는 영향을 미치지 않습니다.</li>
 													</ul>
-													<a href="javascript:void(0);" class="btn btn_sm view_all"
+													<!-- <a href="javascript:void(0);" class="btn btn_sm view_all"
 														data-control="modal"
-														onclick="omniTerms('10', '7030', '3000');">전문보기</a>
+														onclick="omniTerms('10', '7030', '3000');">전문보기</a> -->
 													<div class="radio_agreement">
 														<span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -3650,9 +3657,9 @@ ol, ul, li {
 															동의 사항으로 회원은 개인정보의 제공에 대한 동의를 거부할 수 있으며, 거부하시는 경우 관련 이벤트 및
 															프로모션 등 참여가 제한될 수 있으나 CJ ONE 멤버십 서비스 이용에는 영향을 미치지 않습니다.</li>
 													</ul>
-													<a href="javascript:void(0);" class="btn btn_sm view_all"
+													<!-- <a href="javascript:void(0);" class="btn btn_sm view_all"
 														data-control="modal"
-														onclick="omniTerms('10', '7240', '2401');">전문보기</a>
+														onclick="omniTerms('10', '7240', '2401');">전문보기</a> -->
 													<div class="radio_agreement">
 														<span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -3771,9 +3778,9 @@ ol, ul, li {
 															동의 사항으로 회원은 개인정보의 제공에 대한 동의를 거부할 수 있으며, 거부하시는 경우 관련 이벤트 및
 															프로모션 등 참여가 제한될 수 있으나 CJ ONE 멤버십 서비스 이용에는 영향을 미치지 않습니다.</li>
 													</ul>
-													<a href="javascript:void(0);" class="btn btn_sm view_all"
+													<!-- <a href="javascript:void(0);" class="btn btn_sm view_all"
 														data-control="modal"
-														onclick="omniTerms('10', '7010', '1000');">전문보기</a>
+														onclick="omniTerms('10', '7010', '1000');">전문보기</a> -->
 													<div class="radio_agreement">
 														<span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -3890,9 +3897,9 @@ ol, ul, li {
 															동의 사항으로 회원은 개인정보의 제공에 대한 동의를 거부할 수 있으며, 거부하시는 경우 관련 이벤트 및
 															프로모션 등 참여가 제한될 수 있으나 CJ ONE 멤버십 서비스 이용에는 영향을 미치지 않습니다.</li>
 													</ul>
-													<a href="javascript:void(0);" class="btn btn_sm view_all"
+													<!-- <a href="javascript:void(0);" class="btn btn_sm view_all"
 														data-control="modal"
-														onclick="omniTerms('10', '7020', '2000');">전문보기</a>
+														onclick="omniTerms('10', '7020', '2000');">전문보기</a> -->
 													<div class="radio_agreement">
 														<span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
@@ -4000,9 +4007,9 @@ ol, ul, li {
 															동의 사항으로 회원은 개인정보의 제공에 대한 동의를 거부할 수 있으며, 거부하시는 경우 관련 이벤트 및
 															프로모션 등 참여가 제한될 수 있으나 CJ ONE 멤버십 서비스 이용에는 영향을 미치지 않습니다.</li>
 													</ul>
-													<a href="javascript:void(0);" class="btn btn_sm view_all"
+													<!-- <a href="javascript:void(0);" class="btn btn_sm view_all"
 														data-control="modal"
-														onclick="omniTerms('10', '7190', '1900');">전문보기</a>
+														onclick="omniTerms('10', '7190', '1900');">전문보기</a> -->
 													<div class="radio_agreement">
 														<span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">

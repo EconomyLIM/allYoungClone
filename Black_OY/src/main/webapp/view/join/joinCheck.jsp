@@ -156,6 +156,14 @@ function checkField(event) {
 </script>
 
 <script>
+$(function () {
+    $('#mob_no').keydown(function(event) {
+    	if ( event.which == 13 ){
+    		$("#btnCheRegister").click();	
+    	}
+    });	
+});
+
 function submitForm() {
 	$("#form1").attr("action", "/Black_OY/olive/joinCheck.do");
 	$("#form1").submit(); 

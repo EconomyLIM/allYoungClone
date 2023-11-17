@@ -50,6 +50,7 @@ public class OrderDeliveryHandler implements CommandHandler {
 		
 	
 		MPOrderDeliveryService service = MPOrderDeliveryService.getinstance();
+		
 		MypageService mpservice = MypageService.getinstance();
 		
 		//초기화
