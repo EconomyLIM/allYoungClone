@@ -16,7 +16,7 @@
 	
 			<div class="mypage-head rate_04">
 				<h1 class="tit">
-					<a href="<%=contextPath %>/mypage/main/mypageMain.do">마이페이지</a>
+					<a href="<%=contextPath %>/olive/mypageMain.do">마이페이지</a>
 				</h1>
 
 				<div class="grd-box">

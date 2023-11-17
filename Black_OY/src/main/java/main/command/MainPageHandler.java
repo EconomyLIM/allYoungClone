@@ -21,10 +21,16 @@ public class MainPageHandler implements CommandHandler{
 			user_id = logOnDTO.getUser_id();
 		} // if
 		
+		// ================= 회원과 유사한 고객이 구매한 상품들 갖고오는 작업 ==================
 		MainService mainService = MainService.getinstance();
 		List<PMidListDTO> pdList = mainService.simmilarBuy(user_id);
-		
 		request.setAttribute("pdList", pdList);
+		
+		// ================= 회원을 위한 추천 상품 ==================
+		List<PMidListDTO> recommendList = mainService.recommendBuy(user_id);
+		request.setAttribute("recommendList", recommendList);
+		
+		
 		
 		return "/view/mainPage/main.jsp";
 	} // process

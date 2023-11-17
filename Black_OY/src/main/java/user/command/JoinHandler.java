@@ -58,7 +58,7 @@ public class JoinHandler implements CommandHandler{
 		//회원가입 완료 > 메인페이지로 이동
 		String location ="" ;
 		if (rowCount ==1) {
-			location = "/Black_OY/olive/LogOn.do";
+			location = "/view/logon/logon.jsp";
 		}
 		return location;
 		}

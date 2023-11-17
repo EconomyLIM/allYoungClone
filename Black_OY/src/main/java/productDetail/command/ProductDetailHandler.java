@@ -24,6 +24,7 @@ import review.domain.ReviewDTO;
 import review.domain.ReviewImgDTO;
 import review.domain.ReviewScoreDTO;
 import review.service.ReviewService;
+import user.domain.LogOnDTO;
 
 public class ProductDetailHandler implements CommandHandler{
 
@@ -171,6 +172,12 @@ public class ProductDetailHandler implements CommandHandler{
 		List<QnADetailDTO> qnaList = proDetailService.sDetailQna(goodsNo);
 		request.setAttribute("qnaList", qnaList);
 		
+		// ======================= (데이터 수집) 사용자가 조회했던 중분류 카테고리 저장 ========
+	
+		LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
+		if (logOnDTO != null || request.getParameter("displNum") != null ) {
+			int rowCnt = proDetailService.sCollectView(logOnDTO.getUser_id(), cateMId);
+		} // if
 
 		
 		

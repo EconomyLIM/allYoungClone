@@ -167,10 +167,58 @@ function navigateToURL(url) {
 			//구매기간, 구매조건 선택사항
 			let searchMonth = $(".select-month li.on button ").attr("data-month")
 			
-			//url 작성
-			var url = urlFromJSP + "?searchMonth=" + searchMonth + "&startDate=" + startDate + "&endDate=" + endDate;
+			if(dateCheck()){
+				//url 작성
+				var url = urlFromJSP + "?searchMonth=" + searchMonth + "&startDate=" + startDate + "&endDate=" + endDate + "&searchOrderType=" + searchOrderType;
+				
+				navigateToURL(url);
 			
-			navigateToURL(url);
+			} 
+			
+
 			
 		});
+		
+var dateCheck = function(){
+			let syear = $("#cal-start-year option:selected").val();
+			let smonth = $("#cal-start-month option:selected").val().padStart(2, '0');		
+			let sdate = $("#cal-start-day option:selected").val().padStart(2, '0');
+			
+			let eyear = $("#cal-end-year option:selected").val();
+			let emonth = $("#cal-end-month option:selected").val().padStart(2, '0');		
+			let edate = $("#cal-end-day option:selected").val().padStart(2, '0');
+			
+			let startDate = `${syear}-${smonth}-${sdate}`;
+			
+			let endDate = `${eyear}-${emonth}-${edate}`;
+						
+			let date12 = new Date(endDate);
+			date12.setFullYear(date12.getFullYear() + 1);
+			
+			var today = new Date();
+			let s = new Date(startDate);
+			let e = new Date(endDate);
+
+			
+			if(s > e){
+				alert("검색 종료일이 검색 시작일보다 늦어야됩니다.");
+				return false;
+			}
+			
+			if(s > today ){
+				alert("검색 시작일이 오늘보다 빨라야됩니다.");
+				return false;
+			}
+			
+			if(e >= today){
+				alert("검색 종료일이 오늘보다 빨라야 됩니다.");
+				return false;
+			}
+			
+			if( Math.abs(e - s) > Math.abs(date12 - e)  ){
+				alert("검색기간은 최대 1년 입니다.");
+				return false;
+			}
+			return true;				
+		}
 	

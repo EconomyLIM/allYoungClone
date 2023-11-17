@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import head.domain.CateMDTO;
 import head.domain.EventDTO;
 import head.domain.GiftCardDTO;
 
@@ -21,5 +22,8 @@ public interface HeadDAO {
 	List<EventDTO> selectAllEvent(Connection conn, String type) throws SQLException;
 
 	// 5. 선택한 이벤트 얻어오기
-	EventDTO selectOneEvent(Connection conn, String event_id);
+	EventDTO selectOneEvent(Connection conn, String event_id) throws SQLException;
+
+	// 6. 판매별 카테고리 중분류 이름 얻어오기
+	List<CateMDTO> selectCateMName(Connection conn) throws SQLException;
 }

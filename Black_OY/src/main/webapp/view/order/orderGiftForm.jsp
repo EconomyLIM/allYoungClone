@@ -16,6 +16,79 @@
 <body>
 
 <script>
+function formCheck() {
+	if($("#ordManNm").val() == "") {
+		alert($(this).attr("title"));
+		$("#ordManNm").focus();
+		return;
+	} else if($("#ordManCellSctNo").val() == "") {
+		alert($("#ordManCellSctNo").attr("title"));
+		$("#ordManCellSctNo").focus();
+		return;
+	} else if($("#ordManCellTxnoNo").val() == "") {
+		alert($("#ordManCellTxnoNo").attr("title"));
+		$("#ordManCellTxnoNo").focus();
+		return;
+	} else if($("#ordManCellEndNo").val() == "") {
+		alert($("#ordManCellEndNo").attr("title"));
+		$("#ordManCellEndNo").focus();
+		return;
+	} else if($("#ordManEmailAddrId").val() == "") {
+		alert($("#ordManEmailAddrId").attr("title"));
+		$("#ordManEmailAddrId").focus();
+		return;
+	} else if($("#ordManEmailAddrDmn").val() == "") {
+		alert($("#ordManEmailAddrDmn").attr("title"));
+		$("#ordManEmailAddrDmn").focus();
+		return;
+	} else if($("#rcvNm1").val() == "") {
+		alert("받는 사람 정보를 입력하세요.");
+		$("#rcvNm1").focus();
+		return;
+	} else if($("#rcvPhone1").val() == "") {
+		alert("받는 사람 정보를 입력하세요.");
+		$("#rcvPhone1").focus();
+		return;
+	}
+	
+	
+	if($("#payMethod_11").prop("checked") && $("#acqrCd").val() == "") {
+		alert("결제하실 카드를 선택하세요.");
+		return false;
+	}
+	
+	if($("#agree_1").prop("checked") == false) {
+		alert($("#agree_1").attr("title"));
+		$("#btnDetailAgree").click();
+		return false;
+	} else if($("#agree_2_1").prop("checked") == false) {
+		alert($("#agree_2_1").attr("title"));
+		$("#btnDetailAgree").click();
+		return false;
+	} else if($("#agree_2_2").prop("checked") == false) {
+		alert($("#agree_2_2").attr("title"));
+		$("#btnDetailAgree").click();
+		return false;
+	} else if($("#agree_2_3").prop("checked") == false) {
+		alert($("#agree_2_3").attr("title"));
+		$("#btnDetailAgree").click();
+		return false;
+	}
+		
+	return true;
+}
+
+	$(function() {
+		$("#btnPay").on("click", function() {
+			if(formCheck()) {
+				alert("결제 가능~~");
+				//$("#orderForm").submit();
+			}
+		});
+	})
+</script>
+
+<script>
 	$(function() {
 		// 쿠폰 얻어오기
 		$.ajax({
@@ -175,6 +248,30 @@
 		$("#CJGiftInfo > div > button").on("click", function() {
 			$("#CJGiftInfo").hide();
 			$(".dimm").remove();
+		});
+		
+		// 포인트, 기프트카드 정리
+		$("#oyGiftCard_btn").on("click", function() {
+			alert("등록된 기프트 카드가 없습니다.");
+		});
+		
+		$("#cjGiftCard_btn").on("click", function() {
+			alert("등록된 기프트 카드가 없습니다.");
+		});
+		
+		$("#cjonePnt_btn").on("click", function() {
+			if(${logOn.u_point} < 1000) {
+				alert("CJONE포인트는 최소 1,000원 이상\n보유 시 사용 가능합니다.");
+				return;
+			}
+			
+			$("#cjonePntAplyAmt").val('${logOn.u_point}');
+		});
+		
+		// 총 배송비 팝업창
+		$("#orderForm > div.order_payment_box > div.right_area > ul > li.line_top2 > span.tx_tit > button").on("click", function() {
+			$("#deliveryInfo").css("transform", "translate(-50%, -50%)").show();
+			$("body").append(dimm);
 		});
 	})
 </script>
@@ -1855,7 +1952,7 @@
                         </li>
                         
                         <li class="line_top2">
-                            <span class="tx_tit">총 배송비 <button type="button" class="btnSmall wGray" onclick="fnLayerSet('deliveryInfo', 'open');"><span>상세보기</span></button></span>
+                            <span class="tx_tit">총 배송비 <button type="button" class="btnSmall wGray"><span>상세보기</span></button></span>
                             <span class="tx_cont"><span class="tx_num" id="dlexPayAmt_span">0</span>원</span><!--
 										CJOYPF-242 :: PC ver 주문페이지 신설
 										## 포장비 추가일 경우에 추가
@@ -1878,6 +1975,7 @@
                         </li>
                         <li>
                             <span class="tx_tit"><span class="tx_num">CJ ONE</span> 포인트</span>
+                            <input type="hidden" id="point_price" name="point_price" value="0">
                             <span class="tx_cont colorOrange"><span class="tx_num" id="cjonePntAplyAmt_span">0</span>원</span>
                         </li>
                         <!-- 임직원일 경우 -->
@@ -1901,6 +1999,7 @@
                         <li class="total">
                             <span class="tx_tit">최종 결제금액</span>
                             <span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">0</span>원</span>
+                            <input type="hidden" id="totalPay" name="totalPay" value="">
                             <input type="hidden" name="remainAmt" value="23940">
                             <input type="hidden" name="ordPayAmt" value="23940">
                             <input type="hidden" name="goodsNm" value="바이오더마 하이드라비오 토너 500ml 기획(+화장솜 20매 증정)">

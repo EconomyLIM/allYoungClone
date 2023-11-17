@@ -236,7 +236,7 @@
 								<strong>${sessionScope.logOn.grade_id}&nbsp; 
                   ${sessionScope.logOn.u_name}</strong> <a 
                href="<%=contextPath %>/olive/Logout.do" data-attr="공통^헤더^로그아웃">로그아웃</a></li>
-								<li class="mypage"><a onclick="" href="<%=contextPath %>/mypage/main/mypageMain.do" data-attr="공통^헤더^마이페이지">마이페이지</a></li>
+								<li class="mypage"><a onclick="" href="<%=contextPath %>/olive/mypageMain.do" data-attr="공통^헤더^마이페이지">마이페이지</a></li>
 
 						</c:otherwise>
 					</c:choose>
@@ -827,8 +827,7 @@
                     </li>
                     <li style="">
                         <a onclick=""
-                            href="#"
-                            data-ref-linkurl="main/getBestList.do" data-attr="공통^GNB^랭킹"><span>랭킹</span>
+                            href="<%=contextPath%>/olive/ranking.do"><span>랭킹</span>
                         </a>
                     </li>
                     <li style="">

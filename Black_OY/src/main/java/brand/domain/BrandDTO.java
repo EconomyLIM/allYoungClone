@@ -1,5 +1,7 @@
 package brand.domain;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,5 +28,6 @@ public class BrandDTO { //브랜드 페이지에 사용된 객체들을 담음
        private int rev_like;
        private String rev_content;
        private int rev_grade;
+       private Date pre_reg;
       
 } // class

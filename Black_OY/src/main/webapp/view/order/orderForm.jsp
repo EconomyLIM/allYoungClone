@@ -507,7 +507,7 @@
 			}
 			
 			
-			// 오늘 드림 시 배송비 팝업창
+			// 오늘 드림 시 배송비 
 			$("#o2o_dlv_area > td > table > tbody > tr input").on("click", function() {
 				$("#dlv_dlexPayAmt1").show();
 			});

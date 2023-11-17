@@ -411,7 +411,8 @@ public class OrderDAOImpl implements OrderDAO {
 		int rowCount = 0;
 		
 		String sql = "INSERT INTO today_delivery(today_id, order_id, user_addr, hour_group, today_type, today_del_date, today_arrive) "
-				+ " VALUES('td_'||TO_CHAR(td_seq.NEXTVAL, 'FM00000000'), 'or_'||TO_CHAR(order_seq.CURRVAL, 'FM00000000'), ?, ?, ?, ?, ?)";
+				+ " VALUES('td_'||TO_CHAR(td_seq.NEXTVAL, 'FM00000000'), 'or_'||TO_CHAR(order_seq.CURRVAL, 'FM00000000') "
+				+ " , ?, ?, ?, ?, TO_DATE(?, 'YYYY-MM-DD HH24:MI'))";
 		
 		PreparedStatement pstmt = null;
 		
@@ -421,7 +422,7 @@ public class OrderDAOImpl implements OrderDAO {
 			pstmt.setString(2, (String)map.get("hour_group"));
 			pstmt.setString(3, (String)map.get("today_type"));
 			pstmt.setString(4, (String)map.get("today_del_date"));
-			pstmt.setDate(5, new java.sql.Date(((Date)map.get("today_arrive")).getTime()));
+			pstmt.setString(5, (String)map.get("today_arrive"));
 			rowCount = pstmt.executeUpdate();
 			
 		} catch (Exception e) {

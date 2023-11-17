@@ -43,13 +43,13 @@ public class MainService {
 				mainUserDTO = daoImpl.selectUserInfo(conn, userId); // 정보를 dto에 담았다.
 				System.out.println("Service.daoImpl.selectUserInfo...");
 				
-				conn = ConnectionProvider.getConnection();
+				
 				userList = daoImpl.similarUser(conn, mainUserDTO); // 나와 똑같은 타입의유저 아이디를 갖고오는 작업
 				
-				conn = ConnectionProvider.getConnection();
+				
 				displList = daoImpl.similarProduct(conn, userList); // 그 아이디들의 상품아이디를 갖고오는 작업
 				
-				conn = ConnectionProvider.getConnection();
+				
 				displProduct = daoImpl.similardispl(conn, displList); // 상품아이디를 갖고 상세정보를 가져오는 작업
 				
 				
@@ -64,4 +64,40 @@ public class MainService {
 			return displProduct; 
 			
 		} // sSelectUserInfo
+		
+		
+		public List<PMidListDTO> recommendBuy (String userId) {
+			
+			
+			Connection conn = null;
+			
+			List <String> cateMList = null;
+			int cnt = 0;
+			
+			List<PMidListDTO> recommendProduct = null;
+			try {
+				
+				conn = ConnectionProvider.getConnection();
+				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
+				
+				cateMList = daoImpl.getMidList(conn, userId); // 중분류 카테고리 갖고오기
+//				cnt = daoImpl.getListCount(conn, cateMList); // 전체 총 레코드 수 
+				
+				
+				recommendProduct = daoImpl.recommendProduct(conn, cateMList);
+				
+				
+				
+			} catch (Exception e) {
+				System.out.println("> MainService recommendBuy Exception<");
+				e.printStackTrace();
+			} finally {
+				JDBCUtil.close(conn);
+			}
+			
+			return recommendProduct;
+			
+		} // recommendBuy
+		
+		
 } //class

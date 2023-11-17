@@ -1,6 +1,8 @@
+//BRAND.JSP
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/inc/include.jspf"%>
 <%@ include file="/WEB-INF/inc/session_auth.jspf"%>
 <!DOCTYPE html>
@@ -9,12 +11,61 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	
 <script src="/Black_OY/js/head.js"></script>
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <link rel="stylesheet" href="/Black_OY/css/brand.css">
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
+
+	<script>
+		$(function() {
+			
+			$("ul.cate_list_box >  li").on("click", function(event) {
+				event.preventDefault();
+				// let sort = $(this).find("a").data("sort");
+				 let brand_id = '<%=request.getParameter("brandId")%>';
+				
+				//let dispcatno = $(this).find("a").data("ref-dispcatno");
+		
+				$.ajax({
+		            type : 'get'
+					, async : false
+					, cache: false
+					, url : '/Black_OY/GetSortBrandAjax'
+					, dataType : 'json'
+					, data : {
+						brandId : brandId 
+					}
+					, success : function(data) {
+		                console.log(data);
+		                
+		            }
+					, error : function (data, textStatus) {
+		               console.log('error');
+		            }
+		        });
+				 
+			}) 
+			
+			$("#tabitem2").on("click", function() {
+				$(this).addClass("active");
+				$(this).next().removeClass("active");
+				$("#tab-panel2").addClass("active");
+				$("#tab-panel3").removeClass("active");
+			});
+			
+			$("#tabitem3").on("click", function() {
+				$(this).addClass("active");
+				$(this).prev().removeClass("active");
+				$("#tab-panel2").removeClass("active");
+				$("#tab-panel3").addClass("active");
+				
+			})
+		})
+	</script> 
+
 	<div id="Wrapper">
 		<div id="skip_navi">
 			<a href="#Container">본문바로가기</a>
@@ -36,56 +87,40 @@
 			</div>
 			<div class="brand">
 				<h2 class="title-detail-brand">${ brand.brand_name }</h2>
-            
-
 				<div class="brand_like">
 					<a href="javascript:void(0);" data-ref-onlbrndnm="구달"
 						data-ref-onlbrndcd="A001436" id="icobrand">
 						<p class="brand">
-							<span class="icon"><span class="fw400">${ brand.brand_like }</span>명이 구달을
-								좋아합니다.</span>
+							<span class="icon"><span class="fw400">${ brand.brand_like }</span>명이
+								구달을 좋아합니다.</span>
 						</p>
 					</a>
 				</div>
-
 			</div>
-
 			<div id="brandDataSort">
-
 				<div class="brand">
 					<div class="brand_visual">
-
-
 						<div class="visual">
 							<img
 								data-original="https://image.oliveyoung.co.kr/uploads/images/display/90000020137/263/8950018296969934705.jpg"
 								alt="구달 이미지 배너입니다."
 								data-ref-link-url="https://www.oliveyoung.co.kr/store/"
-								class="completed-seq-lazyload"
-								src="${ brand.brand_img_src }">
+								class="completed-seq-lazyload" src="${ brand.brand_img_src }">
 						</div>
 						<div class="info">
 							<h4 class="vtit">${ brand.brand_summ }</h4>
-							<p class="txt">
-								${ brand.brand_expl }
-							</p>
+							<p class="txt">${ brand.brand_expl }</p>
 						</div>
-
-
 					</div>
 				</div>
-
-
 				<div class="brand" data-sort="5" id="dataSortBox" corner-no="267">
 					<div class="brandBox lineb">
 						<div class="head md">
 							<h3 class="tit">슬로-에이징 구달 스킨케어</h3>
 						</div>
-
 						<div class="mdSwiperBox">
 							<div class="mdSwiper slick-initialized slick-slider"
 								id="mdSwiper">
-
 								<div aria-live="polite" class="slick-list draggable">
 									<div class="slick-track" role="listbox"
 										style="opacity: 1; width: 1020px; transform: translate3d(0px, 0px, 0px);">
@@ -94,11 +129,9 @@
 											style="width: 1020px;" tabindex="-1" role="option"
 											aria-describedby="slick-slide00">
 											<ul class="prod-list">
-
-
 												<li>
 													<div class="prod">
-													<a
+														<a
 															href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000162323&amp;dispCatNo=90000020137&amp;trackingCd=BrandA001436_Mdpick1&amp;t_page=브랜드관&amp;t_click=테마별상품전시1_상품상세&amp;t_number=1"
 															name="BrandA001436_Mdpick1" class="thumb goodsList"
 															data-ref-goodsno="A000000162323"
@@ -217,15 +250,9 @@
 						<div class="head md">
 							<h3 class="tit">가을 햇살에는 구달 어성초 선케어</h3>
 						</div>
-
 						<div class="mdSwiperBox">
 							<div class="mdSwiper slick-initialized slick-slider"
 								id="mdSwiper">
-
-
-
-
-
 
 								<div aria-live="polite" class="slick-list draggable">
 									<div class="slick-track" role="listbox"
@@ -238,7 +265,7 @@
 
 
 												<li>
-													<div class="prod">
+													<div class="prod" id="slide">
 														<a
 															href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000182780&amp;dispCatNo=90000020137&amp;trackingCd=BrandA001436_Mdpick2&amp;t_page=브랜드관&amp;t_click=테마별상품전시2_상품상세&amp;t_number=1"
 															name="BrandA001436_Mdpick2" class="thumb goodsList"
@@ -346,7 +373,7 @@
 
 													</div>
 												</li>
-                      						 	<li></li>
+												<li></li>
 
 												<li></li>
 
@@ -377,7 +404,6 @@
 							</div>
 							<ul class="video_thumbs_box">
 
-
 								<li class="video_item on"><a href="#promotion-video-player"
 									class="video_thumbs" data-thumb-youtubeid="9HU0a9cM6tM"
 									data-attr="브랜드관^구달_동영상^#흑당근비타A 모공탄력 레티놀앰플^1" data-trk="/"
@@ -396,31 +422,13 @@
 											alt=""></span> <span class="thumb_txt">#흑당근비타A 쫀쫀탄력
 											레티놀크림</span>
 								</a></li>
-
-
 							</ul>
-
-
-
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<div class="brand">
-
-
-
-
-
-
-
-
-
-
-
-
-
 				<div class="brandBox lineb">
 					<div class="tabHead">
 						<ul class="tablist" role="tablist">
@@ -437,12 +445,6 @@
 					</div>
 
 					<div class="tabContainer">
-
-
-
-
-
-
 						<div class="tabCont active" role="tabpanel" id="tab-panel2"
 							aria-lebelledby="tabitem2">
 							<div class="itemList">
@@ -452,10 +454,6 @@
 										<button type="button" data-role="none"
 											class="slick-prev slick-arrow" aria-label="Previous"
 											role="button" style="display: block;">Previous</button>
-
-
-
-
 										<div aria-live="polite" class="slick-list draggable">
 											<div class="slick-track" role="listbox"
 												style="opacity: 1; width: 5100px; transform: translate3d(-1020px, 0px, 0px);">
@@ -467,7 +465,7 @@
 
 														<li id="">
 															<div class="prod">
-													
+
 																<a
 																	href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000165071&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=9"
 																	name="BrandA001436_Best" class="thumb goodsList"
@@ -500,7 +498,7 @@
 																		</div>
 																		<div class="flags blank"></div></a>
 																</div>
-															
+
 																<div class="prod-func">
 																	<button type="button" class="favorite btn_zzim jeem"
 																		data-ref-goodsno="A000000165071" tabindex="-1">
@@ -514,12 +512,6 @@
 
 															</div>
 														</li>
-
-
-
-
-
-
 
 														<li id="">
 															<div class="prod">
@@ -573,18 +565,8 @@
 
 															</div>
 														</li>
-
-
-
-
-
-
-
-
 														<li></li>
-
 														<li></li>
-
 													</ul>
 												</div>
 												<div class="item slick-slide slick-current slick-active"
@@ -648,13 +630,6 @@
 
 															</div>
 														</li>
-
-
-
-
-
-
-
 														<li id="bestTab2">
 															<div class="prod">
 																<a
@@ -703,13 +678,6 @@
 
 															</div>
 														</li>
-
-
-
-
-
-
-
 														<li id="bestTab3">
 															<div class="prod">
 																<a
@@ -761,16 +729,8 @@
 																		data-goods-no="A000000182780" data-item-no="001"
 																		tabindex="0">장바구니</button>
 																</div>
-
 															</div>
 														</li>
-
-
-
-
-
-
-
 														<li id="bestTab4">
 															<div class="prod">
 																<a
@@ -821,11 +781,8 @@
 																		data-goods-no="A000000189175" data-item-no="001"
 																		tabindex="0">장바구니</button>
 																</div>
-
 															</div>
 														</li>
-
-
 													</ul>
 												</div>
 												<div class="item slick-slide" data-slick-index="1"
@@ -844,9 +801,11 @@
 																	data-attr="브랜드관^구달_베스트^[단독기획] 구달 청귤 비타C 잡티케어 세럼 30ml 기획 (+세럼 10ml +마스크팩 1매 증정)"
 																	data-trk="/" tabindex="-1"
 																	onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000162325&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;7&quot;);">
-																	<img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016232526ko.jpg?l=ko"
+																	<img
+																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016232526ko.jpg?l=ko"
 																	alt="[단독기획] 구달 청귤 비타C 잡티케어 세럼 30ml 기획 (+세럼 10ml +마스크팩 1매 증정)"
-																	class="pic-thumb" onerror="common.errorImg(this);"></a>
+																	class="pic-thumb" onerror="common.errorImg(this);">
+																</a>
 																<div class="prod-info"
 																	onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000162325&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;7&quot;);">
 																	<a
@@ -886,13 +845,6 @@
 
 															</div>
 														</li>
-
-
-
-
-
-
-
 														<li id="bestTab6">
 															<div class="prod">
 																<a
@@ -940,12 +892,6 @@
 
 															</div>
 														</li>
-
-
-
-
-
-
 
 														<li id="bestTab7">
 															<div class="prod">
@@ -1228,12 +1174,6 @@
 															</div>
 														</li>
 
-
-
-
-
-
-
 														<li id="">
 															<div class="prod">
 																<a
@@ -1282,7 +1222,7 @@
 
 															</div>
 														</li>
-							<li id="">
+														<li id="">
 															<div class="prod">
 																<a
 																	href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000182780&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=3"
@@ -1404,8 +1344,10 @@
 								</div>
 							</div>
 						</div>
+						<c:forEach items="${ relist }" var="review" varStatus="status">
 						<div class="tabCont reviewPanel" role="tabpanel" id="tab-panel3"
 							aria-lebelledby="tabitem3">
+							
 							<div class="tabSwiperBox">
 								<div class="tabSwiper slick-initialized slick-slider"
 									id="reviewTabSwiper">
@@ -1426,7 +1368,7 @@
 														<p class="thum"
 															onclick="javascript:common.link.moveGoodsDetail('A000000162318', '', 'BrandA001436_Review', {t_page:'브랜드관',t_click:'리뷰_상품상세', t_number:'10'}); ">
 															<img
-																src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0016/A00000016231805ko.jpg?l=ko"
+																src="${ review.pro_displ_src }"
 																data-ref-goodsno="A000000162318"
 																alt="구달 청귤 비타C 잡티케어 세럼 마스크 1매 "
 																onerror="common.errorImg(this);"
@@ -1438,12 +1380,12 @@
 															onclick="javascript:display.brandShopDetail.amplitudeReview('A000000162318', '구달 청귤 비타C 잡티케어 세럼 마스크 1매 ', '10'); mypage.reviewerLounge.goReviewDetail('23251131', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'10'});">
 															<div class="topinfo">
 																<div class="review_stat type2">
-																	<span class="point pt5">5점</span>
+																	<span class="point pt5">${ review.rev_grade }</span>
 																</div>
-																<span class="like"><span class="icon">4</span></span>
+																<span class="like"><span class="icon">${review.rev_like }</span></span>
 															</div>
-															<dl class="retxt">
-																<dd>비타민c팩이라 하고나면 피부가 밝아보입니다. 시트팩 밀착력도 좋습니다</dd>
+															<dl class="retxt">02
+																<dd>${ review.rev_content }</dd>
 															</dl>
 															<a href="javascript:void(0);" class="btn_detail"
 																onclick="javascript:display.brandShopDetail.amplitudeReview('A000000162318', '구달 청귤 비타C 잡티케어 세럼 마스크 1매 ', '10'); mypage.reviewerLounge.goReviewDetail('23251131', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'10'});"
@@ -1951,6 +1893,7 @@
 								</div>
 							</div>
 						</div>
+					 </c:forEach>
 					</div>
 					<!--tabContainer  -->
 				</div>
@@ -1964,9 +1907,12 @@
 					<ul class="cate_list_box">
 						<li class="first on"><a href="javascript:;"
 							data-ref-dispcatno="">전체</a></li>
-						<li><a href="javascript:skin();" data-ref-dispcatno="10000010001">스킨케어</a></li>
-						<li><a href="javascript:mask();" data-ref-dispcatno="10000010009">마스크팩</a></li>
-						<li><a href="javascript:sun();" data-ref-dispcatno="10000010011">선케어</a></li>
+						<li><a href="javascript:;"
+							data-ref-dispcatno="10000010001">스킨케어</a></li>
+						<li><a href="javascript:;"
+							data-ref-dispcatno="10000010009">마스크팩</a></li>
+						<li><a href="javascript:;"
+							data-ref-dispcatno="10000010011">선케어</a></li>
 						<li class="disabled">&nbsp;</li>
 						<!-- 2017-02-03 빈 태그일때 class=disabled 추가 -->
 
@@ -1977,11 +1923,11 @@
 					<div class="cate_align_box mgT20">
 						<div class="align_sort" id="alignPrdSort">
 							<ul>
-								<li class="on"><a href="javascript:;" data-prdsoting="01">인기순</a></li>
-								<li><a href="javascript:;" data-prdsoting="02">신상품순</a></li>
-								<li><a href="javascript:;" data-prdsoting="03">판매순</a></li>
-								<li><a href="javascript:;" data-prdsoting="05">낮은 가격순</a></li>
-								<li><a href="javascript:;" data-prdsoting="09">할인율순</a></li>
+								<li class="on"><a href="javascript:;" data-sort="p">인기순</a></li>
+								<li><a href="javascript:;" data-sort="n">신상품순</a></li>
+								<li><a href="javascript:;" data-sort="s">판매순</a></li>
+								<li><a href="javascript:;" data-sort="l">낮은 가격순</a></li>
+								<li><a href="javascript:;" data-sort="d">할인율순</a></li>
 							</ul>
 						</div>
 
@@ -2007,10 +1953,10 @@
 							name="totCntFmt" value="29"> <input type="hidden"
 							id="goodsTrackingCd" name="goodsTrackingCd" value="">
 
-<ul class="prod-list goodsProd">
-						<c:forEach items="${ bsbrand }" var="dto" varStatus="status">
+						<ul class="prod-list goodsProd">
+							<c:forEach items="${ bsbrand }" var="dto" varStatus="status">
 
-							
+
 								<li data-goods-idx="1">
 									<div class="prod">
 										<a
@@ -2020,8 +1966,7 @@
 											data-ref-itemno="001"
 											data-attr="브랜드관^구달_전체상품_전체^[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획"
 											onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000162323&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_전체상품_전체&quot;, &quot;1&quot;);">
-											<img
-											src="${ dto.pro_displ_src }"
+											<img src="${ dto.pro_displ_src }"
 											alt="[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획"
 											class="pic-thumb" onerror="common.errorImg(this);"> <span
 											class="flag-badge best">베스트</span>
@@ -2036,15 +1981,14 @@
 												class="goodsList" data-ref-goodsno="A000000162323"
 												data-ref-dispcatno="9000002" data-ref-itemno="001"
 												data-attr="브랜드관^구달_전체상품_전체^[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획">
-												<span class="prod-name double-line">[한정기획] 구달 청귤 비타C
-													잡티케어 세럼 50ml+31ml 증정 기획</span>
+												<span class="prod-name double-line">${dto.pro_displ_name }</span>
 											</a>
 											<div class="price-info">
 												<div class="discount">
-													<span class="origin">43,000원</span>
+													<span class="origin"><fmt:formatNumber value="${dto.pro_price }" groupingUsed="true"/>원</span>
 												</div>
 												<div class="price">
-													<strong class="total">30,960<span class="won">원</span></strong>
+												<strong class="total">30,960<span class="won">원</span></strong>
 													<span class="oneday">오늘드림</span>
 												</div>
 												<div class="rating">
@@ -2074,23 +2018,16 @@
 										</div>
 									</div>
 								</li>
-							
-
-						</c:forEach>
-</ul>
 
 
-
-
-
-
+							</c:forEach>
+						</ul>
 						<div class="pageing">
 							<strong title="현재 페이지">1</strong> <a href="javascript:void(0);"
 								data-page-no="2">2</a>
+								
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 		</div>
@@ -2169,6 +2106,22 @@
 		<jsp:include page="/layout/footer.jsp"></jsp:include>
 	</div>
 </body>
+<script>
+var slideIndex = 4;
+showSlides(slideIndex);
+function showSlides(n) {
+	var slides = document.getElementsByClassName("slide");
+	var dots = document.getElementsByClassName("dot");
+	//alert(slides.length); //div태그 3개니까 3
+	//모든 slides 숨기기
+	for (var i = 0; i < slides.length; i++) {
+		slides[i].style.display="none"; //모든 div태그 숨기겠다
+		dots[i].classList.remove("active"); //active라는 클래스가 있다면 다 지우고
+	}
+	slides[n-1].style.display="block"; //매개변수(n)로 넘겨받은 번호 div는 보이게
+	dots[n-1].classList.add("active");
+</script>
+
 
 
 </html>

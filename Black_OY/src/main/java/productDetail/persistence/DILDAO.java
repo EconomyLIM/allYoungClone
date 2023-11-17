@@ -3,7 +3,7 @@ package productDetail.persistence;
 import java.sql.Connection;
 
 public interface DILDAO {
-	//DetailBrandLike
+	//DetailItemLike
 	
 	// 1.좋아요 버튼을 누르면 데이터에 추가하는 작업
 	public boolean addLike(Connection conn, String userId, String proid) throws Exception;

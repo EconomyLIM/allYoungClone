@@ -15,6 +15,7 @@ import mypage.orderDelivery.domain.MPODOrderDTO;
 import mypage.orderDelivery.domain.MPODdeliveryDTO;
 import mypage.orderDelivery.domain.MPODpaymentDTO;
 import mypage.orderDelivery.service.MPOrderDeliveryService;
+import user.domain.LogOnDTO;
 
 public class OrderDeliveryHandler implements CommandHandler {
 
@@ -22,15 +23,12 @@ public class OrderDeliveryHandler implements CommandHandler {
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
-/*
-		String method = request.getMethod();
-		if (method.equals("GET")) {
-			return "/view/mypage/orderDelivery.jsp";
-			
-		} else {
-*/
-		
+
 		String userId = null;
+		
+		String start = null;
+		String end = null;
+		String type = null;
 		
 		//주문번호 가져오는 방법 생각해보기
 		String orderId = null;
@@ -40,11 +38,17 @@ public class OrderDeliveryHandler implements CommandHandler {
 		//회원id가져오기
 		
 		// 현재 로그인 한 유저 id 가져올려면 아래 코드 쓰면 됨
-		//LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
-		//userId = logOnDTO.getUser_id();
+		LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
+		userId = logOnDTO.getUser_id();
 		
-		userId = "admin";	//request.getParameter("userId");
+		//userId = "admin";			
 		
+		//검색에 필요한 요소 가져오기
+		start = request.getParameter("startDate");
+		end = request.getParameter("endDate");
+		type = request.getParameter("searchOrderType");
+		
+	
 		MPOrderDeliveryService service = MPOrderDeliveryService.getinstance();
 		MypageService mpservice = MypageService.getinstance();
 		
@@ -58,9 +62,7 @@ public class OrderDeliveryHandler implements CommandHandler {
 
 		//주문배송
 		List<MPODOrderDTO> orderList = null;
-		List<MPODOrderDTO> detailList = null;
-		List<MPODdeliveryDTO> deliveryList = null;
-		List<MPODpaymentDTO> paymentList = null;
+
 		
 		//유저정보
 		userInfo = mpservice.mpUIservice(userId);
@@ -69,11 +71,22 @@ public class OrderDeliveryHandler implements CommandHandler {
 		userDeposit = mpservice.mpUDservice(userId);
 		userRevCount = mpservice.mpURservice(userId);
 		
-		//주문배송
-		orderList = service.mpODorderService(userId);
-		detailList = service.mpODorderdetailService(orderId);
-		deliveryList = service.mpODdeliveryService(orderId);
-		paymentList = service.mpODpaymentService(orderId);
+		//주문배송		
+		if (start == null) {			
+			orderList = service.mpODorderService(userId);
+		} else if (type.equals("")) {			
+			orderList = service.mpODorderSearchService(userId, start, end);
+			
+		} else if (type.equals("10")) {
+			type = "온라인";
+			orderList = service.mpODorderSearchService(userId, start, end, type);
+			
+		}  else {
+			type = "매장";
+			orderList = service.mpODorderSearchService(userId, start, end, type);
+			
+		}
+		
 		
 		//유저정보
 		request.setAttribute("userInfo", userInfo);
@@ -84,9 +97,6 @@ public class OrderDeliveryHandler implements CommandHandler {
 		
 		//주문배송
 		request.setAttribute("orderList", orderList);
-		request.setAttribute("detailList", detailList);
-		request.setAttribute("deliveryList", deliveryList);
-		request.setAttribute("paymentList", paymentList);
 		
 		return "/view/mypage/orderDelivery.jsp";
 		//}//if
