@@ -149,6 +149,9 @@ public class OrderHandler implements CommandHandler {
 				Date today_arrive = new Date();
 				int addHour = (int)(Math.random()*3)+1;
 				today_arrive.setHours(today_arrive.getHours() + addHour);
+				String pattern = "yyyy-MM-dd HH:mm";
+				SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+				String ta_str = sdf.format(today_arrive);
 				
 				// 걸린 시간 그룹
 				String hour_group = "";
@@ -169,8 +172,8 @@ public class OrderHandler implements CommandHandler {
 				if(today_date.equals("익일")) {
 					d.setDate(d.getDate()+1);				
 				}
-				String pattern = "yyyy.MM.dd";
-				SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+				pattern = "yyyy.MM.dd";
+				sdf = new SimpleDateFormat(pattern);
 				sdf.format(d);
 				String today_del_date = sdf.format(d);
 				
@@ -178,14 +181,14 @@ public class OrderHandler implements CommandHandler {
 				System.out.println(
 							"\nregion : " + region
 							+ "\ntoday_type : " + today_type
-							+ "\ntoday_arr : " + today_arrive.toLocaleString()
+							+ "\ntoday_arr : " + ta_str
 							+ "\nhour_group : " + hour_group
-							+ "\today_del_date : " + today_del_date	
+							+ "\ntoday_del_date : " + today_del_date	
 						);
 				
 				map.put("region", region);
 				map.put("today_type", today_type);
-				map.put("today_arrive", today_arrive);
+				map.put("today_arrive", ta_str);
 				map.put("hour_group", hour_group);
 				map.put("today_del_date", today_del_date);
 			}
