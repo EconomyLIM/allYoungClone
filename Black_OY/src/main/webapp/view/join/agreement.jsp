@@ -1433,11 +1433,10 @@
 														<span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
 														<input type="radio" class="chk"
 														id="svcuse_agr_typ_cd_0_disagree"
-														name="svcuse_agr_typ_cd_0" checked="checked"> 
-														<label for="svcuse_agr_typ_cd_0_disagree">
-														<span class="ico"></span>미동의</label>
-													</span> 
-													<span class="radio_btn on" data-skin="accept"
+														name="svcuse_agr_typ_cd_0" checked="checked"> <label
+														for="svcuse_agr_typ_cd_0_disagree"><span
+															class="ico"></span>미동의</label>
+													</span> <span class="radio_btn on" data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
 														<!-- <a href="#"> --> <span class="haze">동의</span><!-- </a> -->
 														<span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -1497,26 +1496,21 @@
 													onclick="javascript:viewAgrAll('view_agr_11','viewall01');"
 													id="viewall01" class="btn btn_sm view_all"
 													data-control="modal">전문보기</a> -->
-												<div class="radio_agreement">
-													<span class="radio_btn " data-skin="accept"
-														data-checked-text="선택됨" data-unchecked-text="미선택됨">
-														<a href="#"> <span class="haze">미동의<span>선택됨</span></span>
-													</a> <span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
+												<div class="radio_agreement"> 
+													<span class="radio_btn " data-skin="accept" 	data-checked-text="선택됨" data-unchecked-text="미선택됨">
+														<a href="#"><span class="haze">미동의<span>선택됨</span></span></a> 
+													<span class="hide"><span class="haze">미동의<span>선택불가</span></span>
+													</span>
 
-														<input type="radio" class="chk"
-														id="svcuse_agr_typ_cd_1_disagree"
-														name="svcuse_agr_typ_cd_1" checked="checked"> <label
-														for="svcuse_agr_typ_cd_1_disagree"><span
-															class="ico"></span>미동의</label>
-													</span> <span class="radio_btn on" data-skin="accept"
-														data-checked-text="선택됨" data-unchecked-text="미선택됨">
-														<a href="#"> <span class="haze">동의<span>미선택됨</span></span>
-													</a> <span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
+														<input type="radio" class="chk" id="svcuse_agr_typ_cd_1_disagree"
+														name="svcuse_agr_typ_cd_1" checked="checked">
+														<label for="svcuse_agr_typ_cd_1_disagree"><span class="ico"></span>미동의</label></span>
+													 <span class="radio_btn on" data-skin="accept" 	data-checked-text="선택됨" data-unchecked-text="미선택됨">
+														<a href="#"> <span class="haze">동의<span>미선택됨</span></span></a>
+														<span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
 														<input type="radio" class="chk" id="svcuse_agr_typ_cd_1_agree" value="11"
-														name="svcuse_agr_typ_cd_1"> <label
-														for="svcuse_agr_typ_cd_1_agree"><span class="ico"></span>동의</label>
-													</span> <input type="hidden" name="effchar1" id="1" value="Y"
-														title="개인정보 수집 및 활용 동의">
+														name="svcuse_agr_typ_cd_1"> <label for="svcuse_agr_typ_cd_1_agree"><span class="ico"></span>동의</label>
+													</span> <input type="hidden" name="effchar1" id="1" value="Y" title="개인정보 수집 및 활용 동의">
 												</div>
 											</div>
 

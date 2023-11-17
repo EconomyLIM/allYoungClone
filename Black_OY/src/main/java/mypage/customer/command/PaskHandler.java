@@ -11,7 +11,7 @@ import user.domain.LogOnDTO;
 import user.service.PwdUpdateService;
 
 public class PaskHandler implements CommandHandler{
-
+//	미완성
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("> pAsk.process...");
@@ -26,10 +26,11 @@ public class PaskHandler implements CommandHandler{
 		}
 		
 		MpPAskDTO askDto = null;
-		
+	
 		String user_id = request.getParameter("user_id");
 		String paskcateId = request.getParameter("PaskcateId");
 		String paskQuestion = request.getParameter("inqCont");
+		askDto = new MpPAskDTO();
 		
 		CustomerService service = CustomerService.getInstance();
 		int rowCount = service.addPask( askDto, logDto.getUser_id() );
