@@ -497,7 +497,7 @@
 
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 
-<!--  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36d928ed3fda62efe8373b73be2275c2"></script>  -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36d928ed3fda62efe8373b73be2275c2"></script>
 <script>
 	// 지도 
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

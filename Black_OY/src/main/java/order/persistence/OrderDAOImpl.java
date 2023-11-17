@@ -405,13 +405,40 @@ public class OrderDAOImpl implements OrderDAO {
 		
 		return rowCount;
 	}
+	
+	@Override
+	public int insertToday(Connection conn, Map<String, Object> map) throws Exception {
+		int rowCount = 0;
+		
+		String sql = "INSERT INTO today_delivery(today_id, order_id, user_addr, hour_group, today_type, today_del_date, today_arrive) "
+				+ " VALUES('td_'||TO_CHAR(td_seq.NEXTVAL, 'FM00000000'), 'or_'||TO_CHAR(order_seq.CURRVAL, 'FM00000000'), ?, ?, ?, ?, ?)";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String)map.get("region"));
+			pstmt.setString(2, (String)map.get("hour_group"));
+			pstmt.setString(3, (String)map.get("today_type"));
+			pstmt.setString(4, (String)map.get("today_del_date"));
+			pstmt.setDate(5, new java.sql.Date(((Date)map.get("today_arrive")).getTime()));
+			rowCount = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+		}
+		
+		return rowCount;
+	}
 
 	@Override
 	public int insertPickup(Connection conn, Map<String, Object> map) throws Exception {
 		int rowCount = 0;
 		
-		String sql = "INSERT INTO pickup(픽업ID, 주문ID, 매장ID) "
-				+ " VALUES('op_'||TO_CHAR(op_seq.NEXTVAL, 'FM00000000'), order_seq.CURRVAR, ?)";
+		String sql = "INSERT INTO pickup(pickup_id, order_id, store_id) "
+				+ " VALUES('op_'||TO_CHAR(op_seq.NEXTVAL, 'FM00000000'), 'or_'||TO_CHAR(order_seq.CURRVAL, 'FM00000000'), ?)";
 		
 		PreparedStatement pstmt = null;
 		
@@ -428,6 +455,8 @@ public class OrderDAOImpl implements OrderDAO {
 		
 		return rowCount;
 	}
+
+	
 
 
 }
