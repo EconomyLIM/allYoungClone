@@ -1,5 +1,6 @@
 package order.command;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -107,7 +108,8 @@ public class OrderHandler implements CommandHandler {
 			 * 3. 쿠폰 할인금액
 			 * 4. 할부 종류
 			 * 5. 선물포장 여부
-			 * 6.포인트 결제 금액
+			 * 6. 포인트 결제 금액
+			 * 7. 어느 버튼을 누르고 왔는지 ex) 장바구니 또는 상품상세페이지
 			 */
 			String today_opt = request.getParameter("quickYN");				// 오늘 드림 여부
 			String pickupYN = request.getParameter("pickupYN");				// 픽업 여부
@@ -115,14 +117,13 @@ public class OrderHandler implements CommandHandler {
 			String inst_type = request.getParameter("instMmCnt");			// 할부종류
 			String cd_price = request.getParameter("cd_price"); 			// 쿠폰할인금액
 			String point_price = request.getParameter("point_price"); 		// 포인트 결제 금액
+			String click = request.getParameter("click");					// 어떤 버튼을 누르고 주문페이지로 온지 
 			
 			
 			/*
 			 * 오늘드림 선택 시 가져와야할 파라미터
 			 * 1. 배송 구분
 			 */
-			String today_param = request.getParameter("dlv_nextdayDlvSp3"); // ex) 금일-34배송
-			String today_type = today_param.split("-")[1];					// 배송 구분
 			
 			
 			/*
@@ -131,13 +132,57 @@ public class OrderHandler implements CommandHandler {
 			if(today_opt.equals("Y")) {
 				String region = request.getParameter("region");		// 고객 주소 동네
 				region = region.split(" ")[1];
-				// 걸린 시간 그룹
-				// 배송 예정 일시
-				String today_del_date;
-				Date d = new Date();
 				
-				// 오늘 드림 주문 여부
+				// 배송 구분
+				String today_param = request.getParameter("temp_chk"); // ex) 금일-34배송
+				String[] today_date_type = today_param.split("-");
+				String today_date = today_date_type[0];					// 금일 or 익일
+				String today_type = today_date_type[1];					// 배송 구분
+				
+				
 				// 오늘 드림 도착 시간
+				Date today_arrive = new Date();
+				int addHour = (int)(Math.random()*3)+1;
+				today_arrive.setHours(today_arrive.getHours() + addHour);
+				
+				// 걸린 시간 그룹
+				String hour_group = "";
+				Date currDate = new Date();
+				String currStr = currDate.getHours() + "" + currDate.getMinutes();
+				String todayStr = today_arrive.getHours() + "" + today_arrive.getMinutes();
+				int diff = Integer.parseInt(todayStr) - Integer.parseInt(currStr);
+				if(diff < 100) {
+					hour_group = "1시간 이내";
+				} else if(diff < 200) {
+					hour_group = "1시간~2시간";
+				} else if(diff < 300) {
+					hour_group = "2시간~3시간";
+				}
+				
+				// 배송 예정 일시
+				Date d = new Date();
+				if(today_date.equals("익일")) {
+					d.setDate(d.getDate()+1);				
+				}
+				String pattern = "yyyy.MM.dd";
+				SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+				sdf.format(d);
+				String today_del_date = sdf.format(d);
+				
+				
+				System.out.println(
+							"\nregion : " + region
+							+ "\ntoday_type : " + today_type
+							+ "\ntoday_arr : " + today_arrive.toLocaleString()
+							+ "\nhour_group : " + hour_group
+							+ "\today_del_date : " + today_del_date	
+						);
+				
+				map.put("region", region);
+				map.put("today_type", today_type);
+				map.put("today_arrive", today_arrive);
+				map.put("hour_group", hour_group);
+				map.put("today_del_date", today_del_date);
 			}
 			
 			
@@ -145,7 +190,7 @@ public class OrderHandler implements CommandHandler {
 			 * 픽업 선택 시 가져와야할 파라미터
 			 * 1. 매장 ID
 			 */
-			String store_id = request.getParameter("mapList");
+			String store_id = request.getParameter("mapList"); // jsp 작업 해야함***********
 			
 			
 			System.out.println("delivery_id : " + delivery_id
@@ -163,6 +208,7 @@ public class OrderHandler implements CommandHandler {
 						+ "\npackaging_opt : " + packaging_opt
 						+ "\ncd_price : " + cd_price
 						+ "\npoint_price : " + point_price
+						+ "\nclick : " + click
 					);
 			
 			map.put("delivery_id", delivery_id);
@@ -183,6 +229,7 @@ public class OrderHandler implements CommandHandler {
 			map.put("inst_type", inst_type);
 			map.put("point_price", Integer.parseInt(point_price));
 			map.put("store_id", store_id);
+			map.put("click", click);
 			
 			
 			boolean flag = service.orderService(map);

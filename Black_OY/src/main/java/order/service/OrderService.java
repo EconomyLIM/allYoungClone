@@ -141,7 +141,7 @@ public class OrderService {
 			dao.updateUserPoint(conn, (String)map.get("user_id"), (int)((Integer)map.get("totalPay")*0.005));
 			
 			if(map.get("today_opt").equals("Y")) {
-				//dao.insertToday(conn, map);
+				dao.insertToday(conn, map);
 			}
 			
 			if(map.get("pickupYN").equals("Y")) {
