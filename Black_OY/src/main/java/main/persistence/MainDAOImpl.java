@@ -264,13 +264,13 @@ public class MainDAOImpl implements MainDAO{
 	// =========================== 갖고온 product_id 상품 표시 하는 리스트 ===========================
 	@Override
 	public List<String> getMidList(Connection conn, String userId) throws Exception {
-		String sql = " SELECT * FROM ( "
+		String sql = " SELECT cat_m_id FROM ( "
 				+ " SELECT cat_m_id FROM user_view "
 				+ " WHERE user_id = ? "
 				+ " GROUP BY cat_m_id "
 				+ " ORDER BY count(*) DESC "
 				+ " ) "
-				+ " WHERE ROWNUM <= 2; ";
+				+ " WHERE ROWNUM <= 2 ";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -291,7 +291,7 @@ public class MainDAOImpl implements MainDAO{
 			} //if
 
 		} catch (SQLException e) {
-			System.out.println(">MainDAOImpl similardispl SQLException<");
+			System.out.println("***>MainDAOImpl similardispl SQLException<***");
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(">MainDAOImpl similardispl Exception<");
@@ -299,7 +299,7 @@ public class MainDAOImpl implements MainDAO{
 		} finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
-			JDBCUtil.close(conn);
+		
 		} //try_catch
 
 		return list;
@@ -360,7 +360,6 @@ public class MainDAOImpl implements MainDAO{
 				+ " WHERE cat_m_id IN ( ";
 
 		for (int i = 0; i < cateMlist.size(); i++) {
-
 			if (i == cateMlist.size() -1) {
 				sql += " ? ";
 			} else{
