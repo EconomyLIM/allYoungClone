@@ -827,8 +827,7 @@
                     </li>
                     <li style="">
                         <a onclick=""
-                            href="#"
-                            data-ref-linkurl="main/getBestList.do" data-attr="공통^GNB^랭킹"><span>랭킹</span>
+                            href="<%=contextPath%>/olive/ranking.do"><span>랭킹</span>
                         </a>
                     </li>
                     <li style="">

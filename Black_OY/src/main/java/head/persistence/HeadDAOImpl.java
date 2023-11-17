@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.util.JDBCUtil;
 
+import head.domain.CateMDTO;
 import head.domain.EventDTO;
 import head.domain.GiftCardDTO;
 
@@ -175,7 +176,7 @@ public class HeadDAOImpl implements HeadDAO {
 		return list;
 	}
 	@Override
-	public EventDTO selectOneEvent(Connection conn, String event_id) {
+	public EventDTO selectOneEvent(Connection conn, String event_id) throws SQLException {
 		EventDTO dto = null;
 		
 		String sql = "SELECT * "
@@ -213,6 +214,41 @@ public class HeadDAOImpl implements HeadDAO {
 		}
 		
 		return dto;
+	}
+	@Override
+	public List<CateMDTO> selectCateMName(Connection conn) throws SQLException {
+		List<CateMDTO> list = null;
+		CateMDTO dto = null;
+		String sql = "";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					dto = CateMDTO.builder()
+							.cat_l_id(rs.getString("cat_l_id"))
+							.cat_m_id(rs.getString("cat_m_id"))
+							.cat_m_name(rs.getString("cat_m_name"))
+							.build();
+					
+					list.add(dto);
+				} while (rs.next());
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+		}
+		
+		return list;
 	}
 
 }
