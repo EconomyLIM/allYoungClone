@@ -35,11 +35,11 @@ public class GetSortBrandAjax extends HttpServlet {
       
       this.brandDao = new BrandDAOImpl();
       List<BrandDTO> list = null;
-      
+     
       try {
          list = brandDao.getSortBrands(brand_id, dispcatno);
       } catch (Exception e) {
-         
+        
          e.printStackTrace();
       }
       

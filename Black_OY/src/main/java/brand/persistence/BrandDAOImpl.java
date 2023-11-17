@@ -16,6 +16,7 @@ import brand.domain.BrandDTO;
 public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블과 관련된 쿼리 실행 
 
 
+
    //브랜드 가져오기 (브랜드페이지, 브랜드사진 이름, 요악 부분) 
    @Override
    public BrandDTO getBrands(String brandId) throws Exception {
@@ -251,7 +252,7 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
             + " JOIN PRODUCT P ON PD.PRO_DISPL_ID = P.PRO_DISPL_ID "
             + " JOIN PRO_DISPL_IMG PDI ON PD.PRO_DISPL_ID = PDI.PRO_DISPL_ID "
             + " WHERE PD.BRAND_ID = ? ";   
-            
+           
          /*
             if(sort !=null ) {
                sql += " AND P.CAT_M_ID = ? ";

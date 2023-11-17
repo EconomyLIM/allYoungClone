@@ -14,7 +14,7 @@
    <jsp:include page="/layout/head.jsp"></jsp:include>
    // A 누르면 구현 페이지
    <a href="/Black_OY/brand/product.do?brandId=br_00000107">A</a>
-
+   
    <!-- http://localhost/Black_OY/brand/product.do?brandId=br_00000107 -->
    페이지 확인 링크
    

@@ -19,7 +19,7 @@ public class BrandHandler implements CommandHandler {
    
    
    
-   
+  
    /*
           public void init() {
               brandDao = new BrandDAOImpl(); // DAO 구현체 초기화
@@ -99,7 +99,7 @@ public class BrandHandler implements CommandHandler {
       //      request.setAttribute("lowpri", lowpri);
       //      request.setAttribute("relist", relist);
         
-      
+  
 
 
       // JSP 페이지로 요청 전달

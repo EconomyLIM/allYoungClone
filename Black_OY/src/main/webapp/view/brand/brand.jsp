@@ -1988,7 +1988,7 @@
 													<span class="origin"><fmt:formatNumber value="${dto.pro_price }" groupingUsed="true"/>원</span>
 												</div>
 												<div class="price">
-													<strong class="total">30,960<span class="won">원</span></strong>
+												<strong class="total">30,960<span class="won">원</span></strong>
 													<span class="oneday">오늘드림</span>
 												</div>
 												<div class="rating">

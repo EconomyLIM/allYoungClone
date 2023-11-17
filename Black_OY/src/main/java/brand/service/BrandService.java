@@ -88,7 +88,7 @@ public class BrandService {
       return newBrands;
    }
 
- 
+
      /*
    // 브랜드 제품 낮은가격순으로 가져오기
    public List<BrandDTO> getProductsByCatSAndPrice(String brandId, String catSId) throws Exception {
