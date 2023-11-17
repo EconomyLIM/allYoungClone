@@ -15,7 +15,6 @@
 </head>
 <body>
 <jsp:include page="/layout/head.jsp"></jsp:include>
-<xmp>주문배송 뷰</xmp>
 
 
 	<div id="Container">
@@ -112,12 +111,13 @@
 	
 									<li class="color1s">${ ol.uodOrderId }</li>
 	
-									<li><a href="javascript:void(0);" class="btnDetail"
+									<li><a href="#" class="btnDetail"
 										data-oper-dt="2023.11.03" data-origin-bizpl-cd=""
 										data-pos-no="" data-receipt-no="" data-deal-sp=""
 										data-frst-receipt-no=""
-										onclick="<%-- 주문 상세보기 페이지 --%>">상세보기</a>
+										onclick="javascript:redirectDetail('${ol.uodOrderId}')">상세보기</a>
 									</li>
+										
 	
 								</ul>
 							</td>
@@ -151,7 +151,7 @@
 	
 	
 										<button type="button" class="btn_bag mgT10" name="Order"
-											onclick="<%-- 해당 상품을 장바구니에 추가하는 스크립트 --%>"
+											onclick="modalcall()"
 											data-goods-no="A000000163041" data-item-no="006"
 											data-quick-yn="N">
 											<span>장바구니 담기</span>
@@ -206,7 +206,25 @@
 		</div>
 
 	</div>
+<script>
+	function redirectDetail(orderId) {
+		var url = '<%= contextPath %>/olive/orderDeliveryDetail.do' + '?orderId=' + encodeURIComponent(orderId);
+		location.href = url;
+	}
+</script>
 
+<script>
+   function modalcall() {
+    $( "#dialog-message" ).dialog({
+      modal: true,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  } 
+  </script>
 
 
 <jsp:include page="/layout/footer.jsp"></jsp:include>

@@ -18,9 +18,9 @@
 					<ul>
 						<li><h2>마이 쇼핑</h2>
 							<ul>
-								<li class="subMenu"><a href="<%=contextPath %>/mypage/orderDelivery/orderDelivery.do"
+								<li class="subMenu"><a href="<%=contextPath %>/olive/orderDelivery.do"
 									mymenuid="0101"
-									data-ref-linkurl="<%=contextPath %>/mypage/orderDelivery/orderDelivery.do"
+									data-ref-linkurl="<%=contextPath %>/olive/orderDelivery.do"
 									data-attr="마이페이지^메뉴^주문/배송 조회" data-tracking-name="주문배송조회 클릭"
 									data-tracking-properties="t_page=마이페이지&amp;t_click=주문배송조회">주문/배송
 										조회</a></li>

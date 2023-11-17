@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MpUserInfoDTO {
 	
+	private String uId;			//회원id
 	private String ugrade;		//등급명
 	private String uname;		//회원이름
 	

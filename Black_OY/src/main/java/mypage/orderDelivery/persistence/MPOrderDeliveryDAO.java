@@ -1,6 +1,7 @@
 package mypage.orderDelivery.persistence;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 
 import mypage.orderDelivery.domain.MPODOrderDTO;
@@ -23,8 +24,11 @@ public interface MPOrderDeliveryDAO {
 	//4. 상세보기 결제정보 가져오기(커넥션 객체, 주문id)
 	List<MPODpaymentDTO> selectUOPayment(Connection conn, String oId) throws Exception;
 	
-	//5. 지정된 날짜별로 검색된 주문상품 목록 가져오기(커넥션 객체, 회원id, 시작날짜, 종료날짜, 구매유형)
-	List<MPODOrderDTO> searchUOrder(Connection conn, String uId, int start, int end, String type) throws Exception;
+	//5. 지정된 날짜, 유형별로 검색된 주문상품 목록 가져오기(커넥션 객체, 회원id, 시작날짜, 종료날짜, 구매유형)
+	List<MPODOrderDTO> searchUOrder(Connection conn, String uId, String start, String end, String type) throws Exception;
+
+	//6. 지정된 날짜별로 검색된 주문상품 목록 가져오기
+	List<MPODOrderDTO> searchUOrder(Connection conn, String uId, String start, String end) throws Exception;
 	
 	
 

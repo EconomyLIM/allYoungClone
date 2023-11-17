@@ -27,7 +27,7 @@ public class MyPageDAOImpl implements MypageDAO {
 	@Override
 	public List<MpUserInfoDTO> selectUserInfo(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT gr_name, u_name  "
+		String sql = " SELECT gr_name, u_name, user_id  "
 				+ " FROM O_user u left join olive_members m on u.grade_id = m.grade_id "
 				+ " WHERE user_id = ? ";
 		ArrayList<MpUserInfoDTO> list = null;
@@ -44,6 +44,7 @@ public class MyPageDAOImpl implements MypageDAO {
 			
 			do {
 				dto = new MpUserInfoDTO();
+				dto.setUId(rs.getString("user_id"));
 				dto.setUgrade(rs.getString("gr_name"));
 				dto.setUname(rs.getString("u_name"));
 				list.add(dto);

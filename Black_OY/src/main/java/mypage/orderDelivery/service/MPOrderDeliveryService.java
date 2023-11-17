@@ -48,7 +48,7 @@ public class MPOrderDeliveryService {
 			conn = ConnectionProvider.getConnection();
 			MPOrderDeliveryDAOImpl daoImpl = MPOrderDeliveryDAOImpl.getinstance();
 			List<MPODOrderDTO> list = null;
-			list = daoImpl.selectUOrder(conn, oId);
+			list = daoImpl.selectUDetailOrder(conn, oId);
 			return list;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -69,6 +69,7 @@ public class MPOrderDeliveryService {
 			return list;
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryService.mpODdeliveryService Exception");
 		}finally {
 			JDBCUtil.close(conn);
@@ -86,11 +87,53 @@ public class MPOrderDeliveryService {
 			return list;
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryService.mpODpaymentService Exception");
 		}finally {
 			JDBCUtil.close(conn);
 		}
 		return null;
 	}
+	
+	//5.	검색된 주문 날짜,유형별로 가져오기 서비스
+	public List<MPODOrderDTO> mpODorderSearchService(String uId, String start, String end, String type){
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			MPOrderDeliveryDAOImpl daoImpl = MPOrderDeliveryDAOImpl.getinstance();
+			List<MPODOrderDTO> list = null;
+			list = daoImpl.searchUOrder(conn, uId, start, end, type);
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("> MPOrderDeliveryService.mpODorderSearchService Exception");
+		} finally {
+			JDBCUtil.close(conn);
+		}
+		return null;
+	
+	}
+
+	//5.	검색된 주문 날짜별로 가져오기 서비스
+	public List<MPODOrderDTO> mpODorderSearchService(String uId, String start, String end){
+		Connection conn = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			MPOrderDeliveryDAOImpl daoImpl = MPOrderDeliveryDAOImpl.getinstance();
+			List<MPODOrderDTO> list = null;
+			list = daoImpl.searchUOrder(conn, uId, start, end);
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("> MPOrderDeliveryService.mpODorderSearchService Exception");
+		} finally {
+			JDBCUtil.close(conn);
+		}
+		return null;
+		
+	}
+	
 	
 }
