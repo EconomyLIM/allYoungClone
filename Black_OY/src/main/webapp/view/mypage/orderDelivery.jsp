@@ -129,7 +129,7 @@
 	
 	
 									<a class="thum"
-										href="<%-- 상품상세페이지 이동 --%>">
+										href="<%= contextPath%>/olive/productDetail.do??goodsNo=${ol.uodDisplN}&displNum=${ol.uodcmid}${ol.uodcsid}">
 										<img
 										src="${ ol.uodDisplsrc }"
 										alt="${ ol.uodDisplN }"
@@ -137,7 +137,7 @@
 									</a>
 									<div class="textus">
 										<a class=""
-											href="<%-- 상품상세페이지 이동 --%>">
+											href="<%= contextPath%>/olive/productDetail.do??goodsNo=${ol.uodDisplN}&displNum=${ol.uodcmid}${ol.uodcsid}">
 											<span class="tit">${ ol.uodBrand }</span> <span class="txt">${ ol.uodDisplN }</span>
 										</a> 
 										
