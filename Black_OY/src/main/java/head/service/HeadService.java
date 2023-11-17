@@ -6,6 +6,7 @@ import java.util.List;
 import com.util.ConnectionProvider;
 import com.util.JDBCUtil;
 
+import head.domain.CateMDTO;
 import head.domain.EventDTO;
 import head.domain.GiftCardDTO;
 import head.persistence.HeadDAO;
@@ -119,5 +120,26 @@ public class HeadService {
 		
 		
 		return dto;
+	}
+
+	public List<CateMDTO> getCateMRanking() {
+		List<CateMDTO> list  = null;
+		Connection conn = null;
+		HeadDAO dao = null;
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = HeadDAOImpl.getInstance();
+			
+			list = dao.selectCateMName(conn);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		}
+		
+		
+		return list;
 	}
 }
