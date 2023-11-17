@@ -9,21 +9,14 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-migrate-3.3.2.min.js"></script>
+	
 <script src="/Black_OY/js/head.js"></script>
 <script src="/Black_OY/js/mainPage.js"></script>
-<link rel="stylesheet" type="text/css"
-   href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 <link rel="stylesheet" href="/Black_OY/css/style.css">
+
 <title>블랙올리브영 온라인몰</title>
-<link rel="stylesheet" type="text/css"
-	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<script type="text/javascript"
-	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-	<script type="text/javascript">
-      $.noConflict();
-</script>
+
 </head>
 <body>
 	<jsp:include page="/layout/head_main.jsp"></jsp:include>
@@ -488,73 +481,7 @@
 									</button>
 								</div>
 <!-- 상품 추천 스크립트 -->
-<script type="text/javascript">
-      $.noConflict();
-</script>
-<script >
 
-		
-	    
-	 $('#main_curation02_01 a.item').each(function(i){
-	        var _item = $(this);			
-	        var _data_goodsno = _item.attr('data-ref-goodsno');
-			var _data_dispCatNo = _item.attr('data-ref-dispCatNo');
-			var egcode = _item.attr("data-egcode");
-		    var egrank = _item.attr("data-egrank");
-			var trackingCd = _item.attr("name");
-
-			//_item.attr('onclick','javascript:gtm.goods.callGoodsGtmInfo("'+_data_goodsno+'", "", "ee-productClick", "홈_큐레이션1", "' + $(this).attr('data-attr').split('^')[3] + '");common.wlog("home_curation1_prod'+trackingCd.substr(trackingCd.length-1, 1)+'");common.link.moveGoodsDetailCuration("'+_data_goodsno+'", "'+_data_dispCatNo+'","like","'+rccode+'", "'+egcode+'", "'+egrank+'", "'+trackingCd+'");');
-		}); 
-	    
-	    $("#main_curation02_01").find(".btnbag").each(function() {
-	    	/* $(this).attr("data-rccode", rccode); */
-	    });
-	
-	    jQuery.noConflict();
-	    jQuery(document).ready(function($) {
-	    	$('#refBtn').on('click', function () {
-	    		
-	    		$('#main_curation02_01').slick({
-	    			dots: false,
-	    	/* 		arrows: true, */
-	    			fade: true,
-	    			infinite: true,
-	    			speed: 100,
-	    			slidesToShow: 1,
-	    			slidesToScroll: 1,
-	    			draggable: true
-	    	 		//nextArrow: $('.btnRef > button') 
-	    			
-	    		});
-				
-				var $this = $(this);
-
-				var totalPage = Number($this.data('total-page'));
-				var currentPage = Number($this.data('current-page'));
-				/* alert('123'); */
-				$('#main_curation02_01').slick('slickNext');
-				/* $('#main_curation02_01').slick('goTo', 3); */
-
-				if (currentPage < totalPage) {
-					currentPage++;
-				} else {
-					currentPage = 1;
-				}
-
-				$this.data('current-page', currentPage);
-				$this.find('.current').html(currentPage);
-				//common.reqAmplitude('큐레이션1_다른상품추천_클릭', {entry_source: '홈', click_source: '큐레이션1_다른상품추천', number: currentPage});
-			});
-	    });
-		
-		
-
-	
-	
-
- 
-
-</script>
 
 <!-- 								<script type="text/javascript">
 $(document).ready(function(){
@@ -7314,5 +7241,61 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script >
+
+
+$('#main_curation02_01').slick({
+	dots: false,
+	arrows: false,
+	fade: true,
+	infinite: true,
+	speed: 100,
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	draggable: true
+});
+
+
+	 $('#main_curation02_01 a.item').each(function(i){
+	        var _item = $(this);			
+	        var _data_goodsno = _item.attr('data-ref-goodsno');
+			var _data_dispCatNo = _item.attr('data-ref-dispCatNo');
+			var egcode = _item.attr("data-egcode");
+		    var egrank = _item.attr("data-egrank");
+			var trackingCd = _item.attr("name");
+
+			//_item.attr('onclick','javascript:gtm.goods.callGoodsGtmInfo("'+_data_goodsno+'", "", "ee-productClick", "홈_큐레이션1", "' + $(this).attr('data-attr').split('^')[3] + '");common.wlog("home_curation1_prod'+trackingCd.substr(trackingCd.length-1, 1)+'");common.link.moveGoodsDetailCuration("'+_data_goodsno+'", "'+_data_dispCatNo+'","like","'+rccode+'", "'+egcode+'", "'+egrank+'", "'+trackingCd+'");');
+		}); 
+	    
+	    $("#main_curation02_01").find(".btnbag").each(function() {
+	    	/* $(this).attr("data-rccode", rccode); */
+	    });
+	
+	    	
+	    	 $('#refBtn').on('click', function () {
+	
+				var $this = $(this);
+
+				var totalPage = Number($this.data('total-page'));
+				var currentPage = Number($this.data('current-page'));
+				// alert('123');
+				
+				$('#main_curation02_01').slick('slickNext'); 
+
+				if (currentPage < totalPage) {
+					currentPage++;
+				} else {
+					currentPage = 1;
+				}
+				$this.data('current-page', currentPage);
+				$this.find('.current').html(currentPage);
+				//common.reqAmplitude('큐레이션1_다른상품추천_클릭', {entry_source: '홈', click_source: '큐레이션1_다른상품추천', number: currentPage});
+			}); 
+	   
+	
+</script>
 </body>
 </html>
