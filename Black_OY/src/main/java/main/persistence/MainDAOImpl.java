@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -482,6 +483,17 @@ public class MainDAOImpl implements MainDAO{
 		
 		return list;
 	} // getPlanShop
+	
+	
+	// ================ 인기 행사의 배너정보와 상품을 갖고오는 작업 ======================
+	@Override
+	public HashMap<List<PlanShopDisplDTO>, List<PMidListDTO>> getPopularEvent(Connection conn,
+			List<PlanShopDisplDTO> list) throws Exception {
+		
+		
+		// TODO Auto-generated method stub
+		return null;
+	} // getPopularEvent
 
 
 

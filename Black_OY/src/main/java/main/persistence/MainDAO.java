@@ -1,6 +1,7 @@
 package main.persistence;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 
 import main.domain.MainUserDTO;
@@ -32,5 +33,8 @@ public interface MainDAO {
 	
 	// 7. 배너와 정보를 갖고오는 작업
 	public List<PlanShopDisplDTO> getPlanShop(Connection conn, int cate) throws Exception;
+	
+	// 8. 인기 행사의 배너정보와 상품을 갖고오는 작업
+	public HashMap< List<PlanShopDisplDTO> , List<PMidListDTO>> getPopularEvent(Connection conn, List<PlanShopDisplDTO> list ) throws Exception;
 	
 } // interface

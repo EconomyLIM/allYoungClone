@@ -175,7 +175,7 @@ public class ProductDetailHandler implements CommandHandler{
 		// ======================= (데이터 수집) 사용자가 조회했던 중분류 카테고리 저장 ========
 	
 		LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
-		if (logOnDTO != null || request.getParameter("displNum") != null ) {
+		if (logOnDTO != null) {
 			int rowCnt = proDetailService.sCollectView(logOnDTO.getUser_id(), cateMId);
 		} // if
 

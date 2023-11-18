@@ -6589,14 +6589,6 @@ $('#main_curation02_01').slick({
 	    			draggable: true,
 	    			dots: true
 	    		});
-	    	 
-	    	 $('#mainPlanSlider').slick({
-	    		 	slide: '.slider_unit',
-	    			infinite: true,          
-	    			slidesToShow: 2,
-	    			slidesToScroll: 2,
-	    			draggable: true
-	    		});
 			
 	    	 $('#mainFullSlider').on('beforeChange', function(event, slick, currentSlide, nextSlide){ 
 
@@ -6700,8 +6692,6 @@ $('#main_curation02_01').slick({
 	 	    	/* 신상 어때요 슬릭  종료*/
 	 	    	
 	 	    	/* 이상품어때요? */
-	 	    	
-				
 	 	    	$('#mainReComSlider').slick({
 		    		   dots: true,
 		    		   arrows: true,
@@ -6713,9 +6703,9 @@ $('#main_curation02_01').slick({
 		    		   draggable: true
 		    		}); 
 	 	    	 
+	 	    	 
 	 	    	 /*인기행사만 모았어요 슬릭*/
 	 	    	 $('#mainPlanSlider').slick({
-
 		    		  dots: true,
 		    		  appendDots : $('.banner_paging'),
 		    		  prevArrow:$('#plan_prev'),
