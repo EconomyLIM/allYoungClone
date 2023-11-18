@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import main.domain.MainUserDTO;
+import main.domain.PlanShopDisplDTO;
 import product.domain.PMidListDTO;
 
 public interface MainDAO {
@@ -28,5 +29,8 @@ public interface MainDAO {
 	
 	// 6. 갖고온 중분류 카테고리를 갖고 상품리스트 갖고오기
 	public List<PMidListDTO> recommendProduct(Connection conn, List<String> cateMlist) throws Exception;
+	
+	// 7. 배너와 정보를 갖고오는 작업
+	public List<PlanShopDisplDTO> getPlanShop(Connection conn, int cate) throws Exception;
 	
 } // interface
