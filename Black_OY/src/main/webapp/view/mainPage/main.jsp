@@ -832,51 +832,35 @@ $(document).ready(function(){
 
 				<!-- 큐레이션 E -->
 
-				<!-- 추천 기획전 -->
+				<!-- ============ Weekly Special 추천 기획전 ====================-->
 				<div class="main_plan_banner">
 					<h3 class="main_sub_tit">
 						<strong>Weekly Special</strong>
 					</h3>
 					<div class="recomm_plan">
 						<ul class="recomm_plan_list">
-
-							<li><a
-								onclick=""
-								href="#"
-								data-ref-dispcatno=""
-								data-attr="홈^WeeklySpecial기획전^브랜드운영팀_웨이크메이크" data-trk="/"> <img
-									src="https://image.oliveyoung.co.kr/uploads/images//categoryBanner/1279276419346446875.jpg"
-									alt="브랜드운영팀_웨이크메이크">
-									<div class="text_wrap">
-										<dl style="color: #000000;">
-											<dt>광채나는글로우</dt>
-											<dt>쿠션&amp;파운데이션</dt>
-											<dd>#졸리레이드#거울증정</dd>
-										</dl>
-									</div>
-							</a></li>
-
-							<li><a
-								onclick=""
-								href="#"
-								data-ref-dispcatno="" data-attr="홈^WeeklySpecial기획전^헤어_라보에이치"
-								data-trk="/"> <img
-									src="https://image.oliveyoung.co.kr/uploads/images//categoryBanner/6065360184442940089.jpg"
-									alt="헤어_라보에이치">
-									<div class="text_wrap">
-										<dl style="color: #000000;">
-											<dt>1등 샴푸 라보에이치</dt>
-											<dt>블랙프라이데이 특가</dt>
-											<dd>UP TO 43%+전구매 증정</dd>
-										</dl>
-									</div>
-							</a></li>
-
-
+							
+							<c:if test="${not empty getWSBanner}">
+								<c:forEach items="${getWSBanner}" var="gws" begin="0" end="1">
+									<li>
+										<a href="<%=contextPath%>/olive/planshop.do">
+											<img src="${gws.psSrc}" alt="GS 배너사진"/>
+											<div class="text_wrap">
+												<dl style="color: #000000;">
+													<dt>${gws.psSumm}</dt>
+													<dt>${gws.psSecSumm}</dt>
+													<dd>${gws.pskeyword}</dd>
+												</dl>
+											</div>
+										</a>
+									</li>
+								</c:forEach>
+							</c:if>
 						</ul>
 					</div>
 				</div>
-				<!-- //추천 기획전 -->
+				<!-- ============ (태그 종료) Weekly Special 추천 기획전 ====================-->
+
 
 				<!-- ======== 인기 행사만 모았어요! 영역  =============== -->
 				<div class="main_plan_banner ty02">
@@ -6643,16 +6627,16 @@ $('#main_curation02_01').slick({
 	 	    	 
 	 	    	 /*인기행사만 모았어요 슬릭*/
 	 	    	 $('#mainPlanSlider').slick({
-		    		   dots: true,
-		    		   appendDots : $('.banner_paging'),
-		    		   prevArrow:$('#plan_prev'),
-		    		   nextArrow:$('#plan_next'),
-		    		   fade: true,
-		    		   infinite: true,
-		    		   speed: 100,
-		    		   slidesToShow: 2,
-		    		   slidesToScroll: 1,
-		    		   draggable: true
+
+		    		  dots: true,
+		    		  appendDots : $('.banner_paging'),
+		    		  prevArrow:$('#plan_prev'),
+		    		  nextArrow:$('#plan_next'),
+	 	    		  slide: '.slider_unit',
+	 	    	      infinite: true,          
+	 	    	      slidesToShow: 2,
+	 	    	      slidesToScroll: 2,
+	 	    	      draggable: true, 
 		    		   
 		    		}); 
 	 	    	

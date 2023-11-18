@@ -13,6 +13,7 @@ import java.util.List;
 import com.util.JDBCUtil;
 
 import main.domain.MainUserDTO;
+import main.domain.PlanShopDisplDTO;
 import product.domain.PMidListDTO;
 
 
@@ -430,6 +431,57 @@ public class MainDAOImpl implements MainDAO{
 
 		return plist;
 	} // recommendProduct
+	
+	// =========================== 배너정보 갖고오는 작업 ===========================
+	@Override
+	public List<PlanShopDisplDTO> getPlanShop(Connection conn, int cate) throws Exception {
+		
+		String sql = " SELECT peb.pe_id, peb_img_src, peb_summ, peb_summ2, peb_keyword, pe_cate FROM peb "
+				+ " JOIN pro_event pe ON pe.pe_id = peb.pe_id "
+				+ " WHERE pe_e_d > SYSDATE AND pe_cate = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<PlanShopDisplDTO> list = null;
+		PlanShopDisplDTO dto = null;
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cate);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					
+					dto = PlanShopDisplDTO.builder()
+							.psId(rs.getString("pe_id"))
+							.psSrc(rs.getString("peb_img_src"))
+							.psSumm(rs.getString("peb_summ"))
+							.psSecSumm(rs.getString("peb_summ2"))
+							.pskeyword(rs.getString("peb_keyword"))
+							.build();
+					
+					list.add(dto);
+					
+				} while (rs.next());
+				System.out.println(" ***>>> MainDAOImpl getPlanShop <<<***");
+			} // if
+			
+			
+		} catch (SQLException e) {
+			System.out.println(">MainDAOImpl getPlanShop SQLException<");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">MainDAOImpl getPlanShop Exception<");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		} //try_catch
+		
+		return list;
+	} // getPlanShop
 
 
 
