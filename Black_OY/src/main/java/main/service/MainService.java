@@ -1,6 +1,7 @@
 package main.service;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 
 import com.util.ConnectionProvider;
@@ -8,6 +9,7 @@ import com.util.JDBCUtil;
 
 import main.domain.MainUserDTO;
 import main.domain.PlanShopDisplDTO;
+import main.domain.PopularProDTO;
 import main.persistence.MainDAOImpl;
 import product.domain.PMidListDTO;
 
@@ -74,7 +76,7 @@ public class MainService {
 			Connection conn = null;
 			
 			List <String> cateMList = null;
-			int cnt = 0;
+			/* int cnt = 0; */
 			
 			List<PMidListDTO> recommendProduct = null;
 			try {
@@ -127,6 +129,25 @@ public class MainService {
 		} // getWeekSpecial
 		
 		// ===================== 상품 행사 배너정보 갖고오는 작업 (인기행사 제외) ======================== 
+		public HashMap<PlanShopDisplDTO, List<PopularProDTO>> sGetPopularShop(){
+			
+			Connection conn = null;
+			HashMap<PlanShopDisplDTO, List<PopularProDTO>> list = null;
+			try {
+				
+				conn = ConnectionProvider.getConnection();
+				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
+				list = daoImpl.getPopularShop(conn);
+				
+			} catch (Exception e) {
+				System.out.println("> MainService sGetPopularShop Exception<");
+				e.printStackTrace();
+			} finally {
+				JDBCUtil.close(conn);
+			} // try_catch
+			
+			return list;
+		} // sGetPopularShop
 		
 		
 } //class

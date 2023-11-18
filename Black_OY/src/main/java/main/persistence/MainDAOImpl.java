@@ -15,6 +15,7 @@ import com.util.JDBCUtil;
 
 import main.domain.MainUserDTO;
 import main.domain.PlanShopDisplDTO;
+import main.domain.PopularProDTO;
 import product.domain.PMidListDTO;
 
 
@@ -301,7 +302,7 @@ public class MainDAOImpl implements MainDAO{
 		} finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
-		
+
 		} //try_catch
 
 		return list;
@@ -432,29 +433,29 @@ public class MainDAOImpl implements MainDAO{
 
 		return plist;
 	} // recommendProduct
-	
+
 	// =========================== 배너정보 갖고오는 작업 ===========================
 	@Override
 	public List<PlanShopDisplDTO> getPlanShop(Connection conn, int cate) throws Exception {
-		
+
 		String sql = " SELECT peb.pe_id, peb_img_src, peb_summ, peb_summ2, peb_keyword, pe_cate FROM peb "
 				+ " JOIN pro_event pe ON pe.pe_id = peb.pe_id "
 				+ " WHERE pe_e_d > SYSDATE AND pe_cate = ?";
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<PlanShopDisplDTO> list = null;
 		PlanShopDisplDTO dto = null;
 		try {
-			
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cate);
 			rs = pstmt.executeQuery();
-			
+
 			if (rs.next()) {
 				list = new ArrayList<>();
 				do {
-					
+
 					dto = PlanShopDisplDTO.builder()
 							.psId(rs.getString("pe_id"))
 							.psSrc(rs.getString("peb_img_src"))
@@ -462,14 +463,14 @@ public class MainDAOImpl implements MainDAO{
 							.psSecSumm(rs.getString("peb_summ2"))
 							.pskeyword(rs.getString("peb_keyword"))
 							.build();
-					
+
 					list.add(dto);
-					
+
 				} while (rs.next());
 				System.out.println(" ***>>> MainDAOImpl getPlanShop <<<***");
 			} // if
-			
-			
+
+
 		} catch (SQLException e) {
 			System.out.println(">MainDAOImpl getPlanShop SQLException<");
 			e.printStackTrace();
@@ -480,21 +481,97 @@ public class MainDAOImpl implements MainDAO{
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
 		} //try_catch
-		
+
 		return list;
 	} // getPlanShop
-	
-	
+
 	// ================ 인기 행사의 배너정보와 상품을 갖고오는 작업 ======================
 	@Override
-	public HashMap<List<PlanShopDisplDTO>, List<PMidListDTO>> getPopularEvent(Connection conn,
-			List<PlanShopDisplDTO> list) throws Exception {
-		
-		
-		// TODO Auto-generated method stub
-		return null;
-	} // getPopularEvent
+	public HashMap<PlanShopDisplDTO, List<PopularProDTO>> getPopularShop(Connection conn) throws Exception {
 
+		String sql = " SELECT * FROM ( " + " SELECT peb.*, pdv.*, " +
+				" ROW_NUMBER() OVER (PARTITION BY pe.pe_id ORDER BY pd.pro_displ_id) as row_num "
+				+ " FROM peb " + " JOIN pro_event pe ON pe.pe_id = peb.pe_id " +
+				" JOIN PEIC ON peic.pe_id = pe.pe_id " +
+				" JOIN peconn ON peconn.peic_id = peic.peic_id " +
+				" JOIN product_display pd ON pd.pro_displ_id = peconn.pro_displ_id " +
+				" JOIN pmListview pdv ON pd.pro_displ_id = pdv.pro_displ_id " +
+				" WHERE pe_e_d > SYSDATE and pe_cate = 2) " + " WHERE row_num<=2 ";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		PlanShopDisplDTO planShopDisplDTO = null;
+		PopularProDTO popularProDTO = null;
+		List<PopularProDTO> list = null;
+		HashMap<PlanShopDisplDTO, List<PopularProDTO>> hashMap = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				hashMap = new HashMap<>();
+				do {
+
+					planShopDisplDTO = PlanShopDisplDTO.builder()
+							.psId(rs.getString("pe_id"))
+							.psSrc(rs.getString("peb_img_src"))
+							.psSumm(rs.getString("peb_summ"))
+							.psSecSumm(rs.getString("peb_summ2"))
+							.pskeyword(rs.getString("peb_keyword"))
+							.build();
+					
+					if (!hashMap.containsKey(planShopDisplDTO)) {
+						list = new ArrayList<>();
+						hashMap.put(planShopDisplDTO, list);
+					} // if 
+
+					popularProDTO = PopularProDTO.builder() 
+							.psId(rs.getString("pe_id"))
+							.psSrc(rs.getString("peb_img_src")) 
+							.psSumm(rs.getString("peb_summ"))
+							.psSecSumm(rs.getString("peb_summ2")) 
+							.pskeyword(rs.getString("peb_keyword"))
+							.displImgSrc(rs.getString("pro_displ_src"))
+							.brandId(rs.getString("brand_id")) 
+							.brandName(rs.getString("brand_name"))
+							.displProName(rs.getString("pro_displ_name")) 
+							.lid(rs.getString("cat_l_id"))
+							.mid(rs.getString("cat_m_id")) 
+							.sid(rs.getString("cat_s_id"))
+							.proPrice(rs.getString("proprice")) 
+							.afterPrice(rs.getString("afterprice"))
+							.displId(rs.getString("pro_displ_id")) 
+							.productID(rs.getString("pro_id"))
+							.prc(rs.getInt("prc")) .pdc(rs.getInt("pdc")) .pmp(rs.getInt("pmp"))
+							.stock(rs.getInt("stock")) .build();
+					
+					list = hashMap.get(planShopDisplDTO);
+					
+					list.add(popularProDTO);
+					
+				} while (rs.next());
+				System.out.println(" >>> MainDAOImpl getPopularShop ... ");
+				
+				System.out.println(hashMap);
+			} // if
+
+		} catch (SQLException e) {
+			System.out.println(">MainDAOImpl getPopularShop SQLException<");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">MainDAOImpl getPopularShop Exception<");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		} //try_catch
+
+
+		return hashMap;
+	}
+
+	
 
 
 } // class

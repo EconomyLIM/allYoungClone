@@ -6,6 +6,7 @@ import java.util.List;
 
 import main.domain.MainUserDTO;
 import main.domain.PlanShopDisplDTO;
+import main.domain.PopularProDTO;
 import product.domain.PMidListDTO;
 
 public interface MainDAO {
@@ -35,6 +36,6 @@ public interface MainDAO {
 	public List<PlanShopDisplDTO> getPlanShop(Connection conn, int cate) throws Exception;
 	
 	// 8. 인기 행사의 배너정보와 상품을 갖고오는 작업
-	public HashMap< List<PlanShopDisplDTO> , List<PMidListDTO>> getPopularEvent(Connection conn, List<PlanShopDisplDTO> list ) throws Exception;
+	public HashMap<PlanShopDisplDTO, List<PopularProDTO>> getPopularShop(Connection conn) throws Exception;
 	
 } // interface
