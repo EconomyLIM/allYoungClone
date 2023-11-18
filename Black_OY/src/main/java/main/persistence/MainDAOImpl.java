@@ -12,6 +12,8 @@ import java.util.List;
 
 import com.util.JDBCUtil;
 
+import main.domain.BrandItemDTO;
+import main.domain.MainBrandDTO;
 import main.domain.MainUserDTO;
 import main.domain.PlanShopDisplDTO;
 import product.domain.PMidListDTO;
@@ -482,6 +484,124 @@ public class MainDAOImpl implements MainDAO{
 		
 		return list;
 	} // getPlanShop
+
+	// 메인 브랜드 좋아요 상위 10개 가져오기
+	@Override
+	public List<MainBrandDTO> mainBrand(Connection conn) throws Exception {
+		String sql = " SELECT * FROM ( "
+				+ "    SELECT b.brand_id, brand_name, brand_like, brand_img_src "
+				+ "    FROM brand b "
+				+ "    JOIN brand_img bi ON b.brand_id = bi.brand_id "
+				+ "    ORDER BY brand_like DESC "
+				+ ") WHERE ROWNUM <= 10 ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<MainBrandDTO> list = null;
+		MainBrandDTO mainBrandDTO = null;
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					
+					mainBrandDTO = MainBrandDTO.builder()
+							.brand_id(rs.getString("brand_id"))
+							.brand_img_src(rs.getString("brand_img_src"))
+							.brand_like(rs.getString("brand_like"))
+							.brand_name(rs.getString("brand_name"))
+							.build();
+					
+					list.add(mainBrandDTO);
+					
+				} while (rs.next());
+				System.out.println(" ***>>> mainBrandImple mainBrand <<<***");
+			} // if
+			
+			
+		} catch (SQLException e) {
+			System.out.println(">mainBrandImple SQLException<");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">mainBrandImple Exception<");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		} //try_catch
+		
+		return list;
+	}
+
+	// 브랜드 상위 2개 상품 가져오기
+	@Override
+	public List<BrandItemDTO> mainBrandItem(Connection conn, String brand_id) throws Exception {
+		String sql = " SELECT * FROM ( "
+				+ "    select pro_displ_src, brand_name, brand_id, pro_displ_name, proprice, cat_l_id, cat_m_id, cat_s_id, "
+				+ "           afterprice, pro_displ_id, pro_id, prc, pdc, pmp, stock, ordercnt, pro_stock, pro_displ_like, pro_reg from pmlistview  "
+				+ "    where brand_id = ? "
+				+ "    order by pro_displ_like desc "
+				+ ") WHERE ROWNUM <= 2 ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<BrandItemDTO> list = null;
+		BrandItemDTO brandItemDTO = null;
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, brand_id);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					
+					brandItemDTO = BrandItemDTO.builder()
+							.proDisplSrc(rs.getString("pro_displ_src")) 
+							.brandName(rs.getString("brand_name"))  
+							.brandId(rs.getString("brand_id"))
+							.proDisplName(rs.getString("pro_displ_name"))
+							.proPrice(rs.getString("proprice"))    
+							.catLId(rs.getString("cat_l_id"))      
+							.catMId(rs.getString("cat_m_id"))      
+							.catSId(rs.getString("cat_s_id"))      
+							.afterPrice(rs.getString("afterprice"))  
+							.proDisplId(rs.getString("pro_displ_id"))  
+							.proId(rs.getString("pro_id"))       
+							.prc(rs.getString("prc"))         
+							.pdc(rs.getString("pdc"))         
+							.pmp(rs.getString("pmp"))         
+							.stock(rs.getString("stock"))       
+							.orderCnt(rs.getString("orderCnt"))    
+							.proStock(rs.getString("pro_stock"))    
+							.proDisplLike(rs.getString("pro_displ_like"))
+							.proReg(rs.getString("pro_reg"))
+							.build();
+							
+					list.add(brandItemDTO);
+					
+				} while (rs.next());
+				System.out.println(" ***>>> mainBrandItem mainBrand <<<***");
+			} // if
+			
+			
+		} catch (SQLException e) {
+			System.out.println(">mainBrandItem SQLException<");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">mainBrandItem Exception<");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		} //try_catch
+		
+		return list;
+	}
 
 
 

@@ -3,6 +3,8 @@ package main.persistence;
 import java.sql.Connection;
 import java.util.List;
 
+import main.domain.BrandItemDTO;
+import main.domain.MainBrandDTO;
 import main.domain.MainUserDTO;
 import main.domain.PlanShopDisplDTO;
 import product.domain.PMidListDTO;
@@ -32,5 +34,12 @@ public interface MainDAO {
 	
 	// 7. 배너와 정보를 갖고오는 작업
 	public List<PlanShopDisplDTO> getPlanShop(Connection conn, int cate) throws Exception;
+	
+	// 메인 브랜드 좋아요 상위 10개 가져오기
+	public List<MainBrandDTO> mainBrand(Connection conn) throws Exception;
+	
+	// 브랜드 상위 2개 상품 가져오기
+	public List<BrandItemDTO> mainBrandItem(Connection conn, String brand_id) throws Exception;
+	
 	
 } // interface
