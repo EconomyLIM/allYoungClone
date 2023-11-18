@@ -17,7 +17,7 @@
 <!-- <link rel="stylesheet" href="/Black_OY/css/mainscrollbar.css"> -->
 <script
 	src="https://static.oliveyoung.co.kr/pc-static-root/js/common/publish/jquery.mCustomScrollbar.concat.min.js"></script>
-
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <title>블랙올리브영 온라인몰</title>
 
 </head>
@@ -402,10 +402,8 @@ $(document).ready(() => {
 
 
 						
-						<button id="mainSliderBtn" style="z-index: 9999;">멈춤</button>
-						<p class="slick-paging">
-							<span class="cur_no">15</span>/15
-						</p>
+						<button id="mainSliderBtn">멈춤</button>
+						<p class="slick-paging"></p>
 					</div>
 				</div>
 
@@ -522,9 +520,6 @@ $(document).ready(() => {
 
 										</c:if>
 
-
-												</c:if>
-												<%-- for each 끝--%>
 
 									</ul>
 								</div>
@@ -895,334 +890,18 @@ $(document).ready(function(){
 					</h3>
 					<div class="banner_wrap">
 						<div
-							class="slick_slider slick-initialized slick-slider slick-dotted"
+							class="slick_slider"
 							id="mainPlanSlider">
-							<div aria-live="polite" class="slick-list draggable">
-								<div class="slick-track" role="listbox"
-									style="opacity: 1; width: 6240px; transform: translate3d(-1040px, 0px, 0px);">
-									<div class="slider_unit  slick-slide slick-cloned"
-										data-slick-index="-2" aria-hidden="true" style="width: 520px;"
-										tabindex="-1">
-										<div class="plan_top">
-											<div class="plan_banner"
-												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/5933098486848573045.jpg');">
-												<a
-													onclick="common.reqAmplitude('인기행사 배너 클릭', {entry_source: '홈', click_source: '인기행사_배너', banner_name: '클렌징 블프시작', banner_number: '7'});"
-													href="javascript:common.link.movePlanShop('500000102730094', 'Home_Planshop3_PROD', 't_page=홈&amp;t_click=인기행사_배너&amp;t_banner_name=%ED%81%B4%EB%A0%8C%EC%A7%95+%EB%B8%94%ED%94%84%EC%8B%9C%EC%9E%91&amp;t_number=7');"
-													data-ref-dispcatno="500000102730094"
-													data-tracking-cd="Home_Planshop3_PROD"
-													data-attr="홈^인기행사기획전상세^클렌징 블프시작^7" data-trk="/"
-													data-attr-imp-goodsno="" tabindex="-1">
-													<p>
-														<strong class="tit" style="color: #000000;">클렌징
-															블랙프라이데이 </strong> <strong class="tit" style="color: #000000;">BEST
-															상품만 모아! </strong> <span class="desc" style="color: #000000;">#7일간
-															혜택</span>
-													</p>
-												</a>
-											</div>
-										</div>
-
-										<ul class="cate_prd_list">
-											<li>
-
-												<div class="prd_info ">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000165797&amp;dispCatNo=90000010001&amp;trackingCd=Home_Planshop3&amp;t_page=홈&amp;t_click=인기행사_클렌징 블프시작_상품상세&amp;t_number=13"
-														name="Home_Planshop3" class="prd_thumb goodsList"
-														data-ref-goodsno="A000000165797"
-														data-attr="홈^인기행사만 모았어요^[대용량] 넘버즈인 1번 말끔 순삭 클렌징 오일 400ml 대용량 기획^1"
-														data-ref-dispcatno="90000010001" data-ref-itemno="001"
-														data-trk="null"
-														data-impression="A000000165797^홈_인기행사만 모았어요^1"
-														data-impression-visibility="1" tabindex="-1"><span
-														class="thumb_flag best">베스트</span><img
-														src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016579710ko.jpg?l=ko"
-														alt="[대용량] 넘버즈인 1번 말끔 순삭 클렌징 오일 400ml 대용량 기획"
-														onerror="common.errorImg(this);"></a>
-													<div class="prd_name">
-														<a href="javascript:;" name="Home_Planshop3"
-															class="goodsList" data-ref-goodsno="A000000165797"
-															data-attr="홈^인기행사만 모았어요^[대용량] 넘버즈인 1번 말끔 순삭 클렌징 오일 400ml 대용량 기획^1"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															data-trk="null" tabindex="-1"><span class="tx_brand">넘버즈인</span>
-															<p class="tx_name">[대용량] 넘버즈인 1번 말끔 순삭 클렌징 오일 400ml
-																대용량 기획</p></a>
-													</div>
-													<button class="btn_zzim jeem"
-														data-ref-goodsno="A000000165797" tabindex="-1">
-														<span>찜하기전</span>
-													</button>
-													<p class="prd_price">
-														<span class="tx_org"><span class="tx_num">35,000</span>원
-														</span><span class="tx_cur"><span class="tx_num">23,520</span>원
-														</span>
-													</p>
-													<p class="prd_flag">
-														<span class="icon_flag sale">세일</span><span
-															class="icon_flag coupon">쿠폰</span><span
-															class="icon_flag delivery">오늘드림</span>
-													</p>
-													<p class="prd_point_area tx_num">
-														<span class="review_point"><span class="point"
-															style="width: 94.0%">10점만점에 5.5점</span></span>(999+)
-													</p>
-													<p class="prd_btn_area">
-														<button class="cartBtn" data-ref-goodsno="A000000165797"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="-1">장바구니</button>
-														<button class="btn_new_pop goodsList" tabindex="-1">새창보기</button>
-													</p>
-												</div>
-
-
-
-											</li>
-
-
-
-											<li>
-
-												<div class="prd_info ">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000187479&amp;dispCatNo=90000010001&amp;trackingCd=Home_Planshop3&amp;t_page=홈&amp;t_click=인기행사_클렌징 블프시작_상품상세&amp;t_number=14"
-														name="Home_Planshop3" class="prd_thumb goodsList"
-														data-ref-goodsno="A000000187479"
-														data-attr="홈^인기행사만 모았어요^비플레인 녹두 약산성 클렌징폼 160ml + 40ml 기획^2"
-														data-ref-dispcatno="90000010001" data-ref-itemno="001"
-														data-trk="null"
-														data-impression="A000000187479^홈_인기행사만 모았어요^2"
-														data-impression-visibility="1" tabindex="-1"><span
-														class="thumb_flag best">베스트</span><img
-														src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018747906ko.jpg?l=ko"
-														alt="비플레인 녹두 약산성 클렌징폼 160ml + 40ml 기획"
-														onerror="common.errorImg(this);"></a>
-													<div class="prd_name">
-														<a href="javascript:;" name="Home_Planshop3"
-															class="goodsList" data-ref-goodsno="A000000187479"
-															data-attr="홈^인기행사만 모았어요^비플레인 녹두 약산성 클렌징폼 160ml + 40ml 기획^2"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															data-trk="null" tabindex="-1"><span class="tx_brand">비플레인</span>
-															<p class="tx_name">비플레인 녹두 약산성 클렌징폼 160ml + 40ml 기획</p></a>
-													</div>
-													<button class="btn_zzim jeem"
-														data-ref-goodsno="A000000187479" tabindex="-1">
-														<span>찜하기전</span>
-													</button>
-													<p class="prd_price">
-														<span class="tx_org"><span class="tx_num">21,900</span>원
-														</span><span class="tx_cur"><span class="tx_num">17,670</span>원
-														</span>
-													</p>
-													<p class="prd_flag">
-														<span class="icon_flag sale">세일</span><span
-															class="icon_flag coupon">쿠폰</span><span
-															class="icon_flag delivery">오늘드림</span>
-													</p>
-													<p class="prd_point_area tx_num">
-														<span class="review_point"><span class="point"
-															style="width: 96.0%">10점만점에 5.5점</span></span>(999+)
-													</p>
-													<p class="prd_btn_area">
-														<button class="cartBtn" data-ref-goodsno="A000000187479"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="-1">장바구니</button>
-														<button class="btn_new_pop goodsList" tabindex="-1">새창보기</button>
-													</p>
-												</div>
-
-
-
-											</li>
-
-
-
-
-
-
-										</ul>
-
-									</div>
-									<div class="slider_unit  right slick-slide slick-cloned"
-										data-slick-index="-1" aria-hidden="true" style="width: 520px;"
-										tabindex="-1">
-
-
-
-
-
-
-
-
-
-										<div class="plan_top">
-											<div class="plan_banner"
-												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/5680994098086568541.jpg');">
-												<a
-													onclick="common.reqAmplitude('인기행사 배너 클릭', {entry_source: '홈', click_source: '인기행사_배너', banner_name: '보습크림모음집', banner_number: '8'});"
-													href="javascript:common.link.movePlanShop('500000102700122', 'Home_Planshop3_PROD', 't_page=홈&amp;t_click=인기행사_배너&amp;t_banner_name=%EB%B3%B4%EC%8A%B5%ED%81%AC%EB%A6%BC%EB%AA%A8%EC%9D%8C%EC%A7%91&amp;t_number=8');"
-													data-ref-dispcatno="500000102700122"
-													data-tracking-cd="Home_Planshop3_PROD"
-													data-attr="홈^인기행사기획전상세^보습크림모음집^8" data-trk="/"
-													data-attr-imp-goodsno="" tabindex="-1">
-													<p>
-														<strong class="tit" style="color: #000000;">건조하고
-															민감한 11월, </strong> <strong class="tit" style="color: #000000;">필요한
-															'크림' 모음집 </strong> <span class="desc" style="color: #000000;">#7일간
-															최대 50%</span>
-													</p>
-												</a>
-											</div>
-										</div>
-
-
-
-
-
-
-
-
-										<ul class="cate_prd_list">
-
-
-
-
-
-											<li>
-
-												<div class="prd_info ">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000191177&amp;dispCatNo=90000010001&amp;trackingCd=Home_Planshop3&amp;t_page=홈&amp;t_click=인기행사_보습크림모음집_상품상세&amp;t_number=15"
-														name="Home_Planshop3" class="prd_thumb goodsList"
-														data-ref-goodsno="A000000191177"
-														data-attr="홈^인기행사만 모았어요^아이오페 스템3 크림 50ml^1"
-														data-ref-dispcatno="90000010001" data-ref-itemno="001"
-														data-trk="null"
-														data-impression="A000000191177^홈_인기행사만 모았어요^1"
-														data-impression-visibility="1" tabindex="-1"><img
-														src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019117701ko.jpg?l=ko"
-														alt="아이오페 스템3 크림 50ml" onerror="common.errorImg(this);"></a>
-													<div class="prd_name">
-														<a href="javascript:;" name="Home_Planshop3"
-															class="goodsList" data-ref-goodsno="A000000191177"
-															data-attr="홈^인기행사만 모았어요^아이오페 스템3 크림 50ml^1"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															data-trk="null" tabindex="-1"><span class="tx_brand">아이오페</span>
-															<p class="tx_name">아이오페 스템3 크림 50ml</p></a>
-													</div>
-													<button class="btn_zzim jeem"
-														data-ref-goodsno="A000000191177" tabindex="-1">
-														<span>찜하기전</span>
-													</button>
-													<p class="prd_price">
-														<span class="tx_org"><span class="tx_num">70,000</span>원
-														</span><span class="tx_cur"><span class="tx_num">50,400</span>원
-														</span>
-													</p>
-													<p class="prd_flag">
-														<span class="icon_flag sale">세일</span><span
-															class="icon_flag coupon">쿠폰</span><span
-															class="icon_flag delivery">오늘드림</span>
-													</p>
-													<p class="prd_point_area tx_num">
-														<span class="review_point"><span class="point"
-															style="width: 100.0%">10점만점에 5.5점</span></span>(7)
-													</p>
-													<p class="prd_btn_area">
-														<button class="cartBtn" data-ref-goodsno="A000000191177"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="-1">장바구니</button>
-														<button class="btn_new_pop goodsList" tabindex="-1">새창보기</button>
-													</p>
-												</div>
-
-
-
-											</li>
-
-
-
-											<li>
-
-												<div class="prd_info ">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000153781&amp;dispCatNo=90000010001&amp;trackingCd=Home_Planshop3&amp;t_page=홈&amp;t_click=인기행사_보습크림모음집_상품상세&amp;t_number=16"
-														name="Home_Planshop3" class="prd_thumb goodsList"
-														data-ref-goodsno="A000000153781"
-														data-attr="홈^인기행사만 모았어요^[채정안PICK/단독기획] CKD&nbsp;레티노콜라겐 저분자&nbsp;300&nbsp;크림&nbsp;40ml&nbsp;기획&nbsp;(40ml+10ml)^2"
-														data-ref-dispcatno="90000010001" data-ref-itemno="001"
-														data-trk="null"
-														data-impression="A000000153781^홈_인기행사만 모았어요^2"
-														data-impression-visibility="1" tabindex="-1"><img
-														src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0015/A00000015378114ko.jpg?l=ko"
-														alt="[채정안PICK/단독기획] CKD&nbsp;레티노콜라겐 저분자&nbsp;300&nbsp;크림&nbsp;40ml&nbsp;기획&nbsp;(40ml+10ml)"
-														onerror="common.errorImg(this);"></a>
-													<div class="prd_name">
-														<a href="javascript:;" name="Home_Planshop3"
-															class="goodsList" data-ref-goodsno="A000000153781"
-															data-attr="홈^인기행사만 모았어요^[채정안PICK/단독기획] CKD&nbsp;레티노콜라겐 저분자&nbsp;300&nbsp;크림&nbsp;40ml&nbsp;기획&nbsp;(40ml+10ml)^2"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															data-trk="null" tabindex="-1"><span class="tx_brand">CKD</span>
-															<p class="tx_name">[채정안PICK/단독기획] CKD&nbsp;레티노콜라겐
-																저분자&nbsp;300&nbsp;크림&nbsp;40ml&nbsp;기획&nbsp;(40ml+10ml)</p></a>
-													</div>
-													<button class="btn_zzim jeem"
-														data-ref-goodsno="A000000153781" tabindex="-1">
-														<span>찜하기전</span>
-													</button>
-													<p class="prd_price">
-														<span class="tx_org"><span class="tx_num">38,000</span>원
-														</span><span class="tx_cur"><span class="tx_num">20,520</span>원
-														</span>
-													</p>
-													<p class="prd_flag">
-														<span class="icon_flag sale">세일</span><span
-															class="icon_flag coupon">쿠폰</span><span
-															class="icon_flag delivery">오늘드림</span>
-													</p>
-													<p class="prd_point_area tx_num">
-														<span class="review_point"><span class="point"
-															style="width: 98.0%">10점만점에 5.5점</span></span>(999+)
-													</p>
-													<p class="prd_btn_area">
-														<button class="cartBtn" data-ref-goodsno="A000000153781"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="-1">장바구니</button>
-														<button class="btn_new_pop goodsList" tabindex="-1">새창보기</button>
-													</p>
-												</div>
-
-
-
-											</li>
-
-
-
-
-
-
-										</ul>
-
-									</div>
-									<div
-										class="slider_unit  slick-slide slick-current slick-active"
-										data-slick-index="0" aria-hidden="false" style="width: 520px;"
-										tabindex="-1" role="option" aria-describedby="slick-slide10">
-
-
-
-
-
-
-
-
+							
+								
+									<div class="slider_unit">
 
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/5358451737655223845.jpg');">
 												<a
-													onclick="common.reqAmplitude('인기행사 배너 클릭', {entry_source: '홈', click_source: '인기행사_배너', banner_name: '맨즈그루밍', banner_number: '1'});"
-													href="javascript:common.link.movePlanShop('500000103010021', 'Home_Planshop3_PROD', 't_page=홈&amp;t_click=인기행사_배너&amp;t_banner_name=%EB%A7%A8%EC%A6%88%EA%B7%B8%EB%A3%A8%EB%B0%8D&amp;t_number=1');"
+													
+													href="#"
 													data-ref-dispcatno="500000103010021"
 													data-tracking-cd="Home_Planshop3_PROD"
 													data-attr="홈^인기행사기획전상세^맨즈그루밍^1" data-trk="/"
@@ -1371,24 +1050,14 @@ $(document).ready(function(){
 										</ul>
 
 									</div>
-									<div class="slider_unit  right slick-slide slick-active"
-										data-slick-index="1" aria-hidden="false" style="width: 520px;"
-										tabindex="-1" role="option" aria-describedby="slick-slide11">
-
-
-
-
-
-
-
-
+									<div class="slider_unit right"
+										>
 
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/508948120174502060.jpg');">
-												<a
-													onclick="common.reqAmplitude('인기행사 배너 클릭', {entry_source: '홈', click_source: '인기행사_배너', banner_name: '당충전필요할때', banner_number: '2'});"
-													href="javascript:common.link.movePlanShop('500000102820183', 'Home_Planshop3_PROD', 't_page=홈&amp;t_click=인기행사_배너&amp;t_banner_name=%EB%8B%B9%EC%B6%A9%EC%A0%84%ED%95%84%EC%9A%94%ED%95%A0%EB%95%8C&amp;t_number=2');"
+												<a		
+													href="#"
 													data-ref-dispcatno="500000102820183"
 													data-tracking-cd="Home_Planshop3_PROD"
 													data-attr="홈^인기행사기획전상세^당충전필요할때^2" data-trk="/"
@@ -1533,24 +1202,14 @@ $(document).ready(function(){
 										</ul>
 
 									</div>
-									<div class="slider_unit  slick-slide" data-slick-index="2"
-										aria-hidden="true" style="width: 520px;" tabindex="-1"
-										role="option" aria-describedby="slick-slide12">
-
-
-
-
-
-
-
-
+									<div class="slider_unit">
 
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/2333911504943230794.jpg');">
 												<a
-													onclick="common.reqAmplitude('인기행사 배너 클릭', {entry_source: '홈', click_source: '인기행사_배너', banner_name: '붙이는주름관리', banner_number: '3'});"
-													href="javascript:common.link.movePlanShop('500000102870138', 'Home_Planshop3_PROD', 't_page=홈&amp;t_click=인기행사_배너&amp;t_banner_name=%EB%B6%99%EC%9D%B4%EB%8A%94%EC%A3%BC%EB%A6%84%EA%B4%80%EB%A6%AC&amp;t_number=3');"
+													
+													href="#"
 													data-ref-dispcatno="500000102870138"
 													data-tracking-cd="Home_Planshop3_PROD"
 													data-attr="홈^인기행사기획전상세^붙이는주름관리^3" data-trk="/"
@@ -1697,24 +1356,14 @@ $(document).ready(function(){
 										</ul>
 
 									</div>
-									<div class="slider_unit  right slick-slide"
-										data-slick-index="3" aria-hidden="true" style="width: 520px;"
-										tabindex="-1" role="option" aria-describedby="slick-slide13">
-
-
-
-
-
-
-
-
-
-										<div class="plan_top">
+									<div class="slider_unit right"
+										>
+								<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/864405830504790862.jpg');">
 												<a
-													onclick="common.reqAmplitude('인기행사 배너 클릭', {entry_source: '홈', click_source: '인기행사_배너', banner_name: '3만원대향수', banner_number: '4'});"
-													href="javascript:common.link.movePlanShop('500000102810086', 'Home_Planshop3_PROD', 't_page=홈&amp;t_click=인기행사_배너&amp;t_banner_name=3%EB%A7%8C%EC%9B%90%EB%8C%80%ED%96%A5%EC%88%98&amp;t_number=4');"
+													
+													href="#"
 													data-ref-dispcatno="500000102810086"
 													data-tracking-cd="Home_Planshop3_PROD"
 													data-attr="홈^인기행사기획전상세^3만원대향수^4" data-trk="/"
@@ -1861,24 +1510,14 @@ $(document).ready(function(){
 										</ul>
 
 									</div>
-									<div class="slider_unit  slick-slide" data-slick-index="4"
-										aria-hidden="true" style="width: 520px;" tabindex="-1"
-										role="option" aria-describedby="slick-slide14">
-
-
-
-
-
-
-
-
+									<div class="slider_unit" >
 
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/5818977716061829679.jpg');">
 												<a
-													onclick="common.reqAmplitude('인기행사 배너 클릭', {entry_source: '홈', click_source: '인기행사_배너', banner_name: '헤어바디블프특가', banner_number: '5'});"
-													href="javascript:common.link.movePlanShop('500000102800124', 'Home_Planshop3_PROD', 't_page=홈&amp;t_click=인기행사_배너&amp;t_banner_name=%ED%97%A4%EC%96%B4%EB%B0%94%EB%94%94%EB%B8%94%ED%94%84%ED%8A%B9%EA%B0%80&amp;t_number=5');"
+													
+													href="#"
 													data-ref-dispcatno="500000102800124"
 													data-tracking-cd="Home_Planshop3_PROD"
 													data-attr="홈^인기행사기획전상세^헤어바디블프특가^5" data-trk="/"
@@ -2028,24 +1667,15 @@ $(document).ready(function(){
 										</ul>
 
 									</div>
-									<div class="slider_unit  right slick-slide"
-										data-slick-index="5" aria-hidden="true" style="width: 520px;"
-										tabindex="-1" role="option" aria-describedby="slick-slide15">
-
-
-
-
-
-
-
+									<div class="slider_unit right">
 
 
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/3778793962759556640.jpg');">
 												<a
-													onclick="common.reqAmplitude('인기행사 배너 클릭', {entry_source: '홈', click_source: '인기행사_배너', banner_name: '힙행열차', banner_number: '6'});"
-													href="javascript:common.link.movePlanShop('500000102750242', 'Home_Planshop3_PROD', 't_page=홈&amp;t_click=인기행사_배너&amp;t_banner_name=%ED%9E%99%ED%96%89%EC%97%B4%EC%B0%A8&amp;t_number=6');"
+													
+													href="#"
 													data-ref-dispcatno="500000102750242"
 													data-tracking-cd="Home_Planshop3_PROD"
 													data-attr="홈^인기행사기획전상세^힙행열차^6" data-trk="/"
@@ -2190,9 +1820,7 @@ $(document).ready(function(){
 										</ul>
 
 									</div>
-									<div class="slider_unit  slick-slide" data-slick-index="6"
-										aria-hidden="true" style="width: 520px;" tabindex="-1"
-										role="option" aria-describedby="slick-slide16">
+									<div class="slider_unit" >
 
 
 
@@ -2354,9 +1982,8 @@ $(document).ready(function(){
 										</ul>
 
 									</div>
-									<div class="slider_unit  right slick-slide"
-										data-slick-index="7" aria-hidden="true" style="width: 520px;"
-										tabindex="-1" role="option" aria-describedby="slick-slide17">
+									<div class="slider_unit right"
+										>
 
 
 
@@ -2506,274 +2133,8 @@ $(document).ready(function(){
 										</ul>
 
 									</div>
-									<div class="slider_unit  slick-slide slick-cloned"
-										data-slick-index="8" aria-hidden="true" style="width: 520px;"
-										tabindex="-1">
-										<div class="plan_top">
-											<div class="plan_banner"
-												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/5358451737655223845.jpg');">
-												<a
-													onclick="common.reqAmplitude('인기행사 배너 클릭', {entry_source: '홈', click_source: '인기행사_배너', banner_name: '맨즈그루밍', banner_number: '1'});"
-													href="javascript:common.link.movePlanShop('500000103010021', 'Home_Planshop3_PROD', 't_page=홈&amp;t_click=인기행사_배너&amp;t_banner_name=%EB%A7%A8%EC%A6%88%EA%B7%B8%EB%A3%A8%EB%B0%8D&amp;t_number=1');"
-													data-ref-dispcatno="500000103010021"
-													data-tracking-cd="Home_Planshop3_PROD"
-													data-attr="홈^인기행사기획전상세^맨즈그루밍^1" data-trk="/"
-													data-attr-imp-goodsno="" tabindex="-1">
-													<p>
-														<strong class="tit" style="color: #000000;">아이디얼
-															포맨 </strong> <strong class="tit" style="color: #000000;">작심1주,블프특가
-														</strong> <span class="desc" style="color: #000000;">#7일특가#선착순증정</span>
-													</p>
-												</a>
-											</div>
-										</div>
-										<ul class="cate_prd_list">
-											<li>
-
-												<div class="prd_info ">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000188808&amp;dispCatNo=90000010001&amp;trackingCd=Home_Planshop3&amp;t_page=홈&amp;t_click=인기행사_맨즈그루밍_상품상세&amp;t_number=1"
-														name="Home_Planshop3" class="prd_thumb goodsList"
-														data-ref-goodsno="A000000188808"
-														data-attr="홈^인기행사만 모았어요^[11월 블프특가]아이디얼 포 맨 시카 흔적 올인원 플루이드 한정기획(75mL 증정)^1"
-														data-ref-dispcatno="90000010001" data-ref-itemno="001"
-														data-trk="null"
-														data-impression="A000000188808^홈_인기행사만 모았어요^1"
-														data-impression-visibility="1" tabindex="-1"><span
-														class="thumb_flag best">베스트</span><img
-														src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018880803ko.jpg?l=ko"
-														alt="[11월 블프특가]아이디얼 포 맨 시카 흔적 올인원 플루이드 한정기획(75mL 증정)"
-														onerror="common.errorImg(this);"></a>
-													<div class="prd_name">
-														<a href="javascript:;" name="Home_Planshop3"
-															class="goodsList" data-ref-goodsno="A000000188808"
-															data-attr="홈^인기행사만 모았어요^[11월 블프특가]아이디얼 포 맨 시카 흔적 올인원 플루이드 한정기획(75mL 증정)^1"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															data-trk="null" tabindex="-1"><span class="tx_brand">아이디얼포맨</span>
-															<p class="tx_name">[11월 블프특가]아이디얼 포 맨 시카 흔적 올인원 플루이드
-																한정기획(75mL 증정)</p></a>
-													</div>
-													<button class="btn_zzim jeem"
-														data-ref-goodsno="A000000188808" tabindex="-1">
-														<span>찜하기전</span>
-													</button>
-													<p class="prd_price">
-														<span class="tx_org"><span class="tx_num">30,000</span>원
-														</span><span class="tx_cur"><span class="tx_num">20,810</span>원
-														</span>
-													</p>
-													<p class="prd_flag">
-														<span class="icon_flag sale">세일</span><span
-															class="icon_flag coupon">쿠폰</span><span
-															class="icon_flag gift">증정</span><span
-															class="icon_flag delivery">오늘드림</span>
-													</p>
-													<p class="prd_point_area tx_num">
-														<span class="review_point"><span class="point"
-															style="width: 96.0%">10점만점에 5.5점</span></span>(999+)
-													</p>
-													<p class="prd_btn_area">
-														<button class="cartBtn" data-ref-goodsno="A000000188808"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="-1">장바구니</button>
-														<button class="btn_new_pop goodsList" tabindex="-1">새창보기</button>
-													</p>
-												</div>
-
-
-
-											</li>
-
-
-
-											<li>
-
-												<div class="prd_info ">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000188803&amp;dispCatNo=90000010001&amp;trackingCd=Home_Planshop3&amp;t_page=홈&amp;t_click=인기행사_맨즈그루밍_상품상세&amp;t_number=2"
-														name="Home_Planshop3" class="prd_thumb goodsList"
-														data-ref-goodsno="A000000188803"
-														data-attr="홈^인기행사만 모았어요^[11월 블프특가]아이디얼 포 맨&nbsp;퍼펙트 올인원 탄력 기획(올인원 30ml+탄력크림 30ml 증정)^2"
-														data-ref-dispcatno="90000010001" data-ref-itemno="001"
-														data-trk="null"
-														data-impression="A000000188803^홈_인기행사만 모았어요^2"
-														data-impression-visibility="1" tabindex="-1"><span
-														class="thumb_flag best">베스트</span><img
-														src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018880304ko.jpg?l=ko"
-														alt="[11월 블프특가]아이디얼 포 맨&nbsp;퍼펙트 올인원 탄력 기획(올인원 30ml+탄력크림 30ml 증정)"
-														onerror="common.errorImg(this);"></a>
-													<div class="prd_name">
-														<a href="javascript:;" name="Home_Planshop3"
-															class="goodsList" data-ref-goodsno="A000000188803"
-															data-attr="홈^인기행사만 모았어요^[11월 블프특가]아이디얼 포 맨&nbsp;퍼펙트 올인원 탄력 기획(올인원 30ml+탄력크림 30ml 증정)^2"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															data-trk="null" tabindex="-1"><span class="tx_brand">아이디얼포맨</span>
-															<p class="tx_name">[11월 블프특가]아이디얼 포 맨&nbsp;퍼펙트 올인원 탄력
-																기획(올인원 30ml+탄력크림 30ml 증정)</p></a>
-													</div>
-													<button class="btn_zzim jeem"
-														data-ref-goodsno="A000000188803" tabindex="-1">
-														<span>찜하기전</span>
-													</button>
-													<p class="prd_price">
-														<span class="tx_org"><span class="tx_num">29,000</span>원
-															~</span><span class="tx_cur"><span class="tx_num">19,860</span>원
-															~</span>
-													</p>
-													<p class="prd_flag">
-														<span class="icon_flag sale">세일</span><span
-															class="icon_flag coupon">쿠폰</span><span
-															class="icon_flag gift">증정</span><span
-															class="icon_flag delivery">오늘드림</span>
-													</p>
-													<p class="prd_point_area tx_num">
-														<span class="review_point"><span class="point"
-															style="width: 98.0%">10점만점에 5.5점</span></span>(999+)
-													</p>
-													<p class="prd_btn_area">
-														<button class="cartBtn" data-ref-goodsno="A000000188803"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="-1">장바구니</button>
-														<button class="btn_new_pop goodsList" tabindex="-1">새창보기</button>
-													</p>
-												</div>
-
-											</li>
-										</ul>
-
-									</div>
-									<div class="slider_unit  right slick-slide slick-cloned"
-										data-slick-index="9" aria-hidden="true" style="width: 520px;"
-										tabindex="-1">
-
-										<div class="plan_top">
-											<div class="plan_banner"
-												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/508948120174502060.jpg');">
-												<a
-													onclick="common.reqAmplitude('인기행사 배너 클릭', {entry_source: '홈', click_source: '인기행사_배너', banner_name: '당충전필요할때', banner_number: '2'});"
-													href="javascript:common.link.movePlanShop('500000102820183', 'Home_Planshop3_PROD', 't_page=홈&amp;t_click=인기행사_배너&amp;t_banner_name=%EB%8B%B9%EC%B6%A9%EC%A0%84%ED%95%84%EC%9A%94%ED%95%A0%EB%95%8C&amp;t_number=2');"
-													data-ref-dispcatno="500000102820183"
-													data-tracking-cd="Home_Planshop3_PROD"
-													data-attr="홈^인기행사기획전상세^당충전필요할때^2" data-trk="/"
-													data-attr-imp-goodsno="" tabindex="-1">
-													<p>
-														<strong class="tit" style="color: #000000;">달달하고
-															행복하게 </strong> <strong class="tit" style="color: #000000;">SWEET
-															SNACK </strong> <span class="desc" style="color: #000000;">#1+1/2+1
-															#BEST모음</span>
-													</p>
-												</a>
-											</div>
-										</div>
-										<ul class="cate_prd_list">
-											<li>
-
-												<div class="prd_info ">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000191890&amp;dispCatNo=90000010001&amp;trackingCd=Home_Planshop3&amp;t_page=홈&amp;t_click=인기행사_당충전필요할때_상품상세&amp;t_number=3"
-														name="Home_Planshop3" class="prd_thumb goodsList"
-														data-ref-goodsno="A000000191890"
-														data-attr="홈^인기행사만 모았어요^밀카 초콜릿 4종 패키지 기획 313g^1"
-														data-ref-dispcatno="90000010001" data-ref-itemno="001"
-														data-trk="null"
-														data-impression="A000000191890^홈_인기행사만 모았어요^1"
-														data-impression-visibility="1" tabindex="-1"><span
-														class="thumb_flag best">베스트</span><img
-														src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019189001ko.jpg?l=ko"
-														alt="밀카 초콜릿 4종 패키지 기획 313g"
-														onerror="common.errorImg(this);"></a>
-													<div class="prd_name">
-														<a href="javascript:;" name="Home_Planshop3"
-															class="goodsList" data-ref-goodsno="A000000191890"
-															data-attr="홈^인기행사만 모았어요^밀카 초콜릿 4종 패키지 기획 313g^1"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															data-trk="null" tabindex="-1"><span class="tx_brand">밀카</span>
-															<p class="tx_name">밀카 초콜릿 4종 패키지 기획 313g</p></a>
-													</div>
-													<button class="btn_zzim jeem"
-														data-ref-goodsno="A000000191890" tabindex="-1">
-														<span>찜하기전</span>
-													</button>
-													<p class="prd_price">
-														<span class="tx_org"><span class="tx_num">8,900</span>원
-														</span><span class="tx_cur"><span class="tx_num">6,900</span>원
-														</span>
-													</p>
-													<p class="prd_flag">
-														<span class="icon_flag sale">세일</span><span
-															class="icon_flag delivery">오늘드림</span>
-													</p>
-													<p class="prd_point_area tx_num">
-														<span class="review_point"><span class="point"
-															style="width: 100.0%">10점만점에 5.5점</span></span>(11)
-													</p>
-													<p class="prd_btn_area">
-														<button class="cartBtn" data-ref-goodsno="A000000191890"
-															data-ref-dispcatno="90000010001" data-ref-itemno="001"
-															tabindex="-1">장바구니</button>
-														<button class="btn_new_pop goodsList" tabindex="-1">새창보기</button>
-													</p>
-												</div>
-											</li>
-											<li>
-
-												<div class="prd_info ">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000189568&amp;dispCatNo=90000010001&amp;trackingCd=Home_Planshop3&amp;t_page=홈&amp;t_click=인기행사_당충전필요할때_상품상세&amp;t_number=4"
-														name="Home_Planshop3" class="prd_thumb goodsList"
-														data-ref-goodsno="A000000189568"
-														data-attr="홈^인기행사만 모았어요^딜라이트 프로젝트 더티초코 디저트 3종^2"
-														data-ref-dispcatno="90000010001" data-ref-itemno="003"
-														data-trk="null"
-														data-impression="A000000189568^홈_인기행사만 모았어요^2"
-														data-impression-visibility="1" tabindex="-1"><span
-														class="thumb_flag best">베스트</span><img
-														src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018956806ko.jpg?l=ko"
-														alt="딜라이트 프로젝트 더티초코 디저트 3종"
-														onerror="common.errorImg(this);"></a>
-													<div class="prd_name">
-														<a href="javascript:;" name="Home_Planshop3"
-															class="goodsList" data-ref-goodsno="A000000189568"
-															data-attr="홈^인기행사만 모았어요^딜라이트 프로젝트 더티초코 디저트 3종^2"
-															data-ref-dispcatno="90000010001" data-ref-itemno="003"
-															data-trk="null" tabindex="-1"><span class="tx_brand">딜라이트
-																프로젝트</span>
-															<p class="tx_name">딜라이트 프로젝트 더티초코 디저트 3종</p></a>
-													</div>
-													<button class="btn_zzim jeem"
-														data-ref-goodsno="A000000189568" tabindex="-1">
-														<span>찜하기전</span>
-													</button>
-													<p class="prd_price">
-														<span class="tx_org"><span class="tx_num">3,200</span>원
-															~</span><span class="tx_cur"><span class="tx_num">2,500</span>원
-															~</span>
-													</p>
-													<p class="prd_flag">
-														<span class="icon_flag sale">세일</span><span
-															class="icon_flag delivery">오늘드림</span>
-													</p>
-													<p class="prd_point_area tx_num">
-														<span class="review_point"><span class="point"
-															style="width: 96.0%">10점만점에 5.5점</span></span>(999+)
-													</p>
-													<p class="prd_btn_area">
-														<button class="cartBtn" data-ref-goodsno="A000000189568"
-															data-ref-dispcatno="90000010001" data-ref-itemno="003"
-															tabindex="-1">장바구니</button>
-														<button class="btn_new_pop goodsList" tabindex="-1">새창보기</button>
-													</p>
-												</div>
-
-
-
-											</li>
-
-										</ul>
-
-									</div>
-								</div>
-							</div>
+									
+									
 
 						</div>
 					</div>
@@ -7002,16 +6363,48 @@ $('#main_curation02_01').slick({
 			}); 
 	    	 
 	    	 $('#mainFullSlider').slick({
+	    		 	slide: 'div',
 	    			arrows: true,
 	    			fade: true,
 	    			infinite: true,
+	    			autoplay: true,             //슬라이드 자동 시작(true or false) ▶기본값 false
+	    			autoplaySpeed: 1000,
 	    			speed: 1000,
 	    			slidesToShow: 1,
 	    			slidesToScroll: 1,
 	    			draggable: true,
 	    			dots: true
 	    		});
+	    	 
+	    	 $('#mainPlanSlider').slick({
+	    		 	slide: '.slider_unit',
+	    			infinite: true,          
+	    			slidesToShow: 2,
+	    			slidesToScroll: 2,
+	    			draggable: true
+	    		});
+			
+	    	 $('#mainFullSlider').on('beforeChange', function(event, slick, currentSlide, nextSlide){ 
 
+	    		 var i = (currentSlide ? currentSlide : 0) + 1;
+				
+	    		 $('.slick-paging').html("<span class='cur_no'>"+i+"</span>/"+slick.slideCount);
+
+	    		 });
+	    	 var sw = 0;
+	    	 $('#mainSliderBtn').on('click',function(){
+	    		 if(sw==0){
+	    		 $(this).addClass('pause');
+	    		 $(this).text('자동재생');
+	    		 $('#mainFullSlider').slick('slickPause')
+	    		 sw = 1;
+	    		 }else{
+	    			$(this).removeClass('pause');
+		    		$(this).text('멈춤');
+	    		 	$('#mainFullSlider').slick('slickPlay')
+	    		 	sw = 0;
+	    		 }
+	    	 })
 	    	 $('#main_curation03_01').slick({
 	    		   dots: false,
 	    		   arrows: false,
