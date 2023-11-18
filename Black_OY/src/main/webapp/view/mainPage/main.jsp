@@ -522,8 +522,7 @@ $(document).ready(() => {
 
 										</c:if>
 
-
-												</c:if>
+											
 												<%-- for each 끝--%>
 
 									</ul>
@@ -842,10 +841,8 @@ $(document).ready(function(){
 						<ul class="recomm_plan_list">
 
 							<li><a
-								onclick="common.reqAmplitude('위클리스페셜 배너 클릭', {entry_source: '홈', click_source: 'weeklyspecial', banner_name: '광채나는글로우
-', banner_number: '1'});"
-								href="javascript:common.link.movePlanShop('500000102940044', 'Home_Planshop2_PROD', 't_page=홈&amp;t_click=weeklyspecial&amp;t_banner_name=광채나는글로우
-&amp;t_number=1');"
+								onclick=""
+								href="#"
 								data-ref-dispcatno=""
 								data-attr="홈^WeeklySpecial기획전^브랜드운영팀_웨이크메이크" data-trk="/"> <img
 									src="https://image.oliveyoung.co.kr/uploads/images//categoryBanner/1279276419346446875.jpg"
@@ -860,10 +857,8 @@ $(document).ready(function(){
 							</a></li>
 
 							<li><a
-								onclick="common.reqAmplitude('위클리스페셜 배너 클릭', {entry_source: '홈', click_source: 'weeklyspecial', banner_name: '1등 샴푸 라보에이치
-', banner_number: '2'});"
-								href="javascript:common.link.movePlanShop('500000102850136', 'Home_Planshop2_PROD', 't_page=홈&amp;t_click=weeklyspecial&amp;t_banner_name=1등 샴푸 라보에이치
-&amp;t_number=2');"
+								onclick=""
+								href="#"
 								data-ref-dispcatno="" data-attr="홈^WeeklySpecial기획전^헤어_라보에이치"
 								data-trk="/"> <img
 									src="https://image.oliveyoung.co.kr/uploads/images//categoryBanner/6065360184442940089.jpg"
@@ -883,9 +878,7 @@ $(document).ready(function(){
 				</div>
 				<!-- //추천 기획전 -->
 
-
-
-
+				<!-- ======== 인기 행사만 모았어요! 영역  =============== -->
 				<div class="main_plan_banner ty02">
 
 
@@ -894,15 +887,9 @@ $(document).ready(function(){
 						<strong>인기 행사만 모았어요!</strong>
 					</h3>
 					<div class="banner_wrap">
-						<div
-							class="slick_slider slick-initialized slick-slider slick-dotted"
-							id="mainPlanSlider">
-							<div aria-live="polite" class="slick-list draggable">
-								<div class="slick-track" role="listbox"
-									style="opacity: 1; width: 6240px; transform: translate3d(-1040px, 0px, 0px);">
-									<div class="slider_unit  slick-slide slick-cloned"
-										data-slick-index="-2" aria-hidden="true" style="width: 520px;"
-										tabindex="-1">
+						<div id="mainPlanSlider" class="slick_slider">
+							
+									<div class="slider_unit">
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/5933098486848573045.jpg');">
@@ -996,7 +983,7 @@ $(document).ready(function(){
 														class="thumb_flag best">베스트</span><img
 														src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018747906ko.jpg?l=ko"
 														alt="비플레인 녹두 약산성 클렌징폼 160ml + 40ml 기획"
-														onerror="common.errorImg(this);"></a>
+														onerror=""></a>
 													<div class="prd_name">
 														<a href="javascript:;" name="Home_Planshop3"
 															class="goodsList" data-ref-goodsno="A000000187479"
@@ -1030,30 +1017,12 @@ $(document).ready(function(){
 														<button class="btn_new_pop goodsList" tabindex="-1">새창보기</button>
 													</p>
 												</div>
-
-
-
 											</li>
-
-
-
-
-
 
 										</ul>
 
 									</div>
-									<div class="slider_unit  right slick-slide slick-cloned"
-										data-slick-index="-1" aria-hidden="true" style="width: 520px;"
-										tabindex="-1">
-
-
-
-
-
-
-
-
+									<div class="slider_unit">
 
 										<div class="plan_top">
 											<div class="plan_banner"
@@ -1076,17 +1045,7 @@ $(document).ready(function(){
 										</div>
 
 
-
-
-
-
-
-
 										<ul class="cate_prd_list">
-
-
-
-
 
 											<li>
 
@@ -1192,31 +1151,11 @@ $(document).ready(function(){
 													</p>
 												</div>
 
-
-
 											</li>
-
-
-
-
-
-
 										</ul>
 
 									</div>
-									<div
-										class="slider_unit  slick-slide slick-current slick-active"
-										data-slick-index="0" aria-hidden="false" style="width: 520px;"
-										tabindex="-1" role="option" aria-describedby="slick-slide10">
-
-
-
-
-
-
-
-
-
+									<div class="slider_unit">
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/5358451737655223845.jpg');">
@@ -1236,18 +1175,7 @@ $(document).ready(function(){
 											</div>
 										</div>
 
-
-
-
-
-
-
-
 										<ul class="cate_prd_list">
-
-
-
-
 
 											<li>
 
@@ -1362,26 +1290,10 @@ $(document).ready(function(){
 
 
 											</li>
-
-
-
-
-
-
 										</ul>
 
 									</div>
-									<div class="slider_unit  right slick-slide slick-active"
-										data-slick-index="1" aria-hidden="false" style="width: 520px;"
-										tabindex="-1" role="option" aria-describedby="slick-slide11">
-
-
-
-
-
-
-
-
+									<div class="slider_unit">
 
 										<div class="plan_top">
 											<div class="plan_banner"
@@ -1402,20 +1314,7 @@ $(document).ready(function(){
 												</a>
 											</div>
 										</div>
-
-
-
-
-
-
-
-
 										<ul class="cate_prd_list">
-
-
-
-
-
 											<li>
 
 												<div class="prd_info ">
@@ -1464,13 +1363,7 @@ $(document).ready(function(){
 														<button class="btn_new_pop goodsList" tabindex="0">새창보기</button>
 													</p>
 												</div>
-
-
-
 											</li>
-
-
-
 											<li>
 
 												<div class="prd_info ">
@@ -1520,31 +1413,11 @@ $(document).ready(function(){
 														<button class="btn_new_pop goodsList" tabindex="0">새창보기</button>
 													</p>
 												</div>
-
-
-
 											</li>
-
-
-
-
-
-
 										</ul>
 
 									</div>
-									<div class="slider_unit  slick-slide" data-slick-index="2"
-										aria-hidden="true" style="width: 520px;" tabindex="-1"
-										role="option" aria-describedby="slick-slide12">
-
-
-
-
-
-
-
-
-
+									<div class="slider_unit">
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/2333911504943230794.jpg');">
@@ -1565,18 +1438,7 @@ $(document).ready(function(){
 											</div>
 										</div>
 
-
-
-
-
-
-
-
 										<ul class="cate_prd_list">
-
-
-
-
 
 											<li>
 
@@ -1628,13 +1490,7 @@ $(document).ready(function(){
 														<button class="btn_new_pop goodsList" tabindex="-1">새창보기</button>
 													</p>
 												</div>
-
-
-
 											</li>
-
-
-
 											<li>
 
 												<div class="prd_info ">
@@ -1685,29 +1541,12 @@ $(document).ready(function(){
 													</p>
 												</div>
 
-
-
 											</li>
-
-
-
-
-
 
 										</ul>
 
 									</div>
-									<div class="slider_unit  right slick-slide"
-										data-slick-index="3" aria-hidden="true" style="width: 520px;"
-										tabindex="-1" role="option" aria-describedby="slick-slide13">
-
-
-
-
-
-
-
-
+									<div class="slider_unit">
 
 										<div class="plan_top">
 											<div class="plan_banner"
@@ -1729,18 +1568,7 @@ $(document).ready(function(){
 											</div>
 										</div>
 
-
-
-
-
-
-
-
 										<ul class="cate_prd_list">
-
-
-
-
 
 											<li>
 
@@ -1851,28 +1679,11 @@ $(document).ready(function(){
 													</p>
 												</div>
 
-
-
 											</li>
-
-
-
-
 										</ul>
 
 									</div>
-									<div class="slider_unit  slick-slide" data-slick-index="4"
-										aria-hidden="true" style="width: 520px;" tabindex="-1"
-										role="option" aria-describedby="slick-slide14">
-
-
-
-
-
-
-
-
-
+									<div class="slider_unit">
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/5818977716061829679.jpg');">
@@ -1893,18 +1704,7 @@ $(document).ready(function(){
 											</div>
 										</div>
 
-
-
-
-
-
-
-
 										<ul class="cate_prd_list">
-
-
-
-
 
 											<li>
 
@@ -1956,11 +1756,7 @@ $(document).ready(function(){
 													</p>
 												</div>
 
-
-
 											</li>
-
-
 
 											<li>
 
@@ -2013,33 +1809,11 @@ $(document).ready(function(){
 														<button class="btn_new_pop goodsList" tabindex="-1">새창보기</button>
 													</p>
 												</div>
-
-
-
 											</li>
-
-
-
-
-
-
-
-
 										</ul>
 
 									</div>
-									<div class="slider_unit  right slick-slide"
-										data-slick-index="5" aria-hidden="true" style="width: 520px;"
-										tabindex="-1" role="option" aria-describedby="slick-slide15">
-
-
-
-
-
-
-
-
-
+									<div class="slider_unit">
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/3778793962759556640.jpg');">
@@ -2060,18 +1834,7 @@ $(document).ready(function(){
 											</div>
 										</div>
 
-
-
-
-
-
-
-
 										<ul class="cate_prd_list">
-
-
-
-
 
 											<li>
 
@@ -2123,11 +1886,7 @@ $(document).ready(function(){
 													</p>
 												</div>
 
-
-
 											</li>
-
-
 
 											<li>
 
@@ -2179,34 +1938,17 @@ $(document).ready(function(){
 														<button class="btn_new_pop goodsList" tabindex="-1">새창보기</button>
 													</p>
 												</div>
-
-
-
 											</li>
-
-
-
 
 										</ul>
 
 									</div>
-									<div class="slider_unit  slick-slide" data-slick-index="6"
-										aria-hidden="true" style="width: 520px;" tabindex="-1"
-										role="option" aria-describedby="slick-slide16">
-
-
-
-
-
-
-
-
-
+									<div class="slider_unit" >
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/5933098486848573045.jpg');">
 												<a
-													onclick="common.reqAmplitude('인기행사 배너 클릭', {entry_source: '홈', click_source: '인기행사_배너', banner_name: '클렌징 블프시작', banner_number: '7'});"
+													onclick=""
 													href="javascript:common.link.movePlanShop('500000102730094', 'Home_Planshop3_PROD', 't_page=홈&amp;t_click=인기행사_배너&amp;t_banner_name=%ED%81%B4%EB%A0%8C%EC%A7%95+%EB%B8%94%ED%94%84%EC%8B%9C%EC%9E%91&amp;t_number=7');"
 													data-ref-dispcatno="500000102730094"
 													data-tracking-cd="Home_Planshop3_PROD"
@@ -2221,20 +1963,7 @@ $(document).ready(function(){
 												</a>
 											</div>
 										</div>
-
-
-
-
-
-
-
-
 										<ul class="cate_prd_list">
-
-
-
-
-
 											<li>
 
 												<div class="prd_info ">
@@ -2345,27 +2074,10 @@ $(document).ready(function(){
 
 
 											</li>
-
-
-
-
-
-
 										</ul>
 
 									</div>
-									<div class="slider_unit  right slick-slide"
-										data-slick-index="7" aria-hidden="true" style="width: 520px;"
-										tabindex="-1" role="option" aria-describedby="slick-slide17">
-
-
-
-
-
-
-
-
-
+									<div class="slider_unit">
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/5680994098086568541.jpg');">
@@ -2386,18 +2098,7 @@ $(document).ready(function(){
 											</div>
 										</div>
 
-
-
-
-
-
-
-
 										<ul class="cate_prd_list">
-
-
-
-
 
 											<li>
 
@@ -2506,9 +2207,7 @@ $(document).ready(function(){
 										</ul>
 
 									</div>
-									<div class="slider_unit  slick-slide slick-cloned"
-										data-slick-index="8" aria-hidden="true" style="width: 520px;"
-										tabindex="-1">
+									<div class="slider_unit">
 										<div class="plan_top">
 											<div class="plan_banner"
 												style="background-image: url('https://image.oliveyoung.co.kr/uploads/images//categoryBanner/5358451737655223845.jpg');">
@@ -2642,9 +2341,7 @@ $(document).ready(function(){
 										</ul>
 
 									</div>
-									<div class="slider_unit  right slick-slide slick-cloned"
-										data-slick-index="9" aria-hidden="true" style="width: 520px;"
-										tabindex="-1">
+									<div class="slider_unit">
 
 										<div class="plan_top">
 											<div class="plan_banner"
@@ -2772,29 +2469,13 @@ $(document).ready(function(){
 										</ul>
 
 									</div>
-								</div>
-							</div>
-
+						
+						<!-- 밑 div 태그가 mainPlanSlider 닫기 태그 입니다.  -->
 						</div>
 					</div>
 					<div class="banner_paging" role="toolbar">
-						<ul class="slick-dots" role="tablist" style="display: block;">
-							<li class="slick-active" aria-hidden="false" role="presentation"
-								aria-selected="true" aria-controls="navigation10"
-								id="slick-slide10"><button type="button" data-role="none"
-									role="button" tabindex="0">1</button></li>
-							<li aria-hidden="true" role="presentation" aria-selected="false"
-								aria-controls="navigation11" id="slick-slide11"><button
-									type="button" data-role="none" role="button" tabindex="0">2</button></li>
-							<li aria-hidden="true" role="presentation" aria-selected="false"
-								aria-controls="navigation12" id="slick-slide12"><button
-									type="button" data-role="none" role="button" tabindex="0">3</button></li>
-							<li aria-hidden="true" role="presentation" aria-selected="false"
-								aria-controls="navigation13" id="slick-slide13"><button
-									type="button" data-role="none" role="button" tabindex="0">4</button></li>
-						</ul>
-					</div>
-					<span class="slick-prev prev slick-arrow" id="plan_prev"
+					</div> 
+					 <span class="slick-prev prev slick-arrow" id="plan_prev"
 						style="display: block;">prev</span> <span
 						class="slick-next next slick-arrow" id="plan_next"
 						style="display: block;">next</span>
@@ -3307,24 +2988,10 @@ $(document).ready(function(){
 					<strong>이 상품 어때요?</strong>
 				</h3>
 				<div
-					class="main_recomm_wrap slick-initialized slick-slider slick-dotted"
+					class="main_recomm_wrap"
 					id="mainReComSlider" role="toolbar">
-					<button type="button" data-role="none"
-						class="slick-prev slick-arrow" aria-label="Previous" role="button"
-						style="display: block;">Previous</button>
 
-
-
-
-
-
-
-
-
-					<div aria-live="polite" class="slick-list draggable">
-						<div class="slick-track" role="listbox"
-							style="opacity: 1; width: 5100px; transform: translate3d(-1020px, 0px, 0px);">
-							<div class="slick-slide slick-cloned" data-slick-index="-1"
+							<div class="" data-slick-index="-1"
 								aria-hidden="true" style="width: 1020px;" tabindex="-1">
 								<ul class="cate_prd_list no_line">
 
@@ -3439,13 +3106,6 @@ $(document).ready(function(){
 
 									</li>
 
-
-
-
-
-
-
-
 									<li class="flag">
 
 										<div class="prd_info ">
@@ -3497,13 +3157,6 @@ $(document).ready(function(){
 										</div>
 
 									</li>
-
-
-
-
-
-
-
 
 									<li class="flag">
 
@@ -3560,8 +3213,8 @@ $(document).ready(function(){
 
 								</ul>
 							</div>
-							<div class="slick-slide slick-current slick-active"
-								data-slick-index="0" aria-hidden="false" style="width: 1020px;"
+							<div class=""
+								 aria-hidden="false" style="width: 1020px;"
 								tabindex="-1" role="option" aria-describedby="slick-slide30">
 								<ul class="cate_prd_list no_line">
 
@@ -3637,7 +3290,7 @@ $(document).ready(function(){
 												data-impression-visibility="1" tabindex="0"><img
 												src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/B00000018796101ko.jpg?l=ko"
 												alt="나랑드사이다 180ml 캔 30입 1박스"
-												onerror="common.errorImg(this);"></a>
+												onerror=""></a>
 											<div class="prd_name">
 												<a href="javascript:;" name="Home_Recommand"
 													class="goodsList" data-ref-goodsno="B000000187961"
@@ -3671,13 +3324,6 @@ $(document).ready(function(){
 										</div>
 
 									</li>
-
-
-
-
-
-
-
 
 									<li class="flag">
 
@@ -3729,13 +3375,6 @@ $(document).ready(function(){
 										</div>
 
 									</li>
-
-
-
-
-
-
-
 
 									<li class="flag">
 
@@ -3793,7 +3432,7 @@ $(document).ready(function(){
 
 								</ul>
 							</div>
-							<div class="slick-slide" data-slick-index="1" aria-hidden="true"
+							<div aria-hidden="true"
 								style="width: 1020px;" tabindex="-1" role="option"
 								aria-describedby="slick-slide31">
 								<ul class="cate_prd_list no_line">
@@ -3849,12 +3488,6 @@ $(document).ready(function(){
 									</li>
 
 
-
-
-
-
-
-
 									<li class="flag">
 
 										<div class="prd_info ">
@@ -3906,12 +3539,6 @@ $(document).ready(function(){
 										</div>
 
 									</li>
-
-
-
-
-
-
 
 
 									<li class="flag">
@@ -4023,7 +3650,7 @@ $(document).ready(function(){
 
 								</ul>
 							</div>
-							<div class="slick-slide" data-slick-index="2" aria-hidden="true"
+							<div data-slick-index="2" aria-hidden="true"
 								style="width: 1020px;" tabindex="-1" role="option"
 								aria-describedby="slick-slide32">
 								<ul class="cate_prd_list no_line">
@@ -4239,7 +3866,7 @@ $(document).ready(function(){
 
 								</ul>
 							</div>
-							<div class="slick-slide slick-cloned" data-slick-index="3"
+							<div 
 								aria-hidden="true" style="width: 1020px;" tabindex="-1">
 								<ul class="cate_prd_list no_line">
 
@@ -4295,13 +3922,6 @@ $(document).ready(function(){
 
 									</li>
 
-
-
-
-
-
-
-
 									<li class="flag">
 
 										<div class="prd_info ">
@@ -4349,14 +3969,6 @@ $(document).ready(function(){
 										</div>
 
 									</li>
-
-
-
-
-
-
-
-
 									<li class="flag">
 
 										<div class="prd_info ">
@@ -4407,13 +4019,6 @@ $(document).ready(function(){
 										</div>
 
 									</li>
-
-
-
-
-
-
-
 
 									<li class="flag">
 
@@ -4471,72 +4076,8 @@ $(document).ready(function(){
 
 								</ul>
 							</div>
-						</div>
-					</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-					<button type="button" data-role="none"
-						class="slick-next slick-arrow" aria-label="Next" role="button"
-						style="display: block;">Next</button>
-					<ul class="slick-dots" style="display: block;" role="tablist">
-						<li class="slick-active" aria-hidden="false" role="presentation"
-							aria-selected="true" aria-controls="navigation30"
-							id="slick-slide30"><button type="button" data-role="none"
-								role="button" tabindex="0">1</button></li>
-						<li aria-hidden="true" role="presentation" aria-selected="false"
-							aria-controls="navigation31" id="slick-slide31"><button
-								type="button" data-role="none" role="button" tabindex="0">2</button></li>
-						<li aria-hidden="true" role="presentation" aria-selected="false"
-							aria-controls="navigation32" id="slick-slide32"><button
-								type="button" data-role="none" role="button" tabindex="0">3</button></li>
-					</ul>
+					<!-- 표시 -->
 				</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 				<div class="today-new-goods">
@@ -4544,17 +4085,11 @@ $(document).ready(function(){
 						<strong>신상 업데이트</strong>
 					</h3>
 					<div class="today_newgoods_slide">
-						<ul class="slide_list slick_slider slick-initialized slick-slider"
-							id="todayGoods" style="">
-
-
-							<div aria-live="polite" class="slick-list">
-								<div class="slick-track" role="listbox"
-									style="opacity: 1; width: 5100px;">
-									<li class="slick-slide slick-current slick-active"
-										data-slick-index="0" aria-hidden="false"
+						<ul class="slide_list " id="todayGoods" style="">
+									<li 
+										aria-hidden="false"
 										style="width: 1020px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;"
-										tabindex="-1" role="option" aria-describedby="slick-slide40">
+										tabindex="-1" role="option" >
 										<ul class="page">
 
 											<li class="item"><a
@@ -4593,9 +4128,9 @@ $(document).ready(function(){
 
 										</ul>
 									</li>
-									<li class="slick-slide" data-slick-index="1" aria-hidden="true"
+									<li  aria-hidden="true"
 										style="width: 1020px; position: relative; left: -1020px; top: 0px; z-index: 998; opacity: 0;"
-										tabindex="-1" role="option" aria-describedby="slick-slide41">
+										tabindex="-1" role="option" >
 										<ul class="page">
 
 											<li class="item"><a
@@ -4632,9 +4167,9 @@ $(document).ready(function(){
 
 										</ul>
 									</li>
-									<li class="slick-slide" data-slick-index="2" aria-hidden="true"
+									<li  aria-hidden="true"
 										style="width: 1020px; position: relative; left: -2040px; top: 0px; z-index: 998; opacity: 0;"
-										tabindex="-1" role="option" aria-describedby="slick-slide42">
+										tabindex="-1" role="option">
 										<ul class="page">
 
 											<li class="item"><a
@@ -4671,9 +4206,9 @@ $(document).ready(function(){
 
 										</ul>
 									</li>
-									<li class="slick-slide" data-slick-index="3" aria-hidden="true"
+									<li   aria-hidden="true"
 										style="width: 1020px; position: relative; left: -3060px; top: 0px; z-index: 998; opacity: 0;"
-										tabindex="-1" role="option" aria-describedby="slick-slide43">
+										tabindex="-1" role="option" >
 										<ul class="page">
 
 											<li class="item"><a
@@ -4712,9 +4247,9 @@ $(document).ready(function(){
 
 										</ul>
 									</li>
-									<li class="slick-slide" data-slick-index="4" aria-hidden="true"
+									<li  aria-hidden="true"
 										style="width: 1020px; position: relative; left: -4080px; top: 0px; z-index: 998; opacity: 0;"
-										tabindex="-1" role="option" aria-describedby="slick-slide44">
+										tabindex="-1" role="option">
 										<ul class="page">
 
 											<li class="item"><a
@@ -4753,8 +4288,8 @@ $(document).ready(function(){
 
 										</ul>
 									</li>
-								</div>
-							</div>
+						
+						<!-- dddd -->
 						</ul>
 					</div>
 
@@ -6951,7 +6486,7 @@ $(document).ready(function(){
 	<script type="text/javascript"
 		src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<script>
-
+/* 슬립 스크립트 */
 
 $('#main_curation02_01').slick({
 	dots: false,
@@ -7058,6 +6593,69 @@ $('#main_curation02_01').slick({
 	 				$this.find('.current').html(currentPage);
 	 				//common.reqAmplitude('큐레이션1_다른상품추천_클릭', {entry_source: '홈', click_source: '큐레이션1_다른상품추천', number: currentPage});
 	 			}); 
+	 	    	 
+	 	    	 /* 신상 어때요 슬릭 */
+	 	    	 $('#todayGoods').slick({
+		    		   dots: false,
+		    		   arrows: false,
+		    		   fade: true,
+		    		   infinite: true,
+		    		   speed: 100,
+		    		   slidesToShow: 1,
+		    		   slidesToScroll: 1,
+		    		   draggable: true
+		    		}); 
+	 	    	 
+	 	    	 /*
+	 	    	  $('#btn_todayGoods').on('click', function () {
+	 	    		 var $this = $(this);
+
+		 				var totalPage = Number($this.data('total-page'));
+		 				var currentPage = Number($this.data('current-page'));
+		 				// alert('123');
+		 				
+		 				$('#btn_todayGoods').slick('slickNext'); 
+
+		 				if (currentPage < totalPage) {
+		 					currentPage++;
+		 				} else {
+		 					currentPage = 1;
+		 				}
+		 				$this.data('current-page', currentPage);
+		 				$this.find('.current').html(currentPage);
+	 	    	 }*/
+	 	     
+	 	    	/* 신상 어때요 슬릭  종료*/
+	 	    	
+	 	    	/* 이상품어때요? */
+	 	    	
+				
+	 	    	$('#mainReComSlider').slick({
+		    		   dots: true,
+		    		   arrows: true,
+		    		   fade: true,
+		    		   infinite: true,
+		    		   speed: 100,
+		    		   slidesToShow: 1,
+		    		   slidesToScroll: 1,
+		    		   draggable: true
+		    		}); 
+	 	    	 
+	 	    	 /*인기행사만 모았어요 슬릭*/
+	 	    	 $('#mainPlanSlider').slick({
+		    		   dots: true,
+		    		   appendDots : $('.banner_paging'),
+		    		   prevArrow:$('#plan_prev'),
+		    		   nextArrow:$('#plan_next'),
+		    		   fade: true,
+		    		   infinite: true,
+		    		   speed: 100,
+		    		   slidesToShow: 2,
+		    		   slidesToScroll: 1,
+		    		   draggable: true
+		    		   
+		    		}); 
+	 	    	
 </script>
 </body>
 <!-- 유사한 고객 추천 상품 팝업 -->
