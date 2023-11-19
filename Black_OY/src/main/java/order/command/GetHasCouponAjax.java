@@ -63,6 +63,11 @@ public class GetHasCouponAjax extends HttpServlet {
 		OrderService service = OrderService.getInstance();
 		List<UserCouponDTO> list = service.getHasCouponList(user_id);
 		
+		if(list == null) {
+			writer.write("");
+			return;
+		}
+		
 		JSONObject jsonObject = new JSONObject();
 		JSONArray jsonArray = new JSONArray();
 		JSONObject userCoupon = null;;

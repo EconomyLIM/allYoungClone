@@ -123,8 +123,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 		
 		
 		
-		String sql = " select rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2,rev_grade_3, pro_id "
-				+ " from review  ";
+		String sql = " SELECT * From ( SELECT ROWNUM no, t.* FROM( SELECT * FROM review ";
+		//String sql = " select rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2,rev_grade_3, pro_id "
+			//	+ " from review  ";
 				
 				if (!(proid.equals("ALL"))) {
 					sql+= " where pro_displ_id = ? AND pro_id = ?  ";

@@ -11,6 +11,7 @@ import java.util.Map;
 import com.util.JDBCUtil;
 
 import order.domain.DeliveryDTO;
+import order.domain.PaymentDTO;
 import order.domain.ProductInfo;
 import order.domain.UserCouponDTO;
 
@@ -455,6 +456,309 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 		
 		return rowCount;
+	}
+
+	@Override
+	public String selectCurrOrderID(Connection conn) throws Exception {
+		String order_id = "";
+		
+		String sql = "SELECT 'or_'||TO_CHAR(order_seq.CURRVAL, 'FM00000000') order_id "
+				+ " FROM dual";
+		
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				order_id = rs.getString("order_id");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		}
+		
+		return order_id;
+	}
+
+	@Override
+	public int insertGiftOrder(Connection conn, Map<String, Object> map) throws Exception {
+		int rowCount = 0;
+		
+		String sql = "INSERT INTO o_order(order_id, user_id, delivery_date, order_status, order_type) "
+				+ " VALUES('or_'||TO_CHAR(order_seq.NEXTVAL, 'FM00000000')"
+				+ ", ?, ?, ?, ?)";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String)map.get("user_id"));
+			pstmt.setDate(2, new java.sql.Date(((Date)map.get("delivery_date")).getTime()));
+			pstmt.setString(3, (String)map.get("order_status"));
+			pstmt.setString(4, (String)map.get("order_type"));
+
+			rowCount = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+		}
+		
+		return rowCount;
+		
+	}
+
+	@Override
+	public int inserGiftPay(Connection conn, Map<String, Object> map) throws Exception {
+		int rowCount = 0;
+		
+		String sql = "INSERT INTO payment(pay_id, order_id, total_price, pay_price, delivery_price, cd_price, point_price, pay_type, saved_money, card_type, inst_type) "
+				+ " VALUES('pa_'||TO_CHAR(pay_seq.NEXTVAL, 'FM00000000'), 'or_'||TO_CHAR(order_seq.CURRVAL, 'FM00000000')"
+				+ " , ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (Integer)map.get("total_price"));
+			pstmt.setInt(2, (Integer)map.get("pay_price"));
+			pstmt.setInt(3,  (Integer)map.get("delivery_price"));
+			pstmt.setInt(4, (Integer)map.get("cd_price"));
+			pstmt.setInt(5, (Integer)map.get("point_price"));
+			pstmt.setString(6, (String)map.get("pay_type"));
+			pstmt.setInt(7, (int)((Integer)map.get("total_price")*0.005));
+			pstmt.setString(8, (String)map.get("card_type"));
+			pstmt.setString(9, (String)map.get("inst_type"));
+			
+			
+			rowCount = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+		}
+		
+		return rowCount;
+	}
+
+	@Override
+	public int insertGift(Connection conn, Map<String, Object> map) throws Exception {
+		int rowCount = 0;
+		
+		String sql = "INSERT INTO pay_present "
+				+ "VALUES('pg_'||TO_CHAR(pay_seq.NEXTVAL, 'FM00000000'), 'or_'||TO_CHAR(order_seq.CURRVAL, 'FM00000000') "
+				+ ", ?, ?, ?, ?)";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String)map.get("mc_id"));
+			pstmt.setString(2, (String)map.get("receive_name"));
+			pstmt.setString(3, (String)map.get("receive_tel"));
+			pstmt.setString(4, (String)map.get("msg"));
+			
+			rowCount = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+		}
+		
+		return rowCount;
+	}
+
+	@Override
+	public int updateProStuck(Connection conn, String pro_id, int cnt) throws Exception {
+		int rowCount = 0;
+		
+		String sql = "UPDATE product "
+				+ " SET pro_stock = pro_stock - ? "
+				+ " WHERE pro_id = ?";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cnt);
+			pstmt.setString(2, pro_id);
+			
+			rowCount = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+		}
+		
+		return rowCount;
+	}
+
+	@Override
+	public int deleteCart(Connection conn, String user_id, String pro_id) throws Exception {
+		int rowCount = 0;
+		
+		String sql = "DELETE FROM basket "
+				+ " WHERE user_id = ? AND product_id = ?";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, pro_id);
+			
+			rowCount = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+		}
+		
+		return rowCount;
+	}
+
+	@Override
+	public int insertCJPoint(Connection conn, String user_id, String p_content, String p_state) throws Exception {
+		int rowCount = 0;
+		
+		String sql = "INSERT INTO cjonepoint(cjp_id, order_id, user_id, p_content, p_state) "
+				+ "VALUES('cop_'||TO_CHAR(cop_seq.NEXTVAL, 'FM00000000'), 'or_'||TO_CHAR(order_seq.CURRVAL, 'FM00000000') "
+				+ ", ?, ?, ?)";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, p_content);
+			pstmt.setString(3, p_state);
+			
+			rowCount = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+		}
+		
+		return rowCount;
+	}
+
+	@Override
+	public int selectIsProStock(Connection conn, String pro_id) throws Exception {
+		int cnt = 0;
+		String sql = "SELECT pro_stock "
+				+ " FROM product "
+				+ " WHERE pro_id = ? ";
+		
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pro_id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt("pro_stock");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public PaymentDTO selectOnePayment(Connection conn, String order_id) throws Exception {
+		PaymentDTO dto = null;
+		String sql = "SELECT * "
+				+ " FROM payment "
+				+ " WHERE order_id = ?";
+		
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, order_id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				dto = PaymentDTO.builder()
+						.pay_id(rs.getString("pay_id"))
+						.order_id(rs.getString("order_id"))
+						.total_price(rs.getInt("total_price"))
+						.pay_price(rs.getInt("pay_price"))
+						.delivery_price(rs.getInt("delivery_price"))
+						.cd_price(rs.getInt("cd_price"))
+						.point_price(rs.getInt("point_price"))
+						.pay_type(rs.getString("pay_type"))
+						.saved_money(rs.getInt("saved_money"))
+						.pay_date(rs.getDate("pay_date"))
+						.pay_status(rs.getString("pay_status"))
+						.card_type(rs.getString("card_type"))
+						.inst_type(rs.getString("inst_type"))
+						.cr_check(rs.getString("cr_check"))
+						.build();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public DeliveryDTO selectOrderDelivery(Connection conn, String order_id) throws Exception {
+		DeliveryDTO dto = null;
+		String sql = "SELECT deli_road_addr, deli_addr, deli_baddr, deli_recipient, deli_tel, deli_tel2, req_select, req_content "
+				+ " FROM o_order o JOIN delivery d ON o.delivery_id = d.delivery_id "
+				+ " WHERE order_id = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, order_id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				dto = DeliveryDTO.builder()
+						.deli_road_addr(rs.getString("deli_road_addr"))
+						.deli_addr(rs.getString("deli_addr"))
+						.deli_baddr(rs.getString("deli_baddr"))
+						.deli_recipient(rs.getString("deli_recipient"))
+						.deli_tel(rs.getString("deli_tel"))
+						.deli_tel2(rs.getString("deli_tel2"))
+						.req_select(rs.getString("req_select"))
+						.req_content(rs.getString("req_content"))
+						.build();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		}
+		
+		return dto;
 	}
 
 	
