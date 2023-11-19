@@ -18,7 +18,7 @@
 	$(function() {
 		let mainurl = window.location.href
 		console.log(mainurl)
-		if (mainurl.includes('http://localhost/Black_OY/olive/main.do')) {
+		if (mainurl.includes('/Black_OY/olive/main.do')) {
 			$('.main_cate_wrap').css("display",'block');
 		}
 		let storesNames = [];

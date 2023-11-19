@@ -1,70 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/inc/include.jspf" %>
-<%@ include file="/WEB-INF/inc/session_auth.jspf" %>
+<%@ include file="/WEB-INF/inc/include.jspf"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <script src="/Black_OY/js/head.js"></script>
 <title>블랙올리브영 온라인몰</title>
+<style>
+#directTop {
+	opacity: 0;
+	transition: opacity 0.5s ease;
+}
+</style>
 </head>
 <body>
-
-<script>
-	$(function() {
-		let mainurl = window.location.href
-		console.log(mainurl)
-		if (mainurl.includes('/Black_OY/olive/main.do')) {
-			$('.main_cate_wrap').css("display",'block');
-		}
-		let storesNames = [];
-		
-		// 로그인이 되어 있을 시
-		// 관심매장 이름 리스트 얻어오기
-		if(${not empty logOn}) {
-			$.ajax({
-				type : 'post'
-				, async : false
-				, cache: false
-				, url : '/Black_OY/olive/attShopAjax.do'
-				, dataType : 'json'
-				, data : { user_id : '${logOn.user_id}' }
-				, success : function(data) {
-					if(data.storeNames != "no") {
-						let storeNames = []
-						for (var i = 0; i < data.storeNames.length; i++) {
-							storeNames.push(data.storeNames[i]);
-						}
-						$(".store .alim_box").html(`<p class="store_desc"><span>${logOn.u_name}</span>님께서 등록하신 관심매장<br><span>\${storeNames.join(",")}</span>의 <br> 최근 행사공지가 없습니다.</p>` 
-										+ '<button class="mymenu_btn" onclick="javascript:;">다른매장 소식보기</button>')
-					} else {
-						$(".store .alim_box").html('<p class="store_desc"><span>${logOn.u_name}</span>님의 관심매장을 등록해 주세요.<br>새로운 이벤트와 세일행사를 빠르게 알려드립니다.</p>'
-								+ `<button class="mymenu_btn" onclick="javascript:location.href='/Black_OY/olive/getStoreMain.do'";>관심매장 등록하기</button>`)
-					}
-					 //console.log(data);
-	            }
-				, error : function (data, textStatus) {
-					console.log(data);
-	                console.log('error');
-	            }
-			});
-		} else {
-			$(".store .alim_box").html('<p class="store_desc"><span>로그인</span>하시면 자주가는 매장을<br>관심 매장으로 설정 할 수 있습니다.</p>'
-					+ `<button class="mymenu_btn" onclick="javascript:location.href='/Black_OY/olive/LogOn.do';">로그인</button>`);
-		}
-		
-	})
-</script>
-    <!-- 3200210 큐레이션 개선 관련 건-레코벨 데이터 송부 
+	<!-- 3200210 큐레이션 개선 관련 건-레코벨 데이터 송부 
 <input type="hidden" id="skinType" name="skinType" value="" />
 <input type="hidden" id="skinTorn" name="skinTorn" value="" />
 <input type="hidden" id="skinIssue" name="skinIssue" value="" />
 -->
-    <div class="infoUpgr" style="display: none;">
+	<div class="infoUpgr" style="display: none;">
 		<p>
 			<a class="ie"
 				href="https://www.microsoft.com/ko-kr/download/internet-explorer.aspx"
@@ -300,7 +261,7 @@
 					<li class="customer"><a onclick="" href="#"
 						data-attr="공통^헤더^고객센터">고객센터</a></li>
 					<li class="store"><a onclick=""
-						href="<%=contextPath%>/olive/getStoreMain.do"
+						href="<%=contextPath%>/store/getStoreMain.do"
 						data-attr="공통^헤더^매장안내">매장안내</a></li>
 					<li class="global"><a href="#" title="올리브영 글로벌 새창으로 열기"
 						data-attr="공통^헤더^Global">Global</a></li>
@@ -932,333 +893,9 @@
 
 			<!-- //[3553186] 온라인몰 전시 카테고리 개편 일괄 작업 요청의 건 -->
 			<!-- 메인 카테고리 목록 -->
-			 <div class="main_cate_wrap" style="display: none">
-                <ul class="main_cate_list">
-                    <li class="type1">
-                        <a href="#" class="main_menu" data-attr="공통^메인롤링^기초화장품" data-trk="/">기초화장품</a>
-                        <div class="lnb_ban_box 10000010001" data-ref-dispcatno-lnb_ban_box="10000010001">
-                            <a href="#"
-                                onclick=""
-                                data-attr="공통^카테고리네비게이터추천상품^[민동성공동개발] 메디필 히알루론산 레이어 물톡스 앰플 더블 기획 30ml "
-                                data-impression="A000000189769^공통_카테고리네비게이터추천상품^1" data-impression-visibility="1">
-                                <div class="ban_info">
-                                    <p class="ban_name">MD's Pick</p>
-                                    <div class="tit_group">
-                                        <p class="tit_m">메디필💧</p>
-                                        <p class="tit_s">수분 꽉,물톡스 앰플</p>
-                                        <p class="tit_s">30ml 더블기획!</p>
-                                    </div>
-                                    <div class="price_group">
-                                        <p class="price_m">34,000<em>원</em></p>
-                                    </div>
-                                </div>
-                                <div class="ban_thum">
-                                    <img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018976913ko.jpg?l=ko"
-                                        alt="">
-                                </div>
-                            </a>
-                        </div>
-                        <div class="lnb_ban_box 10000010010" data-ref-dispcatno-lnb_ban_box="10000010010">
-                            <a href="#;"
-                                data-attr="공통^카테고리네비게이터추천상품^[단독기획]메이크프렘 클린비건 클렌징밀크 리필기획(200ml+100ml)"
-                                data-impression="A000000158513^공통_카테고리네비게이터추천상품^1" data-impression-visibility="1">
-                                <div class="ban_info">
-                                    <p class="ban_name">MD's Pick</p>
-                                    <div class="tit_group">
-                                        <p class="tit_m">메이크프렘💚</p>
-                                        <p class="tit_s">최모나 PICK!</p>
-                                        <p class="tit_s">올영 단독 리필기획✨</p>
-                                    </div>
-                                    <div class="price_group">
-                                        <p class="price_s">28,000<em>원</em></p>
-                                        <p class="price_m">19,950<em>원</em></p>
-                                    </div>
-                                </div>
-                                <div class="ban_thum">
-                                    <img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0015/A00000015851315ko.jpg?l=ko"
-                                        alt="">
-                                </div>
-                            </a>
-                        </div>
-                        <div class="lnb_ban_box 10000010011" data-ref-dispcatno-lnb_ban_box="10000010011">
-                            <a href="#"
-                                data-attr="공통^카테고리네비게이터추천상품^[1+1기획] 구달 맑은 어성초 진정 수분 선크림 50ml 1+1 기획 SPF50+ PA++++"
-                                data-impression="A000000168705^공통_카테고리네비게이터추천상품^1" data-impression-visibility="1">
-                                <div class="ban_info">
-                                    <p class="ban_name">MD's Pick</p>
-                                    <div class="tit_group">
-                                        <p class="tit_m">구달💚</p>
-                                        <p class="tit_s">가벼운 어성초 수분썬💦</p>
-                                        <p class="tit_s">올영 단독 1+1</p>
-                                    </div>
-                                    <div class="price_group">
-                                        <p class="price_m">18,000<em>원</em></p>
-                                    </div>
-                                </div>
-                                <div class="ban_thum">
-                                    <img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0016/A00000016870522ko.jpg?l=ko"
-                                        alt="">
-                                </div>
-                            </a>
-                        </div>
-                        <ul class="sub_cate_list">
-                            <li><a href="#"
-                                    data-ref-dispcatno="10000010001" class="sub_menu" data-attr="공통^메인롤링^기초화장품_스킨케어"
-                                    data-trk="/"><span>스킨케어</span></a></li>
-                            <li><a href="#"
-                                    data-ref-dispcatno="10000010009" class="sub_menu" data-attr="공통^메인롤링^기초화장품_마스크팩"
-                                    data-trk="/"><span>마스크팩</span></a></li>
-                            <li><a href="#"
-                                    data-ref-dispcatno="10000010010" class="sub_menu" data-attr="공통^메인롤링^기초화장품_클렌징"
-                                    data-trk="/"><span>클렌징</span></a></li>
-                            <li><a href="#"
-                                    data-ref-dispcatno="10000010011" class="sub_menu" data-attr="공통^메인롤링^기초화장품_선케어"
-                                    data-trk="/"><span>선케어</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="type2">
-                        <a href="#"
-                            data-ref-dispcatno="10000010008" class="main_menu" data-attr="공통^메인롤링^더모 코스메틱"
-                            data-trk="/">더모 코스메틱</a>
-                        <div class="lnb_ban_box" style="left: 172px;">
-                            <a href="#"
-                                onclick=""
-                                data-attr="공통^카테고리네비게이터추천상품^에스트라 아토베리어365 크림 80ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)"
-                                data-impression="A000000184128^공통_카테고리네비게이터추천상품^1" data-impression-visibility="1">
-                                <div class="ban_info">
-                                    <p class="ban_name">MD's Pick</p>
-                                    <div class="tit_group">
-                                        <p class="tit_m">에스트라💙</p>
-                                        <p class="tit_s">국민장벽크림</p>
-                                        <p class="tit_s">UP TO 28% OFF 💫</p>
-                                    </div>
-                                    <div class="price_group">
-                                        <p class="price_s">31,000<em>원</em></p>
-                                        <p class="price_m">24,800<em>원</em></p>
-                                    </div>
-                                </div>
-                                <div class="ban_thum">
-                                    <img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412802ko.jpg?l=ko"
-                                        alt="">
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="type1">
-                        <a href="#" class="main_menu" data-attr="공통^메인롤링^메이크업 · 네일" data-trk="/">메이크업 · 네일</a>
-                        <ul class="sub_cate_list">
-                            <li><a href="#"
-                                    data-ref-dispcatno="10000010002" class="sub_menu" data-attr="공통^메인롤링^메이크업 · 네일_메이크업"
-                                    data-trk="/"><span>메이크업</span></a></li>
-                            <li><a href="#"
-                                    data-ref-dispcatno="10000010012" class="sub_menu" data-attr="공통^메인롤링^메이크업 · 네일_네일"
-                                    data-trk="/"><span>네일</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="type2">
-                        <a href="#"
-                            data-ref-dispcatno="10000010003" class="main_menu" data-attr="공통^메인롤링^바디케어"
-                            data-trk="/">바디케어</a>
-                    </li>
-                    <li class="type2">
-                        <a href="#"
-                            data-ref-dispcatno="10000010004" class="main_menu" data-attr="공통^메인롤링^헤어케어"
-                            data-trk="/">헤어케어</a>
-                        <div class="lnb_ban_box">
-                            <a href="#"
-                                onclick=""
-                                data-attr="공통^카테고리네비게이터추천상품^[NEW] 어노브 볼륨 업 픽서 200ml"
-                                data-impression="A000000192239^공통_카테고리네비게이터추천상품^1" data-impression-visibility="1">
-                                <div class="ban_info">
-                                    <p class="ban_name">MD's Pick</p>
-                                    <div class="tit_group">
-                                        <p class="tit_m">어노브💗</p>
-                                        <p class="tit_s">부드러운 소프트픽싱</p>
-                                        <p class="tit_s">볼륨 업 픽서 출시!✨</p>
-                                    </div>
-                                    <div class="price_group">
-                                        <p class="price_s">16,000<em>원</em></p>
-                                        <p class="price_m">13,400<em>원</em></p>
-                                    </div>
-                                </div>
-                                <div class="ban_thum">
-                                    <img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0019/A00000019223903ko.jpg?l=ko"
-                                        alt="">
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="type2">
-                        <a href="#"
-                            data-ref-dispcatno="10000010005" class="main_menu" data-attr="공통^메인롤링^향수/디퓨저"
-                            data-trk="/">향수/디퓨저</a>
-                        <div class="lnb_ban_box">
-                            <a href="#"
-                                onclick=""
-                                data-attr="공통^카테고리네비게이터추천상품^[블프특가][샤워젤 증정] CK 캘빈클라인 One EDT 50ml"
-                                data-impression="A000000186173^공통_카테고리네비게이터추천상품^1" data-impression-visibility="1">
-                                <div class="ban_info">
-                                    <p class="ban_name">MD's Pick</p>
-                                    <div class="tit_group">
-                                        <p class="tit_m">상큼시원한 시트러스</p>
-                                        <p class="tit_s">CK ONE 오드뜨왈렛</p>
-                                        <p class="tit_s">7일 특가 47%💙</p>
-                                    </div>
-                                    <div class="price_group">
-                                        <p class="price_s">61,000<em>원</em></p>
-                                        <p class="price_m">32,030<em>원</em></p>
-                                    </div>
-                                </div>
-                                <div class="ban_thum">
-                                    <img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018617303ko.jpg?l=ko"
-                                        alt="">
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="type2">
-                        <a href="#"
-                            data-ref-dispcatno="10000010006" class="main_menu" data-attr="공통^메인롤링^미용소품"
-                            data-trk="/">미용소품</a>
-                        <div class="lnb_ban_box">
-                            <a href="#"
-                                onclick=""
-                                data-attr="공통^카테고리네비게이터추천상품^에스쁘아 비글로우/비벨벳 에어퍼프 5개입(2종)"
-                                data-impression="A000000178556^공통_카테고리네비게이터추천상품^1" data-impression-visibility="1">
-                                <div class="ban_info">
-                                    <p class="ban_name">MD's Pick</p>
-                                    <div class="tit_group">
-                                        <p class="tit_m">에스쁘아💖</p>
-                                        <p class="tit_s">말랑 밀착 쿠션퍼프</p>
-                                        <p class="tit_s">가을 베이스 치트키!</p>
-                                    </div>
-                                    <div class="price_group">
-                                        <p class="price_s">10,000<em>원</em></p>
-                                        <p class="price_m">7,590<em>원</em></p>
-                                    </div>
-                                </div>
-                                <div class="ban_thum">
-                                    <img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0017/A00000017855604ko.jpg?l=ko"
-                                        alt="">
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="type2">
-                        <a href="#"
-                            data-ref-dispcatno="10000010007" class="main_menu" data-attr="공통^메인롤링^남성"
-                            data-trk="/">남성</a>
-                    </li>
-                    <li class="type2">
-                        <a href="#"
-                            data-ref-dispcatno="10000020003" class="main_menu" data-attr="공통^메인롤링^구강/건강용품"
-                            data-trk="/">구강/건강용품</a>
-                        <div class="lnb_ban_box">
-                            <a href="#"
-                                onclick=""
-                                data-attr="공통^카테고리네비게이터추천상품^[11월올영픽/신상] 테라브레스 마우스 로젠지 캔디 만다린민트향 100개입"
-                                data-impression="A000000191586^공통_카테고리네비게이터추천상품^1" data-impression-visibility="1">
-                                <div class="ban_info">
-                                    <p class="ban_name">MD's Pick</p>
-                                    <div class="tit_group">
-                                        <p class="tit_m">로젠지 캔디💚</p>
-                                        <p class="tit_s">테라브레스 구강캔디 올영상륙!</p>
-                                        <p class="tit_s">11월 올영P!CK</p>
-                                    </div>
-                                    <div class="price_group">
-                                        <p class="price_s">22,900<em>원</em></p>
-                                        <p class="price_m">20,900<em>원</em></p>
-                                    </div>
-                                </div>
-                                <div class="ban_thum">
-                                    <img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0019/A00000019158605ko.jpg?l=ko"
-                                        alt="">
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="type2">
-                        <a href="#"
-                            data-ref-dispcatno="10000020004" class="main_menu" data-attr="공통^메인롤링^여성/위생용품"
-                            data-trk="/">여성/위생용품</a>
-                        <div class="lnb_ban_box">
-                            <a href="#"
-                                onclick=""
-                                data-attr="공통^카테고리네비게이터추천상품^[11월 올영픽]이너시아 더 프리즘 유기농 생리대 7종 택 1 (중형 8P / 대형 8P / 라이너 18P / 번들팩)"
-                                data-impression="A000000187776^공통_카테고리네비게이터추천상품^1" data-impression-visibility="1">
-                                <div class="ban_info">
-                                    <p class="ban_name">MD's Pick</p>
-                                    <div class="tit_group">
-                                        <p class="tit_m">이너시아💖</p>
-                                        <p class="tit_s">유기농순면100%</p>
-                                        <p class="tit_s">프리미엄 생리대</p>
-                                    </div>
-                                    <div class="price_group">
-                                        <p class="price_s">8,500<em>원</em></p>
-                                        <p class="price_m">6,600<em>원</em></p>
-                                    </div>
-                                </div>
-                                <div class="ban_thum">
-                                    <img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018777625ko.jpg?l=ko"
-                                        alt="">
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="type2">
-                        <a href="#"
-                            data-ref-dispcatno="10000020001" class="main_menu" data-attr="공통^메인롤링^건강식품"
-                            data-trk="/">건강식품</a>
-                    </li>
-                    <li class="type2">
-                        <a href="#"
-                            data-ref-dispcatno="10000020002" class="main_menu" data-attr="공통^메인롤링^푸드"
-                            data-trk="/">푸드</a>
-                    </li>
-                    <li class="type2">
-                        <a href="#"
-                            data-ref-dispcatno="10000030005" class="main_menu" data-attr="공통^메인롤링^라이프/홈"
-                            data-trk="/">라이프/홈</a>
-                        <div class="lnb_ban_box">
-                            <a href="#"
-                                onclick=""
-                                data-attr="공통^카테고리네비게이터추천상품^[11월 올영픽] 스너글 허거블/해브어 곰나잇 섬유탈취제 150ml 더블 기획  2종 중 택 1"
-                                data-impression="A000000191808^공통_카테고리네비게이터추천상품^1" data-impression-visibility="1">
-                                <div class="ban_info">
-                                    <p class="ban_name">MD's Pick</p>
-                                    <div class="tit_group">
-                                        <p class="tit_m">스너글🧸</p>
-                                        <p class="tit_s">해브어곰나잇💗</p>
-                                        <p class="tit_s">단독기획에포카증정🎁</p>
-                                    </div>
-                                    <div class="price_group">
-                                        <p class="price_s">10,000<em>원</em></p>
-                                        <p class="price_m">7,600<em>원</em></p>
-                                    </div>
-                                </div>
-                                <div class="ban_thum">
-                                    <img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0019/A00000019180805ko.jpg?l=ko"
-                                        alt="">
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="type2">
-                        <a href="#"
-                            data-ref-dispcatno="10000030003" class="main_menu" data-attr="공통^메인롤링^반려동물"
-                            data-trk="/">반려동물</a>
-                    </li>
-                    <li class="lst"><a href="#"
-                            class="main_menu" data-attr="공통^메인롤링^AWARDS" data-trk="/"><span
-                                class="icon_awards">AWARDS</span></a></li>
-                </ul>
-            </div>
-            <!-- //[3553186] 온라인몰 전시 카테고리 개편 일괄 작업 요청의 건 -->
-            <!-- 메인 카테고리 목록 -->
-        </div>
 
 		</div>
-	
+	</div>
 	<script>
 	$(document).ready(function(){
 		$("#query").click(function(){
