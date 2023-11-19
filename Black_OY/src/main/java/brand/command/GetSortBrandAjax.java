@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import brand.domain.BrandDTO;
 import brand.persistence.BrandDAOImpl;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @WebServlet("/GetSortBrandAjax")
@@ -38,7 +39,7 @@ public class GetSortBrandAjax extends HttpServlet {
       List<BrandDTO> list = null;
      
       try {
-    	  list = brandDao.getCATEBrands(brand_id, dispcatno);
+    	  list = brandDao.getSortBrands(brand_id, sort, dispcatno);
       } catch (Exception e) {
         
          e.printStackTrace();
@@ -49,19 +50,35 @@ public class GetSortBrandAjax extends HttpServlet {
       
       BrandDTO dto = null;
       
+      JSONArray jsonArray = new JSONArray();
+      
       Iterator<BrandDTO> ir = list.iterator();
       while (ir.hasNext()) {
          dto = ir.next();
          brand = new JSONObject();
-         brand.put("cate_l_id", dto.getCate_l_id());
-         brand.put("cate_l_name", dto.getCate_l_name());
-         jsonArray.put(brand);
+         brand.put("pro_displ_src", dto.getPro_displ_src());
+         brand.put("brand_name", dto.getBrand_name());
+         brand.put("brand_id", dto.getBrand_id());
+         brand.put("pro_displ_name", dto.getPro_displ_name());
+         brand.put("pro_price", dto.getPro_price());
+         brand.put("afterprice", dto.getAfterprice());
+         brand.put("pro_displ_id", dto.getPro_displ_id());
+         brand.put("pro_id", dto.getPro_id());
+         brand.put("prc", dto.getPrc());
+         brand.put("pdc", dto.getPdc());
+         brand.put("pmp", dto.getPmp());
+         brand.put("stock", dto.getStock());
+         brand.put("ordercnt", dto.getOrdercnt());
+         brand.put("pro_stock", dto.getPro_stock());
+         brand.put("pro_displ_like", dto.getPro_displ_like());
+         brand.put("pro_reg", dto.getPro_reg() != null ? dto.getPro_reg().toString() : null);
+         jsonArray.add(brand);
       }
+  jsonObject.put("brands", jsonArray);
       
       System.out.println(jsonObject);
          
       writer.write(jsonObject.toString());
    }
-
+   }
  
-}

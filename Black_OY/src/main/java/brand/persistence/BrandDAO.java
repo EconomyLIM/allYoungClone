@@ -21,7 +21,9 @@ public interface BrandDAO {
    // 전체, 스킨케어, 마스크팩, 선케어 가져오기 
    List<BrandDTO> getCATEBrands(String brandId, String cate_l_id) throws Exception;
    // 리뷰 가져오기
-   List<BrandDTO> getReviews(String brandId) throws Exception;
+List<BrandDTO> getreviews(String brandId) throws Exception;
+
+
 
    //스킨케어 , 마스크팩, 선크림 소카테고리별 상품 가져오기
 //   List<BrandDTO> getCATEBrandsDetail() throws Exception;

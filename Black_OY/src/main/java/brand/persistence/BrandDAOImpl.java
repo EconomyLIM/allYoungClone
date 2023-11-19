@@ -13,7 +13,7 @@ import com.util.ConnectionProvider;
 
 import brand.domain.BrandDTO;
 
-public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블과 관련된 쿼리 실행 
+public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리 실행 
 
 
 
@@ -85,24 +85,38 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
 
    } // getBrands
    
-   public List<BrandDTO> getSortBrands(String brandId, String dispcatno) throws Exception {
+   //인기순, 신상품순, 판매순 등등
+   public List<BrandDTO> getSortBrands(String brandId, String sort, String dispcatno) throws Exception {
 
-      String sql = " SELECT PD.PRO_DISPL_NAME, PDI.PRO_DISPL_SRC, PD.PRO_DISPL_LIKE, P.PRO_PRICE, PD.BRAND_ID  "
-            + "            FROM PRODUCT_DISPLAY PD  "
-            + "            JOIN PRODUCT P ON PD.PRO_DISPL_ID = P.PRO_DISPL_ID  "
-            + "            JOIN PRO_DISPL_IMG PDI ON PD.PRO_DISPL_ID = PDI.PRO_DISPL_ID  "
-            + "            WHERE PD.BRAND_ID = ? ";
-
-      /*
-       * if(sort.equals("p")) { sql += " ORDER BY PD.PRO_DISPL_LIKE DESC"; } else
-       * if(sort.equals("n")) { sql += ""; } else if(sort.equals("s")) { sql += ""; }
-       * else if(sort.equals("l")) { sql += ""; } else if(sort.equals("d")) { sql +=
-       * ""; } else { // 아무것도 안들어왔을때
-       * 
-       * }
-       */
+      String sql = " SELECT * "
+				+ "    FROM ( "
+				+ "        SELECT ROWNUM no, t.* "
+				+ "            FROM( "
+				+ "                select * from pmlistview ";
+      if(dispcatno.equals("cate_1")) {
+          sql +=  " ";
+          
+       } else if(dispcatno.equals("cate_2")) {
+          sql += " AND cate_l_id= '0001'";            
+       } else if(dispcatno.equals("cate_3")) {
+          sql += " AND cate_l_id= '0003'";
+       } else if(dispcatno.equals("cate_4")) {
+          sql += " AND cate_l_id= '0004' ";
+       } 
+        
       
-      sql+= "cat_m_id = ? ";
+      if(sort.equals("p")) { 
+    	  sql += " ORDER BY PRO_DISPL_LIKE DESC"; 
+      } else if(sort.equals("n")) { 
+    	  sql += " ORDER BY PRO_REG DESC "; 
+    	  } else if(sort.equals("s")) { 
+    		  sql += " ORDER BY ordercnt desc "; 
+    		  }else if(sort.equals("l")) {
+    			  sql += " ORDER BY PRO_PRICE ASC "; 
+    			  } else if(sort.equals("d")) { 
+    				  sql += " ORDER BY (proprice-afterprice)/proprice*100 desc ";
+           } 
+      
       
       List<BrandDTO> list = null;
       BrandDTO brand = null;
@@ -115,35 +129,31 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
          PreparedStatement preparedStatement = conn.prepareStatement(sql);
          preparedStatement.setString(1,brandId);
          preparedStatement.setString(2,dispcatno);
+         preparedStatement.setString(3,sort);
          rs = preparedStatement.executeQuery();
 
-
-         if(rs.next()) {
-            System.out.println("rs변수 담기");
-            list = new ArrayList<>();
-            do {
-               /* [1]
-                */
-
-               /*
-                * brand = BrandDTO.builder() .b .build();
-                */
-
-
-               /*[2]
-                * 
-                * 
-                * brand = new BrandDTO(brandId, brandId, 0, brandId, brandId, brandId, 0); 
-                * */
-
-               /*[3]
-                * 
-                * brand.setBrandId(rs.getString("brand_id"))
-                * */
-               list.add(brand);
-            } while ( rs.next() );
-
+         while (rs.next()) {
+             BrandDTO dto = BrandDTO.builder()
+                     .pro_displ_src(rs.getString("PRO_DISPL_SRC"))
+                     .brand_name(rs.getString("BRAND_NAME"))
+                     .brand_id(rs.getString("BRAND_ID"))
+                     .pro_displ_name(rs.getString("PRO_DISPL_NAME"))
+                     .pro_price(rs.getInt("PRO_PRICE"))
+                     .afterprice(rs.getInt("AFTERPRICE"))
+                     .pro_displ_id(rs.getString("PRO_DISPL_ID"))
+                     .pro_id(rs.getString("PRO_ID"))
+                     .prc(rs.getInt("PRC"))
+                     .pdc(rs.getInt("PDC"))
+                     .pmp(rs.getInt("PMP"))
+                     .stock(rs.getInt("STOCK"))
+                     .ordercnt(rs.getInt("ORDERCNT"))
+                     .pro_stock(rs.getInt("PRO_STOCK"))
+                     .pro_displ_like(rs.getInt("PRO_DISPL_LIKE"))
+                     .pro_reg(rs.getDate("PRO_REG"))
+                     .build();
+             list.add(dto);
          }
+            
       } catch (SQLException e) {
          // Handle SQL exception
          e.printStackTrace();
@@ -195,7 +205,7 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
       try {
          PreparedStatement preparedStatement = conn.prepareStatement(sql);
          preparedStatement.setString(1,brandId);
-         preparedStatement.setString(2,cate_l_id);
+         preparedStatement.setString(2,dispcatno);
          rs = preparedStatement.executeQuery();
 
 
@@ -325,12 +335,46 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
       return sellbrandProducts;
    }
 
+   //리뷰가져오기 
    @Override
-   public List<BrandDTO> getReviews(String brandId) throws Exception {
-      // TODO Auto-generated method stub
-      return null;
-   }
+   public List<BrandDTO> getreviews(String brandId) throws Exception {
 
+      List<BrandDTO> relists = new ArrayList<>();
+      String sql =" SELECT pdi.PRO_DISPL_SRC, r.REV_LIKE, r.REV_GRADE, r.REV_CONTENT "
+            + " FROM PRODUCT_DISPLAY pd "
+            + " JOIN PRO_DISPL_IMG pdi ON pd.PRO_DISPL_ID = pdi.PRO_DISPL_ID "
+            + " JOIN REVIEW r ON pd.PRO_DISPL_ID = r.PRO_DISPL_ID ";
+      ArrayList<BrandDTO> list = null;
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      Connection conn = ConnectionProvider.getConnection(); 
+      try {
+         pstmt = conn.prepareStatement(sql);
+         pstmt.setString(1, brandId);
+         rs = pstmt.executeQuery();
+
+         while (rs.next()) {
+            BrandDTO relist = new BrandDTO();
+            relist.setRev_content(rs.getString("rev_content"));
+            relist.setPro_displ_src(rs.getString("pro_displ_src"));
+            relist.setRev_like(rs.getInt("rev_like"));
+            relist.setRev_grade(rs.getInt("rev_grade"));
+            relists.add(relist);
+         } // while
+      } catch (SQLException e) {
+         // Handle SQL exception
+         e.printStackTrace();
+      } // try_catch
+      finally{
+        rs.close();
+
+      }
+      return relists;
+
+   }
+   
+   //  =여기서 부터 주석처리함 
+   
    //신상품순  카테고리별 (스킨케어/마스크팩/ 선크림) 가져오기  ---- 가져가서 사용하기 
    // 구달 브랜드 제품 인기순/신상품순/판매순/낮은가격 순으로 가져오기 잠시수정중
    //public List<BrandDTO> getNewBrandsDetail(String brandId , String cate_m_id) throws Exception {

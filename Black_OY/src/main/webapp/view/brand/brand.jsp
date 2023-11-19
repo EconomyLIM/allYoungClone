@@ -28,7 +28,7 @@
        $("ul.cate_list_box >  li").on("click", function(event) {
           event.preventDefault();
           // let sort = $(this).find("a").data("sort");
-           let brand_id = '<%=request.getParameter("brandId")%>';
+           let brand_id = '<%=request.getParameter("brand_id")%>';
           
          let dispcatno = $(this).find("a").data("ref-dispcatno");
     
