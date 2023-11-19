@@ -74,6 +74,7 @@ $(document).ready(() => {
 
 <body>
 	<jsp:include page="/layout/head_main.jsp"></jsp:include>
+	
 
 	<div id="Wrapper">
 		<div id="Container">
