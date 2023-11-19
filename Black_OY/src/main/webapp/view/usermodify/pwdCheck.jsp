@@ -191,10 +191,13 @@
 	<!--script 영역-->
 
 	<script>
-	    $(document).ready(function(){
-			enterKey("pwd","pwdCheck()");
-		});
-        
+	$(function () {
+	     $('#pwd').keydown(function(event) {
+	     	if ( event.which == 13 ){
+	     		$("#btnPwdCheck").click();	
+	     	}
+	     });	
+	});
 		// 취소
 		function goCancel() {
 			$("#form1").attr("action", "usermodify.jsp");
@@ -214,7 +217,7 @@
 	}
     $("#btnPwdCheck").on("click", function () {
 		if (pwdCheck() ) {
-			location.href = "/Black_OY/view/usermodify/info_modification.jsp";
+			location.href = "<%=contextPath%>/olive/InfoUpdate.do";
 		}
 	});
     </script>

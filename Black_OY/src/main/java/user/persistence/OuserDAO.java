@@ -15,6 +15,6 @@ public interface OuserDAO {
 	//비밀번호 변경
 	int pwdUpdate(Connection conn, String user_id, String newPwd) throws SQLException;
 	//회원정보수정
-	
+	int infoUpdate(Connection conn, OuserDTO dto) throws SQLException;
 }
 

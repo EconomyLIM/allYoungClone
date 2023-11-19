@@ -291,7 +291,6 @@
 							tr.append(td);
 							td.append(div);
 							div.append(titul);
-	
 
 							$("#Contents > table > tbody > tr:eq(1)").after(tr);
 				
@@ -309,13 +308,7 @@
 			$("#InputTextarea").prop("disabled", false);
 		});
 	});
-	/* $("#recommFaqList > td > div > ul > li:nth-child(1)").on("click", function (event) {
-	let a =$("<a>", {href:"#", role="button", title="답변 내용닫기" }).addClass("tit").text(제목);
-}) ;
-	
-	
-} */
-	
+
 </script>
 
 </body>

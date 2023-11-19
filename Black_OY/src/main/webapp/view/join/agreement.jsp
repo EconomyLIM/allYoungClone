@@ -118,7 +118,11 @@
 								</ul>
 							</div>
 							<!--//step-->
-
+<script>
+	$(".radio_btn>a").on("click", function(event){
+		event.preventDefault();
+	});
+</script>
 							<div class="agreement_sec">
 								<div class="box_member">
 									<h2 class="h2_tit">CJ ONE 서비스 이용약관 및 정보 활용 동의</h2>
@@ -1427,7 +1431,7 @@
 													id="viewall00" class="btn btn_sm view_all"
 													data-control="modal">전문보기</a> -->
 												<div class="radio_agreement">
-													<span class="radio_btn " data-skin="accept"
+													<span class="radio_btn on" data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
 														<a href="#"><span class="haze">미동의</span></a>
 														<span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
@@ -1436,7 +1440,7 @@
 														name="svcuse_agr_typ_cd_0" checked="checked"> <label
 														for="svcuse_agr_typ_cd_0_disagree"><span
 															class="ico"></span>미동의</label>
-													</span> <span class="radio_btn on" data-skin="accept"
+													</span> <span class="radio_btn " data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
 														<!-- <a href="#"> --> <span class="haze">동의</span><!-- </a> -->
 														<span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -1497,7 +1501,7 @@
 													id="viewall01" class="btn btn_sm view_all"
 													data-control="modal">전문보기</a> -->
 												<div class="radio_agreement"> 
-													<span class="radio_btn " data-skin="accept" 	data-checked-text="선택됨" data-unchecked-text="미선택됨">
+													<span class="radio_btn on" data-skin="accept" 	data-checked-text="선택됨" data-unchecked-text="미선택됨">
 														<a href="#"><span class="haze">미동의<span>선택됨</span></span></a> 
 													<span class="hide"><span class="haze">미동의<span>선택불가</span></span>
 													</span>
@@ -1505,7 +1509,7 @@
 														<input type="radio" class="chk" id="svcuse_agr_typ_cd_1_disagree"
 														name="svcuse_agr_typ_cd_1" checked="checked">
 														<label for="svcuse_agr_typ_cd_1_disagree"><span class="ico"></span>미동의</label></span>
-													 <span class="radio_btn on" data-skin="accept" 	data-checked-text="선택됨" data-unchecked-text="미선택됨">
+													 <span class="radio_btn " data-skin="accept" 	data-checked-text="선택됨" data-unchecked-text="미선택됨">
 														<a href="#"> <span class="haze">동의<span>미선택됨</span></span></a>
 														<span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
 														<input type="radio" class="chk" id="svcuse_agr_typ_cd_1_agree" value="11"
@@ -1569,7 +1573,7 @@
 													id="viewall02" class="btn btn_sm view_all"
 													data-control="modal">전문보기</a> -->
 												<div class="radio_agreement">
-													<span class="radio_btn " data-skin="accept"
+													<span class="radio_btn on" data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
 														<a href="#"> <span class="haze">미동의</span>
 													</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
@@ -1578,7 +1582,7 @@
 														name="svcuse_agr_typ_cd_2" checked="checked"> <label
 														for="svcuse_agr_typ_cd_2_disagree"><span
 															class="ico"></span>미동의</label>
-													</span> <span class="radio_btn on" data-skin="accept"
+													</span> <span class="radio_btn" data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
 														<a href="#"> <span class="haze">동의</span>
 													</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -1642,7 +1646,7 @@
 													id="viewall03" class="btn btn_sm view_all"
 													data-control="modal">전문보기</a> -->
 												<div class="radio_agreement">
-													<span class="radio_btn " data-skin="accept"
+													<span class="radio_btn on" data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
 														<a href="#"> <span class="haze">미동의</span></a>
 													<span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
@@ -1651,7 +1655,7 @@
 														name="svcuse_agr_typ_cd_3" checked="checked"> <label
 														for="svcuse_agr_typ_cd_3_disagree"><span
 															class="ico"></span>미동의</label>
-													</span> <span class="radio_btn on" data-skin="accept"
+													</span> <span class="radio_btn " data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
 														<a href="#"> <span class="haze">동의</span>
 													</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -1759,14 +1763,14 @@
 												</p>
 
 												<div class="radio_agreement">
-													<span class="radio_btn " data-skin="accept"
+													<span class="radio_btn on" data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
 														<a href="#"> <span class="haze">미동의</span>
 													</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
 														<input type="radio" class="chk" id="sync_agr_n"
 														name="sync_agr_yn" checked="checked"> <label
 														for="sync_agr_n"><span class="ico"></span>미동의</label>
-													</span> <span class="radio_btn on" data-skin="accept"
+													</span> <span class="radio_btn " data-skin="accept"
 														data-checked-text="선택됨" data-unchecked-text="미선택됨">
 														<a href="#"><span class="haze">동의</span></a>
 													<span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -1861,14 +1865,14 @@
 															class="em">미 동의 시 회원가입을 하실 수 없습니다.</strong>
 													</p>
 													<div class="radio_agreement">
-														<span class="radio_btn " data-skin="accept"
+														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">미동의</span>
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
 															<input type="radio" class="chk" id="agr99_sub1_n"
 															value="99" name="agr99_sub1" checked="checked"> <label
 															for="agr99_sub1_n"><span class="ico"></span>미동의</label>
-														</span> <span class="radio_btn on" data-skin="accept"
+														</span> <span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의</span>
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -2871,14 +2875,14 @@ ol, ul, li {
 														onclick="javascript:viewCoopcoAgr('7030', '10','coopcoviewall00');"
 														id="coopcoviewall00">전문보기</a> -->
 													<div class="radio_agreement">
-														<span class="radio_btn " data-skin="accept"
+														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">미동의</span>
 														</a> <span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
 															<input type="radio" class="chk" id="agr_typ_onln_0_n"
 															value="" name="agr_typ_onln_0" checked="checked">
 															<label for="agr_typ_onln_0_n"><span class="ico"></span>미동의</label>
-														</span> <span class="radio_btn on" data-skin="accept"
+														</span> <span class="radio_btn" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의</span>
 														</a> <span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -3006,14 +3010,14 @@ ol, ul, li {
 														onclick="javascript:viewCoopcoAgr('7030', '20','coopcoviewall01');"
 														id="coopcoviewall01">전문보기</a> -->
 													<div class="radio_agreement">
-														<span class="radio_btn " data-skin="accept"
+														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">미동의</span>
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
 															<input type="radio" class="chk" id="agr_typ_onln_1_n"
 															value="" name="agr_typ_onln_1" checked="checked">
 															<label for="agr_typ_onln_1_n"><span class="ico"></span>미동의</label>
-														</span> <span class="radio_btn on" data-skin="accept"
+														</span> <span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의</span>
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -3180,7 +3184,7 @@ ol, ul, li {
 														data-control="modal"
 														onclick="omniTerms('10', '7060', '6040');">전문보기</a> -->
 													<div class="radio_agreement">
-														<span class="radio_btn " data-skin="accept"
+														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">미동의</span>
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
@@ -3188,7 +3192,7 @@ ol, ul, li {
 															id="omniagreeNN1070606040" name="omniagreeN1070606040"
 															value="" checked="checked"> <label
 															for="omniagreeNN1070606040"><span class="ico"></span>미동의</label>
-														</span> <span class="radio_btn on" data-skin="accept"
+														</span> <span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의</span>
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -3296,7 +3300,7 @@ ol, ul, li {
 														data-control="modal"
 														onclick="omniTerms('10', '7130', '1301');">전문보기</a> -->
 													<div class="radio_agreement">
-														<span class="radio_btn " data-skin="accept"
+														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">미동의</span></a>
 														<span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
@@ -3304,7 +3308,7 @@ ol, ul, li {
 															id="omniagreeNN1071301301" name="omniagreeN1071301301"
 															value="" checked="checked"> <label
 															for="omniagreeNN1071301301"><span class="ico"></span>미동의</label>
-														</span> <span class="radio_btn on" data-skin="accept"
+														</span> <span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의</span>
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -3416,7 +3420,7 @@ ol, ul, li {
 														data-control="modal"
 														onclick="omniTerms('10', '7040', '4070');">전문보기</a> -->
 													<div class="radio_agreement">
-														<span class="radio_btn " data-skin="accept"
+														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">미동의</span>
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
@@ -3424,7 +3428,7 @@ ol, ul, li {
 															id="omniagreeNN1070404070" name="omniagreeN1070404070"
 															value="" checked="checked"> <label
 															for="omniagreeNN1070404070"><span class="ico"></span>미동의</label>
-														</span> <span class="radio_btn on" data-skin="accept"
+														</span> <span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의</span>
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -3537,7 +3541,7 @@ ol, ul, li {
 														data-control="modal"
 														onclick="omniTerms('10', '7030', '3000');">전문보기</a> -->
 													<div class="radio_agreement">
-														<span class="radio_btn " data-skin="accept"
+														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">미동의</span>
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
@@ -3545,7 +3549,7 @@ ol, ul, li {
 															id="omniagreeNN1070303000" name="omniagreeN1070303000"
 															value="" checked="checked"> <label
 															for="omniagreeNN1070303000"><span class="ico"></span>미동의</label>
-														</span> <span class="radio_btn on" data-skin="accept"
+														</span> <span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의</span>
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -3655,7 +3659,7 @@ ol, ul, li {
 														data-control="modal"
 														onclick="omniTerms('10', '7240', '2401');">전문보기</a> -->
 													<div class="radio_agreement">
-														<span class="radio_btn " data-skin="accept"
+														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">미동의</span>
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
@@ -3663,7 +3667,7 @@ ol, ul, li {
 															id="omniagreeNN1072402401" name="omniagreeN1072402401"
 															value="" checked="checked"> <label
 															for="omniagreeNN1072402401"><span class="ico"></span>미동의</label>
-														</span> <span class="radio_btn on" data-skin="accept"
+														</span> <span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의</span>
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -3776,7 +3780,7 @@ ol, ul, li {
 														data-control="modal"
 														onclick="omniTerms('10', '7010', '1000');">전문보기</a> -->
 													<div class="radio_agreement">
-														<span class="radio_btn " data-skin="accept"
+														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">미동의</span>
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
@@ -3784,7 +3788,7 @@ ol, ul, li {
 															id="omniagreeNN1070101000" name="omniagreeN1070101000"
 															value="" checked="checked"> <label
 															for="omniagreeNN1070101000"><span class="ico"></span>미동의</label>
-														</span> <span class="radio_btn on" data-skin="accept"
+														</span> <span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의</span>
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -3895,7 +3899,7 @@ ol, ul, li {
 														data-control="modal"
 														onclick="omniTerms('10', '7020', '2000');">전문보기</a> -->
 													<div class="radio_agreement">
-														<span class="radio_btn " data-skin="accept"
+														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">미동의</span>
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
@@ -3903,7 +3907,7 @@ ol, ul, li {
 															id="omniagreeNN1070202000" name="omniagreeN1070202000"
 															value="" checked="checked"> <label
 															for="omniagreeNN1070202000"><span class="ico"></span>미동의</label>
-														</span> <span class="radio_btn on" data-skin="accept"
+														</span> <span class="radio_btn " data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의</span>
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
@@ -4005,7 +4009,7 @@ ol, ul, li {
 														data-control="modal"
 														onclick="omniTerms('10', '7190', '1900');">전문보기</a> -->
 													<div class="radio_agreement">
-														<span class="radio_btn " data-skin="accept"
+														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">미동의</span>
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
@@ -4013,7 +4017,7 @@ ol, ul, li {
 															id="omniagreeNN1071901900" name="omniagreeN1071901900"
 															value="" checked="checked"> <label
 															for="omniagreeNN1071901900"><span class="ico"></span>미동의</label>
-														</span> <span class="radio_btn on" data-skin="accept"
+														</span> <span class="radio_btn" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의</span>
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>

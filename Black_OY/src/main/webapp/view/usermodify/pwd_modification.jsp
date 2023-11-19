@@ -39,7 +39,7 @@
 
 		<!-- contents -->
 		<div id="contentsWrap">
-			<form id="form1" name="form1" method="post" action="<%=contextPath %>/olive/pwdUpdate.do">
+			<form id="form1" name="form1" method="post" action="<%=contextPath %>/olive/InfoModification.do">
 				<input type="hidden" name="return_url" id="return_url" value="">
 				<input type="hidden" name="pwd" id="pwd" value=""> <input
 					type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
@@ -223,9 +223,6 @@
 $("#btnCancel").on("click", function () {
 	alert('비밀번호 변경을 취소하시겠습니까?');
 	location.href = "<%=contextPath%>/olive/usermodify.do";
-});
-$('#new_pwd_check').keydown(function(event) {
-	if (event.keyCode == 13) chkPwd();
 });
 
 	//비밀번호 체크

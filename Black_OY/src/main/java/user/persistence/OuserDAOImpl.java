@@ -12,6 +12,7 @@ import javax.naming.NamingException;
 import javax.tools.DocumentationTool.Location;
 
 import com.util.ConnectionProvider;
+import com.util.JDBCUtil;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,22 +44,28 @@ public class OuserDAOImpl implements OuserDAO {
 		  
 		  OuserDTO dto= null;
 
-	      pstmt = conn.prepareStatement(sql); 
-	      pstmt.setString(1, u_tel);
-	      rs = pstmt.executeQuery();      
-	      if( rs.next() ) {
-			dto= OuserDTO.builder()
-			 				.u_name(rs.getString("u_name"))
-			 				.u_birth(rs.getDate("u_birth"))
-			 				.u_tel(rs.getString("u_tel"))
-			 				.user_id(rs.getString("user_id"))
-			 				.build();
-	      }      
-	      pstmt.close();
-	      rs.close();
-	      
+		  try {
+			  pstmt = conn.prepareStatement(sql); 
+			  pstmt.setString(1, u_tel);
+			  rs = pstmt.executeQuery();      
+			  if( rs.next() ) {
+				  dto= OuserDTO.builder()
+						  				.u_name(rs.getString("u_name"))
+						  				.u_birth(rs.getDate("u_birth"))
+						  				.u_tel(rs.getString("u_tel"))
+						  				.user_id(rs.getString("user_id"))
+						  				.build();
+			  } //if  
+		  } catch (Exception e) {
+			  e.printStackTrace();
+			  System.out.println("joinCheckImpl Exception~");
+		  }finally {
+			  JDBCUtil.close(pstmt);
+			  JDBCUtil.close(rs);
+		  }
+
 	      return dto;
-	}
+		}
 	
 	//회원가입
 	@Override
@@ -67,21 +74,24 @@ public class OuserDAOImpl implements OuserDAO {
 		String sql = "INSERT INTO o_user (user_id, u_name, u_pwd, u_tel, u_birth, u_email) "
 				+ " VALUES (?, ?, ?, ?, ?, ? ) ";
 		PreparedStatement pstmt = null;
-
-		pstmt = conn.prepareStatement(sql); 
-		pstmt.setString(1,  dto.getUser_id() );
-		pstmt.setString(2,  dto.getU_name() );
-		pstmt.setString(3,  dto.getU_pwd() );
-		pstmt.setString(4,  dto.getU_tel() );
-		java.util.Date d = dto.getU_birth() ;
-		d.setMonth(d.getMonth()-1);
-		pstmt.setDate(5,   new Date(d.getTime()) );
-		pstmt.setString(6,  dto.getU_email() );
-		rowCount = pstmt.executeUpdate();
-
-		pstmt.close();
+		try { 
+			pstmt = conn.prepareStatement(sql); 
+			pstmt.setString(1,  dto.getUser_id() );
+			pstmt.setString(2,  dto.getU_name() );
+			pstmt.setString(3,  dto.getU_pwd() );
+			pstmt.setString(4,  dto.getU_tel() );
+			java.util.Date d = dto.getU_birth() ;
+			d.setMonth(d.getMonth()-1);
+			pstmt.setDate(5,   new Date(d.getTime()) );
+			pstmt.setString(6,  dto.getU_email() );
+			rowCount = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("joinImpl Exception~");
+		}finally {
+			JDBCUtil.close(pstmt);
+		}
 		return rowCount;
-
 	}
 
 	//비밀번호 변경
@@ -92,15 +102,50 @@ public class OuserDAOImpl implements OuserDAO {
 				+ " WHERE user_id = ? ";
 		
 		 PreparedStatement pstmt = null;
-		 
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, newPwd);
-		pstmt.setString(2, user_id);
-		rowCount = pstmt.executeUpdate();  
-		
-		pstmt.close();
+		try { 
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, newPwd);
+			pstmt.setString(2, user_id);
+			
+			rowCount = pstmt.executeUpdate();  
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("pwdUpdateImpl Exception~");
+		}finally {
+			JDBCUtil.close(pstmt);
+		}
 		return rowCount;
 	}
+	
+	//회원정보 수정
+	@Override
+	public int infoUpdate(Connection conn, OuserDTO dto) throws SQLException {
+		int rowCount = 0;
+		String sql = "UPDATE o_user SET u_name = ? , u_tel = ? , "
+				+ "u_email = ? , u_pwd = ? "
+				+ "WHERE user_id = ? ";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+	        pstmt = conn.prepareStatement(sql);
+	        
+	        pstmt.setString(1, dto.getU_name()); 
+	        pstmt.setString(2, dto.getU_tel()); 
+	        pstmt.setString(3, dto.getU_email());
+	        pstmt.setString(4, dto.getU_pwd()); 
+	        pstmt.setString(5, dto.getUser_id());
 
-
+	        rowCount = pstmt.executeUpdate();
+	        
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("infoUpdateImpl Exception~");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(conn);
+		}
+		return rowCount;
+	}
 }

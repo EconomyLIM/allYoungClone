@@ -413,29 +413,7 @@
 														</p>
 													</td>
 				
-			 	<script>
-				var sel;
-				var str = "${u_birth}";
-				const result1=str.substr(0,4);	
-				const result2=str.substr(4,2);		
-				const result3=str.substr(6,2);
-				
-				
-				sel = $("#birth_yy");
-				var selYYvalue =result1;
-				
-				sel.find("option[value='" + selYYvalue + "']").prop("selected", true);
-				
-				sel = $("#birth_mm");
-				var selMMvalue =result2;
-				
-				sel.find("option[value='" + selMMvalue + "']").prop("selected", true);
-				
-				sel = $("#birth_dd");
-				var selDDvalue =result3;
-				
-				sel.find("option[value='" + selDDvalue + "']").prop("selected", true);
-				</script>
+		
 												</tr>
 												<tr class="input">
 													<th scope="row" class="mandatory"
@@ -492,25 +470,6 @@
 									</tbody>
 									</table>
 									</div>
-			<script>
-				$("#email_addr2").val( $("#email_addr_opt").val() );
-				$("#email_addr_opt").change(function () {
-					$("#email_addr2").val( $("#email_addr_opt").val() );
-				});
-				</script>
-	<script>
-	var str = "${u_tel}";
-	const result4=str.substr(0,4);		
-	const result5=str.substr(4,4);	
-				let str1 = result4;
-				let str2 = result5;
-				let strAll = "010" + str1.replace(str1, '****') +str2;
-				$("#mob_no").val(strAll);
-	</script>					
-	<script>
-		$("#u_tel").val("010-"+str1+"-"+str2);
-	</script>
-
 									<div class="btn_sec">
 										<button type="button" class="btn" id="btncancel">취소</button>
 										<button type="button" class="btn btn_em" id="btnok">등록</button>
@@ -1351,6 +1310,48 @@ $('#new_pwd_check').keydown(function(event) {
 		}
 	});
 </script>
+	 	<script>
+				var sel;
+				var str = "${u_birth}";
+				const result1=str.substr(0,4);	
+				const result2=str.substr(4,2);		
+				const result3=str.substr(6,2);
+				
+				
+				sel = $("#birth_yy");
+				var selYYvalue =result1;
+				
+				sel.find("option[value='" + selYYvalue + "']").prop("selected", true);
+				
+				sel = $("#birth_mm");
+				var selMMvalue =result2;
+				
+				sel.find("option[value='" + selMMvalue + "']").prop("selected", true);
+				
+				sel = $("#birth_dd");
+				var selDDvalue =result3;
+				
+				sel.find("option[value='" + selDDvalue + "']").prop("selected", true);
+				</script>
+			<script>
+				$("#email_addr2").val( $("#email_addr_opt").val() );
+				$("#email_addr_opt").change(function () {
+					$("#email_addr2").val( $("#email_addr_opt").val() );
+				});
+				</script>
+	<script>
+	var str = "${u_tel}";
+	const result4=str.substr(0,4);		
+	const result5=str.substr(4,4);	
+				let str1 = result4;
+				let str2 = result5;
+				let strAll = "010" + str1.replace(str1, '****') +str2;
+				$("#mob_no").val(strAll);
+	</script>					
+	<script>
+		$("#u_tel").val("010-"+str1+"-"+str2);
+	</script>
+
 <script>
 	$("#btncancel").on("click", function () {
 		alert("회원가입을 취소하시겠습니까?");
