@@ -162,7 +162,7 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
    
       
    // 스킨케어/마스크팩/선크림  카테고리 대분류 별로 가져오기   
-   public List<BrandDTO> getCATEBrands(String brandId, String cate_l_id) throws Exception {
+   public List<BrandDTO> getCATEBrands(String brandId, String dispcatno) throws Exception {
 
       String sql = " SELECT distinct cl.cat_l_id, cl.cat_l_name"
             + "FROM cate_m cm"
@@ -173,15 +173,15 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
             + "LEFT JOIN brand b ON b.brand_id = pd.brand_id"
             + "where b.brand_id = ''; ";
 
-      if(cate_l_id.equals("cate_1")) {
+      if(dispcatno.equals("cate_1")) {
          sql +=  " ";
          
-      } else if(cate_l_id.equals("cate_2")) {
-         sql += " WHERE cate_l_id= '0001'";            
-      } else if(cate_l_id.equals("cate_3")) {
-         sql += " WHERE cate_l_id= '0003'";
-      } else if(cate_l_id.equals("cate_4")) {
-         sql += " WHERE cate_l_id= '0004' ";
+      } else if(dispcatno.equals("cate_2")) {
+         sql += " AND cate_l_id= '0001'";            
+      } else if(dispcatno.equals("cate_3")) {
+         sql += " AND cate_l_id= '0003'";
+      } else if(dispcatno.equals("cate_4")) {
+         sql += " AND cate_l_id= '0004' ";
       } 
        
       
@@ -199,29 +199,15 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
          rs = preparedStatement.executeQuery();
 
 
-         if(rs.next()) {
+        if(rs.next()) {
             System.out.println("rs변수 담기");
             list = new ArrayList<>();
-            do {
-               /* [1]
-                */
-
-               /*
-                * brand = BrandDTO.builder() .b .build();
-                */
-
-
-               /*[2]
-                * 
-                * 
-                * brand = new BrandDTO(brandId, brandId, 0, brandId, brandId, brandId, 0); 
-                * */
-
-               /*[3]
-                * 
-                * brand.setBrandId(rs.getString("brand_id"))
-                * */
-               list.add(brand);
+            do{
+            	 BrandDTO catebrand = BrandDTO.builder()
+                         .cate_l_id(rs.getString("cat_l_id"))
+                         .cate_l_name(rs.getString("cat_l_name"))
+                         .build();
+                 list.add(catebrand);
             } while ( rs.next() );
 
          }
@@ -253,19 +239,20 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
             + " JOIN PRO_DISPL_IMG PDI ON PD.PRO_DISPL_ID = PDI.PRO_DISPL_ID "
             + " WHERE PD.BRAND_ID = ? ";   
            
-         /*
-            if(sort !=null ) {
-               sql += " AND P.CAT_M_ID = ? ";
-            } else if(sort.equals("p")) {
-               sql += "ORDER BY PD.PRO_DISPL_LIKE DESC";
-            } else if(sort.equals("")) {
-               sql += "";
-            } else if(sort.equals("")) {
-               sql += "";
-            } else if(sort.equals("")) {
-               sql += "";
-            } 
-           */ 
+        
+      if(sort.equals("p")) { 
+    	  sql += " ORDER BY PD.PRO_DISPL_LIKE DESC"; 
+      } else if(sort.equals("n")) { 
+    	  sql += ""; 
+    	  } else if(sort.equals("s")) { 
+    		  sql += ""; 
+    		  }else if(sort.equals("l")) {
+    			  sql += ""; 
+    			  } else if(sort.equals("d")) { 
+    				  sql +=
+           ""; } else { // 아무것도 안들어왔을때
+  }
+           
     
       List<BrandDTO> bestBrandProducts = new ArrayList<>();
 

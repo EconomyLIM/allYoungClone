@@ -29,6 +29,7 @@ public class GetSortBrandAjax extends HttpServlet {
       String sort = request.getParameter("sort");
       String brand_id = request.getParameter("brand_id");
       String dispcatno = request.getParameter("dispcatno");
+  
       System.out.println("sort : " + sort);
       System.out.println("brand_id : " + brand_id);
       System.out.println("dispcatno: " + dispcatno);
@@ -37,7 +38,7 @@ public class GetSortBrandAjax extends HttpServlet {
       List<BrandDTO> list = null;
      
       try {
-         list = brandDao.getSortBrands(brand_id, dispcatno);
+    	  list = brandDao.getCATEBrands(brand_id, dispcatno);
       } catch (Exception e) {
         
          e.printStackTrace();
@@ -52,7 +53,9 @@ public class GetSortBrandAjax extends HttpServlet {
       while (ir.hasNext()) {
          dto = ir.next();
          brand = new JSONObject();
-         brand.put("pro_displ_name", ir);
+         brand.put("cate_l_id", dto.getCate_l_id());
+         brand.put("cate_l_name", dto.getCate_l_name());
+         jsonArray.put(brand);
       }
       
       System.out.println(jsonObject);
@@ -60,8 +63,5 @@ public class GetSortBrandAjax extends HttpServlet {
       writer.write(jsonObject.toString());
    }
 
-   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      doGet(request, response);
-   }
-
+ 
 }

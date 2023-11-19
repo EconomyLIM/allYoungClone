@@ -29,5 +29,8 @@ public class BrandDTO { //브랜드 페이지에 사용된 객체들을 담음
        private String rev_content;
        private int rev_grade;
        private Date pre_reg;
+       private String cate_l_id;
+       private String cate_l_name;
+   
       
 } // class
