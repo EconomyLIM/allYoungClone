@@ -67,18 +67,18 @@ public class BrandHandler implements CommandHandler {
 
       BrandDTO brand = brandDao.getBrands(brandId);
       System.out.println(brand);
-      List<BrandDTO> bestBrandProducts = brandDao.getBestBrandpro(brandId, categoryId);
+      //List<BrandDTO> bestBrandProducts = brandDao.getBestBrandpro(brandId, categoryId);
       List<BrandDTO> brandProducts = brandDao.getsellProduct(brandId, categoryId);
       List<BrandDTO> sellbrandProducts = brandDao.getsellProduct(brandId, categoryId);
       List<BrandDTO> relist = brandDao.getreviews(categoryId);
        
       
       request.setAttribute("brand", brand);
-      request.setAttribute("bestBrandProducts", bestBrandProducts);
+      //request.setAttribute("bestBrandProducts", bestBrandProducts);
       request.setAttribute("sellbrandProduts", sellbrandProducts);
       //request.setAttribute("sellbrandProducts", sellbrandProduct);
 
-      List<BrandDTO> bsbrand = brandDao.getBestBrandpro(brandId , categoryId);   
+     // List<BrandDTO> bsbrand = brandDao.getBestBrandpro(brandId , categoryId);   
       
       
 
