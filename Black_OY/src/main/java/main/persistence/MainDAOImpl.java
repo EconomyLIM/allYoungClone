@@ -553,7 +553,6 @@ public class MainDAOImpl implements MainDAO{
 				} while (rs.next());
 				System.out.println(" >>> MainDAOImpl getPopularShop ... ");
 				
-				System.out.println(hashMap);
 			} // if
 
 		} catch (SQLException e) {

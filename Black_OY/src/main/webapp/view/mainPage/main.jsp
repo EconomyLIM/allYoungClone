@@ -534,104 +534,6 @@ $(document).ready(() => {
 												class="current" id="contsInfoBeginNum">1</span>5</em></span>
 									</button>
 								</div>
-								<!-- 상품 추천 스크립트 -->
-
-
-								<!-- 								<script type="text/javascript">
-$(document).ready(function(){
-	var recoMbrNo = '';
-	var showType = ''; 
-	var clickCnt = 1;
-	var recall = false;
-	var group = "";
-	var chkNo = 1;
-	var rccode = "pc_main_01_c";
-	
-	
-    var recoGoodsListLength = "35";
-	if(recoGoodsListLength > 0){
-	    // 로딩바 제거 및 레코벨 상품 영역 show
-	    $(".loading_box").hide();
-	    $(".curation_area").show();
-	}
-	
-    $('#main_curation02_01').slick({
-		dots: false,
-		arrows: false,
-		fade: true,
-		infinite: true,
-		speed: 100,
-		slidesToShow: 2,
-		slidesToScroll: 1,
-		draggable: true
-	});
-    
-    $('#main_curation02_01 a.item').each(function(i){
-        var _item = $(this);			
-        var _data_goodsno = _item.attr('data-ref-goodsno');
-		var _data_dispCatNo = _item.attr('data-ref-dispCatNo');
-		var egcode = _item.attr("data-egcode");
-	    var egrank = _item.attr("data-egrank");
-		var trackingCd = _item.attr("name");
-
-		_item.attr('onclick','javascript:gtm.goods.callGoodsGtmInfo("'+_data_goodsno+'", "", "ee-productClick", "홈_큐레이션1", "' + $(this).attr('data-attr').split('^')[3] + '");common.wlog("home_curation1_prod'+trackingCd.substr(trackingCd.length-1, 1)+'");common.link.moveGoodsDetailCuration("'+_data_goodsno+'", "'+_data_dispCatNo+'","like","'+rccode+'", "'+egcode+'", "'+egrank+'", "'+trackingCd+'");');
-	});
-    
-    $("#main_curation02_01").find(".btnbag").each(function() {
-    	$(this).attr("data-rccode", rccode);
-    });
-
-	$('#refBtn').on('click', function () {
-		var $this = $(this);
-
-		var totalPage = Number($this.data('total-page'));
-		var currentPage = Number($this.data('current-page'));
-
-		$('#main_curation02_01').slick('slickNext');
-
-		if (currentPage < totalPage) {
-			currentPage++;
-		} else {
-			currentPage = 1;
-		}
-
-		$this.data('current-page', currentPage);
-		$this.find('.current').html(currentPage);
-		common.reqAmplitude('큐레이션1_다른상품추천_클릭', {entry_source: '홈', click_source: '큐레이션1_다른상품추천', number: currentPage});
-	});
-    
-	var recType = "p002";
-	
-   	var name = "";
-   	
-   	if(name == undefined || name == "") {
-   		name = "고객";
-   	}
-
-   	var param = {
-   		size : 40, //큐레이션 api 호출용
-   		viewType : 'VertPop', // 세로형
-      	popupYn : "Y",
-      	titlRp : name, // 타이틀 replace 텍스트
-      	viewArea : 'home_curation1_more_prod',
-      	recType : recType, // 큐레이션 url 정보
-      	loginRecType : "p202",
-      	dispCatNo : '90000010001',
-      	rccode : rccode,
-		trackingCd: 'Home_Curation1_More'
-   	};
-   	
-	// 기존 영역이기 때문에 이벤트 추가만 한다.
-	curation.btnMoreEvent(param);
-
-	gtm.goods.initProductImpression();
-
-	//오특 플래그
-	common.gnb.todaySpecial.setTodaySpecialFlag('.a_detail .newOyflag');
-}); -->
-								</script>
-
-
 							</div>
 						</div>
 						<div class="inner">
@@ -725,104 +627,7 @@ $(document).ready(function(){
 									</button>
 								</div>
 								
-
-
 								<input type="hidden" id="rectype" name="rectype" value="p001">
-
-								<script type="text/javascript">
-/* $(document).ready(function(){
-    var recoGoodsList2Length = "29";
-	if(recoGoodsList2Length > 0){
-	    // 로딩바 제거 및 레코벨 상품 영역 show
-	    $(".loading_box").hide();
-	    $(".curation_area").show();
-	}
-	var clickCnt = 1;
-    var isLogin = "false";
-    var mbrAgrYn = $("#mktAgrYn").val();
-    var recall = false;
-    var rccode = "pc_main_02_c";
-
-    if($("#recobell_area2").hasClass("type01")){
-        slidesToShowVal=4;
-        slidesToScrollVal=4;
-        arrows=true;
-    }
-	
-	$('#main_curation03_01').slick({
-		dots: false,
-		arrows: false,
-		fade: true,
-		infinite: true,
-		speed: 100,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		draggable: false
-	});
-
-	$('#main_curation03_01 a.item').each(function(i){
-		var _item = $(this);			
-		var _data_goodsno = _item.attr('data-ref-goodsno');
-		var _data_dispCatNo = _item.attr('data-ref-dispCatNo');
-		var egcode = _item.attr("data-egcode");
-	    var egrank = _item.attr("data-egrank");
-	    var trackingCd = _item.attr("name");
-		_item.attr('onclick','javascript:gtm.goods.callGoodsGtmInfo("'+_data_goodsno+'", "", "ee-productClick", "홈_큐레이션2", "' + $(this).attr('data-attr').split('^')[3] + '"); common.wlog("home_curation2_prod'+trackingCd.substr(trackingCd.length-1, 1)+'");common.link.moveGoodsDetailCuration("'+_data_goodsno+'", "'+_data_dispCatNo+'","recent","'+rccode+'", "'+egcode+'", "'+egrank+'", "'+trackingCd+'");');
-   });
-	
-	$('#main_curation03_01').find(".btnbag").each(function(){
-		$(this).attr("data-rccode", rccode);
-	});
-
-	$('#refBtn2').on('click', function () {
-		var $this = $(this);
-
-		var totalPage = Number($this.data('total-page'));
-		var currentPage = Number($this.data('current-page'));
-
-		$('#main_curation03_01').slick('slickNext');
-
-		if (currentPage < totalPage) {
-			currentPage++;
-		} else {
-			currentPage = 1;
-		}
-
-		$this.data('current-page', currentPage);
-		$this.find('.current').html(currentPage);
-		common.reqAmplitude('큐레이션2_다른상품추천_클릭', {entry_source: '홈', click_source: '큐레이션2_다른상품추천', number: currentPage});
-	});
-	
-	var param = {
-		size : 30, //큐레이션 api 호출용
-		viewType : 'VertPop', // 가로형
-		popupYn : "Y",
-		titlRp : "", // 타이틀 replace 텍스트
-		viewArea : 'home_curation2_more_prod',
-		recType : "p001",
-		loginRecType : "p201",
-		dispCatNo : '90000010001',
-		rccode : rccode,
-		trackingCd: 'Home_Curation2_More'
-	};
-	
-	if("p001" != "m002") {
-		param.cps = true;
-		param.cpt = "m002";
-	}
-	
-	// 기존 영역이기 때문에 이벤트 추가만 한다.
-	curation.btnMoreEvent(param);
-
-	// GTM Product Impression 공통 적용
-	gtm.goods.initProductImpression();
-
-	//오특 플래그
-	common.gnb.todaySpecial.setTodaySpecialFlag('.a_detail .newOyflag');
-
-}); */
-</script>
-
 							</div>
 						</div>
 					</div>
@@ -886,7 +691,7 @@ $(document).ready(function(){
 										<c:forEach items="${gpb.value}" var="value">
 										<li>
 											<div class="prd_info ">
-												<a href="#" name="Home_Planshop3" class="prd_thumb goodsList">
+												<a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${value.displId}&displNum=${value.lid}${value.sid}" name="Home_Planshop3" class="prd_thumb goodsList">
 													<span class="thumb_flag best">베스트</span>
 													<img src="${value.displImgSrc}"/>
 												</a>
@@ -939,8 +744,9 @@ $(document).ready(function(){
 							</c:forEach>
 						</c:if> 
 
-						<!-- 인기행사 마지막 태그입니다. -->
+						
 						</div>
+						<!-- 인기행사 마지막 태그입니다. -->
 					</div>
 					<div class="banner_paging" role="toolbar">
 					</div> 
@@ -957,6 +763,7 @@ $(document).ready(function(){
 				<!--// 메인 꾸밈영역 -->
 
 
+				<!-- 올리브영 매거진 -->
 				<div class="oy-magazine">
 					<h3>
 						<strong>올리브영 매거진</strong>
@@ -1015,18 +822,13 @@ $(document).ready(function(){
 						</ul>
 					</div>
 				</div>
+				
+				<!-- 오직 올리브영에서만 -->
 				<div class="main_onlyone_wrap">
 					<h3 class="main_sub_tit">오직 올리브영에서만</h3>
-					<div
-						class="banner_wrap slick_slider slick-initialized slick-slider slick-dotted"
-						id="OnlyoneSlider" role="toolbar">
+					<div class="banner_wrap " id="OnlyoneSlider" role="toolbar">
 
-
-						<div aria-live="polite" class="slick-list draggable">
-							<div class="slick-track" role="listbox"
-								style="opacity: 1; width: 4116px; transform: translate3d(-1029px, 0px, 0px);">
-								<div class="slick-slide slick-cloned" data-slick-index="-3"
-									aria-hidden="true" style="width: 343px;" tabindex="-1">
+								<div >
 									<a
 										onclick="common.reqAmplitude('오직 올리브영 배너 클릭', {entry_source: '홈', click_source: '오직올리브영_배너', banner_name: '111-5013_김희연', banner_number: '4'});"
 										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103000032&amp;trackingCd=Home_Onlyone&amp;t_page=홈&amp;t_click=오직올리브영_배너&amp;t_banner_name=111-5013_김희연&amp;t_number=4"
@@ -1042,8 +844,7 @@ $(document).ready(function(){
 										</div>
 									</a>
 								</div>
-								<div class="slick-slide slick-cloned" data-slick-index="-2"
-									aria-hidden="true" style="width: 343px;" tabindex="-1">
+								<div >
 									<a
 										onclick="common.reqAmplitude('오직 올리브영 배너 클릭', {entry_source: '홈', click_source: '오직올리브영_배너', banner_name: '111-5014_김희연', banner_number: '5'});"
 										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103050025&amp;trackingCd=Home_Onlyone&amp;t_page=홈&amp;t_click=오직올리브영_배너&amp;t_banner_name=111-5014_김희연&amp;t_number=5"
@@ -1063,10 +864,7 @@ $(document).ready(function(){
 										</div>
 									</a>
 								</div>
-								<div class="slick-slide slick-cloned" data-slick-index="-1"
-									aria-hidden="true" style="width: 343px;" tabindex="-1">
-
-
+								<div>
 
 									<a
 										onclick="common.reqAmplitude('오직 올리브영 배너 클릭', {entry_source: '홈', click_source: '오직올리브영_배너', banner_name: '111-5001_김슬기', banner_number: '6'});"
@@ -1086,9 +884,7 @@ $(document).ready(function(){
 										</div>
 									</a>
 								</div>
-								<div class="slick-slide slick-current slick-active"
-									data-slick-index="0" aria-hidden="false" style="width: 343px;"
-									tabindex="-1" role="option" aria-describedby="slick-slide20">
+								<div >
 
 
 
@@ -1110,9 +906,7 @@ $(document).ready(function(){
 										</div>
 									</a>
 								</div>
-								<div class="slick-slide slick-active" data-slick-index="1"
-									aria-hidden="false" style="width: 343px;" tabindex="-1"
-									role="option" aria-describedby="slick-slide21">
+								<div >
 									<a
 										onclick="common.reqAmplitude('오직 올리브영 배너 클릭', {entry_source: '홈', click_source: '오직올리브영_배너', banner_name: '111-5012_허예림', banner_number: '2'});"
 										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103050026&amp;trackingCd=Home_Onlyone&amp;t_page=홈&amp;t_click=오직올리브영_배너&amp;t_banner_name=111-5012_허예림&amp;t_number=2"
@@ -1127,195 +921,10 @@ $(document).ready(function(){
 										</div>
 									</a>
 								</div>
-								<div class="slick-slide slick-active" data-slick-index="2"
-									aria-hidden="false" style="width: 343px;" tabindex="-1"
-									role="option" aria-describedby="slick-slide22">
 
-
-									<a
-										onclick="common.reqAmplitude('오직 올리브영 배너 클릭', {entry_source: '홈', click_source: '오직올리브영_배너', banner_name: '1101-4101_서부현', banner_number: '3'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102820182&amp;trackingCd=Home_Onlyone&amp;t_page=홈&amp;t_click=오직올리브영_배너&amp;t_banner_name=1101-4101_서부현&amp;t_number=3"
-										class="onlyone_box"
-										data-attr="홈^온리원관오직올리브영에서만^1101-4101_서부현^3" data-trk="/"
-										tabindex="0"> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/6/8440553167349456219.jpg"
-										alt="1101-4101_서부현">
-
-										<div class="txt" style="color: #FFFFFF">
-
-
-
-											<strong class="title">대용량 인기 간식</strong> <strong
-												class="title">최대 50% 할인!</strong> <span class="desc">#왕크니까
-												#왕맛있다</span>
-
-										</div>
-									</a>
-								</div>
-								<div class="slick-slide" data-slick-index="3" aria-hidden="true"
-									style="width: 343px;" tabindex="-1" role="option"
-									aria-describedby="slick-slide23">
-
-									<a
-										onclick="common.reqAmplitude('오직 올리브영 배너 클릭', {entry_source: '홈', click_source: '오직올리브영_배너', banner_name: '111-5013_김희연', banner_number: '4'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103000032&amp;trackingCd=Home_Onlyone&amp;t_page=홈&amp;t_click=오직올리브영_배너&amp;t_banner_name=111-5013_김희연&amp;t_number=4"
-										class="onlyone_box" data-attr="홈^온리원관오직올리브영에서만^111-5013_김희연^4"
-										data-trk="/" tabindex="-1"> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/6/4661345115759382171.jpg"
-										alt="111-5013_김희연">
-
-										<div class="txt" style="color: #000000">
-
-
-
-											<strong class="title">머리부터 </strong> <strong class="title">발끝까지
-											</strong> <span class="desc">#보습#바디케어</span>
-
-										</div>
-									</a>
-								</div>
-								<div class="slick-slide" data-slick-index="4" aria-hidden="true"
-									style="width: 343px;" tabindex="-1" role="option"
-									aria-describedby="slick-slide24">
-
-
-
-									<a
-										onclick="common.reqAmplitude('오직 올리브영 배너 클릭', {entry_source: '홈', click_source: '오직올리브영_배너', banner_name: '111-5014_김희연', banner_number: '5'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103050025&amp;trackingCd=Home_Onlyone&amp;t_page=홈&amp;t_click=오직올리브영_배너&amp;t_banner_name=111-5014_김희연&amp;t_number=5"
-										class="onlyone_box" data-attr="홈^온리원관오직올리브영에서만^111-5014_김희연^5"
-										data-trk="/" tabindex="-1"> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/6/9192792450653956257.jpg"
-										alt="111-5014_김희연">
-
-										<div class="txt" style="color: #000000">
-
-
-
-											<strong class="title">후보정필요없는</strong> <strong class="title">현실포토샵</strong>
-
-											<span class="desc">#컬러그램#메이크업</span>
-
-										</div>
-									</a>
-								</div>
-								<div class="slick-slide" data-slick-index="5" aria-hidden="true"
-									style="width: 343px;" tabindex="-1" role="option"
-									aria-describedby="slick-slide25">
-
-
-
-									<a
-										onclick="common.reqAmplitude('오직 올리브영 배너 클릭', {entry_source: '홈', click_source: '오직올리브영_배너', banner_name: '111-5001_김슬기', banner_number: '6'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102990029&amp;trackingCd=Home_Onlyone&amp;t_page=홈&amp;t_click=오직올리브영_배너&amp;t_banner_name=111-5001_김슬기&amp;t_number=6"
-										class="onlyone_box" data-attr="홈^온리원관오직올리브영에서만^111-5001_김슬기^6"
-										data-trk="/" tabindex="-1"> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/6/3737201163791687911.jpg"
-										alt="111-5001_김슬기">
-
-										<div class="txt" style="color: #000000">
-
-
-
-											<strong class="title">임지연Pick</strong> <strong class="title">보습의답
-												BOH이다</strong> <span class="desc">#바이오힐보 #세라뮨</span>
-
-										</div>
-									</a>
-								</div>
-								<div class="slick-slide slick-cloned" data-slick-index="6"
-									aria-hidden="true" style="width: 343px;" tabindex="-1">
-
-
-
-									<a
-										onclick="common.reqAmplitude('오직 올리브영 배너 클릭', {entry_source: '홈', click_source: '오직올리브영_배너', banner_name: '111-5008_임용성', banner_number: '1'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103250011&amp;trackingCd=Home_Onlyone&amp;t_page=홈&amp;t_click=오직올리브영_배너&amp;t_banner_name=111-5008_임용성&amp;t_number=1"
-										class="onlyone_box" data-attr="홈^온리원관오직올리브영에서만^111-5008_임용성^1"
-										data-trk="/" tabindex="-1"> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/6/5890960228533835803.jpg"
-										alt="111-5008_임용성">
-
-										<div class="txt" style="color: #000000">
-
-
-
-											<strong class="title">11월 신상품</strong> <strong class="title">출시
-												기념 특가</strong> <span class="desc">#최대37%#쿠폰발급</span>
-
-										</div>
-									</a>
-								</div>
-								<div class="slick-slide slick-cloned" data-slick-index="7"
-									aria-hidden="true" style="width: 343px;" tabindex="-1">
-
-
-
-									<a
-										onclick="common.reqAmplitude('오직 올리브영 배너 클릭', {entry_source: '홈', click_source: '오직올리브영_배너', banner_name: '111-5012_허예림', banner_number: '2'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000103050026&amp;trackingCd=Home_Onlyone&amp;t_page=홈&amp;t_click=오직올리브영_배너&amp;t_banner_name=111-5012_허예림&amp;t_number=2"
-										class="onlyone_box" data-attr="홈^온리원관오직올리브영에서만^111-5012_허예림^2"
-										data-trk="/" tabindex="-1"> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/6/4115594780654286720.jpg"
-										alt="111-5012_허예림">
-
-										<div class="txt" style="color: #000000">
-
-
-
-											<strong class="title">블랙프라이데이 </strong> <strong class="title">매일매일다른할인</strong>
-
-											<span class="desc">#놓치지마세요</span>
-
-										</div>
-									</a>
-								</div>
-								<div class="slick-slide slick-cloned" data-slick-index="8"
-									aria-hidden="true" style="width: 343px;" tabindex="-1">
-									<a
-										onclick="common.reqAmplitude('오직 올리브영 배너 클릭', {entry_source: '홈', click_source: '오직올리브영_배너', banner_name: '1101-4101_서부현', banner_number: '3'});"
-										href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102820182&amp;trackingCd=Home_Onlyone&amp;t_page=홈&amp;t_click=오직올리브영_배너&amp;t_banner_name=1101-4101_서부현&amp;t_number=3"
-										class="onlyone_box"
-										data-attr="홈^온리원관오직올리브영에서만^1101-4101_서부현^3" data-trk="/"
-										tabindex="-1"> <img
-										src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/6/8440553167349456219.jpg"
-										alt="1101-4101_서부현">
-
-										<div class="txt" style="color: #FFFFFF">
-
-
-
-											<strong class="title">대용량 인기 간식</strong> <strong
-												class="title">최대 50% 할인!</strong> <span class="desc">#왕크니까
-												#왕맛있다</span>
-
-										</div>
-									</a>
-								</div>
-							</div>
-						</div>
-
-
-
-
-
-
-
-						<ul class="slick-dots" style="display: block;" role="tablist">
-							<li class="slick-active" aria-hidden="false" role="presentation"
-								aria-selected="true" aria-controls="navigation20"
-								id="slick-slide20"><button type="button" data-role="none"
-									role="button" tabindex="0">1</button></li>
-							<li aria-hidden="true" role="presentation" aria-selected="false"
-								aria-controls="navigation21" id="slick-slide21"><button
-									type="button" data-role="none" role="button" tabindex="0">2</button></li>
-						</ul>
 					</div>
 				</div>
-
-
-
-
+				<!-- 오직 올리브영에서만 종료 태그 표시 ==================  -->
 
 				<!-- MD 추천 상품 Start-->
 
@@ -1424,11 +1033,6 @@ $(document).ready(function(){
 						</ul>
 					</div>
 				</div>
-
-
-
-
-
 
 				<h3 class="main_sub_tit">
 					<strong>이 상품 어때요?</strong>
@@ -5101,9 +4705,9 @@ $('#main_curation02_01').slick({
 	 	    	$('#mainReComSlider').slick({
 		    		   dots: true,
 		    		   arrows: true,
-		    		   fade: true,
+		    		   fade: false,
 		    		   infinite: true,
-		    		   speed: 100,
+		    		   speed: 500,
 		    		   slidesToShow: 1,
 		    		   slidesToScroll: 1,
 		    		   draggable: true
@@ -5124,6 +4728,16 @@ $('#main_curation02_01').slick({
 		    		   
 		    		}); 
 	 	    	
+	 	    	 $('#OnlyoneSlider').slick({
+		    		   dots: true,
+		    		   arrows: false,
+		    		   fade: false,
+		    		   infinite: true,
+		    		   speed: 500,
+		    		   slidesToShow: 3,
+		    		   slidesToScroll: 3,
+		    		   draggable: true
+		    		}); 
 </script>
 </body>
 <!-- 유사한 고객 추천 상품 팝업 -->
