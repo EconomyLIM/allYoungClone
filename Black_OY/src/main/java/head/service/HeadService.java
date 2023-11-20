@@ -9,6 +9,7 @@ import com.util.JDBCUtil;
 import head.domain.CateMDTO;
 import head.domain.EventDTO;
 import head.domain.GiftCardDTO;
+import head.domain.ProductHistoryDTO;
 import head.persistence.HeadDAO;
 import head.persistence.HeadDAOImpl;
 
@@ -141,5 +142,24 @@ public class HeadService {
 		
 		
 		return list;
+	}
+	
+	public ProductHistoryDTO productHistoryService(String pro_id) {
+		ProductHistoryDTO historyDTO = null;
+		Connection conn = null;
+		HeadDAO dao = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = HeadDAOImpl.getInstance();
+			
+			historyDTO = dao.productHistory(conn, pro_id);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		}
+		
+		return historyDTO;
 	}
 }

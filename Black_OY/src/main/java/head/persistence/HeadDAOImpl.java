@@ -12,6 +12,7 @@ import com.util.JDBCUtil;
 import head.domain.CateMDTO;
 import head.domain.EventDTO;
 import head.domain.GiftCardDTO;
+import head.domain.ProductHistoryDTO;
 
 public class HeadDAOImpl implements HeadDAO {
 	private static HeadDAOImpl dao;
@@ -252,5 +253,53 @@ public class HeadDAOImpl implements HeadDAO {
 		
 		return list;
 	}
+	
+	// 최근 본 상품
+	@Override
+	public ProductHistoryDTO productHistory(Connection conn, String pro_id) throws Exception {
+		// TODO Auto-generated method stub
+		String sql = " select * from pmlistview where pro_displ_id = ? ";
+		ProductHistoryDTO historyDTO = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pro_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				historyDTO = new ProductHistoryDTO();
+				historyDTO = ProductHistoryDTO.builder()
+						.PRO_DISPL_SRC(rs.getString("PRO_DISPL_SRC"))
+						.BRAND_NAME(rs.getString("BRAND_NAME"))    
+						.BRAND_ID(rs.getString("BRAND_ID"))      
+						.PRO_DISPL_NAME(rs.getString("PRO_DISPL_NAME"))
+						.PROPRICE(rs.getString("PROPRICE"))      
+						.CAT_L_ID(rs.getString("CAT_L_ID"))      
+						.CAT_M_ID(rs.getString("CAT_M_ID"))      
+						.CAT_S_ID(rs.getString("CAT_S_ID"))      
+						.AFTERPRICE(rs.getString("AFTERPRICE"))    
+						.PRO_DISPL_ID(rs.getString("PRO_DISPL_ID"))  
+						.PRO_ID(rs.getString("PRO_ID"))        
+						.PRC(rs.getString("PRC"))           
+						.PDC(rs.getString("PDC"))           
+						.PMP(rs.getString("PMP"))           
+						.STOCK(rs.getString("STOCK"))         
+						.ORDERCNT(rs.getString("ORDERCNT"))      
+						.PRO_STOCK(rs.getString("PRO_STOCK"))     
+						.PRO_DISPL_LIKE(rs.getString("PRO_DISPL_LIKE"))
+						.PRO_REG(rs.getString("PRO_REG"))  
+						.build();
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+		}
+		
+		return historyDTO;
+	}//productHistory
 
 }
