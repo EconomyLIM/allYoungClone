@@ -10,10 +10,11 @@ import java.util.List;
 
 
 import com.util.ConnectionProvider;
+import com.util.JDBCUtil;
 
 import brand.domain.BrandDTO;
 
-public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블과 관련된 쿼리 실행 
+public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리 실행 
 
 
 
@@ -79,32 +80,45 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
 
       } finally {
          rs.close();
-
+         conn.close();
       }// try_catch
       return brand;
 
    } // getBrands
    
-   public List<BrandDTO> getSortBrands(String brandId, String dispcatno) throws Exception {
+   //인기순, 신상품순, 판매순 등등
+   public List<BrandDTO> getSortBrands(String brandId, String sort, String dispcatno) throws Exception {
 
-      String sql = " SELECT PD.PRO_DISPL_NAME, PDI.PRO_DISPL_SRC, PD.PRO_DISPL_LIKE, P.PRO_PRICE, PD.BRAND_ID  "
-            + "            FROM PRODUCT_DISPLAY PD  "
-            + "            JOIN PRODUCT P ON PD.PRO_DISPL_ID = P.PRO_DISPL_ID  "
-            + "            JOIN PRO_DISPL_IMG PDI ON PD.PRO_DISPL_ID = PDI.PRO_DISPL_ID  "
-            + "            WHERE PD.BRAND_ID = ? ";
-
-      /*
-       * if(sort.equals("p")) { sql += " ORDER BY PD.PRO_DISPL_LIKE DESC"; } else
-       * if(sort.equals("n")) { sql += ""; } else if(sort.equals("s")) { sql += ""; }
-       * else if(sort.equals("l")) { sql += ""; } else if(sort.equals("d")) { sql +=
-       * ""; } else { // 아무것도 안들어왔을때
-       * 
-       * }
-       */
+      String sql = " SELECT * "
+				+ "    FROM pmlistview WHERE brand_id = ? ";
+			
+      if(dispcatno.equals("cate_01")) {
+          sql +=  "AND cat_l_id= '0001' AND cat_l_id= '0002'  AND cat_l_id= '0004' ";
+       } else if(dispcatno.equals("cate_02")) {
+          sql += " AND cat_l_id= '0001' ";            
+       } else if(dispcatno.equals("cate_03")) {
+          sql += " AND cat_l_id= '0002' ";
+       } else if(dispcatno.equals("cate_04")) {
+          sql += " AND cat_l_id= '0004' ";
+       } 
+        
+      if (sort != null) {
+    	    if (sort.equals("p")) {
+    	        sql += " ORDER BY PRO_DISPL_LIKE DESC";
+    	    } else if (sort.equals("n")) {
+    	        sql += " ORDER BY PRO_REG DESC";
+    	    } else if (sort.equals("s")) {
+    	        sql += " ORDER BY ordercnt DESC";
+    	    } else if (sort.equals("l")) {
+    	        sql += " ORDER BY PRO_PRICE ASC";
+    	    } else if (sort.equals("d")) {
+    	        sql += " ORDER BY (proprice-afterprice)/proprice*100 DESC";
+    	    }
+    	}
       
-      sql+= "cat_m_id = ? ";
+      System.out.println( sql );
       
-      List<BrandDTO> list = null;
+      List<BrandDTO> list = new ArrayList<BrandDTO>();
       BrandDTO brand = null;
 
       Connection conn =  ConnectionProvider.getConnection(); 
@@ -113,118 +127,33 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
 
       try {
          PreparedStatement preparedStatement = conn.prepareStatement(sql);
-         preparedStatement.setString(1,brandId);
-         preparedStatement.setString(2,dispcatno);
-         rs = preparedStatement.executeQuery();
-
-
-         if(rs.next()) {
-            System.out.println("rs변수 담기");
-            list = new ArrayList<>();
-            do {
-               /* [1]
-                */
-
-               /*
-                * brand = BrandDTO.builder() .b .build();
-                */
-
-
-               /*[2]
-                * 
-                * 
-                * brand = new BrandDTO(brandId, brandId, 0, brandId, brandId, brandId, 0); 
-                * */
-
-               /*[3]
-                * 
-                * brand.setBrandId(rs.getString("brand_id"))
-                * */
-               list.add(brand);
-            } while ( rs.next() );
-
-         }
-      } catch (SQLException e) {
-         // Handle SQL exception
-         e.printStackTrace();
-
-         //preparedStatement.close();
-
-
-      } finally {
-         rs.close();
-
-      }// try_catch
-      return list;
-
-   } // getBrands
-   
-   
-      
-   // 스킨케어/마스크팩/선크림  카테고리 대분류 별로 가져오기   
-   public List<BrandDTO> getCATEBrands(String brandId, String cate_l_id) throws Exception {
-
-      String sql = " SELECT distinct cl.cat_l_id, cl.cat_l_name"
-            + "FROM cate_m cm"
-            + "JOIN cate_l cl ON cl.cat_l_id = cm.cat_l_id"
-            + "JOIN cate_s cs ON cm.cat_m_id = cs.cat_m_id"
-            + "LEFT JOIN product p ON p.cat_s_id = cs.cat_s_id"
-            + "LEFT JOIN product_display pd ON pd.pro_displ_id = p.pro_displ_id "
-            + "LEFT JOIN brand b ON b.brand_id = pd.brand_id"
-            + "where b.brand_id = ''; ";
-
-      if(cate_l_id.equals("cate_1")) {
-         sql +=  " ";
          
-      } else if(cate_l_id.equals("cate_2")) {
-         sql += " WHERE cate_l_id= '0001'";            
-      } else if(cate_l_id.equals("cate_3")) {
-         sql += " WHERE cate_l_id= '0003'";
-      } else if(cate_l_id.equals("cate_4")) {
-         sql += " WHERE cate_l_id= '0004' ";
-      } 
-       
-      
-      List<BrandDTO> list = null;
-      BrandDTO brand = null;
-
-      Connection conn =  ConnectionProvider.getConnection(); 
-
-      ResultSet rs = null;
-
-      try {
-         PreparedStatement preparedStatement = conn.prepareStatement(sql);
          preparedStatement.setString(1,brandId);
-         preparedStatement.setString(2,cate_l_id);
+
          rs = preparedStatement.executeQuery();
 
-
-         if(rs.next()) {
-            System.out.println("rs변수 담기");
-            list = new ArrayList<>();
-            do {
-               /* [1]
-                */
-
-               /*
-                * brand = BrandDTO.builder() .b .build();
-                */
-
-
-               /*[2]
-                * 
-                * 
-                * brand = new BrandDTO(brandId, brandId, 0, brandId, brandId, brandId, 0); 
-                * */
-
-               /*[3]
-                * 
-                * brand.setBrandId(rs.getString("brand_id"))
-                * */
-               list.add(brand);
-            } while ( rs.next() );
-
+         while (rs.next()) {
+             BrandDTO dto = BrandDTO.builder()
+                     .pro_displ_src(rs.getString("PRO_DISPL_SRC"))
+                     .brand_name(rs.getString("BRAND_NAME"))
+                     .brand_id(rs.getString("BRAND_ID"))
+                     .pro_displ_name(rs.getString("PRO_DISPL_NAME"))
+                     .pro_price(rs.getInt("proprice"))
+                     .afterprice(rs.getInt("AFTERPRICE"))
+                     .pro_displ_id(rs.getString("PRO_DISPL_ID"))
+                     .pro_id(rs.getString("PRO_ID"))
+                     .prc(rs.getInt("PRC"))
+                     .pdc(rs.getInt("PDC"))
+                     .pmp(rs.getInt("PMP"))
+                     .stock(rs.getInt("STOCK"))
+                     .ordercnt(rs.getInt("ORDERCNT"))
+                     .pro_stock(rs.getInt("PRO_STOCK"))
+                     .pro_displ_like(rs.getInt("PRO_DISPL_LIKE"))
+                     .pro_reg(rs.getDate("PRO_REG"))
+                     .build();
+             list.add(dto);
          }
+            
       } catch (SQLException e) {
          // Handle SQL exception
          e.printStackTrace();
@@ -234,65 +163,18 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
 
       } finally {
          rs.close();
-
+        conn.close();
+       
       }// try_catch
       return list;
 
    } // getBrands
-
-   //
-      
    
-   //인기순/ 신상품순/ 판매순/ 낮은가격순 으로 가져오기 
-   @Override
-   public List<BrandDTO> getBestBrandpro(String brandId, String sort) throws Exception { //두개의 메소드를 받음 
-
-      String sql = " SELECT PD.PRO_DISPL_NAME, PDI.PRO_DISPL_SRC, PD.PRO_DISPL_LIKE, P.PRO_PRICE, PD.BRAND_ID "
-            + " FROM PRODUCT_DISPLAY PD "
-            + " JOIN PRODUCT P ON PD.PRO_DISPL_ID = P.PRO_DISPL_ID "
-            + " JOIN PRO_DISPL_IMG PDI ON PD.PRO_DISPL_ID = PDI.PRO_DISPL_ID "
-            + " WHERE PD.BRAND_ID = ? ";   
-           
-         /*
-            if(sort !=null ) {
-               sql += " AND P.CAT_M_ID = ? ";
-            } else if(sort.equals("p")) {
-               sql += "ORDER BY PD.PRO_DISPL_LIKE DESC";
-            } else if(sort.equals("")) {
-               sql += "";
-            } else if(sort.equals("")) {
-               sql += "";
-            } else if(sort.equals("")) {
-               sql += "";
-            } 
-           */ 
-    
-      List<BrandDTO> bestBrandProducts = new ArrayList<>();
-
-
-      try (Connection conn = ConnectionProvider.getConnection();  //데이터베이스 연결 
-            PreparedStatement preparedStatement = conn.prepareStatement(sql) ) { //SQL 쿼리를 받고,   
-
-         preparedStatement.setString(1, brandId); // 매개변수값을 설정  
-         if (sort != null) {
-            preparedStatement.setString(2, sort);   
-         }
-
-         try (ResultSet rs = preparedStatement.executeQuery()) { //RESULTSET을 통해 쿼리 실행결과를 받아옴 
-            while (rs.next()) {
-               BrandDTO brand = BrandDTO.builder()  // brandbuilder를 사용하여 BRANDdto객체 생성 
-                     .pro_displ_name(rs.getString("PRO_DISPL_NAME")) // 
-                     .pro_displ_src(rs.getString("PRO_DISPL_SRC"))
-                     .pro_displ_like(rs.getInt("PRO_DISPL_LIKE"))
-                     .pro_price(rs.getInt("PRO_PRICE"))
-                     .brand_id(rs.getString("BRAND_ID"))
-                     .build();  
-               bestBrandProducts.add(brand);      // 이 객체들을 brandPRODUCT리스트에 추가 
-            }
-         }
-      } // Resources are automatically closed here, no need for a finally block
-      return bestBrandProducts;
-   }
+   
+      
+ 
+      
+  
 
    //베스트 - 슬라이드바에 있는 베스트 수 4개    
    @Override
@@ -324,7 +206,7 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
                      .pro_displ_name(rs.getString("PRO_DISPL_NAME"))
                      .pro_displ_src(rs.getString("PRO_DISPL_SRC"))
                      .pro_displ_like(rs.getInt("PRO_DISPL_LIKE"))
-                     .pro_price(rs.getInt("PRO_PRICE")) // Assuming price can be a decimal
+                     .pro_price(rs.getInt("PRO_PRICE")) 
                      .build();
                sellbrandProducts.add(sellbrandProduct);
             }
@@ -334,20 +216,186 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
          e.printStackTrace();
       //preparedStatement.close();
       } finally {
+    //	  JDBCUtil.close(preparedStatement);
+    //	  JDBCUtil.close(conn);
+    //	  JDBCUtil.close(rs);
+    	 
       }// try_catch
       return sellbrandProducts;
    }
-
+  /*
+   //리뷰가져오기 
    @Override
-   public List<BrandDTO> getReviews(String brandId) throws Exception {
-      // TODO Auto-generated method stub
-      return null;
+   public List<BrandDTO> getreviews(String brandId) throws Exception {
+
+      List<BrandDTO> relists = new ArrayList<>();
+      String sql =" SELECT pdi.PRO_DISPL_SRC, r.REV_LIKE, r.REV_GRADE, r.REV_CONTENT "
+            + " FROM PRODUCT_DISPLAY pd "
+            + " JOIN PRO_DISPL_IMG pdi ON pd.PRO_DISPL_ID = pdi.PRO_DISPL_ID "
+            + " JOIN REVIEW r ON pd.PRO_DISPL_ID = r.PRO_DISPL_ID ";
+      ArrayList<BrandDTO> list = null;
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      Connection conn = ConnectionProvider.getConnection(); 
+      try {
+         pstmt = conn.prepareStatement(sql);
+         pstmt.setString(1, brandId);
+         rs = pstmt.executeQuery();
+
+         while (rs.next()) {
+            BrandDTO relist = new BrandDTO();
+            relist.setRev_content(rs.getString("rev_content"));
+            relist.setPro_displ_src(rs.getString("pro_displ_src"));
+            relist.setRev_like(rs.getInt("rev_like"));
+            relist.setRev_grade(rs.getInt("rev_grade"));
+            relists.add(relist);
+         } // while
+      } catch (SQLException e) {
+         // Handle SQL exception
+         e.printStackTrace();
+      } // try_catch
+      finally{
+        rs.close();
+
+      }
+      return relists;
+
+   }
+   */
+   
+   //  =여기서 부터 주석처리함 
+   
+   /*
+    *   // 스킨케어/마스크팩/선크림  카테고리 대분류 별로 가져오기   
+   public List<BrandDTO> getCATEBrands(String brandId, String dispcatno) throws Exception {
+
+      String sql = " SELECT distinct cl.cat_l_id, cl.cat_l_name"
+            + "FROM cate_m cm"
+            + "JOIN cate_l cl ON cl.cat_l_id = cm.cat_l_id"
+            + "JOIN cate_s cs ON cm.cat_m_id = cs.cat_m_id"
+            + "LEFT JOIN product p ON p.cat_s_id = cs.cat_s_id"
+            + "LEFT JOIN product_display pd ON pd.pro_displ_id = p.pro_displ_id "
+            + "LEFT JOIN brand b ON b.brand_id = pd.brand_id"
+            + "where b.brand_id = ''; ";
+
+      if(dispcatno.equals("cate_1")) {
+         sql +=  " ";
+         
+      } else if(dispcatno.equals("cate_2")) {
+         sql += " AND cate_l_id= '0001'";            
+      } else if(dispcatno.equals("cate_3")) {
+         sql += " AND cate_l_id= '0003'";
+      } else if(dispcatno.equals("cate_4")) {
+         sql += " AND cate_l_id= '0004' ";
+      } 
+       
+      
+      List<BrandDTO> list = null;
+      BrandDTO brand = null;
+
+      Connection conn =  ConnectionProvider.getConnection(); 
+
+      ResultSet rs = null;
+
+      try {
+         PreparedStatement preparedStatement = conn.prepareStatement(sql);
+         preparedStatement.setString(1,brandId);
+         preparedStatement.setString(2,dispcatno);
+         rs = preparedStatement.executeQuery();
+
+
+        if(rs.next()) {
+            System.out.println("rs변수 담기");
+            list = new ArrayList<>();
+            do{
+            	 BrandDTO catebrand = BrandDTO.builder()
+                         .cate_l_id(rs.getString("cat_l_id"))
+                         .cate_l_name(rs.getString("cat_l_name"))
+                         .build();
+                 list.add(catebrand);
+            } while ( rs.next() );
+
+         }
+      } catch (SQLException e) {
+         // Handle SQL exception
+         e.printStackTrace();
+
+         //preparedStatement.close();
+
+
+      } finally {
+         rs.close();
+
+      }// try_catch
+      return list;
+
+   } // getBrands
+
+   //
+    */
+ 
+   
+  
+         
+   //리뷰가져오기 
+   @Override
+   public List<BrandDTO> getReviews(String pro_displ_id) throws Exception {
+      List<BrandDTO> relists = new ArrayList<>();
+      String sql = " SELECT r.REV_ID, pdi.PRO_DISPL_SRC, r.REV_LIKE, r.REV_GRADE, r.REV_CONTENT, pd.pro_displ_id "
+            + " FROM PRODUCT_DISPLAY pd "
+            + " JOIN PRO_DISPL_IMG pdi ON pd.PRO_DISPL_ID = pdi.PRO_DISPL_ID "
+            + " JOIN REVIEW r ON pd.PRO_DISPL_ID = r.PRO_DISPL_ID "
+            + " WHERE pd.PRO_DISPL_ID = 'pd_00000006' ";
+
+      Connection conn = ConnectionProvider.getConnection();
+      ResultSet rs = null;
+
+      try {
+         PreparedStatement pstmt = conn.prepareStatement(sql);
+         //pstmt.setString(1, brandId);
+         rs = pstmt.executeQuery();
+
+         while (rs.next()) {
+            BrandDTO relist = BrandDTO.builder()
+                  .rev_id(rs.getString("rev_id"))
+                  .pro_displ_src(rs.getString("pro_displ_src"))
+                  .pro_displ_id(rs.getString("pro_displ_id"))
+                  .rev_like(rs.getInt("rev_like"))
+                  .rev_grade(rs.getInt("rev_grade"))
+                  .rev_content(rs.getString("rev_content"))
+                  .build();
+            relists.add(relist);
+            
+         }
+      } catch (SQLException e) {
+         
+         e.printStackTrace();
+      } finally {
+      rs.close();
+       
+      }
+
+      return relists;
    }
 
-   //신상품순  카테고리별 (스킨케어/마스크팩/ 선크림) 가져오기  ---- 가져가서 사용하기 
+@Override
+public List<BrandDTO> getBestBrandpro(String brand_Id, String category_s_Id) throws Exception {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+   // 브랜드 제품 할인율순으로 가져오기
+
+
+   //
+   /* 이전코딩들 
+    ajax 사용 
+    
+     //신상품순  카테고리별 (스킨케어/마스크팩/ 선크림) 가져오기  ---- 가져가서 사용하기 
    // 구달 브랜드 제품 인기순/신상품순/판매순/낮은가격 순으로 가져오기 잠시수정중
    //public List<BrandDTO> getNewBrandsDetail(String brandId , String cate_m_id) throws Exception {
-   /*
+ 
     String sql ="SELECT pdi.PRO_DISPL_SRC, pd.PRO_DISPL_NAME, pd.PRO_DISPL_ID, p.PRO_PRICE, pd.BRAND_ID, pd.PRO_DISPL_LIKE, pd.PRO_REG "
      + "FROM PRODUCT_DISPLAY pd " +
      "JOIN PRODUCT p ON pd.PRO_DISPL_ID = p.PRO_DISPL_ID " +
@@ -406,55 +454,61 @@ public class BrandDAOImpl<ProductDisplayDTO> implements BrandDAO {  //테이블�
      //판매순
      
      
-         
-   //리뷰가져오기 
+    
+      //인기순/ 신상품순/ 판매순/ 낮은가격순 으로 가져오기 
    @Override
-   public List<BrandDTO> getReviews(String pro_displ_id) throws Exception {
-      List<BrandDTO> relists = new ArrayList<>();
-      String sql = " SELECT r.REV_ID, pdi.PRO_DISPL_SRC, r.REV_LIKE, r.REV_GRADE, r.REV_CONTENT, pd.pro_displ_id "
-            + " FROM PRODUCT_DISPLAY pd "
-            + " JOIN PRO_DISPL_IMG pdi ON pd.PRO_DISPL_ID = pdi.PRO_DISPL_ID "
-            + " JOIN REVIEW r ON pd.PRO_DISPL_ID = r.PRO_DISPL_ID "
-            + " WHERE pd.PRO_DISPL_ID = 'pd_00000006' ";
+   public List<BrandDTO> getBestBrandpro(String brandId, String sort) throws Exception { //두개의 메소드를 받음 
 
-      Connection conn = ConnectionProvider.getConnection();
-      ResultSet rs = null;
+      String sql = " SELECT PD.PRO_DISPL_NAME, PDI.PRO_DISPL_SRC, PD.PRO_DISPL_LIKE, P.PRO_PRICE, PD.BRAND_ID "
+            + " FROM PRODUCT_DISPLAY PD "
+            + " JOIN PRODUCT P ON PD.PRO_DISPL_ID = P.PRO_DISPL_ID "
+            + " JOIN PRO_DISPL_IMG PDI ON PD.PRO_DISPL_ID = PDI.PRO_DISPL_ID "
+            + " WHERE PD.BRAND_ID = ? ";   
+           
+        if( sort ==null) {
+        	
+        }
+      else if(sort.equals("p")) { 
+    	  sql += " ORDER BY PD.PRO_DISPL_LIKE DESC"; 
+      } else if(sort.equals("n")) { 
+    	  sql += ""; 
+    	  } else if(sort.equals("s")) { 
+    		  sql += ""; 
+    		  }else if(sort.equals("l")) {
+    			  sql += ""; 
+    			  } else if(sort.equals("d")) { 
+    				  sql +=
+           ""; } else { // 아무것도 안들어왔을때
+  }
+           
+    
+      List<BrandDTO> bestBrandProducts = new ArrayList<>();
 
-      try {
-         PreparedStatement pstmt = conn.prepareStatement(sql);
-         //pstmt.setString(1, brandId);
-         rs = pstmt.executeQuery();
 
-         while (rs.next()) {
-            BrandDTO relist = BrandDTO.builder()
-                  .rev_id(rs.getString("rev_id"))
-                  .pro_displ_src(rs.getString("pro_displ_src"))
-                  .pro_displ_id(rs.getString("pro_displ_id"))
-                  .rev_like(rs.getInt("rev_like"))
-                  .rev_grade(rs.getInt("rev_grade"))
-                  .rev_content(rs.getString("rev_content"))
-                  .build();
-            relists.add(relist);
-            
+      try (Connection conn = ConnectionProvider.getConnection();  //데이터베이스 연결 
+            PreparedStatement preparedStatement = conn.prepareStatement(sql) ) { //SQL 쿼리를 받고,   
+
+         preparedStatement.setString(1, brandId); // 매개변수값을 설정  
+         if (sort != null) {
+            preparedStatement.setString(2, sort);   
          }
-      } catch (SQLException e) {
-         
-         e.printStackTrace();
-      } finally {
-      rs.close();
-       
-      }
 
-      return relists;
+         try (ResultSet rs = preparedStatement.executeQuery()) { //RESULTSET을 통해 쿼리 실행결과를 받아옴 
+            while (rs.next()) {
+               BrandDTO brand = BrandDTO.builder()  // brandbuilder를 사용하여 BRANDdto객체 생성 
+                     .pro_displ_name(rs.getString("PRO_DISPL_NAME")) // 
+                     .pro_displ_src(rs.getString("PRO_DISPL_SRC"))
+                     .pro_displ_like(rs.getInt("PRO_DISPL_LIKE"))
+                     .pro_price(rs.getInt("PRO_PRICE"))
+                     .brand_id(rs.getString("BRAND_ID"))
+                     .build();  
+               bestBrandProducts.add(brand);      // 이 객체들을 brandPRODUCT리스트에 추가 
+            }
+         }
+      } // Resources are automatically closed here, no need for a finally block
+      return bestBrandProducts;
    }
-
-
-   // 브랜드 제품 할인율순으로 가져오기
-
-
-   //
-   /* 이전코딩들 
-    ajax 사용 
+   
    @Override
    //스킨케어 , 마스크팩, 선크림 소카테고리별 상품 가져오기
    public List<BrandDTO> getCATEBrandsDetail() throws Exception {
