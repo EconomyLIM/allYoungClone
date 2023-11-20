@@ -105,7 +105,7 @@ public class MainService {
 			
 		} // recommendBuy
 		
-		// ===================== 상품 행사 배너정보 갖고오는 작업 (인기행사 제외) ======================== 
+		// ===================== 상품 행사 배너정보 갖고오는 작업 (Week Special) ======================== 
 		public List<PlanShopDisplDTO> getWeekSpecial (int cate){
 			
 			Connection conn = null;
@@ -130,7 +130,7 @@ public class MainService {
 			
 		} // getWeekSpecial
 		
-		// ===================== 상품 행사 배너정보 갖고오는 작업 (인기행사 제외) ======================== 
+		// ===================== 상품 행사 배너정보 갖고오는 작업 (인기행사) ======================== 
 		public HashMap<PlanShopDisplDTO, List<PopularProDTO>> sGetPopularShop(){
 			
 			Connection conn = null;
@@ -195,5 +195,7 @@ public class MainService {
 			
 			return list;
 		}
+		
+		
 		
 } //class
