@@ -105,7 +105,7 @@ public class MainService {
 			
 		} // recommendBuy
 		
-		// ===================== 상품 행사 배너정보 갖고오는 작업 (인기행사 제외) ======================== 
+		// ===================== 상품 행사 배너정보 갖고오는 작업 (Week Special) ======================== 
 		public List<PlanShopDisplDTO> getWeekSpecial (int cate){
 			
 			Connection conn = null;
@@ -130,7 +130,7 @@ public class MainService {
 			
 		} // getWeekSpecial
 		
-		// ===================== 상품 행사 배너정보 갖고오는 작업 (인기행사 제외) ======================== 
+		// ===================== 상품 행사 배너정보 갖고오는 작업 (인기행사) ======================== 
 		public HashMap<PlanShopDisplDTO, List<PopularProDTO>> sGetPopularShop(){
 			
 			Connection conn = null;
@@ -151,7 +151,7 @@ public class MainService {
 			return list;
 		} // sGetPopularShop
 		
-		// 메인 브랜드 좋아요 상위 10개 가져오기
+		// ===================== 메인 브랜드 좋아요 상위 10개 가져오기 =====================
 		public List<MainBrandDTO> mainBrandService(){
 			Connection conn = null;
 			List<MainBrandDTO> list = null;
@@ -174,7 +174,7 @@ public class MainService {
 		}
 		
 		
-		// 브랜드 상위 2개 상품 가져오기
+		// ===================== 브랜드 상위 2개 상품 가져오기 =====================
 		public List<BrandItemDTO> mainBrandItemService(String brand_id){
 			Connection conn = null;
 			List<BrandItemDTO> list = null;
@@ -194,6 +194,30 @@ public class MainService {
 			} // try_catch
 			
 			return list;
-		}
+		}  // mainBrandItemService
+		
+		// ===================== MD가 추천해요 상품 갖고오기 =====================
+		public List<PMidListDTO> sGetMdRecommend(){
+			
+			Connection conn = null;
+			List<PMidListDTO> list = null;
+			
+			try {
+				
+				conn = ConnectionProvider.getConnection();
+				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
+				list = daoImpl.getMdRecommend(conn);
+				
+			} catch (Exception e) {
+				System.out.println("> sGetMdRecommend Exception<");
+				e.printStackTrace();
+			} finally {
+				JDBCUtil.close(conn);
+			} // try_catch
+			
+			return list;
+		} // sGetMdRecommend
+		
+		
 		
 } //class

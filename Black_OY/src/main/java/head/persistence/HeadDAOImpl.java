@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.util.JDBCUtil;
 
@@ -13,6 +16,8 @@ import head.domain.CateMDTO;
 import head.domain.EventDTO;
 import head.domain.GiftCardDTO;
 import head.domain.ProductHistoryDTO;
+import product.domain.PMidListDTO;
+import productDetail.domain.CateLDTO;
 
 public class HeadDAOImpl implements HeadDAO {
 	private static HeadDAOImpl dao;
@@ -260,7 +265,6 @@ public class HeadDAOImpl implements HeadDAO {
 	// 최근 본 상품
 	@Override
 	public ProductHistoryDTO productHistory(Connection conn, String pro_id) throws Exception {
-		// TODO Auto-generated method stub
 		String sql = " select * from pmlistview where pro_displ_id = ? ";
 		ProductHistoryDTO historyDTO = null;
 		PreparedStatement pstmt = null;
@@ -304,5 +308,179 @@ public class HeadDAOImpl implements HeadDAO {
 		
 		return historyDTO;
 	}//productHistory
+	@Override
+	public List<PMidListDTO> selectSalesRanking(Connection conn, String mid) throws Exception {
+		List<PMidListDTO> list = null;
+		PMidListDTO dto = null;
+		
+		String sql = "SELECT * "
+				+ " FROM pmlistview "
+				+ " WHERE pro_id IN ( "
+				+ "    SELECT product_id "
+				+ "    FROM ( "
+				+ "        SELECT product_id, sum(product_cnt) cnt "
+				+ "        FROM order_product "
+				+ "        GROUP BY product_id "
+				+ "        ORDER BY cnt DESC "
+				+ "    ) "
+				+ "    WHERE ROWNUM <= 100 "
+				+ " )";
+		
+		if(mid != "") {
+			sql += " AND cat_m_id = ?";
+		}
+		
+		System.out.println(sql);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if(mid != "") {
+				pstmt.setString(1, mid);
+			}
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					dto = PMidListDTO.builder()
+							.displImgSrc(rs.getString("pro_displ_src"))
+							.brandName(rs.getString("brand_name"))
+							.brandId(rs.getString("brand_id"))
+							.displProName(rs.getString("pro_displ_name"))
+							.lid(rs.getString("cat_l_id"))
+							.mid(rs.getString("cat_m_id"))
+							.sid(rs.getString("cat_s_id"))
+							.proPrice(rs.getString("proprice"))
+							.afterPrice(rs.getString("afterprice"))
+							.displId(rs.getString("pro_displ_id"))
+							.productID(rs.getString("pro_id"))
+							.prc(rs.getInt("prc"))
+							.pdc(rs.getInt("pdc"))
+							.pmp(rs.getInt("pmp"))
+							.stock(rs.getInt("stock"))
+							.ordercnt(rs.getInt("ordercnt"))
+							.displLike(rs.getInt("pro_displ_like"))
+							.proReg(rs.getDate("pro_reg"))
+							.build();
+							
+					list.add(dto);
+				} while (rs.next());
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+		}
+		
+		return list;
+	}
+	// ============================= 대분류 카테고리 갖고오기 =================== 
+	@Override
+	public List<CateLDTO> getCateL(Connection conn, int cate) throws Exception {
+		String sql = " SELECT * FROM cate_l ";
+		
+		if (cate == 1) {
+			sql += " WHERE cate_h_id = 1 ";
+		} else if(cate == 2){
+			sql += " WHERE cate_h_id = 2 ";
+		} else if(cate == 3) {
+			sql += " WHERE cate_h_id = 3 ";
+		} //if
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		CateLDTO dto = null;
+		List<CateLDTO> list = null;
+		String lid;
+		String lname;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					
+					lid = rs.getString("cat_l_id");
+					lname = rs.getString("cat_l_name");
+					
+					dto = new CateLDTO(lid, lname);
+					
+					list.add(dto);
+					
+				} while (rs.next());
+				
+			} // if
+			
+		} catch(Exception e) {
+			System.out.println(" HeadDAOImpl getCateL Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+		} // try catch
+		
+		return list;
+	} // getCateL
+	
+	// ============================= 중분류 카테고리 갖고오기 =================== 
+	@Override
+	public Map<CateLDTO, List<CateMDTO>> getCate(Connection conn, int cate) throws Exception {
+		String sql = " SELECT ch.cat_h_id, cl.cat_l_id, cl.cat_l_name, cm.cat_m_id, cm.cat_m_name from cate_l cl "
+				+ " JOIN cate_m cm ON cl.cat_l_id = cm.cat_l_id "
+				+ " JOIN cate_h ch ON ch.cat_h_id = cl.cat_h_id "
+				+ " WHERE ch.cat_h_id = ? "
+				+ " ORDER BY cl.cat_l_id asc ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		CateLDTO ldto = null;
+		CateMDTO mdto = null;
+		List<CateMDTO> list = null;
+		Map<CateLDTO, List<CateMDTO>> hashMap = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cate);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				hashMap = new LinkedHashMap<CateLDTO, List<CateMDTO>>();
+				do {
+					
+					ldto = new CateLDTO(rs.getString("cat_l_id"), rs.getString("cat_l_name"));
+					
+					if ( !hashMap.containsKey(ldto) ) {
+						list = new ArrayList<>();
+						hashMap.put(ldto, list);
+					} // if
+					
+					mdto = new CateMDTO(rs.getString("cat_m_id"), rs.getString("cat_l_id"), rs.getString("cat_m_name"));
+					list = hashMap.get(ldto);
+					
+					list.add(mdto);
+					
+					
+				} while (rs.next());
+				System.out.println(" HeadDAOImpl getCate ...");
+			} // if
+			
+		} catch(Exception e) {
+			System.out.println(" HeadDAOImpl getCateL Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+		} // try catch
+		
+		
+		return hashMap;
+	} // 
 
 }

@@ -28,6 +28,17 @@ public class BrandDTO { //브랜드 페이지에 사용된 객체들을 담음
        private int rev_like;
        private String rev_content;
        private int rev_grade;
-       private Date pre_reg;
-      
+       private Date pro_reg;
+       private String cate_l_id;
+       private String cate_l_name;
+       private int afterprice;
+      private String pro_id;
+      private int prc; 
+      private int pdc;
+      private int pmp;
+      private int stock;
+  	private int displLike;
+  	private int ordercnt;
+  	private Date proReg;
+  	private int  pro_stock;
 } // class
