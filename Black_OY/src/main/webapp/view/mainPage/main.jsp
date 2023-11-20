@@ -829,7 +829,7 @@ function addCookie(id) {
 				</div>
 				<!-- ============= 오직 올리브영에서만 종료 태그 표시 ==================  -->
 
-				<!-- ============= MD 추천 상품 Start-->
+				<!-- ============= MD 추천 상품 (getMdRecommend) Start-->
 
 				<div class="main_recommendation_wrap">
 					<h3 class="main_sub_tit">
@@ -838,100 +838,62 @@ function addCookie(id) {
 					<div>
 						<ul class="cate_prd_list no_line horizontal">
 
-
-							<li class="flag">
-								<div class="prd_info ">
-									<a
-										href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=B000000190675&amp;dispCatNo=90000010001&amp;trackingCd=Home_MD_Recommand&amp;t_page=홈&amp;t_click=MD가추천해요_상품상세&amp;t_number=1"
-										name="Home_MD_Recommand" class="prd_thumb goodsList"
-										data-ref-goodsno="B000000190675"
-										data-attr="홈^MD가추천해요^라이블링 클렌즈 15ml*30포 3종(레몬맛,자몽맛,청사과맛) 택1 ^1"
-										data-ref-dispcatno="90000010001" data-ref-itemno="001"
-										data-trk="null" data-impression="B000000190675^홈_MD가추천해요^1"
-										data-impression-visibility="1"><img
-										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/B00000019067501ko.jpg?l=ko"
-										alt="라이블링 클렌즈 15ml*30포 3종(레몬맛,자몽맛,청사과맛) 택1 "
-										onerror="common.errorImg(this);"></a>
-									<div class="prd_name">
-										<a
-											href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=B000000190675&amp;dispCatNo=90000010001&amp;trackingCd=Home_MD_Recommand&amp;t_page=홈&amp;t_click=MD가추천해요_상품상세&amp;t_number=1"
-											name="Home_MD_Recommand" class="goodsList"
-											data-ref-goodsno="B000000190675"
-											data-attr="홈^MD가추천해요^라이블링 클렌즈 15ml*30포 3종(레몬맛,자몽맛,청사과맛) 택1 ^1"
-											data-ref-dispcatno="90000010001" data-ref-itemno="001"
-											data-trk="null"><span class="tx_brand">라이블링</span>
-											<p class="tx_name">라이블링 클렌즈 15ml*30포 3종(레몬맛,자몽맛,청사과맛) 택1</p></a>
-									</div>
-									<p class="prd_price">
-										<span class="tx_org"><span class="tx_num">29,900</span>원
-										</span><span class="tx_cur"><span class="tx_num">27,500</span>원
-										</span>
-									</p>
-									<p class="prd_flag">
-										<span class="icon_flag coupon">쿠폰</span>
-									</p>
-									<p class="prd_point_area tx_num">
-										<span class="review_point"><span class="point"
+							<c:if test="${not empty getMdRecommend }">
+								<c:forEach items="${getMdRecommend }" var="gmr">
+									<li class="flag">
+										<div class="prd_info">
+											<a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${gmr.displId}&displNum=${gmr.lid}${gmr.sid}" name="Home_MD_Recommand" class="prd_thumb goodsList" onclick="addCookie('${gmr.displId}');">
+												<img alt="상품이미지 준비중입니다." src="${gmr.displImgSrc}">
+											</a>
+											<div class="prd_name">
+											<a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${gmr.displId}&displNum=${gmr.lid}${gmr.sid}" name="Home_MD_Recommand" class="goodsList">
+												<span class="tx_brand">${gmr.brandName}</span>
+												<p class="tx_name">${gmr.displProName}</p>
+											</a>
+										</div>
+										<p class="prd_price">
+											<span class="prd_price">
+												<c:if test="${gmr.afterPrice eq gmr.proPrice}">
+													<span class="tx_cur"><span class="tx_num">${gmr.afterPrice}</span>원</span>
+												</c:if>
+												<c:if test="${gmr.afterPrice ne gmr.proPrice}">
+													<span class="tx_org">
+														<span class="tx_num">${gmr.proPrice}</span>원
+													</span>
+													<span class="tx_cur">
+														<span class="tx_num">${gmr.afterPrice}</span>원
+													</span>
+												</c:if>
+											</span>
+										</p>
+										<p class="prd_flag">
+													<c:if test="${gmr.pdc eq 1}">
+														<span class="icon_flag sale">세일</span>
+													</c:if>
+													<c:if test="${gmr.prc eq 1}">
+														<span class="icon_flag coupon">쿠폰</span>
+													</c:if>
+													<c:if test="${gmr.pmp eq 1}">
+														<span class="icon_flag gift">증정</span>
+													</c:if>
+													<c:if test="${gmr.stock eq 1}">
+														<span class="icon_flag delivery">오늘드림</span>
+													</c:if>
+										</p>
+										<p class="prd_point_area tx_num">
+											<span class="review_point"><span class="point"
 											style="width: 100.0%">10점만점에 5.5점</span></span>(46)
-									</p>
-									<p class="prd_btn_area">
-										<button class="cartBtn" data-ref-goodsno="B000000190675"
+										</p>
+										<p class="prd_btn_area">
+											<button class="cartBtn" data-ref-goodsno="${gmr.displId}"
 											data-ref-dispcatno="90000010001" data-ref-itemno="001">장바구니</button>
-										<button class="btn_new_pop goodsList">새창보기</button>
-									</p>
-								</div>
-
-							</li>
-
-
-
-							<li class="flag">
-								<div class="prd_info ">
-									<a
-										href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000164840&amp;dispCatNo=90000010001&amp;trackingCd=Home_MD_Recommand&amp;t_page=홈&amp;t_click=MD가추천해요_상품상세&amp;t_number=2"
-										name="Home_MD_Recommand" class="prd_thumb goodsList"
-										data-ref-goodsno="A000000164840"
-										data-attr="홈^MD가추천해요^[블프특가] 필리밀리 아이브러시 프로 컬렉션(5종)(단품/컬러에디션)^2"
-										data-ref-dispcatno="90000010001" data-ref-itemno="002"
-										data-trk="null" data-impression="A000000164840^홈_MD가추천해요^2"
-										data-impression-visibility="1"><span
-										class="thumb_flag best">베스트</span><img
-										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016484021ko.jpg?l=ko"
-										alt="[블프특가] 필리밀리 아이브러시 프로 컬렉션(5종)(단품/컬러에디션)"
-										onerror="common.errorImg(this);"></a>
-									<div class="prd_name">
-										<a
-											href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000164840&amp;dispCatNo=90000010001&amp;trackingCd=Home_MD_Recommand&amp;t_page=홈&amp;t_click=MD가추천해요_상품상세&amp;t_number=2"
-											name="Home_MD_Recommand" class="goodsList"
-											data-ref-goodsno="A000000164840"
-											data-attr="홈^MD가추천해요^[블프특가] 필리밀리 아이브러시 프로 컬렉션(5종)(단품/컬러에디션)^2"
-											data-ref-dispcatno="90000010001" data-ref-itemno="002"
-											data-trk="null"><span class="tx_brand">필리밀리</span>
-											<p class="tx_name">[블프특가] 필리밀리 아이브러시 프로 컬렉션(5종)(단품/컬러에디션)</p></a>
-									</div>
-									<p class="prd_price">
-										<span class="tx_org"><span class="tx_num">28,000</span>원
-										</span><span class="tx_cur"><span class="tx_num">19,470</span>원
-										</span>
-									</p>
-									<p class="prd_flag">
-										<span class="icon_flag sale">세일</span><span
-											class="icon_flag coupon">쿠폰</span><span
-											class="icon_flag delivery">오늘드림</span>
-									</p>
-									<p class="prd_point_area tx_num">
-										<span class="review_point"><span class="point"
-											style="width: 96.0%">10점만점에 5.5점</span></span>(999+)
-									</p>
-									<p class="prd_btn_area">
-										<button class="cartBtn" data-ref-goodsno="A000000164840"
-											data-ref-dispcatno="90000010001" data-ref-itemno="002">장바구니</button>
-										<button class="btn_new_pop goodsList">새창보기</button>
-									</p>
-								</div>
-
-							</li>
-
+											<button class="btn_new_pop goodsList">새창보기</button>
+										</p>
+										</div>
+										
+									</li>
+								</c:forEach>
+							</c:if>
 
 						</ul>
 					</div>
@@ -993,215 +955,37 @@ function addCookie(id) {
 							</div>
 							
 					<!-- 표시 -->
-
+					<!-- ============== 신상 업데이트 (getNUBanner)-->
 				<div class="today-new-goods">
 					<h3>
 						<strong>신상 업데이트</strong>
 					</h3>
 					<div class="today_newgoods_slide">
 						<ul class="slide_list " id="todayGoods" style="">
-									<li 
-										aria-hidden="false"
-										style="width: 1020px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;"
-										tabindex="-1" role="option" >
-										<ul class="page">
-
-											<li class="item"><a
-												onclick="common.reqAmplitude('오늘의신상_배너클릭', {entry_source: '홈', click_source: '오늘의신상_배너', banner_name: '고급스러운 코팅광 완벽 밀착!
-', banner_number: '1'});"
-												href="javascript:common.link.moveToDayGoods('planshop/getPlanShopDetail.do?dispCatNo=500000101350155', 'Home_new', 't_page=홈&amp;t_click=오늘의신상_배너&amp;t_banner_name=고급스러운 코팅광 완벽 밀착!
-&amp;t_number=1')"
-												data-attr="홈^신상^주관신상 11-1 웨이크메이크^1" data-trk="/"
-												tabindex="0"> <img
-													src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/397/5889683516731155245.jpg"
-													alt="주관신상 11-1 웨이크메이크">
-
-
-													<p>고급스러운 코팅광 완벽 밀착!</p>
-													<p>광으로 차오르는 피부 어렵지 않아요</p>
-
-											</a></li>
-
-
-
-											<li class="item"><a
-												onclick="common.reqAmplitude('오늘의신상_배너클릭', {entry_source: '홈', click_source: '오늘의신상_배너', banner_name: '바디 보습 5초면 충분해요
-', banner_number: '2'});"
-												href="javascript:common.link.moveToDayGoods('planshop/getPlanShopDetail.do?dispCatNo=500000101350154', 'Home_new', 't_page=홈&amp;t_click=오늘의신상_배너&amp;t_banner_name=바디 보습 5초면 충분해요
-&amp;t_number=2')"
-												data-attr="홈^신상^10-4 아벤느(주관신상)^2" data-trk="/" tabindex="0">
-													<img
-													src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/397/5323109864929589110.jpg"
-													alt="10-4 아벤느(주관신상)">
-
-
-													<p>바디 보습 5초면 충분해요</p>
-													<p>보습을 넘어선 장벽 로션으로 속까지 촉촉하게</p>
-
-											</a></li>
-
-										</ul>
-									</li>
-									<li  aria-hidden="true"
-										style="width: 1020px; position: relative; left: -1020px; top: 0px; z-index: 998; opacity: 0;"
-										tabindex="-1" role="option" >
-										<ul class="page">
-
-											<li class="item"><a
-												onclick="common.reqAmplitude('오늘의신상_배너클릭', {entry_source: '홈', click_source: '오늘의신상_배너', banner_name: '스너글 곰나잇 에디션 출시
-', banner_number: '3'});"
-												href="javascript:common.link.moveToDayGoods('goods/getGoodsDetail.do?goodsNo=A000000191808', 'Home_new', 't_page=홈&amp;t_click=오늘의신상_배너&amp;t_banner_name=스너글 곰나잇 에디션 출시
-&amp;t_number=3')"
-												data-attr="홈^신상^11-1 스너글^3" data-trk="/" tabindex="-1">
-													<img
-													src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/397/2955837458105646093.jpg"
-													alt="11-1 스너글">
-
-
-													<p>스너글 곰나잇 에디션 출시</p>
-													<p>귀여운 스너글 안대와 포토카드를 만나보라곰!</p>
-
-											</a></li>
-
-
-
-											<li class="item"><a
-												onclick="common.reqAmplitude('오늘의신상_배너클릭', {entry_source: '홈', click_source: '오늘의신상_배너', banner_name: '붙이는 글루타치온 출시!', banner_number: '4'});"
-												href="javascript:common.link.moveToDayGoods('goods/getGoodsDetail.do?goodsNo=A000000191449', 'Home_new', 't_page=홈&amp;t_click=오늘의신상_배너&amp;t_banner_name=붙이는 글루타치온 출시!&amp;t_number=4')"
-												data-attr="홈^신상^11-1 케어플러스^4" data-trk="/" tabindex="-1">
-													<img
-													src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/397/8877756922401449296.jpg"
-													alt="11-1 케어플러스">
-
-
-													<p>붙이는 글루타치온 출시!</p>
-													<p>흔적이 지나간 피부 고민 부위 잡티 커버</p>
-
-											</a></li>
-
-										</ul>
-									</li>
-									<li  aria-hidden="true"
-										style="width: 1020px; position: relative; left: -2040px; top: 0px; z-index: 998; opacity: 0;"
-										tabindex="-1" role="option">
-										<ul class="page">
-
-											<li class="item"><a
-												onclick="common.reqAmplitude('오늘의신상_배너클릭', {entry_source: '홈', click_source: '오늘의신상_배너', banner_name: '더 업그레이드 된 모다모다 2세대 블랙샴푸', banner_number: '5'});"
-												href="javascript:common.link.moveToDayGoods('goods/getGoodsDetail.do?goodsNo=A000000191959', 'Home_new', 't_page=홈&amp;t_click=오늘의신상_배너&amp;t_banner_name=더 업그레이드 된 모다모다 2세대 블랙샴푸&amp;t_number=5')"
-												data-attr="홈^신상^11-1 모다모다^5" data-trk="/" tabindex="-1">
-													<img
-													src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/397/1241194061376133682.jpg"
-													alt="11-1 모다모다">
-
-
-													<p>더 업그레이드 된 모다모다 2세대 블랙샴푸</p>
-													<p>새치부터 두피,모발까지 3 in 1 멀티 새치샴푸</p>
-
-											</a></li>
-
-
-
-											<li class="item"><a
-												onclick="common.reqAmplitude('오늘의신상_배너클릭', {entry_source: '홈', click_source: '오늘의신상_배너', banner_name: '4세대 식물성 콜라겐 부스터
-', banner_number: '6'});"
-												href="javascript:common.link.moveToDayGoods('display/getBrandShopDetail.do?onlBrndCd=A010251', 'Home_new', 't_page=홈&amp;t_click=오늘의신상_배너&amp;t_banner_name=4세대 식물성 콜라겐 부스터
-&amp;t_number=6')"
-												data-attr="홈^신상^11-1 비거너리^6" data-trk="/" tabindex="-1">
-													<img
-													src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/397/1719738550294403157.jpg"
-													alt="11-1 비거너리">
-
-
-													<p>4세대 식물성 콜라겐 부스터</p>
-													<p>100% 비건 &amp; 4-FREE 무첨가로 안심 섭취</p>
-
-											</a></li>
-
-										</ul>
-									</li>
-									<li   aria-hidden="true"
-										style="width: 1020px; position: relative; left: -3060px; top: 0px; z-index: 998; opacity: 0;"
-										tabindex="-1" role="option" >
-										<ul class="page">
-
-											<li class="item"><a
-												onclick="common.reqAmplitude('오늘의신상_배너클릭', {entry_source: '홈', click_source: '오늘의신상_배너', banner_name: '피부를 밝히는 멜라토닝 크림
-', banner_number: '7'});"
-												href="javascript:common.link.moveToDayGoods('goods/getGoodsDetail.do?goodsNo=A000000191762', 'Home_new', 't_page=홈&amp;t_click=오늘의신상_배너&amp;t_banner_name=피부를 밝히는 멜라토닝 크림
-&amp;t_number=7')"
-												data-attr="홈^신상^11-1 이지듀^7" data-trk="/" tabindex="-1">
-													<img
-													src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/397/807629815407486697.jpg"
-													alt="11-1 이지듀">
-
-
-													<p>피부를 밝히는 멜라토닝 크림</p>
-													<p>이지듀로 기미잡티 집중 케어 하세요!</p>
-
-											</a></li>
-
-
-
-											<li class="item"><a
-												onclick="common.reqAmplitude('오늘의신상_배너클릭', {entry_source: '홈', click_source: '오늘의신상_배너', banner_name: '건조한 바디에 진정 보습케어
-', banner_number: '8'});"
-												href="javascript:common.link.moveToDayGoods('goods/getGoodsDetail.do?goodsNo=A000000191670', 'Home_new', 't_page=홈&amp;t_click=오늘의신상_배너&amp;t_banner_name=건조한 바디에 진정 보습케어
-&amp;t_number=8')"
-												data-attr="홈^신상^11-1 에센허브^8" data-trk="/" tabindex="-1">
-													<img
-													src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/397/7476501110867393204.jpg"
-													alt="11-1 에센허브">
-
-
-													<p>건조한 바디에 진정 보습케어</p>
-													<p>티트리 수분층과 보습 크림층 7:3으로 쉽고 빠르게 피부케어</p>
-
-											</a></li>
-
-										</ul>
-									</li>
-									<li  aria-hidden="true"
-										style="width: 1020px; position: relative; left: -4080px; top: 0px; z-index: 998; opacity: 0;"
-										tabindex="-1" role="option">
-										<ul class="page">
-
-											<li class="item"><a
-												onclick="common.reqAmplitude('오늘의신상_배너클릭', {entry_source: '홈', click_source: '오늘의신상_배너', banner_name: '키 PICK! 롱테이크 솔리드 퍼퓸
-', banner_number: '9'});"
-												href="javascript:common.link.moveToDayGoods('planshop/getPlanShopDetail.do?dispCatNo=500000102810087', 'Home_new', 't_page=홈&amp;t_click=오늘의신상_배너&amp;t_banner_name=키 PICK! 롱테이크 솔리드 퍼퓸
-&amp;t_number=9')"
-												data-attr="홈^신상^11-1 롱테이크^9" data-trk="/" tabindex="-1">
-													<img
-													src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/397/5556818639952230817.jpg"
-													alt="11-1 롱테이크">
-
-
-													<p>키 PICK! 롱테이크 솔리드 퍼퓸</p>
-													<p>감각적으로 즐기는 캐시미어 촉감 고체 향수</p>
-
-											</a></li>
-
-
-
-											<li class="item"><a
-												onclick="common.reqAmplitude('오늘의신상_배너클릭', {entry_source: '홈', click_source: '오늘의신상_배너', banner_name: '프로타주 펜슬 F/W 신상 컬러
-', banner_number: '10'});"
-												href="javascript:common.link.moveToDayGoods('goods/getGoodsDetail.do?goodsNo=A000000120656', 'Home_new', 't_page=홈&amp;t_click=오늘의신상_배너&amp;t_banner_name=프로타주 펜슬 F/W 신상 컬러
-&amp;t_number=10')"
-												data-attr="홈^신상^11-1 투쿨포스쿨^10" data-trk="/" tabindex="-1">
-													<img
-													src="https://image.oliveyoung.co.kr/uploads/images/display/90000010001/397/5519404367010316646.jpg"
-													alt="11-1 투쿨포스쿨">
-
-
-													<p>프로타주 펜슬 F/W 신상 컬러</p>
-													<p>더 화사해진 애교살, 로맨틱 모브 섀도우까지</p>
-
-											</a></li>
-
-										</ul>
-									</li>
+								<c:if test="${not empty getNUBanner}">
+									<c:forEach var="i" begin="1" end="${getNUBanner.size()-1}" varStatus="outerLoop">
+										<c:set var="innerLoopBegin"
+															value="${(outerLoop.index - 1) * 2}" />
+										<c:set var="innerLoopEnd"
+															value="${(outerLoop.index * 2) -1}" />
+									
+											<li>
+									
+												<ul class="page">
+											<c:forEach items="${getNUBanner }" var="gnb" begin="${innerLoopBegin}" end="${innerLoopEnd}">
+												<li class="item">
+													<a href="<%=contextPath%>/olive/planshop.do?eventId=${gnb.psId}">
+													<img alt="배너 이미지 준비중입니다." src="${gnb.psSrc}">
+													<p>${gnb.psSumm}</p>
+													<p>${gnb.psSumm}</p>
+													</a>
+												</li>
+											</c:forEach>
+												</ul>
+											</li>
+										</c:forEach>
+									</c:if>
+									
 						
 						<!-- dddd -->
 						</ul>
@@ -1214,7 +998,7 @@ function addCookie(id) {
 							신상 더보기 <em class="num" data-attr="홈^todaygoods_더보기^더보기"
 								data-trk="/"> <span class="current"
 								data-attr="홈^todaygoods_더보기^더보기" data-trk="/"
-								data-current-page="1" data-total-page="5">1</span>5
+								data-current-page="1" data-total-page="${getNUBanner.size()-1}"></span>${getNUBanner.size()-1}
 							</em>
 						</button>
 					</div>
@@ -2300,7 +2084,7 @@ $('#main_curation02_01').slick({
 	 				//common.reqAmplitude('큐레이션1_다른상품추천_클릭', {entry_source: '홈', click_source: '큐레이션1_다른상품추천', number: currentPage});
 	 			}); 
 	 	    	 
-	 	    	 /* 신상 어때요 슬릭 */
+	 	    	 /* 신상 업데이트 슬릭 */
 	 	    	 $('#todayGoods').slick({
 		    		   dots: false,
 		    		   arrows: false,
@@ -2311,8 +2095,7 @@ $('#main_curation02_01').slick({
 		    		   slidesToScroll: 1,
 		    		   draggable: true
 		    		}); 
-	 	    	 
-	 	    	 /*
+				
 	 	    	  $('#btn_todayGoods').on('click', function () {
 	 	    		 var $this = $(this);
 
@@ -2320,7 +2103,7 @@ $('#main_curation02_01').slick({
 		 				var currentPage = Number($this.data('current-page'));
 		 				// alert('123');
 		 				
-		 				$('#btn_todayGoods').slick('slickNext'); 
+		 				$('#todayGoods').slick('slickNext'); 
 
 		 				if (currentPage < totalPage) {
 		 					currentPage++;
@@ -2329,9 +2112,9 @@ $('#main_curation02_01').slick({
 		 				}
 		 				$this.data('current-page', currentPage);
 		 				$this.find('.current').html(currentPage);
-	 	    	 }*/
+	 	    	 });
 	 	     
-	 	    	/* 신상 어때요 슬릭  종료*/
+	 	    	/* 신상 업데이트 슬릭  종료*/
 	 	    	
 	 	    	/* 이상품어때요? */
 	 	    	$('#mainReComSlider').slick({
@@ -2370,6 +2153,8 @@ $('#main_curation02_01').slick({
 		    		   slidesToScroll: 3,
 		    		   draggable: true
 		    		}); 
+	 	    	 
+	 	    	 
 </script>
 </body>
 <!-- 유사한 고객 추천 상품 팝업 -->

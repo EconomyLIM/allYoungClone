@@ -1,7 +1,9 @@
 package head.service;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.util.ConnectionProvider;
 import com.util.JDBCUtil;
@@ -13,6 +15,7 @@ import head.domain.ProductHistoryDTO;
 import head.persistence.HeadDAO;
 import head.persistence.HeadDAOImpl;
 import product.domain.PMidListDTO;
+import productDetail.domain.CateLDTO;
 
 public class HeadService {
 	private static HeadService headService;
@@ -182,5 +185,30 @@ public class HeadService {
 		}
 		
 		return list;
-	}
-}
+	} // getSalesRanking
+	
+	// ======================= 대분류 중분류 갖고오는 서비스 ======================
+	public Map<CateLDTO, List<CateMDTO>> sGetCate(int cate){
+		
+		Map<CateLDTO, List<CateMDTO>> hashmap = null;
+		Connection conn = null;
+		HeadDAO dao = null;
+		
+		try {
+			
+			conn = ConnectionProvider.getConnection();
+			dao = HeadDAOImpl.getInstance();
+			hashmap = dao.getCate(conn, cate);
+			System.out.println(hashmap);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		} // try_catch
+		
+		return hashmap;
+	} // sGetCate
+	
+	
+	
+} // class

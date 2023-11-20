@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.util.JDBCUtil;
 
@@ -14,6 +17,7 @@ import head.domain.EventDTO;
 import head.domain.GiftCardDTO;
 import head.domain.ProductHistoryDTO;
 import product.domain.PMidListDTO;
+import productDetail.domain.CateLDTO;
 
 public class HeadDAOImpl implements HeadDAO {
 	private static HeadDAOImpl dao;
@@ -374,5 +378,109 @@ public class HeadDAOImpl implements HeadDAO {
 		
 		return list;
 	}
+	// ============================= 대분류 카테고리 갖고오기 =================== 
+	@Override
+	public List<CateLDTO> getCateL(Connection conn, int cate) throws Exception {
+		String sql = " SELECT * FROM cate_l ";
+		
+		if (cate == 1) {
+			sql += " WHERE cate_h_id = 1 ";
+		} else if(cate == 2){
+			sql += " WHERE cate_h_id = 2 ";
+		} else if(cate == 3) {
+			sql += " WHERE cate_h_id = 3 ";
+		} //if
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		CateLDTO dto = null;
+		List<CateLDTO> list = null;
+		String lid;
+		String lname;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					
+					lid = rs.getString("cat_l_id");
+					lname = rs.getString("cat_l_name");
+					
+					dto = new CateLDTO(lid, lname);
+					
+					list.add(dto);
+					
+				} while (rs.next());
+				
+			} // if
+			
+		} catch(Exception e) {
+			System.out.println(" HeadDAOImpl getCateL Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+		} // try catch
+		
+		return list;
+	} // getCateL
+	
+	// ============================= 중분류 카테고리 갖고오기 =================== 
+	@Override
+	public Map<CateLDTO, List<CateMDTO>> getCate(Connection conn, int cate) throws Exception {
+		String sql = " SELECT ch.cat_h_id, cl.cat_l_id, cl.cat_l_name, cm.cat_m_id, cm.cat_m_name from cate_l cl "
+				+ " JOIN cate_m cm ON cl.cat_l_id = cm.cat_l_id "
+				+ " JOIN cate_h ch ON ch.cat_h_id = cl.cat_h_id "
+				+ " WHERE ch.cat_h_id = ? "
+				+ " ORDER BY cl.cat_l_id asc ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		CateLDTO ldto = null;
+		CateMDTO mdto = null;
+		List<CateMDTO> list = null;
+		Map<CateLDTO, List<CateMDTO>> hashMap = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cate);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				hashMap = new LinkedHashMap<CateLDTO, List<CateMDTO>>();
+				do {
+					
+					ldto = new CateLDTO(rs.getString("cat_l_id"), rs.getString("cat_l_name"));
+					
+					if ( !hashMap.containsKey(ldto) ) {
+						list = new ArrayList<>();
+						hashMap.put(ldto, list);
+					} // if
+					
+					mdto = new CateMDTO(rs.getString("cat_m_id"), rs.getString("cat_l_id"), rs.getString("cat_m_name"));
+					list = hashMap.get(ldto);
+					
+					list.add(mdto);
+					
+					
+				} while (rs.next());
+				System.out.println(" HeadDAOImpl getCate ...");
+			} // if
+			
+		} catch(Exception e) {
+			System.out.println(" HeadDAOImpl getCateL Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+		} // try catch
+		
+		
+		return hashMap;
+	} // 
 
 }

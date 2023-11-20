@@ -31,8 +31,18 @@ public class PlanShopHandler implements CommandHandler{
 			request.setAttribute("map", map);
 		} // if
 		
+		// ============ Luxe Edit 작업 =====================
+		if (eventId.equals("le_00000001")) {
+			
+			return "/view/planShop/planShopLuxe.jsp";
+		} else{
+			
+			return "/view/planShop/planShop.jsp"; //luxeEdit 가 아닐시 
+		}// if
 		
-		return "/view/planShop/planShop.jsp";
+		
+		
+		
 	} // process
 
 } // PlanShop
