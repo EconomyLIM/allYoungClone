@@ -129,6 +129,7 @@ public class HeadDAOImpl implements HeadDAO {
 		
 		return dto;
 	}
+	
 	@Override
 	public List<EventDTO> selectAllEvent(Connection conn, String type) throws SQLException {
 		List<EventDTO> list = null;
@@ -175,6 +176,7 @@ public class HeadDAOImpl implements HeadDAO {
 		
 		return list;
 	}
+	
 	@Override
 	public EventDTO selectOneEvent(Connection conn, String event_id) throws SQLException {
 		EventDTO dto = null;
@@ -215,6 +217,7 @@ public class HeadDAOImpl implements HeadDAO {
 		
 		return dto;
 	}
+	
 	@Override
 	public List<CateMDTO> selectCateMName(Connection conn) throws SQLException {
 		List<CateMDTO> list = null;
@@ -222,7 +225,7 @@ public class HeadDAOImpl implements HeadDAO {
 		String sql = "SELECT c.cat_m_id, cat_m_name "
 				+ " FROM cate_m c JOIN order_product o ON c.cat_m_id = o.cat_m_id "
 				+ " GROUP BY c.cat_m_id, cat_m_name "
-				+ " HAVING sum(product_cnt) > 100";
+				+ " HAVING sum(product_cnt) > 50";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

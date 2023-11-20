@@ -36,7 +36,6 @@ public class GetPaymentAjax extends HttpServlet {
 		jsonObject.put("point_price", dto.getPoint_price());
 		jsonObject.put("pay_type", dto.getPay_type());
 		jsonObject.put("saved_money", dto.getSaved_money());
-		jsonObject.put("pay_date", dto.getPay_date());
 		jsonObject.put("pay_status", dto.getPay_status());
 		jsonObject.put("card_type", dto.getCard_type());
 		jsonObject.put("inst_type", dto.getInst_type());

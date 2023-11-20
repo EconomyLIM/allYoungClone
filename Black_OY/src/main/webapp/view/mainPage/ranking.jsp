@@ -76,7 +76,37 @@
 						
 									<li class="flag">
 										
-										<div class="prd_info "><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000160943&amp;dispCatNo=90000010009&amp;trackingCd=Best_Sellingbest&amp;t_page=랭킹&amp;t_click=판매랭킹_전체_상품상세&amp;t_number=1" name="Best_Sellingbest" class="prd_thumb goodsList" data-ref-goodsno="A000000160943" data-attr="랭킹^판매랭킹리스트_전체^[11/17 단하루 특가] 셀리맥스 시카 지우개패드 60매 (토너 패드)^1" data-ref-dispcatno="90000010009" data-ref-itemno="001" data-trk="/" data-impression="A000000160943^랭킹_판매랭킹리스트_전체^1" data-impression-visibility="1"><span class="newOyflag today"><em>오특</em></span><span class="newOyflag time" style="display:none;"><div class="main-today"><div class="timer ready"><span class="nums h"><span class="num" data-timer-val="0">0</span><span class="num" data-timer-val="0">0</span></span><span class="nums m"><span class="num" data-timer-val="0">0</span><span class="num" data-timer-val="0">0</span></span></div></div></span><img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016094305ko.jpg?l=ko" alt="[11/17 단하루 특가] 셀리맥스 시카 지우개패드 60매 (토너 패드)" onerror="common.errorImg(this);"></a><div class="prd_name"><a href="javascript:;" name="Best_Sellingbest" class="goodsList" data-ref-goodsno="A000000160943" data-attr="랭킹^판매랭킹리스트_전체^[11/17 단하루 특가] 셀리맥스 시카 지우개패드 60매 (토너 패드)^1" data-ref-dispcatno="90000010009" data-ref-itemno="001" data-trk="/"><span class="tx_brand">셀리맥스</span><p class="tx_name">[11/17 단하루 특가] 셀리맥스 시카 지우개패드 60매 (토너 패드)</p></a></div><button class="btn_zzim jeem" data-ref-goodsno="A000000160943"><span>찜하기전</span></button><p class="prd_price"><span class="tx_org"><span class="tx_num">24,000</span>원 </span><span class="tx_cur"><span class="tx_num">15,940</span>원 </span></p><p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span></p><p class="prd_point_area tx_num"><span class="review_point"><span class="point" style="width:94.0%">10점만점에 5.5점</span></span>(435)</p><p class="prd_btn_area"><button class="cartBtn" data-ref-goodsno="A000000160943" data-ref-dispcatno="90000010009" data-ref-itemno="001">장바구니</button><button class="btn_new_pop goodsList">새창보기</button></p></div>
+										<div class="prd_info ">
+											<a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000160943&amp;dispCatNo=90000010009&amp;trackingCd=Best_Sellingbest&amp;t_page=랭킹&amp;t_click=판매랭킹_전체_상품상세&amp;t_number=1" name="Best_Sellingbest" class="prd_thumb goodsList" data-ref-goodsno="A000000160943" data-attr="랭킹^판매랭킹리스트_전체^[11/17 단하루 특가] 셀리맥스 시카 지우개패드 60매 (토너 패드)^1" data-ref-dispcatno="90000010009" data-ref-itemno="001" data-trk="/" data-impression="A000000160943^랭킹_판매랭킹리스트_전체^1" data-impression-visibility="1">
+												<span class="newOyflag today"><em>오특</em></span>
+												<span class="newOyflag time" style="display:none;">
+													<div class="main-today">
+														<div class="timer ready">
+															<span class="nums h">
+																<span class="num" data-timer-val="0">0</span>
+																<span class="num" data-timer-val="0">0</span>
+															</span>
+															<span class="nums m">
+																<span class="num" data-timer-val="0">0</span>
+																<span class="num" data-timer-val="0">0</span>
+															</span>
+														</div>
+													</div>
+												</span>
+												<img src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016094305ko.jpg?l=ko" alt="[11/17 단하루 특가] 셀리맥스 시카 지우개패드 60매 (토너 패드)" onerror="common.errorImg(this);">
+											</a>
+											<div class="prd_name">
+												<a href="javascript:;" name="Best_Sellingbest" class="goodsList" data-ref-goodsno="A000000160943" data-attr="랭킹^판매랭킹리스트_전체^[11/17 단하루 특가] 셀리맥스 시카 지우개패드 60매 (토너 패드)^1" data-ref-dispcatno="90000010009" data-ref-itemno="001" data-trk="/">
+													<span class="tx_brand">셀리맥스</span>
+													<p class="tx_name">[11/17 단하루 특가] 셀리맥스 시카 지우개패드 60매 (토너 패드)</p>
+												</a>
+											</div>
+											<button class="btn_zzim jeem" data-ref-goodsno="A000000160943"><span>찜하기전</span></button>
+											<p class="prd_price"><span class="tx_org"><span class="tx_num">24,000</span>원 </span><span class="tx_cur"><span class="tx_num">15,940</span>원 </span></p>
+											<p class="prd_flag"><span class="icon_flag sale">세일</span><span class="icon_flag coupon">쿠폰</span></p>
+											<p class="prd_point_area tx_num"><span class="review_point"><span class="point" style="width:94.0%">10점만점에 5.5점</span></span>(435)</p>
+											<p class="prd_btn_area"><button class="cartBtn" data-ref-goodsno="A000000160943" data-ref-dispcatno="90000010009" data-ref-itemno="001">장바구니</button><button class="btn_new_pop goodsList">새창보기</button></p>
+										</div>
 
 									</li>
 

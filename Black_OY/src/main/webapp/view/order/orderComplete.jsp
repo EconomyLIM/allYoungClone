@@ -25,9 +25,12 @@
 			, dataType : 'json'
 			, data : { order_id : '${order_id}' }
 			, success : function(data) {
+				$("#total_price").text(data.total_price);
+				$("#cd_price").text(data.cd_price);
+				$("#delivery_price").text(data.delivery_price);
+				$("#pay_price").text(data.pay_price);
 				
-				
-				console.log(data);
+				// console.log(data);
             }
 			, error : function (data, textStatus) {
 				console.log('error');
@@ -43,14 +46,71 @@
 			, dataType : 'json'
 			, data : { order_id : '${order_id}' }
 			, success : function(data) {
+				let tbody = $("#Contents > div.order_end_box > div:nth-child(3) > table > tbody");
 				
+				let tr = $("<tr>");
+				let th = $("<th>").attr("scope", "row").text("받는분");
+				let td = $("<td>").text(data.deli_recipient);
+				tr.append(th).append(td);
+				tbody.append(tr);
 				
-				console.log(data);
+				tr = $("<tr>");
+				th = $("<th>").attr("scope", "row").text("연락처1");
+				td = $("<td>").text(data.deli_tel);
+				tr.append(th).append(td);
+				tbody.append(tr);
+				
+				if(data.deli_tel2 != "") {
+					tr = $("<tr>");
+					th = $("<th>").attr("scope", "row").text("연락처2");
+					td = $("<td>").text(data.deli_tel2);
+					tr.append(th).append(td);
+					tbody.append(tr);
+				}
+				
+				tr = $("<tr>");
+				th = $("<th>").attr("scope", "row").text("주소");
+				td = $("<td>").html(`<p>도로명 주소 : \${data.deli_road_addr} \${data.deli_baddr}</p>`
+										+ `<p class='colorGrey'>지번주소 : \${data.deli_addr} \${data.deli_baddr}</p>`);
+				tr.append(th).append(td);
+				tbody.append(tr);
+				
+				tr = $("<tr>");
+				th = $("<th>").attr("scope", "row").text("공동현관 출입방법");
+				td = $("<td>").css("colspan", "3").text(data.req_select);
+				tr.append(th).append(td);
+				tbody.append(tr);
+				
+				if(data.req_content != "") {
+					tr = $("<tr>");
+					th = $("<th>").attr("scope", "row").text("출입방법 상세");
+					td = $("<td>").css("colspan", "3").text(data.req_content);
+					tr.append(th).append(td);
+					tbody.append(tr);
+				}
+				
+				tr = $("<tr>");
+				th = $("<th>").attr("scope", "row").text("배송완료 메시지 전송시점");
+				td = $("<td>").css("colspan", "3").text("배송직후");
+				tr.append(th).append(td);
+				tbody.append(tr);
+				
+				// console.log(data);
             }
 			, error : function (data, textStatus) {
 				console.log('error');
             }
 		}); 
+		
+		
+		$(".btnGreenW").on("click", function() {
+			location.href = '<%=contextPath%>/olive/main.do';
+		});
+		
+		$(".btnGreen").on("click", function() {
+			alert("주문 내역으로 이동해야함");
+			// location.href = '<%=contextPath%>/';
+		});
 	})
 </script>
 
@@ -95,26 +155,24 @@
 						<tbody>
 						<tr>
 							<th scope="row">총상품금액</th><!-- 2017-01-20 수정 : 총상품금액, 총배송비, 총 할인금액 추가 -->
-							<td><span class="tx_num">32,700</span>원</td>
+							<td><span class="tx_num" id="total_price">0</span>원</td>
 						</tr>
 						<tr>
 							<th scope="row">총할인금액</th>
 							<td>
-		
-		
-								<span class="tx_price">-<span class="tx_num">4,000</span>원</span>
+								<span class="tx_price">-<span class="tx_num" id="cd_price">0</span>원</span>
 		
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">총배송비</th>
-							<td><span class="tx_num">0</span>원</td>
+							<td><span class="tx_num" id="delivery_price">0</span>원</td>
 						</tr>
 						<!-- 2017-01-20 수정 : 최종 결제금액 영역 추가  -->
 						<tr class="last_tot_price">
 							<th scope="row">최종 결제금액</th>
 							<td>
-								<span class="tx_price"><span class="tx_num">28,700</span>원</span>
+								<span class="tx_price"><span class="tx_num" id="pay_price">0</span>원</span>
 
 							</td>
 						</tr>
@@ -136,48 +194,6 @@
 							<col style="width:*">
 						</colgroup>
 						<tbody>
-						<tr>
-							<th scope="row">받는분</th>
-							<td>이상문</td>
-						</tr>
-						<tr>
-							<th scope="row">연락처1</th>
-							<td>010-5549-7526</td>
-						</tr>
-		
-						<tr>
-							<th scope="row">주소</th>
-							<td>
-								<p>도로명 주소 : 서울 관악구 관천로23길 7-2 (신림동) 102호</p>
-								<p class="colorGrey">지번주소 : 서울 관악구 신림동 458-31 102호</p>
-							</td>
-						</tr>
-						
-				
-						<tr>
-							<th scope="row">배송 메시지</th>
-							<td colspan="3">그냥 문 앞에 놓아 주시면 돼요.</td>
-						</tr>
-				
-						<tr>
-							<th scope="row">공동현관 출입방법</th>
-							<td colspan="3">
-									자유출입가능
-							</td>
-						</tr>
-					
-					
-						<tr>
-							<th scope="row">배송완료 메시지 전송시점</th>
-							<td colspan="3">
-								
-								
-									배송직후
-									
-								
-							</td>
-						</tr>
-
 						</tbody>
 					</table>
 					<!--// 배송정보 -->
