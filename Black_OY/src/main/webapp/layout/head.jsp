@@ -516,6 +516,76 @@
 							<p class="recent_tit">
 								전체 <span>0</span>개
 							</p>
+
+							<ul class="cate_prd_list gtm_common_recent_list">
+						<c:if test="${fn:length(sessionScope.productHistory) > 0}">
+						<c:set var="i" value="${0 }" />
+						<c:forEach items="${productHistory }" var="history">
+						<c:if test="${not empty history.PRO_DISPL_ID }">
+						<c:set var="i" value="${i + 1 }" />
+								<li data-ref-recentgoodsidx="${i }">
+									<div class="prd_info ">
+										<a
+											href="/Black_OY/olive/productDetail.do?goodsNo=${history.PRO_DISPL_ID }&displNum=${history.CAT_L_ID}${history.CAT_M_ID}"
+											name="Common_Recent" class="prd_thumb goodsList"
+											data-ref-goodsno="A000000165598"
+											data-attr="공통^최근본상품^[단독기획] 토리든 다이브인 저분자 히알루론산 수딩크림 더블기획 (100ml+100ml)^1"
+											data-ref-dispcatno="" data-ref-itemno="001" data-trk="null"
+											data-impression="null"
+											onclick="javascript: gtm.goods.callGoodsGtmInfo(&quot;A000000165598&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;공통_최근본상품&quot;, &quot;1&quot;);"><span
+											class="thumb_flag best">베스트</span><img
+											src="${history.PRO_DISPL_SRC }"
+											alt="[단독기획] 토리든 다이브인 저분자 히알루론산 수딩크림 더블기획 (100ml+100ml)"
+											onerror="common.errorImg(this);"></a>
+										<div class="prd_name">
+											<a href="javascript:;" name="Common_Recent" class="goodsList"
+												data-ref-goodsno="A000000165598"
+												data-attr="공통^최근본상품^[단독기획] 토리든 다이브인 저분자 히알루론산 수딩크림 더블기획 (100ml+100ml)^1"
+												data-ref-dispcatno="" data-ref-itemno="001" data-trk="null"
+												onclick="javascript: gtm.goods.callGoodsGtmInfo(&quot;A000000165598&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;공통_최근본상품&quot;, &quot;1&quot;);"><span
+												class="tx_brand">${history.BRAND_NAME }</span>
+											<p class="tx_name">${history.PRO_DISPL_NAME }</p></a>
+										</div>
+										<button class="btn_zzim jeem" data-ref-goodsno="A000000165598">
+											<span>찜하기전</span>
+										</button>
+										<p class="prd_price">
+											<span class="tx_org"><span class="tx_num">${history.PROPRICE }</span>원
+											</span><span class="tx_cur"><span class="tx_num">${history.AFTERPRICE }</span>원
+											</span>
+										</p>
+										<p class="prd_flag">
+											<span class="icon_flag sale">세일</span><span
+												class="icon_flag gift">증정</span><span
+												class="icon_flag delivery">오늘드림</span>
+										</p>
+										<!-- <p class="prd_point_area tx_num">
+											<span class="review_point"><span class="point"
+												style="width: 96.0%">10점만점에 5.5점</span></span>(999+)
+										</p> -->
+										<p class="prd_btn_area">
+											<button class="cartBtn" data-ref-goodsno="A000000165598"
+												data-ref-dispcatno="" data-ref-itemno="001">장바구니</button>
+											<button class="btn_new_pop goodsList">새창보기</button>
+										</p>
+									</div>
+
+
+
+									<!-- <p class="btn_recom">
+										<button type="button" class="btn btnCuration"
+											onclick="common.recentGoods.curationMove('8809784600398','A000000165598','1000001000100150001','크림')">
+											<span class="bul">추천 상품 보기</span>
+										</button>
+									</p> -->
+
+									<button type="button" id="${history.PRO_DISPL_ID}" class="btnDelete cookiedel">삭제</button>
+								</li>
+							</c:if>
+							</c:forEach>
+							</c:if>
+							</ul>
+
 							<div class="no_data" style="display: none;">최근 본 상품이 없습니다.
 							</div>
 						</div></li>

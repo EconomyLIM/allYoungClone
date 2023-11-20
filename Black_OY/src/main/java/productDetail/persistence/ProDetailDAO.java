@@ -12,6 +12,7 @@ import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.DetailInfoDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
+import productDetail.domain.ProductMoreDTO;
 import productDetail.domain.ProductPromo;
 import productDetail.domain.QnADetailDTO;
 import productDetail.domain.WrtieQnaDTO;
@@ -59,5 +60,8 @@ public interface ProDetailDAO {
 
 	// 13. (데이터 수집) 사용자가 조회했던 중분류 카테고리 갖고오기
 	public int collectView(Connection conn, String userId, String cateM) throws Exception;
+	
+	// 14. 상품 추천
+	public List<ProductMoreDTO> proMore (Connection conn, String cateM) throws Exception;
 	
 } // interface

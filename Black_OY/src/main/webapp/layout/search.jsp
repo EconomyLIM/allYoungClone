@@ -10,7 +10,7 @@
 <div class="brand_area" id="ark_brand" style="display: block;">
 	
 	<c:if test="${not empty brandSearch }">
-	<a href="?${brandSearch.brand_id}"
+	<a href="<%=contextPath %>/brand/product.do?brandId=${brandSearch.brand_id}"
 		onclick="moveBrandShopForSearch('A003585', '통합검색결과페이지', '연관브랜드관', '가히');"
 		class="brand_box high" data-attr="공통^통합검색_브랜드관바로가기^가히"
 		style="background-image: url(${brandSearch.brand_img_src});">

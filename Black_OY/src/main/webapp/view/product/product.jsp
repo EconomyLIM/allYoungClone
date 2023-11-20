@@ -1645,13 +1645,259 @@ $(function () {
 			<!-- 큐레이션 2차 S -->
 			<div class="curation_area_a002_lead"></div>
 			<div id="recobell_area_a002" class="cura_pord">
-				<h4 class="tit_h4"></h4>
-				<div class="loading_box">
-					<span class="icon"><img
-						src="https://static.oliveyoung.co.kr/pc-static-root/image/comm/pc_loading.gif"
-						alt="로딩중"></span>
-					<p class="txt">고객님을 위한 상품 추천중이에요</p>
+
+				<c:set value="${morelist[0].cat_m_name }" var="i" />
+				<h4 class="tit_h4 title_a002">
+					이런 <strong>${i }</strong> 상품은 어때요?
+					<button class="moreBtn" id="crt_more_a002"
+						onclick="javascript:common.wlog('goods_curation1_more_btn');">
+						<span>더보기</span>
+					</button>
+				</h4>
+
+
+				<div class="inner_cont" role="toolbar">
+					<ul
+						class="curation_basket slide_list slick_slider"
+						id="goods_curation_a002">
+						<!-- <button type="button" data-role="none"
+							class="slick-prev slick-arrow" aria-label="Previous"
+							role="button" style="display: block;">Previous</button> -->
+
+						
+								
+								<c:forEach items="${morelist }" var="morelist">
+								
+								<li data-wlog_type="a002">
+									<div class="thum" data-ref-goodsno="A000000188968"
+										data-egrank="1" data-egcode="a002_a002" data-attr="null"
+										data-trk="null"
+										data-impression="A000000188968^상품추천_동일카테고리추천^1"
+										data-tracking-param="t_page=상품상세&amp;t_click=에센스/세럼/앰플_상품추천_상품상세&amp;t_number=1"
+										data-ref-dispcatno="90000010001" data-ref-itemno="001"
+										data-impression-visibility="1">
+										<span class="thumb_flag best">베스트</span><img
+											src="${morelist.PRO_DISPL_SRC }"
+											alt="이미지 준비중"
+											onerror="common.errorImg(this);"
+											data-attr="상품상세^상품추천_동일카테고리추천^[리뷰이벤트/모공교정앰플] 디마르3 시그니처 에스투드 프로텍터 대용량 앰플 170ml^1"
+											onclick="javascript: gtm.goods.callGoodsGtmInfo(&quot;A000000188968&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;상품상세_상품추천_동일카테고리추천&quot;, &quot;1&quot;);">
+										<div class="my">
+											<button type="button" class="myCart cartBtnRecoBell"
+												data-ref-goodsno="A000000188968" name=""
+												data-ref-dispcatno="90000010001" data-ref-itemno="001"
+												data-rccode="pc_detail_01_a" tabindex="0">
+												<span>장바구니</span>
+											</button>
+											<button type="button" class="mySee btn_zzim"
+												data-ref-goodsno="A000000188968" tabindex="0">
+												<span>찜하기전</span>
+											</button>
+										</div>
+									</div>
+									<div class="info">
+										<a
+											href="javascript: gtm.goods.callGoodsGtmInfo(&quot;A000000188968&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;상품상세_상품추천_동일카테고리추천&quot;, &quot;1&quot;); common.wlog(&quot;goods_curation1_prod&quot;);common.link.moveGoodsDetailCuration(&quot;A000000188968&quot;, &quot;90000010001&quot;,&quot;goods_detail_a002&quot;,&quot;pc_detail_01_a&quot;, &quot;a002_a002&quot;, &quot;1&quot;, &quot;Curation1&quot;, &quot;t_page=상품상세&amp;t_click=에센스/세럼/앰플_상품추천_상품상세&amp;t_number=1&quot;);"
+											class="a_detail" name="Curation1"
+											data-ref-goodsno="A000000188968" data-egrank="1"
+											data-egcode="a002_a002"
+											data-attr="상품상세^상품추천_동일카테고리추천^[리뷰이벤트/모공교정앰플] 디마르3 시그니처 에스투드 프로텍터 대용량 앰플 170ml^1"
+											data-trk="/"
+											data-tracking-param="t_page=상품상세&amp;t_click=에센스/세럼/앰플_상품추천_상품상세&amp;t_number=1"
+											data-ref-dispcatno="90000010001" data-ref-itemno="001"
+											tabindex="0"><dl>
+												<dt class="tit">${morelist.PRO_DISPL_NAME}</dt>
+												<dd class="price">
+													<del>${ morelist.PROPRICE}원</del>
+													<strong>${morelist.AFTERPRICE }원</strong>
+												</dd>
+												<dd class="icon">
+													<c:if test="${morelist.PDC eq 1}">
+															<span class="icon_flag sale">세일</span>
+														</c:if>
+														<c:if test="${morelist.PRC eq 1}">
+															<span class="icon_flag coupon">쿠폰</span>
+														</c:if>
+														<c:if test="${morelist.PMP eq 1 }">
+															<span class="icon_flag gift">증정</span>
+														</c:if>
+														<c:if test="${morelist.STOCK > 0}">
+															<span class="icon_flag delivery">오늘드림</span>
+														</c:if>
+												</dd>
+											</dl></a>
+									</div>
+
+								</li>
+								
+								</c:forEach>
+
+						<!-- <button type="button" data-role="none"
+							class="slick-next slick-arrow" aria-label="Next" role="button"
+							style="display: block;">Next</button> -->
+						
+					</ul>
+					<input type="hidden" id="goodsCnt" name="goodsCnt" value="12">
 				</div>
+				<script type="text/javascript">
+				
+$(document).ready(function(){
+
+	//오특 플래그
+	common.gnb.todaySpecial.setTodaySpecialFlag('.newOyflag');
+
+    // 찜하기 버튼 이벤트 bind
+    common.wish.bindEvent();
+    
+    var recType = "a002";
+    var rccode = "pc_detail_01_a";
+
+	if (recType == "a002")
+		common.setCookie("recDescNo", "1");
+    
+    if(recType == "a003" || recType == "a029"){
+        // 상단
+        // 방어로직 아닌 상품이 3개 이상인 경우에만 노출. 3개 미만이면 미노출.
+        if("24" >= 3){
+
+            $(".curation_area_" + recType).show();
+            $(".title_" + recType).show();
+            $("#recobell_area_" + recType).css("display","block");
+        }
+    }else{
+     	// 하단
+        if("23" > 0){
+            $(".title_a002").show();
+            $(".curation_area_"+recType).show();
+        }else{
+            $(".title_a002").hide();
+            $(".curation_area_"+recType).hide();
+            $("#recobell_area_"+recType).css("display","none");
+        }
+    }
+    
+    // A태그 클릭 시 해당 상품으로 이동
+    $('#goods_curation_a002 a').each(function(i){
+        var _item = $(this);
+        var _data_goodsno = _item.attr('data-ref-goodsno');
+		var _data_dispCatNo = _item.attr('data-ref-dispCatNo');
+		var egcode = _item.attr("data-egcode");
+	    var egrank = _item.attr("data-egrank");
+	    var trackingCd = "Curation1";
+	    var trackingParam = _item.attr("data-tracking-param");
+
+		_item.attr('href','javascript: gtm.goods.callGoodsGtmInfo("'+_data_goodsno+'", "", "ee-productClick", "상품상세_상품추천_동일카테고리추천", "'+(i+1)+'"); common.wlog("goods_curation1_prod");common.link.moveGoodsDetailCuration("'+_data_goodsno+'", "'+_data_dispCatNo+'","goods_detail_a002","'+rccode+'", "'+egcode+'", "'+egrank+'", "'+ trackingCd +'", "'+ trackingParam +'");');
+		_item.attr('name', trackingCd);
+		_item.attr('data-attr',"상품상세^상품추천_동일카테고리추천^"+_item.find('.tit').text()+"^"+(i+1));
+		_item.attr('data-trk', "/");
+
+    });
+
+	$('#goods_curation_a002 .thum img').each(function(i){
+		var _item = $(this);
+		var _name = $(this).attr('alt');
+		var _data_goodsno = $(this).parent().attr('data-ref-goodsno');
+
+		_item.attr('data-attr',"상품상세^상품추천_동일카테고리추천^"+_name+"^"+(i+1));
+		_item.attr('onclick','javascript: gtm.goods.callGoodsGtmInfo("'+_data_goodsno+'", "", "ee-productClick", "상품상세_상품추천_동일카테고리추천", "'+(i+1)+'");');
+	});
+
+	if(recType == "a003" || recType == "a029"){
+
+		$('#goods_curation_' + recType + ' a').each(function(i){
+	        var _item = $(this);
+	        var _data_goodsno = _item.attr('data-ref-goodsno');
+			var _data_dispCatNo = _item.attr('data-ref-dispCatNo');
+			var egcode = _item.attr("data-egcode");
+		    var egrank = _item.attr("data-egrank");
+		    var trackingCd = "Curation2";
+			var trackingParam = _item.attr("data-tracking-param");
+			_item.attr('href','javascript: gtm.goods.callGoodsGtmInfo("'+_data_goodsno+'", "", "ee-productClick", "상품상세_상품추천_함께보면좋은상품", "'+(i+1)+'"); common.wlog("goods_curation2_prod");common.link.moveGoodsDetailCuration("'+_data_goodsno+'", "'+_data_dispCatNo+'","goods_detail_a003","'+rccode+'", "'+egcode+'", "'+egrank+'", "'+ trackingCd +'", "'+ trackingParam +'");');
+			_item.attr('name', trackingCd);
+			_item.attr('data-attr',"상품상세^상품추천_함께보면좋은상품^"+_item.find('.tit').text()+"^"+(i+1));
+			_item.attr('data-trk', "/");
+	    });
+
+		$('#goods_curation_' + recType + ' .thum img').each(function(i){
+			var _item = $(this);
+			var _name = $(this).attr('alt');
+			var _data_goodsno = $(this).parent().attr('data-ref-goodsno');
+
+			_item.attr('data-attr',"상품상세^상품추천_함께보면좋은상품^"+_name+"^"+(i+1));
+			_item.attr('onclick','javascript: gtm.goods.callGoodsGtmInfo("'+_data_goodsno+'", "", "ee-productClick", "상품상세_상품추천_함께보면좋은상품", "'+(i+1)+'");');
+		});
+
+		$(document).on("click","#goods_curation_" + recType + " .thum img", function(){
+	        var _item = $(this).closest(".thum");
+	        var _data_goodsno = _item.attr('data-ref-goodsno');
+			var _data_dispCatNo = _item.attr('data-ref-dispCatNo');
+		    var egcode = _item.attr("data-egcode");
+		    var egrank = _item.attr("data-egrank");
+			var trackingCd = "Curation2";
+			var trackingParam = _item.attr("data-tracking-param");
+			common.wlog("goods_curation2_prod");
+			common.link.moveGoodsDetailCuration(_data_goodsno, _data_dispCatNo,"goods_detail_a003",rccode, egcode, egrank, trackingCd, trackingParam);
+	    });
+	}
+
+    // 썸네일 클릭 시 해당 상품으로 이동
+    $(document).on("click","#goods_curation_a002 .thum img", function(){
+        var _item = $(this).closest(".thum");
+        var _data_goodsno = _item.attr('data-ref-goodsno');
+		var _data_dispCatNo = _item.attr('data-ref-dispCatNo');
+	    var egcode = _item.attr("data-egcode");
+	    var egrank = _item.attr("data-egrank");
+		var trackingCd = "Curation1";
+		var trackingParam = _item.attr("data-tracking-param");
+		common.wlog("goods_curation1_prod");
+		common.link.moveGoodsDetailCuration(_data_goodsno, _data_dispCatNo,"goods_detail_a002",rccode, egcode, egrank, trackingCd,trackingParam);
+    });
+
+    //큐레이션 더보기 팝업 이벤트 추가
+	var recType = "a002";
+	var viewArea = recType == "a002" ? "goods_curation1_more_prod" : "goods_curation2_more_prod";
+	var trackingCd = recType == "a002" ? "Curation1_More" : "Curation2_More";
+	var dtlDispName = recType == "a002" ? "에센스/세럼/앰플" : "";
+	var recDescNo = recType == "a002" ? common.getCookie("recDescNo") : "";
+
+	$("#goods_curation_" + recType).find(".cartBtnRecoBell").each(function() {
+		$(this).attr("data-rccode", rccode);
+	});
+    
+	var param = {
+		size : 40, //큐레이션 api 호출용, 더보기 팝업 노출갯수
+		cps : true, //큐레이션 api 호출용
+		cpt : "c001",
+		viewType : 'VertPop', // 세로형
+		popupYn : "Y",
+		titlRp : "에센스/세럼/앰플", // 타이틀 replace 텍스트
+		viewArea : viewArea,
+		recType : recType, // 큐레이션 url 정보
+		lastCallRecType : "a002", // 마지막에 호출된 recType
+		iids : $("#lgcGoodsNo").val(),
+		goodsNo : $("#goodsNo").val(),
+		cpcids : "1000001000100140001",
+		rccode : rccode,
+		trackingCd : trackingCd // trackingCd
+	};
+
+	if(recType == "a002") {
+		if ((recDescNo != null && recDescNo != "" && recDescNo == "2") && (dtlDispName != null && dtlDispName != ""))
+			param.titlRp = dtlDispName;
+		else
+			param.titlRp = "에센스/세럼/앰플";
+	} else {
+		param.titlRp = "";
+	}
+	
+	// 기존 영역이기 때문에 이벤트 추가만 한다.
+	curation.btnMoreEvent(param);
+
+	gtm.goods.initProductImpression();
+});
+</script>
+
+
 			</div>
 			<!-- 큐레이션 2차 E -->
 			<ul class="prd_detail_tab" id="tabList">
@@ -2837,7 +3083,14 @@ $(function () {
 
 				<script>
 $(function(){
-	
+	$("#goods_curation_a002").slick({
+		  slidesToShow: 3,
+		  slidesToScroll: 3,
+		  infinite : true,
+		  arrows: true
+		  
+		  
+		});
 	 $('.slider-for').slick({
 		  slidesToShow: 1,
 		  slidesToScroll: 1,
@@ -3411,12 +3664,16 @@ $(function(){
 	<!--  ========상품 좋아요 클릭 팝업 ========== -->
 	<div class="layerAlim zzimOn wishPrd" style="display: none;">
 		<span class="icon"></span>
-		<p class="one"><strong>좋아요</strong></p>
+		<p class="one">
+			<strong>좋아요</strong>
+		</p>
 	</div>
-	
+
 	<div class="layerAlim zzimOff wishPrd" style="display: none;">
 		<span class="icon"></span>
-		<p class="one"><strong>좋아요</strong></p>
+		<p class="one">
+			<strong>좋아요</strong>
+		</p>
 	</div>
 	<script>
 	
