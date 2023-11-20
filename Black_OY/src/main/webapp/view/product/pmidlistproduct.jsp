@@ -460,7 +460,7 @@ function changePerPageAndClass(value) {
 							<li class="flag">
 								<div class="prd_info">
 									<a href="<%=contextPath%>/olive/productDetail.do?goodsNo=${pml.displId}&displNum=<%=midId %>" class="prd_thumb goodsList"
-										name=""> <img src="${pml.displImgSrc}" alt="사진"
+										name="${pml.displId}"> <img src="${pml.displImgSrc}" alt="사진"
 										class="completed-seq-lazyload" />
 									</a>
 									<div class="prd_name">
@@ -633,6 +633,31 @@ $(document).ready(function() {
 }
 	
 </script>
+<script>
+// 쿠키 저장 함수
+function setCookie(cookie_name, value, days) {
+  var exdate = new Date();
+  exdate.setDate(exdate.getDate() + days);
+  // 설정 일수만큼 현재시간에 만료값으로 지정
 
+  var cookie_value = escape(value) + ((days == null) ? '' : '; expires=' + exdate.toUTCString());
+  document.cookie = cookie_name + '=' + cookie_value;
+}
+
+// 쿠키 값 가져오는 함수
+function getCookie(cookie_name) {
+	  var x, y;
+	  var val = document.cookie.split(';');
+
+	  for (var i = 0; i < val.length; i++) {
+	    x = val[i].substr(0, val[i].indexOf('='));
+	    y = val[i].substr(val[i].indexOf('=') + 1);
+	    x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+	    if (x == cookie_name) {
+	      return unescape(y); // unescape로 디코딩 후 값 리턴
+	    }
+	  }
+	}
+</script>
 
 </html>
