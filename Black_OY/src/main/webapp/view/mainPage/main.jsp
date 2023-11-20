@@ -66,7 +66,35 @@ $(document).ready(() => {
     });
 });
 
+// 쿠키
+function addCookie(id) {
+  var items = getCookie('productItems'); // 이미 저장된 값을 쿠키에서 가져오기
+  var maxItemNum = 4; // 최대 저장 가능한 아이템 개수
+  var expire = 7; // 쿠키값을 저장할 기간
+  
+  if (items) {
+    var itemArray = items.split(',');
+    var itemSet = new Set(itemArray); // 중복 아이템을 제거하기 위해 Set 사용
+    
+    if (!itemSet.has(id)) {
+      // 새로운 값 추가
+      itemSet.add(id);
+      
+      // 쿠키에 새로운 값 추가 후, 최대 개수 유지하기
+      var updatedItemsArray = Array.from(itemSet);
+      while (updatedItemsArray.length > maxItemNum) {
+        updatedItemsArray.shift(); // 오래된 값을 삭제
+      }
 
+      // 쿠키에 새로운 값을 추가한 후, 다시 설정
+      var updatedItemsString = updatedItemsArray.join(',');
+      setCookie('productItems', updatedItemsString, expire);
+    }
+  } else {
+    // 신규 id값 저장하기
+    setCookie('productItems', id, expire);
+  }
+}
 
 
 
@@ -472,7 +500,7 @@ $(document).ready(() => {
 															<li class="curation_item" data-idx="${innerLoop}"><a
 																href="<%=contextPath %>/olive/productDetail.do?goodsNo=${pli.displId}"
 																name="Home_Curation1_1" class="item a_detail"
-																data-ref-goodsno="${pli.displId }" onclick=""> <span
+																data-ref-goodsno="${pli.displId }" onclick="addCookie('${pli.displId}');"> <span
 																	class="thumb_flag best">베스트</span> <span
 																	class="thumImg"> <img src="${pli.displImgSrc }"
 																		alt="${pli.displProName}"
@@ -563,7 +591,7 @@ $(document).ready(() => {
 																<c:forEach items="${recommendList }" var="rec"
 																 begin="${innerLoopBegin}" end="${innerLoopEnd}" varStatus="innerLoop">
 																 <li class="curation_item" data-idx=${innerLoop}>
-																 <a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${rec.displId}" class="item a_detail" name ="Home_Curation1_1" >
+																 <a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${rec.displId}" onclick="addCookie('${rec.displId}');" class="item a_detail" name ="Home_Curation1_1" >
 																 	<span class="thumImg">
 																 		<img src="${rec.displImgSrc }"/>
 																 	</span>
@@ -691,7 +719,7 @@ $(document).ready(() => {
 										<c:forEach items="${gpb.value}" var="value">
 										<li>
 											<div class="prd_info ">
-												<a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${value.displId}&displNum=${value.lid}${value.sid}" name="Home_Planshop3" class="prd_thumb goodsList">
+												<a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${value.displId}&displNum=${value.lid}${value.sid}" onclick="addCookie('${value.displId}');" name="Home_Planshop3" class="prd_thumb goodsList">
 													<span class="thumb_flag best">베스트</span>
 													<img src="${value.displImgSrc}"/>
 												</a>
@@ -2399,7 +2427,7 @@ $(document).ready(() => {
 									<div class="main_brand swiper-slide" data-ref-brndno="A001712" role="group" aria-label="1 / 10" style="width: 1020px;">
 										<!-- S : 인기브랜드 이미지 -->
 										<div class="brand-info-wrap">
-											<a onclick="common.reqAmplitude('주목하는_브랜드관 클릭', {entry_source: '홈', click_source: '주목브랜드_브랜드배너', banner_name: '나이팅게일', banner_number: '1'});" href="javascript:common.link.moveBrandShop('A001712', 'Home_Brand_Banner', '', 't_page=홈&amp;t_click=주목브랜드_브랜드배너&amp;t_brand_name=나이팅게일&amp;t_number=1');" class="link" data-attr="홈^주목브랜드_배너^나이팅게일">
+											<a onclick="common.reqAmplitude('주목하는_브랜드관 클릭', {entry_source: '홈', click_source: '주목브랜드_브랜드배너', banner_name: '나이팅게일', banner_number: '1'});" href="<%=contextPath %>/brand/product.do?brandId=${mbl.brand_id }" class="link" data-attr="홈^주목브랜드_배너^나이팅게일">
 												<div class="brand-info">
 													<strong class="brand-name">${mbl.brand_name }</strong> <span class="desc"><i class="icon-like"></i>${mbl.brand_like }명이 좋아합니다.</span>
 												</div>
@@ -2425,7 +2453,7 @@ $(document).ready(() => {
 													</div>
 												</div>
 												<div class="info">
-													<a href="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000102967&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;홈_주목브랜드&quot;, &quot;1&quot;);common.wlog(&quot;home_brand_tab_1_1&quot;);common.link.moveGoodsDetail(&quot;A000000102967&quot;, &quot;90000010001&quot;,&quot;Home_Brand&quot;, &quot;t_page=홈&amp;t_click=주목브랜드_상품상세&amp;t_number=1&quot;);" class="a_detail" data-ref-goodsno="A000000102967" data-egrank="null" data-egcode="null" data-attr="홈^주목브랜드^나이팅게일 데일리더마 클렌징패드 마일드 (70매)^1" data-tracking-param="t_page=홈&amp;t_click=주목브랜드_상품상세&amp;t_number=1" data-ref-dispcatno="90000010001" data-ref-itemno="001"><dl>
+													<a href="/Black_OY/olive/productDetail.do?goodsNo=${mbi.proDisplId }&displNum=${mbi.catLId}${mbi.catMId}" onclick="addCookie('${mbi.proDisplId}');" class="a_detail" data-ref-goodsno="A000000102967" data-egrank="null" data-egcode="null" data-attr="홈^주목브랜드^나이팅게일 데일리더마 클렌징패드 마일드 (70매)^1" data-tracking-param="t_page=홈&amp;t_click=주목브랜드_상품상세&amp;t_number=1" data-ref-dispcatno="90000010001" data-ref-itemno="001"><dl>
 															<dt class="tit">${mbi.proDisplName }</dt>
 															<dd class="price">
 																<del>${mbi.proPrice }원</del>
@@ -3368,7 +3396,7 @@ $('#main_curation02_01').slick({
 	    			dots: true
 	    		});
 			
-	    	 $('#mainFullSlider').on('beforeChange', function(event, slick, currentSlide, nextSlide){ 
+	    	 $('#mainFullSlider').on('afterChange', function(event, slick, currentSlide, nextSlide){ 
 
 	    		 var i = (currentSlide ? currentSlide : 0) + 1;
 				
