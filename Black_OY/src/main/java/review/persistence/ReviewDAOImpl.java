@@ -119,24 +119,16 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public List<ReviewDTO> reviewList(Connection conn, String pro_displ_id, String proid) {
 		ArrayList<ReviewDTO> reviewlist = null;
 		ReviewDTO reviewDTO = null;
-		
-		
-		
-		
-		String sql = " SELECT * From ( SELECT ROWNUM no, t.* FROM( SELECT * FROM review ";
-		//String sql = " select rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2,rev_grade_3, pro_id "
-			//	+ " from review  ";
+
+		String sql = " select rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2,rev_grade_3, pro_id "
+				+ " from review  ";
 				
 				if (!(proid.equals("ALL"))) {
 					sql+= " where pro_displ_id = ? AND pro_id = ?  ";
 				}else {
 					sql += " where pro_displ_id = ? ";
 				}
-		
-				
-				
-				
-		
+
 		String rev_id;
 		String user_id;
 		//String pro_displ_id; 
@@ -171,7 +163,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 					 rev_id = rs.getString("rev_id");
 					 user_id = rs.getString("user_id");
 					//String pro_displ_id; 
-					rev_like = rs.getInt("rev_like");
+					 rev_like = rs.getInt("rev_like");
 					 rev_content = rs.getString("rev_content");
 					 rev_grade = rs.getInt("rev_grade");
 					 rev_reg = rs.getDate("rev_reg");
