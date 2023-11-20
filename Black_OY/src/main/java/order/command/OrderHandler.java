@@ -40,7 +40,7 @@ public class OrderHandler implements CommandHandler {
 		
 		
 		if(method.equals("GET")) {
-			String click = request.getParameter("click");
+			String click = request.getParameter("click"); // 어떤 버튼을 클릭하고 결제창에 왔는지
 			String[] products = request.getParameterValues("products");
 			String quickYN = request.getParameter("quickYN"); // 오늘드림 여부
 			
@@ -74,6 +74,7 @@ public class OrderHandler implements CommandHandler {
 			request.setAttribute("list", list);
 			request.setAttribute("productList", productList);
 			request.setAttribute("dto", dto);
+			request.setAttribute("click", click);
 			
 			if(click.equals("선물하기")) {
 				return "/view/order/orderGiftForm.jsp";

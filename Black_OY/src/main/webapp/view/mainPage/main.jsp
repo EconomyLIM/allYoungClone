@@ -647,7 +647,7 @@ $(document).ready(() => {
 							<c:if test="${not empty getWSBanner}">
 								<c:forEach items="${getWSBanner}" var="gws" begin="0" end="1">
 									<li>
-										<a href="<%=contextPath%>/olive/planshop.do">
+										<a href="<%=contextPath%>/olive/planshop.do?eventId=${gws.psId}">
 											<img src="${gws.psSrc}" alt="GS 배너사진"/>
 											<div class="text_wrap">
 												<dl style="color: #000000;">
@@ -678,7 +678,7 @@ $(document).ready(() => {
 								<div class="slider_unit">
 									<div class="plan_top">
 										<div class="plan_banner" style="background-image: url('${gpb.key.psSrc}')">
-											<a href="#">
+											<a href="<%=contextPath%>/olive/planshop.do?eventId=${gpb.key.psId}">
 												<p>
 													<strong class="tit" style="color: #000000;">${gpb.key.psSumm}</strong>
 													<strong class="tit" style="color: #000000;">${gpb.key.psSecSumm}</strong>
@@ -3510,7 +3510,7 @@ $('#main_curation02_01').slick({
 </body>
 <!-- 유사한 고객 추천 상품 팝업 -->
 <div class="layer_pop_wrap" id="crtPopWrap"
-	style="top: 1%; width: 849px; display: block; left: 50%; margin-left: -424.5px; margin-top: 353px;">
+	style="top: 1%; width: 849px; display: none; left: 50%; margin-left: -424.5px; margin-top: 353px;">
 	<script
 		src="https://static.oliveyoung.co.kr/pc-static-root/js/store/jquery.mCustomScrollbar.concat.min.js"></script>
 	<style media data-href="/Black_OY/css/mainscrollbar.css"></style>

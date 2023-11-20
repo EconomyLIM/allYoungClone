@@ -141,6 +141,9 @@
             }
 		}); 
 		
+		// 가지고 있는 포인트 표시
+		$("#cjonePnt").text('${logOn.u_point}');
+		
 		// 회원 기본 설정
 		let tel1 = '${dto.deli_tel}';
 		let tel1s = tel1.split("-");
@@ -363,7 +366,7 @@
             <input type="hidden" id="point_price" name="point_price" value="0">
             <input type="hidden" id="mc_id" name="mc_id" value="">
             
-            
+            <input type="hidden" id="click" name="click" value="${click}">
             <input type="hidden" id="quickInfoYn" name="quickInfoYn" value="N">
             <input type="hidden" id="ocbValidChk" name="ocbValidChk" value="N">
             
@@ -1089,9 +1092,19 @@
 															<i class="tit">옵션</i>${list.displName }											
 														</p>
 														<p class="prd_flag">
-															<span class="icon_flag sale">세일</span>
-															<span class="icon_flag gift">증정</span><!-- 14 -->
-															<span class="icon_flag delivery">오늘드림</span><!-- 15 -->	
+															<c:if test="${list.prd eq 1}">
+																<span class="icon_flag sale">세일</span>
+															</c:if>
+															<c:if test="${list.prc eq 1}">
+																<span class="icon_flag coupon">쿠폰</span>
+															</c:if>
+															<!-- 기간계 상품, 브랜드 증정품만 아이콘 노출 -->
+															<c:if test="${list.prp eq 1}">
+																<span class="icon_flag gift" id="free_gift">증정</span>
+															</c:if>
+															<c:if test="${list.stock eq 1}">
+																<span class="icon_flag delivery" id="quick_yn">오늘드림</span>
+															</c:if>		
 														</p>
 														<!--//fix/3275248 bmiy20 cjone point 적립불가건에 대해 사용 불가 처리 추가-->
 													</div>

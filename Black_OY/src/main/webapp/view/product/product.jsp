@@ -533,7 +533,7 @@ $(function() {
 				params += "&quickYN=N";
 			}
 			
-			location.href = "<%=contextPath%>/olive/orderForm.do?" + params + "&click=바로구메";
+			location.href = "<%=contextPath%>/olive/orderForm.do?" + params + "&click=바로구매";
 		});
 		
 		// 선물하기 눌렀을 때

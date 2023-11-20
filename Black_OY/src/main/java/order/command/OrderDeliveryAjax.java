@@ -13,7 +13,7 @@ import net.sf.json.JSONObject;
 import order.domain.DeliveryDTO;
 import order.service.OrderService;
 
-@WebServlet("/OrderDeliveryAjax")
+@WebServlet("/olive/getOrderDelivery.do")
 public class OrderDeliveryAjax extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
