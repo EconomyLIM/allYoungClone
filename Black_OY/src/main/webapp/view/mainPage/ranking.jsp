@@ -17,14 +17,22 @@
 <script>
 	$(function() {
 		$.ajax({
-			type : 'post'
+			type : 'get'
 			, async : false
 			, cache: false
 			, url : '/Black_OY/olive/getCateMRankingAjax'
 			, dataType : 'json'
 			, data : {  }
 			, success : function(data) {
-				console.log(data);
+				//console.log(data);
+				let ul = $(".common-menu ul");
+				for (var i = 0; i < data.cateM.length; i++) {
+					
+				let li = $("<li>");
+				let button = $("<button>").attr("type", "button").data("mid", data.cateM[i].cateMID).text(data.cateM[i].cateMName);
+				li.append(button);
+				ul.append(li);
+				}
             }
 			, error : function (data, textStatus) {
 				console.log('error');

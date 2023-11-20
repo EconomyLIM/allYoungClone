@@ -1,6 +1,8 @@
 package main.command;
 
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import command.CommandHandler;
 import main.domain.BrandItemDTO;
 import main.domain.MainBrandDTO;
 import main.domain.PlanShopDisplDTO;
+import main.domain.PopularProDTO;
 import main.service.MainService;
 import product.domain.PMidListDTO;
 import user.domain.LogOnDTO;
@@ -39,8 +42,8 @@ public class MainPageHandler implements CommandHandler{
 		request.setAttribute("getWSBanner", getWSBanner);
 		
 		// ================= 인기행사만 모았어요! 배너정보 갖고오는 작업 ==================
-		List<PlanShopDisplDTO> getPEBanner = mainService.getWeekSpecial(2);
-		request.setAttribute("getPEBanner", getPEBanner);
+		HashMap<PlanShopDisplDTO, List<PopularProDTO>> getPopBanner = mainService.sGetPopularShop();
+		request.setAttribute("getPopBanner", getPopBanner);
 		
 		// 메인 브랜드 10개
 		List<MainBrandDTO> mbrandlist = mainService.mainBrandService();

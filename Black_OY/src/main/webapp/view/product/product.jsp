@@ -502,22 +502,29 @@ $(function() {
 			*/
 			
 			let params = ""; 
-			let products = $(".option_add_area > div");
 			
-			for (var i = 0; i < products.length; i++) {
-				if($(products[i]).css("display") == "block") {
-					let product_id = $(products[i]).attr("id");
-					let cnt = $("#input_" + product_id).val();
-					params += "products=" + product_id + "-" + cnt + "&" ;
-					flag = true;
+			let sm = $(".option_add_area.pkg_goods_n").length; // 상품이 싱글인지 다중인지
+			
+			if(sm == 1) {
+				let products = $(".option_add_area > div");
+				
+				for (var i = 0; i < products.length; i++) {
+					if($(products[i]).css("display") == "block") {
+						let product_id = $(products[i]).attr("id");
+						let cnt = $("#input_" + product_id).val();
+						params += "products=" + product_id + "-" + cnt + "&" ;
+						flag = true;
+					}
 				}
-			}
-			
-			params = params.substr(0, params.length-1);
-			
-			if(!flag) {
-				alert("상품을 선택해주세요.");
-				return;
+				
+				params = params.substr(0, params.length-1);
+				
+				if(!flag) {
+					alert("상품을 선택해주세요.");
+					return;
+				}
+			} else {
+				params = "products=" + $("#pro_id").val() + "-" + $("#cartCnt_A000000175060001").val();
 			}
 			
 			if($("#deliveDay").prop("checked")) {
@@ -538,22 +545,29 @@ $(function() {
 			*/
 			
 			let params = ""; 
-			let products = $(".option_add_area > div");
 			
-			for (var i = 0; i < products.length; i++) {
-				if($(products[i]).css("display") == "block") {
-					let product_id = $(products[i]).attr("id");
-					let cnt = $("#input_" + product_id).val();
-					params += "products=" + product_id + "-" + cnt + "&" ;
-					flag = true;
+			let sm = $(".option_add_area.pkg_goods_n").length; // 상품이 싱글인지 다중인지
+			
+			if(sm == 1) {
+				let products = $(".option_add_area > div");
+				
+				for (var i = 0; i < products.length; i++) {
+					if($(products[i]).css("display") == "block") {
+						let product_id = $(products[i]).attr("id");
+						let cnt = $("#input_" + product_id).val();
+						params += "products=" + product_id + "-" + cnt + "&" ;
+						flag = true;
+					}
 				}
-			}
-			
-			params = params.substr(0, params.length-1);
-			
-			if(!flag) {
-				alert("상품을 선택해주세요.");
-				return;
+				
+				params = params.substr(0, params.length-1);
+				
+				if(!flag) {
+					alert("상품을 선택해주세요.");
+					return;
+				}
+			} else {
+				params = "products=" + $("#pro_id").val() + "-" + $("#cartCnt_A000000175060001").val();
 			}
 			
 			if($("#deliveDay").prop("checked")) {
@@ -1400,6 +1414,9 @@ $(function () {
 
 						</c:if>
 						<c:if test="${pLists.size() eq 1}">
+							<c:forEach items="${pLists }" var="list">
+								<input type="hidden" id="pro_id" value="${list.proId}" />
+							</c:forEach>
 							<div class="option_add_area">
 								<div class="prd_cnt_box">
 									<div class="tit_area">

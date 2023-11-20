@@ -21,6 +21,10 @@
 		if (mainurl.includes('/Black_OY/olive/main.do')) {
 			$('.main_cate_wrap').css("display",'block');
 		}
+
+<script>
+	$(function() {
+
 		let storesNames = [];
 		
 		// 로그인이 되어 있을 시
@@ -59,7 +63,7 @@
 		
 	})
 </script>
-    <!-- 3200210 큐레이션 개선 관련 건-레코벨 데이터 송부 
+
 <input type="hidden" id="skinType" name="skinType" value="" />
 <input type="hidden" id="skinTorn" name="skinTorn" value="" />
 <input type="hidden" id="skinIssue" name="skinIssue" value="" />

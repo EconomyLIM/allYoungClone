@@ -130,6 +130,11 @@
 				, dataType : 'json'
 				, data : { user_id : '${logOn.user_id}' }
 				, success : function(data) {
+					if(data == "") {
+						$(".couponView").text(`보유쿠폰 (0)`)
+						$("#userCpPop > div > h2").text(`보유쿠폰 (0)`)
+					}
+					
 					$(".couponView").text(`보유쿠폰 (\${data.userCoupon.length})`)
 					$("#userCpPop > div > h2").text(`보유쿠폰 (\${data.userCoupon.length})`)
 					console.log(data);
@@ -386,6 +391,31 @@
 			// 결제하기 버튼 클릭 했을 때
 			$("#btnPay").on("click", function() {
 				if(formCheck()) {
+					let products = $("input[name=pro_id]");
+					let params = "";
+					for (var i = 0; i < products.length; i++) {
+						params += i==products.length-1 ? $(products[i]).val() : $(products[i]).val() + ",";
+					}
+					
+					$.ajax({
+						type : 'get'
+						, async : false
+						, cache: false
+						, url : '/Black_OY/olive/getProStockAjax.do'
+						, dataType : 'json'
+						, data : { products : params }
+						, success : function(data) {
+							if(data.cnt == 0) {
+								alert("현재 상품의 재고가 소진되었습니다.");
+								location.href = '<%=contextPath%>/olive/main.do';
+							}
+							// console.log(data);
+			            }
+						, error : function (data, textStatus) {
+							console.log('error');
+			            }
+					});
+					
 					alert("결제 가능~~");
 					$("#orderForm").submit();
 				}
@@ -474,21 +504,27 @@
 			let h = d.getHours();
 			let m = d.getMinutes();
 			
-			$("#dlv_time2").text(`\${h+2}:\${m} ~ \${h+3}:\${m}`);
+			
+			$("#dlv_time1").text(`\${h+2}:\${m} ~ \${h+3}:\${m}`);
+			$("#dlv_time2").text("15:00 ~ 16:00");
+			
+			if(h >= 20 || h < 11) {
+				$("#dlv_time1").text("13:00 ~ 14:00");
+			}
 			
 			$("#dlv_today").text(`\${month}/\${date}일 (\${"일월화수목금토".charAt(d.getDay())})`);
 			$("#dlv_nextday").text(`\${month}/\${date+1}일 (\${"일월화수목금토".charAt(d.getDay()+1)})`);
 			
 			// 오늘 드림 라디오버튼 처리
-			// 34배송
-			if(h >= 13) {
+			// 빠른배송
+			if(h >= 20) {
 				$("#dlv_nextdayDlvSp1 > input").prop("disabled", false);
 			} else {
 				$("#dlv_todayDlvSp1 > input").prop("disabled", false);
 			}
 			
-			// 빠른배송
-			if(h >= 20) {
+			// 34배송
+			if(h >= 13) {
 				$("#dlv_nextdayDlvSp2 > input").prop("disabled", false);
 			} else {
 				$("#dlv_todayDlvSp2 > input").prop("disabled", false);
@@ -686,19 +722,19 @@
 							<tr>
 								<td id="dlv_time1">11:00 ~ 13:00</td>
 								<td id="dlv_todayDlvSp1">
-									<input type="radio" class="rad18" name="temp_chk" data-price="2500" disabled="" value="금일-34배송">
+									<input type="radio" class="rad18" name="temp_chk" data-price="2500" disabled="" value="금일-빠름배송">
 								</td>
 								<td id="dlv_nextdayDlvSp1">
-									<input type="radio" class="rad18" name="temp_chk" data-price="2500" disabled="" value="익일-34배송">
+									<input type="radio" class="rad18" name="temp_chk" data-price="2500" disabled="" value="익일-빠름배송">
 								</td>
 							</tr>
 							<tr>
 								<td id="dlv_time2"></td>
 								<td id="dlv_todayDlvSp2">
-									<input type="radio" class="rad18" name="temp_chk" data-price="5000" disabled="" value="금일-빠름배송">
+									<input type="radio" class="rad18" name="temp_chk" data-price="5000" disabled="" value="금일-34배송">
 								</td>
 								<td id="dlv_nextdayDlvSp2">
-									<input type="radio" class="rad18" name="temp_chk" data-price="5000" disabled="" value="익일-빠름배송">
+									<input type="radio" class="rad18" name="temp_chk" data-price="5000" disabled="" value="익일-34배송">
 								</td>
 							</tr>
 							<tr>
@@ -1370,6 +1406,7 @@
 							<tr>
 								<td colspan="5" itemno="001" entrno="C19275" brndcd="3440" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="1" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko"  purchasetype="N"><!-- 2017-01-13 수정 -->
 									<input type="hidden" name="pr_cnt" value="${list.proId }-${list.cnt}">
+									<input type="hidden" name="pro_id" value="${list.proId }">
 									<div class="tbl_cont_area">
 											<div class="tbl_cell w700"><!-- 2017-01-24 수정 : 클래스명 변경 -->
 												<div class="prd_info">

@@ -2,6 +2,7 @@ package head.command;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,16 +27,21 @@ public class CateMRankingAjax extends HttpServlet {
 		HeadService service = HeadService.getInstance();
 
 		List<CateMDTO> list = service.getCateMRanking();
+		CateMDTO dto = null;
 		JSONObject jsonObject = new JSONObject();
 		JSONArray array = new JSONArray();
-		JSONObject cateMName = null;
-
-		for (int i = 0; i < list.size(); i++) {
-			cateMName = new JSONObject();
-			cateMName.put("cateMName", list.get(i));
-			array.add(cateMName);
+		JSONObject cateM = null;
+		
+		Iterator<CateMDTO> ir = list.iterator();
+		while (ir.hasNext()) {
+			dto = ir.next();
+			cateM = new JSONObject();
+			cateM.put("cateMID", dto.getCat_m_id());
+			cateM.put("cateMName", dto.getCat_m_name());
+			array.add(cateM);
 		}
-		jsonObject.put("minors", array);
+
+		jsonObject.put("cateM", array);
 		System.out.println(jsonObject);
 
 		writer.write(jsonObject.toString());
