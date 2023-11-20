@@ -17,17 +17,17 @@ public interface ProfileDAO {
 	public List<String> selectIntCate(Connection conn, String uId) throws Exception;
 	
 	//4.	나의 프로필 수정하기
-	public List<ProfileDTO> updateProfile(Connection conn, String uId, String nickN, String pfCon, String sTone, String sType, String uImgsrc ) throws Exception;
+	public int updateProfile(Connection conn, String uId, String nickN, String pfCon, String sTone, String sType, String uimgsrc ) throws Exception;
 	
-	//5. 	피부고민 수정하기
-	public List<String> updateSkinTrouble(Connection conn, String uId) throws Exception;
+	//5. 	피부고민 삽입하기
+	public int insertSkinTrouble(Connection conn, String uId, List<String> skinTrouble) throws Exception;
 	
-	//6.	관심카테고리 수정하기
-	public List<String> updateIntCate(Connection conn, String uId) throws Exception;
+	//6.	관심카테고리 삽입하기
+	public int insertIntCate(Connection conn, String uId, List<String> intCate) throws Exception;
 	
 	//7.	피부고민 전부 삭제하기
-	public List<String> deleteSkinTroubleAll(Connection conn, String uId) throws Exception;
+	public int deleteSkinTroubleAll(Connection conn, String uId) throws Exception;
 	
 	//8. 	관심카테고리 전부 삭제하기
-	public List<String> deleteIntCateAll(Connection conn, String uId) throws Exception;
+	public int deleteIntCateAll(Connection conn, String uId) throws Exception;
 }
