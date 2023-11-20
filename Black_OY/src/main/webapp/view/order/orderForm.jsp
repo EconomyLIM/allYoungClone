@@ -15,7 +15,7 @@
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
-
+	
 	<script>
 		// form check
 		function formCheck() {
@@ -211,8 +211,14 @@
 				$("#pickupStore").hide();
 				$("#pickupStoreList").hide();
 				$(".new_order_area input,select").prop("disabled", true);
-				$("#dlvpSelect").show();
-			})
+				$("#dlvpSelect").prop("disabled", false).show();
+				$("#rmitCellSctNo_exist").prop("disabled", false);
+				$("#rmitTelRgnNo_exist").prop("disabled", false);
+			});
+			
+			$("#search-zipcode-pop_exist_r").on("click", function() {
+				alert();
+			});
 			
 			// 배송지 선택에서 바뀔 시 ajax 처리
 			$("#dlvpSelect").on("change", function() {

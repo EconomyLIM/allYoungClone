@@ -71,7 +71,6 @@
 <a href="<%=contextPath %>/olive/main.do">main page</a>
 <br>
 <br>
-<a href="https://www.google.com/search?q=%EC%8B%A0%EA%B8%B0%EB%B2%94&sca_esv=583261567&sxsrf=AM9HkKmvZt0HV2q-1jDzcrZYowiaOWWc1A%3A1700204984949&ei=uBFXZda8OYS30-kP3823qAE&ved=0ahUKEwjW-LCRvcqCAxWE2zQHHd_mDRUQ4dUDCBA&uact=5&oq=%EC%8B%A0%EA%B8%B0%EB%B2%94&gs_lp=Egxnd3Mtd2l6LXNlcnAiCeyLoOq4sOuylDIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwAzIKEAAYRxjWBBiwA0j4AlAAWABwAXgBkAEAmAEAoAEAqgEAuAEDyAEA4gMEGAAgQYgGAZAGBQ&sclient=gws-wiz-serp">신기범</a>
 
 
 </div>

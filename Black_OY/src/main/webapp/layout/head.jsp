@@ -943,7 +943,7 @@
 					<li style=""><a onclick="" href="#"
 						data-ref-linkurl="main/getHotdealList.do" data-attr="공통^GNB^오특"><span>오특</span>
 					</a></li>
-					<li style=""><a onclick="" href="<%=contextPath %>/olive/ranking.do"
+					<li style=""><a onclick="" href="<%=contextPath %>/olive/ranking.do?m_click=전체"
 						data-ref-linkurl="main/getBestList.do" data-attr="공통^GNB^랭킹"><span>랭킹</span>
 					</a></li>
 					<li style=""><a onclick="" href="#"

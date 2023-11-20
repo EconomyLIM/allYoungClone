@@ -15,12 +15,12 @@
 <body>
 
 <!--  로그인이 안된 상태에서 url 주소를 입력하거나  때 -->
-<%-- <c:if test="${empty logOn }">
+<c:if test="${empty logOn }">
 	<script>
 		alert("로그인을 해주세요~~!!");
 		location.href = "<%=contextPath%>/olive/LogOn.do";
 	</script>
-</c:if> --%>
+</c:if>
 <jsp:include page="/layout/head.jsp"></jsp:include>
 	<div id="Container">
 		<!-- #Contents -->
