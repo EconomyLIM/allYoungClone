@@ -26,30 +26,35 @@
     $(function() {
        
        $("ul.cate_list_box >  li").on("click", function(event) {
+    	   
           event.preventDefault();
-          // let sort = $(this).find("a").data("sort");
-           let brand_id = '<%=request.getParameter("brand_id")%>';
+           let sort ='p';
+           let brand_id = '<%=request.getParameter("brandId")%>';          
+          let dispcatno = $(this).find("a").data("ref-dispcatno");
           
-         let dispcatno = $(this).find("a").data("ref-dispcatno");
-    
+      
           $.ajax({
                 type : 'get'
              , async : false
              , cache: false
              , url : '/Black_OY/GetSortBrandAjax'
-             , dataType : 'json'
+             
              , data : {
-                brandId : brandId 
-                dispcatno: cateId
+            	brand_id : brand_id ,
+                dispcatno: dispcatno,
+                sort: sort
              }
-             , success : function(data) {
-                    console.log(data);
-                    
+             , success : function(response) {
+                    /* console.log(data); */
+                    $(".prod-list.goodsProd").empty()
+                    $(".prod-list.goodsProd").append(response)
+            	 
                 }
-             , error : function (data, textStatus) {
+             , error : function (response, textStatus) {
                    console.log('error');
                 }
             });
+   
            
        }) 
        
@@ -1951,7 +1956,7 @@
 							id="goodsTrackingCd" name="goodsTrackingCd" value="">
 
 						<ul class="prod-list goodsProd">
-							<c:forEach items="${ bsbrand }" var="dto" varStatus="status">
+							<c:forEach items="${ jsonObject }" var="dto" varStatus="status">
 
 
 								<li data-goods-idx="1">
@@ -2105,6 +2110,7 @@
 	</div>
 </body>
 <script>
+/*
 $('#tablist').slick({ << ( 여기 안의 값은 바꾸기!)
 	   dots: false,
 	   arrows: true,
@@ -2115,7 +2121,7 @@ $('#tablist').slick({ << ( 여기 안의 값은 바꾸기!)
 	   slidesToScroll: 1,
 	   draggable: true
 	});
-
+*/
 </script>
 
 

@@ -27,7 +27,7 @@ public class GetSortBrandAjax extends HttpServlet {
       response.setCharacterEncoding("utf-8");
       PrintWriter writer = response.getWriter();
       
-      String sort = request.getParameter("sort");
+      String sort =request.getParameter("sort");
       String brand_id = request.getParameter("brand_id");
       String dispcatno = request.getParameter("dispcatno");
   
@@ -56,27 +56,29 @@ public class GetSortBrandAjax extends HttpServlet {
       while (ir.hasNext()) {
          dto = ir.next();
          brand = new JSONObject();
-         brand.put("pro_displ_src", dto.getPro_displ_src());
-         brand.put("brand_name", dto.getBrand_name());
-         brand.put("brand_id", dto.getBrand_id());
-         brand.put("pro_displ_name", dto.getPro_displ_name());
-         brand.put("pro_price", dto.getPro_price());
-         brand.put("afterprice", dto.getAfterprice());
-         brand.put("pro_displ_id", dto.getPro_displ_id());
-         brand.put("pro_id", dto.getPro_id());
-         brand.put("prc", dto.getPrc());
-         brand.put("pdc", dto.getPdc());
-         brand.put("pmp", dto.getPmp());
-         brand.put("stock", dto.getStock());
-         brand.put("ordercnt", dto.getOrdercnt());
-         brand.put("pro_stock", dto.getPro_stock());
-         brand.put("pro_displ_like", dto.getPro_displ_like());
-         brand.put("pro_reg", dto.getPro_reg() != null ? dto.getPro_reg().toString() : null);
+	         brand.put("pro_displ_src", dto.getPro_displ_src());
+	         brand.put("brand_name", dto.getBrand_name());
+	         brand.put("brand_id", dto.getBrand_id());
+	         brand.put("pro_displ_name", dto.getPro_displ_name());
+	         brand.put("pro_price", dto.getPro_price());
+	         brand.put("afterprice", dto.getAfterprice());
+	         brand.put("pro_displ_id", dto.getPro_displ_id());
+	         brand.put("pro_id", dto.getPro_id());
+	         brand.put("prc", dto.getPrc());
+	         brand.put("pdc", dto.getPdc());
+	         brand.put("pmp", dto.getPmp());
+	         brand.put("stock", dto.getStock());
+	         brand.put("ordercnt", dto.getOrdercnt());
+	         brand.put("pro_stock", dto.getPro_stock());
+	         brand.put("pro_displ_like", dto.getPro_displ_like());
+	         brand.put("pro_reg", dto.getPro_reg() != null ? dto.getPro_reg().toString() : null);
          jsonArray.add(brand);
       }
   jsonObject.put("brands", jsonArray);
+      request.setAttribute("brandlist", list);
+      request.getRequestDispatcher("/view/brand/brandtest.jsp").forward(request, response);
       
-      System.out.println(jsonObject);
+      System.out.println(">>" + jsonObject);
          
       writer.write(jsonObject.toString());
    }

@@ -70,7 +70,7 @@ public class BrandHandler implements CommandHandler {
       //List<BrandDTO> bestBrandProducts = brandDao.getBestBrandpro(brandId, categoryId);
       List<BrandDTO> brandProducts = brandDao.getsellProduct(brandId, categoryId);
       List<BrandDTO> sellbrandProducts = brandDao.getsellProduct(brandId, categoryId);
-      List<BrandDTO> relist = brandDao.getreviews(categoryId);
+      List<BrandDTO> relist = brandDao.getReviews(brandId);
        
       
       request.setAttribute("brand", brand);
@@ -81,20 +81,20 @@ public class BrandHandler implements CommandHandler {
      // List<BrandDTO> bsbrand = brandDao.getBestBrandpro(brandId , categoryId);   
       
       
-
-      //      List<BrandDTO> nwbrand = brandDao.getNewBrandsDetail(brandId);
-
-      //      List<BrandDTO> lowpri = brandDao.getProductsByCategory(brandId , toString() );
-
-      //      List<BrandDTO> relist =  brandDao.getreviews();              //System.out.println( ">> 검색 결과 확인  : " +  brandDetails.size());
-
       
-      // 데이터를 요청 속성에 추가
+      //      List<BrandDTO> nwbrand = brandDao.getNewBrandsDetail(brandId);
+      
+      //      List<BrandDTO> lowpri = brandDao.getProductsByCategory(brandId , toString() );
+      
+      //      List<BrandDTO> relist =  brandDao.getreviews();              //System.out.println( ">> 검색 결과 확인  : " +  brandDetails.size());
+      
+           
+      //      데이터를 요청 속성에 추가
       //      request.setAttribute("brandds", brandds);
       
-      request.setAttribute("bsbrand", bsbrand);  
+      //request.setAttribute("bsbrand", bsbrand);  
       request.setAttribute("relist" , relist );
-
+      
       //      request.setAttribute("nwbrand", nwbrand);
       //      request.setAttribute("lowpri", lowpri);
       //      request.setAttribute("relist", relist);

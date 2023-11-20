@@ -13,7 +13,7 @@ public interface BrandDAO {
    BrandDTO getBrands(String brandId) throws Exception; 
 
    // 브랜드제품  인기순 리스트 가져오기  , 베스트 상품 
-  // List<BrandDTO> getBestBrandpro(String brand_Id, String category_s_Id) throws Exception;
+   List<BrandDTO> getBestBrandpro(String brand_Id, String category_s_Id) throws Exception;
 
    //   //베스트제품 4개  
    List<BrandDTO> getsellProduct(String brandId, String categoryId) throws Exception;
@@ -22,7 +22,7 @@ public interface BrandDAO {
    List<BrandDTO> getSortBrands(String brandId, String sort, String dispcatno) throws Exception;
    
    // 리뷰 가져오기
-List<BrandDTO> getreviews(String brandId) throws Exception;
+List<BrandDTO> getReviews(String pro_displ_id) throws Exception;
 
 
 

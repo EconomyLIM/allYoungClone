@@ -10,6 +10,7 @@ import java.util.List;
 
 
 import com.util.ConnectionProvider;
+import com.util.JDBCUtil;
 
 import brand.domain.BrandDTO;
 
@@ -89,38 +90,35 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
    public List<BrandDTO> getSortBrands(String brandId, String sort, String dispcatno) throws Exception {
 
       String sql = " SELECT * "
-				+ "    FROM ( "
-				+ "        SELECT ROWNUM no, t.* "
-				+ "            FROM( "
-				+ "                select * from pmlistview ";
-      if(dispcatno.equals("cate_1")) {
+				+ "    FROM pmlistview WHERE brand_id = ? ";
+			
+      if(dispcatno.equals("cate_01")) {
           sql +=  " ";
-          
-       } else if(dispcatno.equals("cate_2")) {
-          sql += " AND cate_l_id= '0001'";            
-       } else if(dispcatno.equals("cate_3")) {
-          sql += " AND cate_l_id= '0003'";
-       } else if(dispcatno.equals("cate_4")) {
-          sql += " AND cate_l_id= '0004' ";
+       } else if(dispcatno.equals("cate_02")) {
+          sql += " AND cat_l_id= '0001' ";            
+       } else if(dispcatno.equals("cate_03")) {
+          sql += " AND cat_l_id= '0003' ";
+       } else if(dispcatno.equals("cate_04")) {
+          sql += " AND cat_l_id= '0004' ";
        } 
         
-      if( sort !=null ) {
-    	  
-      }
-       else if(sort.equals("p")) { 
-    	  sql += " ORDER BY PRO_DISPL_LIKE DESC"; 
-      } else if(sort.equals("n")) { 
-    	  sql += " ORDER BY PRO_REG DESC "; 
-    	  } else if(sort.equals("s")) { 
-    		  sql += " ORDER BY ordercnt desc "; 
-    		  }else if(sort.equals("l")) {
-    			  sql += " ORDER BY PRO_PRICE ASC "; 
-    			  } else if(sort.equals("d")) { 
-    				  sql += " ORDER BY (proprice-afterprice)/proprice*100 desc ";
-           } 
+      if (sort != null) {
+    	    if (sort.equals("p")) {
+    	        sql += " ORDER BY PRO_DISPL_LIKE DESC";
+    	    } else if (sort.equals("n")) {
+    	        sql += " ORDER BY PRO_REG DESC";
+    	    } else if (sort.equals("s")) {
+    	        sql += " ORDER BY ordercnt DESC";
+    	    } else if (sort.equals("l")) {
+    	        sql += " ORDER BY PRO_PRICE ASC";
+    	    } else if (sort.equals("d")) {
+    	        sql += " ORDER BY (proprice-afterprice)/proprice*100 DESC";
+    	    }
+    	}
       
+      System.out.println( sql );
       
-      List<BrandDTO> list = null;
+      List<BrandDTO> list = new ArrayList<BrandDTO>();
       BrandDTO brand = null;
 
       Connection conn =  ConnectionProvider.getConnection(); 
@@ -129,9 +127,9 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
 
       try {
          PreparedStatement preparedStatement = conn.prepareStatement(sql);
+         
          preparedStatement.setString(1,brandId);
-         preparedStatement.setString(2,dispcatno);
-         preparedStatement.setString(3,sort);
+
          rs = preparedStatement.executeQuery();
 
          while (rs.next()) {
@@ -140,7 +138,7 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
                      .brand_name(rs.getString("BRAND_NAME"))
                      .brand_id(rs.getString("BRAND_ID"))
                      .pro_displ_name(rs.getString("PRO_DISPL_NAME"))
-                     .pro_price(rs.getInt("PRO_PRICE"))
+                     .pro_price(rs.getInt("proprice"))
                      .afterprice(rs.getInt("AFTERPRICE"))
                      .pro_displ_id(rs.getString("PRO_DISPL_ID"))
                      .pro_id(rs.getString("PRO_ID"))
@@ -217,10 +215,13 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
          e.printStackTrace();
       //preparedStatement.close();
       } finally {
+//    	  JDBCUtil.close(preparedStatement);
+//    	  JDBCUtil.close(conn);
+//    	  JDBCUtil.close(rs);
       }// try_catch
       return sellbrandProducts;
    }
-
+  /*
    //리뷰가져오기 
    @Override
    public List<BrandDTO> getreviews(String brandId) throws Exception {
@@ -258,6 +259,7 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
       return relists;
 
    }
+   */
    
    //  =여기서 부터 주석처리함 
    
@@ -373,6 +375,12 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
 
       return relists;
    }
+
+@Override
+public List<BrandDTO> getBestBrandpro(String brand_Id, String category_s_Id) throws Exception {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 
    // 브랜드 제품 할인율순으로 가져오기
