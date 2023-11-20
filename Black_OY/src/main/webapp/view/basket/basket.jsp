@@ -8,6 +8,9 @@
 <%
 ArrayList<BasketDTO> basketList = (ArrayList) request.getAttribute("list");
 String quickyn = request.getParameter("quickyn");
+if(quickyn == null || quickyn.equals("")){
+	quickyn = "N";
+}
 %>
 
 
@@ -22,6 +25,33 @@ String quickyn = request.getParameter("quickyn");
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
+<script>
+//등급 색깔 
+$(function(){
+let grade_id = "${logOn.grade_id}";
+let grade = grade_id.split(" ")[0];
+
+let gradeColor = ""
+switch (grade) {
+case 'BABY': 
+	gradeColor = 'iconGrade5';
+	break;
+case 'PINK': 
+	gradeColor = 'iconGrade4';
+	break;
+case 'GREEN': 
+	gradeColor = 'iconGrade3';
+	break;
+case 'BLACK': 
+	gradeColor = 'iconGrade2';
+	break;
+case 'GOLD': 
+	gradeColor = 'iconGrade1';
+	break;
+}
+$("#Contents > div.membership_box").addClass(gradeColor);
+})
+</script>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
 	<div>
 		<div id="Contents">
@@ -51,7 +81,7 @@ String quickyn = request.getParameter("quickyn");
 
 
 
-			<div class="membership_box  iconGrade5">
+			<div class="membership_box">
 				<p class="tx_grade_info">
 					<strong>${sessionScope.logOn.u_name}</strong>님의 멤버십 등급은 <span
 						class="grade">${sessionScope.logOn.grade_id} </span>입니다
