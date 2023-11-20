@@ -1,9 +1,27 @@
+<%@page import="java.util.Map"%>
+<%@page import="head.domain.CateMDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="head.service.HeadService"%>
+<%@page import="productDetail.domain.CateLDTO"%>
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/WEB-INF/inc/include.jspf"%>
 <%@ include file="/WEB-INF/inc/session_auth.jspf"%>
+<% 
+
+	HeadService headService = HeadService.getInstance();
+	Map<CateLDTO, List<CateMDTO>> bHash = headService.sGetCate(1);
+	request.setAttribute("bHash", bHash);
+	Map<CateLDTO, List<CateMDTO>> hHash = headService.sGetCate(2);
+	request.setAttribute("hHash", hHash);
+	Map<CateLDTO, List<CateMDTO>> lHash = headService.sGetCate(3);
+	request.setAttribute("lHash", lHash);
+	
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -602,225 +620,32 @@
 					<ul class="all_menu_wrap">
 						<li>
 							<h2>뷰티</h2>
+							<c:if test="${not empty bHash}">
+							<c:forEach var="i" varStatus="outerLoop" begin="1" end="3">
+								<c:set var="innerLoopBegin" value="${(outerLoop.index - 1) * 4}" />
+								<c:set var="innerLoopEnd" value="${(outerLoop.index * 4) -1}" />
 							<div class="sub_menu_box">
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000010001"
-										data-attr="공통^드로우^스킨케어">스킨케어</a>
-								</p>
-								<ul>
-									<li><a
-										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00010001&sort=1"
-										data-ref-dispcatno="100000100010008"
-										data-attr="공통^드로우^스킨케어_토너/로션/올인원" data-trk="/">토너/로션/올인원</a></li>
-									<li><a
-										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00010002&sort=1"
-										data-ref-dispcatno="100000100010009"
-										data-attr="공통^드로우^스킨케어_에센스/크림" data-trk="/">에센스/크림</a></li>
-									<li><a
-										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00010003&sort=1"
-										data-ref-dispcatno="100000100010010"
-										data-attr="공통^드로우^스킨케어_미스트/오일" data-trk="/">미스트/오일</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000010009"
-										data-attr="공통^드로우^마스크팩">마스크팩</a>
-								</p>
-								<ul>
-									<li><a
-										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00020004&sort=1"
-										data-ref-dispcatno="100000100090001"
-										data-attr="공통^드로우^마스크팩_시트팩" data-trk="/">시트팩</a></li>
-									<li><a
-										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00020005&sort=1"
-										data-ref-dispcatno="100000100090004"
-										data-attr="공통^드로우^마스크팩_패드" data-trk="/">패드</a></li>
-									<li><a
-										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00020006&sort=1"
-										data-ref-dispcatno="100000100090002"
-										data-attr="공통^드로우^마스크팩_페이셜팩" data-trk="/">페이셜팩</a></li>
-									<li><a
-										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00020007&sort=1"
-										data-ref-dispcatno="100000100090003"
-										data-attr="공통^드로우^마스크팩_코팩/패치" data-trk="/">코팩/패치</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000010010"
-										data-attr="공통^드로우^클렌징">클렌징</a>
-								</p>
-								<ul>
-									<li><a
-										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00030008&sort=1"
-										data-ref-dispcatno="100000100100001"
-										data-attr="공통^드로우^클렌징_클렌징폼/젤" data-trk="/">클렌징폼/젤</a></li>
-									<li><a
-										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00030009&sort=1"
-										data-ref-dispcatno="100000100100002"
-										data-attr="공통^드로우^클렌징_오일/워터/리무버" data-trk="/">오일/워터/리무버</a></li>
-									<li><a
-										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00030010&sort=1"
-										data-ref-dispcatno="100000100100003"
-										data-attr="공통^드로우^클렌징_필링/패드" data-trk="/">필링/패드</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000010011"
-										data-attr="공통^드로우^선케어">선케어</a>
-								</p>
-								<ul>
-									<li><a
-										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00040011&sort=1"
-										data-ref-dispcatno="100000100110001"
-										data-attr="공통^드로우^선케어_선블록" data-trk="/">선블록</a></li>
-									<li><a
-										href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=00040012&sort=1"
-										data-ref-dispcatno="100000100110002"
-										data-attr="공통^드로우^선케어_태닝/애프터선" data-trk="/">태닝/애프터선</a></li>
-								</ul>
+								<c:forEach items="${bHash}" var="bh" begin="${innerLoopBegin}" end="${innerLoopEnd}" varStatus="innerLoop">
+									
+										<p class="sub_depth">
+											<a href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=${bh.key.cLId}">${bh.key.cLName}</a>
+										</p>
+										<ul>
+											<c:forEach items="${bh.value}" var="value">
+												<li>
+													<a href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=${bh.key.cLId}${value.cat_m_id}&sort=1">
+													${value.cat_m_name}
+													</a>
+												</li>
+											</c:forEach>
+										</ul>
+									
+								</c:forEach>
 							</div>
-							<div class="sub_menu_box">
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000010008"
-										data-attr="공통^드로우^더모 코스메틱">더모 코스메틱</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000100080013"
-										data-attr="공통^드로우^더모 코스메틱_스킨케어" data-trk="/">스킨케어</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100080006"
-										data-attr="공통^드로우^더모 코스메틱_클렌징" data-trk="/">클렌징</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100080005"
-										data-attr="공통^드로우^더모 코스메틱_선케어" data-trk="/">선케어</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100080011"
-										data-attr="공통^드로우^더모 코스메틱_마스크팩" data-trk="/">마스크팩</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100080004"
-										data-attr="공통^드로우^더모 코스메틱_바디케어" data-trk="/">바디케어</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000010002"
-										data-attr="공통^드로우^메이크업">메이크업</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000100020006"
-										data-attr="공통^드로우^메이크업_립메이크업" data-trk="/">립메이크업</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100020001"
-										data-attr="공통^드로우^메이크업_베이스메이크업" data-trk="/">베이스메이크업</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100020007"
-										data-attr="공통^드로우^메이크업_아이메이크업" data-trk="/">아이메이크업</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000010012"
-										data-attr="공통^드로우^네일">네일</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000100120007"
-										data-attr="공통^드로우^네일_폴리쉬" data-trk="/">폴리쉬</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100120006"
-										data-attr="공통^드로우^네일_팁/스티커" data-trk="/">팁/스티커</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100120005"
-										data-attr="공통^드로우^네일_반경화" data-trk="/">반경화</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100120004"
-										data-attr="공통^드로우^네일_케어" data-trk="/">케어</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000010003"
-										data-attr="공통^드로우^바디케어">바디케어</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000100030014"
-										data-attr="공통^드로우^바디케어_로션/오일" data-trk="/">로션/오일</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100030005"
-										data-attr="공통^드로우^바디케어_샤워/입욕" data-trk="/">샤워/입욕</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100030008"
-										data-attr="공통^드로우^바디케어_립케어" data-trk="/">립케어</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100030016"
-										data-attr="공통^드로우^바디케어_핸드케어" data-trk="/">핸드케어</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100030019"
-										data-attr="공통^드로우^바디케어_제모/왁싱" data-trk="/">제모/왁싱</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100030015"
-										data-attr="공통^드로우^바디케어_바디미스트" data-trk="/">바디미스트</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100030012"
-										data-attr="공통^드로우^바디케어_데오드란트" data-trk="/">데오드란트</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100030020"
-										data-attr="공통^드로우^바디케어_맘&amp;베이비" data-trk="/">맘&amp;베이비</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100030017"
-										data-attr="공통^드로우^바디케어_선물세트" data-trk="/">선물세트</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100030018"
-										data-attr="공통^드로우^바디케어_풋케어" data-trk="/">풋케어</a></li>
-								</ul>
-							</div>
-							<div class="sub_menu_box">
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000010004"
-										data-attr="공통^드로우^헤어케어">헤어케어</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000100040008"
-										data-attr="공통^드로우^헤어케어_샴푸/린스" data-trk="/">샴푸/린스</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100040007"
-										data-attr="공통^드로우^헤어케어_트리트먼트/팩" data-trk="/">트리트먼트/팩</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100040013"
-										data-attr="공통^드로우^헤어케어_헤어에센스" data-trk="/">헤어에센스</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100040010"
-										data-attr="공통^드로우^헤어케어_염색약/펌" data-trk="/">염색약/펌</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100040004"
-										data-attr="공통^드로우^헤어케어_헤어기기" data-trk="/">헤어기기</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100040011"
-										data-attr="공통^드로우^헤어케어_스타일링" data-trk="/">스타일링</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100040009"
-										data-attr="공통^드로우^헤어케어_헤어브러쉬" data-trk="/">헤어브러쉬</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000010005"
-										data-attr="공통^드로우^향수/디퓨저">향수/디퓨저</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000100050003"
-										data-attr="공통^드로우^향수/디퓨저_여성향수" data-trk="/">여성향수</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100050004"
-										data-attr="공통^드로우^향수/디퓨저_남성향수" data-trk="/">남성향수</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100050008"
-										data-attr="공통^드로우^향수/디퓨저_홈 프래그런스" data-trk="/">홈 프래그런스</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100050009"
-										data-attr="공통^드로우^향수/디퓨저_선물세트" data-trk="/">선물세트</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000010006"
-										data-attr="공통^드로우^미용소품">미용소품</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000100060001"
-										data-attr="공통^드로우^미용소품_메이크업소품" data-trk="/">메이크업소품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100060006"
-										data-attr="공통^드로우^미용소품_스킨케어소품" data-trk="/">스킨케어소품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100060007"
-										data-attr="공통^드로우^미용소품_아이소품" data-trk="/">아이소품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100060002"
-										data-attr="공통^드로우^미용소품_헤어/바디소품" data-trk="/">헤어/바디소품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100060003"
-										data-attr="공통^드로우^미용소품_미용관리" data-trk="/">미용관리</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100060004"
-										data-attr="공통^드로우^미용소품_미용가전" data-trk="/">미용가전</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100060005"
-										data-attr="공통^드로우^미용소품_미용잡화" data-trk="/">미용잡화</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000010007"
-										data-attr="공통^드로우^남성">남성</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000100070007"
-										data-attr="공통^드로우^남성_스킨케어" data-trk="/">스킨케어</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100070009"
-										data-attr="공통^드로우^남성_헤어케어" data-trk="/">헤어케어</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100070010"
-										data-attr="공통^드로우^남성_쉐이빙" data-trk="/">쉐이빙</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100070017"
-										data-attr="공통^드로우^남성_향수/매너용품" data-trk="/">향수/매너용품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100070008"
-										data-attr="공통^드로우^남성_메이크업" data-trk="/">메이크업</a></li>
-									<li><a href="#" data-ref-dispcatno="100000100070011"
-										data-attr="공통^드로우^남성_바디케어" data-trk="/">바디케어</a></li>
-								</ul>
-							</div>
+							</c:forEach>
+							</c:if>
 						</li>
+						<!-- 뷰티 끝 -->
 						<li>
 							<h2>헬스&amp;푸드</h2>
 							<div class="sub_menu_box">
@@ -946,7 +771,7 @@
 					<li style=""><a onclick="" href="<%=contextPath%>/olive/ranking.do"
 						data-ref-linkurl="main/getBestList.do" data-attr="공통^GNB^랭킹"><span>랭킹</span>
 					</a></li>
-					<li style=""><a onclick="" href="#"
+					<li style=""><a onclick="" href="<%=contextPath %>/olive/planshop.do?eventId=le_00000001"
 						data-attr="공통^GNB^LUXE EDIT"><span>LUXE EDIT</span> </a></li>
 
 					<li style=""><a onclick="" href="#"

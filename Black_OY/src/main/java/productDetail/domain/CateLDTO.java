@@ -1,6 +1,8 @@
 package productDetail.domain;
 
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode
 public class CateLDTO {
 
 	private String cLId;
