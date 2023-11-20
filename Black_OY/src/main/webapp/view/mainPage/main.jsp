@@ -73,7 +73,7 @@ $(document).ready(() => {
 </script>
 
 <body>
-	<jsp:include page="/layout/head_main.jsp"></jsp:include>
+	<jsp:include page="/layout/head.jsp"></jsp:include>
 	
 
 	<div id="Wrapper">

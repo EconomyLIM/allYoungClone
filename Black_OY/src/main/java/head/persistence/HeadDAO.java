@@ -7,6 +7,7 @@ import java.util.List;
 import head.domain.CateMDTO;
 import head.domain.EventDTO;
 import head.domain.GiftCardDTO;
+import head.domain.ProductHistoryDTO;
 
 public interface HeadDAO {
 	// 1. 관심 매장 이름 리스트 얻어오기
@@ -26,4 +27,7 @@ public interface HeadDAO {
 
 	// 6. 판매별 카테고리 중분류 이름 얻어오기
 	List<CateMDTO> selectCateMName(Connection conn) throws SQLException;
+	
+	// 7. 최근 본 상품
+	ProductHistoryDTO productHistory(Connection conn, String pro_id) throws Exception;
 }

@@ -210,8 +210,8 @@ function changePerPageAndClass(value) {
 	}
 </script>
 <body>
-	<%-- <jsp:include page="/layout/head.jsp"></jsp:include> --%>
-	<jsp:include page="/layout/head_main.jsp"></jsp:include>
+	<jsp:include page="/layout/head.jsp"></jsp:include>
+	
 	<div id="Container">
 		<div id="Contents">
 			<div class="page_location">
@@ -634,6 +634,8 @@ $(document).ready(function() {
 	
 </script>
 <script>
+
+
 // 쿠키 저장 함수
 function setCookie(cookie_name, value, days) {
   var exdate = new Date();
@@ -658,6 +660,47 @@ function getCookie(cookie_name) {
 	    }
 	  }
 	}
+	
+	//쿠키 값 저장 하기
+	function addCookie(id) {
+  var items = getCookie('productItems'); // 이미 저장된 값을 쿠키에서 가져오기
+  var maxItemNum = 4; // 최대 저장 가능한 아이템 개수
+  var expire = 7; // 쿠키값을 저장할 기간
+  
+  if (items) {
+    var itemArray = items.split(',');
+    var itemSet = new Set(itemArray); // 중복 아이템을 제거하기 위해 Set 사용
+    
+    if (!itemSet.has(id)) {
+      // 새로운 값 추가
+      itemSet.add(id);
+      
+      // 쿠키에 새로운 값 추가 후, 최대 개수 유지하기
+      var updatedItemsArray = Array.from(itemSet);
+      while (updatedItemsArray.length > maxItemNum) {
+        updatedItemsArray.shift(); // 오래된 값을 삭제
+      }
+
+      // 쿠키에 새로운 값을 추가한 후, 다시 설정
+      var updatedItemsString = updatedItemsArray.join(',');
+      setCookie('productItems', updatedItemsString, expire);
+    }
+  } else {
+    // 신규 id값 저장하기
+    setCookie('productItems', id, expire);
+  }
+}
+
+// 클릭 이벤트 처리
+$(function(){
+  $(".prd_thumb.goodsList").on("click",function(){
+    let pro_id = $(this).attr("name");
+    addCookie(pro_id); // addCookie 함수 호출
+  })
+})
+
+
+	
 </script>
 
 </html>
