@@ -229,6 +229,7 @@ function Test2() {
 				 $('#buy_option_box').removeClass('open');
 			} else {
 				 $('#buy_option_box').addClass('open');
+				 $('.option_add_area.pkg_goods_n').css('display','block');
 			}
 		})
 		
@@ -247,7 +248,7 @@ function Test2() {
 		/* */
 		
 		$('.btn_opt_del').on('click', function(event) {
-			 event.preventDefault(); // 이 부분이 빠져있었습니다.
+			 event.preventDefault(); 
 			 
 			var totalPrice = parseInt($('#totalPrcTxt').text());
 			 
@@ -322,7 +323,7 @@ function Test2() {
 	<script>
 $(function() {
 	$('#deliveDay').on('click', function() {
-		$('.prd_cnt_box ').css('display','none');
+		$('.option_add_area.pkg_goods_n').css('display','none');
 		$('.option_cnt_box input').val(0);
 		$('.tx_cont > .tx_num').text(0);
 	})// deliveDay
@@ -1425,19 +1426,18 @@ RemoveSessionServlet?sessionName='
 									<div class="cont_area">
 										<span class="option_cnt_box">
 											<button class="btnCalc minus"
-												onclick="goods.detail.cart.prevVal('A000000175060001','17000','1');">수량
-												1감소</button> <input type="text" id="cartCnt_A000000175060001"
-											name="cartCnt_A000000175060001" value="1" class="tx_num"
+												onclick="">수량
+												1감소</button> <input type="text" id="cartCnt"
+											name="cartCnt" value="1" class="tx_num"
 											title="구매수량">
 											<button class="btnCalc plus"
-												onclick="goods.detail.cart.nextVal('A000000175060001','17000','1');">수량
+												onclick="">수량
 												1증가</button>
 										</span>
 									</div>
 								</div>
 
 							</div>
-
 
 						</c:if>
 						<div class="prd_total_price">
@@ -1627,10 +1627,10 @@ RemoveSessionServlet?sessionName='
 					<!-- 202005 상품개선 : 브랜드 좋아요 추가 -->
 					<div class="brand_like">
 						<p class="inner">
-							<a href=".do?${detailBrandDTO.brandId }" id="moveBrandShop_like"
+							<a href="<%=contextPath%>/brand/product.do?brand_id=${detailBrandDTO.brandId }" id="moveBrandShop_like"
 								class="link arr goods_brand"> <!-- 								<span class="img" style="background-image:url('/pc-static-root/image/product/img_brand_default.png')"></span> -->
 								<span class="logo"
-								style="background-image: ${detailBrandDTO.brandLogoSrc}')"></span>
+								style="background-image:url('${detailBrandDTO.brandLogoSrc}')"></span>
 								<em>${detailBrandDTO.brandName } 브랜드관</em>
 							</a>
 							<button type="button" id="brnd_wish" data-ref-onlbrndcd="A003585"
