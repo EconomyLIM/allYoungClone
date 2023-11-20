@@ -80,6 +80,7 @@ function handleMenuClick(id, event) {
 			
 
 		</c:if>
+		
 		<c:if test="${not empty map }">
 			<ul class="plan-menu" id="move1">
 					<li><a href="#" onclick=" handleMenuClick('all',event)">전체</a></li>

@@ -487,7 +487,7 @@ public class MainDAOImpl implements MainDAO{
 		return list;
 	} // getPlanShop
 
-	// 메인 브랜드 좋아요 상위 10개 가져오기
+	// ====================== 메인 브랜드 좋아요 상위 10개 가져오기 ======================
 	@Override
 	public List<MainBrandDTO> mainBrand(Connection conn) throws Exception {
 		String sql = " SELECT * FROM ( "
@@ -538,7 +538,7 @@ public class MainDAOImpl implements MainDAO{
 		return list;
 	}
 
-	// 브랜드 상위 2개 상품 가져오기
+	// ====================== 브랜드 상위 2개 상품 가져오기 ======================
 	@Override
 	public List<BrandItemDTO> mainBrandItem(Connection conn, String brand_id) throws Exception {
 		String sql = " SELECT * FROM ( "
@@ -686,6 +686,67 @@ public class MainDAOImpl implements MainDAO{
 
 		return hashMap;
 	} // getPopularShop
+
+	// ================ MD가 추천해요 작업 ======================
+	@Override
+	public List<PMidListDTO> getMdRecommend(Connection conn) throws Exception {
+		String sql = " SELECT * "
+				+ " FROM ( "
+				+ "    SELECT * "
+				+ "    FROM pmListview "
+				+ "    ORDER BY DBMS_RANDOM.VALUE "
+				+ " ) "
+				+ " WHERE ROWNUM <= 2 ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		PMidListDTO dto = null;
+		List<PMidListDTO> list = null;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					
+					dto = PMidListDTO.builder()
+							.displImgSrc(rs.getString("pro_displ_src"))
+							.brandId(rs.getString("brand_id")) 
+							.brandName(rs.getString("brand_name"))
+							.displProName(rs.getString("pro_displ_name")) 
+							.lid(rs.getString("cat_l_id"))
+							.mid(rs.getString("cat_m_id")) 
+							.sid(rs.getString("cat_s_id"))
+							.proPrice(rs.getString("proprice")) 
+							.afterPrice(rs.getString("afterprice"))
+							.displId(rs.getString("pro_displ_id")) 
+							.productID(rs.getString("pro_id"))
+							.prc(rs.getInt("prc")) .pdc(rs.getInt("pdc")) .pmp(rs.getInt("pmp"))
+							.stock(rs.getInt("stock")) .build();
+					
+					list.add(dto);
+					
+					
+				} while (rs.next());
+				System.out.println(" >>> MainDAOImpl getMdRecommend <<< ");
+			} // if
+			
+		} catch (SQLException e) {
+			System.out.println(">MainDAOImpl getMdRecommend SQLException<");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">MainDAOImpl getMdRecommend Exception<");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		} //try_catch
+
+		return list;
+	} // getMdRecommend
 
 
 } // class

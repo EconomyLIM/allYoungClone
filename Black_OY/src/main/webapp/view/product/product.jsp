@@ -29,7 +29,7 @@ usersOnPage.add(session2.getId());
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="/Black_OY/js/head.js"></script>
+<!-- <script src="/Black_OY/js/head.js"></script> -->
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
 
@@ -229,6 +229,7 @@ function Test2() {
 				 $('#buy_option_box').removeClass('open');
 			} else {
 				 $('#buy_option_box').addClass('open');
+				 $('.option_add_area.pkg_goods_n').css('display','block');
 			}
 		})
 		
@@ -247,7 +248,7 @@ function Test2() {
 		/* */
 		
 		$('.btn_opt_del').on('click', function(event) {
-			 event.preventDefault(); // 이 부분이 빠져있었습니다.
+			 event.preventDefault(); 
 			 
 			var totalPrice = parseInt($('#totalPrcTxt').text());
 			 
@@ -322,7 +323,7 @@ function Test2() {
 	<script>
 $(function() {
 	$('#deliveDay').on('click', function() {
-		$('.prd_cnt_box ').css('display','none');
+		$('.option_add_area.pkg_goods_n').css('display','none');
 		$('.option_cnt_box input').val(0);
 		$('.tx_cont > .tx_num').text(0);
 	})// deliveDay
@@ -792,7 +793,7 @@ $(function () {
             var sessionName = '<%=session.getAttribute(request.getParameter("goodsNo"))%>';
             $.ajax({
                 url: '<%=contextPath%>
-		RemoveSessionServlet?sessionName='
+RemoveSessionServlet?sessionName='
 												+ sessionName,
 										cache : false,
 										type : 'GET',
@@ -1188,9 +1189,9 @@ $(function () {
 						<p class="prd_name">${pLists[0].displName }</p>
 						<!-- 202005 상품개선 : 추가 -->
 						<div class="price">
-							<span class="price-1"> <strike>${pLists[0].lowPrice }</strike>
+							<span class="price-1"> <strike><fmt:formatNumber value="${pLists[0].lowPrice}" pattern="#,###" /> </strike>
 								<span>원</span>
-							</span> <span class="price-2"> <strong>${pLists[0].afterPrice}</strong>
+							</span> <span class="price-2"> <strong><fmt:formatNumber value="${pLists[0].afterPrice}" pattern="#,###" /></strong>
 								<span>원</span>
 							</span>
 							<c:if
@@ -1204,13 +1205,13 @@ $(function () {
 								<div class="detail">
 									<div class="list">
 										<div class="flex-item">
-											<span class="label">판매가</span> <span class="price">${pLists[0].lowPrice}<em>원</em></span>
+											<span class="label">판매가</span> <span class="price"><fmt:formatNumber value="${pLists[0].lowPrice}" pattern="#,###" /><em>원</em></span>
 										</div>
 										<c:if test="${not empty productPromo.promoDId}">
 											<div class="price_child">
 												<div class="flex-item">
 													<span class="label">세일 (${productPromo.promoDS} ~
-														${productPromo.promoDE })</span> <span class="price">${productPromo.promoDdis }<em>원</em></span>
+														${productPromo.promoDE })</span> <span class="price"><fmt:formatNumber value="${productPromo.promoDdis}" pattern="#,###" /><em>원</em></span>
 												</div>
 											</div>
 										</c:if>
@@ -1219,7 +1220,7 @@ $(function () {
 												<div class="flex-item">
 													<span class="label">${productPromo.promoCName }
 														(${productPromo.promoCS}~ ${productPromo.promoCE})</span> <span
-														class="price">-${productPromo.cpdis}<em>원</em></span>
+														class="price">-<fmt:formatNumber value="${productPromo.cpdis}" pattern="#,###" /><em>원</em></span>
 												</div>
 											</div>
 										</c:if>
@@ -1227,7 +1228,7 @@ $(function () {
 									<div class="list">
 										<div class="flex-item">
 											<span class="label"><b>최적가</b></span> <span
-												class="price total">${pLists[0].afterPrice}<em>원</em></span>
+												class="price total"><fmt:formatNumber value="${pLists[0].afterPrice}" pattern="#,###" /><em>원</em></span>
 										</div>
 									</div>
 								</div>
@@ -1350,8 +1351,8 @@ $(function () {
 											</span>
 												<div class="set">
 													<span class="option_value"> ${pll.proName} <span
-														class="option_price"> <span class="tx_num"><fmt:formatNumber
-																	value="${pll.pafterPrice}" pattern="#,###" />원</span>
+														class="option_price"> <span class="tx_num">
+														<fmt:formatNumber value="${pll.pafterPrice}" pattern="#,###" />원</span>
 													</span>
 													</span>
 													<c:if test="${pll.stock eq 1}">
@@ -1401,7 +1402,8 @@ $(function () {
 											</span>
 										</div>
 										<div class="cont_area">
-											<span class="option_price"> <span class="tx_num">${pli.pafterPrice}</span>원
+											<span class="option_price"> <span class="tx_num">
+											<fmt:formatNumber value="${pli.pafterPrice}" pattern="#,###" /></span>원
 											</span> <a href="#" class="btn_opt_del">선택한 옵션 삭제</a>
 										</div>
 									</div>
@@ -1425,12 +1427,12 @@ $(function () {
 									<div class="cont_area">
 										<span class="option_cnt_box">
 											<button class="btnCalc minus"
-												onclick="goods.detail.cart.prevVal('A000000175060001','17000','1');">수량
-												1감소</button> <input type="text" id="cartCnt_A000000175060001"
-											name="cartCnt_A000000175060001" value="1" class="tx_num"
+												onclick="">수량
+												1감소</button> <input type="text" id="cartCnt"
+											name="cartCnt" value="1" class="tx_num"
 											title="구매수량">
 											<button class="btnCalc plus"
-												onclick="goods.detail.cart.nextVal('A000000175060001','17000','1');">수량
+												onclick="">수량
 												1증가</button>
 										</span>
 									</div>
@@ -1438,14 +1440,20 @@ $(function () {
 
 							</div>
 
-
 						</c:if>
 						<div class="prd_total_price">
 							<span class="tx_tit">상품금액 합계</span> <input type="hidden"
 								id="totalCnt" value="1" name="totalCnt"> <input
 								type="hidden" id="totalPrc" value="17000" name="totalPrc">
-							<span class="tx_cont"><span class="tx_num"
-								id="totalPrcTxt">0</span>원</span>
+							<span class="tx_cont">
+								<span class="tx_num"
+								id="totalPrcTxt">
+								<c:if test="${pLists.size() eq 1 }"><fmt:formatNumber value="${pLists[0].afterPrice}" pattern="#,###" />
+								</c:if>
+								<c:if test="${pLists.size() ne 1 }">0
+								</c:if>
+								</span>원
+							</span>
 
 						</div>
 
@@ -1627,10 +1635,10 @@ $(function () {
 					<!-- 202005 상품개선 : 브랜드 좋아요 추가 -->
 					<div class="brand_like">
 						<p class="inner">
-							<a href=".do?${detailBrandDTO.brandId }" id="moveBrandShop_like"
+							<a href="<%=contextPath%>/brand/product.do?brand_id=${detailBrandDTO.brandId }" id="moveBrandShop_like"
 								class="link arr goods_brand"> <!-- 								<span class="img" style="background-image:url('/pc-static-root/image/product/img_brand_default.png')"></span> -->
 								<span class="logo"
-								style="background-image: ${detailBrandDTO.brandLogoSrc}')"></span>
+								style="background-image:url('${detailBrandDTO.brandLogoSrc}')"></span>
 								<em>${detailBrandDTO.brandName } 브랜드관</em>
 							</a>
 							<button type="button" id="brnd_wish" data-ref-onlbrndcd="A003585"
@@ -1708,8 +1716,8 @@ $(function () {
 											tabindex="0"><dl>
 												<dt class="tit">${morelist.PRO_DISPL_NAME}</dt>
 												<dd class="price">
-													<del>${ morelist.PROPRICE}원</del>
-													<strong>${morelist.AFTERPRICE }원</strong>
+													<del><fmt:formatNumber value="${ morelist.PROPRICE}" pattern="#,###" />원</del>
+													<strong><fmt:formatNumber value="${morelist.AFTERPRICE}" pattern="#,###" />원</strong>
 												</dd>
 												<dd class="icon">
 													<c:if test="${morelist.PDC eq 1}">
