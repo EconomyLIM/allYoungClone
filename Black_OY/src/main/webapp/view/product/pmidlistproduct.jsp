@@ -307,25 +307,6 @@ function changePerPageAndClass(value) {
 						</c:forEach>
 
 					</c:if>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
 
 
 				</ul>
