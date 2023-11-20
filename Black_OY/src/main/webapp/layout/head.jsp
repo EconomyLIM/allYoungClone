@@ -946,7 +946,7 @@
 					<li style=""><a onclick="" href="<%=contextPath%>/olive/ranking.do"
 						data-ref-linkurl="main/getBestList.do" data-attr="공통^GNB^랭킹"><span>랭킹</span>
 					</a></li>
-					<li style=""><a onclick="" href="#"
+					<li style=""><a onclick="" href="<%=contextPath %>/olive/planshop.do?eventId=le_00000001"
 						data-attr="공통^GNB^LUXE EDIT"><span>LUXE EDIT</span> </a></li>
 
 					<li style=""><a onclick="" href="#"
