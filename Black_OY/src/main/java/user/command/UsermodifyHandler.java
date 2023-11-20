@@ -1,4 +1,4 @@
-package mypage.customer.command;
+package user.command;
 
 import java.sql.Connection;
 import java.util.List;

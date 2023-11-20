@@ -117,9 +117,6 @@
 								type="hidden" name="param_r3" id="param_r3"> <input
 								type="hidden" name="enc_com" id="enc_com">
 
-							<!-- 2010.12.21 가입출처 제휴사 정보 추가.(오쇼핑,더마켓의 다음온, 링크프라이스를 통한 회원가입시 가입출처 정보) -->
-
-
 							<!--//step-->
 							<div class="box_member">
 								<h2 class="haze">본인인증</h2>
@@ -128,12 +125,13 @@
 									<p class="certi_txt">안전한 회원가입을 위한 본인인증 단계입니다. 원하시는 인증방법을
 										선택해주세요.</p>
 									<ul class="way">
-										<li class="type1"><span class="bg"></span><a href="/Black_OY/view/join/verify_phfirst.jsp" class="btn btn_em"
+										<li class="type1"><span class="bg"><img src="/휴대폰인증.PNG" alt="" /></span>
+										<a href="/Black_OY/view/join/verify_phfirst.jsp" class="btn btn_em"
 											title="새 창"><span>휴대전화 인증</span></a></li>
 
-										<li class="type2" style="border-right: 0px;"><span
+										<!-- <li class="type2" style="border-right: 0px;"><span
 											class="bg"></span><a href="#" class="btn btn_em"
-											onclick="javascript:fnCheckPlusPPopup(event);" title="새 창">공동인증서	인증</a></li>
+											onclick="javascript:fnCheckPlusPPopup(event);" title="새 창">공동인증서	인증</a></li> -->
 									</ul>
 								</div>
 							</div>

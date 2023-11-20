@@ -62,6 +62,7 @@ public class OuserDAOImpl implements OuserDAO {
 		  }finally {
 			  JDBCUtil.close(pstmt);
 			  JDBCUtil.close(rs);
+			  JDBCUtil.close(conn);
 		  }
 
 	      return dto;
@@ -90,6 +91,7 @@ public class OuserDAOImpl implements OuserDAO {
 			System.out.println("joinImpl Exception~");
 		}finally {
 			JDBCUtil.close(pstmt);
+			JDBCUtil.close(conn);
 		}
 		return rowCount;
 	}
@@ -120,10 +122,9 @@ public class OuserDAOImpl implements OuserDAO {
 	
 	//회원정보 수정
 	@Override
-	public int infoUpdate(Connection conn, OuserDTO dto) throws SQLException {
+	public int infoUpdate(Connection conn, String newEmail, String newPwd, String user_id) throws SQLException {
 		int rowCount = 0;
-		String sql = "UPDATE o_user SET u_name = ? , u_tel = ? , "
-				+ "u_email = ? , u_pwd = ? "
+		String sql = "UPDATE o_user SET u_email = ? , u_pwd = ? "
 				+ "WHERE user_id = ? ";
 		
 		PreparedStatement pstmt = null;
@@ -131,11 +132,9 @@ public class OuserDAOImpl implements OuserDAO {
 		try {
 	        pstmt = conn.prepareStatement(sql);
 	        
-	        pstmt.setString(1, dto.getU_name()); 
-	        pstmt.setString(2, dto.getU_tel()); 
-	        pstmt.setString(3, dto.getU_email());
-	        pstmt.setString(4, dto.getU_pwd()); 
-	        pstmt.setString(5, dto.getUser_id());
+	        pstmt.setString(1, newEmail);
+	        pstmt.setString(2 , newPwd);
+	        pstmt.setString(3, user_id);
 
 	        rowCount = pstmt.executeUpdate();
 	        
@@ -145,6 +144,28 @@ public class OuserDAOImpl implements OuserDAO {
 		}finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(conn);
+		}
+		return rowCount;
+	}
+	@Override
+	public int nameUpdate( Connection conn, String user_id, String newName) throws SQLException {
+		int rowCount = 0;
+		String sql = "UPDATE o_user SET u_name = ? "
+				+ " WHERE user_id = ? ";
+		
+		 PreparedStatement pstmt = null;
+		try { 
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, newName);
+			pstmt.setString(2, user_id);
+			
+			rowCount = pstmt.executeUpdate();  
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("nameUpdateImpl Exception~");
+		}finally {
+			JDBCUtil.close(pstmt);
 		}
 		return rowCount;
 	}

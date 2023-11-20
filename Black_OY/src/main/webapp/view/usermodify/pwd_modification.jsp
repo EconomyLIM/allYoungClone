@@ -39,7 +39,7 @@
 
 		<!-- contents -->
 		<div id="contentsWrap">
-			<form id="form1" name="form1" method="post" action="<%=contextPath %>/olive/InfoModification.do">
+			<form id="form1" name="form1" method="post" action="<%=contextPath %>/olive/pwdUpdate.do">
 				<input type="hidden" name="return_url" id="return_url" value="">
 				<input type="hidden" name="pwd" id="pwd" value=""> <input
 					type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
