@@ -208,6 +208,13 @@ function changePerPageAndClass(value) {
 	    matchedLi.parentElement.classList.add('on');
 	  }
 	}
+	$(function(){
+	// 브랜드 선택 초기화
+	$("#onlBrndReSet").on("click",function(){
+		var url = "/Black_OY/view/product/pmidlistproduct.do?displNum="+'<%=midId%>'+"&sort=${param.sort}&currentpage=1";
+		window.location.href = url;
+	})
+	})
 </script>
 <body>
 	<jsp:include page="/layout/head.jsp"></jsp:include>

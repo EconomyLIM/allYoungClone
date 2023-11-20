@@ -528,7 +528,7 @@
 								<li data-ref-recentgoodsidx="${i }">
 									<div class="prd_info ">
 										<a
-											href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000165598&amp;trackingCd=Common_Recent"
+											href="/Black_OY/olive/productDetail.do?goodsNo=${history.PRO_DISPL_ID }&displNum=${history.CAT_L_ID}${history.CAT_M_ID}"
 											name="Common_Recent" class="prd_thumb goodsList"
 											data-ref-goodsno="A000000165598"
 											data-attr="공통^최근본상품^[단독기획] 토리든 다이브인 저분자 히알루론산 수딩크림 더블기획 (100ml+100ml)^1"

@@ -1,6 +1,7 @@
 package productDetail.command;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -20,6 +21,7 @@ import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.DetailInfoDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
+import productDetail.domain.ProductMoreDTO;
 import productDetail.domain.ProductPromo;
 import productDetail.domain.QnADetailDTO;
 import productDetail.service.ProDetailService;
@@ -181,6 +183,10 @@ public class ProductDetailHandler implements CommandHandler{
 		if (logOnDTO != null) {
 			int rowCnt = proDetailService.sCollectView(logOnDTO.getUser_id(), cateMId);
 		} // if
+		
+		// ===================== 상품 추천
+		List<ProductMoreDTO> morelist = proDetailService.promoreService(cateMId);
+		request.setAttribute("morelist", morelist);
 
 		// 쿠키 값확인
 		HeadService headService = HeadService.getInstance();
@@ -196,7 +202,6 @@ public class ProductDetailHandler implements CommandHandler{
 		            productItemsValue = java.net.URLDecoder.decode(productItemsValue, "UTF-8");
 		            // 쿠키 값을 쉼표(,)를 기준으로 나누기
 		            String[] items = productItemsValue.split(",");
-
 		            // 각각의 값에 대해 작업하기
 		            for (String item : items) {
 		            	System.out.println(item);
