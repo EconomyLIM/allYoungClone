@@ -17,9 +17,9 @@ public class PMidListDTO {
 	private String brandId;
 	private String brandName;
 	private String displProName;
-	private String lId;
-	private String mId;
-	private String sId;
+	private String lid;
+	private String mid;
+	private String sid;
 	private String proPrice;
 	private String afterPrice;
 	private String displId;
