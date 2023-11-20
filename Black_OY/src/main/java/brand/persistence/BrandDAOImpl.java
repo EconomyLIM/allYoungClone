@@ -80,7 +80,7 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
 
       } finally {
          rs.close();
-
+         conn.close();
       }// try_catch
       return brand;
 
@@ -93,11 +93,11 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
 				+ "    FROM pmlistview WHERE brand_id = ? ";
 			
       if(dispcatno.equals("cate_01")) {
-          sql +=  " ";
+          sql +=  "AND cat_l_id= '0001' AND cat_l_id= '0002'  AND cat_l_id= '0004' ";
        } else if(dispcatno.equals("cate_02")) {
           sql += " AND cat_l_id= '0001' ";            
        } else if(dispcatno.equals("cate_03")) {
-          sql += " AND cat_l_id= '0003' ";
+          sql += " AND cat_l_id= '0002' ";
        } else if(dispcatno.equals("cate_04")) {
           sql += " AND cat_l_id= '0004' ";
        } 
@@ -163,7 +163,8 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
 
       } finally {
          rs.close();
-
+        conn.close();
+       
       }// try_catch
       return list;
 
@@ -205,7 +206,7 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
                      .pro_displ_name(rs.getString("PRO_DISPL_NAME"))
                      .pro_displ_src(rs.getString("PRO_DISPL_SRC"))
                      .pro_displ_like(rs.getInt("PRO_DISPL_LIKE"))
-                     .pro_price(rs.getInt("PRO_PRICE")) // Assuming price can be a decimal
+                     .pro_price(rs.getInt("PRO_PRICE")) 
                      .build();
                sellbrandProducts.add(sellbrandProduct);
             }
@@ -215,9 +216,10 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
          e.printStackTrace();
       //preparedStatement.close();
       } finally {
-//    	  JDBCUtil.close(preparedStatement);
-//    	  JDBCUtil.close(conn);
-//    	  JDBCUtil.close(rs);
+    //	  JDBCUtil.close(preparedStatement);
+    //	  JDBCUtil.close(conn);
+    //	  JDBCUtil.close(rs);
+    	 
       }// try_catch
       return sellbrandProducts;
    }

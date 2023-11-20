@@ -100,7 +100,7 @@ public class BrandHandler implements CommandHandler {
       //      request.setAttribute("relist", relist);
         
   
-
+    
 
       // JSP 페이지로 요청 전달
       //RequestDispatcher dispatcher = request.getRequestDispatcher("brand_page.jsp");
