@@ -15,154 +15,17 @@
 <body>
 <jsp:include page="/layout/head.jsp"></jsp:include>
 
-<div class="reviewer-profile-wrap clrfix">
-			<!-- reviewer-profile-info :: 리뷰어 프로필 시작 -->
-			<!-- [D] 탑리뷰언서 UI top-reviewer 클래스 추가 / 닉네임 미설정 nickname-not-set 클래스 추가 -->
+<div id="Container">
+	<div id="Contents">
+		<div class="reviewer-profile-wrap clrfix">
+			
+			
 			<div class="reviewer-profile-info profile-top-reviewer-v1 ">
-				<div class="top-reviewer-inner">
-					<%-- 나의 프로필의 내용과 동일 --%>
-					<!-- 탑리뷰어언서 UI추가 -->
-					<div class="top-reviewer-profile">
-						<div class="profile-top-content">
-							<div class="thum">
-<!-- 								<img src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2023/11/06/1699251894483.png" class="profileThum_s" alt="프로필 이미지" onerror="common.errorProfileImg(this);"> -->
-							</div>
-
-							<div class="new-profile-info">
-								<!-- 등급 rate_01, rate_02, rate_03, rate_04, rate_05 -->
-								<div class="user-id-area rate_05">
-									<!--[D] 닉네임 미설정 노출 on 클래스 -->
-									<p class="id my-profile on">
-										
-											
-											
-												<!--[D] 나의 프로필 닉네임 노출 on 클래스 -->
-												<strong>asdfa</strong>
-											
-										
-										<span class="badge-img">
-											<span class="blind">멤버십 등급별 이미지</span>
-										</span>
-									</p>
-								</div>
-
-								<div class="profile-badge on">
-									
-									
-								</div>
-							</div>
-						</div>
-						<div class="profile-info-content">
-							<div class="profile-keyword-area">
-								
-									
-									
-									<ul class="profile-keyword-list on">
-										
-											
-												<li class="list-item">지성</li>
-											
-											
-											
-										
-											
-											
-												<li class="list-item">웜톤</li>
-											
-											
-										
-											
-											
-											
-												<li class="list-item">각질</li>
-												
-											
-										
-											
-											
-											
-												<li class="list-item">모공</li>
-												
-											
-										
-											
-											
-											
-										
-											
-											
-											
-										
-									</ul>
-								
-
-								
-								
-
-								
-							</div>
-
-							
-								
-								
-								
-								
-								
-								
-									
-									<p class="top-reviewer-info on">
-										
-										
-											asd
-											
-											<br>
-										
-									</p>
-								
-							
-						</div>
-					</div>
-					<!-- // 탑리뷰어언서 UI추가 -->
-					<ul class="reviewer-profile-info__bottom reviewer-data-info">
-						<li class="reviewer-data-info__list">
-							<span>
-								
-									
-										0
-									
-									
-								
-							</span>
-							<span>리뷰</span>
-						</li>
-						<li class="reviewer-data-info__list">
-							<span>
-								
-									
-										0
-									
-									
-								
-							</span>
-							<span>도움</span>
-						</li>
-						<li class="reviewer-data-info__list">
-							<span>
-								
-									
-										0
-									
-									
-								
-							</span>
-							<span>랭킹</span>
-						</li>
-					</ul>
-				</div>
+				<jsp:include page="/view/mypage/layout/profilelayout.jsp"></jsp:include>			
 			</div>
-			<!-- reviewer-profile-info :: 리뷰어 프로필 끝 -->
-			<!-- reviewer-profile-content :: 우측 레이아웃 :: 시작 -->
+			
 			<div class="reviewer-profile-content">
+			
 				<!-- reviewer-profile-content__header :: 프로필 수정 시작 -->
 				<div class="reviewer-profile-content__header">
 					<div>프로필 수정</div>
@@ -173,6 +36,7 @@
 					<div class="reviewer-profile-content__body">
 						<!-- 기본 프로필 :: 시작 -->
 						<div class="reviewer-update first-section">
+						<c:forEach items="${ profileInfo }" var="pf">
 							<p class="reviewer-update__tit">기본 프로필</p>
 							<ul class="reviewer-update__content">
 								<li>
@@ -187,7 +51,7 @@
 											<div id="previewImgArea" class="review-preview-img__area">
 												
 													
-														<span id="thumbnail" class="reviewer-profile-img--active" style="background-image: url(&quot;https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2023/11/06/1699251894483.png&quot;); display: none;"><span class="review-text-hidden">프로필 사진</span></span>
+														<span id="thumbnail" class="reviewer-profile-img--active" style="background-image: ${ pf.pfimgsrc } display: none;"><span class="review-text-hidden">프로필 사진</span></span>
 													
 												
 											</div>
@@ -204,7 +68,7 @@
 									<div class="reviewer-update__head">닉네임</div>
 									<div class="reviewer-update__data" style="display: flex;">
                                         <div class="nickname-wrapper">
-                                            <input id="nicknameInput" class="reviewer-update-input" type="text" name="mbrNickNm" value="<%-- 이미 설정된 닉네임 --%>" placeholder="닉네임을 설정해 주세요.">
+                                            <input id="nicknameInput" class="reviewer-update-input" type="text" name="mbrNickNm" value="${ pf.nickname }" placeholder="닉네임을 설정해 주세요.">
                                             <p id="nicknameInfo" class="txtinfo">이름보다는 별명을 적어주세요</p>
                                             <span id="nicknameStatus" class="validation-check--status valid" style="display:none">사용 가능한 닉네임입니다</span>
                                         </div>
@@ -215,7 +79,7 @@
 									<div class="reviewer-update__head">소개</div>
 									<div class="reviewer-update__data">
 										<input type="hidden" id="introVal">
-										<textarea id="intro" class="reviewer-update-textarea" name="slfIntro" placeholder="소개 글을 적어주세요 (공백제외, 특수문자포함)"><%-- 이미 입력된 설명 --%></textarea>
+										<textarea id="intro" class="reviewer-update-textarea" name="slfIntro" placeholder="소개 글을 적어주세요 (공백제외, 특수문자포함)">${ pf.pfContent }</textarea>
 										<!-- 비속어시 활성화 ::  validation-check--status invalid 추가 <textarea class="reviewer-update-textarea validation-check--status invalid" placeholder="소개 글을 적어주세요 (공백제외, 특수문자포함)" onkeyup="checkTextLength(this)" onkeydown=""></textarea> -->
 										<div class="reviewer-update-textarea--status">
                                             <div class="txtInfo">개인정보를 남기지 않게 조심해 주세요</div>
@@ -228,6 +92,25 @@
 									</div>
 								</li>
 							</ul>
+<script>
+
+	
+
+    // 서버에서 전달된 체크된 값들의 배열
+    var serverCheckedValues = \${pf.skintype};
+
+    // 이미 생성된 체크박스들에 동적으로 checked 속성 부여
+    $(document).ready(function() {
+        $("input[value='\${ id값들 }']").each(function() {
+            var checkboxValue = $(this).val();
+            if ($.inArray(checkboxValue, serverCheckedValues) !== -1) {
+                $(this).prop("checked", true);
+            }
+        });
+    });
+</script>
+							
+							</c:forEach>
 						</div>
 						<!-- 기본 프로필 :: 끝 -->
 						<!-- 나의 피부 컨디션 & 관심 카테고리 :: 시작 -->
@@ -247,49 +130,49 @@
 													
 														
 															<li>
-																<input type="radio" id="skinType지성" name="skin_type1" value="A01" checked="checked">
+																<input type="radio" id="skinType지성" name="skin_type1" value="STY_00000001">
 																<label for="skinType지성">지성</label>
 															</li>
 														
 													
 														
 															<li>
-																<input type="radio" id="skinType건성" name="skin_type1" value="A02">
+																<input type="radio" id="skinType건성" name="skin_type1" value="STY_00000002">
 																<label for="skinType건성">건성</label>
 															</li>
 														
 													
 														
 															<li>
-																<input type="radio" id="skinType복합성" name="skin_type1" value="A03">
+																<input type="radio" id="skinType복합성" name="skin_type1" value="STY_00000003">
 																<label for="skinType복합성">복합성</label>
 															</li>
 														
 													
 														
 															<li>
-																<input type="radio" id="skinType민감성" name="skin_type1" value="A04">
+																<input type="radio" id="skinType민감성" name="skin_type1" value="STY_00000004">
 																<label for="skinType민감성">민감성</label>
 															</li>
 														
 													
 														
 															<li>
-																<input type="radio" id="skinType약건성" name="skin_type1" value="A05">
+																<input type="radio" id="skinType약건성" name="skin_type1" value="STY_00000005">
 																<label for="skinType약건성">약건성</label>
 															</li>
 														
 													
 														
 															<li>
-																<input type="radio" id="skinType트러블성" name="skin_type1" value="A06">
+																<input type="radio" id="skinType트러블성" name="skin_type1" value="STY_00000006">
 																<label for="skinType트러블성">트러블성</label>
 															</li>
 														
 													
 														
 															<li>
-																<input type="radio" id="skinType중성" name="skin_type1" value="A07">
+																<input type="radio" id="skinType중성" name="skin_type1" value="STY_00000007">
 																<label for="skinType중성">중성</label>
 															</li>
 													
@@ -313,7 +196,7 @@
 													
 														
 															<li>
-																<input type="radio" id="skinTone웜톤" name="skin_type2" value="B02" checked="checked">
+																<input type="radio" id="skinTone웜톤" name="skin_type2" value="B02" >
 																<label for="skinTone웜톤">웜톤</label>
 															</li>
 														
@@ -385,7 +268,7 @@
 																
 															
 															<li>
-																<input type="checkbox" id="skinTrouble각질" name="skin_type3" value="C04" checked="checked">
+																<input type="checkbox" id="skinTrouble각질" name="skin_type3" value="C04">
 																<label for="skinTrouble각질">각질</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -431,7 +314,7 @@
 																
 															
 															<li>
-																<input type="checkbox" id="skinTrouble모공" name="skin_type3" value="C09" checked="checked">
+																<input type="checkbox" id="skinTrouble모공" name="skin_type3" value="C09">
 																<label for="skinTrouble모공">모공</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -491,7 +374,7 @@
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory마스크팩" value="D02" name="skin_type4" checked="checked">
+															<input type="checkbox" id="personalCatogory마스크팩" value="D02" name="skin_type4" >
 															<label for="personalCatogory마스크팩">마스크팩</label>
 														</li>
 													
@@ -526,7 +409,7 @@
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory헤어케어" value="D09" name="skin_type4" checked="checked">
+															<input type="checkbox" id="personalCatogory헤어케어" value="D09" name="skin_type4">
 															<label for="personalCatogory헤어케어">헤어케어</label>
 														</li>
 													
@@ -590,7 +473,7 @@
 								<ul>
                                     <li>
                                         <input type="hidden" name="profileImageConsentYn" value="N">
-                                        <input type="hidden" name="hasProfileImageYn" value="Y">
+                                        <input type="hidden" name="hasProfileImageYn" value="N">
                                         
                                         <%-- 체크여부에 따라 hidden속성의 value가 Y || N --%>
                                         <input type="checkbox" id="profileImageConsentYn" title="프로필 사진 수집 동의 (필수)" checked="checked">
@@ -677,14 +560,14 @@
                                     </li>
 
 									<li>
-										<input type="hidden" name="profileOpenYnVal" value="Y">
+										<input type="hidden" name="profileOpenYnVal" value="N">
 										<input type="checkbox" id="profileOpenYnVal" title="프로필 비공개" checked="checked">
 										
 										<label for="profileOpenYnVal">프로필 비공개</label>
 										<p>비공개로 설정할 경우, 고객님의 프로필 이미지, 컬렉션, 랭킹, 누적 리뷰 정보 등이 공개되지 않습니다.</p>
 									</li>
 									<li>
-										<input type="hidden" name="addInfoOpenYnVal" value="Y">
+										<input type="hidden" name="addInfoOpenYnVal" value="N">
 										<input type="checkbox" id="addInfoOpenYnVal" title="나의 피부 컨디션 &amp; 관심 카테고리 정보 비공개" checked="checked">
 										<label for="addInfoOpenYnVal">나의 피부 컨디션&amp;관심 카테고리 정보 비공개</label>
 										<p>비공개로 설정하실 경우 고객님의 피부타입, 피부톤, 피부고민, 관심 카테고리 정보가 공개되지 않습니다.</p>
@@ -698,9 +581,19 @@
 					</div>
 				</form>
 				<!-- reviewer-profile-content__body :: 프로필 본문 끝 -->
+				
 			</div>
 			<!-- reviewer-profile-content :: 우측 레이아웃 :: 끝 -->
 		</div>
+		
+	</div>
+
+</div>
+
+
+
+
+
 
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>

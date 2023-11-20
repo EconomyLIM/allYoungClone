@@ -14,7 +14,9 @@ public class ProfileDTO {
 	private String nickname;
 	private String pfContent;
 	private String skinType;
+	private String skinTypeid;
 	private String skinTone;
+	private String skinToneid;
 	private String pfimgsrc;
 	
 	//피부고민, 관심카테고리는 dto없이 list<String> 으로
