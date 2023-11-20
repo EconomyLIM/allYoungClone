@@ -1306,6 +1306,7 @@ $('#new_pwd_check').keydown(function(event) {
 
 	$("#btnok").on("click", function() {
 		if (chkPwd()) {
+			alert("회원가입이 완료되었습니다.")
 			$("#formJoin").submit();
 		}
 	});
@@ -1347,8 +1348,7 @@ $('#new_pwd_check').keydown(function(event) {
 				let str2 = result5;
 				let strAll = "010" + str1.replace(str1, '****') +str2;
 				$("#mob_no").val(strAll);
-	</script>					
-	<script>
+
 		$("#u_tel").val("010-"+str1+"-"+str2);
 	</script>
 

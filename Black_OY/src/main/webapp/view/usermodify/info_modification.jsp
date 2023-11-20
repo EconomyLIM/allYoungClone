@@ -213,11 +213,11 @@
 												<th scope="row"><label for="mob_no_1">휴대전화번호</label></th>
 												<td>
 													<div>
-														<span class="input_txt w100 phon_write" id="mobileNoInfo">${logOn.u_tel}</span>
+														<span class="input_txt w100 phon_write" id="mobileNoInfo"></span>
 														<input type="hidden" name="mob_no_1" id="mob_no_1"
-															value="010"> <input type="hidden" name="mob_no_2"
-															id="mob_no_2" value="7367"> <input type="hidden"
-															name="mob_no_3" id="mob_no_3" value="8785"> <a
+															value=""> <input type="hidden" name="mob_no_2"
+															id="mob_no_2" value=""> <input type="hidden"
+															name="mob_no_3" id="mob_no_3" value=""> <a
 															href="javascript:void(0);"
 															onclick="callAuthLayerMobChgAuth();" class="btn btn_sm"><span
 															class="arr">변경하기</span></a>
@@ -2653,9 +2653,6 @@ function goFooterMenu(type){
             $('#email_addr2').val('');
         }
     }
-    
-
-
 
     function beforeSubmit() {
         // 이메일 셋팅
@@ -2683,290 +2680,9 @@ function goFooterMenu(type){
 	        }
         }
     }
-    
-    function callAuthLayer(){
-    	cjone.openModal('/cjmweb/member/verify-account-mem-info.do');
-    }
-    
-    function certificationModCallBack() {
-    	
-    	if($(".ui_modal_ajax").length > 0) cjone.closeModal();
-    	$("#auth_btn_area").attr("style","display:none;");
-		var params = $('#form1').serialize();
-		
-		$.ajax({
-	 		url: "/cjmweb/member/get-member-info.do",
-	 		data: params,
-	 		dataType: "json",
-	 		type:"post",
-	 		async: false,
-	 		success: function(data) {
-	 			
-	 			if ( data.retCode == "success" ) {
-	 				
-		 			isMaskYn = "N";
-					var user_map = data.user_map;
-					tel2Be = user_map.mob_no_2;
-					email1Be = user_map.email_addr1;
-					$("#hg_nm_area").html(user_map.hg_nm);
-		 			$("#mbr_id_area").html(user_map.mbr_id);
-					$("#mob_no_2").val(user_map.mob_no_2);
-					$("#mobileNoInfo").text($("#mob_no_1").val()+" - "+user_map.mob_no_2+" - "+$("#mob_no_3").val());
-					$("#email_addr1").val(user_map.email_addr1);
-					$("#birthday_default").hide();
-					$("#birthday_select").show();
-			    	$("#mob_no_1").attr("disabled",false);
-			    	$("#mob_no_2").attr("disabled",false);
-			    	$("#mob_no_3").attr("disabled",false);
-			    	$("#email_addr1").attr("disabled",false);
-			    	$("#email_addr2").attr("disabled",false);
-			    	$("#email_addr_opt").attr("disabled",false);
-			    	$("#select_way").attr("disabled",false);
-			    	
-			    	var receiptBox = data.receiptBox;
-			    	var issuWayCd = receiptBox.issu_way_cd;
-			    	
-					var cardChk = receiptBox.issu_way_val_4;
-					//01:현금영수증카드, 02:휴대전화, 03:신용카드, 04:현금영수증카드, 05:기타 
-					if(issuWayCd == '01') { 
-				        if(cardChk == "undefined" || cardChk == undefined) {
-				        	issuWayCd = '04';
-				        } else if(cardChk.length == 4) {
-				        	issuWayCd = '03';
-				        } else if(cardChk.length == 6) {
-				        	issuWayCd = '01';
-				        } else if(cardChk.length == 7) {
-				        	issuWayCd = '05';
-				        }
-				    }
-					
-					for(var i=0; i < $("#select_way option").length; i++){
-						if($($("#select_way option")[i]).attr('value') == 'option'+issuWayCd){
-							$($("#select_way option")[i]).attr('selected', 'selected');
-						}
-					}
-					$('[data-skin="form"] select#select_way').formSkin('addSkin');
-					//----------
-					
-					selectOptDisp($("#select_way").val());
-					receiptsBe = "option" + issuWayCd;
-					switch($("#select_way").val()) {
-						case "option02":
-							$('#option02_val_1').val(receiptBox.issu_way_val_1);
-							$('#option02_val_2').val(receiptBox.issu_way_val_2);
-							$('#option02_val_3').val(receiptBox.issu_way_val_3);
-							val1Be = receiptBox.issu_way_val_1;
-							val2Be = receiptBox.issu_way_val_2;
-							val3Be = receiptBox.issu_way_val_3;
-							//changeText("02_val_3", "");
-							break;
-						case "option01":
-							$('#option01_val_1').val(receiptBox.issu_way_val_1);
-							$('#option01_val_2').val(receiptBox.issu_way_val_2);
-							$('#option01_val_3').val(receiptBox.issu_way_val_3);
-							$('#option01_val_4').val(receiptBox.issu_way_val_4);
-							val1Be = receiptBox.issu_way_val_1;
-							val2Be = receiptBox.issu_way_val_2;
-							val3Be = receiptBox.issu_way_val_3;							
-							val4Be = receiptBox.issu_way_val_4;							
-							//changeText("01_val_4", "");
-							break;
-						case "option03":
-							$('#option03_val_1').val(receiptBox.issu_way_val_1);
-							$('#option03_val_2').val(receiptBox.issu_way_val_2);
-							$('#option03_val_3').val(receiptBox.issu_way_val_3);
-							$('#option03_val_4').val(receiptBox.issu_way_val_4);
-							val1Be = receiptBox.issu_way_val_1;
-							val2Be = receiptBox.issu_way_val_2;
-							val3Be = receiptBox.issu_way_val_3;							
-							val4Be = receiptBox.issu_way_val_4;									
-							//changeText("03_val_4", "");
-							break;
-						case "option04":
-							$('#option04_val_1').val(receiptBox.issu_way_val_1+""+receiptBox.issu_way_val_2+""+receiptBox.issu_way_val_3);
-							val1Be = receiptBox.issu_way_val_1+""+receiptBox.issu_way_val_2+""+receiptBox.issu_way_val_3;
-							//changeText("04_val_1", "");
-							break;
-						case "option05":
-							$('#option05_val_1').val(receiptBox.issu_way_val_1+""+receiptBox.issu_way_val_2+""+receiptBox.issu_way_val_3+""+receiptBox.issu_way_val_4);
-							val1Be = receiptBox.issu_way_val_1+""+receiptBox.issu_way_val_2+""+receiptBox.issu_way_val_3+""+receiptBox.issu_way_val_4;
-							//changeText("05_val_1", "");
-							break;
-					}    	
-			    	
-			    	$("#option02_val_1").attr("disabled",false);
-			    	$("#option02_val_2").attr("disabled",false);
-			    	$("#option02_val_3").attr("disabled",false);
-			    	$("#option01_val_1").attr("disabled",false);
-			    	$("#option01_val_2").attr("disabled",false);
-			    	$("#option01_val_3").attr("disabled",false);
-			    	$("#option01_val_4").attr("disabled",false);
-			    	$("#option03_val_1").attr("disabled",false);
-			    	$("#option03_val_2").attr("disabled",false);
-			    	$("#option03_val_3").attr("disabled",false);
-			    	$("#option03_val_4").attr("disabled",false);
-			    	$("#option04_val_1").attr("disabled",false);
-			    	$("#option05_val_1").attr("disabled",false);	 	
-			    	$(".select_wrap").attr("style","");
-	 			} else {
-	 				alert("잘못된 경로로 접근하셨습니다.");
-	 				callAuthLayer();
-	 			}
-	 		}, 
-	 		error: function(xhr) {
-	 			alert("error");
-	 	    }
-	 	});    	
-    }
-    
-    var tel2Be = "";
-    var email1Be = "";
-    var receiptsBe = "";
-    var val1Be = "";
-    var val2Be = "";
-    var val3Be = "";
-    var val4Be = "";
-    // 160418 회원정보 변경체크
-    function userInfoChangeChk(){
-    	var infoChange = "N";
-    	var emailAvcChange = 0;
-    	var smsAvcChange = 0;
-    	var telAvcChange = 0;
-    	var birthChange = 0;
-    	var telChange = 0;
-    	var emailChange = 0;
-    	var agreeYn = 0;
-    	var receiptsChange = 0;
-    	
-    	// 이메일 수신 변경체크
-    	var emailAvcBe = "N";
-    	var emailAvcAft = $("input:checkbox[id='email_rcv_70000000']").is(":checked")?"Y":"N";
-    	//console.log("email Avc change log before : " + emailAvcBe +"\tafter : "+ emailAvcAft);
-    	if(emailAvcBe != emailAvcAft){
-    		emailAvcChange = 1;
-    		$("#chk_email_acv_change").val("Y"+emailAvcAft);
-    	}
-    	// sms 수신 변경체크
-    	var smsAvcBe = "N";
-    	var smsAvcAft = $("input:checkbox[id='sms_rcv_70000000']").is(":checked")?"Y":"N";
-    	//console.log("sms Avc change log before : " + smsAvcBe +"\tafter : "+ smsAvcAft);
-    	if(smsAvcBe != smsAvcAft){
-    		smsAvcChange = 1;
-    		$("#chk_sms_acv_change").val("Y"+smsAvcAft);
-    	}
-    	// 전화 수신 변경체크
-    	var telAvcBe = "N";
-    	var telAvcAft = $("input:checkbox[id='tm_rcv_70000000']").is(":checked")?"Y":"N";
-    	//console.log("tel Avc avc change log before : " + telAvcBe +"\tafter : "+ telAvcAft);
-    	if(telAvcBe != telAvcAft){
-    		telAvcChange = 1;
-    		$("#chk_tel_acv_change").val("Y"+telAvcAft);
-    	}
-    	
-    	// 참여사 변경 체크
-    	$('#coop_agree input:checkbox[id^="tm_rcv_"]').each(function(idx){
-      		var checked = $(this).is(":checked")?"Y":"N";
-      		if (tm_rcv_checkbox[idx] != checked) {
-      			telAvcChange = 1;
-      			$("#chk_tel_acv_change").val("Y"+checked);
-      			return false;
-      		}
-       	});
-      	
-      	$('#coop_agree input:checkbox[id^="sms_rcv_"]').each(function(idx){
-      		var checked = $(this).is(":checked")?"Y":"N";
-      		if (sms_rcv_checkbox[idx] != checked) {
-      			smsAvcChange = 1;
-      			$("#chk_sms_acv_change").val("Y"+checked);
-      			return false;
-      		}
-       	});
-      	
-      	$('#coop_agree input:checkbox[id^="email_rcv_"]').each(function(idx){
-      		var checked = $(this).is(":checked")?"Y":"N";
-      		if (email_rcv_checkbox[idx] != checked) {
-      			emailAvcChange = 1;
-      			$("#chk_email_acv_change").val("Y"+checked);
-      			return false;
-      		}
-       	});
-      	
-    	// 생년월일 변경체크
-    	var birthYYBe = "1993"*1;
-    	var birthMMBe = "05"*1;
-    	var birthDDBe = "15"*1;
-    	var birthYYAft = $("#birth_yy option:selected").val()*1;
-    	var birthMMAft = $("#birth_mm option:selected").val()*1;
-    	var birthDDAft = $("#birth_dd option:selected").val()*1;
-    	//console.log("birth change log before : " + birthYYBe+birthMMBe+birthDDBe +"\tafter : "+ birthYYAft+birthMMAft+birthDDAft);
-    	if( (birthYYBe != birthYYAft) || (birthMMBe != birthMMAft) || (birthDDBe != birthDDAft) ){
-    		birthChange = 1;
-    		$("#chk_birth_change").val("Y");
-    	}
-    	if ( isMaskYn == 'N' ) {
-	    	// 휴대전화번호 변경체크
-	    	var tel1Be = "010";
-	    	//tel2Be = "****";
-	    	var tel3Be = "8785";
-	    	var tel1Aft = $("#mob_no_1").val();
-	    	var tel2Aft = $("#mob_no_2").val();
-	    	var tel3Aft = $("#mob_no_3").val();
-	    	//console.log("tel change log before : " + tel1Be+tel2Be+tel3Be +"\tafter : "+ tel1Aft+tel2Aft+tel3Aft);
-	    	if( (tel1Be != tel1Aft) || (tel2Be != tel2Aft) || (tel3Be != tel3Aft) ){
-	    		telChange = 1;
-	    		$("#chk_tel_change").val("Y");
-	    	}
-	    	// 이메일 주소 변경체크
-	    	//email1Be = "jy*********";
-	    	var email2Be = "naver.com";
-	    	var email1Aft = $("#email_addr1").val();
-	    	var email2Aft = $("#email_addr2").val();
-	    	//console.log("email change log before : " + email1Be+email2Be+"\tafter : "+ email1Aft+email2Aft);
-	    	if( (email1Be != email1Aft) || (email2Be != email2Aft)  ){
-	    		emailChange = 1;
-	    		$("#chk_email_change").val("Y");
-	    	}
-	    	
-			//현금 영수증 발행 정보변경
-				    	
-	    	
-    	}
-    	
-    	// 정보제공 동의 변경체크 
-    	
-			
-			
-			var lengthTmap = "2"*1;
-			var tAgrBe =new Array(lengthTmap);
-			var tAgrAft =new Array(lengthTmap);
-			var i = 0;
-			
-				i = "0"*1;
-				tAgrBe[i] = "N";
-				tAgrAft[i] = $(':radio[name="agr38"]:checked').val();
-				//console.log("tAgr change before : " + tAgrBe[i] + "\tafter : "+ tAgrAft[i]);
-				if( tAgrBe[i] != tAgrAft[i] ){
-					agreeYn = 1;
-					$("#chk_info_agr_change").val("Y");
-				}
-			
-				i = "1"*1;
-				tAgrBe[i] = "N";
-				tAgrAft[i] = $(':radio[name="agr39"]:checked').val();
-				//console.log("tAgr change before : " + tAgrBe[i] + "\tafter : "+ tAgrAft[i]);
-				if( tAgrBe[i] != tAgrAft[i] ){
-					agreeYn = 1;
-					$("#chk_info_agr_change").val("Y");
-				}
 
-		if(emailAvcChange || smsAvcChange || telAvcChange || birthChange || telChange || emailChange || agreeYn || receiptsChange){
-			infoChange = "Y";
-		}
-    	//console.log("infoChange : " + infoChange);
-		$("#user_info_change").val(infoChange);
-    	
-    }
-    // 160418 회원정보 변경체크 종료
+  
+
     
 	function alertMsg(objId, ErrMsg){
 		$("#"+objId).html(ErrMsg);
@@ -2994,45 +2710,9 @@ function goFooterMenu(type){
 		}
 	}
     
-    var flag = "invalid";
-    function checkPasswordValid() {
-    	flag ="invalid";
-    	$('#pwd').val($('#pwd_check').val()); 
-    	var parameter = {};
-    	function transHEX(a){
-    		
-    		var result = "";
-    		for(var i = 0; i < a.length; ++i){
-    			var code = a.charCodeAt(i).toString(16);
-    			result += ''+code;
-    		}
-    		return result;
-    	}
- 
-    	parameter.p = BASE64.encode($('#pwd').val());
-    	parameter.m = BASE64.encode($('#mbr_id').val());    	
-    	
-    	$.ajax({
-	        url     : '/cjmweb/common/check-pwd-rule.do',
-	        dataType  : 'json',
-	        data :  'mbr_id='+parameter.m+'&pwd=' + parameter.p,
-	        async   : false,
-	        type    : 'POST',
-	        error   : function(err) {
-	        	alertMsg("msg_pwd","<em>"+err+"</em>");
-	        },
-	        success   : function(response, statusText) {
-	        	if (response.result_code != "0000") {
-	        		alertMsg("msg_pwd","<em>"+response.result_msg+"</em>");
-	        		$('#pwd').focus();
-	        		flag = "invalid";
-	        	} else {
-	        		flag = "valid";
-	        	}
-	        }
-		}); 
-    }		
-    
+
+
+
     // 회원수정 체크
     function checkInput() {
     	
@@ -3475,10 +3155,25 @@ $("#btn_submit").on("click", function () {
 	$("#email_addr1").val(emailadd1);
 	$("#email_addr2").val(emailadd2);
 
-	$("#email_addr2").val( $("#email_addr_opt").val() );
+
 	$("#email_addr_opt").change(function () {
 		$("#email_addr2").val( $("#email_addr_opt").val() );
 	});
+	</script>
+	<script>
+
+	var tel = "${logOn.u_tel}";
+	alert(tel);
+	var arr = tel.split('-', 3);
+	var tel1 = arr[0];
+	var tel2 = arr[1];
+	var tel3 = arr[2];
+
+	$("#mob_no_1").val(tel1);
+	$("#mob_no_2").val("****");
+	$("#mob_no_3").val(tel3);
+	$("#mobileNoInfo").text(tel1+"-"+"****"+"-"+tel3);
+	
 	</script>
 	<script>
 
@@ -3542,6 +3237,7 @@ function chkPwd() {
 	
 
 	$("#btn_submit").on("click", function () {
+		alert("event");
 		if (chkPwd() ) {
 			$("#mobChgForm").submit();
 		}

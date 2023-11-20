@@ -24,29 +24,24 @@ public class InfoUpdateHandler  implements CommandHandler{
 			String method = request.getMethod(); // GET, POST
 
 			LogOnDTO logDto = (LogOnDTO) request.getSession().getAttribute("logOn");	
-
-			String u_name = request.getParameter("u_name");
-			String u_pwd = request.getParameter("pwd");
-			String u_tel=  request.getParameter("u_tel");
-			String u_email=  request.getParameter("email_addr1")+"@"+request.getParameter("email_addr2");
-/*
-			logDto = LogOnDTO.builder()
-					.user_id(user_id)
-					.u_name(u_name)
-					.u_pwd(u_pwd)
-					.u_tel(u_tel)
-					.u_email(u_email)
-					.build();
-
+			String user_id = logDto.getUser_id();
+			String newEmail = request.getParameter("newEmail");
+			String newPwd = request.getParameter("newPwd");
+			String newName = request.getParameter("userName");
+			String newTel = request.getParameter("No");
+			
+			
 			Connection conn = ConnectionProvider.getConnection();
-			InfoUpdateService service = InfoUpdateService.getInstance();*/
-		/*	int rowCount =  service.infoUpdate(logDto);*/
-			//회원가입 완료 > 메인페이지로 이동
-//			String location ="" ;
-//			if (rowCount ==1) {
-//				location = "/view/usermodify/info_modification_ok.jsp";
-//			}
-//			return location;
-//			
+			InfoUpdateService service = InfoUpdateService.getInstance();
+			int infoUpd = 0;
+			int nameUpd = 0;
+			int telUpd = 0;
+			
+			infoUpd = service.infoUpdate(user_id , newEmail, newPwd);
+			nameUpd =  service.nameUpdate(user_id, newName);
+			telUpd = service.telUpdate(user_id, newTel);
+			
+			return  "/view/usermodify/info_modification.jsp";
+			
 	}
 }

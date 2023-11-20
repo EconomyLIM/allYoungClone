@@ -21,30 +21,47 @@ public class InfoUpdateService {
 	
 	public int infoUpdate(String user_id, String newEmail, String newPwd) {
 		Connection conn = null;
-		int rowCount = 0;
+		int infoUpd = 0;
 		try {
 			conn = ConnectionProvider.getConnection();
 			OuserDAOImpl dao = OuserDAOImpl.getInstance();
-			rowCount =  dao.infoUpdate(conn, user_id, newEmail, newPwd);
+			infoUpd =  dao.infoUpdate(conn, user_id, newEmail, newPwd);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("InfoUpdateService.infoUpdateException");
 		}
-		return rowCount;
+		return infoUpd;
 		
 	}
 	public int nameUpdate(String user_id, String newName) {
 		Connection conn = null;
-		int rowCount = 0;
+		int nameUpd = 0;
 		try {
 			conn = ConnectionProvider.getConnection();
 			OuserDAOImpl dao = OuserDAOImpl.getInstance();
-			rowCount =  dao.nameUpdate(conn, user_id, newName);
+			nameUpd =  dao.nameUpdate(conn, user_id, newName);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("InfoUpdateService.nameUpdateException");
 		}
-		return rowCount;
+		return nameUpd;
+		
+	}
+	public int telUpdate(String user_id, String newTel) {
+		Connection conn = null;
+		int telUpd = 0;
+		try {
+			conn = ConnectionProvider.getConnection();
+			OuserDAOImpl dao = OuserDAOImpl.getInstance();
+			telUpd =  dao.telUpdate(conn, user_id, newTel);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("telUpdateService.nameUpdateException");
+		}
+		return telUpd;
 		
 	}
 }
