@@ -22,7 +22,7 @@ public class ProfileDAOImpl implements ProfileDAO {
 	@Override
 	public List<ProfileDTO> selectProfile(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT a.user_id, a.nickname nn, a.pc pfc, a.skintone_title stone, a.skintype_title stitle, SUM(a.rev_like) AS trl, a.follower fl, a.following fi"
+		String sql = " SELECT a.user_id, a.nickname nn, a.pc pfc, a.skintone_title stone, a.skintype_title stype, SUM(a.rev_like) AS trl, a.follower fl, a.following fi "
 				+ " FROM ( "
 				+ "    SELECT up.user_id, nickname, NVL(pf_content, '내용없음') pc , pst.skintone_title, skintype_title, r.rev_like, follower, following "
 				+ "    FROM user_profile up "
@@ -74,11 +74,11 @@ public class ProfileDAOImpl implements ProfileDAO {
 	@Override
 	public List<String> selectSkinTrouble(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT  skintrb_title st "
-				+ " FROM upf_skintrouble ut left join pf_skintrouble pt on ut.skintrb_id = pt.skintrb_id "
-				+ " WHERE user_id = ? ";
+		String sql = " SELECT  skintrb_title skint "
+				+ "FROM upf_skintrouble ut left join pf_skintrouble pt on ut.skintrb_id = pt.skintrb_id "
+				+ "WHERE user_id = ?  ";
 		
-		ArrayList<String> list = null;
+		ArrayList<String> list =  new ArrayList<String>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -86,11 +86,13 @@ public class ProfileDAOImpl implements ProfileDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, uId);
 			rs = pstmt.executeQuery();
-			String st = null;
-			do {
-				st = rs.getString("st");
-				list.add(st);
-			} while (rs.next());
+			String str = null;
+			while (rs.next()) {
+				
+				str = rs.getString("skint");
+				list.add(str);
+			} 
+			
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
 			JDBCUtil.close(conn);
@@ -106,10 +108,10 @@ public class ProfileDAOImpl implements ProfileDAO {
 	@Override
 	public List<String> selectIntCate(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT interest_title it "
+		String sql = " SELECT interest_title inter "
 				+ " FROM upf_intcate ui left join pf_intcate pi on ui.interest_id = pi.interest_id "
 				+ " WHERE user_id = ? ";
-		ArrayList<String> list = null;
+		ArrayList<String> list = new ArrayList<String>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -117,11 +119,12 @@ public class ProfileDAOImpl implements ProfileDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, uId);
 			rs = pstmt.executeQuery();
-			String it = null;
-			do {
-				it = rs.getString("st");
-				list.add(it);
-			} while (rs.next());
+			String itr = null;
+			 while (rs.next()) {
+				
+				itr = rs.getString("inter");
+				list.add(itr);
+			}
 			
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
@@ -199,7 +202,7 @@ public class ProfileDAOImpl implements ProfileDAO {
 			
 		    for (int i = 0; i < results.length; i++) {
 		        int result = results[i];
-		        if (result >= 0) {
+		        if (result > 0) {
 		            System.out.println("Batch " + (i + 1) + " executed success");
 		        } else {
 		            System.out.println("Batch " + (i + 1) + " failed. Error code: " + result);
@@ -241,7 +244,7 @@ public class ProfileDAOImpl implements ProfileDAO {
 			
 		    for (int i = 0; i < results.length; i++) {
 		        int result = results[i];
-		        if (result >= 0) {
+		        if (result > 0) {
 		            System.out.println("Batch " + (i + 1) + " executed success");
 		        } else {
 		            System.out.println("Batch " + (i + 1) + " failed. Error code: " + result);

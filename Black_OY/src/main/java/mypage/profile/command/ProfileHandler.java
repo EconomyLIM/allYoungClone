@@ -25,19 +25,16 @@ public class ProfileHandler implements CommandHandler{
 		//다른 사람의 프로필 접속시 조건
 		//다른 사람 프로필 클릭 시 그 사람의 userId를 가져오게 처리
 		//userId = request.getParameter("userId");
-				
+		
+		
+		
 		ProfileService service = ProfileService.getinstance();
 		
 		//초기화
 		List<ProfileDTO> profileInfo = null;
 		List<String> skintrouble = null;
 		List<String> intcate = null;
-		int pfedit = 0;
-		int insskintrouble = 0;
-		int insIntCate = 0;
-		int delskintrouble = 0;
-		int delIntCate = 0;
-		
+
 		//서비스
 		profileInfo = service.pfinfoService(userId);
 		skintrouble = service.pfstrService(userId);
@@ -47,7 +44,7 @@ public class ProfileHandler implements CommandHandler{
 		request.setAttribute("skintrouble", skintrouble);
 		request.setAttribute("intcate", intcate);
 				
-		return "/view/mypage/profile.jsp";
+		return "/view/mypage/myprofile.jsp";
 	}
 
 }
