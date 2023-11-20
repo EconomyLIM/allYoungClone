@@ -7,6 +7,8 @@ import java.util.List;
 import com.util.ConnectionProvider;
 import com.util.JDBCUtil;
 
+import main.domain.BrandItemDTO;
+import main.domain.MainBrandDTO;
 import main.domain.MainUserDTO;
 import main.domain.PlanShopDisplDTO;
 import main.domain.PopularProDTO;
@@ -149,5 +151,49 @@ public class MainService {
 			return list;
 		} // sGetPopularShop
 		
+		// 메인 브랜드 좋아요 상위 10개 가져오기
+		public List<MainBrandDTO> mainBrandService(){
+			Connection conn = null;
+			List<MainBrandDTO> list = null;
+			
+			try {
+				
+				conn = ConnectionProvider.getConnection();
+				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
+				list = daoImpl.mainBrand(conn);
+				
+				
+			} catch (Exception e) {
+				System.out.println("> mainBrandService Exception<");
+				e.printStackTrace();
+			} finally {
+				JDBCUtil.close(conn);
+			} // try_catch
+			
+			return list;
+		}
+		
+		
+		// 브랜드 상위 2개 상품 가져오기
+		public List<BrandItemDTO> mainBrandItemService(String brand_id){
+			Connection conn = null;
+			List<BrandItemDTO> list = null;
+			
+			try {
+				
+				conn = ConnectionProvider.getConnection();
+				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
+				list = daoImpl.mainBrandItem(conn, brand_id);
+				
+				
+			} catch (Exception e) {
+				System.out.println("> mainBrandItemService Exception<");
+				e.printStackTrace();
+			} finally {
+				JDBCUtil.close(conn);
+			} // try_catch
+			
+			return list;
+		}
 		
 } //class

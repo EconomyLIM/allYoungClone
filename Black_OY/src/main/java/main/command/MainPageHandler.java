@@ -1,5 +1,7 @@
 package main.command;
 
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.CommandHandler;
+import main.domain.BrandItemDTO;
+import main.domain.MainBrandDTO;
 import main.domain.PlanShopDisplDTO;
 import main.domain.PopularProDTO;
 import main.service.MainService;
@@ -40,6 +44,20 @@ public class MainPageHandler implements CommandHandler{
 		// ================= 인기행사만 모았어요! 배너정보 갖고오는 작업 ==================
 		HashMap<PlanShopDisplDTO, List<PopularProDTO>> getPopBanner = mainService.sGetPopularShop();
 		request.setAttribute("getPopBanner", getPopBanner);
+		
+		// 메인 브랜드 10개
+		List<MainBrandDTO> mbrandlist = mainService.mainBrandService();
+		request.setAttribute("mbrandlist", mbrandlist);
+		// 브랜드 제품 2개
+		List<List<BrandItemDTO>> mbilist = new ArrayList<List<BrandItemDTO>>();
+		List<BrandItemDTO> brandItemDTOs = null;
+		String brand_id = null;
+		for (int i = 0; i < mbrandlist.size(); i++) {
+			brand_id = mbrandlist.get(i).getBrand_id();
+			brandItemDTOs = mainService.mainBrandItemService(brand_id);
+			mbilist.add(brandItemDTOs);
+		}
+		request.setAttribute("mbilist", mbilist);
 		
 		
 		return "/view/mainPage/main.jsp";
