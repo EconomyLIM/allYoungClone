@@ -52,7 +52,7 @@
 				<a href="<%=contextPath %>/olive/pwdCheck.do" class="now"><span>회원정보 수정</span></a></div> 
 			</div>
 			<div class="cont_header">
-				<h1 class="h1_tit">이름변경</h1>
+				<h1 class="h1_tit">회원정보 변경</h1>
 			</div>
 			<div class="cont_area">
 

@@ -46,7 +46,7 @@
 			
 		</div>
 		<div id="contentsWrap">
-			<form id="form1" method="post" action="<%=contextPath%>/olive/infoUpdate.do">
+			<form id="form1" method="post" action="<%=contextPath%>/olive/userInfo.do">
 				<input type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
 				<input type="hidden" name="brnd_cd" id="brnd_cd" value="3000">
 				<input type="hidden" name="mcht_no" id="mcht_no" value="3000">

@@ -161,7 +161,7 @@
 
 		<section id="ct" class="certify_user2 certifyWrap certifyWrap_02">
 			<form id="cplogn" name="cplogn" method="post"
-				action="<%=contextPath%>/olive/nameUpdate.do">
+				action="<%=contextPath %>/olive/infoUpdate.do">
 				<div class="">
 					<fieldset>
 						<legend>휴대폰 본인확인 입력</legend>

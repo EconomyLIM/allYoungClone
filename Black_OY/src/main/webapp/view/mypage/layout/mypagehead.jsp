@@ -45,7 +45,7 @@
 							<li id="membershipBenefit"><a href="<%-- 맴버십페이지 연결 --%>"
 								onclick="<%-- 맴버십페이지 연결스크립트 --%>">올리브 멤버스 라운지</a></li>
 
-							<li id="profileModify"><a href="<%-- 나의 프로필 연결 --%>"
+							<li id="profileModify"><a href="<%= contextPath %>/olive/profile.do"
 								onclick="<%-- 나의 프로필 연결스크립트 --%>">나의 프로필</a></li>
 						</ul>
 					</div>
