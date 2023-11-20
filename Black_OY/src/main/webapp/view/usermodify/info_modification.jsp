@@ -243,34 +243,17 @@
 															placeholder="이메일 도메인" data-format="email"
 															name="email_addr2" id="email_addr2" value=""
 															autocomplete="off">
-														</span> <span class="select w100 hide" data-skin="form"> <select
-															title="이메일 도메인 선택" data-control="emailSelector"
+														</span> <span class="select w100 " data-skin="form">
+														<select title="이메일 도메인 선택" data-control="emailSelector"
 															name="email_addr_opt" id="email_addr_opt">
-																<option value="" selected="selected">선택해주세요</option>
 																<option value="0">직접입력</option>
 																<option value="naver.com">네이버</option>
 																<option value="hanmail.net">한메일</option>
 																<option value="nate.com">네이트</option>
 																<option value="gmail.com">지메일</option>
-
 														</select>
 														</span>
-														<div class="select_wrap w100" style="">
-															<div class="item_seleced">
-																<a href="#naver.com" title="이메일 도메인 선택 목록 열기"
-																	data-title="이메일 도메인 선택" class="">네이버<span
-																	class="haze">선택됨</span></a>
-															</div>
-															<div class="item_list_wrap ">
-																<div class="item_list ui_scrollarea">
-																	<ul class="ui_content">
-																		<li><a href="#0"><span>직접입력</span></a></li>
-																		<li><a href="#naver.com" data-selected="true"><span>네이버</span></a></li>
-																		<li><a href="#hanmail.net"><span>한메일</span></a></li>
-																		<li><a href="#nate.com"><span>네이트</span></a></li>
-																		<li><a href="#gmail.com"><span>지메일</span></a></li>
-																	</ul>
-																</div>
+						
 																<div class="scroll ui_scrollbar">
 																	<span class="bg_top"></span> <span class="bg bg_mid"
 																		style="display: none;"></span> <span class="bg_btm"></span>
@@ -281,10 +264,6 @@
 													<p class="msg_desc">이메일 주소 입력 시 사용 가능 특수 문자 : - . _</p>
 												</td>
 											</tr>
-
-
-
-
 
 											<tr>
 												<th scope="row">카카오 로그인</th>
@@ -3130,13 +3109,6 @@ function goFooterMenu(type){
     }
 </script>
 
-	<script>
-$("#btn_submit").on("click", function () {
-	if (chkPwd() ) {
-		$("#mobChgForm").submit();
-	}
-});
-</script>
 	<style>
 .ie8Lbls {
 	font-size: 10px;
@@ -3147,28 +3119,29 @@ $("#btn_submit").on("click", function () {
 </style>
 	<!--//script 영역-->
 	<script>
-	var email = "${logOn.u_email}";
+ 	var email = "${logOn.u_email}";
 	var arr = email.split('@', 2);
 	var emailadd1 = arr[0];
 	var emailadd2 = arr[1];
 
 	$("#email_addr1").val(emailadd1);
 	$("#email_addr2").val(emailadd2);
-
-
+	 
+	if ( $("#email_addr2").val() != $("#email_addr_opt").val() ){
+		$("#email_addr_opt option:first").attr("selected", "selected");
+	}
 	$("#email_addr_opt").change(function () {
 		$("#email_addr2").val( $("#email_addr_opt").val() );
 	});
+	
 	</script>
 	<script>
-
 	var tel = "${logOn.u_tel}";
-	alert(tel);
 	var arr = tel.split('-', 3);
 	var tel1 = arr[0];
 	var tel2 = arr[1];
 	var tel3 = arr[2];
-
+	
 	$("#mob_no_1").val(tel1);
 	$("#mob_no_2").val("****");
 	$("#mob_no_3").val(tel3);
@@ -3180,43 +3153,42 @@ $("#btn_submit").on("click", function () {
 //비밀번호 체크
 function chkPwd() {
 	var userpwd = $("#pwd").val();
+
 	var userckpwd = $("#pwd_check").val();
 	var userid = "${logOn.user_id}";
+	alert(userid);
 	var pwdPattern = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
 	var num = userpwd.search(/[0-9]/g);
-	var eng = userpwd.search(/[a-z]/ig);
-	var spe = userpwd.search(/[!"#$%&'()*+,-./:;<=>?@[]^_`{|}~]/gi);
-	if ((num < 0 && eng < 0) || (eng < 0 && spe < 0)
-			|| (spe < 0 && num < 0)) {
-		//alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
-		$("#msg_pwdNull").css("display", "block");
-		$("#pwd").focus();
-		return false;
-	else if (userpwd.length<8 || userpwd.length>12) {
-		//alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
-		$("#msg_pwdAbcd").css("display", "block");
-		$("#pwd").focus();
-		return false;
-	} else if (/(\w)\1\1\1/.test(userpwd)) {
-		//alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
-		$("#msg_pwdAbcd").css("display", "block");
-		$("#pwd").focus();
-		return false;
-	} else if (userpwd.search(userid) > -1) {
-		//alert("비밀번호 설정 시 아이디와 4자리 이상 동일한 문자 또는 숫자를 사용할 수 없습니다.");
-		$("#msg_pwdId").css("display", "block");
-		$("#pwd").focus();
-		return false;
-	} else if ( userpwd !=userckpwd){
-		//alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-		$("#msg_pwd_check").removeClass("hide");
-		$("#pwd_check").focus();
-		return false;
+	var eng = userpwd.search(/[a-z]/i);
+	var spe = userpwd.search(/[!@#$%^&*]/);
+	 if ((num < 0 || eng < 0 || spe < 0) || userpwd.length < 8 || userpwd.length > 12 || /(\w)\1\1\1/.test(userpwd) || userpwd.search(userid) > -1 || userpwd !== userckpwd) {
+	        if (num < 0 || eng < 0 || spe < 0) {
+	            $("#msg_pwdNull").css("display", "block");
+	            $("#pwd").focus();
+	            return false;
+	        } else if (userpwd.length < 8 || userpwd.length > 12) {
+	            $("#msg_pwdAbcd").css("display", "block");
+	            $("#pwd").focus();
+	            return false;
+	        } else if (/(\w)\1\1\1/.test(userpwd)) {
+	            $("#msg_pwdAbcd").css("display", "block");
+	            $("#pwd").focus();
+	            return false;
+	        } else if (userpwd.search(userid) > -1) {
+	            $("#msg_pwdId").css("display", "block");
+	            $("#pwd").focus();
+	            return false;
+	        } else if (userpwd !== userckpwd) {
+	            $("#msg_pwd_check").removeClass("hide");
+	            $("#msg_pwd_check").addClass("show");
+	            $("#pwd_check").focus();
+	            return false;
+	        }
+	    }
+	    return true;
 	}
-	return true;
-}
 // 패스워드 강도 체크  
-
+/* 
 	$("#btn_submit").on("change", function () {
 		//alert("event");		
 	var inputVal = $("#pwd").val();	
@@ -3230,25 +3202,24 @@ function chkPwd() {
 		}  else{
 	       	$("#pwd").text("강도 : 매우약함");
 	   }
-});
+}); */
 
 </script>
 	<script>
+	function btncancel(){
+		alert('수정하신 정보는 저장되지 않습니다.\n수정을 취소하시겠습니까?');
+		location.href='/Black_OY/view/usermodify/usermodify.jsp';
+		}
+	$("#lnChangeName").on("click", function (event) {
+		event.preventDefault();
+		location.href = "<%=contextPath%>/olive/nameUpdate.do"; 
+	});
 	
-
 	$("#btn_submit").on("click", function () {
 		alert("event");
 		if (chkPwd() ) {
 			$("#mobChgForm").submit();
 		}
-	});
-	function btncancel(){
-	  alert('수정하신 정보는 저장되지 않습니다.\n수정을 취소하시겠습니까?');
-	  location.href='/Black_OY/view/usermodify/usermodify.jsp';
-	}
-	$("#lnChangeName").on("click", function (event) {
-		event.preventDefault();
-		location.href = "<%=contextPath%>/olive/nameUpdate.do"; 
 	});
 
 </script>

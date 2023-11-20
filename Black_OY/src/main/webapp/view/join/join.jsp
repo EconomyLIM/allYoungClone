@@ -680,7 +680,8 @@
 					//	    $("#email_addr_opt").val("naver.com").change();
 					$('#pwd').keyup(checkPassword); // 강도  체크(비밀번호)
 
-					$('#email_addr_opt').change(setEmail); // 이메일 직접 입력등 선택
+					$('#
+_addr_opt').change(setEmail); // 이메일 직접 입력등 선택
 					$('#email_addr_opt').change(chkEmail); // 이메일 직접입력
 					$('#email_addr2').blur(chkEmailDomain); // 직접입력 이메일 도메인 유효성 체크
 
