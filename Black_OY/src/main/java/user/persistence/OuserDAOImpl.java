@@ -123,7 +123,7 @@ public class OuserDAOImpl implements OuserDAO {
 	//회원정보 수정
 	@Override
 	public int infoUpdate(Connection conn, String newEmail, String newPwd, String user_id) throws SQLException {
-		int rowCount = 0;
+		int infoUpd = 0;
 		String sql = "UPDATE o_user SET u_email = ? , u_pwd = ? "
 				+ "WHERE user_id = ? ";
 		
@@ -136,7 +136,7 @@ public class OuserDAOImpl implements OuserDAO {
 	        pstmt.setString(2 , newPwd);
 	        pstmt.setString(3, user_id);
 
-	        rowCount = pstmt.executeUpdate();
+	        infoUpd = pstmt.executeUpdate();
 	        
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -145,11 +145,11 @@ public class OuserDAOImpl implements OuserDAO {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(conn);
 		}
-		return rowCount;
+		return infoUpd;
 	}
 	@Override
 	public int nameUpdate( Connection conn, String user_id, String newName) throws SQLException {
-		int rowCount = 0;
+		int nameUpd = 0;
 		String sql = "UPDATE o_user SET u_name = ? "
 				+ " WHERE user_id = ? ";
 		
@@ -160,13 +160,37 @@ public class OuserDAOImpl implements OuserDAO {
 			pstmt.setString(1, newName);
 			pstmt.setString(2, user_id);
 			
-			rowCount = pstmt.executeUpdate();  
+			nameUpd = pstmt.executeUpdate();  
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("nameUpdateImpl Exception~");
 		}finally {
 			JDBCUtil.close(pstmt);
 		}
-		return rowCount;
+		return nameUpd;
 	}
+
+	@Override
+	public int telUpdate(Connection conn, String user_id, String newTel) throws SQLException {
+		int telUpd = 0;
+		String sql = "UPDATE o_user SET u_tel = ? "
+				+ " WHERE user_id = ? ";
+		
+		 PreparedStatement pstmt = null;
+		try { 
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, newTel);
+			pstmt.setString(2, user_id);
+			
+			telUpd = pstmt.executeUpdate();  
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("telUpdateImpl Exception~");
+		}finally {
+			JDBCUtil.close(pstmt);
+		}
+		return telUpd;
+	}
+	
 }

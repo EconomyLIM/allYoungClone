@@ -18,5 +18,7 @@ public interface OuserDAO {
 	int infoUpdate(Connection conn, String newEmail, String newPwd, String user_id) throws SQLException;
 	//이름수정
 	 int nameUpdate( Connection conn, String user_id, String newName) throws SQLException;
+	 //전화번호 수정
+	 int telUpdate(Connection conn, String user_id, String newTel) throws SQLException;
 }
 
