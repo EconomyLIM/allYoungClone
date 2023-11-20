@@ -13,6 +13,7 @@ import head.domain.CateMDTO;
 import head.domain.EventDTO;
 import head.domain.GiftCardDTO;
 import head.domain.ProductHistoryDTO;
+import product.domain.PMidListDTO;
 
 public class HeadDAOImpl implements HeadDAO {
 	private static HeadDAOImpl dao;
@@ -260,7 +261,6 @@ public class HeadDAOImpl implements HeadDAO {
 	// 최근 본 상품
 	@Override
 	public ProductHistoryDTO productHistory(Connection conn, String pro_id) throws Exception {
-		// TODO Auto-generated method stub
 		String sql = " select * from pmlistview where pro_displ_id = ? ";
 		ProductHistoryDTO historyDTO = null;
 		PreparedStatement pstmt = null;
@@ -304,5 +304,75 @@ public class HeadDAOImpl implements HeadDAO {
 		
 		return historyDTO;
 	}//productHistory
+	@Override
+	public List<PMidListDTO> selectSalesRanking(Connection conn, String mid) throws Exception {
+		List<PMidListDTO> list = null;
+		PMidListDTO dto = null;
+		
+		String sql = "SELECT * "
+				+ " FROM pmlistview "
+				+ " WHERE pro_id IN ( "
+				+ "    SELECT product_id "
+				+ "    FROM ( "
+				+ "        SELECT product_id, sum(product_cnt) cnt "
+				+ "        FROM order_product "
+				+ "        GROUP BY product_id "
+				+ "        ORDER BY cnt DESC "
+				+ "    ) "
+				+ "    WHERE ROWNUM <= 100 "
+				+ " )";
+		
+		if(mid != "") {
+			sql += " AND cat_m_id = ?";
+		}
+		
+		System.out.println(sql);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if(mid != "") {
+				pstmt.setString(1, mid);
+			}
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					dto = PMidListDTO.builder()
+							.displImgSrc(rs.getString("pro_displ_src"))
+							.brandName(rs.getString("brand_name"))
+							.brandId(rs.getString("brand_id"))
+							.displProName(rs.getString("pro_displ_name"))
+							.lid(rs.getString("cat_l_id"))
+							.mid(rs.getString("cat_m_id"))
+							.sid(rs.getString("cat_s_id"))
+							.proPrice(rs.getString("proprice"))
+							.afterPrice(rs.getString("afterprice"))
+							.displId(rs.getString("pro_displ_id"))
+							.productID(rs.getString("pro_id"))
+							.prc(rs.getInt("prc"))
+							.pdc(rs.getInt("pdc"))
+							.pmp(rs.getInt("pmp"))
+							.stock(rs.getInt("stock"))
+							.ordercnt(rs.getInt("ordercnt"))
+							.displLike(rs.getInt("pro_displ_like"))
+							.proReg(rs.getDate("pro_reg"))
+							.build();
+							
+					list.add(dto);
+				} while (rs.next());
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs);
+			JDBCUtil.close(pstmt);
+		}
+		
+		return list;
+	}
 
 }

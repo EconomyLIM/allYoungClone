@@ -59,8 +59,19 @@ public class MainPageHandler implements CommandHandler{
 		}
 		request.setAttribute("mbilist", mbilist);
 		
+		// ================= 올리브영 매거진 배너정보 갖고오는 작업 ==================
+		List<PlanShopDisplDTO> getOMBanner = mainService.getWeekSpecial(3);
+		request.setAttribute("getOMBanner", getOMBanner);
+				
+		// ================= 올리브영 매거진 배너정보 갖고오는 작업 ==================
+		List<PlanShopDisplDTO> getOOBanner = mainService.getWeekSpecial(4);
+		System.out.println(getOOBanner);
+		request.setAttribute("getOOBanner", getOOBanner);
+		
 		
 		return "/view/mainPage/main.jsp";
 	} // process
+	
+	
 
 } // main
