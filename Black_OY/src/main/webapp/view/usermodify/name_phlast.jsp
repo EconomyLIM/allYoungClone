@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/WEB-INF/inc/include.jspf"%>
+<%@ include file="/WEB-INF/inc/session_auth.jspf"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -158,7 +161,7 @@
 
 		<section id="ct" class="certify_user2 certifyWrap certifyWrap_02">
 			<form id="cplogn" name="cplogn" method="post"
-				action="https://www.kmcert.com/kmcis/web_v4/kmcisSms02.jsp">
+				action="<%=contextPath%>/olive/nameUpdate.do">
 				<div class="">
 					<fieldset>
 						<legend>휴대폰 본인확인 입력</legend>
@@ -350,8 +353,7 @@
 	</script>
 <script>
 	$("#btnSubmit").on("click", function () {
-		alert("인증이 완료되었습니다.");
-		location.href="agreement.jsp";
+		$("#cplogn").submit();
 		
 	});
 

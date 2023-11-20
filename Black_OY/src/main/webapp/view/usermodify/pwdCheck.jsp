@@ -46,7 +46,7 @@
 			
 		</div>
 		<div id="contentsWrap">
-			<form id="form1" method="post" action="<%=contextPath %>/user/pwdCheck.do">
+			<form id="form1" method="post" action="<%=contextPath%>/olive/infoUpdate.do">
 				<input type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
 				<input type="hidden" name="brnd_cd" id="brnd_cd" value="3000">
 				<input type="hidden" name="mcht_no" id="mcht_no" value="3000">
@@ -85,8 +85,8 @@
 								</span>
 							</div>
 							<div class="btn_center">
-								<button type="button" onclick="javascript:goCancel();" class="btn">취소</button>
-								<button type="button" id ="btnPwdCheck" onclick="javascript:pwdCheck();" class="btn btn_em">확인</button>
+								<button type="button" id="btnCancel" class="btn">취소</button>
+								<button type="button" id ="btnPwdCheck" class="btn btn_em">확인</button>
 							</div>
 						</div>
 					</div>
@@ -191,30 +191,34 @@
 	<!--script 영역-->
 
 	<script>
-	    $(document).ready(function(){
-			enterKey("pwd","pwdCheck()");
-		});
-        
+	$(function () {
+	     $('#pwd').keydown(function(event) {
+	     	if ( event.which == 13 ){
+	     		$("#btnPwdCheck").click();	
+	     	}
+	     });	
+	});
 		// 취소
-		function goCancel() {
-			$("#form1").attr("action", "usermodify.jsp");
-			$("#form1").submit();
-			 
-		} 
+	$("#btnCancel").on("click", function () {
+		alert("회원정보 수정을 취소하시겠습니까?");
+		location.href = '<%=contextPath%>/olive/usermodify.do';
+	});
 	//비밀번호 체크
 
     function pwdCheck() {
         var u_pwd = $("#pwd").val();
         if (u_pwd == "") {
             alert("비밀번호를 입력해 주세요.");
+            $("#pwd").focus();
         } else if ( u_pwd != "${logOn.u_pwd}"){
-        	alert("비밀번호가 일치하지 않습니다.");	
+        	alert("비밀번호가 일치하지 않습니다.");
+        	$("#pwd").focus();
         }
         return true;
 	}
     $("#btnPwdCheck").on("click", function () {
 		if (pwdCheck() ) {
-			location.href = "/Black_OY/view/usermodify/info_modification.jsp";
+			$("#form1").submit();
 		}
 	});
     </script>

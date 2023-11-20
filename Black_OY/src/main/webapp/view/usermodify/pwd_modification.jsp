@@ -224,9 +224,6 @@ $("#btnCancel").on("click", function () {
 	alert('비밀번호 변경을 취소하시겠습니까?');
 	location.href = "<%=contextPath%>/olive/usermodify.do";
 });
-$('#new_pwd_check').keydown(function(event) {
-	if (event.keyCode == 13) chkPwd();
-});
 
 	//비밀번호 체크
 	function chkPwd() {

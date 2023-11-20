@@ -34,6 +34,7 @@ public class MPOrderDeliveryService {
 			return list;
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryService.mpODorderService Exception");
 		} finally {
 			JDBCUtil.close(conn);
@@ -52,6 +53,7 @@ public class MPOrderDeliveryService {
 			return list;
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryService.mpODorderdetailService Exception");
 		} finally {
 			JDBCUtil.close(conn);

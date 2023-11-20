@@ -2,25 +2,34 @@
 <%@page import="user.domain.OuserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/inc/include.jspf" %>
-<%@ include file="/WEB-INF/inc/session_auth.jspf" %>
+<%@ include file="/WEB-INF/inc/include.jspf"%>
+<%@ include file="/WEB-INF/inc/session_auth.jspf"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../../css/CJbase.css" />
-<link rel="stylesheet" href="../../css/CJparticipate.css" />
+<link rel="stylesheet" href="../css/CJbase.css" />
+<link rel="stylesheet" href="../css/CJparticipate.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<body>
+<body class="" style="height: 1269px;">
 	<!--skip navigation-->
 	<div class="skipNavi">
 		<a href="#contentsWrap">본문으로 바로가기</a>
 	</div>
+	<!--//skip navigation-->
+
 	<div id="bodyWrap">
 		<!-- header -->
+
+
+
+
+
+
+
 
 		<form method="post" id="getCoopForm" name="getCoopForm">
 			<input type="hidden" name="get_coopco_cd" id="get_coopco_cd"
@@ -32,32 +41,41 @@
 		<!--header-->
 		<div id="part_headerWrap">
 			<div class="part_header_wrap">
-				<h1 class="cj_logo">	<span class="logo">CJ ONE</span> TRUE LIFESTYLE MEMBERSHIP</h1>
+				<h1 class="cj_logo">
+					<span class="logo">CJ ONE</span> TRUE LIFESTYLE MEMBERSHIP
+				</h1>
 				<div id="coop_header_wrap">
-					<p class="part_logo">건강한 아름다움을 제안하는 글로벌 라이프스타일 플랫폼
-					<img src="https://www.cjone.com/cjmweb/upfile/20191007_1837101.png" alt="올리브영">
+					<p class="part_logo">
+						건강한 아름다움을 제안하는 글로벌 라이프스타일 플랫폼<img
+							src="https://www.cjone.com/cjmweb/upfile/20191007_1837101.png"
+							alt="올리브영">
 					</p>
 				</div>
+				<!-- 160216 수정 - 제휴 브랜드별 헤더 문구 및 로고 추가 -->
+
+
+				<!-- //160216 수정 - 제휴 브랜드별 헤더 문구 및 로고 추가 -->
 			</div>
 		</div>
+
+
 		<!-- //header -->
 
 		<!-- contents -->
 		<div id="contentsWrap">
-			<form name="mobChgForm" id="mobChgForm" method="post" action="">
-				<input type="hidden" name="enc_data" value=""> 
-				<input 	type="hidden" name="enc_com" value=""> 
-				<input type="hidden" name="hg_nm" value=""> 
-				<input type="hidden" name="phone_no" value=""> 
-				<input type="hidden" name="mob_no_1" value="">
-				<input type="hidden" name="mob_no_2" value=""> 
-				<input 	type="hidden" name="mob_no_3" value=""> 
-				<input 	type="hidden" name="dup_mob_no_init_use" value="N"> 
-				<input 	type="hidden" name="coopco_cd" value="7030"> 
-				<input 	type="hidden" name="brnd_cd" value="3000"> 
-				<input 	type="hidden" name="mcht_no" value="3000">
+			<form name="mobChgForm" id="mobChgForm" method="post"
+				action="<%=contextPath%>/olive/infoUpdate.do">
+				<input type="hidden" name="enc_data" value=""> <input
+					type="hidden" name="enc_com" value=""> <input type="hidden"
+					name="hg_nm" value=""> <input type="hidden" name="phone_no"
+					value=""> <input type="hidden" name="mob_no_1" value="">
+				<input type="hidden" name="mob_no_2" value=""> <input
+					type="hidden" name="mob_no_3" value=""> <input
+					type="hidden" name="dup_mob_no_init_use" value="N"> <input
+					type="hidden" name="coopco_cd" value="7030"> <input
+					type="hidden" name="brnd_cd" value="3000"> <input
+					type="hidden" name="mcht_no" value="3000">
 			</form>
-			
 			<form name="sform" id="sform" method="post" action="">
 				<input type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
 				<input type="hidden" name="brnd_cd" id="brnd_cd" value="3000">
@@ -71,36 +89,45 @@
 				<input type="hidden" name="mcht_no" id="mcht_no" value="3000">
 				<input type="hidden" name="coop_return_url" id="coop_return_url"
 					value="https://www.oliveyoung.co.kr/store/mypage/getMktReceiptInfo.do?refresh=Y">
-				<input type="hidden" name="old_clndr_typ_cd" id="old_clndr_typ_cd" value="S">
-				<input type="hidden" id="under_14"	name="under_14" value="N">
-				<input type="hidden" id="agr30_yn" name="agr30_yn" value=""> 
-				<input	type="hidden" id="agrbrnd_yn" name="agr_yn" value="">
-				<input 	type="hidden" id="mbr_id" name="mbr_id" value=""> 
-				<input 	type="hidden" name="access_token" id="access_token" value="">
+				<input type="hidden" name="old_clndr_typ_cd" id="old_clndr_typ_cd"
+					value="S"> <input type="hidden" id="under_14"
+					name="under_14" value="N"> <input type="hidden"
+					id="agr30_yn" name="agr30_yn" value=""> <input
+					type="hidden" id="agrbrnd_yn" name="agr_yn" value=""> <input
+					type="hidden" id="mbr_id" name="mbr_id" value="jy*****"> <input
+					type="hidden" name="access_token" id="access_token" value="">
 				<input type="hidden" name="sns_typ_cd" id="sns_typ_cd" value="">
-				<input type="hidden" name="sns_typ_cd_10" id="sns_typ_cd_10" value="">
-				<input type="hidden" name="sns_first_yn" id="sns_first_yn" value="Y">
-				<input type="hidden" name="noAgr" id="noAgr" value="">
+				<input type="hidden" name="sns_typ_cd_10" id="sns_typ_cd_10"
+					value=""> <input type="hidden" name="sns_first_yn"
+					id="sns_first_yn" value="Y"> <input type="hidden"
+					name="noAgr" id="noAgr"
+					value="AGRTYPCD_10,AGRTYPCD_11,AGRTYPCD_30,AGRTYPCD_40,AGRTYPCD_31,AGRTYPCD_Y14LT">
 
 				<!-- 160418 회원정보 변경체크용 파라미터 -->
 				<input type="hidden" name="chk_email_acv_change" value="N"
-					id="chk_email_acv_change">
-				<input type="hidden" name="chk_sms_acv_change" value="N" id="chk_sms_acv_change">
-				<input type="hidden" name="chk_tel_acv_change" value="N" id="chk_tel_acv_change"> 
-				<input type="hidden" name="chk_birth_change" value="N" id="chk_birth_change"> 
-				<input 	type="hidden" name="chk_tel_change" value="N" id="chk_tel_change">
-				<input type="hidden" name="chk_email_change" value="N" id="chk_email_change">
-				<input type="hidden" name="chk_info_agr_change" value="N" id="chk_info_agr_change">
-				<input type="hidden" name="chk_receipts_change" value="N" id="chk_receipts_change">
-				<input type="hidden" name="user_info_change" value="N" id="user_info_change">
-				<input 	type="hidden" name="chk_info_agr_change2" value="N" 	id="chk_info_agr_change2">
+					id="chk_email_acv_change"> <input type="hidden"
+					name="chk_sms_acv_change" value="N" id="chk_sms_acv_change">
+				<input type="hidden" name="chk_tel_acv_change" value="N"
+					id="chk_tel_acv_change"> <input type="hidden"
+					name="chk_birth_change" value="N" id="chk_birth_change"> <input
+					type="hidden" name="chk_tel_change" value="N" id="chk_tel_change">
+				<input type="hidden" name="chk_email_change" value="N"
+					id="chk_email_change"> <input type="hidden"
+					name="chk_info_agr_change" value="N" id="chk_info_agr_change">
+				<input type="hidden" name="chk_receipts_change" value="N"
+					id="chk_receipts_change"> <input type="hidden"
+					name="user_info_change" value="N" id="user_info_change"> <input
+					type="hidden" name="chk_info_agr_change2" value="N"
+					id="chk_info_agr_change2">
 
 				<div id="contents">
 					<!-- location -->
 					<div class="location_wrap">
 						<div class="location">
-							<a href="usermodify.jsp" class="home"><span class="haze">홈</span></a>
-							<a href="pwdCheck.jsp" class="now"><span>회원정보 수정</span></a>
+							<a href="<%=contextPath%>/olive/usermodify.do" class="home"><span
+								class="haze">홈</span></a><a
+								href="<%=contextPath%>/olive/usermodify.do" class="now"><span>회원정보
+									수정</span></a>
 						</div>
 					</div>
 					<!-- //location -->
@@ -118,8 +145,9 @@
 									<div class="info">
 
 										<a id="auth_btn_area" href="javascript:callAuthLayer()"
-											 class="btn btn_sm"><span class="arr">전체 정보 확인 및 수정</span></a>
-											 <a href="https://www.cjone.com/cjmweb/member/withdrawal.do?coopco_cd=7030&amp;brnd_cd=3000&amp;mcht_no=3000"
+											;="" class="btn btn_sm" style="display: none;"><span
+											class="arr">전체 정보 확인 및 수정</span></a> <a
+											href="https://www.cjone.com/cjmweb/member/withdrawal.do?coopco_cd=7030&amp;brnd_cd=3000&amp;mcht_no=3000"
 											class="btn btn_sm"><span class="arr">회원탈퇴</span></a>
 									</div>
 								</div>
@@ -138,9 +166,9 @@
 												<th scope="row">이름</th>
 												<td>
 													<div class="input_group">
-														<span id="hg_nm_area">${logOn.u_name }</span><a href="#"
-															class="btn btn_sm" id="lnChangeName"><span
-															class="arr">변경하기</span></a>
+														<span id="hg_nm_area">${logOn.u_name}</span>
+														<a href="#" class="btn btn_sm" id="lnChangeName">
+														<span class="arr">변경하기</span></a>
 													</div>
 													<p class="msg_desc">이름은 "개명"한 경우에만 변경 가능합니다.</p>
 												</td>
@@ -148,7 +176,7 @@
 
 											<tr>
 												<th scope="row">아이디</th>
-												<td><span id="mbr_id_area">${logOn.user_id }</span></td>
+												<td><span id="mbr_id_area">${logOn.user_id}</span></td>
 											</tr>
 
 											<tr class="input">
@@ -156,424 +184,23 @@
 												<td>
 													<div class="birthday_select" id="birthday_select"
 														style="display: none">
-														<span class="select w120 hide" data-skin="form"> <select
-															id="birth_yy" name="birth_yy" title="생년월일 중 년 선택">
-																[
-																<option value="">년</option>,
-																<option value="2023">2023</option>,
-																<option value="2022">2022</option>,
-																<option value="2021">2021</option>,
-																<option value="2020">2020</option>,
-																<option value="2019">2019</option>,
-																<option value="2018">2018</option>,
-																<option value="2017">2017</option>,
-																<option value="2016">2016</option>,
-																<option value="2015">2015</option>,
-																<option value="2014">2014</option>,
-																<option value="2013">2013</option>,
-																<option value="2012">2012</option>,
-																<option value="2011">2011</option>,
-																<option value="2010">2010</option>,
-																<option value="2009">2009</option>,
-																<option value="2008">2008</option>,
-																<option value="2007">2007</option>,
-																<option value="2006">2006</option>,
-																<option value="2005">2005</option>,
-																<option value="2004">2004</option>,
-																<option value="2003">2003</option>,
-																<option value="2002">2002</option>,
-																<option value="2001">2001</option>,
-																<option value="2000">2000</option>,
-																<option value="1999">1999</option>,
-																<option value="1998">1998</option>,
-																<option value="1997">1997</option>,
-																<option value="1996">1996</option>,
-																<option value="1995">1995</option>,
-																<option value="1994">1994</option>,
-																<option value="1993">1993</option>,
-																<option value="1992">1992</option>,
-																<option value="1991">1991</option>,
-																<option value="1990">1990</option>,
-																<option value="1989">1989</option>,
-																<option value="1988">1988</option>,
-																<option value="1987">1987</option>,
-																<option value="1986">1986</option>,
-																<option value="1985">1985</option>,
-																<option value="1984">1984</option>,
-																<option value="1983">1983</option>,
-																<option value="1982">1982</option>,
-																<option value="1981">1981</option>,
-																<option value="1980">1980</option>,
-																<option value="1979">1979</option>,
-																<option value="1978">1978</option>,
-																<option value="1977">1977</option>,
-																<option value="1976">1976</option>,
-																<option value="1975">1975</option>,
-																<option value="1974">1974</option>,
-																<option value="1973">1973</option>,
-																<option value="1972">1972</option>,
-																<option value="1971">1971</option>,
-																<option value="1970">1970</option>,
-																<option value="1969">1969</option>,
-																<option value="1968">1968</option>,
-																<option value="1967">1967</option>,
-																<option value="1966">1966</option>,
-																<option value="1965">1965</option>,
-																<option value="1964">1964</option>,
-																<option value="1963">1963</option>,
-																<option value="1962">1962</option>,
-																<option value="1961">1961</option>,
-																<option value="1960">1960</option>,
-																<option value="1959">1959</option>,
-																<option value="1958">1958</option>,
-																<option value="1957">1957</option>,
-																<option value="1956">1956</option>,
-																<option value="1955">1955</option>,
-																<option value="1954">1954</option>,
-																<option value="1953">1953</option>,
-																<option value="1952">1952</option>,
-																<option value="1951">1951</option>,
-																<option value="1950">1950</option>,
-																<option value="1949">1949</option>,
-																<option value="1948">1948</option>,
-																<option value="1947">1947</option>,
-																<option value="1946">1946</option>,
-																<option value="1945">1945</option>,
-																<option value="1944">1944</option>,
-																<option value="1943">1943</option>,
-																<option value="1942">1942</option>,
-																<option value="1941">1941</option>,
-																<option value="1940">1940</option>,
-																<option value="1939">1939</option>,
-																<option value="1938">1938</option>,
-																<option value="1937">1937</option>,
-																<option value="1936">1936</option>,
-																<option value="1935">1935</option>,
-																<option value="1934">1934</option>,
-																<option value="1933">1933</option>,
-																<option value="1932">1932</option>,
-																<option value="1931">1931</option>,
-																<option value="1930">1930</option>,
-																<option value="1929">1929</option>,
-																<option value="1928">1928</option>,
-																<option value="1927">1927</option>,
-																<option value="1926">1926</option>,
-																<option value="1925">1925</option>,
-																<option value="1924">1924</option>,
-																<option value="1923">1923</option>,
-																<option value="1922">1922</option>,
-																<option value="1921">1921</option>,
-																<option value="1920">1920</option>,
-																<option value="1919">1919</option>,
-																<option value="1918">1918</option>,
-																<option value="1917">1917</option>,
-																<option value="1916">1916</option>,
-																<option value="1915">1915</option>,
-																<option value="1914">1914</option>,
-																<option value="1913">1913</option>,
-																<option value="1912">1912</option>,
-																<option value="1911">1911</option>,
-																<option value="1910">1910</option>,
-																<option value="1909">1909</option>,
-																<option value="1908">1908</option>,
-																<option value="1907">1907</option>,
-																<option value="1906">1906</option>,
-																<option value="1905">1905</option>,
-																<option value="1904">1904</option>,
-																<option value="1903">1903</option>,
-																<option value="1902">1902</option>,
-																<option value="1901">1901</option>,
-																<option value="1900">1900</option>]
-														</select>
-														</span>
-														<div class="select_wrap w120"
-															style="background-color: rgb(235, 235, 228)">
-															<div class="item_seleced">
-																<a href="#1993" title="생년월일 중 년 선택 목록 열기"
-																	data-title="생년월일 중 년 선택">1993<span class="haze">선택됨</span></a>
-															</div>
-															<div class="item_list_wrap ">
-																<div class="item_list ui_scrollarea">
-																	<ul class="ui_content">
-																		<li><a href="#"><span>년</span></a></li>
-																		<li><a href="#2023"><span>2023</span></a></li>
-																		<li><a href="#2022"><span>2022</span></a></li>
-																		<li><a href="#2021"><span>2021</span></a></li>
-																		<li><a href="#2020"><span>2020</span></a></li>
-																		<li><a href="#2019"><span>2019</span></a></li>
-																		<li><a href="#2018"><span>2018</span></a></li>
-																		<li><a href="#2017"><span>2017</span></a></li>
-																		<li><a href="#2016"><span>2016</span></a></li>
-																		<li><a href="#2015"><span>2015</span></a></li>
-																		<li><a href="#2014"><span>2014</span></a></li>
-																		<li><a href="#2013"><span>2013</span></a></li>
-																		<li><a href="#2012"><span>2012</span></a></li>
-																		<li><a href="#2011"><span>2011</span></a></li>
-																		<li><a href="#2010"><span>2010</span></a></li>
-																		<li><a href="#2009"><span>2009</span></a></li>
-																		<li><a href="#2008"><span>2008</span></a></li>
-																		<li><a href="#2007"><span>2007</span></a></li>
-																		<li><a href="#2006"><span>2006</span></a></li>
-																		<li><a href="#2005"><span>2005</span></a></li>
-																		<li><a href="#2004"><span>2004</span></a></li>
-																		<li><a href="#2003"><span>2003</span></a></li>
-																		<li><a href="#2002"><span>2002</span></a></li>
-																		<li><a href="#2001"><span>2001</span></a></li>
-																		<li><a href="#2000"><span>2000</span></a></li>
-																		<li><a href="#1999"><span>1999</span></a></li>
-																		<li><a href="#1998"><span>1998</span></a></li>
-																		<li><a href="#1997"><span>1997</span></a></li>
-																		<li><a href="#1996"><span>1996</span></a></li>
-																		<li><a href="#1995"><span>1995</span></a></li>
-																		<li><a href="#1994"><span>1994</span></a></li>
-																		<li><a href="#1993"><span>1993</span></a></li>
-																		<li><a href="#1992"><span>1992</span></a></li>
-																		<li><a href="#1991"><span>1991</span></a></li>
-																		<li><a href="#1990"><span>1990</span></a></li>
-																		<li><a href="#1989"><span>1989</span></a></li>
-																		<li><a href="#1988"><span>1988</span></a></li>
-																		<li><a href="#1987"><span>1987</span></a></li>
-																		<li><a href="#1986"><span>1986</span></a></li>
-																		<li><a href="#1985"><span>1985</span></a></li>
-																		<li><a href="#1984"><span>1984</span></a></li>
-																		<li><a href="#1983"><span>1983</span></a></li>
-																		<li><a href="#1982"><span>1982</span></a></li>
-																		<li><a href="#1981"><span>1981</span></a></li>
-																		<li><a href="#1980"><span>1980</span></a></li>
-																		<li><a href="#1979"><span>1979</span></a></li>
-																		<li><a href="#1978"><span>1978</span></a></li>
-																		<li><a href="#1977"><span>1977</span></a></li>
-																		<li><a href="#1976"><span>1976</span></a></li>
-																		<li><a href="#1975"><span>1975</span></a></li>
-																		<li><a href="#1974"><span>1974</span></a></li>
-																		<li><a href="#1973"><span>1973</span></a></li>
-																		<li><a href="#1972"><span>1972</span></a></li>
-																		<li><a href="#1971"><span>1971</span></a></li>
-																		<li><a href="#1970"><span>1970</span></a></li>
-																		<li><a href="#1969"><span>1969</span></a></li>
-																		<li><a href="#1968"><span>1968</span></a></li>
-																		<li><a href="#1967"><span>1967</span></a></li>
-																		<li><a href="#1966"><span>1966</span></a></li>
-																		<li><a href="#1965"><span>1965</span></a></li>
-																		<li><a href="#1964"><span>1964</span></a></li>
-																		<li><a href="#1963"><span>1963</span></a></li>
-																		<li><a href="#1962"><span>1962</span></a></li>
-																		<li><a href="#1961"><span>1961</span></a></li>
-																		<li><a href="#1960"><span>1960</span></a></li>
-																		<li><a href="#1959"><span>1959</span></a></li>
-																		<li><a href="#1958"><span>1958</span></a></li>
-																		<li><a href="#1957"><span>1957</span></a></li>
-																		<li><a href="#1956"><span>1956</span></a></li>
-																		<li><a href="#1955"><span>1955</span></a></li>
-																		<li><a href="#1954"><span>1954</span></a></li>
-																		<li><a href="#1953"><span>1953</span></a></li>
-																		<li><a href="#1952"><span>1952</span></a></li>
-																		<li><a href="#1951"><span>1951</span></a></li>
-																		<li><a href="#1950"><span>1950</span></a></li>
-																		<li><a href="#1949"><span>1949</span></a></li>
-																		<li><a href="#1948"><span>1948</span></a></li>
-																		<li><a href="#1947"><span>1947</span></a></li>
-																		<li><a href="#1946"><span>1946</span></a></li>
-																		<li><a href="#1945"><span>1945</span></a></li>
-																		<li><a href="#1944"><span>1944</span></a></li>
-																		<li><a href="#1943"><span>1943</span></a></li>
-																		<li><a href="#1942"><span>1942</span></a></li>
-																		<li><a href="#1941"><span>1941</span></a></li>
-																		<li><a href="#1940"><span>1940</span></a></li>
-																		<li><a href="#1939"><span>1939</span></a></li>
-																		<li><a href="#1938"><span>1938</span></a></li>
-																		<li><a href="#1937"><span>1937</span></a></li>
-																		<li><a href="#1936"><span>1936</span></a></li>
-																		<li><a href="#1935"><span>1935</span></a></li>
-																		<li><a href="#1934"><span>1934</span></a></li>
-																		<li><a href="#1933"><span>1933</span></a></li>
-																		<li><a href="#1932"><span>1932</span></a></li>
-																		<li><a href="#1931"><span>1931</span></a></li>
-																		<li><a href="#1930"><span>1930</span></a></li>
-																		<li><a href="#1929"><span>1929</span></a></li>
-																		<li><a href="#1928"><span>1928</span></a></li>
-																		<li><a href="#1927"><span>1927</span></a></li>
-																		<li><a href="#1926"><span>1926</span></a></li>
-																		<li><a href="#1925"><span>1925</span></a></li>
-																		<li><a href="#1924"><span>1924</span></a></li>
-																		<li><a href="#1923"><span>1923</span></a></li>
-																		<li><a href="#1922"><span>1922</span></a></li>
-																		<li><a href="#1921"><span>1921</span></a></li>
-																		<li><a href="#1920"><span>1920</span></a></li>
-																		<li><a href="#1919"><span>1919</span></a></li>
-																		<li><a href="#1918"><span>1918</span></a></li>
-																		<li><a href="#1917"><span>1917</span></a></li>
-																		<li><a href="#1916"><span>1916</span></a></li>
-																		<li><a href="#1915"><span>1915</span></a></li>
-																		<li><a href="#1914"><span>1914</span></a></li>
-																		<li><a href="#1913"><span>1913</span></a></li>
-																		<li><a href="#1912"><span>1912</span></a></li>
-																		<li><a href="#1911"><span>1911</span></a></li>
-																		<li><a href="#1910"><span>1910</span></a></li>
-																		<li><a href="#1909"><span>1909</span></a></li>
-																		<li><a href="#1908"><span>1908</span></a></li>
-																		<li><a href="#1907"><span>1907</span></a></li>
-																		<li><a href="#1906"><span>1906</span></a></li>
-																		<li><a href="#1905"><span>1905</span></a></li>
-																		<li><a href="#1904"><span>1904</span></a></li>
-																		<li><a href="#1903"><span>1903</span></a></li>
-																		<li><a href="#1902"><span>1902</span></a></li>
-																		<li><a href="#1901"><span>1901</span></a></li>
-																		<li><a href="#1900"><span>1900</span></a></li>
-																	</ul>
-																</div>
-																<div class="scroll ui_scrollbar">
-																	<span class="bg_top"></span> <span class="bg bg_mid"
-																		style="display: none;"></span> <span class="bg_btm"></span>
-																</div>
-															</div>
-														</div>
-														<span class="symbol">년</span> <span
-															class="select w70 hide" data-skin="form"> <select
-															id="birth_mm" name="birth_mm" title="생년월일 중 월 선택"
-															class="narrow"> [
-																<option value="">월</option>,
-																<option value="01">01</option>,
-																<option value="02">02</option>,
-																<option value="03">03</option>,
-																<option value="04">04</option>,
-																<option value="05">05</option>,
-																<option value="06">06</option>,
-																<option value="07">07</option>,
-																<option value="08">08</option>,
-																<option value="09">09</option>,
-																<option value="10">10</option>,
-																<option value="11">11</option>,
-																<option value="12">12</option>]
-														</select>
-														</span>
+														<span class="select w120 hide" data-skin="form"></span>
+												
+														<span class="symbol">년</span> 
+														<span class="select w70 hide" data-skin="form"></span>
 														<div class="select_wrap w70"
 															style="background-color: rgb(235, 235, 228)">
-															<div class="item_seleced">
-																<a href="#05" title="생년월일 중 월 선택 목록 열기"
-																	data-title="생년월일 중 월 선택">05<span class="haze">선택됨</span></a>
-															</div>
-															<div class="item_list_wrap ">
-																<div class="item_list ui_scrollarea">
-																	<ul class="ui_content">
-																		<li><a href="#"><span>월</span></a></li>
-																		<li><a href="#01"><span>01</span></a></li>
-																		<li><a href="#02"><span>02</span></a></li>
-																		<li><a href="#03"><span>03</span></a></li>
-																		<li><a href="#04"><span>04</span></a></li>
-																		<li><a href="#05"><span>05</span></a></li>
-																		<li><a href="#06"><span>06</span></a></li>
-																		<li><a href="#07"><span>07</span></a></li>
-																		<li><a href="#08"><span>08</span></a></li>
-																		<li><a href="#09"><span>09</span></a></li>
-																		<li><a href="#10"><span>10</span></a></li>
-																		<li><a href="#11"><span>11</span></a></li>
-																		<li><a href="#12"><span>12</span></a></li>
-																	</ul>
-																</div>
-																<div class="scroll ui_scrollbar">
-																	<span class="bg_top"></span> <span class="bg bg_mid"
-																		style="display: none;"></span> <span class="bg_btm"></span>
-																</div>
-															</div>
 														</div>
-														<span class="symbol">월</span> <span
-															class="select w70 hide" data-skin="form"> <select
-															id="birth_dd" name="birth_dd" title="생년월일 중 일 선택"
-															class="narrow"> [
-																<option value="">일</option>,
-																<option value="01">01</option>,
-																<option value="02">02</option>,
-																<option value="03">03</option>,
-																<option value="04">04</option>,
-																<option value="05">05</option>,
-																<option value="06">06</option>,
-																<option value="07">07</option>,
-																<option value="08">08</option>,
-																<option value="09">09</option>,
-																<option value="10">10</option>,
-																<option value="11">11</option>,
-																<option value="12">12</option>,
-																<option value="13">13</option>,
-																<option value="14">14</option>,
-																<option value="15">15</option>,
-																<option value="16">16</option>,
-																<option value="17">17</option>,
-																<option value="18">18</option>,
-																<option value="19">19</option>,
-																<option value="20">20</option>,
-																<option value="21">21</option>,
-																<option value="22">22</option>,
-																<option value="23">23</option>,
-																<option value="24">24</option>,
-																<option value="25">25</option>,
-																<option value="26">26</option>,
-																<option value="27">27</option>,
-																<option value="28">28</option>,
-																<option value="29">29</option>,
-																<option value="30">30</option>,
-																<option value="31">31</option>]
-														</select>
-														</span>
-														<div class="select_wrap w70"
-															style="background-color: rgb(235, 235, 228)">
-															<div class="item_seleced">
-																<a href="#15" title="생년월일 중 일 선택 목록 열기"
-																	data-title="생년월일 중 일 선택"><span class="haze">선택됨</span></a>
-															</div>
-															<div class="item_list_wrap ">
-																<div class="item_list ui_scrollarea">
-																	<ul class="ui_content">
-																		<li><a href="#"><span>일</span></a></li>
-																		<li><a href="#01"><span>01</span></a></li>
-																		<li><a href="#02"><span>02</span></a></li>
-																		<li><a href="#03"><span>03</span></a></li>
-																		<li><a href="#04"><span>04</span></a></li>
-																		<li><a href="#05"><span>05</span></a></li>
-																		<li><a href="#06"><span>06</span></a></li>
-																		<li><a href="#07"><span>07</span></a></li>
-																		<li><a href="#08"><span>08</span></a></li>
-																		<li><a href="#09"><span>09</span></a></li>
-																		<li><a href="#10"><span>10</span></a></li>
-																		<li><a href="#11"><span>11</span></a></li>
-																		<li><a href="#12"><span>12</span></a></li>
-																		<li><a href="#13"><span>13</span></a></li>
-																		<li><a href="#14"><span>14</span></a></li>
-																		<li><a href="#15"><span>15</span></a></li>
-																		<li><a href="#16"><span>16</span></a></li>
-																		<li><a href="#17"><span>17</span></a></li>
-																		<li><a href="#18"><span>18</span></a></li>
-																		<li><a href="#19"><span>19</span></a></li>
-																		<li><a href="#20"><span>20</span></a></li>
-																		<li><a href="#21"><span>21</span></a></li>
-																		<li><a href="#22"><span>22</span></a></li>
-																		<li><a href="#23"><span>23</span></a></li>
-																		<li><a href="#24"><span>24</span></a></li>
-																		<li><a href="#25"><span>25</span></a></li>
-																		<li><a href="#26"><span>26</span></a></li>
-																		<li><a href="#27"><span>27</span></a></li>
-																		<li><a href="#28"><span>28</span></a></li>
-																		<li><a href="#29"><span>29</span></a></li>
-																		<li><a href="#30"><span>30</span></a></li>
-																		<li><a href="#31"><span>31</span></a></li>
-																	</ul>
-																</div>
-																<div class="scroll ui_scrollbar">
-																	<span class="bg_top"></span> <span class="bg bg_mid"
-																		style="display: none;"></span> <span class="bg_btm"></span>
-																</div>
-															</div>
-														</div>
+														<span class="symbol">월</span> 
+														<span class="select w70 hide" data-skin="form"></span>
+													
 														<span class="symbol">일</span> 
-														<!-- <a href="https://www.cjone.com/cjmweb/my-one/coupon.do?cpn_type_cd=15"
-															class="btn btn_sm"><span class="arr">생일쿠폰 확인하기</span></a> -->
+									
 													</div>
 													<div class="birthday_select" id="birthday_default"
 														style="display: block">
 														****<span class="symbol">년</span> **<span class="symbol">월</span>
-														**<span class="symbol">일</span> <a
-															href="https://www.cjone.com/cjmweb/my-one/coupon.do?cpn_type_cd=15"
-															class="btn btn_sm"><span class="arr">생일쿠폰 확인하기</span></a>
+														**<span class="symbol">일</span>
 													</div>
 													<p class="msg_desc">
 														설정하신 생일을 기준으로 <em class="em">15일 전</em> 생일쿠폰이 발행됩니다.<br>
@@ -587,12 +214,10 @@
 												<td>
 													<div>
 														<span class="input_txt w100 phon_write" id="mobileNoInfo">${logOn.u_tel}</span>
-														<input type="hidden" name="mob_no_1"
-															id="mob_no_1" value="010" disabled="disabled">
-															<input type="hidden" name="mob_no_2" id="mob_no_2" value="****"
-															disabled="disabled"> <input type="hidden"
-															name="mob_no_3" id="mob_no_3" value=""
-															disabled="disabled"> <a
+														<input type="hidden" name="mob_no_1" id="mob_no_1"
+															value="010"> <input type="hidden" name="mob_no_2"
+															id="mob_no_2" value="7367"> <input type="hidden"
+															name="mob_no_3" id="mob_no_3" value="8785"> <a
 															href="javascript:void(0);"
 															onclick="callAuthLayerMobChgAuth();" class="btn btn_sm"><span
 															class="arr">변경하기</span></a>
@@ -611,44 +236,39 @@
 															type="text" class="text small" title="이메일 아이디 입력"
 															placeholder="이메일 아이디" data-format="email"
 															name="email_addr1" id="email_addr1" value=""
-															disabled="disabled" autocomplete="off">
+															autocomplete="off">
 														</span> <span class="symbol">@</span> <span
 															class="input_txt w110"> <input type="text"
 															class="text small" title="이메일 도메인 입력"
 															placeholder="이메일 도메인" data-format="email"
-															name="email_addr2" id="email_addr2" value="gmail.com"
-															disabled="disabled" autocomplete="off">
+															name="email_addr2" id="email_addr2" value=""
+															autocomplete="off">
 														</span> <span class="select w100 hide" data-skin="form"> <select
 															title="이메일 도메인 선택" data-control="emailSelector"
-															name="email_addr_opt" id="email_addr_opt"
-															disabled="disabled">
-
+															name="email_addr_opt" id="email_addr_opt">
+																<option value="" selected="selected">선택해주세요</option>
 																<option value="0">직접입력</option>
-
 																<option value="naver.com">네이버</option>
-
 																<option value="hanmail.net">한메일</option>
-
 																<option value="nate.com">네이트</option>
-
-																<option value="gmail.com" selected="selected">지메일</option>
+																<option value="gmail.com">지메일</option>
 
 														</select>
 														</span>
-														<div class="select_wrap w100"
-															style="background-color: rgb(235, 235, 228)">
+														<div class="select_wrap w100" style="">
 															<div class="item_seleced">
-																<a href="#gmail.com" title="이메일 도메인 선택 목록 열기"
-																	data-title="이메일 도메인 선택">지메일<span class="haze">선택됨</span></a>
+																<a href="#naver.com" title="이메일 도메인 선택 목록 열기"
+																	data-title="이메일 도메인 선택" class="">네이버<span
+																	class="haze">선택됨</span></a>
 															</div>
 															<div class="item_list_wrap ">
 																<div class="item_list ui_scrollarea">
 																	<ul class="ui_content">
 																		<li><a href="#0"><span>직접입력</span></a></li>
-																		<li><a href="#naver.com"><span>네이버</span></a></li>
+																		<li><a href="#naver.com" data-selected="true"><span>네이버</span></a></li>
 																		<li><a href="#hanmail.net"><span>한메일</span></a></li>
 																		<li><a href="#nate.com"><span>네이트</span></a></li>
-																		<li><a href="#gmail.com" data-selected="true"><span>지메일</span></a></li>
+																		<li><a href="#gmail.com"><span>지메일</span></a></li>
 																	</ul>
 																</div>
 																<div class="scroll ui_scrollbar">
@@ -662,17 +282,7 @@
 												</td>
 											</tr>
 
-				<script>
-				$("#email_addr2").val( $("#email_addr_opt").val() );
-				$("#email_addr_opt").change(function () {
-					$("#email_addr2").val( $("#email_addr_opt").val() );
-				});
-				</script>
-				<%-- <script>
-				let tel = "<%=u_tel%>";
-				let strAll = "010" + str1.replace(str1, '****') +str2;
-				$("#mob_no").val(strAll);
-				</script> --%>
+
 
 
 
@@ -692,21 +302,35 @@
 												<td>
 													<div>
 														<div class="input_group" data-handler="trPwdCheck">
-															<span class="input_txt w250"><input
+															<span class="input_txt w250"> <input
 																type="password" class="text" placeholder="비밀번호를 입력해주세요."
 																maxlength="50" name="pwd" id="pwd"></span> <span
 																class="msg_desc" id="alert_pwd_strength"></span>
 															<p id="msg_pwd" class="msg_info em hide">비밀번호는 영문자,
 																숫자,특수문자 모두 최소 1가지 이상 조합한 8~12자리이어야 합니다.</p>
+															<p id="msg_pwdAbcd" class="msg_info em hide"
+																style="display: none;">
+																<em>4자리 이상 반복되는 문자와 숫자(1234, 4321, abcd, dcba 등)는
+																	사용 불가합니다.</em>
+															</p>
+															<p id="msg_pwdNull" class="msg_info em hide"
+																style="display: none;">
+																<em>비밀번호는 영문자, 숫자,특수문자 모두 최소 1가지 이상 조합한 8~12자리이어야
+																	합니다.</em>
+															</p>
+															<p id="msg_pwdId" class="msg_info em hide"
+																style="display: none;">
+																<em>비밀번호 설정 시 아이디와 4자리 이상 동일한 문자 또는 숫자를 사용할 수 없습니다.</em>
+															</p>
 														</div>
-														<div class="btn_wrap change_pw" id="btn_chg_pw"
-															data-handler="trPwdCheck">
-															<button type="button" class="btn btn_sm"
+														<div class="btn_wrap change_pw hide" id="btn_chg_pw"
+															data-handler="trPwdCheck" style="display: none;">
+															<button type="button" class="btn btn_sm on"
 																data-control="toggle" data-handler-target="trPwdCheck">
 																<span class="arr">변경하기</span>
 															</button>
 														</div>
-														<div class="msg_desc " data-handler="trPwdCheck">
+														<div class="msg_desc" data-handler="trPwdCheck">
 															<ul class="bul_list sub_txt">
 																<li class="dot_arr">영문자, 숫자, 특수문자 조합하여 8~12자리어야
 																	합니다.</li>
@@ -720,17 +344,18 @@
 													</div>
 												</td>
 											</tr>
-											<tr class="input new_pw " id="trPwdCheck"
+											<tr class="input new_pw" id="trPwdCheck"
 												data-handler="trPwdCheck">
-												<th scope="row"><label for="pwd_check">비밀번호 확인</label>
-												</th>
-												<td>
+												<th scope="row" class="hide"><label for="pwd_check">비밀번호
+														확인</label></th>
+												<td class="hide">
 													<div class="input_group">
 														<span class="input_txt w250"><input type="password"
 															class="text" placeholder="비밀번호를 재입력해주세요." maxlength="50"
 															name="pwd_check" id="pwd_check"></span>
 														<p id="msg_pwd_check" class="msg_info em hide">비밀번호와
 															비밀번호 확인이 일치하지 않습니다.</p>
+
 													</div>
 												</td>
 											</tr>
@@ -740,112 +365,12 @@
 								</div>
 								<!-- //기본정보 -->
 
-								<!-- 선택정보 -->
-								<div class="table_header choice">
-									<h3 class="h3_tit">선택정보</h3>
-								</div>
-								<div class="table_col">
-									<table>
-										<caption>회원선택정보 입력 표로 CJ ONE 마케팅 정보 수신 동의, 제휴 브랜드
-											마케팅 정보수신 동의, 현금영수증 발행 정보 입력 내용의 입력을 나타냅니다.</caption>
-										<colgroup>
-											<col style="width: 25%">
-											<col>
-										</colgroup>
-										<tbody>
-											<!-- CJ ONE 마케팅 동의-->
-											<tr>
-												<th scope="row">CJ ONE 마케팅<br>정보 수신 동의
-												</th>
-												<input type="hidden" name="rcvr_coopco" value="7000|0000">
-												<td data-handler="checkAll">
-													<p class="mkt_tx">
-														포인트/이벤트/문화공연/상품 소식을 전해드립니다. (공지목적의 발송되는 메일은 제외)<br>
-														아래 채널을 선택하실 경우 해당 채널을 통한 마케팅 수신에 동의하신 것으로 봅니다.
-													</p>
-													<div class="chk_group" id="cj_agree">
-
-														<!-- 전체동의 -->
-														<span class="check_box" data-skin="accept"
-															data-checked-text="선택됨" data-unchecked-text="미선택됨">
-															<a href="#"> <span class="haze">전체 동의<span>미선택됨</span></span>
-														</a><span class="hide"><span class="haze">전체 동의<span>선택불가</span></span></span>
-															<input type="checkbox"
-															data-check-all="[data-handler='checkAll']" value="Y"
-															id="mkt_rcv_all" name="mkt_rcv" class="chk"> <label
-															class="label_check" for="mkt_rcv_all"><span
-																class="ico"></span>전체 동의</label>
-														</span>
-
-														<!-- Email -->
-														<span class="check_box" data-skin="accept"
-															data-checked-text="선택됨" data-unchecked-text="미선택됨">
-															<a href="#"> <span class="haze">이메일<span>미선택됨</span></span>
-														</a><span class="hide"><span class="haze">이메일<span>선택불가</span></span></span>
-															<input type="checkbox" class="chk"
-															name="email_rcv_70000000" id="email_rcv_70000000"
-															value="Y"> <label class="label_check"
-															for="email_rcv_70000000"><span class="ico"></span>이메일</label>
-														</span>
-
-														<!-- SMS -->
-														<span class="check_box" data-skin="accept"
-															data-checked-text="선택됨" data-unchecked-text="미선택됨">
-															<a href="#"> <span class="haze">SMS<span>미선택됨</span></span>
-														</a><span class="hide"><span class="haze">SMS<span>선택불가</span></span></span>
-															<input type="checkbox" class="chk"
-															name="sms_rcv_70000000" id="sms_rcv_70000000" value="Y">
-															<label class="label_check" for="sms_rcv_70000000"><span
-																class="ico"></span>SMS</label>
-														</span>
-
-														<!-- Phone -->
-														<span class="check_box" data-skin="accept"
-															data-checked-text="선택됨" data-unchecked-text="미선택됨">
-															<a href="#"> <span class="haze">휴대전화<span>미선택됨</span></span>
-														</a><span class="hide"><span class="haze">휴대전화<span>선택불가</span></span></span>
-															<input type="checkbox" class="chk" name="tm_rcv_70000000"
-															id="tm_rcv_70000000" value="Y"> <label
-															class="label_check" for="tm_rcv_70000000"><span
-																class="ico"></span>휴대전화</label>
-														</span>
-
-														<!-- Push -->
-
-													</div>
-													<p class="mkt_agree_tx">※ 회원은 본 서비스 이용 동의 대한 거부를 할 수
-														있으며, 미 동의 시 본 서비스에 대한 혜택을 받으실 수 없습니다.</p>
-													<div id="cj_marketing_agree" class="msg_desc hide"
-														style="margin-top: 0;">
-														<p>※ CJ ONE 마케팅정보 수신동의는 CJ ONE 개인정보 수집 및 활용동의(선택) 동의 시
-															가능합니다.</p>
-														<a href="#" class="link_txt uline"
-															data-control="cj_gatherAgree" style="margin-top: 15px;"><span
-															class="arr" style="padding-right: 11px;">개인정보 수집 및
-																활용동의 설정</span></a>
-													</div>
-												</td>
-											</tr>
-
-											<!-- 제휴 브랜드 마케팅 동의 -->
-
-
-											<!-- 현금영수증 발행 -->
-
-										</tbody>
-									</table>
-								</div>
-								<!-- //선택정보 -->
-
 								<!-- 정보제공 동의여부 -->
 								<div class="table_header choice">
 									<h3 class="h3_tit">정보제공 동의여부</h3>
 								</div>
 								<div class="list_accordion faq_list agreement_sec">
 									<ul data-control="accordion">
-
-
-
 
 
 										<!-- CJ ONE 개인정보 수집 및 활용 동의 -->
@@ -900,15 +425,14 @@
 														<span class="radio_btn" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<!-- 선택 시 on클래스 추가 --> <a href="#"> <span
-																class="haze">미동의<span>미선택됨</span></span>
-															<!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
+																class="haze">미동의<span>미선택됨</span></span> <!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
 															<input type="radio" id="agr30_N" name="agr30" value="N"
 															class="chk"> <label for="agr30_N">미동의</label>
 														</span> <span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의<span>선택됨</span></span>
-															<!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
+																<!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
 															<input type="radio" id="agr30_Y" name="agr30" value="Y"
 															class="chk" checked="checked"> <label
@@ -964,15 +488,14 @@
 														<span class="radio_btn" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<!-- 선택 시 on클래스 추가 --> <a href="#"> <span
-																class="haze">미동의<span>미선택됨</span></span>
-															<!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
+																class="haze">미동의<span>미선택됨</span></span> <!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
 															<input type="radio" id="agr40_N" name="agr40" value="N"
 															class="chk"> <label for="agr40_N">미동의</label>
 														</span> <span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의<span>선택됨</span></span>
-															<!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
+																<!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
 															<input type="radio" id="agr40_Y" name="agr40" value="Y"
 															class="chk" checked="checked"> <label
@@ -1378,8 +901,7 @@
 														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<!-- 선택 시 on클래스 추가 --> <a href="#"> <span
-																class="haze">미동의<span>선택됨</span></span>
-															<!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
+																class="haze">미동의<span>선택됨</span></span> <!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
 															<input type="radio" id="agr38_N" name="agr38" value="N"
 															class="chk" checked="checked"> <label
@@ -1387,7 +909,7 @@
 														</span> <span class="radio_btn" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의<span>미선택됨</span></span>
-															<!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
+																<!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
 															<input type="radio" id="agr38_Y" name="agr38" value="Y"
 															class="chk"> <label for="agr38_Y">동의</label>
@@ -1458,8 +980,7 @@
 														<span class="radio_btn on" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<!-- 선택 시 on클래스 추가 --> <a href="#"> <span
-																class="haze">미동의<span>선택됨</span></span>
-															<!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
+																class="haze">미동의<span>선택됨</span></span> <!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
 														</a><span class="hide"><span class="haze">미동의<span>선택불가</span></span></span>
 															<input type="radio" id="agr39_N" name="agr39" value="N"
 															class="chk" checked="checked"> <label
@@ -1467,7 +988,7 @@
 														</span> <span class="radio_btn" data-skin="accept"
 															data-checked-text="선택됨" data-unchecked-text="미선택됨">
 															<a href="#"> <span class="haze">동의<span>미선택됨</span></span>
-															<!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
+																<!-- input이 checked상태면 선택됨, 아니면 미선택됨 -->
 														</a><span class="hide"><span class="haze">동의<span>선택불가</span></span></span>
 															<input type="radio" id="agr39_Y" name="agr39" value="Y"
 															class="chk"> <label for="agr39_Y">동의</label>
@@ -2620,7 +2141,8 @@
 								<!-- 정보제공 동의여부 -->
 
 								<div class="btn_sec btn_center">
-									<button type="button" class="btn" id="btn_cancel">취소</button>
+									<button type="button" class="btn" id="btn_cancel"
+										onclick="btncancel()"">취소</button>
 									<button type="button" class="btn btn_em" id="btn_submit">수정</button>
 								</div>
 
@@ -2768,17 +2290,18 @@ function goFooterMenu(type){
 				<!--//20191112 CJONE APP 사업자 정보 노출 추가-->
 				<p class="copyright">
 					<span class="img"><img
-						src="/cjmweb/images/common/logo_cjolivenetworks_footer.png"
+						src="https://www.cjone.com/cjmweb/images/common/logo_cjolivenetworks_footer.png"
 						alt="CJ 올리브넥트웍스"></span> Copyright (c)2016 CJ OLIVENETWORKS. All
 					Rights Reserved
 				</p>
 
-				<div class="fixedTop" data-control="goTop" style="bottom: 50px;">
+				<div class="fixedTop hide" data-control="goTop"
+					style="bottom: 50px;">
 					<a href="#headerWrap" title="페이지 처음으로 이동"><span class="haze">TOP</span></a>
 				</div>
 
 			</div>
-			<!--// 20191021 CJ ONE APP 사업자 정보 노출 전체 영역 -->
+			<!--// CJ ONE APP 사업자 정보 노출 전체 영역 -->
 			<!-- 레이어 팝업(confirm) 내용 -->
 			<div id="div_confirm" style="display: none;">
 				<div class="ui_modal"
@@ -2838,30 +2361,7 @@ function goFooterMenu(type){
 		<!-- //footer -->
 	</div>
 	<!--script 영역-->
-	<script type="text/javascript" src="/cjmweb/js/assl/assl.js"></script>
-	<script type="text/javascript"
-		src="https://www.cjone.com/cjmweb/js/assl/lib/jsbn/jsbn.js"></script>
-	<script type="text/javascript"
-		src="https://www.cjone.com/cjmweb/js/assl/lib/jsbn/prng4.js"></script>
-	<script type="text/javascript"
-		src="https://www.cjone.com/cjmweb/js/assl/lib/jsbn/rng.js"></script>
-	<script type="text/javascript"
-		src="https://www.cjone.com/cjmweb/js/assl/lib/jsbn/rsa.js"></script>
-	<script type="text/javascript"
-		src="https://www.cjone.com/cjmweb/js/assl/lib/aes.js"></script>
-	<script type="text/javascript"
-		src="https://www.cjone.com/cjmweb/js/assl/assl_.js"></script>
-	<script type="text/javascript" src="/cjmweb/js/password_ck.js"></script>
-	<script src="/cjmweb/js/modules/cjoneCore.js"></script>
-	<script src="/cjmweb/js/modules/commonUi.js"></script>
-	<script src="/cjmweb/js/frontUi.js"></script>
-	<script src="/cjmweb/js/modules/jquery.bxslider.js"></script>
-	<script type="text/javascript" src="/cjmweb/js/crypto-js/crypto-js.js"></script>
-	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-	<!--[if lte IE 9]><script src="/cjmweb/js/jquery.placeholder.js"></script>[![endif]]<!--jQuery--->
-
-	<!-- 160203 수정 -->
 	<script>
 		var tm_rcv_checkbox = new Array();
 		var sms_rcv_checkbox = new Array();
@@ -2909,7 +2409,7 @@ function goFooterMenu(type){
             
         });
     </script>
-	<!-- //160203 수정 -->
+
 
 	<script type="text/javascript">
 	
@@ -2933,7 +2433,7 @@ function goFooterMenu(type){
 	    $('#email_addr_opt').change(chkEmail);  // 이메일 직접입력
 	    $('#email_addr2').blur(chkEmailDomain); // 직접입력 이메일 도메인 유효성 체크
 
-	    $("#btn_cancel").click(goCancel);
+	  //  $("#btn_cancel").click(goCancel);
 	    $("#btn_submit").click(goSubmit);
 	    
 	    $(".item_seleced a").click(chkCertification);
@@ -3132,99 +2632,7 @@ function goFooterMenu(type){
 	    	$(".select_wrap").attr("style","background-color:rgb(235,235,228)");
 	    }
    });
-   
-    function omniTerms(typCd, coopcoCd, brndCd) {
-        cjone.openModal('/cjmweb/layer/omni-terms.do?agr_typ_cd='+typCd+'&coopco_cd='+coopcoCd+'&brnd_cd='+brndCd);
-    }
- 
-    function chkCertification() {
-    	//alert("보호된 정보 확인 클릭");
-    	if (isMaskYn == 'Y') {
-	        if(!confirm('보호된 정보를 표시하기 위해 본인인증이 필요합니다.')) {
-	            return false;
-	        } else {
-	        	cjone.openModal('/cjmweb/member/verify-account-mem-info.do');
-	        }   
-    	}
-    }
-    //cjMarketingAgree 제어 function
-    function cjMarketingAgreeControl(isAgree){
-    	if(!isAgree){
-    		$('#mkt_rcv_all').prop('checked', 'true');
-    		$('#mkt_rcv_all').trigger('click');
-    		$('#cj_marketing_agree').show();
-    		var listCount = $('#cj_agree input[type="checkbox"]').length;
-    		
-    		for(var i=0; i <= listCount ; i++){
-    			$($('#cj_agree input[type="checkbox"]')[i]).attr("disabled", true).trigger('change');
-    		}
-    	}else{
-    		$('#cj_marketing_agree').hide();
-    		
-    		var listCount = $('#cj_agree input[type="checkbox"]').length;
-    		
-    		for(var i=0; i <= listCount ; i++){
-    			$($('#cj_agree input[type="checkbox"]')[i]).attr("disabled", false).trigger('change');
-    		}
-    		
-    		$('#mkt_rcv_all').prop('checked', 'true').trigger('click');
-    	}
-    }
-    
-    //coopMarketingAgree 제어 function
-    function coopMarketingAgreeControl(isAgree){
-    	if(!isAgree){
-    		$('#coop_marketing_agree').show();
-    		
-    		$('#coop_agree input[type="checkbox"]').prop("disabled", true).trigger('change');
 
-    		// 위에 checkbox disabled에 대한 스킨만 입히는 로직이 없어서, 아래에서 체크된 애들을 다시 풀어주고 있다.
-    		$('#email_all').prop('checked', false).trigger('change');
-    		$('#sms_all').prop('checked', false).trigger('change');
-    		$('#tm_all').prop('checked', false).trigger('change');
-    		$('input[name^="all_rcv"]').prop('checked', false).trigger('change');
-    	}else{
-    		$('#coop_marketing_agree').hide();
-    		$('#coop_agree input[type="checkbox"]').prop("disabled", false).trigger('change');
-    		
-    		$('#mkt_rcv_all2').prop('checked', 'true').trigger('click');
-    	}
-    } 
-    
-    
-    
-    // 오프라인 회원정보
-    function setUserInfo() {
-    	$('#email_addr_opt').val('gmail.com');
-
-        // 이메일 직접입력일때
-        if($('#email_addr2').val() != '' && ($('#email_addr_opt').val() != $('#email_addr2').val())) {
-            $('#email_addr_opt').val('0');
-        }
-
-        $('#home_tel_no_1').val('');
-		
-
-        // 14세 미만은 패스
-        if($('#under_14').val() != 'Y') {
-            // 우편물 수령지
-            if('' != '20') {
-                $('#mail_rcvr_fg_1').attr('checked',true);
-            } else {
-                $('#mail_rcvr_fg_2').attr('checked',true);
-            }
-
-            $('#off_tel_no_1').val('');
-			
-
-            // 기타 기념일 구분
-            $('#etc_memory_fg').val('');
-
-            // 선호브랜드
-            $('#prfr_brnd_cd').val('|');
-        }
-    }
-    
     // 이메일 셋팅
     function setEmail(){
         // 직접입력일때
@@ -3246,178 +2654,9 @@ function goFooterMenu(type){
         }
     }
     
-    // cabs lock 체크
-    var msgStr  = "";
-    function cabsCheck() {
-        var id = this.id;
-        if(checkCapsLock()) {
-            msgStr = "Cabs lock가 켜져 있습니다.";
-        } else {
-            $("#msg_"+id).hide();
-            msgStr  = "";
-        }
-    }
-    
-    // 패스워드 강도 체크  2012.1.5
-    var pwStrength = false;
-    function checkPassword() {
-        pwStrength = false;
-        var special_chars1 = "~!@#$%&*";
 
-        var pw = new Password(document.getElementById('pwd').value, special_chars1);
-        var verdict = pw.getStrength();
 
-        var hint = msgStr;
-        if (pw.lcase_count  == 0)   hint += "";
-        if (pw.ucase_count  == 0)   hint += "";
-        if (pw.num_count    == 0)   hint += "";
-        if (pw.schar_count  == 0)   hint += "";
-        if (pw.run_score    <= 1)   hint += "";
 
-        alertMsg("alert_pwd_strength", "<em>"+verdict+" "+hint+"</em>");
-
-        if(pw.strength >= 38){ pwStrength=true;}
-    }
-    
-	function checkPasswordRule() {
-		var parameter = {};
-		/*var ki = {
-				k : CryptoJS.enc.Hex.parse(transHEX('1234567890123456')),
-				i : CryptoJS.enc.Hex.parse(transHEX('0987654321123456,'))
-		};
-		parameter.p = CryptoJS.AES.encrypt($('#pwd').val(), ki.k, {iv: ki.i});*/
-		
-		parameter.p = BASE64.encode($('#pwd').val());
-    	parameter.m = BASE64.encode($('#mbr_id').val());   
-        if($('#pwd').val() == ""){
-            alert("msg_pwd", "비밀번호를 입력해 주세요.");
-            return false;
-        } else {
-			$.ajax({
-		        url     : '/cjmweb/common/check-pwd-rule.do',
-		        dataType  : 'json',
-		        data	: 'mbr_id='+parameter.m+'&pwd=' + parameter.p,
-		        async   : false,
-		        type    : 'POST',
-		        error   : function(err) { alert(err); },
-		        success   : function(response, statusText) {
-		        	if (response.resultCode != "0000") {
-		        		alertMsg("alert_pwd_strength","<em>"+response.result_msg+"</em>");
-			        	return false;
-		        	} else {
-		        		return true;
-		        	}
-		        }
-			});
-		    
-        }
-	}
-    
-	function chkEmailDomain() {
-        if($('#email_addr_opt').val() == '0' && $('#email_addr2').val()) {
-			$.ajax({
-		        url     : '/cjmweb/common/check-email-available.do',
-		        dataType  : 'json',
-		        data	: 'domain=' + $('#email_addr2').val(),
-		        async   : false,
-		        type    : 'POST',
-		        error   : function(err) { alert(err); },
-		        success   : function(response, statusText) {
-		        	if (response.resultCode != '00000') {
-			        	alertMsg('alert_email_addr', "메일 도메인주소를 정확하게 입력하셨나요? 다시 한 번 확인해 주세요.");
-		        	} else $('#alert_email_addr').hide();
-		        }
-			});
-        }
-	}
-    
-    // 취소
-    function goCancel() {
-        if(!confirm('수정하신 정보는 저장되지 않습니다.\n수정을 취소하시겠습니까?')) return;
-        location.href='https://www.cjone.com/cjmweb/main.do';
-    }
-    
-    // 회원정보 수정
-    function goSubmit() {
-        if( beforeSubmit() )
-        {
-        	submitAction();
-        }
-    }
-    
-    function submitAction() {
-    	userInfoChangeChk();
-    	
-    	// action url 처리
-    	if($("#pwd").val()){
-	    	$("#pwd_check").val('');
-	    	$('#pwd').val(BASE64.encode($('#pwd').val()));
-    	}
-    	
-    	var omniAgrChkList = '';
-        $.each($('input[id^="omniagreeY"]:checked'), function() {
-            omniAgrChkList += ',' + $(this).val();
-        });
-        $('#omni_agr_list').val(omniAgrChkList.substr(1));
-        
-		var params = $('#form1').serialize();
-		
-		$.ajax({
-	 		url: "/cjmweb/member/member-modify.do",
-	 		data: params,
-	 		dataType: "json",
-	 		type:"post",
-	 		async: false,
-	 		success: function(data) {
-	 			var result = data.reqBox;
-	 			if(result.coopco_cd != "undefined" && result.coopco_cd != null && result.coopco_cd != '' )$("#action_frm #ajax_coopco_cd").val(result.coopco_cd);
-	 			if(result.brnd_cd != "undefined" && result.brnd_cd != null && result.brnd_cd != '' )$("#action_frm #ajax_brnd_cd").val(result.brnd_cd);
-	 			if(result.mcht_no != "undefined" && result.mcht_no != null && result.mcht_no != '' )$("#action_frm #ajax_mcht_no").val(result.mcht_no);
-	 			if(result.coop_return_url != "undefined" && result.coop_return_url != null && result.coop_return_url != '' )$("#action_frm #ajax_coop_return_url").val(result.coop_return_url);
-	 			if(result.return_func != "undefined" && result.return_func != null && result.return_func != '' )$("#action_frm #ajax_return_func").val(result.return_func);
-	 			if(result.sub_type != "undefined" && result.sub_type != null && result.sub_type != '' )$("#action_frm #ajax_sub_type").val(result.sub_type);
-	 			if(result.ipin_use_yn != "undefined" && result.ipin_use_yn != null && result.ipin_use_yn != '' )$("#action_frm #ajax_ipin_use_yn").val(result.ipin_use_yn);
-	 			if(result.hg_nm != "undefined" && result.hg_nm != null && result.hg_nm != '' )$("#action_frm #ajax_hg_nm").val(result.hg_nm);
-	 			if(result.vno != "undefined" && result.vno != null && result.vno != '' )$("#action_frm #ajax_hg_nm").val(result.vno);
-	 			if(result.ssn1 != "undefined" && result.ssn1 != null && result.ssn1 != '' )$("#action_frm #ajax_ssn1").val(result.ssn1);
-	 			if(result.ssn2 != "undefined" && result.ssn2 != null && result.ssn2 != '' )$("#action_frm #ajax_ssn2").val(result.ssn2);
-	 			if(result.ipin_ci != "undefined" && result.ipin_ci != null && result.ipin_ci != '' )$("#action_frm #ajax_ipin_ci").val(result.ipin_ci);
-	 			if(result.ipin_di != "undefined" && result.ipin_di != null && result.ipin_di != '' )$("#action_frm #ajax_ipin_di").val(result.ipin_di);
-	 			if(result.gender != "undefined" && result.gender != null && result.gender != '' )$("#action_frm #ajax_gender").val(result.gender);
-	 			if(result.legl_birth_dy != "undefined" && result.legl_birth_dy != null && result.legl_birth_dy != '' )$("#action_frm #ajax_legl_birth_dy").val(result.legl_birth_dy);
-	 			if(result.frgnr_yn != "undefined" && result.frgnr_yn != null && result.frgnr_yn != '' )$("#action_frm #ajax_frgnr_yn").val(result.frgnr_yn);
-	 			if(result.under_14 != "undefined" && result.under_14 != null && result.under_14 != '' )$("#action_frm #ajax_under_14").val(result.under_14);
-	 			if(result.id_validate != "undefined" && result.id_validate != null && result.id_validate != '' )$("#action_frm #ajax_id_validate").val(result.id_validate);
-	 			if(result.agr_dy != "undefined" && result.agr_dy != null && result.agr_dy != '' )$("#action_frm #ajax_agr_dy").val(result.agr_dy);
-	 			if(result.agr_tm != "undefined" && result.agr_tm != null && result.agr_tm != '' )$("#action_frm #ajax_agr_tm").val(result.agr_tm);
-	 			if(result.agr_yn != "undefined" && result.agr_yn != null && result.agr_yn != '' )$("#action_frm #ajax_agr_yn").val(result.agr_yn);
-	 			if(result.mod_rcvr_list != "undefined" && result.mod_rcvr_list != null && result.mod_rcvr_list != '' )$("#action_frm #ajax_mod_rcvr_list").val(result.mod_rcvr_list);
-	 			
-	 			var str_msg ="" + data.reqBox.str_msg;
- 				if( str_msg != "undefined" && str_msg != null && str_msg != '' ){
- 					str_msg = str_msg.replace(/\\n/g, '\n');
-		    		$("#pwd").val('');
- 					alert(str_msg);
- 					window.location.reload(true);
- 					return false;
- 				}
- 				
- 				$("#action_frm").attr("action", "https://www.cjone.com/cjmweb/member/modification/finish.do");
- 				$("#action_frm").submit();
-	 		}, 
-	 		error: function(xhr) {
-	    		$("#pwd").val('');
-				alert('xhr (' + xhr.status + ':'+ xhr.statusText + ':' + xhr.responseText + ')');
-	 	    }
-	 	});
-    	
-    }
-    
-    // 본인인증 callback function
-    function certificationCallBack() {
-    	submitAction();
-    }    
-    
     function beforeSubmit() {
         // 이메일 셋팅
         if($('#email_addr_opt').val() != "0"){
@@ -3678,8 +2917,8 @@ function goFooterMenu(type){
 	    		$("#chk_tel_change").val("Y");
 	    	}
 	    	// 이메일 주소 변경체크
-	    	//email1Be = "jy*******";
-	    	var email2Be = "gmail.com";
+	    	//email1Be = "jy*********";
+	    	var email2Be = "naver.com";
 	    	var email1Aft = $("#email_addr1").val();
 	    	var email2Aft = $("#email_addr2").val();
 	    	//console.log("email change log before : " + email1Be+email2Be+"\tafter : "+ email1Aft+email2Aft);
@@ -3719,13 +2958,7 @@ function goFooterMenu(type){
 					agreeYn = 1;
 					$("#chk_info_agr_change").val("Y");
 				}
-			
-		
 
-		
-
-		//console.log("after param emailAvcChange : " + emailAvcChange +"\tsmsAvcChange :" + smsAvcChange +"\ttelAvcChange : " +telAvcChange +"\tbirthChange : "+ birthChange + "\ttelChange : " +telChange +"\temailChange : "+emailChange +"\tagreeYn: " +agreeYn +"\treceiptsChange : "+receiptsChange);
-		//alert("after param emailAvcChange : " + emailAvcChange +"\tsmsAvcChange :" + smsAvcChange +"\ttelAvcChange : " +telAvcChange +"\tbirthChange : "+ birthChange + "\ttelChange : " +telChange +"\temailChange : "+emailChange +"\tagreeYn: " +agreeYn +"\treceiptsChange : "+receiptsChange);
 		if(emailAvcChange || smsAvcChange || telAvcChange || birthChange || telChange || emailChange || agreeYn || receiptsChange){
 			infoChange = "Y";
 		}
@@ -3775,21 +3008,7 @@ function goFooterMenu(type){
     		}
     		return result;
     	}
-    	/*
-		var ki = {
-			//k : CryptoJS.enc.Hex.parse(transHEX('qawsedrftgyhujik')),
-			//i : CryptoJS.enc.Hex.parse(transHEX('azsxdcfvgbhnjmkm'))
-			//k : CryptoJS.SHA256('1234567890abcdef'),
-			k : CryptoJS.enc.Hex.parse(transHEX('1234567890abcdef')),
-			i : CryptoJS.enc.Hex.parse(transHEX('1234567890abcdef'))
-			//k : CryptoJS.enc.Hex.parse('01010101010101010101010101010101'),
-			//i : CryptoJS.enc.Hex.parse('01010101010101010101010101010101')
-		};
-		parameter.p = CryptoJS.AES.encrypt($('#pwd').val(), ki.k, {iv: ki.i, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7});
-		parameter.m = CryptoJS.AES.encrypt($('#mbr_id').val(), ki.k, {iv: ki.i, mode : CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7});
-		//alert(parameter.p);
-    	*/
-    	
+ 
     	parameter.p = BASE64.encode($('#pwd').val());
     	parameter.m = BASE64.encode($('#mbr_id').val());    	
     	
@@ -3846,18 +3065,6 @@ function goFooterMenu(type){
     				return false;
     			} 		
         	}
-        	
-    	    //cj one 마케팅약관을 동의하면 정보수신동의에서 최소1개이상 동의받아야 한다.
-    	    /* if($('#coopco_cd').val() == '' || $('#coopco_cd').val() == null || $('#coopco_cd').val() == '7000'){
-    	    	if($('#agr30_Y').is(':checked')){
-    	            if($('#cj_agree input[type="checkbox"]').filter(':checked').size() <= 0){
-    	                alert('마케팅정보 수신동의하면, CJ ONE의 쿠폰 이벤트 등의 다양한 혜택 정보를 알려줍니다.');
-    	                $('#mkt_rcv_all').focus();
-    	                return false;
-    	            }
-    	        }
-    	    }  */
-    	    
     	    return true;
         	
     	} else {
@@ -3941,19 +3148,7 @@ function goFooterMenu(type){
 	        $('#msg_email_addr').hide();
 	
 	        if(!setFocusMobileTel("1")||!setFocusMobileTel("2")||!setFocusMobileTel("3")) return false;
-	        
-	        
-		    
-		    //cj one 마케팅약관을 동의하면 정보수신동의에서 최소1개이상 동의받아야 한다.
-		    /* if($('#coopco_cd').val() == '' || $('#coopco_cd').val() == null || $('#coopco_cd').val() == '7000'){
-		    	if($('#agr30_Y').is(':checked')){
-		            if($('#cj_agree input[type="checkbox"]').filter(':checked').size() <= 0){
-		                alert('마케팅정보 수신동의하면, CJ ONE의 쿠폰 이벤트 등의 다양한 혜택 정보를 알려줍니다.');
-		                $('#mkt_rcv_all').focus();
-		                return false;
-		            }
-		        }
-		    }  */
+	
 		    return true;
     	}
     }
@@ -3981,12 +3176,7 @@ function goFooterMenu(type){
         }
         else return true;
     }
-    
-    function selectOptTest(optId){
-        for(var i=0;i<6;i++) $('#option0'+i).hide();
-        $('#'+optId).show();
-    }
-    
+
     function isValid_mbrId(str) {
         var patten = new Array();
         var msg = new Array();
@@ -4021,129 +3211,12 @@ function goFooterMenu(type){
     	else return true;
     }
     
-    // 아이디 체크 팝업창
-    // 탈퇴회원 재가입은 안띄움
-    function idCheck()  {
-        if ( $('#id_validate').val() != 'Y' ) {
-        	$('#mbr_id').val($('#mbr_id').val().replace(' ',''));
-        	if ( isValid_mbrId($('#mbr_id').val()) ) {
-                if ( $('#mbr_id').val().length > 5 ) {
-    				$.ajax({
-    			        url     : '/cjmweb/join/check-iddup.do',
-    			        dataType  : 'json',
-    			        data	: 'mbr_id='+$('#mbr_id').val()+'&ipin_ci='+encodeURIComponent($('#ipin_ci').val())+'&coopco_cd='+$('#coopco_cd').val()+'&brnd_cd='+$('#brnd_cd').val(),
-    			        async   : false,
-    					cache   : false,
-    			        type    : 'POST',
-    			        error   : function(err) { alert(err); },
-    			        success   : function(resp) {
-    			        	if (resp.resultCode == '00') $('#id_validate').val('Y');
-    			        	else $('#id_validate').val('N');
-    			        	alertMsg("alert_mbr_id", resp.resultMessage);
-    			        }
-    				});
-                } else {
-                	alertMsg("alert_mbr_id", "영문자, 숫자 조합하여 6~12자리 아이디를 입력해 주세요.");
-                    $('#mbr_id').focus();
-                }
-        	}
-        }
-    }
-    
     // 이름변경(개명)
 	function changeName() {
 		$('#sform').attr('target', '_self');
         $('#sform').attr('action', 'https://www.cjone.com/cjmweb/member/name-change.do');
         $('#sform').submit();
 	}
-    
-	function agrBrndPopup(brnd_nm, oId) {
-/* 		if ( $('#'+oId).is(':checked') && $('#agrbrnd_yn').val() != 'Y' && "" != "" ) {
-    		alert(brnd_nm+" 선택 개인정보 수집 및 활용 동의에 거부한 회원님은 "+brnd_nm+" 마케팅 정보 수신을 받으실 수 없습니다. "+brnd_nm+" 선택 개인정보 수집 및 활용에 동의해 주세요.");
-    		$('#'+oId).attr('checked', false);
-    		chkBrndAgree();
-		}			 */
-	}
-	
-	//현금영수증 발행정보 세팅
-    function init_receipt_info() {
-    	var issuWayCd = '02';
-		var cardChk = '';
-		
-		//01:현금영수증카드, 02:휴대전화, 03:신용카드, 04:현금영수증카드, 05:기타 
-		if(issuWayCd == '01') { 
-	        if(cardChk.length < 4) {
-	        	issuWayCd = '04';
-	        } else if(cardChk.length == 4) {
-	        	issuWayCd = '03';
-	        } else if(cardChk.length == 6) {
-	        	issuWayCd = '01';
-	        } else if(cardChk.length == 7) {
-	        	issuWayCd = '05';
-	        }
-	    }
-		
-		//발행정보 selected 처리 - 20160810
-		for(var i=0; i < $("#select_way option").length; i++){
-			if($($("#select_way option")[i]).attr('value') == 'option'+issuWayCd){
-				$($("#select_way option")[i]).attr('selected', 'selected');
-			}
-		}
-		$('[data-skin="form"] select#select_way').formSkin('addSkin');
-		//----------
-		
-		selectOptDisp($("#select_way").val());
-
-		switch($("#select_way").val()) {
-			case "option02":
-				$('#option02_val_1').val('');
-				$('#option02_val_2').val('');
-				$('#option02_val_3').val('');
-				//changeText("02_val_3", "");
-				break;
-			case "option01":
-				$('#option01_val_1').val('');
-				$('#option01_val_2').val('');
-				$('#option01_val_3').val('');
-				$('#option01_val_4').val('');
-				//changeText("01_val_4", "");
-				break;
-			case "option03":
-				$('#option03_val_1').val('');
-				$('#option03_val_2').val('');
-				$('#option03_val_3').val('');
-				$('#option03_val_4').val('');
-				//changeText("03_val_4", "");
-				break;
-			case "option04":
-				$('#option04_val_1').val('');
-				//changeText("04_val_1", "");
-				break;
-			case "option05":
-				$('#option05_val_1').val('');
-				//changeText("05_val_1", "");
-				break;
-		}
-    }
-	
-    //현금영수증 선택 show/hide
-  	function selectOptDisp(optId){
-		for(var i=0;i<6;i++){
-			$('#option0'+i).addClass('hide');
-		}
-		$('#'+optId).removeClass('hide');
-	}
-  
-    //현금영수증 발행번호 뒷자리 Masking 처리
-	function changeText(id, value){
-		var length = value.length;
-		var chgVal = "";
-		for(var i=0; i< length; i++){
-			chgVal += "*";
-		}
-		$('#option'+id).val(chgVal);
-	}
-    
 	//input size 검사
 	function chkInputDigit(id_list, length_list, receiptType) {
 		var check_ok = true;
@@ -4328,10 +3401,6 @@ function goFooterMenu(type){
 	    });
 	}
 
-	/* ie8 이하버전에서 placeholder 처리하기 위한 기능 */
-	//$('input[type=text], input[type=password], textarea', $('#native-example')).placeholder();
-	
-	
 	function callAuthLayerMobChgAuth(){
         cjone.openModal('/cjmweb/member/mobile-change-auth.do');
     }
@@ -4381,16 +3450,13 @@ function goFooterMenu(type){
     }
 </script>
 
-<script>
+	<script>
 $("#btn_submit").on("click", function () {
 	if (chkPwd() ) {
 		$("#mobChgForm").submit();
 	}
 });
 </script>
-
-
-
 	<style>
 .ie8Lbls {
 	font-size: 10px;
@@ -4400,11 +3466,96 @@ $("#btn_submit").on("click", function () {
 }
 </style>
 	<!--//script 영역-->
+	<script>
+	var email = "${logOn.u_email}";
+	var arr = email.split('@', 2);
+	var emailadd1 = arr[0];
+	var emailadd2 = arr[1];
 
+	$("#email_addr1").val(emailadd1);
+	$("#email_addr2").val(emailadd2);
 
-	<script type="text/javascript" data-import="true"
-		src="/cjmweb/js/modules/placeholder.js"></script>
-	<script type="text/javascript" data-import="true"
-		src="/cjmweb/js/modules/formatter.js"></script>
+	$("#email_addr2").val( $("#email_addr_opt").val() );
+	$("#email_addr_opt").change(function () {
+		$("#email_addr2").val( $("#email_addr_opt").val() );
+	});
+	</script>
+	<script>
+
+//비밀번호 체크
+function chkPwd() {
+	var userpwd = $("#pwd").val();
+	var userckpwd = $("#pwd_check").val();
+	var userid = "${logOn.user_id}";
+	var pwdPattern = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
+	var num = userpwd.search(/[0-9]/g);
+	var eng = userpwd.search(/[a-z]/ig);
+	var spe = userpwd.search(/[!"#$%&'()*+,-./:;<=>?@[]^_`{|}~]/gi);
+	if ((num < 0 && eng < 0) || (eng < 0 && spe < 0)
+			|| (spe < 0 && num < 0)) {
+		//alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
+		$("#msg_pwdNull").css("display", "block");
+		$("#pwd").focus();
+		return false;
+	else if (userpwd.length<8 || userpwd.length>12) {
+		//alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
+		$("#msg_pwdAbcd").css("display", "block");
+		$("#pwd").focus();
+		return false;
+	} else if (/(\w)\1\1\1/.test(userpwd)) {
+		//alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
+		$("#msg_pwdAbcd").css("display", "block");
+		$("#pwd").focus();
+		return false;
+	} else if (userpwd.search(userid) > -1) {
+		//alert("비밀번호 설정 시 아이디와 4자리 이상 동일한 문자 또는 숫자를 사용할 수 없습니다.");
+		$("#msg_pwdId").css("display", "block");
+		$("#pwd").focus();
+		return false;
+	} else if ( userpwd !=userckpwd){
+		//alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+		$("#msg_pwd_check").removeClass("hide");
+		$("#pwd_check").focus();
+		return false;
+	}
+	return true;
+}
+// 패스워드 강도 체크  
+
+	$("#btn_submit").on("change", function () {
+		//alert("event");		
+	var inputVal = $("#pwd").val();	
+	var length = inputVal.length;
+		if ( length >15) {
+			$("#pwd").text("강도 : 강함");
+		} else if ( length >13) {
+			$("#pwd").text("강도 : 적정");
+		}  else if (length >9) {
+			$("#pwd").text('강도 : 약함'); 
+		}  else{
+	       	$("#pwd").text("강도 : 매우약함");
+	   }
+});
+
+</script>
+	<script>
+	
+
+	$("#btn_submit").on("click", function () {
+		if (chkPwd() ) {
+			$("#mobChgForm").submit();
+		}
+	});
+	function btncancel(){
+	  alert('수정하신 정보는 저장되지 않습니다.\n수정을 취소하시겠습니까?');
+	  location.href='/Black_OY/view/usermodify/usermodify.jsp';
+	}
+	$("#lnChangeName").on("click", function (event) {
+		event.preventDefault();
+		location.href = "<%=contextPath%>/olive/nameUpdate.do"; 
+	});
+
+</script>
+
 </body>
 </html>
