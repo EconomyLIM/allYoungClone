@@ -8,6 +8,7 @@ import head.domain.CateMDTO;
 import head.domain.EventDTO;
 import head.domain.GiftCardDTO;
 import head.domain.ProductHistoryDTO;
+import product.domain.PMidListDTO;
 
 public interface HeadDAO {
 	// 1. 관심 매장 이름 리스트 얻어오기
@@ -30,4 +31,8 @@ public interface HeadDAO {
 	
 	// 7. 최근 본 상품
 	ProductHistoryDTO productHistory(Connection conn, String pro_id) throws Exception;
+
+	// 8. 판매별 랭킹
+	List<PMidListDTO> selectSalesRanking(Connection conn, String mid) throws Exception;
+	
 }

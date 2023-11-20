@@ -12,6 +12,7 @@ import head.domain.GiftCardDTO;
 import head.domain.ProductHistoryDTO;
 import head.persistence.HeadDAO;
 import head.persistence.HeadDAOImpl;
+import product.domain.PMidListDTO;
 
 public class HeadService {
 	private static HeadService headService;
@@ -161,5 +162,25 @@ public class HeadService {
 		}
 		
 		return historyDTO;
+	}
+
+	public List<PMidListDTO> getSalesRanking(String mid) {
+		List<PMidListDTO> list = null;
+		
+		Connection conn = null;
+		HeadDAO dao = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			dao = HeadDAOImpl.getInstance();
+			
+			list = dao.selectSalesRanking(conn, mid);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		}
+		
+		return list;
 	}
 }

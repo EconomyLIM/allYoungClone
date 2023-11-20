@@ -108,8 +108,7 @@
 		});
 		
 		$(".btnGreen").on("click", function() {
-			alert("주문 내역으로 이동해야함");
-			// location.href = '<%=contextPath%>/';
+			location.href = '<%=contextPath%>/olive/orderDelivery.do';
 		});
 	})
 </script>
