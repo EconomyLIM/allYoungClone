@@ -1,11 +1,14 @@
 package main.command;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.CommandHandler;
+import main.domain.PlanShopDisplDTO;
+import main.domain.PopularProDTO;
 import main.service.MainService;
 import product.domain.PMidListDTO;
 import user.domain.LogOnDTO;
@@ -30,6 +33,13 @@ public class MainPageHandler implements CommandHandler{
 		List<PMidListDTO> recommendList = mainService.recommendBuy(user_id);
 		request.setAttribute("recommendList", recommendList);
 		
+		// ================= Week Special 배너정보 갖고오는 작업 ==================
+		List<PlanShopDisplDTO> getWSBanner = mainService.getWeekSpecial(1);
+		request.setAttribute("getWSBanner", getWSBanner);
+		
+		// ================= 인기행사만 모았어요! 배너정보 갖고오는 작업 ==================
+		HashMap<PlanShopDisplDTO, List<PopularProDTO>> getPopBanner = mainService.sGetPopularShop();
+		request.setAttribute("getPopBanner", getPopBanner);
 		
 		
 		return "/view/mainPage/main.jsp";

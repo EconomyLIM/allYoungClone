@@ -219,7 +219,10 @@ public class HeadDAOImpl implements HeadDAO {
 	public List<CateMDTO> selectCateMName(Connection conn) throws SQLException {
 		List<CateMDTO> list = null;
 		CateMDTO dto = null;
-		String sql = "";
+		String sql = "SELECT c.cat_m_id, cat_m_name "
+				+ " FROM cate_m c JOIN order_product o ON c.cat_m_id = o.cat_m_id "
+				+ " GROUP BY c.cat_m_id, cat_m_name "
+				+ " HAVING sum(product_cnt) > 100";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -233,7 +236,6 @@ public class HeadDAOImpl implements HeadDAO {
 				list = new ArrayList<>();
 				do {
 					dto = CateMDTO.builder()
-							.cat_l_id(rs.getString("cat_l_id"))
 							.cat_m_id(rs.getString("cat_m_id"))
 							.cat_m_name(rs.getString("cat_m_name"))
 							.build();

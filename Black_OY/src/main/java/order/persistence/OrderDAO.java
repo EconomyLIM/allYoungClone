@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import order.domain.DeliveryDTO;
+import order.domain.PaymentDTO;
 import order.domain.ProductInfo;
 import order.domain.UserCouponDTO;
 
@@ -40,10 +41,41 @@ public interface OrderDAO {
 	// 10. 결제 후 유저 포인트 업데이트
 	int updateUserPoint(Connection conn, String user_id, int point) throws Exception;
 
+	// 11. 오늘드림 insert
 	int insertToday(Connection conn, Map<String, Object> map) throws Exception;
 	
 	// 12. 픽업 insert
 	int insertPickup(Connection conn, Map<String, Object> map) throws Exception;
+	
+	// 13. 주문한 주문ID 가져오기
+	String selectCurrOrderID(Connection conn) throws Exception;
+
+	// 14. 선물하기 주문 insert
+	int insertGiftOrder(Connection conn, Map<String, Object> map) throws Exception;
+
+	// 15. 선물하기 결제 insert
+	int inserGiftPay(Connection conn, Map<String, Object> map) throws Exception;
+
+	// 16. 선물 테이블 insert
+	int insertGift(Connection conn, Map<String, Object> map) throws Exception;
+	
+	// 17. 주문 시 수량 update
+	int updateProStuck(Connection conn, String pro_id, int cnt) throws Exception;
+	
+	// 18. 장바구니에서 주문 시 장바구니 테이블 삭제
+	int deleteCart(Connection conn, String user_id, String pro_id) throws Exception;
+	
+	// 19. cjONEPOINT 적립하기
+	int insertCJPoint(Connection conn, String user_id, String p_content, String p_state) throws Exception;
+
+	// 20. 상품의 재고가 있는지 확인
+	int selectIsProStock(Connection conn, String pro_id) throws Exception;
+
+	// 21. 해당 주문ID의 결제 정보 얻어오기
+	PaymentDTO selectOnePayment(Connection conn, String order_id) throws Exception;
+
+	// 22. 주문ID로 배송지 얻어오기
+	DeliveryDTO selectOrderDelivery(Connection conn, String order_id) throws Exception;
 
 
 }
