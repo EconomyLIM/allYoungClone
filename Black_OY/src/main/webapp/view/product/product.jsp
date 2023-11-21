@@ -735,7 +735,7 @@ $(function () {
     function toggleLikeStatus() {
     let url = window.location.href;
 	$.ajax({
-		url: "<%=contextPath%>/GetDBLAjax",
+		url: "<%=contextPath%>/GetDBLAjaxP",
 		method:"POST",
 		cache:false,
 		dataType : 'text',
@@ -802,7 +802,7 @@ $(function () {
 	function toggleLikeItemStatus() {
 		let url = window.location.href;
 		$.ajax({
-			url: "<%=contextPath%>/GetDILAjax",
+			url: "<%=contextPath%>/GetDILAjaxP",
 			method:"POST",
 			cache:false,
 			dataType : 'text',
