@@ -282,7 +282,7 @@
 				<ul class="menu_list" id="menu_list_header">
 					<c:choose>
 						<c:when test="${empty sessionScope.logOn }">
-							<li class="join"><a href="#" data-attr="공통^헤더^회원가입">회원가입</a></li>
+							<li class="join"><a href="<%=contextPath%>/olive/joinStart.do" data-attr="공통^헤더^회원가입">회원가입</a></li>
 							<li class="login"><a href="<%=contextPath%>/olive/LogOn.do"
 								data-attr="공통^헤더^로그인">로그인</a></li>
 						</c:when>

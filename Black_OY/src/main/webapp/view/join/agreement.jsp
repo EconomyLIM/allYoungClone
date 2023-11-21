@@ -1,6 +1,8 @@
 <%@page import="user.domain.OuserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/inc/include.jspf"%>
+<%@ include file="/WEB-INF/inc/session_auth.jspf"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +45,7 @@
 		<!--contents-->
 		<div id="contentsWrap">
 
-			<form id="form1" name="form1" method="post" action="">
+			<form id="form1" name="form1" method="post" action="<%=contextPath%>/olive/agreement.do">
 				<input type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
 				<input type="hidden" name="brnd_cd" id="brnd_cd" value="3000">
 				<input type="hidden" name="mcht_no" id="mcht_no" value="3000">
@@ -118,11 +120,7 @@
 								</ul>
 							</div>
 							<!--//step-->
-<script>
-	$(".radio_btn>a").on("click", function(event){
-		event.preventDefault();
-	});
-</script>
+							
 							<div class="agreement_sec">
 								<div class="box_member">
 									<h2 class="h2_tit">CJ ONE 서비스 이용약관 및 정보 활용 동의</h2>
@@ -161,15 +159,12 @@
 											}); */
 										</script>
 										<script>
-											$("#checkedAll").on("click", function (event) {
-												event.preventDefault();
-												alert("event");
-											});
+										
 										</script>
 										<script>
-											$(".radio_btn").on("click", function () {
-												$(this).addClass("on");
-										});
+										
+										
+										
 										</script>
 										<!-- CJ ONE 서비스 이용약관(필수) -->
 										<div class="item_box case">
@@ -3322,12 +3317,6 @@ ol, ul, li {
 												<!--// 옴니 서비스 약관 -->
 
 
-
-
-
-
-
-
 												<div class="item_box case">
 													<h3 class="h5_tit">CJ이엔엠㈜의 개인정보 제공 동의 (선택)</h3>
 													<div class="clause_box">
@@ -4138,7 +4127,7 @@ function goFooterMenu(type){
 
 
 			<script>
-	$(function () {
+	/* $(function () {
 	    $('[data-control="accordion"]').accordion({singleOpen: false});
 	    
 	    $('[data-control="checkAll"]').toggle().on({
@@ -4151,11 +4140,9 @@ function goFooterMenu(type){
                     $('[id^="omniagreeY"]').prop('checked', true).trigger('change');
 				}
 			}
-		});
+		}); */
 	    
-	    $("#btn_prev").click(goCancel);
-	    $("#btn_agree").click(goSave);
-	    
+	   
     	$('iframe').load(function() {
   		  this.style.height =
   		  this.contentWindow.document.body.offsetHeight + 'px';
@@ -4267,74 +4254,41 @@ function goFooterMenu(type){
         });
         return chkagr;
     }
-	
-	// 약관전문보기 
-	function viewAgrAll(idKey, selId) {
-	    var typ_cd = "";
-	    
-	    switch(idKey) {
-	    
-	    
-	    case 'view_agr_10':
-	        agr_typ_cd = "10";
-	        break;
-	    
-	    case 'view_agr_11':
-	        agr_typ_cd = "11";
-	        break;
-	    
-	    case 'view_agr_30':
-	        agr_typ_cd = "30";
-	        break;
-	    
-	    case 'view_agr_40':
-	        agr_typ_cd = "40";
-	        break;
-	    
-	    case 'view_agr_99': //99 제3자 정보제공 동의 추가
-	        agr_typ_cd = "99";
-	        break;
-	    case 'view_agr99_sub': //99 제3자 정보제공 동의 추가
-	        agr_typ_cd = "99A";
-	        break;
-	    }
-	    
-	    var url = "https://www.cjone.com/cjmweb/common/terms.do?agr_typ_cd="+agr_typ_cd;
-	    selval = $("#"+selId).attr("href",url);
-			//openCustomWindows(url,'agr_win',800,600); 
-	}  
-        
-        // 참여사 약관전문보기
-    function viewCoopcoAgr(coopco_cd, agr_typ_cd, selId) {
-        var brnd_cd = '3000';
-        
-        if(coopco_cd != '' && brnd_cd != ''){
-            var url = "https://www.cjone.com/cjmweb/common/terms-coopco.do?coopco_cd="+coopco_cd+"&brnd_cd="+brnd_cd+"&agr_typ_cd="+agr_typ_cd;
-//                openCustomWindows(url,'coop_agr_win',800,640);
-        }else{
-            var url = "https://www.cjone.com/cjmweb/common/terms-coopco.do?coopco_cd="+coopco_cd+"&agr_typ_cd="+agr_typ_cd;
-//                openCustomWindows(url,'coop_agr_win',800,640); 
-        }
-            //console.log("selid : " + "#"+selId);
-            //console.log("url : " + url);
-        selval = $("#"+selId).attr("href",url);
-    } 
 
-	// 참여사 약관전문보기
-    function viewCoopcoAgr99(coopco_cd, agr_typ_cd, selId) {
-        var brnd_cd = '3000';
-        var url='/cjmweb/common/terms.do?agr_typ_cd='+agr_typ_cd+'&coopco_cd='+coopco_cd+'&brnd_cd='+brnd_cd;
-        selval = $("#"+selId).attr("href",url);
-	}    
 </script>
 		</div>
 	</div>
-	<script>
-	$("#btn_agree").on("click", function () {
-		//location.href ="join.jsp";
-		location.href = "/Black_OY/olive/agreement.do";
+<script>
+	$(function () {
+		var agreeButtons = $(".radio_agreement .radio_btn");
+		agreeButtons.each(function() {
+		    $(this).on("click", function(event) {
+		        event.preventDefault();
+		        if ($(this).attr("on")) {
+		            $(this).removeClass("on").removeAttr("on");
+		        } else {
+		            $(this).addClass("on").attr("on", "true");
+		        }
+		    });
+		});
+	
+	$("#checkedAll").on("click", function (event) {
+		event.preventDefault();
+		$(".radio_btn:even").removeClass("on");
+		$(".radio_btn:odd").addClass("on");
 	});
+});
+</script>							
+<script>
+	$("#btn_prev").click(goCancel);
+	function goCancel() {
+		alert('약관동의 취소하시겠습니까?');
+		location.href = "<%=contextPath%>/olive/main.do";
+	}
 
+	$("#btn_agree").on("click", function () {
+		$("#form1").submit();
+	});
 </script>
 
 </body>

@@ -25,14 +25,11 @@ public class InfoUpdateHandler  implements CommandHandler{
 
 			LogOnDTO logDto = (LogOnDTO) request.getSession().getAttribute("logOn");	
 			String user_id = logDto.getUser_id();
+			
 			String newEmail = request.getParameter("email_addr1")+"@"+request.getParameter("email_addr2");
 			String newPwd = request.getParameter("pwd");
-			String newName = request.getParameter("userName");
-			String tel1 = request.getParameter("No").substring(0, 3);
-			String tel2 = request.getParameter("No").substring(3, 7);
-			String tel3 = request.getParameter("No").substring(7);
-			String newTel = tel1+"-"+tel2+"-"+tel3;
-			
+			String newName = request.getParameter("newName");
+			String newTel = request.getParameter("newTel");
 			Connection conn = ConnectionProvider.getConnection();
 			InfoUpdateService service = InfoUpdateService.getInstance();
 			int infoUpd = 0;
@@ -42,10 +39,8 @@ public class InfoUpdateHandler  implements CommandHandler{
 			infoUpd = service.infoUpdate(user_id , newEmail, newPwd);
 			nameUpd =  service.nameUpdate(user_id, newName);
 			telUpd = service.telUpdate(user_id, newTel);
-			
-			System.out.println(newEmail);
-			System.out.println(newTel);
-			return  "/view/usermodify/info_modification.jsp";
+
+			return  "/view/usermodify/info_modification_ok.jsp";
 			
 	}
 }

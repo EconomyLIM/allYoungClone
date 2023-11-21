@@ -349,6 +349,14 @@
 		}
 	</script>
 <script>
+
+	$(function () {
+     $('#No').keydown(function(event) {
+     	if ( event.which == 13 ){
+     		$("#btnSubmit").click();	
+     	}
+     });	
+});
 	$("#btnSubmit").on("click", function () {
 		alert("인증이 완료되었습니다.");
 		location.href="agreement.jsp";
