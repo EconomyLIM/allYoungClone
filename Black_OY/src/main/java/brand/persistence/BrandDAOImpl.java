@@ -92,10 +92,10 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
       String sql = " SELECT * "
 				+ "    FROM pmlistview WHERE brand_id = ? ";
 			
-      if(dispcatno.equals("cate_01")) {
-          sql +=  "AND cat_l_id= '0001' AND cat_l_id= '0002'  AND cat_l_id= '0004' ";
+      if(dispcatno == null || dispcatno.equals("") || dispcatno.equals("cate_01")) {
+    	  sql += " AND (cat_l_id= '0001' OR cat_l_id= '0002' OR cat_l_id= '0004') ";
        } else if(dispcatno.equals("cate_02")) {
-          sql += " AND cat_l_id= '0001' ";            
+          sql += " AND cat_l_id= '0001'  ";     //전체 -모든상품보여지기         
        } else if(dispcatno.equals("cate_03")) {
           sql += " AND cat_l_id= '0002' ";
        } else if(dispcatno.equals("cate_04")) {
@@ -223,23 +223,75 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
       }// try_catch
       return sellbrandProducts;
    }
-  /*
+ 
+   
+   
    //리뷰가져오기 
    @Override
-   public List<BrandDTO> getreviews(String brandId) throws Exception {
+   public List<BrandDTO> getReviews() throws Exception {
+      List<BrandDTO> relists = new ArrayList<>();
+      String sql = " SELECT r.REV_ID, pdi.PRO_DISPL_SRC, r.REV_LIKE, r.REV_GRADE, r.REV_CONTENT, pd.pro_displ_id "
+            + " FROM PRODUCT_DISPLAY pd "
+            + " JOIN PRO_DISPL_IMG pdi ON pd.PRO_DISPL_ID = pdi.PRO_DISPL_ID "
+            + " JOIN REVIEW r ON pd.PRO_DISPL_ID = r.PRO_DISPL_ID "
+            + " WHERE pd.PRO_DISPL_ID = 'pd_00000006' ";
+
+      Connection conn = ConnectionProvider.getConnection();
+      ResultSet rs = null;
+
+      try {
+         PreparedStatement pstmt = conn.prepareStatement(sql);
+         //pstmt.setString(1, brandId);
+         rs = pstmt.executeQuery();
+
+         while (rs.next()) {
+            BrandDTO relist = BrandDTO.builder()
+                  .rev_id(rs.getString("rev_id"))
+                  .pro_displ_src(rs.getString("pro_displ_src"))
+                  .pro_displ_id(rs.getString("pro_displ_id"))
+                  .rev_like(rs.getInt("rev_like"))
+                  .rev_grade(rs.getInt("rev_grade"))
+                  .rev_content(rs.getString("rev_content"))
+                  .build();
+            relists.add(relist);
+            
+         }
+      } catch (SQLException e) {
+         
+         e.printStackTrace();
+      } finally {
+      rs.close();
+       
+      }
+
+      return relists;
+   }
+
+@Override
+public List<BrandDTO> getBestBrandpro(String brand_Id, String category_s_Id) throws Exception {
+	// TODO Auto-generated method stub
+	return null;
+}
+   
+   /*
+   //리뷰가져오기 
+   @Override
+   public List<BrandDTO> getreviews(String pro_displ_id) throws Exception {
 
       List<BrandDTO> relists = new ArrayList<>();
       String sql =" SELECT pdi.PRO_DISPL_SRC, r.REV_LIKE, r.REV_GRADE, r.REV_CONTENT "
             + " FROM PRODUCT_DISPLAY pd "
             + " JOIN PRO_DISPL_IMG pdi ON pd.PRO_DISPL_ID = pdi.PRO_DISPL_ID "
-            + " JOIN REVIEW r ON pd.PRO_DISPL_ID = r.PRO_DISPL_ID ";
+            + " JOIN REVIEW r ON pd.PRO_DISPL_ID = r.PRO_DISPL_ID "
+            + " WHERE pd.PRO_DISPL_ID ='pd_00000006'";
+           
       ArrayList<BrandDTO> list = null;
       PreparedStatement pstmt = null;
       ResultSet rs = null;
       Connection conn = ConnectionProvider.getConnection(); 
       try {
          pstmt = conn.prepareStatement(sql);
-         pstmt.setString(1, brandId);
+        // pstmt.setString(1, pro_displ_id);
          rs = pstmt.executeQuery();
 
          while (rs.next()) {
@@ -261,7 +313,8 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
       return relists;
 
    }
-   */
+   
+   
    
    //  =여기서 부터 주석처리함 
    
@@ -335,54 +388,9 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
     */
  
    
-  
-         
-   //리뷰가져오기 
-   @Override
-   public List<BrandDTO> getReviews(String pro_displ_id) throws Exception {
-      List<BrandDTO> relists = new ArrayList<>();
-      String sql = " SELECT r.REV_ID, pdi.PRO_DISPL_SRC, r.REV_LIKE, r.REV_GRADE, r.REV_CONTENT, pd.pro_displ_id "
-            + " FROM PRODUCT_DISPLAY pd "
-            + " JOIN PRO_DISPL_IMG pdi ON pd.PRO_DISPL_ID = pdi.PRO_DISPL_ID "
-            + " JOIN REVIEW r ON pd.PRO_DISPL_ID = r.PRO_DISPL_ID "
-            + " WHERE pd.PRO_DISPL_ID = 'pd_00000006' ";
 
-      Connection conn = ConnectionProvider.getConnection();
-      ResultSet rs = null;
 
-      try {
-         PreparedStatement pstmt = conn.prepareStatement(sql);
-         //pstmt.setString(1, brandId);
-         rs = pstmt.executeQuery();
 
-         while (rs.next()) {
-            BrandDTO relist = BrandDTO.builder()
-                  .rev_id(rs.getString("rev_id"))
-                  .pro_displ_src(rs.getString("pro_displ_src"))
-                  .pro_displ_id(rs.getString("pro_displ_id"))
-                  .rev_like(rs.getInt("rev_like"))
-                  .rev_grade(rs.getInt("rev_grade"))
-                  .rev_content(rs.getString("rev_content"))
-                  .build();
-            relists.add(relist);
-            
-         }
-      } catch (SQLException e) {
-         
-         e.printStackTrace();
-      } finally {
-      rs.close();
-       
-      }
-
-      return relists;
-   }
-
-@Override
-public List<BrandDTO> getBestBrandpro(String brand_Id, String category_s_Id) throws Exception {
-	// TODO Auto-generated method stub
-	return null;
-}
 
 
    // 브랜드 제품 할인율순으로 가져오기

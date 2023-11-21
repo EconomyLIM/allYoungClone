@@ -22,7 +22,8 @@ public interface BrandDAO {
    List<BrandDTO> getSortBrands(String brandId, String sort, String dispcatno) throws Exception;
    
    // 리뷰 가져오기
-List<BrandDTO> getReviews(String pro_displ_id) throws Exception;
+List<BrandDTO> getReviews() throws Exception;
+
 
 
 

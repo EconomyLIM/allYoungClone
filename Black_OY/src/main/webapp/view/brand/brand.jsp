@@ -21,44 +21,47 @@
 </head>
 <body>
 
-	
-	<script>
-    $(function() {
-       
-       $("ul.cate_list_box >  li").on("click", function(event) {
-    	   
-          event.preventDefault();
-           let sort ='p';
-           let brand_id = '<%=request.getParameter("brandId")%>';     
-          let dispcatno = $(this).find("a").data("ref-dispcatno");
-          
-      
-          $.ajax({
-                type : 'get'
-             , async : false
-             , cache: false
-             , url : '/Black_OY/GetSortBrandAjax'
-             
-             , data : {
-            	brand_id : brand_id ,
-                dispcatno: dispcatno,
-                sort: sort
-             }
-             , success : function(response) {
-                    /* console.log(data); */
-                    $(".prod-list.goodsProd").empty()
-                    $(".prod-list.goodsProd").append(response)
-            	 
-                }
-             , error : function (response, textStatus) {
-                   console.log('error');
-                }
-            });
-   
-           
-       }) 
-       
-       $("#tabitem2").on("click", function() {
+
+<script>
+$(function() {
+    // 기본으로 보여지는 함수 
+    loadProducts('cate_01', 'p',24);
+
+    // 카테고리 클릭 이벤트 핸들러
+    $("ul.cate_list_box > li").on("click", function(event) {
+        event.preventDefault();
+        let dispcatno = $(this).find("a").data("ref-dispcatno");
+        loadProducts(dispcatno, 'p'); // 기본적으로 인기순으로 로드
+    });
+
+    // 인기순, 신상순, 판매순 등등 
+    $(document).on("click", ".align_sort ul li a", function(event) {
+        event.preventDefault();
+        let sort = $(this).data("sort");
+        let dispcatno = 'cate_01'; // 디폴트로 보여줘야함
+
+        // 'on' 클래스를 동적으로 처리
+        $('.align_sort ul li').removeClass('on');
+        $(this).parent('li').addClass('on');
+
+        loadProducts(dispcatno, sort);
+    });
+    
+    // 상품 개수 선택 이벤트 핸들러
+    $(".count_sort ul li a").on("click", function(event) {
+        event.preventDefault();
+        var numOfItems = $(this).text(); // "24", "36", "48" 중 하나를 가져옴 
+        
+        
+        $(".count_sort ul li").removeClass('on');
+        $(this).parent('li').addClass('on');
+
+        loadProducts('cate_01', 'p', numOfItems);
+    });
+
+
+    // 탭 클릭 이벤트 핸들러...
+      $("#tabitem2").on("click", function() {
           $(this).addClass("active");
           $(this).next().removeClass("active");
           $("#tab-panel2").addClass("active");
@@ -72,9 +75,34 @@
           $("#tab-panel3").addClass("active");
           
        })
-    })
- </script>
-	
+
+    // 상품 목록을 로드하는 함수
+    function loadProducts(dispcatno, sort,numOfItems) {
+        let brand_id = '<%=request.getParameter("brandId")%>';
+
+        $.ajax({
+            type: 'get',
+            async: true, // 비동기 호출
+            cache: false,
+            url: '/Black_OY/GetSortBrandAjax',
+            data: {
+                brand_id: brand_id,
+                dispcatno: dispcatno,
+                sort: sort,
+                numOfItems: numOfItems
+            },
+            success: function(response) {
+                $(".prod-list.goodsProd").empty();
+                $(".prod-list.goodsProd").append(response);
+            },
+            error: function(response, textStatus) {
+                console.log('error');
+            }
+        });
+    }
+});
+</script>
+
 
 	<div id="Wrapper">
 		<div id="skip_navi">
@@ -1392,8 +1420,7 @@
 																	</div>
 																	<span class="like"><span class="icon">${review.rev_like }</span></span>
 																</div>
-																<dl class="retxt">
-																	02
+																<dl class="retxt">														
 																	<dd>${ review.rev_content }</dd>
 																</dl>
 																<a href="javascript:void(0);" class="btn_detail"
@@ -1437,18 +1464,7 @@
 																	<span class="like"><span class="icon">33</span></span>
 																</div>
 																<dl class="retxt">
-																	<dd>💬자칭/타칭 선크림 처돌이인 나 - ! 이 제품 후기가 꽤 좋다는 것을 알고
-																		있었는데, 이미 너무 많아서 사볼 엄두가 안났음,,,, 내 최애 선크림인 엠디스픽 선크림을 다 쓴
-																		김에 한번 구매해봄 ! 일단 [당분간 정착할 예정]이라는 결론부터 말하고 시작 ~ ➕요즘 핫한
-																		라운드랩 자작나무 선크림, 아떼 만큼 발림성 좋은 유기자차 ➕진정 성분 들어있어 자극적이지도 않고
-																		나는 눈시림도 괜찮음 💛아떼는 자극이 있었는데 이 제품 자극 못느꼈고, 💙라운드랩은 흡수 후
-																		약간의 유분이 남았는데 이 제품은 좀 더 깔끔하게 흡수됨 💚이번에 해외여행가면서 동생은 식물나라
-																		산소수 선젤로션, 나는 구달 선크림 사용했는데, 내가 훨씬 덜 탐,,, 둘다 50+에
-																		PA++++로 동일한데도 불구하고,,,, 위에서 비교한 선크림 3종과 구달 선크림까지 전부
-																		[한국콜마]라는 같은 곳에서 제조된 거라 전반적인 사용감은 비슷하나, 개인적으로 단점이 안보였던
-																		구달로 정착 예정 ! 엠디스픽 선크림과 거의 똑같은데 올영 입점으로 접근성 좋고 할인도 되는
-																		구달로 정착해야지 ! ✨ 늘 가방에 넣어놓고 다니면서 자주 발랐더니 한달도 안되어서 한 통 끝 !
-																		도움이 되셨다면, 도움이 돼요(👍🏻) 한번만 눌러주세요 🤍</dd>
+																	<dd>${review.rev_content }</dd>
 																</dl>
 																<a href="javascript:void(0);" class="btn_detail"
 																	onclick="javascript:display.brandShopDetail.amplitudeReview('A000000168705', '[1+1기획] 구달 맑은 어성초 진정 수분 선크림 50ml 1+1 기획 SPF50+ PA++++', '1'); mypage.reviewerLounge.goReviewDetail('23033813', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'1'});"
@@ -1477,14 +1493,7 @@
 																	<span class="like"><span class="icon">24</span></span>
 																</div>
 																<dl class="retxt">
-																	<dd>5⭐️/5 이 세럼은 필수품입니다! 🍋 지난 1년간 매일 아침 종교적으로 바르고
-																		있습니다. 이 세럼 덕분에, 제 피부는 항상 빛나고, 피곤하고 스트레스를 받을 때도 결코 칙칙해
-																		보이지 않습니다! 🍋 이 세럼은 흉터와 흑점 제거에도 많은 도움을 주며, 사용을 시작한 후 피부
-																		톤이 훨씬 균일해졌다는 것을 알게 되었습니다! 🍋 질감은 제가 항상 세럼에서 찾는 텍스처입니다:
-																		두껍고 약간 끈적거려서 이 세럼을 바르면 하루 종일 제 피부를 보호해주는 장벽이 생기는 것처럼
-																		느껴집니다. 🍋 제 피부가 매우 건조하고, 이 세럼은 피부에 기름기를 남기지 않고 완벽하게
-																		흡수됩니다! 🍋 이 세럼의 귤냄새가 너무 좋아요! 상쾌한 아침향으로 제격입니다 :) 이건 절대
-																		포기하지 않을 제품이에요, 찐짜 제 피부를 바뀌었어요 🥰</dd>
+																	<dd>${review.rev_content }</dd>
 																</dl>
 																<a href="javascript:void(0);" class="btn_detail"
 																	onclick="javascript:display.brandShopDetail.amplitudeReview('A000000162323', '[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획', '2'); mypage.reviewerLounge.goReviewDetail('23102015', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'2'});"
@@ -1513,8 +1522,7 @@
 																	<span class="like"><span class="icon">16</span></span>
 																</div>
 																<dl class="retxt">
-																	<dd>자극 없이 순하고, 막 쓰고 3스킨하기 진짜 좋습니당 🤗 뭐 나는 것도 하나
-																		없어요!</dd>
+																	<dd>${review.rev_content }</dd>
 																</dl>
 																<a href="javascript:void(0);" class="btn_detail"
 																	onclick="javascript:display.brandShopDetail.amplitudeReview('A000000183371', '[1+1기획] 구달 맑은 어성초 진정 수분 토너 300ml 기획(+300ml 리필)', '3'); mypage.reviewerLounge.goReviewDetail('22999186', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'3'});"
@@ -1726,9 +1734,10 @@
 																		것 같은데 지금은 피부가 좀 예민해져서 잠시 중단했습니다.</dd>
 																</dl>
 																<a href="javascript:void(0);" class="btn_detail"
-																	onclick="javascript:display.brandShopDetail.amplitudeReview('A000000190108', '[재유PICK/단독기획]구달 흑당근 비타A 레티놀 탄력 앰플 30ml 기획 (+앰플 9ml*2ea)', '9'); mypage.reviewerLounge.goReviewDetail('22776824', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'9'});"
+																	onclick="";
 																	tabindex="-1">자세히 보기</a>
 															</div>
+															
 														</li>
 
 
@@ -1892,6 +1901,348 @@
 												</div>
 											</div>
 										</div>
+							<div class="layer_pop_wrap w920" id="layerWrap920" style="z-index: 999; display: none; left: 50%; margin-left: -460px; top: 2247.5px; margin-top: 0px;">
+
+<!-- rate_01, rate_02, rate_03, rate_04 -->
+
+	
+<div class="review-detail-view">
+	<p class="review-detail-view__tit">리뷰 상세보기 <button type="button" class="rw-popup-layer-close" onclick="goods.gdas.closeReviewerGdasDetailPop('23120466');"></button></p>
+
+	<!-- 리뷰어 프로필 전체 부분 시작 -->
+	<div class="reviewer-profile-wrap clrfix">
+	<!-- reviewer-profile-info :: 리뷰어 프로필 시작 -->
+		<div class="reviewer-profile-info profile-top-reviewer-v1 ">
+		
+			<div class="top-reviewer-inner">
+					<!-- 탑리뷰어언서 UI추가 -->
+				<div class="top-reviewer-profile">
+					<div class="profile-top-content">
+						<div class="reviewer-profile-img thum">
+							<!-- 프로필 이미지 -->
+							<div class="reviewer-profile-img__inner" onclick="common.link.commonMoveUrl('mypage/getReviewerProfile.do?key=KzVJdWQxZlJFNmExaTMzOFM0ODBRUT09');">
+								
+									<span class="reviewer-profile-img--active" style="background-image: url('https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2023/09/01/1693564021070.png')"><span class="review-text-hidden">프로필 사진</span></span>
+								
+							</div>
+						</div>
+
+						<div class="new-profile-info">
+							<div class="user-id-area rate_04">
+								
+									
+										<p class="id my-profile on">
+											<strong>나는짱이될거야</strong>
+											<span class="badge-img">
+													<span class="blind">멤버십 등급별 이미지</span>
+									</span>
+										</p>
+									
+									
+								
+							</div>
+
+							<div class="profile-badge on">
+								
+								
+										<span class="badge-item top-number">
+											<a href="https://www.oliveyoung.co.kr/store/mypage/getReviewerLounge.do">TOP 338</a>
+										</span>
+								
+							</div>
+
+						</div>
+					</div>
+
+					<div class="profile-info-content">
+						
+							<div class="profile-keyword-area">
+								
+									
+									
+									<ul class="profile-keyword-list on">
+										
+											
+												<li class="list-item">복합성</li>
+											
+											
+											
+										
+											
+											
+												<li class="list-item">쿨톤</li>
+											
+											
+										
+											
+											
+											
+												<li class="list-item">모공</li>
+												
+											
+										
+											
+											
+											
+												<li class="list-item">잡티</li>
+						
+											
+										
+									</ul>
+								
+									
+								
+								
+									
+									
+									<p class="top-reviewer-text on">
+										
+											<!-- span태그로 분리 | 추가, 마지막 요소에는 제거 -->
+											
+												
+													<span>구강용품 분야 탑리뷰어</span>
+												
+												
+											
+										
+									</p>
+								
+							</div>
+						
+						
+							
+							
+							
+							
+							
+							
+								
+								<p class="top-reviewer-info on">
+									
+									
+										올영져아💝 트루찐리뷰 남기는 블로거
+										
+										<br>
+									
+								</p>
+							
+						
+					</div>
+				</div>
+				<!-- // 탑리뷰어언서 UI추가 -->
+				
+					<ul class="reviewer-profile-info__bottom reviewer-data-info">
+						<li class="reviewer-data-info__list">
+											<span>
+												
+													
+													
+														379
+													
+												
+											</span>
+							<span>리뷰</span>
+						</li>
+						<li class="reviewer-data-info__list">
+											<span>
+												
+													
+													
+														1,441
+													
+												
+											</span>
+							<span>도움</span>
+						</li>
+						<li class="reviewer-data-info__list">
+											<span>
+												
+													
+													
+														338
+													
+												
+											</span>
+							<span>랭킹</span>
+						</li>
+					</ul>
+				
+			</div>
+
+			
+		</div>
+	<!-- reviewer-profile-info :: 리뷰어 프로필 끝 -->
+	
+
+		<div class="reviewer-profile-content">
+			<div class="reviewer-profile-content__body">
+				
+				<!-- rw-box :: 누적 리뷰 부분에서 반복되었던 부분  시작 -->
+				<div class="rw-box">
+				
+					<a href="#;" class="rw-box__link" onclick="location.href='https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000162021&amp;trackingCd=Best_Reviewbest'; gtm.goods.callGoodsGtmInfo('A000000162021', null, 'ee-productClick', '랭킹_리뷰베스트_리뷰상세', 1);" data-attr="랭킹^리뷰베스트_리뷰상세^[한정기획] 구달 청귤 비타C 잡티케어 크림 75ml 기획(+크림 10mlx2ea 증정)">
+						<div class="rw-box-figure">
+							<div class="rw-box-figure__img">
+							
+							
+								<img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0016/A00000016202129ko.jpg?l=ko" alt="" onerror="common.errorImg(this);">
+							
+							</div>
+							<div class="rw-box-figcaption">
+								
+								<p class="rw-box-figcaption__brand">구달</p>
+								
+								<p class="rw-box-figcaption__name">[한정기획] 구달 청귤 비타C 잡티케어 크림 75ml 기획(+크림 10mlx2ea 증정)</p>
+								
+									<p class="rw-box-figcaption__price">
+										
+											
+											
+										<span class="price">28,000원</span>
+											
+										
+									</p>
+
+									<p class="rw-box-figcaption__etc">
+									
+									
+									
+									
+									
+										<span class="today">오늘드림</span>
+									
+									</p>
+								
+							</div>
+						</div>
+					</a>
+				
+
+					<!-- 추가 :: s -->
+					<!-- 스크롤 부분 :: s -->
+					<div class="review-detail-view__content scrbar">
+						<div class="rw-box__first-line">
+							<span class="review_point"><!-- 리뷰 포인트 누적 리뷰에서와 같음. width 값으로 제어-->
+								<span class="point" style="width:100%">5점만점에 5점</span>
+							</span>
+							<span class="review_point_text">
+								<span>작성일자 2023.10.24</span>
+								
+								
+								
+								
+							</span>
+						</div>
+						
+						
+						<div class="rw-box__second-line">
+							
+							
+							
+						</div>
+						
+
+						
+
+						
+						
+							<!-- 썸네일 리스트 - 확대 가능 :: 시작 -->
+							
+                        <div class="review-detail-thumb">
+                            <ul>
+                                
+                                <li>
+                                    <span>
+                                        <img src="https://image.oliveyoung.co.kr/uploads/images/gdasEditor/2023/10/24/1698102250817.png?RS=76x76&amp;CS=76x76" alt="" onload="common.imgLoads(this,76);" onerror="common.errorResizeImg(this,76)">
+                                    </span>
+                                </li>
+                                
+                                <li>
+                                    <span>
+                                        <img src="https://image.oliveyoung.co.kr/uploads/images/gdasEditor/2023/10/24/1698102254629.png?RS=76x76&amp;CS=76x76" alt="" onload="common.imgLoads(this,76);" onerror="common.errorResizeImg(this,76)">
+                                    </span>
+                                </li>
+                                
+                                <li>
+                                    <span>
+                                        <img src="https://image.oliveyoung.co.kr/uploads/images/gdasEditor/2023/10/24/1698102258770.png?RS=76x76&amp;CS=76x76" alt="" onload="common.imgLoads(this,76);" onerror="common.errorResizeImg(this,76)">
+                                    </span>
+                                </li>
+                                
+                            </ul>
+                        </div>
+						<div class="bimg" style="top: 179px; display: none;"><!-- 확대되는 부분은 따로 분리 - position: absolute -->
+							<div class="thumb"><img src="https://image.oliveyoung.co.kr/uploads/images/gdasEditor/2023/10/24/1698102250817.png" alt="" onerror="common.errorImg(this);"></div>
+						</div>
+						<!-- 썸네일 리스트 - 확대 가능 :: 끝 -->
+							
+							
+							
+							
+								<p class="rw-box__description">
+									알갱이가 있는지는 모르고 구매했는데.. 잘 녹아요<br>수분감도 괜찮고 흡수도 괜찮고..  꾸덕하지 않아서 편하게 바를 수 있는 제형이고 기대 중입니다
+								</p>
+							
+						
+
+						<div class="review-detail-fixed">
+						
+						
+						
+							<div class="review-detail-fixed__tag"><!-- # 자동 추가 -->
+							
+								<span>구달</span>
+							
+							</div>
+						
+						
+						
+							<dl class="review-detail-fixed__list clrfix">
+								
+								<dt>피부타입</dt>
+								<dd>건성에 좋아요</dd>
+								
+								<dt>피부고민</dt>
+								<dd>주름/미백에 좋아요</dd>
+								
+								<dt>자극도</dt>
+								<dd>보통이에요</dd>
+								
+							</dl>
+						
+						</div>
+
+					</div>
+					<!-- 스크롤 부분 :: e -->
+					<div class="rw-box__bottom">
+						<div class="rw-box__help">
+							<button type="button" class="common-event-help unlike" id="gdas_23120466" onclick="goods.gdas.setRecommGdasToggle('23120466',  'N');">
+								<span>도움이 돼요</span>
+								<span class="num">
+                                    
+										
+										
+											3
+										
+									
+                                    </span>
+							</button>
+							<input type="hidden" name="recommCnt_23120466" value="3">
+						</div>
+						<button type="button" class="rw-box__help-btn" onclick="mypage.reviewerInfo.goDclPop('23120466', 'A000000162021', '001', 'N');">신고하기</button>
+					</div>
+					<!-- 추가 :: e -->
+				</div>
+				<!-- rw-box :: 누적 리뷰 부분에서 반복되었던 부분  끝 -->
+			</div>
+		</div>
+	
+	</div>
+	<!-- 리뷰어 프로필 전체 부분 끝 -->
+</div>
+
+
+</div>
 
 										<button type="button" data-role="none"
 											class="slick-next slick-arrow" aria-label="Next"
@@ -2111,7 +2462,7 @@
 	</div>
 </body>
 <script>
-
+/*
 $('#tablist').slick({ 
 	   dots: false,
 	   arrows: true,
@@ -2122,7 +2473,7 @@ $('#tablist').slick({
 	   slidesToScroll: 1,
 	   draggable: true
 	});
-
+*/
 </script>
 
 
