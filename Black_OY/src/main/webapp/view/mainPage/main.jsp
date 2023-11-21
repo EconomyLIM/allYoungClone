@@ -497,7 +497,7 @@ function addCookie(id) {
 																	class="thumb_flag best">베스트</span> <span
 																	class="thumImg"> <img src="${pli.displImgSrc }"
 																		alt="${pli.displProName}"
-																		onerror="common.errorImg(this);" />
+																		/>
 																</span>
 																	<div class="prd_name">
 																		<p class="tx_name">${pli.displProName}</p>
@@ -604,7 +604,7 @@ function addCookie(id) {
 																				</span>
 																			</c:if>
 																			<c:if test="${rec.proPrice eq rec.afterPrice }">
-																			<span class="tx_org">
+																			<span class="tx_cur">
 																					<span class="tx_num">${rec.proPrice}</span>원 
 																				</span>
 																			</c:if>
@@ -1062,7 +1062,7 @@ function addCookie(id) {
 											<c:if test="${mbi.brandId eq mbl.brand_id }">
 											<li>
 												<div class="thum" data-ref-goodsno="A000000102967" data-egrank="null" data-egcode="null" data-attr="홈^주목브랜드^나이팅게일 데일리더마 클렌징패드 마일드 (70매)^1" data-impression="A000000102967^홈_주목브랜드^1" data-tracking-param="t_page=홈&amp;t_click=주목브랜드_상품상세&amp;t_number=1" data-ref-dispcatno="90000010001" data-ref-itemno="001" data-impression-visibility="1" onclick="location.href = gtm.goods.callGoodsGtmInfo(&quot;A000000102967&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;홈_주목브랜드&quot;, &quot;1&quot;);common.wlog(&quot;home_brand_tab_1_1&quot;);common.link.moveGoodsDetail(&quot;A000000102967&quot;, &quot;90000010001&quot;,&quot;Home_Brand&quot;);">
-													<img src="${mbi.proDisplSrc }" alt="나이팅게일 데일리더마 클렌징패드 마일드 (70매)" onerror="common.errorImg(this);">
+													<img src="${mbi.proDisplSrc }" alt="나이팅게일 데일리더마 클렌징패드 마일드 (70매)">
 													<div class="my">
 														<button type="button" class="myCart cartBtnRecoBell" data-ref-goodsno="A000000102967" data-ref-dispcatno="90000010001" data-ref-itemno="001">
 															<span>장바구니</span>
@@ -1172,7 +1172,7 @@ function addCookie(id) {
 														data-impression-visibility="1" tabindex="-1"> <img
 														src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0019/A00000019131811ko.jpg?l=ko"
 														alt="[11월 올영픽] [30+10포/먹는레티놀]바이탈뷰티 슈퍼레티놀C 기획세트"
-														onerror="common.errorImg(this);">
+														>
 													</a>
 													<div class="my">
 														<button type="button" class="myCart cartBtnRecoBell"
@@ -1237,7 +1237,7 @@ function addCookie(id) {
 														data-impression="A000000188467^홈_실시간VIEW랭킹^2"
 														data-impression-visibility="1" tabindex="-1"> <img
 														src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0018/A00000018846706ko.jpg?l=ko"
-														alt="브링그린 세럼 한정기획 3종" onerror="common.errorImg(this);">
+														alt="브링그린 세럼 한정기획 3종" >
 													</a>
 													<div class="my">
 														<button type="button" class="myCart cartBtnRecoBell"
@@ -1299,7 +1299,7 @@ function addCookie(id) {
 														data-impression-visibility="1" tabindex="-1"> <img
 														src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0018/A00000018319758ko.jpg?l=ko"
 														alt="[후니언픽] 이니스프리 비타C 그린티 엔자임 잡티 세럼 기획 30ml+7ml"
-														onerror="common.errorImg(this);">
+														>
 													</a>
 													<div class="my">
 														<button type="button" class="myCart cartBtnRecoBell"
@@ -1363,7 +1363,7 @@ function addCookie(id) {
 														data-impression-visibility="1" tabindex="-1"> <img
 														src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0017/A00000017215608ko.jpg?l=ko"
 														alt="[리뷰이벤트]루트리 오디베리 5중 모공 리파이닝 앰플 50ml"
-														onerror="common.errorImg(this);">
+														>
 													</a>
 													<div class="my">
 														<button type="button" class="myCart cartBtnRecoBell"
@@ -1426,7 +1426,7 @@ function addCookie(id) {
 														data-impression-visibility="1" tabindex="-1"> <img
 														src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0019/A00000019161802ko.jpg?l=ko"
 														alt="[올영픽특가/43%] 비거너리 식물성 콜라겐 3270mg 7포+2포 기획(샤인머스캣맛) (9일분)"
-														onerror="common.errorImg(this);">
+														>
 													</a>
 													<div class="my">
 														<button type="button" class="myCart cartBtnRecoBell"
@@ -1490,7 +1490,7 @@ function addCookie(id) {
 														data-impression-visibility="1" tabindex="-1"> <img
 														src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0012/A00000012065621ko.jpg?l=ko"
 														alt="[NEW애교살컬러] 투쿨포스쿨 프로타주 펜슬"
-														onerror="common.errorImg(this);">
+														>
 													</a>
 													<div class="my">
 														<button type="button" class="myCart cartBtnRecoBell"
@@ -1552,7 +1552,7 @@ function addCookie(id) {
 														data-impression-visibility="1" tabindex="-1"> <img
 														src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0018/A00000018546523ko.jpeg?l=ko"
 														alt="[NEW 컬러] 레미유 듀이 플로우 틴트"
-														onerror="common.errorImg(this);">
+														>
 													</a>
 													<div class="my">
 														<button type="button" class="myCart cartBtnRecoBell"
@@ -1614,7 +1614,7 @@ function addCookie(id) {
 														data-impression-visibility="1" tabindex="-1"> <img
 														src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0018/A00000018807804ko.jpg?l=ko"
 														alt="[애교살 꿀템] 피치베리 베리섀도우 7colors "
-														onerror="common.errorImg(this);">
+														>
 													</a>
 													<div class="my">
 														<button type="button" class="myCart cartBtnRecoBell"
@@ -1690,7 +1690,7 @@ function addCookie(id) {
 														data-impression-visibility="1" tabindex="0"> <img
 														src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0019/A00000019181203ko.jpg?l=ko"
 														alt="[11월 올영픽] 락토핏 골드 더블기획 60포 (60일분)"
-														onerror="common.errorImg(this);">
+														>
 													</a>
 													<div class="my">
 														<button type="button" class="myCart cartBtnRecoBell"
@@ -1754,7 +1754,7 @@ function addCookie(id) {
 														data-impression-visibility="1" tabindex="-1"> <img
 														src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0018/A00000018412802ko.jpg?l=ko"
 														alt="에스트라 아토베리어365 크림 80ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)"
-														onerror="common.errorImg(this);">
+														>
 													</a>
 													<div class="my">
 														<button type="button" class="myCart cartBtnRecoBell"
@@ -2215,7 +2215,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018041043ko.jpg?l=ko"
 										alt="[한정기획/더보이즈 현재PICK]앰플엔 세라마이드샷 앰플 100ml 기획(100ml+10ml)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										 class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[한정기획/더보이즈 현재PICK]앰플엔 세라마이드샷 앰플 100ml
 											기획(100ml+10ml)</p>
@@ -2253,7 +2253,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018412802ko.jpg?l=ko"
 										alt="에스트라 아토베리어365 크림 80ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										 class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">에스트라 아토베리어365 크림 80ml 기획 (+하이드로에센스
 											25ml+무기자차선크림10ml 증정)</p>
@@ -2291,7 +2291,7 @@ $('#main_curation02_01').slick({
 									name="Home_Curation1_More"><span class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0015/A00000015863602ko.jpg?l=ko"
 										alt="디오디너리 히알루로닉 애시드 2% + B5 30ml"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										 class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">디오디너리 히알루로닉 애시드 2% + B5 30ml</p>
 									</div>
@@ -2326,7 +2326,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016667505ko.jpg?l=ko"
 										alt="[리필기획] 아누아 어성초 77 수딩 토너 350ml 리필 기획세트(350ml+350ml리필)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										 class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[리필기획] 아누아 어성초 77 수딩 토너 350ml 리필
 											기획세트(350ml+350ml리필)</p>
@@ -2367,7 +2367,7 @@ $('#main_curation02_01').slick({
 									name="Home_Curation1_More"><span class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019138702ko.jpg?l=ko"
 										alt="[NEW] 아비브 부활초 비피다 세럼 퍼밍 드롭 50ml"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[NEW] 아비브 부활초 비피다 세럼 퍼밍 드롭 50ml</p>
 									</div>
@@ -2405,7 +2405,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0014/A00000014557922ko.jpg?l=ko"
 										alt="라운드랩 자작나무 수분크림 (본품80ml+20ml 추가 증정)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">라운드랩 자작나무 수분크림 (본품80ml+20ml 추가 증정)</p>
 									</div>
@@ -2442,7 +2442,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018926111ko.jpg?l=ko"
 										alt="[단독기획] 토리든 다이브인 저분자 히알루론산 세럼 50ml 리필기획(+리필팩 50ml)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[단독기획] 토리든 다이브인 저분자 히알루론산 세럼 50ml
 											리필기획(+리필팩 50ml)</p>
@@ -2480,7 +2480,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019095803ko.jpg?l=ko"
 										alt="[NEW] 아비브 부활초 비피다 세럼 퍼밍 드롭 50ml 기획(+부활초 크림 30ml 증정)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[NEW] 아비브 부활초 비피다 세럼 퍼밍 드롭 50ml 기획(+부활초
 											크림 30ml 증정)</p>
@@ -2522,7 +2522,7 @@ $('#main_curation02_01').slick({
 									name="Home_Curation1_More"><span class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016918601ko.jpg?l=ko"
 										alt="피지오겔 DMT 베이비 인텐시브 크림 100ml"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">피지오겔 DMT 베이비 인텐시브 크림 100ml</p>
 									</div>
@@ -2560,7 +2560,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017587818ko.jpg?l=ko"
 										alt="[대용량] 파티온 노스카나인 트러블 세럼 단독 기획(50ml+15ml)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[대용량] 파티온 노스카나인 트러블 세럼 단독 기획(50ml+15ml)</p>
 									</div>
@@ -2597,7 +2597,7 @@ $('#main_curation02_01').slick({
 									name="Home_Curation1_More"><span class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018942901ko.jpg?l=ko"
 										alt="아벤느 이드랑스 부스트 세럼 10ml+10ml 더블 기획"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">아벤느 이드랑스 부스트 세럼 10ml+10ml 더블 기획</p>
 									</div>
@@ -2635,7 +2635,7 @@ $('#main_curation02_01').slick({
 									name="Home_Curation1_More"><span class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017427310ko.jpg?l=ko"
 										alt="[단독기획] 아이소이 10년간, 1등 잡티세럼 30ml 기획(+아이크림5ml 증정)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[단독기획] 아이소이 10년간, 1등 잡티세럼 30ml
 											기획(+아이크림5ml 증정)</p>
@@ -2677,7 +2677,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016659010ko.jpg?l=ko"
 										alt="[NEW] 라운드랩 소나무 진정 시카 앰플 기획 (+진정 크림 10ml 증정)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[NEW] 라운드랩 소나무 진정 시카 앰플 기획 (+진정 크림 10ml
 											증정)</p>
@@ -2714,7 +2714,7 @@ $('#main_curation02_01').slick({
 									name="Home_Curation1_More"><span class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018948809ko.jpg?l=ko"
 										alt="[리뉴업] 더랩바이블랑두 저분자 히알루론산 딥 토너 200ml + 50ml 기획"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[리뉴업] 더랩바이블랑두 저분자 히알루론산 딥 토너 200ml +
 											50ml 기획</p>
@@ -2752,7 +2752,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018983703ko.jpg?l=ko"
 										alt="[흔적미백] 넘버즈인 5번 글루타치온C 흔적 앰플 30ml+30ml 듀오기획"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[흔적미백] 넘버즈인 5번 글루타치온C 흔적 앰플 30ml+30ml
 											듀오기획</p>
@@ -2791,7 +2791,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018868202ko.jpg?l=ko"
 										alt="[한정기획] 피지오겔 레드수딩 AI 크림 100ml+30ml 증정 기획"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[한정기획] 피지오겔 레드수딩 AI 크림 100ml+30ml 증정 기획</p>
 									</div>
@@ -2833,7 +2833,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019177402ko.jpg?l=ko"
 										alt="[피부결] 넘버즈인 3번 보들보들 결 세럼 50ml 기획 (+15ml 증정)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[피부결] 넘버즈인 3번 보들보들 결 세럼 50ml 기획 (+15ml
 											증정)</p>
@@ -2871,7 +2871,7 @@ $('#main_curation02_01').slick({
 									onclick="javascript:common.wlog(&quot;home_curation1_more_prod&quot;);common.wlog(&quot;undefined&quot;);common.link.moveGoodsDetailCuration(&quot;A000000012880&quot;, &quot;undefined&quot;,&quot;home_curation1_more_prod&quot; , &quot;pc_main_01_c&quot;,&quot;a016_a016&quot; ,&quot;25&quot; ,&quot;Home_Curation1_More&quot;,&quot;t_page=홈&amp;t_click=큐레이션1_더보기_상품상세&amp;t_number=18&quot;); return false;"
 									name="Home_Curation1_More"><span class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0001/A00000001288002ko.jpg?l=ko"
-										alt="피지오겔 DMT 페이셜 크림 75ml" onerror="common.errorImg(this);"
+										alt="피지오겔 DMT 페이셜 크림 75ml"  
 										class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">피지오겔 DMT 페이셜 크림 75ml</p>
@@ -2910,7 +2910,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018106213ko.jpg?l=ko"
 										alt="아이소이 속보습, 100시간 장수진 수분크림 70ml 기획(+수분앰플 10ml)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">아이소이 속보습, 100시간 장수진 수분크림 70ml 기획(+수분앰플
 											10ml)</p>
@@ -2948,7 +2948,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019005123ko.jpg?l=ko"
 										alt="[윈터 PICK] 마몽드 포어 슈링커 바쿠치올 크림 60ml 단독기획 (+30ml 추가증정)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[윈터 PICK] 마몽드 포어 슈링커 바쿠치올 크림 60ml 단독기획
 											(+30ml 추가증정)</p>
@@ -2992,7 +2992,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0014/A00000014780915ko.jpg?l=ko"
 										alt="[형원PICK] 웰라쥬 리얼 히알루로닉 블루 100 앰플 100ml 기획 (+원데이키트2ea)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[형원PICK] 웰라쥬 리얼 히알루로닉 블루 100 앰플 100ml
 											기획 (+원데이키트2ea)</p>
@@ -3030,7 +3030,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016651002ko.jpg?l=ko"
 										alt="차앤박(CNP) 프로폴리스 에너지 앰플 미스트 250ml"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">차앤박(CNP) 프로폴리스 에너지 앰플 미스트 250ml</p>
 									</div>
@@ -3066,7 +3066,7 @@ $('#main_curation02_01').slick({
 									name="Home_Curation1_More"><span class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017155602ko.jpg?l=ko"
 										alt="식물나라 프로폴리스 워터리 멀티 오일 더블기획50mL*2"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">식물나라 프로폴리스 워터리 멀티 오일 더블기획50mL*2</p>
 									</div>
@@ -3103,7 +3103,7 @@ $('#main_curation02_01').slick({
 									name="Home_Curation1_More"><span class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017519811ko.jpg?l=ko"
 										alt="[NEW]닥터자르트 세라마이딘 스킨 베리어 모이스처라이징 크림 50ml"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[NEW]닥터자르트 세라마이딘 스킨 베리어 모이스처라이징 크림 50ml</p>
 									</div>
@@ -3142,7 +3142,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019016603ko.jpg?l=ko"
 										alt="[대용량/키링 증정] 리얼베리어 익스트림 크림 70ml 1+1 기획 (벨리곰 콜라보)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[대용량/키링 증정] 리얼베리어 익스트림 크림 70ml 1+1 기획
 											(벨리곰 콜라보)</p>
@@ -3180,7 +3180,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019013204ko.jpg?l=ko"
 										alt="[선물세트] 닥터지 블랙 스네일 옴므 프레스티지 3종세트(토너150ml+에멀전150ml+클렌징폼70ml)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[선물세트] 닥터지 블랙 스네일 옴므 프레스티지
 											3종세트(토너150ml+에멀전150ml+클렌징폼70ml)</p>
@@ -3219,7 +3219,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018258101ko.jpg?l=ko"
 										alt="[단독기획]닥터자르트 시카페어 인텐시브 수딩 리페어 크림 기획(50ml+15ml*2ea)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[단독기획]닥터자르트 시카페어 인텐시브 수딩 리페어 크림
 											기획(50ml+15ml*2ea)</p>
@@ -3255,7 +3255,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018824005ko.jpg?l=ko"
 										alt="[서강준 Pick] 성분에디터 그린토마토 포어 리프팅 앰플 플러스 30ml 더블 기획"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[서강준 Pick] 성분에디터 그린토마토 포어 리프팅 앰플 플러스
 											30ml 더블 기획</p>
@@ -3298,7 +3298,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016559824ko.jpg?l=ko"
 										alt="[단독기획] 토리든 다이브인 저분자 히알루론산 수딩크림 더블기획 (100ml+100ml)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[단독기획] 토리든 다이브인 저분자 히알루론산 수딩크림 더블기획
 											(100ml+100ml)</p>
@@ -3336,7 +3336,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018419102ko.jpg?l=ko"
 										alt="에스트라 아토베리어365 하이드로에센스 200ml 기획 (+크림 30ml+무기자차선크림3ml 증정)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">에스트라 아토베리어365 하이드로에센스 200ml 기획 (+크림
 											30ml+무기자차선크림3ml 증정)</p>
@@ -3374,7 +3374,7 @@ $('#main_curation02_01').slick({
 									name="Home_Curation1_More"><span class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0015/A00000015978327ko.jpg?l=ko"
 										alt="[단독기획] 토니모리 원더 세라마이드 모찌 토너 (본품500ml+100ml)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[단독기획] 토니모리 원더 세라마이드 모찌 토너
 											(본품500ml+100ml)</p>
@@ -3413,7 +3413,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018976914ko.jpg?l=ko"
 										alt="[민동성공동개발] 메디필 히알루론산 레이어 물톡스 앰플 더블 기획 30ml "
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[민동성공동개발] 메디필 히알루론산 레이어 물톡스 앰플 더블 기획
 											30ml</p>
@@ -3454,7 +3454,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0015/A00000015684228ko.jpg?l=ko"
 										alt="[11월 올영픽/화장솜 증정기획]바이오더마 하이드라비오 에센스로션 200ml(화장솜 증정)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[11월 올영픽/화장솜 증정기획]바이오더마 하이드라비오 에센스로션
 											200ml(화장솜 증정)</p>
@@ -3494,7 +3494,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018599518ko.jpg?l=ko"
 										alt="이니스프리 레티놀 시카 흔적 앰플 30ml 기획 (+7ml 증정)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">이니스프리 레티놀 시카 흔적 앰플 30ml 기획 (+7ml 증정)</p>
 									</div>
@@ -3533,7 +3533,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019069103ko.jpg?l=ko"
 										alt="[한정기획/1+1] 스킨푸드 로열허니 프로폴리스 인리치 에센스 50ml 리필기획"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[한정기획/1+1] 스킨푸드 로열허니 프로폴리스 인리치 에센스 50ml
 											리필기획</p>
@@ -3572,7 +3572,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019011612ko.jpg?l=ko"
 										alt="[한정기획] 아이소이 10년간, 1등 잡티세럼 20ml+20ml+15ml 증량 기획"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[한정기획] 아이소이 10년간, 1등 잡티세럼
 											20ml+20ml+15ml 증량 기획</p>
@@ -3612,7 +3612,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018412902ko.jpg?l=ko"
 										alt="에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스
 											25ml+무기자차선크림10ml 증정)</p>
@@ -3651,7 +3651,7 @@ $('#main_curation02_01').slick({
 									class="thumImg"><img
 										src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0019/A00000019082407ko.jpg?l=ko"
 										alt="[곰민영 PICK/디퓨저 선착순 증정] 한율 어린쑥 수분진정크림 55ml+25ml+마스크팩 기획"
-										onerror="common.errorImg(this);" class="mCS_img_loaded"></span>
+										  class="mCS_img_loaded"></span>
 									<div class="prd_name">
 										<p class="tx_name">[곰민영 PICK/디퓨저 선착순 증정] 한율 어린쑥 수분진정크림
 											55ml+25ml+마스크팩 기획</p>
