@@ -17,6 +17,12 @@
 <script src="/Black_OY/js/head.js"></script>
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <link rel="stylesheet" href="/Black_OY/css/brand.css">
+<style>
+.close:hover, .close:focus {
+    color: black;
+    cursor: pointer;
+}
+</style>
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
@@ -1381,6 +1387,11 @@ $(function() {
 								<!-- 슬라이더끝 -->
 							</div>
 						</div>
+
+						
+						
+						
+						
 						<c:forEach items="${ relist }" var="review" varStatus="status">
 							<div class="tabCont reviewPanel" role="tabpanel" id="tab-panel3"
 								aria-lebelledby="tabitem3">
@@ -1413,7 +1424,7 @@ $(function() {
 																	onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000162318&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_리뷰&quot;, &quot;1&quot;);">
 															</p>
 															<div class="reviewCont"
-																onclick="javascript:display.brandShopDetail.amplitudeReview('A000000162318', '구달 청귤 비타C 잡티케어 세럼 마스크 1매 ', '10'); mypage.reviewerLounge.goReviewDetail('23251131', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'10'});">
+																onclick="openReviewModal('23251131');display.brandShopDetail.amplitudeReview('A000000162318', '구달 청귤 비타C 잡티케어 세럼 마스크 1매 ', '10'); mypage.reviewerLounge.goReviewDetail('23251131', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'10'});">
 																<div class="topinfo">
 																	<div class="review_stat type2">
 																		<span class="point pt5">${ review.rev_grade }</span>
@@ -1424,7 +1435,7 @@ $(function() {
 																	<dd>${ review.rev_content }</dd>
 																</dl>
 																<a href="javascript:void(0);" class="btn_detail"
-																	onclick="javascript:display.brandShopDetail.amplitudeReview('A000000162318', '구달 청귤 비타C 잡티케어 세럼 마스크 1매 ', '10'); mypage.reviewerLounge.goReviewDetail('23251131', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'10'});"
+																	onclick="openReviewModal('23251131'); display.brandShopDetail.amplitudeReview('A000000162318', '구달 청귤 비타C 잡티케어 세럼 마스크 1매 ', '10'); mypage.reviewerLounge.goReviewDetail('23251131', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'10'});"
 																	tabindex="-1">자세히 보기</a>
 															</div>
 														</li>
@@ -1722,16 +1733,19 @@ $(function() {
 															<div class="reviewCont"
 																onclick="javascript:display.brandShopDetail.amplitudeReview('A000000190108', '[재유PICK/단독기획]구달 흑당근 비타A 레티놀 탄력 앰플 30ml 기획 (+앰플 9ml*2ea)', '9'); mypage.reviewerLounge.goReviewDetail('22776824', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'9'});">
 																<div class="topinfo">
+															
 																	<div class="review_stat type2">
 																		<span class="point pt5">5점</span>
 																	</div>
 																	<span class="like"><span class="icon">6</span></span>
+																
 																</div>
-																<dl class="retxt">
+																<dl class="retxt" >
+																
 																	<dd>다른 레티놀에 비해 순하긴 한 것 같아요. 타사 유명한 레티놀 제품을 사용했을 때
 																		좋다. 잘 맞는다. 괜찮다. 이런 느낌은 안 들었어서 이번에도 사용하기가 좀 무서웠어요. 근데
 																		3일동안 밤에만 사용했는데 생각보다 자극이 된다고 느껴지진 않았어요. 이거 쓰고 피부 결이 좋아진
-																		것 같은데 지금은 피부가 좀 예민해져서 잠시 중단했습니다.</dd>
+																		것 같은데 지금은 피부가 좀 예민해져서 잠시 중단했습니다.</dd></button>
 																</dl>
 																<a href="javascript:void(0);" class="btn_detail"
 																	onclick="";
@@ -1829,71 +1843,6 @@ $(function() {
 															</div>
 														</li>
 
-														<li>
-															<p class="thum"
-																onclick="javascript:common.link.moveGoodsDetail('A000000162323', '', 'BrandA001436_Review', {t_page:'브랜드관',t_click:'리뷰_상품상세', t_number:'2'}); ">
-																<img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0016/A00000016232329ko.jpg?l=ko"
-																	data-ref-goodsno="A000000162323"
-																	alt="[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획"
-																	onerror="common.errorImg(this);"
-																	data-attr="브랜드관^구달_리뷰^[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획"
-																	data-trk="/"
-																	onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000162323&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_리뷰&quot;, &quot;13&quot;);">
-															</p>
-															<div class="reviewCont"
-																onclick="javascript:display.brandShopDetail.amplitudeReview('A000000162323', '[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획', '2'); mypage.reviewerLounge.goReviewDetail('23102015', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'2'});">
-																<div class="topinfo">
-																	<div class="review_stat type2">
-																		<span class="point pt5">5점</span>
-																	</div>
-																	<span class="like"><span class="icon">24</span></span>
-																</div>
-																<dl class="retxt">
-																	<dd>5⭐️/5 이 세럼은 필수품입니다! 🍋 지난 1년간 매일 아침 종교적으로 바르고
-																		있습니다. 이 세럼 덕분에, 제 피부는 항상 빛나고, 피곤하고 스트레스를 받을 때도 결코 칙칙해
-																		보이지 않습니다! 🍋 이 세럼은 흉터와 흑점 제거에도 많은 도움을 주며, 사용을 시작한 후 피부
-																		톤이 훨씬 균일해졌다는 것을 알게 되었습니다! 🍋 질감은 제가 항상 세럼에서 찾는 텍스처입니다:
-																		두껍고 약간 끈적거려서 이 세럼을 바르면 하루 종일 제 피부를 보호해주는 장벽이 생기는 것처럼
-																		느껴집니다. 🍋 제 피부가 매우 건조하고, 이 세럼은 피부에 기름기를 남기지 않고 완벽하게
-																		흡수됩니다! 🍋 이 세럼의 귤냄새가 너무 좋아요! 상쾌한 아침향으로 제격입니다 :) 이건 절대
-																		포기하지 않을 제품이에요, 찐짜 제 피부를 바뀌었어요 🥰</dd>
-																</dl>
-																<a href="javascript:void(0);" class="btn_detail"
-																	onclick="javascript:display.brandShopDetail.amplitudeReview('A000000162323', '[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획', '2'); mypage.reviewerLounge.goReviewDetail('23102015', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'2'});"
-																	tabindex="-1">자세히 보기</a>
-															</div>
-														</li>
-
-														<li>
-															<p class="thum"
-																onclick="javascript:common.link.moveGoodsDetail('A000000183371', '', 'BrandA001436_Review', {t_page:'브랜드관',t_click:'리뷰_상품상세', t_number:'3'}); ">
-																<img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0018/A00000018337104ko.jpg?l=ko"
-																	data-ref-goodsno="A000000183371"
-																	alt="[1+1기획] 구달 맑은 어성초 진정 수분 토너 300ml 기획(+300ml 리필)"
-																	onerror="common.errorImg(this);"
-																	data-attr="브랜드관^구달_리뷰^[1+1기획] 구달 맑은 어성초 진정 수분 토너 300ml 기획(+300ml 리필)"
-																	data-trk="/"
-																	onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000183371&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_리뷰&quot;, &quot;14&quot;);">
-															</p>
-															<div class="reviewCont"
-																onclick="javascript:display.brandShopDetail.amplitudeReview('A000000183371', '[1+1기획] 구달 맑은 어성초 진정 수분 토너 300ml 기획(+300ml 리필)', '3'); mypage.reviewerLounge.goReviewDetail('22999186', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'3'});">
-																<div class="topinfo">
-																	<div class="review_stat type2">
-																		<span class="point pt5">5점</span>
-																	</div>
-																	<span class="like"><span class="icon">16</span></span>
-																</div>
-																<dl class="retxt">
-																	<dd>자극 없이 순하고, 막 쓰고 3스킨하기 진짜 좋습니당 🤗 뭐 나는 것도 하나
-																		없어요!</dd>
-																</dl>
-																<a href="javascript:void(0);" class="btn_detail"
-																	onclick="javascript:display.brandShopDetail.amplitudeReview('A000000183371', '[1+1기획] 구달 맑은 어성초 진정 수분 토너 300ml 기획(+300ml 리필)', '3'); mypage.reviewerLounge.goReviewDetail('22999186', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'3'});"
-																	tabindex="-1">자세히 보기</a>
-															</div>
-														</li>
 
 
 													</ul>
@@ -1911,6 +1860,257 @@ $(function() {
 					</div>
 					<!--tabContainer  -->
 				</div>
+				
+	<!-- 리뷰어 프로필 전체 부분 시작 -->
+		<div class="review-detail-view">
+	<div id="myModal" class="modal" style=" display: none;position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4); ">
+  
+	<div class="modal-content" style=" background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%;">
+  <span class="close" style="  color: #aaa; float: right; font-size: 28px; font-weight: bold;">&times;</span>
+	<!-- reviewer-profile-info :: 리뷰어 프로필 시작 -->
+		<div class="reviewer-profile-info profile-top-reviewer-v1 ">
+		
+			<div class="top-reviewer-inner">
+					<!-- 탑리뷰어언서 UI추가 -->
+				<div class="top-reviewer-profile">
+					<div class="profile-top-content">
+						<div class="reviewer-profile-img thum">
+							<!-- 프로필 이미지 -->
+							<div class="reviewer-profile-img__inner" onclick="common.link.commonMoveUrl('mypage/getReviewerProfile.do?key=L2xpNEhpWGd6WU4rVFJ0aWE2OVVEdz09');">
+								
+									<span class="reviewer-profile-img--active" style="background-image: url('https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2023/11/14/1699924371453.png')"><span class="review-text-hidden">프로필 사진</span></span>
+								
+							</div>
+						</div>
+
+						<div class="new-profile-info">
+							<div class="user-id-area rate_01">
+								
+									
+										<p class="id my-profile on">
+											<strong>comejuliet</strong>
+											<span class="badge-img">
+													<span class="blind">멤버십 등급별 이미지</span>
+									</span>
+										</p>
+								
+							</div>
+
+							<div class="profile-badge on">
+								
+								
+										<span class="badge-item top-number">
+											<a href="https://www.oliveyoung.co.kr/store/mypage/getReviewerLounge.do">TOP 96</a>
+										</span>								
+							</div>
+
+						</div>
+					</div>
+
+					<div class="profile-info-content">
+						
+							<div class="profile-keyword-area">								
+									<ul class="profile-keyword-list on">
+												<li class="list-item">건성</li>
+										
+												<li class="list-item">겨울쿨톤</li>
+											
+												<li class="list-item">블랙헤드</li>
+												<li class="list-item">주름</li>
+											
+									</ul>
+								
+									<p class="top-reviewer-text on">
+										
+											<!-- span태그로 분리 | 추가, 마지막 요소에는 제거 -->
+											
+												
+													<span>메이크업 분야 탑리뷰어</span>
+												
+									</p>
+								
+							</div>
+								<p class="top-reviewer-info on">
+									
+									
+										🥀 겨울딥톤/가울딥톤 22호 메이크업 추천 🥀
+										
+										<br>
+									
+										인스타: @deep_motd 
+										
+										<br>
+										<br>
+									
+										스트레스 해소를 위해 반짝이는 화장품을 사재기하는 대학생 ✨
+										
+										<br>
+								</p>
+					</div>
+				</div>
+				<!-- // 탑리뷰어언서 UI추가 -->
+				
+					<ul class="reviewer-profile-info__bottom reviewer-data-info">
+						<li class="reviewer-data-info__list">
+											<span>242</span>
+							<span>리뷰</span>
+						</li>
+						<li class="reviewer-data-info__list">
+											<span>1,787</span>
+							<span>도움</span>
+						</li>
+						<li class="reviewer-data-info__list">
+											<span>96</span>
+							<span>랭킹</span>
+						</li>
+					</ul>
+				
+			</div>
+
+			
+		</div>
+	<!-- reviewer-profile-info :: 리뷰어 프로필 끝 -->
+	
+ <div class="review-detail-view">
+		<div class="reviewer-profile-content">
+			<div class="reviewer-profile-content__body">
+				
+				<!-- rw-box :: 누적 리뷰 부분에서 반복되었던 부분  시작 -->
+				<div class="rw-box">
+			 
+					<a href="#;" class="rw-box__link"  onclick="location.href='https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000162323&amp;trackingCd=Best_Reviewbest'; gtm.goods.callGoodsGtmInfo('A000000162323', null, 'ee-productClick', '랭킹_리뷰베스트_리뷰상세', 1);" data-attr="랭킹^리뷰베스트_리뷰상세^[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획">
+						<div class="rw-box-figure">
+							<div class="rw-box-figure__img">
+							<img src="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0016/A00000016232329ko.jpg?l=ko" alt="" onerror="common.errorImg(this);">
+							
+							</div>
+							<div class="rw-box-figcaption">
+								
+								<p class="rw-box-figcaption__brand">구달</p>								
+								<p class="rw-box-figcaption__name">[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획</p>
+								
+									<p class="rw-box-figcaption__price">									
+									<span class="price">34,400원</span>
+										<del>43,000원</del>
+							
+									</p>
+
+									<p class="rw-box-figcaption__etc">									
+										<span>증정</span>									
+										<span class="today">오늘드림</span>
+									
+									</p>
+								
+							</div>
+						</div>
+					</a>				
+					<!-- 추가 :: s -->
+					<!-- 스크롤 부분 :: s -->
+					<div class="review-detail-view__content scrbar">
+						<div class="rw-box__first-line">
+							<span class="review_point"><!-- 리뷰 포인트 누적 리뷰에서와 같음. width 값으로 제어-->
+								<span class="point" style="width:100%">5점만점에 5점</span>
+							</span>
+							<span class="review_point_text">
+								<span>작성일자 2023.10.23</span>
+						
+							</span>
+						</div>												
+						<div class="rw-box__second-line">
+						
+								<span>한달이상사용</span>
+							
+						</div>
+					
+							<!-- 썸네일 리스트 - 확대 가능 :: 시작 -->
+							
+                        <div class="review-detail-thumb">
+                            <ul>
+                                
+                                <li>
+                                    <span>
+                                        <img src="https://image.oliveyoung.co.kr/uploads/images/gdasEditor/2023/10/23/1698023327691.png?RS=76x76&amp;CS=76x76" alt="" onload="common.imgLoads(this,76);" onerror="common.errorResizeImg(this,76)">
+                                    </span>
+                                </li>
+                                
+                                <li>
+                                    <span>
+                                        <img src="https://image.oliveyoung.co.kr/uploads/images/gdasEditor/2023/10/23/1698023355981.png?RS=76x76&amp;CS=76x76" alt="" onload="common.imgLoads(this,76);" onerror="common.errorResizeImg(this,76)">
+                                    </span>
+                                </li>
+                                
+                                <li>
+                                    <span>
+                                        <img src="https://image.oliveyoung.co.kr/uploads/images/gdasEditor/2023/10/23/1698023419902.png?RS=76x76&amp;CS=76x76" alt="" onload="common.imgLoads(this,76);" onerror="common.errorResizeImg(this,76)">
+                                    </span>
+                                </li>
+                                
+                            </ul>
+                        </div>
+						<div class="bimg" style="top: 229px; display: none;"><!-- 확대되는 부분은 따로 분리 - position: absolute -->
+							<div class="thumb"><img src="https://image.oliveyoung.co.kr/uploads/images/gdasEditor/2023/10/23/1698023327691.png" alt="" onerror="common.errorImg(this);"></div>
+						</div>
+						<!-- 썸네일 리스트 - 확대 가능 :: 끝 -->
+						
+								<p class="rw-box__description">
+									5⭐️/5 <br>이 세럼은 필수품입니다! <br><br>🍋 지난 1년간 매일 아침 종교적으로 바르고 있습니다. 이 세럼 덕분에, 제 피부는 항상 빛나고, 피곤하고 스트레스를 받을 때도 결코 칙칙해 보이지 않습니다!<br>🍋 이 세럼은 흉터와 흑점 제거에도 많은 도움을 주며, 사용을 시작한 후 피부 톤이 훨씬 균일해졌다는 것을 알게 되었습니다! <br>🍋 질감은 제가 항상 세럼에서 찾는 텍스처입니다: 두껍고 약간 끈적거려서 이 세럼을 바르면 하루 종일 제 피부를 보호해주는 장벽이 생기는 것처럼 느껴집니다. <br>🍋 제 피부가 매우 건조하고, 이 세럼은 피부에 기름기를 남기지 않고 완벽하게 흡수됩니다! <br>🍋 이 세럼의 귤냄새가 너무 좋아요! 상쾌한 아침향으로 제격입니다 :) <br><br>이건 절대 포기하지 않을 제품이에요, 찐짜 제 피부를 바뀌었어요 🥰
+								</p>
+	                 		<div class="review-detail-fixed">
+	
+							<dl class="review-detail-fixed__list clrfix">
+								
+								<dt>피부타입</dt>
+								<dd>건성에 좋아요</dd>
+								
+								<dt>피부고민</dt>
+								<dd>보습에 좋아요</dd>
+								
+								<dt>자극도</dt>
+								<dd>자극없이 순해요</dd>
+								
+							</dl>
+						
+						</div>
+
+					</div>
+					<!-- 스크롤 부분 :: e -->
+					<div class="rw-box__bottom">
+						<div class="rw-box__help">
+							<button type="button" class="common-event-help unlike" id="gdas_23102015" onclick="goods.gdas.setRecommGdasToggle('23102015',  'N');">
+								<span>도움이 돼요</span>
+								<span class="num">
+                                 30
+							</span>
+							</button>
+							<input type="hidden" name="recommCnt_23102015" value="30">
+						</div>
+						<button type="button" class="rw-box__help-btn" onclick="mypage.reviewerInfo.goDclPop('23102015', 'A000000162323', '001', 'N');">신고하기</button>
+					</div>
+					<!-- 추가 :: e -->
+				</div>
+				<!-- rw-box :: 누적 리뷰 부분에서 반복되었던 부분  끝 -->
+			</div>
+		</div>
+	
+	</div>
+	<!-- 리뷰어 프로필 전체 부분 끝 -->
+</div>
+</div>
+</div>
+				
+				
+				
 				<!-- brandBox line -->
 				<div class="brandBox" id="sub_gbn_cate">
 					<div class="head">
@@ -2132,7 +2332,23 @@ $('#tablist').slick({
 	});
 */
 </script>
-
+<script>
+/*
+//모달 열기 함수
+<script>
+   function modalcall() {
+    $( "#review-detail-view" ).dialog({
+      modal: true,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  }
+   */
+  </script>
+</script>
 
 
 </html>

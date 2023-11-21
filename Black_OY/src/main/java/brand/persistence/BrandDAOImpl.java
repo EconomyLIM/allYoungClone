@@ -10,6 +10,7 @@ import java.util.List;
 
 
 import com.util.ConnectionProvider;
+import com.util.DBConn;
 import com.util.JDBCUtil;
 
 import brand.domain.BrandDTO;
@@ -124,9 +125,9 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
       Connection conn =  ConnectionProvider.getConnection(); 
 
       ResultSet rs = null;
-
+      PreparedStatement preparedStatement = null;
       try {
-         PreparedStatement preparedStatement = conn.prepareStatement(sql);
+    	  preparedStatement = conn.prepareStatement(sql);
          
          preparedStatement.setString(1,brandId);
 
@@ -164,6 +165,7 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
       } finally {
          rs.close();
         conn.close();
+        
        
       }// try_catch
       return list;
@@ -262,6 +264,7 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
          e.printStackTrace();
       } finally {
       rs.close();
+      conn.close();
        
       }
 
