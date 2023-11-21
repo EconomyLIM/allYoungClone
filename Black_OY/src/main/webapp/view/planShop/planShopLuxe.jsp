@@ -24,6 +24,7 @@
 	z-index: 998; /* 모달보다 한 단계 낮은 z-index */
 }
 </style>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>
 <script>
 	function handleMenuClick(id, event) {
@@ -683,6 +684,24 @@ translateX(
 	</div>
 
 	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	
+	<script>
+  var swiper = new Swiper('.swiper_curation', {
+    slidesPerView: '1', // 화면에 보여질 슬라이드 수 (여러 개의 슬라이드가 화면에 보이도록 설정)
+    //spaceBetween: 30, // 슬라이드 간 간격
+    loop: true, // 무한 루프
+    navigation: {
+        nextEl: '.swiper01-button-next', // 다음 버튼 선택자
+        prevEl: '.swiper01-button-prev', // 이전 버튼 선택자
+      }
+      
+  });
+  
+
+
+  
+
+</script>
 </body>
 
 

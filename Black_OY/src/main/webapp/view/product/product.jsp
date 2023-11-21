@@ -78,8 +78,9 @@ $(function () {
 	/* */
 	
 	$('.btnCalc.plus').on('click', function(event) {
-		var totalPrice = parseInt($('#totalPrcTxt').text());
-
+		var totalPrice = $('#totalPrcTxt').text();
+		totalPrice = parseInt(totalPrice.replace(/,/g, ''), 10);
+		
 		event.preventDefault();
 		var inputElement = $(this).prev();
 		var currentValue = parseInt(inputElement.val());
@@ -88,8 +89,14 @@ $(function () {
 	        
 	        var div = $(this).closest('.prd_cnt_box');
 	        var price = $(div).find('.option_price > .tx_num').text();
+	        price = parseInt(price.replace(/,/g, ''), 10);
+	        if (isNaN(price)) {
+	        	price = ${pLists[0].afterPrice};	
+			}
+	        
 	        totalPrice += price*1;
-
+	        
+	        console.log(totalPrice)
 	        $('.tx_cont > .tx_num').text(totalPrice);
 	    } else {
 	        alert("총 10개까지만 구매할 수 있습니다.");
@@ -100,7 +107,8 @@ $(function () {
 		/* */
 	$('.btnCalc.minus').on('click', function(event) {
 		
-		var totalPrice = parseInt($('#totalPrcTxt').text());
+		var totalPrice = $('#totalPrcTxt').text();
+		totalPrice = parseInt(totalPrice.replace(/,/g, ''), 10);
 		event.preventDefault();
 		var inputElement =  $(this).next();
 	    var currentValue = parseInt(inputElement.val());
@@ -108,9 +116,15 @@ $(function () {
 	        inputElement.val(currentValue - 1);
 	        var div = $(this).closest('.prd_cnt_box');
 	        var price = $(div).find('.option_price > .tx_num').text();
+	        price = parseInt(price.replace(/,/g, ''), 10);
+	        
+	        if (isNaN(price)) {
+	        	price = ${pLists[0].afterPrice};	
+			}
+	        
 	        totalPrice -= price*1;
 	        
-
+			
 	        $('.tx_cont > .tx_num').text(totalPrice);
 	    } else {
 	        alert("1개 이상부터 구매할 수 있는 상품입니다.");
@@ -250,9 +264,11 @@ function Test2() {
 		$('.btn_opt_del').on('click', function(event) {
 			 event.preventDefault(); 
 			 
-			var totalPrice = parseInt($('#totalPrcTxt').text());
+			 var totalPrice = $('#totalPrcTxt').text();
+			 totalPrice = parseInt(totalPrice.replace(/,/g, ''), 10);
 			 
 			var price = $(this).closest('.prd_cnt_box').find('.option_price .tx_num').text();
+			 price = parseInt(price.replace(/,/g, ''), 10);
 			
 			var cnt = $(this).closest('.prd_cnt_box').find('.tx_num').val();
 			
@@ -271,7 +287,8 @@ function Test2() {
 	function displayDiv(Id) {
 		 event.preventDefault();
 
-		 var totalPrice = parseInt($('#totalPrcTxt').text());
+		 var totalPrice = $('#totalPrcTxt').text();
+		 totalPrice = parseInt(totalPrice.replace(/,/g, ''), 10);
 		 
 		 
 		 $('div #'+Id).css('display', 'block');
@@ -285,6 +302,7 @@ function Test2() {
 		        // 총합 금액 업데이트문 
 		        var div = $('.prd_cnt_box');
 		        var price = $('div #'+ Id +' .cont_area .option_price > .tx_num').text();
+		        price = parseInt(price.replace(/,/g, ''), 10);
 		        totalPrice += price*1;
 		        
 		        $('.tx_cont > .tx_num').text(totalPrice);
@@ -299,7 +317,8 @@ function Test2() {
 	
 	function deleteDiv(event, Id) {
 		alert('123');
-		 var totalPrice = parseInt($('#totalPrcTxt').text());
+		 var totalPrice = $('#totalPrcTxt').text();
+		 totalPrice = parseInt(totalPrice.replace(/,/g, ''), 10);
 		 alert(totalPrice);
 		 $('div #'+Id).css('display', 'none');
 		
@@ -312,6 +331,7 @@ function Test2() {
 		        // 총합 금액 업데이트문 
 		 var div = $('.prd_cnt_box');
 		 var price = $('div #'+ Id +' .cont_area .option_price > .tx_num').text();
+		 price = parseInt(price.replace(/,/g, ''), 10);
 		  totalPrice -= price*inputElement;
 		        
 		 $('.tx_cont > .tx_num').text(totalPrice);
@@ -324,6 +344,7 @@ function Test2() {
 $(function() {
 	$('#deliveDay').on('click', function() {
 		$('.option_add_area.pkg_goods_n').css('display','none');
+		$('.prd_cnt_box.no_prom').css('display','none');
 		$('.option_cnt_box input').val(0);
 		$('.tx_cont > .tx_num').text(0);
 	})// deliveDay
@@ -1427,12 +1448,12 @@ RemoveSessionServlet?sessionName='
 									<div class="cont_area">
 										<span class="option_cnt_box">
 											<button class="btnCalc minus"
-												onclick="">수량
+												>수량
 												1감소</button> <input type="text" id="cartCnt"
 											name="cartCnt" value="1" class="tx_num"
 											title="구매수량">
 											<button class="btnCalc plus"
-												onclick="">수량
+												>수량
 												1증가</button>
 										</span>
 									</div>
@@ -3695,6 +3716,11 @@ $(function(){
 	function slide(index){
 		$('.slider-nav').slick('goTo', index);
 	}
+	
+	function addComma(value){
+        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return value; 
+    }
 	</script>
 </body>
 </html>

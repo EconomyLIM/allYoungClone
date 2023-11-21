@@ -17,6 +17,7 @@
 <script src="/Black_OY/js/head.js"></script>
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <link rel="stylesheet" href="/Black_OY/css/brand.css">
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
@@ -2093,7 +2094,7 @@ jQuery(document).ready(function($) {
 	$('#bestTabSwiper').slick({
 	   slidesToShow: 1,
 	   slidesToScroll: 1,
-	   arrow: true,
+	   arrows: true,
 	   draggable: true
 	});
 	})

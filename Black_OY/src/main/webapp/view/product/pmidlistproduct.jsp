@@ -88,6 +88,12 @@ if(request.getParameter("perPage")!= null){
 </head>
 <script>
 $(function () {
+	
+	if (${param.plusButtonFlag eq 'Y'}) {
+		$('.cate_brand_box').addClass("more_view")
+	}
+	
+	
 	console.log(window.location.href);
 	$(".loc_history>li").mouseover(function () {
 		$(this).addClass("active");
@@ -151,20 +157,31 @@ $(function () {
     	var url = "/Black_OY/view/product/pmidlistproduct.do?displNum="+'<%=midId%>'+"&sort=${param.sort}&currentpage=1<%=s%>";
     	console.log(url);
         var brandID = $(this).val();
-
+		var plusButtonFlag = "&plusButtonFlag=Y";
+		const brandBox = $('.cate_brand_box');
         if ($(this).is(':checked')) {
             // 체크박스가 체크되었을 때
             if (url.indexOf('brandId=' + brandID) === -1) {
                 // 파라미터가 없으면 파라미터 추가
                 var separator = url.indexOf('?') !== -1 ? '&' : '?';
-                window.location.href = url + separator + 'brandId=' + brandID;
+                if (brandBox.hasClass('more_view')) {
+                	window.location.href = url + separator + 'brandId=' + brandID + plusButtonFlag;
+				}else{
+					window.location.href = url + separator + 'brandId=' + brandID;
+				}
+                
             }
         } else {
             // 체크박스가 해제되었을 때
             if (url.indexOf('brandId=' + brandID) !== -1) {
                 // 파라미터가 있으면 파라미터 삭제
                 var newUrl = url.replace(new RegExp('[?&]brandId=' + brandID), '');
-                window.location.href = newUrl;
+                if (brandBox.hasClass('more_view')) {
+                	window.location.href = newUrl + plusButtonFlag;
+				}else{
+					window.location.href = newUrl;
+				}
+                
             }
         }
     })   
