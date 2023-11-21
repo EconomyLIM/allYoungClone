@@ -77,7 +77,7 @@ $(function () {
 	
 	/* */
 	
-	$('.btnCalc.plus').on('click', function(event) {
+	$('.prd_cnt_box:not(.disabled) .btnCalc.plus').on('click', function(event) {
 		var totalPrice = $('#totalPrcTxt').text();
 		totalPrice = parseInt(totalPrice.replace(/,/g, ''), 10);
 		
@@ -105,7 +105,7 @@ $(function () {
 	    }
 	})
 		/* */
-	$('.btnCalc.minus').on('click', function(event) {
+	$('.prd_cnt_box:not(.disabled) .btnCalc.minus').on('click', function(event) {
 		
 		var totalPrice = $('#totalPrcTxt').text();
 		totalPrice = parseInt(totalPrice.replace(/,/g, ''), 10);
@@ -1188,8 +1188,8 @@ $(function () {
 				<div class="left_area">
 					<div class="prd_img">
 						<img id="mainImg" src="${proDImg[0].proDImgSrc }" alt="상품명 이미지"
-							onerror=""> <input type="hidden"
-							id="mainImgSize" value="550">
+							onerror=""> <input type="hidden" id="mainImgSize"
+							value="550">
 
 						<div class="prd-option-name">
 							<!-- 노출 시 is-active class 추가 -->
@@ -1219,12 +1219,10 @@ $(function () {
 						<!-- 위치 변경 <p><a href="#" class="btn_off_store" data-rel="layer" data-target="offlineStore">올리브영 오프라인 매장 재고확인</a></p>-->
 						<p>
 							<!-- 							<strong>공유하기</strong> -->
-							<a href=""
-								class="link_social kakao goods_share_kakao">카카오톡 공유하기(새창)</a> <a
-								href=""
-								class="link_social facebook goods_share_facebook">페이스북
+							<a href="" class="link_social kakao goods_share_kakao">카카오톡
 								공유하기(새창)</a> <a href=""
-								class="link_social url goods_share_url">URL공유하기</a>
+								class="link_social facebook goods_share_facebook">페이스북
+								공유하기(새창)</a> <a href="" class="link_social url goods_share_url">URL공유하기</a>
 						</p>
 					</div>
 					<!--// 고객 만족도 및 공유, 재고확인 -->
@@ -1239,10 +1237,10 @@ $(function () {
 						<p class="prd_name">${pLists[0].displName }</p>
 						<!-- 202005 상품개선 : 추가 -->
 						<div class="price">
-							<span class="price-1"> <strike><fmt:formatNumber value="${pLists[0].lowPrice}" pattern="#,###" /> </strike>
-								<span>원</span>
-							</span> <span class="price-2"> <strong><fmt:formatNumber value="${pLists[0].afterPrice}" pattern="#,###" /></strong>
-								<span>원</span>
+							<span class="price-1"> <strike><fmt:formatNumber
+										value="${pLists[0].lowPrice}" pattern="#,###" /> </strike> <span>원</span>
+							</span> <span class="price-2"> <strong><fmt:formatNumber
+										value="${pLists[0].afterPrice}" pattern="#,###" /></strong> <span>원</span>
 							</span>
 							<c:if
 								test="${not empty productPromo.promoDId or not empty productPromo.promoCId}">
@@ -1255,13 +1253,15 @@ $(function () {
 								<div class="detail">
 									<div class="list">
 										<div class="flex-item">
-											<span class="label">판매가</span> <span class="price"><fmt:formatNumber value="${pLists[0].lowPrice}" pattern="#,###" /><em>원</em></span>
+											<span class="label">판매가</span> <span class="price"><fmt:formatNumber
+													value="${pLists[0].lowPrice}" pattern="#,###" /><em>원</em></span>
 										</div>
 										<c:if test="${not empty productPromo.promoDId}">
 											<div class="price_child">
 												<div class="flex-item">
 													<span class="label">세일 (${productPromo.promoDS} ~
-														${productPromo.promoDE })</span> <span class="price"><fmt:formatNumber value="${productPromo.promoDdis}" pattern="#,###" /><em>원</em></span>
+														${productPromo.promoDE })</span> <span class="price"><fmt:formatNumber
+															value="${productPromo.promoDdis}" pattern="#,###" /><em>원</em></span>
 												</div>
 											</div>
 										</c:if>
@@ -1270,7 +1270,8 @@ $(function () {
 												<div class="flex-item">
 													<span class="label">${productPromo.promoCName }
 														(${productPromo.promoCS}~ ${productPromo.promoCE})</span> <span
-														class="price">-<fmt:formatNumber value="${productPromo.cpdis}" pattern="#,###" /><em>원</em></span>
+														class="price">-<fmt:formatNumber
+															value="${productPromo.cpdis}" pattern="#,###" /><em>원</em></span>
 												</div>
 											</div>
 										</c:if>
@@ -1278,7 +1279,8 @@ $(function () {
 									<div class="list">
 										<div class="flex-item">
 											<span class="label"><b>최적가</b></span> <span
-												class="price total"><fmt:formatNumber value="${pLists[0].afterPrice}" pattern="#,###" /><em>원</em></span>
+												class="price total"><fmt:formatNumber
+													value="${pLists[0].afterPrice}" pattern="#,###" /><em>원</em></span>
 										</div>
 									</div>
 								</div>
@@ -1394,22 +1396,49 @@ $(function () {
 								<ul class="sel_option_list new" id="option_list">
 									<!-- 혜택 아이콘 li 분기 시작 -->
 									<c:forEach items="${pLists}" var="pll">
-										<li class="type1"><a style="cursor: pointer" href="#"
-											id="LinkId${pll.proId}"
+										<li
+											class="type1 <c:if test="${pll.proStock eq 0 }">soldout</c:if>">
+
+											<a style="cursor: pointer" href="#" id="LinkId${pll.proId}"
 											onclick="displayDiv('${pll.proId}'); Test2();"> <span
 												class="color"> <img alt="상품이미지" src="${pll.proImg}">
 											</span>
 												<div class="set">
-													<span class="option_value"> ${pll.proName} <span
-														class="option_price"> <span class="tx_num">
-														<fmt:formatNumber value="${pll.pafterPrice}" pattern="#,###" />원</span>
-													</span>
-													</span>
-													<c:if test="${pll.stock eq 1}">
-														<span class="icon_flag delivery">오늘드림</span>
+													<c:if test="${pll.proStock ne 0 }">
+														<span class="option_value"> ${pll.proName} <span
+															class="option_price"> <span class="tx_num">
+																	<fmt:formatNumber value="${pll.pafterPrice}"
+																		pattern="#,###" />원
+															</span>
+														</span>
+														</span>
+														<c:if test="${pll.stock eq 1}">
+															<span class="icon_flag delivery">오늘드림</span>
+														</c:if>
+													</c:if>
+													<c:if test="${pll.proStock eq 0 }">
+
+														<span class="option_value">(품절) ${pll.proName}</span>
+														<div class="btn_restock">
+															<button
+																onclick="common.openStockAlimPop('A000000192957','001');"
+																class="restock_alarm">
+																<span
+																	data-attr="상품상세^재입고알림^[한정기획] 에스티 로더 갈색병 30ml 기획 (2023 홀리데이 에디션) "
+																	data-trk="/">재입고알림</span>
+															</button>
+															<button
+																onclick="javascript:goods.detail.restockMorePop('887167665972');"
+																class="restock_more">
+																<span>추천상품보기</span>
+															</button>
+
+														</div>
 													</c:if>
 												</div>
-										</a></li>
+										</a>
+
+										</li>
 									</c:forEach>
 									<!-- 혜택 아이콘 li 분기 시작 -->
 
@@ -1453,7 +1482,9 @@ $(function () {
 										</div>
 										<div class="cont_area">
 											<span class="option_price"> <span class="tx_num">
-											<fmt:formatNumber value="${pli.pafterPrice}" pattern="#,###" /></span>원
+													<fmt:formatNumber value="${pli.pafterPrice}"
+														pattern="#,###" />
+											</span>원
 											</span> <a href="#" class="btn_opt_del">선택한 옵션 삭제</a>
 										</div>
 									</div>
@@ -1470,20 +1501,18 @@ $(function () {
 								<input type="hidden" id="pro_id" value="${list.proId}" />
 							</c:forEach>
 							<div class="option_add_area">
-								<div class="prd_cnt_box">
+								<div
+									class="prd_cnt_box <c:if test="${pLists[0].proStock eq 0 }">disabled</c:if>">
+
 									<div class="tit_area">
 										<span>구매수량</span>
 									</div>
 									<div class="cont_area">
 										<span class="option_cnt_box">
-											<button class="btnCalc minus"
-												>수량
-												1감소</button> <input type="text" id="cartCnt"
-											name="cartCnt" value="1" class="tx_num"
-											title="구매수량">
-											<button class="btnCalc plus"
-												>수량
-												1증가</button>
+											<button class="btnCalc minus">수량 1감소</button> <input
+											type="text" id="cartCnt" name="cartCnt" value="1"
+											class="tx_num" title="구매수량">
+											<button class="btnCalc plus">수량 1증가</button>
 										</span>
 									</div>
 								</div>
@@ -1495,15 +1524,13 @@ $(function () {
 							<span class="tx_tit">상품금액 합계</span> <input type="hidden"
 								id="totalCnt" value="1" name="totalCnt"> <input
 								type="hidden" id="totalPrc" value="17000" name="totalPrc">
-							<span class="tx_cont">
-								<span class="tx_num"
-								id="totalPrcTxt">
-								<c:if test="${pLists.size() eq 1 }"><%-- <fmt:formatNumber value="${pLists[0].afterPrice}" pattern="#,###" /> --%>
+							<span class="tx_cont"> <span class="tx_num"
+								id="totalPrcTxt"> <c:if test="${pLists.size() eq 1 }">
+										<%-- <fmt:formatNumber value="${pLists[0].afterPrice}" pattern="#,###" /> --%>
 								${pLists[0].afterPrice}
+								</c:if> <c:if test="${pLists.size() ne 1 }">0
 								</c:if>
-								<c:if test="${pLists.size() ne 1 }">0
-								</c:if>
-								</span>원
+							</span>원
 							</span>
 
 						</div>
@@ -1533,10 +1560,8 @@ $(function () {
 
 							<div class="today_dvArea">
 								<div class="today_dvArea_inner">
-									<a
-										href="#"
-										class="btn_noDv" style="display: none;">+ 배송지 추가</a> <a
-										href="#" class="btn_todayDV">
+									<a href="#" class="btn_noDv" style="display: none;">+ 배송지
+										추가</a> <a href="#" class="btn_todayDV">
 										<dl>
 
 										</dl>
@@ -1572,18 +1597,39 @@ $(function () {
 						<!-- 20191213 e -->
 
 						<div class="prd_btn_area new-style type1">
-							<button class="btnBasket  goods_cart" id="btnBasket"
-								data-attr="상품상세^주문유형^장바구니">장바구니</button>
-							<!-- <button class="btnBuy goods_buy" id="cartBtn" onClick="javascript:goods.detail.bindBtnBuy();">구매하기</button> -->
+							<c:if test="${pLists.size() eq 1}">
+								<c:choose>
+									<c:when test="${pLists[0].proStock eq 0 }">
+										<button class="btnSoldout recoPopBtn temprecobell">
+											일시품절
+											<div class="moreBtn">
+												<span>추천상품보기</span>
+											</div>
+										</button>
+										<button class="goods_buy btnReStock" style="display: block;"
+											onclick="javascript:;" data-attr="상품상세^재입고알림신청^가히 멀티밤 리필_클릭"
+											data-trk="/Cat100000100010009_Small">재입고 알림신청</button>
+									</c:when>
+									<c:otherwise>
+										<button class="btnBasket  goods_cart" id="btnBasket"
+											data-attr="상품상세^주문유형^장바구니">장바구니</button>
+										<button class="btnBuy goods_buy" id="cartBtn"
+											data-attr="상품상세^주문유형^바로구매">바로구매</button>
+										<button class="btnGift goods_gift">선물하기</button>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+							<c:if test="${pLists.size() > 1}">
+								<button class="btnBasket  goods_cart" id="btnBasket"
+									data-attr="상품상세^주문유형^장바구니">장바구니</button>
+								<!-- <button class="btnBuy goods_buy" id="cartBtn" onClick="javascript:goods.detail.bindBtnBuy();">구매하기</button> -->
+								<button class="btnBuy goods_buy" id="cartBtn"
+									data-attr="상품상세^주문유형^바로구매">바로구매</button>
+								<button class="btnGift goods_gift">선물하기</button>
+							</c:if>
 
-							<button class="btnBuy goods_buy" id="cartBtn"
-								data-attr="상품상세^주문유형^바로구매">바로구매</button>
-							<button class="btnGift goods_gift">선물하기</button>
-							<button class="btnSoldout dupItem goods_cart"
-								style="display: none;" onclick="javascript:;">일시품절</button>
-							<button class="goods_buy btnReStock" style="display: none;"
-								onclick="javascript:;" data-attr="상품상세^재입고알림신청^가히 멀티밤 리필_클릭"
-								data-trk="/Cat100000100010009_Small">재입고 알림신청</button>
+
+
 							<button class="btnZzim  goods_wish"
 								data-ref-goodsno="A000000175060"
 								data-attr="상품상세^상품좋아요^가히 멀티밤 리필_1">찜하기전</button>
@@ -1686,8 +1732,9 @@ $(function () {
 					<!-- 202005 상품개선 : 브랜드 좋아요 추가 -->
 					<div class="brand_like">
 						<p class="inner">
-							<a href="<%=contextPath%>/brand/product.do?brand_id=${detailBrandDTO.brandId }" id="moveBrandShop_like"
-								class="link arr goods_brand"> <!-- 								<span class="img" style="background-image:url('/pc-static-root/image/product/img_brand_default.png')"></span> -->
+							<a
+								href="<%=contextPath%>/brand/product.do?brand_id=${detailBrandDTO.brandId }"
+								id="moveBrandShop_like" class="link arr goods_brand"> <!-- 								<span class="img" style="background-image:url('/pc-static-root/image/product/img_brand_default.png')"></span> -->
 								<span class="logo"
 								style="background-image:url('${detailBrandDTO.brandLogoSrc}')"></span>
 								<em>${detailBrandDTO.brandName } 브랜드관</em>
@@ -1708,90 +1755,83 @@ $(function () {
 				<c:set value="${morelist[0].cat_m_name }" var="i" />
 				<h4 class="tit_h4 title_a002">
 					이런 <strong>${i }</strong> 상품은 어때요?
-					<button class="moreBtn" id="crt_more_a002"
-						>
+					<button class="moreBtn" id="crt_more_a002">
 						<span>더보기</span>
 					</button>
 				</h4>
 
 
 				<div class="inner_cont" role="toolbar">
-					<ul
-						class="curation_basket slide_list slick_slider"
+					<ul class="curation_basket slide_list slick_slider"
 						id="goods_curation_a002">
 						<!-- <button type="button" data-role="none"
 							class="slick-prev slick-arrow" aria-label="Previous"
 							role="button" style="display: block;">Previous</button> -->
 
-						
-								
-								<c:forEach items="${morelist }" var="morelist">
-								
-								<li data-wlog_type="a002">
-									<div class="thum" data-ref-goodsno="A000000188968"
-										data-egrank="1" data-egcode="" data-attr="null"
-										data-trk="null"
-										data-impression=""
-										data-tracking-param=""
-										data-ref-dispcatno="" data-ref-itemno=""
-										data-impression-visibility="1">
-										<span class="thumb_flag best">베스트</span><img
-											src="${morelist.PRO_DISPL_SRC }"
-											alt="이미지 준비중">
-										<div class="my">
-											<button type="button" class="myCart cartBtnRecoBell"
-												data-ref-goodsno="A000000188968" name=""
-												data-ref-dispcatno="90000010001" data-ref-itemno="001"
-												data-rccode="pc_detail_01_a" tabindex="0">
-												<span>장바구니</span>
-											</button>
-											<button type="button" class="mySee btn_zzim"
-												data-ref-goodsno="A000000188968" tabindex="0">
-												<span>찜하기전</span>
-											</button>
-										</div>
-									</div>
-									<div class="info">
-										<a
-											href=""
-											class="a_detail" name="Curation1"
-											data-ref-goodsno="" data-egrank="1"
-											data-egcode="a002_a002"
-											data-attr=""
-											data-trk="/"
-											data-tracking-param=""
-											data-ref-dispcatno="" data-ref-itemno="001"
-											tabindex="0"><dl>
-												<dt class="tit">${morelist.PRO_DISPL_NAME}</dt>
-												<dd class="price">
-													<del><fmt:formatNumber value="${ morelist.PROPRICE}" pattern="#,###" />원</del>
-													<strong><fmt:formatNumber value="${morelist.AFTERPRICE}" pattern="#,###" />원</strong>
-												</dd>
-												<dd class="icon">
-													<c:if test="${morelist.PDC eq 1}">
-															<span class="icon_flag sale">세일</span>
-														</c:if>
-														<c:if test="${morelist.PRC eq 1}">
-															<span class="icon_flag coupon">쿠폰</span>
-														</c:if>
-														<c:if test="${morelist.PMP eq 1 }">
-															<span class="icon_flag gift">증정</span>
-														</c:if>
-														<c:if test="${morelist.STOCK > 0}">
-															<span class="icon_flag delivery">오늘드림</span>
-														</c:if>
-												</dd>
-											</dl></a>
-									</div>
 
-								</li>
-								
-								</c:forEach>
+
+						<c:forEach items="${morelist }" var="morelist">
+
+							<li data-wlog_type="a002">
+								<div class="thum" data-ref-goodsno="A000000188968"
+									data-egrank="1" data-egcode="" data-attr="null" data-trk="null"
+									data-impression="" data-tracking-param="" data-ref-dispcatno=""
+									data-ref-itemno="" data-impression-visibility="1">
+									<span class="thumb_flag best">베스트</span><img
+										src="${morelist.PRO_DISPL_SRC }" alt="이미지 준비중">
+									<div class="my">
+										<button type="button" class="myCart cartBtnRecoBell"
+											data-ref-goodsno="A000000188968" name=""
+											data-ref-dispcatno="90000010001" data-ref-itemno="001"
+											data-rccode="pc_detail_01_a" tabindex="0">
+											<span>장바구니</span>
+										</button>
+										<button type="button" class="mySee btn_zzim"
+											data-ref-goodsno="A000000188968" tabindex="0">
+											<span>찜하기전</span>
+										</button>
+									</div>
+								</div>
+								<div class="info">
+									<a href="" class="a_detail" name="Curation1"
+										data-ref-goodsno="" data-egrank="1" data-egcode="a002_a002"
+										data-attr="" data-trk="/" data-tracking-param=""
+										data-ref-dispcatno="" data-ref-itemno="001" tabindex="0"><dl>
+											<dt class="tit">${morelist.PRO_DISPL_NAME}</dt>
+											<dd class="price">
+												<del>
+													<fmt:formatNumber value="${ morelist.PROPRICE}"
+														pattern="#,###" />
+													원
+												</del>
+												<strong><fmt:formatNumber
+														value="${morelist.AFTERPRICE}" pattern="#,###" />원</strong>
+											</dd>
+											<dd class="icon">
+												<c:if test="${morelist.PDC eq 1}">
+													<span class="icon_flag sale">세일</span>
+												</c:if>
+												<c:if test="${morelist.PRC eq 1}">
+													<span class="icon_flag coupon">쿠폰</span>
+												</c:if>
+												<c:if test="${morelist.PMP eq 1 }">
+													<span class="icon_flag gift">증정</span>
+												</c:if>
+												<c:if test="${morelist.STOCK > 0}">
+													<span class="icon_flag delivery">오늘드림</span>
+												</c:if>
+											</dd>
+										</dl></a>
+								</div>
+
+							</li>
+
+						</c:forEach>
 
 						<!-- <button type="button" data-role="none"
 							class="slick-next slick-arrow" aria-label="Next" role="button"
 							style="display: block;">Next</button> -->
-						
+
 					</ul>
 					<input type="hidden" id="goodsCnt" name="goodsCnt" value="12">
 				</div>
@@ -1837,8 +1877,7 @@ $(function () {
 					<a
 						href="https://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000102700126&amp;trackingCd=Banner"
 						data-attr="상품상세^MD공지배너^100000100010008,100000100010009,100000100010010_클릭"
-						data-trk="/Cat100000100010009_Small"
-						> <img
+						data-trk="/Cat100000100010009_Small"> <img
 						src="https://image.oliveyoung.co.kr/uploads/images/display/9000003/396/3903698812558035257.jpg"
 						alt="100000100010008,100000100010009,100000100010010">
 					</a>
@@ -2063,14 +2102,13 @@ $(function () {
 
 						<a href="javascript:;" id="ALL" class="sel_option item"> <span
 							class="opt"><img src="${proDImg[0].proDImgSrc }"
-								onerror=""></span> <span class="txt">전체</span>
-							<!-- ## 리뷰 고도화 1차 ## -->
+								onerror=""></span> <span class="txt">전체</span> <!-- ## 리뷰 고도화 1차 ## -->
 						</a>
 						<ul class="sel_option_list scrbar">
 							<li><a href="javascript:;" class="item" title="전체"> <span
 									class="opt"><img src="${proDImg[0].proDImgSrc }"
-										onerror=""></span> <span class="txt">전체</span>
-									<span class="num"><em>2379</em>건</span> <input type="hidden"
+										onerror=""></span> <span class="txt">전체</span> <span
+									class="num"></span> <input type="hidden"
 									name="gdasItemNo" value="ALL"> <input type="hidden"
 									name="gdasLgcGoodsNo" value="ALL">
 							</a></li>
@@ -2078,11 +2116,9 @@ $(function () {
 								<li optgoodsinfo="${pll.proId }">
 									<!-- ## 리뷰고도화 2차## 본상품+연관상품 적용시 필요값 (상품번호:아이템번호)--> <a
 									href="javascript:;" class="item" title="${pll.proName }"> <span
-										class="opt"> <img src="${pll.proImg }"
-											onerror="">
+										class="opt"> <img src="${pll.proImg }" onerror="">
 
-									</span> <span class="txt">${pll.proName }</span> <span class="num"><em
-											class="txt_en">691</em>건</span> <input type="hidden"
+									</span> <span class="txt">${pll.proName }</span> <span class="num"></span> <input type="hidden"
 										name="gdasItemNo" value="${pll.proId }"> <input
 										type="hidden" name="gdasLgcGoodsNo" value="${pll.proId }">
 
@@ -2599,8 +2635,7 @@ $(function () {
 											data-attr="상품상세^포토모아보기^포토더보기"> <span> <!-- ## 리뷰 고도화 1차 ## -->
 													<span><em>더보기</em></span> <!-- ## 리뷰 고도화 1차 ## onload , errorResizeImg -->
 													<img src="${img.rev_img_src }" class="thum"
-													data-value="23722172_2" alt="" data-state=""
-													>
+													data-value="23722172_2" alt="" data-state="">
 											</span>
 
 										</a>
@@ -2661,8 +2696,7 @@ $(function () {
 												src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2023/11/04/1699105876598.png"
 												style="display: none;">
 												<div class="thum">
-													<span class="bg"></span> <img
-														src="${review.user_img }"
+													<span class="bg"></span> <img src="${review.user_img }"
 														class="profileThum_s"
 														style="background: url(https://static.oliveyoung.co.kr/pc-static-root/image/comm/my_picture_base.jpg) no-repeat 0 0; background-size: 60px">
 												</div>
@@ -2682,13 +2716,13 @@ $(function () {
 												<!--피부 컨디션이 -->
 												<!--<strong _tmplitem="143" >-->
 												<!-- ## 리뷰 고도화 1차 ## : 위치 변경 및 마크업 변경 -->
-												<span>${review.skintype_title }</span> <span>${review.skintone_title}</span> 
+												<span>${review.skintype_title }</span> <span>${review.skintone_title}</span>
 												<c:forEach items="${skinlists }" var="skinlist">
 													<c:forEach items="${skinlist }" var="skintrb">
 														<c:if test="${skintrb.user_id eq review.user_id }">
-												<span>${skintrb.skintrb_title }</span>
-												</c:if>
-												</c:forEach>
+															<span>${skintrb.skintrb_title }</span>
+														</c:if>
+													</c:forEach>
 												</c:forEach>
 												<!--</strong>-->
 											</p>
@@ -2781,9 +2815,8 @@ $(function () {
 
 														<c:if test="${img.rev_id eq review.rev_id }">
 															<li><a href="#" data-attr="상품상세^포토리뷰^포토 클릭^1"><span><img
-																		src="${img.rev_img_src }"
-																		
-																		data-value="23082403_1" class="thum" alt=""></span></a></li>
+																		src="${img.rev_img_src }" data-value="23082403_1"
+																		class="thum" alt=""></span></a></li>
 														</c:if>
 													</c:forEach>
 												</c:forEach>
@@ -2893,8 +2926,6 @@ $(function () {
 													tabindex="0"> <img alt="" name="23745102"
 													data-attr="상품상세^포토상세^포토상세이동_포토"
 													data-value="23745102_2_23727075_1"
-													
-													
 													src="${img.rev_img_src }">
 											</div>
 										</c:forEach>
@@ -2915,9 +2946,7 @@ $(function () {
 												onclick="goods.gdas.handleClickReviewPhotoDetailReviewerProfile('aTJNaDhBM0V5QStaeWYrWXdXaWFPZz09', {t_page: '포토상세', t_click: '리뷰포토상세_리뷰어프로필', t_profile_name: 'Mizthecat', goodsNo: 'A000000190051', goodsname: '[윈터 PICK] 마몽드 포어 슈링커 바쿠치올 크림 60ml 단독기획 (+30ml 추가증정)', t_review_rank_name: '1172'});"
 												data-attr="상품상세^포토상세^리뷰어프로필클릭"> <img
 												src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2023/07/31/1690732966938.png"
-												onerror=""
-												style="display: none;"
-												>
+												onerror="" style="display: none;">
 												<div class="thum">
 													<span class="bg"></span> <img
 														src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2023/07/31/1690732966938.png?RS=60x79&amp;CS=60x60"
@@ -3034,22 +3063,28 @@ $(function(){
 				
 				$.ajax({
 					url: "<%=contextPath%>/olive/reviewimg.do",
-					data:data,
-					cache: false,
-					success:function( response ) {
-			              $(".info_area.scrbar").empty();
-			              $(".info_area.scrbar").append( response );
-				           		              
-			          }
-			        , error		: function() {
-			            alert( '서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.' );
-			        }
-				})
-			
-		})
-		
-})
-</script>
+																data : data,
+																cache : false,
+																success : function(
+																		response) {
+																	$(
+																			".info_area.scrbar")
+																			.empty();
+																	$(
+																			".info_area.scrbar")
+																			.append(
+																					response);
+
+																},
+																error : function() {
+																	alert('서버 데이터를 가져오지 못했습니다. 다시 확인하여 주십시오.');
+																}
+															})
+
+												})
+
+							})
+				</script>
 
 			</div>
 
@@ -3067,10 +3102,9 @@ $(function(){
 										<c:forEach items="${imglist }" var="img">
 											<li><a href="javascript:;"> <span class="thum">
 														<img style="width: 80px;" src="${img.rev_img_src }"
-														 class="review_img"
-														alt="썸네일 이미지" data-attr="상품상세^포토목록^포토 클릭"
-														data-value="${img.rev_id }" data-state=""
-														>
+														class="review_img" alt="썸네일 이미지"
+														data-attr="상품상세^포토목록^포토 클릭" data-value="${img.rev_id }"
+														data-state="">
 												</span>
 											</a></li>
 										</c:forEach>
@@ -3105,8 +3139,7 @@ $(function(){
 			<!--  ====QNA=========================================  -->
 			<div class="tabConts prd_detail_cont" id="qnaContentsArea">
 				<div class="prd_qna_tit">
-					<p 
-						style="cursor: pointer;">★ 상품 문의사항이 아닌 반품/교환관련 문의는 고객센터 1:1
+					<p style="cursor: pointer;">★ 상품 문의사항이 아닌 반품/교환관련 문의는 고객센터 1:1
 						문의를 이용해주세요.</p>
 					<button class="btnInquiry goods_qna_inquiry" onclick="">상품문의</button>
 				</div>
@@ -3524,8 +3557,8 @@ $(function(){
 		</div>
 
 		<script>
-		
-	</script>
+			
+		</script>
 		<div class="alertPop isOpen" style="display: none">
 			<p class="txt">
 				해당 상품의 배송/교환/반품 문의를 위해<br>1:1문의 게시판을 이용해주세요.
@@ -3564,9 +3597,7 @@ $(function(){
 					</button>
 				</div>
 
-				<button type="button" class="ButtonClose"
-					>팝업창
-					닫기</button>
+				<button type="button" class="ButtonClose">팝업창 닫기</button>
 			</div>
 		</div>
 
@@ -3585,16 +3616,17 @@ $(function(){
 			<strong>좋아요</strong>
 		</p>
 	</div>
+	
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	<script>
-	
-	function slide(index){
-		$('.slider-nav').slick('goTo', index);
-	}
-	
-	function addComma(value){
-        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        return value; 
-    }
+		function slide(index) {
+			$('.slider-nav').slick('goTo', index);
+		}
+
+		function addComma(value) {
+			value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			return value;
+		}
 	</script>
 </body>
 </html>

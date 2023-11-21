@@ -740,26 +740,7 @@
 				method="post">
 				<input type="hidden" id="cjssoq" name="cjssoq">
 			</form>
-			<script>
-				var ssoCheck = "null";
-				var cjssoq = "null";
-				//alert('ssocheck:'+ssoCheck);
-				//세션 정보가 없을경우 
-				if (!_isLogin || ssoCheck != 'N') {
-					//SSO 쿠키가 있고 정상적으로 토큰을 밥급받았을 경우
-					if ((typeof _cjssoEncData) != "undefined"
-							&& _cjssoEncData != "") {
-						//ajax를 사용해서 _cjssoEncData 를 처리하여 사용하셔도 무방합니다.
-						//alert("111 SSO쿠키를 조사해보니 있어서 확인하러 갑니다11."+_cjssoEncData);
-						if (_cjssoEncData != cjssoq) {
-							document.getElementById("cjssoq").value = _cjssoEncData;
-							document.ssologinfrm.submit();
-						}
-					} else {
-						//alert("222세션도 없고 쿠키도 없어서 해당 페이지로 갑니다.")
-					}
-				}
-			</script>
+			
 
 			<!-- //[3553186] 온라인몰 전시 카테고리 개편 일괄 작업 요청의 건 -->
 			<!-- 메인 카테고리 목록 -->

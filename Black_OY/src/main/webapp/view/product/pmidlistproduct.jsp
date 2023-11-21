@@ -476,6 +476,9 @@ function changePerPageAndClass(value) {
 									<a href="<%=contextPath%>/olive/productDetail.do?goodsNo=${pml.displId}&displNum=<%=midId %>" class="prd_thumb goodsList"
 										name="${pml.displId}"> <img src="${pml.displImgSrc}" alt="사진"
 										class="completed-seq-lazyload" />
+										<c:if test="${pml.prostock eq 0 }">
+										<span class="status_flag soldout">일시품절</span>
+										</c:if>
 									</a>
 									<div class="prd_name">
 										<a href="#" class="goodsList"> <span class="tx_brand">${pml.brandName}</span>

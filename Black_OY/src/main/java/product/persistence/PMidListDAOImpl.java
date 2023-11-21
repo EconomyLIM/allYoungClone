@@ -317,6 +317,7 @@ public class PMidListDAOImpl  implements PMidListDAO{
 		int displLike; // 좋아요 수
 		int ordercnt; // 주문수
 		Date proReg; // 등록일
+		int prostock; // 재고
 
 		int temp =2;
 		System.out.println(sql);
@@ -360,8 +361,8 @@ public class PMidListDAOImpl  implements PMidListDAO{
 					displLike = rs.getInt("pro_displ_like");
 					ordercnt = rs.getInt("ordercnt");
 					proReg = rs.getDate("pro_reg");
-
-					pmidlistdto = new PMidListDTO(displImgSrc, brandId, brandName, displProName, lId, midId, sId, proPrice, afterPrice, displId, productID, prc, pdc, pmp, stock, displLike, ordercnt, proReg);
+					prostock = rs.getInt("pro_stock");
+					pmidlistdto = new PMidListDTO(displImgSrc, brandId, brandName, displProName, lId, midId, sId, proPrice, afterPrice, displId, productID, prc, pdc, pmp, stock, displLike, ordercnt, proReg,prostock);
 
 					list.add(pmidlistdto);
 

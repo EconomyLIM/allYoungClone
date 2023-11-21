@@ -10,6 +10,7 @@ import basket.domain.BasketDTO;
 import basket.service.BasketListService;
 import command.CommandHandler;
 import search.domain.BrandSearchDTO;
+import search.domain.SearchDTO;
 import search.service.SearchService;
 import user.domain.LogOnDTO;
 import user.service.LogOnService;
@@ -32,7 +33,7 @@ public class SearchHandler implements CommandHandler{
 		} // try_catch
 		
 		//  1. 초기화
-		List<String> list = null;
+		List<SearchDTO> list = null;
 		SearchService searchService = SearchService.getinstance();
 		
 		BrandSearchDTO brandSearchDTO = null;

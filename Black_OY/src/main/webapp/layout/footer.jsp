@@ -7,8 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="/Black_OY/js/head.js"></script>
+
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
 </head>
@@ -18,13 +17,13 @@
 		<div class="oneConts">
 			<div class="conts">
 				<ul class="list-menu">
-					<li><a class="brandstory" href="https://www.oliveyoung.co.kr/store/company/brandStory.do">회사소개</a></li>
-					<li><a class="recruit" href="https://www.oliveyoung.co.kr/store/company/recruit.do">채용안내</a></li>
-					<li><a class="prvsuser" href="https://www.oliveyoung.co.kr/store/prvsuser/getPrvsuser.do">가맹점 개설문의</a></li>
-					<li><a class="cjoyp" href="https://oypartner.cj.net/CJOYP/prvsuser/index/index.fo" target="_blank">상품입점 및 제휴문의</a></li>
+					<li><a class="brandstory" href="#">회사소개</a></li>
+					<li><a class="recruit" href="#">채용안내</a></li>
+					<li><a class="prvsuser" href="#">가맹점 개설문의</a></li>
+					<li><a class="cjoyp" href="#" target="_blank">상품입점 및 제휴문의</a></li>
 <!-- 					<li><a class="cyberAudit" href="javascript:common.link.openCyberAudit();">사이버 감사실</a></li> -->
-					<li><a class="cyberAudit" href="javascript:common.cyber.oyLayerOpen('cyberAuditPop',this);">사이버 감사실</a></li>
-					<li><a class="faqList" href="javascript:common.faq.getFaqList('99');">고객센터</a></li>
+					<li><a class="cyberAudit" href="#">사이버 감사실</a></li>
+					<li><a class="faqList" href="#">고객센터</a></li>
 				</ul>
 				<div class="sel_family_group">
 					<a href="#" class="sel_option" title="상세내용 보기">CJ그룹 계열사 바로가기</a>

@@ -109,6 +109,10 @@ public class LikeDAOImpl implements LikeDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("> LikeDAOImpl_selectPlike() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		return list;
@@ -205,6 +209,10 @@ public class LikeDAOImpl implements LikeDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("> LikeDAOImpl_selectBlike() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		return list;

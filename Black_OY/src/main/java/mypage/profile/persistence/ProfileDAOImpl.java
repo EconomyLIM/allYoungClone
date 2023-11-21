@@ -70,7 +70,11 @@ public class ProfileDAOImpl implements ProfileDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 			System.out.println("> ProfileDAOImpl selectProfile exception");
-		} 
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		}
 		
 		return list;
 	}
@@ -106,6 +110,10 @@ public class ProfileDAOImpl implements ProfileDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 			System.out.println("> ProfileDAOImpl selectSkinTrouble exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		return list;
@@ -142,6 +150,10 @@ public class ProfileDAOImpl implements ProfileDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 			System.out.println("> ProfileDAOImpl selectIntCate() exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		return list;

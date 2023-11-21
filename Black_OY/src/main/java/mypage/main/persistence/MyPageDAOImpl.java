@@ -56,6 +56,10 @@ public class MyPageDAOImpl implements MypageDAO {
 		
 		} catch (Exception e) {
 			System.out.println("> MyPageDAOImpl_selectUserInfo() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		return list;
 	}
@@ -237,6 +241,10 @@ public class MyPageDAOImpl implements MypageDAO {
 		
 		} catch (Exception e) {
 			System.out.println("> MyPageDAOImpl_selectUserPlike() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		return list;
@@ -278,6 +286,10 @@ public class MyPageDAOImpl implements MypageDAO {
 		
 		} catch (Exception e) {
 			System.out.println("> MyPageDAOImpl_selectUserPAsk() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		return list;
 		
@@ -322,6 +334,10 @@ public class MyPageDAOImpl implements MypageDAO {
 		
 		} catch (Exception e) {
 			System.out.println("> MyPageDAOImpl_selectUserQnA() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		return list;
 	}
@@ -393,6 +409,10 @@ public class MyPageDAOImpl implements MypageDAO {
 		
 		} catch (Exception e) {
 			System.out.println("> MyPageDAOImpl_selectUserOrderStatus() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		return list;
 	}

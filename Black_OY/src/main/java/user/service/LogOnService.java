@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.util.ConnectionProvider;
+import com.util.JDBCUtil;
 
 import user.domain.LogOnDTO;
 import user.persistence.LogOnDAOImpl;
@@ -31,6 +32,8 @@ public class LogOnService {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn);
 		}
 		return logdto;
 		
@@ -47,6 +50,8 @@ public class LogOnService {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn);
 		}
 		return list;
 		

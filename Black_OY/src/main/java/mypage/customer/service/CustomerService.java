@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.util.ConnectionProvider;
+import com.util.JDBCUtil;
 
 import mypage.customer.domain.FaqDTO;
 import mypage.customer.persistence.CustomerDAO;
@@ -34,6 +35,8 @@ public class CustomerService {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn);
 		}
 		
 		return rowCount;		
@@ -49,6 +52,8 @@ public class CustomerService {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn);
 		}
 		
 		return list;	
@@ -64,6 +69,8 @@ public class CustomerService {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn);
 		}
 		
 		return list;	
@@ -79,6 +86,8 @@ public class CustomerService {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn);
 		}
 		
 		return list;	
