@@ -291,7 +291,7 @@ public class MyPageDAOImpl implements MypageDAO {
 				+ "            left join brand b on p.brand_id = b.brand_id "
 				+ "            left join pro_displ_img i on p.pro_displ_id = i.pro_displ_id "
 				+ " WHERE user_id = ? "
-				+ "    and rownum = 1 ";
+				+ " and ROWNUM <= 3 ";
 		ArrayList<MpQnADTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

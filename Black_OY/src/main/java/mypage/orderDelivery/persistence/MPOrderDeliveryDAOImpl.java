@@ -27,7 +27,7 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 	public List<MPODOrderDTO> selectUOrder(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
 		String sql = " SELECT order_id, order_date, pro_displ_src,  csid,  cmid, "
-				+ "       brand_name, pro_displ_name, pro_name, product_cnt, order_status, total_price, "
+				+ "       brand_name, pro_displ_name, pro_displ_id ,pro_name, product_cnt, order_status, total_price, "
 				+ "       refund_date, refund_status "
 				+ " FROM ( "
 				+ "    SELECT "
@@ -38,6 +38,7 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 				+ "        cm.cat_m_id cmid, "
 				+ "        brand_name, "
 				+ "        pro_displ_name, "
+				+ "		   pd.pro_displ_id, "
 				+ "        pro_name, "
 				+ "        product_cnt, "
 				+ "        order_status, "
@@ -83,6 +84,7 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 				dto.setUodcmid(rs.getString("cmid"));
 				dto.setUodBrand(rs.getString("brand_name"));
 				dto.setUodDisplN(rs.getString("pro_displ_name"));
+				dto.setUodDispId(rs.getString("pro_displ_id"));
 				dto.setUodProN(rs.getString("pro_name"));
 				dto.setUodamount(rs.getInt("product_cnt"));
 				dto.setUodorderPrice(rs.getInt("total_price"));

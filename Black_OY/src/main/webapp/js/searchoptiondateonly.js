@@ -137,6 +137,7 @@ function navigateToURL(url) {
 			var today = new Date();
 			var tyear = today.getFullYear();
 			var tMonth = today.getMonth();
+			var tday = today.getDate();
 			
 			//구매기간이라면
 			if ($(this).parents("ul").hasClass("select-month")) {
@@ -145,8 +146,11 @@ function navigateToURL(url) {
 				if (datemonth == "-12") {
 					$("#cal-start-year").val(tyear - 1).prop("selected", true);
 					$("#cal-start-month").val(tMonth + 1).prop("selected", true);
+					$("#cal-start-day").val(tday).prop("selected", true);
 				} else {				
+					$("#cal-start-year").val(tyear).prop("selected", true);
 					$("#cal-start-month").val(tMonth + 1 + Number(datemonth)).prop("selected", true);
+					$("#cal-start-day").val(tday).prop("selected", true);
 				}
 								
 			} 
@@ -169,7 +173,7 @@ function navigateToURL(url) {
 			
 			if(dateCheck()){
 				//url 작성
-				var url = urlFromJSP + "?searchMonth=" + searchMonth + "&startDate=" + startDate + "&endDate=" + endDate + "&searchOrderType=" + searchOrderType;
+				var url = urlFromJSP + "?searchMonth=" + searchMonth + "&startDate=" + startDate + "&endDate=" + endDate ;
 				
 				navigateToURL(url);
 			

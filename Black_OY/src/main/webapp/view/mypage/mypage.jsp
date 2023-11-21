@@ -166,7 +166,7 @@
 							<div class="title-area">
 								<h2 class="tit">상품Q&amp;A내역</h2>
 								<a class="btnMore" id="goodsQnaListMore"
-									href="<%-- 상품QnA 페이지 이동 --%>">더보기</a>
+									href="<%= contextPath%>/olive/productQnA.do">더보기</a>
 							</div>
 
 							<div class="list-customer">
