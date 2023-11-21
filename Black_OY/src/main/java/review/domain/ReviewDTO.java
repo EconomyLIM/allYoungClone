@@ -23,4 +23,7 @@ public class ReviewDTO {
 	private int rev_grade_2;
 	private int rev_grade_3;
 	private String pro_id;
+	private String user_img	;
+	private String skintone_title;
+	private String skintype_title;
 }

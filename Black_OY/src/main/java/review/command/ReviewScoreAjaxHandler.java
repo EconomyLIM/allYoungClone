@@ -34,7 +34,7 @@ public class ReviewScoreAjaxHandler implements CommandHandler{
 		List<ReviewImgDTO> reviewimglist = null;
 		List<List<ReviewImgDTO>> reviewimg = new ArrayList<List<ReviewImgDTO>>();
 		ReviewDTO reviewDTO = null;
-		
+		List<ReviewDTO> reviewlistall = null;
 		ReviewScoreDTO reviewScoreDTO = null;
 		try {
 			pro_displ_id = request.getParameter("displ");
@@ -60,7 +60,7 @@ public class ReviewScoreAjaxHandler implements CommandHandler{
 		ReviewService reviewService = ReviewService.getInstance();
 		reviewlist = reviewService.reviewListService(pro_displ_id, type, pro_id, currentPage, perPage);
 		reviewScoreDTO = reviewService.reviewScoreService(pro_displ_id, pro_id);
-		
+		reviewlistall = reviewService.reviewListService(pro_displ_id, pro_id);
 		try {
 				if (reviewlist != null) {
 			for (int i = 0; i < reviewlist.size(); i++) {
@@ -77,7 +77,7 @@ public class ReviewScoreAjaxHandler implements CommandHandler{
 		
 		
 		if (reviewlist != null) {
-		request.setAttribute("reviewcnt", reviewlist.size());
+		request.setAttribute("reviewcnt", reviewlistall.size());
 		request.setAttribute("reviewlist", reviewlist);
 		request.setAttribute("reviewScore", reviewScoreDTO);
 		request.setAttribute("reviewimg", reviewimg);

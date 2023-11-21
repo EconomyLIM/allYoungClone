@@ -718,10 +718,15 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 	// 상품 추천
 	@Override
 	public List<ProductMoreDTO> proMore(Connection conn, String cateM) throws Exception {
-		String sql = " select PRO_DISPL_SRC, BRAND_NAME, BRAND_ID, PRO_DISPL_NAME, PROPRICE, p.CAT_L_ID, p.CAT_M_ID, p.CAT_S_ID, AFTERPRICE, PRO_DISPL_ID, PRO_ID, PRC, PDC, PMP, STOCK, ORDERCNT, PRO_STOCK, PRO_DISPL_LIKE, PRO_REG, cat_m_name "
-				+ " from pmlistview p "
-				+ " join cate_m cm on p.cat_m_id = cm.cat_m_id "
-				+ " where p.cat_m_id = ? ";
+		String sql = " SELECT * "
+				+ "FROM ( "
+				+ "    SELECT PRO_DISPL_SRC, BRAND_NAME, BRAND_ID, PRO_DISPL_NAME, PROPRICE, p.CAT_L_ID, p.CAT_M_ID, p.CAT_S_ID, AFTERPRICE, PRO_DISPL_ID, PRO_ID, PRC, PDC, PMP, STOCK, ORDERCNT, PRO_STOCK, PRO_DISPL_LIKE, PRO_REG, cat_m_name "
+				+ "    FROM pmlistview p "
+				+ "    JOIN cate_m cm ON p.cat_m_id = cm.cat_m_id "
+				+ "     where p.cat_m_id = ? "
+				+ "  ORDER BY DBMS_RANDOM.RANDOM() ) "
+				+ "WHERE ROWNUM <= 12 ";
+			
 		
 		PreparedStatement pstmt = null;
 		ProductMoreDTO productMoreDTO = null;

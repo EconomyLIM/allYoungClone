@@ -13,7 +13,7 @@
 					onload="common.onLoadProfileImg(this, 60);">
 					<div class="thum">
 						<span class="bg"></span> <img
-							src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2023/07/31/1690732966938.png?RS=60x79&amp;CS=60x60"
+							src="${reviewDTO.user_img }"
 							class="profileThum_s"
 							style="background: url(https://static.oliveyoung.co.kr/pc-static-root/image/comm/my_picture_base.jpg) no-repeat 0 0; background-size: 60px">
 					</div>
@@ -29,7 +29,14 @@
 				<!-- 리뷰 고도화 2차 추가 S-->
 				<!-- 리뷰 고도화 2차 추가 E-->
 				<p class="tag">
-					<span>트러블성</span> <span>겨울쿨톤</span> <span>각질</span> <span>모공</span>
+					<span>${reviewDTO.skintype_title }</span> <span>${reviewDTO.skintone_title }</span> 
+					
+													<c:forEach items="${skinlist }" var="skintrb">
+														
+												<span>${skintrb.skintrb_title }</span>
+												
+												</c:forEach>
+												
 				</p>
 			</div>
 			<div class="score_area addOY">

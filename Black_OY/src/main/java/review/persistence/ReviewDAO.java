@@ -7,6 +7,7 @@ import java.util.List;
 import review.domain.ReviewDTO;
 import review.domain.ReviewImgDTO;
 import review.domain.ReviewScoreDTO;
+import review.domain.SkintbDTO;
 
 public interface ReviewDAO {
 
@@ -19,6 +20,8 @@ public interface ReviewDAO {
 	List<ReviewImgDTO> reviewimg(Connection conn, String rev_id);
 	
 	ReviewScoreDTO reviewScore(Connection conn, String pro_displ_id, String pro_id);
+	
+	List<SkintbDTO> skintr(Connection conn, String user_id);
 	
 	// 전체 페이지 구하기
 	int getTotalReviewPages(Connection conn, String pro_displ_id,String proid, int numberPerPage)  throws SQLException;
