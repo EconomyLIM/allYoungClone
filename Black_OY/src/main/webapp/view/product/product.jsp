@@ -2096,7 +2096,7 @@ $(function () {
 							<li><a href="javascript:;" class="item" title="전체"> <span
 									class="opt"><img src="${proDImg[0].proDImgSrc }"
 										onerror=""></span> <span class="txt">전체</span> <span
-									class="num"><em>2379</em>건</span> <input type="hidden"
+									class="num"></span> <input type="hidden"
 									name="gdasItemNo" value="ALL"> <input type="hidden"
 									name="gdasLgcGoodsNo" value="ALL">
 							</a></li>
@@ -2106,8 +2106,7 @@ $(function () {
 									href="javascript:;" class="item" title="${pll.proName }"> <span
 										class="opt"> <img src="${pll.proImg }" onerror="">
 
-									</span> <span class="txt">${pll.proName }</span> <span class="num"><em
-											class="txt_en">691</em>건</span> <input type="hidden"
+									</span> <span class="txt">${pll.proName }</span> <span class="num"></span> <input type="hidden"
 										name="gdasItemNo" value="${pll.proId }"> <input
 										type="hidden" name="gdasLgcGoodsNo" value="${pll.proId }">
 

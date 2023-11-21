@@ -10,7 +10,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<script src="/Black_OY/js/head.js"></script>
 <script src="/Black_OY/js/mainPage.js"></script>
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <!-- <link rel="stylesheet" href="/Black_OY/css/mainscrollbar.css"> -->
