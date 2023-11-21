@@ -11,10 +11,8 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
 <script type="text/javascript"
 	src="https://static.oliveyoung.co.kr/pc-static-root/js/common/publish/slick.min.js"></script>
-
 
 <script src="/Black_OY/js/head.js"></script>
 <link rel="stylesheet" href="/Black_OY/css/style.css">
@@ -1572,65 +1570,35 @@ $(function() {
 															</div>
 														</li>
 
-
-												
-							</div>
-							
-							<c:forEach var="pro" items="${ sellbrandProducts }">
-								<div class="item">
-									<ul class="prod-list">
-
-
-										<li id="">
-											<div class="prod">
-												<a
-													href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000162323&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=1"
-													name="BrandA001436_Best" class="thumb goodsList"
-													data-ref-goodsno="A000000162323"
-													data-ref-dispcatno="9000002" data-ref-itemno="001"
-													data-attr="브랜드관^구달_베스트^[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획"
-													data-trk="/" tabindex="-1"
-													onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000162323&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;13&quot;);"><img
-													src="${ sellbrandProducts.PRO_DISPL_SRC }"
-													alt="[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획"
-													class="pic-thumb" onerror="common.errorImg(this);"><span
-													class="flag-badge best">베스트</span></a>
-												<div class="prod-info"
-													onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000162323&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;13&quot;);">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000162323&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=1"
-														name="BrandA001436_Best" class="goodsList"
-														data-ref-goodsno="A000000162323"
-														data-ref-dispcatno="9000002" data-ref-itemno="001"
-														data-attr="브랜드관^구달_베스트^[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획"
-														data-trk="/" tabindex="-1"><div class="prod-brand">
-															<strong class="exclusive"></strong>
-														</div> <span class="prod-name double-line">${sellbrandProducts.PRO_DISPL_NAME }</span>
-														<div class="discount">
-															<span class="origin">${ sellbrandProducts.PRO_PRICE }</span>
-														</div>
-														<div class="price">
-															<strong class="total">30,960<span class="won">원</span></strong>
-															<span class="oneday">오늘드림</span>
-														</div>
-														<div class="rating">
-															<span class="point">4.7</span><span class="num">(999+)</span>
-														</div>
-														<div class="flags">
-															<span class="flag sale">세일</span><span
-																class="flag coupon">쿠폰</span>
-														</div></a>
-												</div>
-												<div class="prod-func">
-													<button type="button" class="favorite btn_zzim jeem"
-														data-ref-goodsno="A000000162323" tabindex="-1">
-														<span>찜하기</span>
-													</button>
-													<button type="button" class="cart"
-														onclick="common.gf_regCart(this); return false;"
-														data-goods-no="A000000162323" data-item-no="001"
-														tabindex="-1">장바구니</button>
-												</div>
+														<li>
+															<p class="thum"
+																onclick="javascript:common.link.moveGoodsDetail('A000000171077', '', 'BrandA001436_Review', {t_page:'브랜드관',t_click:'리뷰_상품상세', t_number:'5'}); ">
+																<img
+																	src="https://image.oliveyoung.co.kr/uploads/images/goods/550/10/0000/0017/A00000017107701ko.jpg?l=ko"
+																	data-ref-goodsno="A000000171077"
+																	alt="구달 살구 콜라겐 탄력 마스크 1매"
+																	onerror="common.errorImg(this);"
+																	data-attr="브랜드관^구달_리뷰^구달 살구 콜라겐 탄력 마스크 1매" data-trk="/"
+																	onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000171077&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_리뷰&quot;, &quot;6&quot;);">
+															</p>
+															<div class="reviewCont"
+																onclick="javascript:display.brandShopDetail.amplitudeReview('A000000171077', '구달 살구 콜라겐 탄력 마스크 1매', '5'); mypage.reviewerLounge.goReviewDetail('22881713', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'5'});">
+																<div class="topinfo">
+																	<div class="review_stat type2">
+																		<span class="point pt3">3점</span>
+																	</div>
+																	<span class="like"><span class="icon">10</span></span>
+																</div>
+																<dl class="retxt">
+																	<dd>개인적으로 저랑은 안 맞았던 팩이에요 뭐가 올라오거나 한 것은 아니지만 올리면
+																		얼굴이 따가워서 금방 뗐습니다 개인 피부마다 차이가 있으니 다른 분들은 잘 맞을 수 있지만 저는
+																		안 맞아서 아쉬웠어요</dd>
+																</dl>
+																<a href="javascript:void(0);" class="btn_detail"
+																	onclick="javascript:display.brandShopDetail.amplitudeReview('A000000171077', '구달 살구 콜라겐 탄력 마스크 1매', '5'); mypage.reviewerLounge.goReviewDetail('22881713', {t_page:'브랜드관',t_click:'리뷰_리뷰상세보기',t_number:'5'});"
+																	tabindex="-1">자세히 보기</a>
+															</div>
+														</li>
 
 														<li>
 															<p class="thum"
@@ -1932,7 +1900,7 @@ $(function() {
 												</div>
 											</div>
 										</div>
-
+										
 										<button type="button" data-role="none"
 											class="slick-next slick-arrow" aria-label="Next"
 											role="button" style="display: block;">Next</button>
@@ -2168,14 +2136,3 @@ $('#tablist').slick({
 
 
 </html>
-<script type="text/javascript"
-	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script>
-	$(function(){
-	$('#bestTabSwiper').slick({
-	   slidesToShow: 1,
-	   slidesToScroll: 1,
-	   draggable: true
-	});
-	})
-</script>
