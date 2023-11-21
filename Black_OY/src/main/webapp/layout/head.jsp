@@ -329,7 +329,7 @@
 			<div class="header_inner">
 				<h1>
 					<a onclick="" href="<%=contextPath%>/olive/main.do"> <img
-						src="https://static.oliveyoung.co.kr/pc-static-root/image/comm/h1_logo.png"
+						src="<%=contextPath%>/images/logo.png"
 						alt="올리브영">
 					</a>
 				</h1>

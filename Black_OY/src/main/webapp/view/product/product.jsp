@@ -3103,7 +3103,7 @@ $(function(){
 
 
 			<!--  ====QNA=========================================  -->
-			<div class="tabConts prd_detail_cont show" id="qnaContentsArea">
+			<div class="tabConts prd_detail_cont" id="qnaContentsArea">
 				<div class="prd_qna_tit">
 					<p 
 						style="cursor: pointer;">★ 상품 문의사항이 아닌 반품/교환관련 문의는 고객센터 1:1
