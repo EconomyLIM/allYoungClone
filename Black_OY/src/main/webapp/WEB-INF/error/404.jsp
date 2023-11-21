@@ -21,7 +21,7 @@
 			</ul>
 		</div>
 		<div class="header_inner">
-			<h1><a href="/"><img src="https://www.oliveyoung.co.kr/pc-static-root/image/comm/h1_logo.png" alt="올리브영"></a></h1>
+			<h1><a href="<%=contextPath%>/olive/main.do"><img src="https://www.oliveyoung.co.kr/pc-static-root/image/comm/h1_logo.png" alt="올리브영"></a></h1>
 		</div>
 	</div>
 	<!-- //#Header -->

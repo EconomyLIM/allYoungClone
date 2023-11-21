@@ -768,11 +768,7 @@
 					<li style=""><a onclick="" href="#"
 						data-ref-linkurl="main/getHotdealList.do" data-attr="공통^GNB^오특"><span>오특</span>
 					</a></li>
-<<<<<<< HEAD
-					<li style=""><a onclick="" href="<%=contextPath %>/olive/ranking.do?m_click=전체"
-=======
 					<li style=""><a onclick="" href="<%=contextPath%>/olive/ranking.do"
->>>>>>> branch 'feature_product' of https://github.com/Team3-JSP/OliveYoung.git
 						data-ref-linkurl="main/getBestList.do" data-attr="공통^GNB^랭킹"><span>랭킹</span>
 					</a></li>
 					<li style=""><a onclick="" href="<%=contextPath %>/olive/planshop.do?eventId=le_00000001"
