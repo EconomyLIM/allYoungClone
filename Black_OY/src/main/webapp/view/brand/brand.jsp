@@ -1900,7 +1900,7 @@ $(function() {
 												</div>
 											</div>
 										</div>
-
+										
 										<button type="button" data-role="none"
 											class="slick-next slick-arrow" aria-label="Next"
 											role="button" style="display: block;">Next</button>

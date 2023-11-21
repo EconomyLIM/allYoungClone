@@ -244,6 +244,7 @@ public class BrandDAOImpl implements BrandDAO {  //테이블과 관련된 쿼리
          //pstmt.setString(1, brandId);
          rs = pstmt.executeQuery();
 
+        
          while (rs.next()) {
             BrandDTO relist = BrandDTO.builder()
                   .rev_id(rs.getString("rev_id"))
