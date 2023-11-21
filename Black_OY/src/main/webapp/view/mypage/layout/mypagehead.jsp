@@ -14,7 +14,7 @@
 </head>
 <body>
 	
-			<div class="mypage-head rate_04">
+			<div class="mypage-head">
 				<h1 class="tit">
 					<a href="<%=contextPath %>/olive/mypageMain.do">마이페이지</a>
 				</h1>
@@ -42,7 +42,7 @@
 						</p>
 						<ul class="mem_opt">
 
-							<li id="membershipBenefit"><a href="<%-- 맴버십페이지 연결 --%>"
+							<li id="membershipBenefit"><a href="<%= contextPath %>/olive/membership.do"
 								onclick="<%-- 맴버십페이지 연결스크립트 --%>">올리브 멤버스 라운지</a></li>
 
 							<li id="profileModify"><a href="<%= contextPath %>/olive/profile.do"
@@ -75,6 +75,29 @@
 				</div>
 			</div>
 	
+	<script>
+		$(document).ready(function() {
+			let grade = "${ logOn.grade_id }"
+			//alert(grade);
+			//$(".mypage-head").removeClass("rate_04");
+			if (grade == "BABY OLIVE") {
+				$(".mypage-head").addClass("rate_04");		
+			} 
+			else if (grade == "PINK OLIVE") {
+				$(".mypage-head").addClass("rate_05");		
+			}
+			else if (grade == "GREEN OLIVE") {
+				$(".mypage-head").addClass("rate_03");		
+			}
+			else if (grade == "BLACK OLIVE") {
+				$(".mypage-head").addClass("rate_02");		
+			}
+			else if (grade == "GOLD OLIVE") {
+				$(".mypage-head").addClass("rate_01");		
+			}
+			
+		});
+	</script>
 
 </body>
 </html>

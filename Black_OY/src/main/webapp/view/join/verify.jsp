@@ -10,6 +10,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/CJbase.css" />
 <link rel="stylesheet" href="../css/CJparticipate.css" />
+<link rel="stylesheet" href="../../css/CJbase.css" />
+<link rel="stylesheet" href="../../css/CJparticipate.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
@@ -125,13 +127,13 @@
 									<p class="certi_txt">안전한 회원가입을 위한 본인인증 단계입니다. 원하시는 인증방법을
 										선택해주세요.</p>
 									<ul class="way">
-										<li class="type1"><span class="bg"><img src="/휴대폰인증.PNG" alt="" /></span>
+										<li class="type1"><span class="bg" style ="display:block; position:absolute; width:88px; height:88px; margin-left:-44px; background:url('/Black_OY/images/cjone/ico_regi_complete.png') no-repeat left top; top:0; left:50%;"></span>
 										<a href="/Black_OY/view/join/verify_phfirst.jsp" class="btn btn_em"
 											title="새 창"><span>휴대전화 인증</span></a></li>
 
-										<!-- <li class="type2" style="border-right: 0px;"><span
-											class="bg"></span><a href="#" class="btn btn_em"
-											onclick="javascript:fnCheckPlusPPopup(event);" title="새 창">공동인증서	인증</a></li> -->
+										<li class="type2" style="border-right: 0px;"><span
+											class="bg" style ="display:block; position:absolute; width:88px; height:88px; margin-left:-44px; background:url('/Black_OY/images/cjone/ico_regi_complete.png') no-repeat left top; top:0; left:50%;"></span><a href="#" class="btn btn_em"
+											onclick="javascript:fnCheckPlusPPopup(event);" title="새 창">공동인증서	인증</a></li>
 									</ul>
 								</div>
 							</div>

@@ -694,7 +694,7 @@ button.btn_more {width:310px; height:50px; border:1px solid #ddd; background-col
 #contents {position:relative; max-width:1060px; min-width:1024px; margin:0 auto; padding-bottom:80px;}
 #contents .location {position:absolute; top:30px; right:0; height:15px; text-align:right;}
 #contents .location a {float:left; margin:3px 0 0 5px; padding-left:10px; background:url('/cjmweb/images/common/ico_location.png') no-repeat; color:#555; font-size:12px; line-height:13px;}
-#contents .location .home {width:15px; height:15px; margin:0; padding:0; background:url('/cjmweb/images/common/ico_home.png') no-repeat;}
+#contents .location .home {width:15px; height:15px; margin:0; padding:0; background:url('/Black_OY/images/cjone/ico_home.png') no-repeat;}
 #contents .location .now {color:#222;}
 #contents .location_wrap.white a,
 #contents .location.white a {background-image:url('/cjmweb/images/common/ico_location_white.png'); color:rgba(255,255,255,.6);}
@@ -1021,7 +1021,7 @@ button.btn_more {width:310px; height:50px; border:1px solid #ddd; background-col
 
 /* 등록 완료 */
 .regi_complete {padding:50px 0; border-top:1px solid #222; background-color:#f8f8f8; text-align:center;}
-.regi_complete .bg {display:block; width:88px; height:88px; margin:0 auto 35px; background:url('/cjmweb/images/common/ico_regi_complete.png') no-repeat -300px 0;}
+.regi_complete .bg {display:block; width:88px; height:88px; margin:0 auto 35px; background:url('/Black_OY/images/cjone/ico_regi_complete.png') no-repeat -300px 0;}
 .regi_complete .bg.chk {background-position:-300px 0;}
 .regi_complete .bg.lock {background-position:-400px 0;}
 .regi_complete .bg.post {background-position:0 -100px;}
@@ -1077,7 +1077,7 @@ button.btn_more {width:310px; height:50px; border:1px solid #ddd; background-col
 .certification_sec .certi_txt {position:relative; color:#222; font-size:18px; text-align:left;}
 .certification_sec .way {display:inline-block; margin-top:60px; *padding-left:89px;}
 .certification_sec .way li {position:relative; float:left; width:160px; padding:118px 50px 0;}
-.certification_sec .way li span.bg {display:block; position:absolute; width:88px; height:88px; margin-left:-44px; background:url('/cjmweb/images/common/ico_regi_complete.png') no-repeat left top; top:0; left:50%;}
+.certification_sec .way li span.bg {display:block; position:absolute; width:88px; height:88px; margin-left:-44px; background:url('/Black_OY/images/cjone/ico_regi_complete.png') no-repeat left top; top:0; left:50%;}
 .certification_sec .way li .btn {margin:0;}
 .certification_sec .way li.type1,
 .certification_sec .way li.type2 {border-right:1px solid #ddd;}
