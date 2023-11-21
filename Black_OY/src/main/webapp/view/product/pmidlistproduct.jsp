@@ -108,6 +108,13 @@ $(function () {
 	            $(this).text('축소');
 	        }
 	    });
+	
+	 var urlParams = new URLSearchParams(window.location.search);
+
+     // plusbutton 매개변수가 있고 값이 'y'인 경우 체크박스 체크
+     if (urlParams.has('plusbutton') && urlParams.get('plusbutton') === 'y') {
+         $('#checkbox').prop('checked', true);
+     }
 	//
 
 	 // midId와 일치하는 id를 가진 li 요소에 'on' 클래스 추가
@@ -168,6 +175,8 @@ $(function () {
             }
         }
     })   
+    
+    
 }) ; 
 
 function changePerPage(value) { // perPage 수정
@@ -294,7 +303,7 @@ function changePerPageAndClass(value) {
 
 			<div class="cate_brand_box">
 				<div class="tit_area">
-					<strong>브랜드</strong> <span class="tx_num">Total <%=myList.size()%></span>
+					<strong>브랜드</strong> <span class="tx_num">Total <c:if test="${not empty myList}"><%=myList.size()%></c:if> </span>
 				</div>
 				<ul class="brand_list">
 

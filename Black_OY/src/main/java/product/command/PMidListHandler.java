@@ -96,7 +96,14 @@ public class PMidListHandler implements CommandHandler{
 			cateL = displNum.substring(0, 4);
 			
 			pcurnamedto = pmidsurvice.ScurName(group, cateL);
+			
+			// 하위 중분류 카테고리 갖고 와야 함
+			
+			// 스킨케어중에 가장 많이 팔린것을 갖고 와야 함
+			midcatedto = pmidsurvice.selectMidCate(cateL);
+			
 			request.setAttribute("pcurnamedto", pcurnamedto);
+			return "/view/product/topCateList.jsp";
 			
 		} else if(displNum.length() == 8) {
 			group = 2;

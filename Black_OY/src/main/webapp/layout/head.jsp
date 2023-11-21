@@ -648,116 +648,51 @@
 						<!-- 뷰티 끝 -->
 						<li>
 							<h2>헬스&amp;푸드</h2>
+							
 							<div class="sub_menu_box">
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000020003"
-										data-attr="공통^드로우^구강/건강용품">구강/건강용품</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000200030001"
-										data-attr="공통^드로우^구강/건강용품_구강용품" data-trk="/">구강용품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200030005"
-										data-attr="공통^드로우^구강/건강용품_패치/겔" data-trk="/">패치/겔</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200030002"
-										data-attr="공통^드로우^구강/건강용품_눈 관리 용품" data-trk="/">눈 관리 용품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200030012"
-										data-attr="공통^드로우^구강/건강용품_의료/간호용품" data-trk="/">의료/간호용품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200030014"
-										data-attr="공통^드로우^구강/건강용품_마사지/헬스용품" data-trk="/">마사지/헬스용품</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000020004"
-										data-attr="공통^드로우^여성/위생용품">여성/위생용품</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000200040001"
-										data-attr="공통^드로우^여성/위생용품_생리용품" data-trk="/">생리용품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200040002"
-										data-attr="공통^드로우^여성/위생용품_여성청결제" data-trk="/">여성청결제</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200040003"
-										data-attr="공통^드로우^여성/위생용품_성인용품" data-trk="/">성인용품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200040004"
-										data-attr="공통^드로우^여성/위생용품_기저귀/물티슈" data-trk="/">기저귀/물티슈</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200040005"
-										data-attr="공통^드로우^여성/위생용품_제지류" data-trk="/">제지류</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000020001"
-										data-attr="공통^드로우^건강식품">건강식품</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000200010015"
-										data-attr="공통^드로우^건강식품_비타민" data-trk="/">비타민</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200010024"
-										data-attr="공통^드로우^건강식품_장건강" data-trk="/">장건강</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200010023"
-										data-attr="공통^드로우^건강식품_체중관리" data-trk="/">체중관리</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200010022"
-										data-attr="공통^드로우^건강식품_이너뷰티" data-trk="/">이너뷰티</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200010025"
-										data-attr="공통^드로우^건강식품_영양제/기타" data-trk="/">영양제/기타</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000020002"
-										data-attr="공통^드로우^푸드">푸드</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000200020020"
-										data-attr="공통^드로우^푸드_식단관리" data-trk="/">식단관리</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200020023"
-										data-attr="공통^드로우^푸드_디저트/간식" data-trk="/">디저트/간식</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200020022"
-										data-attr="공통^드로우^푸드_생수/음료/커피" data-trk="/">생수/음료/커피</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200020024"
-										data-attr="공통^드로우^푸드_간편식/요리" data-trk="/">간편식/요리</a></li>
-									<li><a href="#" data-ref-dispcatno="100000200020021"
-										data-attr="공통^드로우^푸드_베이비푸드" data-trk="/">베이비푸드</a></li>
-								</ul>
+								<c:if test="${not empty hHash}">
+									<c:forEach items="${hHash}" var="hh">
+										<p class="sub_depth">
+											<a href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=${hh.key.cLId}">${hh.key.cLName }
+											</a>
+										</p>
+										<c:forEach items="${hh.value }" var="value">
+										<ul>
+											<li>
+												<a href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=${hh.key.cLId}${value.cat_m_id}&sort=1">
+													${value.cat_m_name}
+												</a>
+											</li>
+										</ul>
+										</c:forEach>
+									</c:forEach>
+								</c:if>
+								
 							</div>
 						</li>
+						
+						
+						<!--  헬스&amp;푸드 끝 -->
 						<li>
 							<h2>라이프</h2>
 							<div class="sub_menu_box">
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000030005"
-										data-attr="공통^드로우^라이프/홈">라이프/홈</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000300050005"
-										data-attr="공통^드로우^라이프/홈_라이프웨어" data-trk="/">라이프웨어</a></li>
-									<li><a href="#" data-ref-dispcatno="100000300050001"
-										data-attr="공통^드로우^라이프/홈_공간방향/제습" data-trk="/">공간방향/제습</a></li>
-									<li><a href="#" data-ref-dispcatno="100000300050006"
-										data-attr="공통^드로우^라이프/홈_테크" data-trk="/">테크</a></li>
-									<li><a href="#" data-ref-dispcatno="100000300050002"
-										data-attr="공통^드로우^라이프/홈_홈 클리닝" data-trk="/">홈 클리닝</a></li>
-									<li><a href="#" data-ref-dispcatno="100000300050003"
-										data-attr="공통^드로우^라이프/홈_생활" data-trk="/">생활</a></li>
-									<li><a href="#" data-ref-dispcatno="100000300050004"
-										data-attr="공통^드로우^라이프/홈_주방" data-trk="/">주방</a></li>
-									<li><a href="#" data-ref-dispcatno="100000300050007"
-										data-attr="공통^드로우^라이프/홈_홈데코" data-trk="/">홈데코</a></li>
-									<li><a href="#" data-ref-dispcatno="100000300050008"
-										data-attr="공통^드로우^라이프/홈_악세서리" data-trk="/">악세서리</a></li>
-									<li><a href="#" data-ref-dispcatno="100000300050009"
-										data-attr="공통^드로우^라이프/홈_컬쳐" data-trk="/">컬쳐</a></li>
-									<li><a href="#" data-ref-dispcatno="100000300050010"
-										data-attr="공통^드로우^라이프/홈_유아용품" data-trk="/">유아용품</a></li>
-								</ul>
-								<p class="sub_depth">
-									<a href="#" data-ref-dispcatno="10000030003"
-										data-attr="공통^드로우^반려동물">반려동물</a>
-								</p>
-								<ul>
-									<li><a href="#" data-ref-dispcatno="100000300030001"
-										data-attr="공통^드로우^반려동물_강아지 식품" data-trk="/">강아지 식품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000300030002"
-										data-attr="공통^드로우^반려동물_강아지 용품" data-trk="/">강아지 용품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000300030003"
-										data-attr="공통^드로우^반려동물_고양이 식품" data-trk="/">고양이 식품</a></li>
-									<li><a href="#" data-ref-dispcatno="100000300030004"
-										data-attr="공통^드로우^반려동물_고양이 용품" data-trk="/">고양이 용품</a></li>
-								</ul>
+								<c:if test="${not empty lHash}">
+									<c:forEach items="${lHash}" var="lh">
+										<p class="sub_depth">
+											<a href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=${lh.key.cLId}">${lh.key.cLName }
+											</a>
+										</p>
+										<c:forEach items="${lh.value }" var="value">
+										<ul>
+											<li>
+												<a href="<%=contextPath%>/olive/pmidlistproduct.do?displNum=${lh.key.cLId}${value.cat_m_id}&sort=1">
+													${value.cat_m_name}
+												</a>
+											</li>
+										</ul>
+										</c:forEach>
+									</c:forEach>
+								</c:if>
 							</div>
 						</li>
 					</ul>
