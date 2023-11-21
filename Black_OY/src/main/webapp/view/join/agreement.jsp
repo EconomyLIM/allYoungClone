@@ -10,8 +10,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../../css/CJbase.css" />
 <link rel="stylesheet" href="../../css/CJparticipate.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </head>
 <body>
 	<!--skip navigation-->
@@ -4123,86 +4123,9 @@ function goFooterMenu(type){
 			<!--script 영역-->
 
 
-
-
-
 			<script>
-	/* $(function () {
-	    $('[data-control="accordion"]').accordion({singleOpen: false});
-	    
-	    $('[data-control="checkAll"]').toggle().on({
-			'toggle:end': function (e, datas) {
-				if(confirm('전체 동의 선택 시, 필수약관과 선택약관이 모두 동의로 선택됩니다. 단, 전체 동의를 하더라도 각 약관의 동의 내용을 확인 후 개별적으로 동의여부를 선택하실 수 있습니다.') == true){
-                    $('[id^="svcuse_agr_typ_cd_"]').filter(':odd').prop('checked', true).trigger('change');
-                    $('[id^="agr99_sub1_y"]').prop('checked', true).trigger('change');
-                    $('[id^="sync_agr_y"]').prop('checked', true).trigger('change');
-                    $('[id^="agr_typ_onln"]').filter(':odd').prop('checked', true).trigger('change');
-                    $('[id^="omniagreeY"]').prop('checked', true).trigger('change');
-				}
-			}
-		}); */
-	    
-	   
-    	$('iframe').load(function() {
-  		  this.style.height =
-  		  this.contentWindow.document.body.offsetHeight + 'px';
-  		});	 	    
-	});
-	
-    function omniTerms(typCd, coopcoCd, brndCd) {
-        cjone.openModal('https://www.cjone.com/cjmweb/layer/omni-terms.do?agr_typ_cd='+typCd+'&coopco_cd='+coopcoCd+'&brnd_cd='+brndCd);
-    }
-	
-	// 취소
-	function goCancel() {
-	    if(!confirm('약관동의 취소하시겠습니까?')) return;
-	    if (''==''){
-	    	 location.href='https://www.cjone.com/cjmweb/join.do';
-	    }else{
-	    	 location.href='https://www.cjone.com/cjmweb/join.do?coopco_cd=7030&brnd_cd=3000&mcht_no=3000&upd_coopco_id=';
-	    }
-	   
-	}   
-	/*
-	// 확인
-	function goSave(){
-		var brnd_cd = '3000';
-	    //통합 이용약관
-	    if(!cjoneAgrCheck()) return;
-	    if("N" == "Y"){ // 쌍방약관인 경우 제3자 정보제공 값을 setting
-	        $('#agr_sub_yn99').val("Y");
-	    }else if($("#coopco_cd").val() != "7000") {
-	    	//제3자 정보제공 약관동의는 별도로 체크한다. 
-	        if ( !$('input[id=sync_agr_y]').is(':checked') ) {
-	            alert("CJ ONE 서비스 이용을 위한 정보 제공 및 활용에 동의하셔야 합니다.");
-	            $('input[id=sync_agr_y]').focus();
-	            return;
-	        }
-	        if ( !$('input[id=agr99_sub1_y]').is(':checked') ) {
-	        	alert("CJ ONE 서비스 이용을 위한 정보 제공 및 활용에 동의하셔야 합니다.");
-	            $('input[id=agr99_sub1_y]').focus();
-	            return;
-	        }
-	        if ( $('input[id=sync_agr_y]').is(':checked') ) {
-	            $('#agr_sub_yn99').val("Y");
-	        }
-	    }
-	    // 약관동의는 Y로 한다.
-	    $('#agr_yn').val("Y");
-	    // 참여사 이용약관
-	    if(!coopAgrCheck()) return;
-	    // 옴니서비스 이용약관
-        if(!omniAgrCheck()) return;
-        var omniAgrChkList = '';
-        $.each($('input[id^="omniagreeY"]:checked'), function() {
-            omniAgrChkList += ',' + $(this).val();
-        });
-        $('#omni_agr_list').val(omniAgrChkList.substr(1));
-	
- 	    $('#form1').attr('action', 'https://www.cjone.com/cjmweb/join/member-info.do');
-	    $('#form1').submit(); 
-	}
-	*/
+
+
 	//통합 이용약관 체크
 	function cjoneAgrCheck(){
 		var chkagr = true;

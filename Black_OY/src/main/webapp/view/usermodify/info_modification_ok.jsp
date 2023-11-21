@@ -137,7 +137,7 @@
 				<div class="cont_area">
 					<div class="mypage_sec">
 						<div class="regi_complete">
-							<span class="bg face_type2"></span>
+							<span class="bg face_type2" style ="background-position:-100px -200px; display:block; position:absolute; width:88px; height:88px; margin-left:-44px; background:url('/Black_OY/images/cjone/ico_regi_complete.png') no-repeat left top; top:0; left:50%;"></span>
 							<p class="h2_tit">회원님의 정보가 수정되었습니다.</p>
 							<p class="fc_gray">잠시 후 올리브영 페이지로 이동됩니다. [바로가기] 버튼을 클릭하시면 바로
 								이동됩니다.</p>
@@ -150,7 +150,7 @@
 								<script type="text/javascript">
 									setTimeout(() => {
 				    	  				window.location.href="<%=contextPath %>/olive/usermodify.do";
-									}, 5000); 
+									}, 50000); 
 								</script>
 							</div>
 						</div>

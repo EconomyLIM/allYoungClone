@@ -65,7 +65,7 @@
 							<div class="box_member">
 								<h2 class="haze">본인인증</h2>
 								<div class="certi_txt check">
-									<span class="ico" style="background-image: url('/view/join/alreadymember.PNG'); background-size: 100px 100px;"></span>
+									<span class="ico" ></span>
 
 									<p class="b_txt"><strong class="em"><%=dto.getU_name() %></strong>님! 이미 CJ ONE 회원으로 등록되어 있습니다.</p>			
 									<p class="s_txt">회원 아이디<em>(<%=dto.getUser_id() %>)</em>로 로그인 하시거나 아이디 찾기를 진행해 주세요.</p>								
