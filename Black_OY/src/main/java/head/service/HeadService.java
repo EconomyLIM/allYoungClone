@@ -199,7 +199,7 @@ public class HeadService {
 			conn = ConnectionProvider.getConnection();
 			dao = HeadDAOImpl.getInstance();
 			hashmap = dao.getCate(conn, cate);
-			System.out.println(hashmap);
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
