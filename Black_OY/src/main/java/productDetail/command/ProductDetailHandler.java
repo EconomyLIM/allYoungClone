@@ -28,6 +28,7 @@ import productDetail.service.ProDetailService;
 import review.domain.ReviewDTO;
 import review.domain.ReviewImgDTO;
 import review.domain.ReviewScoreDTO;
+import review.domain.SkintbDTO;
 import review.service.ReviewService;
 import user.domain.LogOnDTO;
 
@@ -86,6 +87,7 @@ public class ProductDetailHandler implements CommandHandler{
 		String pro_id = null;
 		String rev_id = null;
 		String type = null;
+		String user_id = null;
 		
 		List<ReviewDTO> reviewlist = null;
 		List<ReviewDTO> reviewlistall = null;
@@ -140,12 +142,17 @@ public class ProductDetailHandler implements CommandHandler{
 		reviewlist = reviewService.reviewListService(pro_displ_id, type, pro_id, currentPage, perPage);
 		reviewScoreDTO = reviewService.reviewScoreService(pro_displ_id, pro_id);
 		reviewlistall = reviewService.reviewListService(pro_displ_id, pro_id);
+		List<SkintbDTO> skinlist = null;
+		List<List<SkintbDTO>> skinlists = new ArrayList<List<SkintbDTO>>();
 		try {
 				if (reviewlist != null) {
 			for (int i = 0; i < reviewlistall.size(); i++) {
 				rev_id = reviewlistall.get(i).getRev_id();
+				user_id = reviewlistall.get(i).getUser_id();
 				reviewimglist = reviewService.reviewimgService(rev_id);
 				reviewimg.add(reviewimglist);
+				skinlist = reviewService.skinService(user_id);
+				skinlists.add(skinlist);
 			}
 			}
 			
@@ -163,6 +170,7 @@ public class ProductDetailHandler implements CommandHandler{
 		request.setAttribute("reviewlist", reviewlist);
 		request.setAttribute("reviewScore", reviewScoreDTO);
 		request.setAttribute("reviewimg", reviewimg);
+		request.setAttribute("skinlists", skinlists);
 		}
 		
 		// ======================= 해당 브랜드 정보 갖고오기 ===========================

@@ -10,6 +10,7 @@ import product.persistence.PMidListDAOImpl;
 import review.domain.ReviewDTO;
 import review.domain.ReviewImgDTO;
 import review.domain.ReviewScoreDTO;
+import review.domain.SkintbDTO;
 import review.persistence.ReviewDAOImpl;
 
 public class ReviewService {
@@ -151,6 +152,27 @@ public class ReviewService {
 		
 		return reviewDTO;
 		
+	}
+	
+	public List<SkintbDTO> skinService(String user_id){
+		Connection conn = null;
+		try {
+			
+			conn = ConnectionProvider.getConnection();
+			ReviewDAOImpl reviewDAOImpl = ReviewDAOImpl.getInstance();
+			List<SkintbDTO> skinlist = reviewDAOImpl.skintr(conn, user_id);
+			
+			return skinlist;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("리뷰이미지 오류");
+		}finally {
+			JDBCUtil.close(conn);
+		} // try_catch
+		
+		
+		return null;
 	}
 
 }

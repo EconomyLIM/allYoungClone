@@ -10,6 +10,7 @@ import command.CommandHandler;
 import review.domain.ReviewDTO;
 import review.domain.ReviewImgDTO;
 import review.domain.ReviewScoreDTO;
+import review.domain.SkintbDTO;
 import review.service.ReviewService;
 
 public class ReviewListAjaxHandler implements CommandHandler{
@@ -21,6 +22,7 @@ public class ReviewListAjaxHandler implements CommandHandler{
 		String pro_id = null;
 		String rev_id = null;
 		String type = null;
+		String user_id = null;
 		
 		// 페이징 처리
 				int currentPage =1; //현재페이지 번호 
@@ -66,12 +68,17 @@ public class ReviewListAjaxHandler implements CommandHandler{
 		ReviewService reviewService = ReviewService.getInstance();
 		reviewlist = reviewService.reviewListService(pro_displ_id, type, pro_id, currentPage, perPage);
 		reviewScoreDTO = reviewService.reviewScoreService(pro_displ_id, pro_id);
+		List<SkintbDTO> skinlist = null;
+		List<List<SkintbDTO>> skinlists = new ArrayList<List<SkintbDTO>>();
 		try {
 			if (reviewlist != null) {
 			for (int i = 0; i < reviewlist.size(); i++) {
 				rev_id = reviewlist.get(i).getRev_id();
+				user_id = reviewlist.get(i).getUser_id();
 				reviewimglist = reviewService.reviewimgService(rev_id);
 				reviewimg.add(reviewimglist);
+				skinlist = reviewService.skinService(user_id);
+				skinlists.add(skinlist);
 			}
 			}
 			
@@ -81,7 +88,7 @@ public class ReviewListAjaxHandler implements CommandHandler{
 		}
 		
 		
-		
+		request.setAttribute("skinlists", skinlists);
 		request.setAttribute("goodsNo", pro_displ_id);
 		request.setAttribute("reviewlist", reviewlist);
 		request.setAttribute("reviewimg", reviewimg);

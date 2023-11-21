@@ -16,6 +16,11 @@
 
 <script>
 	$(function() {
+		// 세 자리마다 , 찍기
+		function formatStringWithCommas(str) {
+		    return str.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+		
 		// 결제 정보 얻어오기
 		$.ajax({
 			type : 'post'
@@ -25,82 +30,85 @@
 			, dataType : 'json'
 			, data : { order_id : '${order_id}' }
 			, success : function(data) {
-				$("#total_price").text(data.total_price);
+				$("#total_price").text(data.total_price.toLocaleString());
 				$("#cd_price").text(data.cd_price);
 				$("#delivery_price").text(data.delivery_price);
-				$("#pay_price").text(data.pay_price);
+				$("#pay_price").text(data.pay_price.toLocaleString());
 				
-				// console.log(data);
+				console.log(data);
             }
 			, error : function (data, textStatus) {
 				console.log('error');
             }
 		}); 
 		
-		// 배송 정보 가지고 오기
-		$.ajax({
-			type : 'post'
-			, async : false
-			, cache: false
-			, url : '/Black_OY/olive/getOrderDelivery.do'
-			, dataType : 'json'
-			, data : { order_id : '${order_id}' }
-			, success : function(data) {
-				let tbody = $("#Contents > div.order_end_box > div:nth-child(3) > table > tbody");
-				
-				let tr = $("<tr>");
-				let th = $("<th>").attr("scope", "row").text("받는분");
-				let td = $("<td>").text(data.deli_recipient);
-				tr.append(th).append(td);
-				tbody.append(tr);
-				
-				tr = $("<tr>");
-				th = $("<th>").attr("scope", "row").text("연락처1");
-				td = $("<td>").text(data.deli_tel);
-				tr.append(th).append(td);
-				tbody.append(tr);
-				
-				if(data.deli_tel2 != "") {
-					tr = $("<tr>");
-					th = $("<th>").attr("scope", "row").text("연락처2");
-					td = $("<td>").text(data.deli_tel2);
+		if(${empty click}) {
+			
+			// 배송 정보 가지고 오기
+			$.ajax({
+				type : 'post'
+				, async : false
+				, cache: false
+				, url : '/Black_OY/olive/getOrderDelivery.do'
+				, dataType : 'json'
+				, data : { order_id : '${order_id}' }
+				, success : function(data) {
+					let tbody = $("#Contents > div.order_end_box > div:nth-child(3) > table > tbody");
+					
+					let tr = $("<tr>");
+					let th = $("<th>").attr("scope", "row").text("받는분");
+					let td = $("<td>").text(data.deli_recipient);
 					tr.append(th).append(td);
 					tbody.append(tr);
-				}
-				
-				tr = $("<tr>");
-				th = $("<th>").attr("scope", "row").text("주소");
-				td = $("<td>").html(`<p>도로명 주소 : \${data.deli_road_addr} \${data.deli_baddr}</p>`
-										+ `<p class='colorGrey'>지번주소 : \${data.deli_addr} \${data.deli_baddr}</p>`);
-				tr.append(th).append(td);
-				tbody.append(tr);
-				
-				tr = $("<tr>");
-				th = $("<th>").attr("scope", "row").text("공동현관 출입방법");
-				td = $("<td>").css("colspan", "3").text(data.req_select);
-				tr.append(th).append(td);
-				tbody.append(tr);
-				
-				if(data.req_content != "") {
+					
 					tr = $("<tr>");
-					th = $("<th>").attr("scope", "row").text("출입방법 상세");
-					td = $("<td>").css("colspan", "3").text(data.req_content);
+					th = $("<th>").attr("scope", "row").text("연락처1");
+					td = $("<td>").text(data.deli_tel);
 					tr.append(th).append(td);
 					tbody.append(tr);
-				}
-				
-				tr = $("<tr>");
-				th = $("<th>").attr("scope", "row").text("배송완료 메시지 전송시점");
-				td = $("<td>").css("colspan", "3").text("배송직후");
-				tr.append(th).append(td);
-				tbody.append(tr);
-				
-				// console.log(data);
-            }
-			, error : function (data, textStatus) {
-				console.log('error');
-            }
-		}); 
+					
+					if(data.deli_tel2 != "") {
+						tr = $("<tr>");
+						th = $("<th>").attr("scope", "row").text("연락처2");
+						td = $("<td>").text(data.deli_tel2);
+						tr.append(th).append(td);
+						tbody.append(tr);
+					}
+					
+					tr = $("<tr>");
+					th = $("<th>").attr("scope", "row").text("주소");
+					td = $("<td>").html(`<p>도로명 주소 : \${data.deli_road_addr} \${data.deli_baddr}</p>`
+											+ `<p class='colorGrey'>지번주소 : \${data.deli_addr} \${data.deli_baddr}</p>`);
+					tr.append(th).append(td);
+					tbody.append(tr);
+					
+					tr = $("<tr>");
+					th = $("<th>").attr("scope", "row").text("공동현관 출입방법");
+					td = $("<td>").css("colspan", "3").text(data.req_select);
+					tr.append(th).append(td);
+					tbody.append(tr);
+					
+					if(data.req_content != "") {
+						tr = $("<tr>");
+						th = $("<th>").attr("scope", "row").text("출입방법 상세");
+						td = $("<td>").css("colspan", "3").text(data.req_content);
+						tr.append(th).append(td);
+						tbody.append(tr);
+					}
+					
+					tr = $("<tr>");
+					th = $("<th>").attr("scope", "row").text("배송완료 메시지 전송시점");
+					td = $("<td>").css("colspan", "3").text("배송직후");
+					tr.append(th).append(td);
+					tbody.append(tr);
+					
+					// console.log(data);
+	            }
+				, error : function (data, textStatus) {
+					console.log('error');
+	            }
+			}); 
+		}
 		
 		
 		$(".btnGreenW").on("click", function() {
@@ -181,9 +189,9 @@
 					<!--// 결제정보 -->
 				</div>
 
-		
+				<c:if test="${empty click}">
+				
 				<div class="inner_box">
-					
 					<!-- 배송정보 -->
 					<h2 class="sub-title2">배송정보</h2>
 					<table class="tbl_data_view type2"><!-- 2017-01-20 수정 : type2 클래스 추가 -->
@@ -196,9 +204,8 @@
 						</tbody>
 					</table>
 					<!--// 배송정보 -->
-					
-					
 				</div>
+				</c:if>
 
 				<ul class="info_dot_list type2 mgT20 mgL100"><!--  2019-12-13 class 변경 -->
 					<li>주문취소는 [결제완료] 상태까지 가능합니다. [배송준비중], [배송중]에는 상품 수령 후 반품요청 부탁드립니다.</li><!--  2019-12-13 취소문구 추가 -->

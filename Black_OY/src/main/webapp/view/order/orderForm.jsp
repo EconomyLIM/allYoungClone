@@ -11,12 +11,18 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="/Black_OY/js/head.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
-
+	
 	<script>
+		// 세 자리마다 , 찍기
+		function formatStringWithCommas(str) {
+		    return str.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+	
 		// form check
 		function formCheck() {
 			if($("#btn_dlvp_exist").prop("checked")) {
@@ -103,15 +109,19 @@
 			
 			if($("#agree_1").prop("checked") == false) {
 				alert($("#agree_1").attr("title"));
+				$("#btnDetailAgree").click();
 				return false;
 			} else if($("#agree_2_1").prop("checked") == false) {
 				alert($("#agree_2_1").attr("title"));
+				$("#btnDetailAgree").click();
 				return false;
 			} else if($("#agree_2_2").prop("checked") == false) {
 				alert($("#agree_2_2").attr("title"));
+				$("#btnDetailAgree").click();
 				return false;
 			} else if($("#agree_2_3").prop("checked") == false) {
 				alert($("#agree_2_3").attr("title"));
+				$("#btnDetailAgree").click();
 				return false;
 			}
 				
@@ -211,8 +221,44 @@
 				$("#pickupStore").hide();
 				$("#pickupStoreList").hide();
 				$(".new_order_area input,select").prop("disabled", true);
-				$("#dlvpSelect").show();
-			})
+				$("#dlvpSelect").prop("disabled", false).show();
+				$("#rmitCellSctNo_exist").prop("disabled", false);
+				$("#rmitTelRgnNo_exist").prop("disabled", false);
+			});
+			
+			// 우편 번호 api
+			$("#search-zipcode-pop_exist_r").on("click", function() {
+				new daum.Postcode({
+		            oncomplete: function(data) {
+		                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+		                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		                var roadAddr = data.roadAddress; // 도로명 주소 변수
+		                var extraRoadAddr = ''; // 참고 항목 변수
+
+		                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+		                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+		                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+		                    extraRoadAddr += data.bname;
+		                }
+		                // 건물명이 있고, 공동주택일 경우 추가한다.
+		                if(data.buildingName !== '' && data.apartment === 'Y'){
+		                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		                }
+		                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+		                if(extraRoadAddr !== ''){
+		                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+		                }
+
+		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		                $("#stnmRmitPostNo_exist").val(data.zonecode);
+		                $("#stnmPostAddr_exist").text(roadAddr);
+		                $("#baseAddr_exist").text(data.jibunAddress);
+
+		            }
+		        }).open();
+			});
 			
 			// 배송지 선택에서 바뀔 시 ajax 처리
 			$("#dlvpSelect").on("change", function() {
@@ -328,17 +374,20 @@
 				alert("등록된 기프트 카드가 없습니다.");
 			});
 			
+			// 포인트 적용 버튼을 눌렀을 때
 			$("#cjonePnt_btn").on("click", function() {
 				if(${logOn.u_point} < 1000) {
 					alert("CJONE포인트는 최소 1,000원 이상\n보유 시 사용 가능합니다.");
 					return;
 				}
 				
-				// $("#cjonePntAplyAmt").val('${logOn.u_point}');
+				
 			});
 			
+			
+			
 			// 가지고 있는 포인트 표시
-			$("#cjonePnt").text('${logOn.u_point}');
+			$("#cjonePnt").text(formatStringWithCommas('${logOn.u_point}'));
 			
 			
 			// 동의 부분 처리
@@ -394,6 +443,12 @@
 			// 결제하기 버튼 클릭 했을 때
 			$("#btnPay").on("click", function() {
 				if(formCheck()) {
+					let payCheck = confirm("결제 하시겠습니까?");
+					if(!payCheck) {
+						alert("결제를 취소하셨습니다.");
+						history.back();
+					}
+					
 					let products = $("input[name=pro_id]");
 					let params = "";
 					for (var i = 0; i < products.length; i++) {
@@ -419,7 +474,6 @@
 			            }
 					});
 					
-					alert("결제 가능~~");
 					$("#orderForm").submit();
 				}
 			});
@@ -445,8 +499,8 @@
 			}
 			
 			$("#orderForm > div.order_payment_box > div.right_area > ul > li:nth-child(1) > span.tx_cont > span")
-				.text(totalPrice);
-			$("#totPayAmt_sum_span").text(totalPrice);
+				.text(formatStringWithCommas(totalPrice));
+			$("#totPayAmt_sum_span").text(totalPrice.toLocaleString());
 			$("#totalPrice").val(totalPrice);
 			$("#totalPay").val(totalPrice);
 			
@@ -609,12 +663,9 @@
 		<form name="pickupOrderForm" id="pickupOrderForm">
 		</form>
 		<form name="orderForm" id="orderForm" method="post" action="<%=contextPath %>/olive/orderForm.do" target="setOrderRequest">
-			<input type="hidden" id="o2oGiftBoxAmtRm" name="o2oGiftBoxAmtRm" value="30000">
-			<input type="hidden" id="o2oGiftBoxAmtDc" name="o2oGiftBoxAmtDc" value="2000">
-			<input type="hidden" id="o2oGiftBoxAmtDf" name="o2oGiftBoxAmtDf" value="2000">
-			<input type="hidden" id="o2oGiftBoxAmt" name="o2oGiftBoxAmt" value="0">
 			<input type="hidden" id="quickYn" name="quickYn" value="Y">
 			<input type="hidden" id="click" name="click" value="${click}">
+			<input type="hidden" id="point_price" name="point_price" value="0">
 			<input type="hidden" id="pickupDirectYn" name="pickupDirectYn" value="N">
 			<input type="hidden" id="quickInfoYn" name="quickInfoYn" value="Y">
 			<input type="hidden" id="ocbValidChk" name="ocbValidChk" value="N">
@@ -2348,7 +2399,7 @@
 						<li>
 							<span class="tx_tit">총 상품금액</span>
 							<span class="tx_cont"><span class="tx_num">0</span>원</span>
-							<input type="hidden" id="totalPrice" name="totalPrice" value="">
+							<input type="hidden" id="totalPrice" name="totalPrice" value="0">
 						</li>
 						<li>
 							<span class="tx_tit">쿠폰할인금액</span><!-- 2017-01-18 수정 : 문구수정 -->
@@ -2396,7 +2447,7 @@
 						<li class="total">
 							<span class="tx_tit">최종 결제금액</span>
 							<span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">0</span>원</span>
-							<input type="hidden" id="totalPay" name="totalPay" value="">
+							<input type="hidden" id="totalPay" name="totalPay" value="0">
 							<input type="hidden" name="remainAmt" value="0">
 							<input type="hidden" name="ordPayAmt" value="0">
 							<input type="hidden" name="goodsNm" value="에스트라 아토베리어365 로션 150ml 기획 (+하이드로에센스 25ml+무기자차선크림10ml 증정)">

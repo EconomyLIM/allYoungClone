@@ -4,7 +4,6 @@
 				auth="Container"
               	type="javax.sql.DataSource" 
               	driverClassName="oracle.jdbc.OracleDriver"
-
              	url="jdbc:oracle:thin:@192.168.10.183:1521:xe"
 
               	username="scott" password="tiger" maxTotal="20" maxIdle="10"

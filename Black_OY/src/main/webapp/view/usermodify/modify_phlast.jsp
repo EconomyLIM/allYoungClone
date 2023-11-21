@@ -161,7 +161,7 @@
 
 		<section id="ct" class="certify_user2 certifyWrap certifyWrap_02">
 			<form id="cplogn" name="cplogn" method="post"
-				action="<%=contextPath %>/olive/infoUpdate.do">
+				action="<%=contextPath%>/olive/nameTelUpdate.do">
 				<div class="">
 					<fieldset>
 						<legend>휴대폰 본인확인 입력</legend>
@@ -248,7 +248,7 @@
 					<div class="certi_btn_area">
 						<ul class="btn_area2 bt2">
 							<li><button type="button" id="btnCancel"
-									class="btn_r btn_type6" onclick="top.window.close();">취소</button></li>
+									class="btn_r btn_type6">취소</button></li>
 							<li><button type="button" id="btnSubmit"
 									class="btn_r btn_type btn_type3">확인</button></li>
 						</ul>
@@ -346,12 +346,17 @@
 			type="hidden" name="reqCriOSYn" value="Y">
 	</form>
 
-	<script language="JavaScript">
-		function goTotMove(){
-			document.KmcisTotFom.submit();
-		}
-	</script>
 <script>
+	$("#btnCancel").on("click", function () {
+		location.href = "<%=contextPath%>/olive/userInfo.do";
+	});
+$(function () {
+    $('#securityNum').keydown(function(event) {
+    	if ( event.which == 13 ){
+    		$("#btnSubmit").click();	
+    	}
+    });	
+}); 
 	$("#btnSubmit").on("click", function () {
 		$("#cplogn").submit();
 		
