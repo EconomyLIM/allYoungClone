@@ -18,11 +18,6 @@
 <body>
 	
 	<script>
-		// 세 자리마다 , 찍기
-		function formatStringWithCommas(str) {
-		    return str.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		}
-	
 		// form check
 		function formCheck() {
 			if($("#btn_dlvp_exist").prop("checked")) {
@@ -387,7 +382,7 @@
 			
 			
 			// 가지고 있는 포인트 표시
-			$("#cjonePnt").text(formatStringWithCommas('${logOn.u_point}'));
+			$("#cjonePnt").text('${logOn.u_point}');
 			
 			
 			// 동의 부분 처리
@@ -497,16 +492,13 @@
 			for (var i = 0; i < pur_price.length; i++) {
 				totalPrice += parseInt($(pur_price[i]).find("span").data("price"));
 			}
-			
 			$("#orderForm > div.order_payment_box > div.right_area > ul > li:nth-child(1) > span.tx_cont > span")
-				.text(formatStringWithCommas(totalPrice));
+				.text(totalPrice);
 			$("#totPayAmt_sum_span").text(totalPrice.toLocaleString());
 			$("#totalPrice").val(totalPrice);
 			$("#totalPay").val(totalPrice);
 			
-			
-			
-			
+
 			// 오늘드림을 누르고 왔을 때
 			let quickYN = '${quickYN}';
 			if(quickYN == 'Y') {
