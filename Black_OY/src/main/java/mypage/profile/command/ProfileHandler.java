@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.CommandHandler;
+import mypage.profile.domain.PfIntCateDTO;
+import mypage.profile.domain.PfSkinTrbDTO;
 import mypage.profile.domain.ProfileDTO;
 import mypage.profile.service.ProfileService;
 import user.domain.LogOnDTO;
@@ -32,8 +34,8 @@ public class ProfileHandler implements CommandHandler{
 		
 		//초기화
 		List<ProfileDTO> profileInfo = null;
-		List<String> skintrouble = null;
-		List<String> intcate = null;
+		List<PfSkinTrbDTO> skintrouble = null;
+		List<PfIntCateDTO> intcate = null;
 
 		//서비스
 		profileInfo = service.pfinfoService(userId);
