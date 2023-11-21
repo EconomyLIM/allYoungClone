@@ -20,6 +20,7 @@ import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.DetailInfoDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
+import productDetail.domain.ProductMoreDTO;
 import productDetail.domain.ProductPromo;
 import productDetail.domain.QnADetailDTO;
 import productDetail.domain.WrtieQnaDTO;
@@ -713,6 +714,73 @@ public class ProDetailDAOImpl implements ProDetailDAO{
 		
 		return rowCnt;
 	}
+
+	// 상품 추천
+	@Override
+	public List<ProductMoreDTO> proMore(Connection conn, String cateM) throws Exception {
+		String sql = " select PRO_DISPL_SRC, BRAND_NAME, BRAND_ID, PRO_DISPL_NAME, PROPRICE, p.CAT_L_ID, p.CAT_M_ID, p.CAT_S_ID, AFTERPRICE, PRO_DISPL_ID, PRO_ID, PRC, PDC, PMP, STOCK, ORDERCNT, PRO_STOCK, PRO_DISPL_LIKE, PRO_REG, cat_m_name "
+				+ " from pmlistview p "
+				+ " join cate_m cm on p.cat_m_id = cm.cat_m_id "
+				+ " where p.cat_m_id = ? ";
+		
+		PreparedStatement pstmt = null;
+		ProductMoreDTO productMoreDTO = null;
+		List<ProductMoreDTO> list = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cateM);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				list = new ArrayList<>();
+				do {
+					productMoreDTO = ProductMoreDTO.builder()
+							.PRO_DISPL_SRC(rs.getString("PRO_DISPL_SRC")) 
+							.BRAND_NAME(rs.getString("BRAND_NAME"))    
+							.BRAND_ID(rs.getString("BRAND_ID"))      
+							.PRO_DISPL_NAME(rs.getString("PRO_DISPL_NAME"))
+							.PROPRICE(rs.getInt("PROPRICE"))      
+							.CAT_L_ID(rs.getString("CAT_L_ID"))      
+							.CAT_M_ID(rs.getString("CAT_M_ID"))      
+							.CAT_S_ID(rs.getString("CAT_S_ID"))      
+							.AFTERPRICE(rs.getInt("AFTERPRICE"))    
+							.PRO_DISPL_ID(rs.getString("PRO_DISPL_ID"))  
+							.PRO_ID(rs.getString("PRO_ID"))        
+							.PRC(rs.getInt("PRC"))           
+							.PDC(rs.getString("PDC"))           
+							.PMP(rs.getString("PMP"))           
+							.STOCK(rs.getInt("STOCK"))         
+							.ORDERCNT(rs.getInt("ORDERCNT"))      
+							.PRO_STOCK(rs.getInt("PRO_STOCK"))     
+							.PRO_DISPL_LIKE(rs.getInt("PRO_DISPL_LIKE"))
+							.PRO_REG(rs.getString("PRO_REG"))   
+							.cat_m_name(rs.getString("cat_m_name"))
+							.build();
+							
+							
+							list.add(productMoreDTO);
+					
+				} while (rs.next());
+				System.out.println(">> proDetailDAOImpl detailQna... ");
+			} // if
+			
+		} catch (SQLException e) {
+			System.out.println(">proDetailDAOImpl detailQna SQLException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(">proDetailDAOImpl detailQna Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		} //try_catch
+		
+		return list;
+	}//proMore
 
 	
 

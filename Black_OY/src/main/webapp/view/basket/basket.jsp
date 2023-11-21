@@ -8,6 +8,9 @@
 <%
 ArrayList<BasketDTO> basketList = (ArrayList) request.getAttribute("list");
 String quickyn = request.getParameter("quickyn");
+if(quickyn == null || quickyn.equals("")){
+	quickyn = "N";
+}
 %>
 
 
@@ -22,6 +25,33 @@ String quickyn = request.getParameter("quickyn");
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
+<script>
+//등급 색깔 
+$(function(){
+let grade_id = "${logOn.grade_id}";
+let grade = grade_id.split(" ")[0];
+
+let gradeColor = ""
+switch (grade) {
+case 'BABY': 
+	gradeColor = 'iconGrade5';
+	break;
+case 'PINK': 
+	gradeColor = 'iconGrade4';
+	break;
+case 'GREEN': 
+	gradeColor = 'iconGrade3';
+	break;
+case 'BLACK': 
+	gradeColor = 'iconGrade2';
+	break;
+case 'GOLD': 
+	gradeColor = 'iconGrade1';
+	break;
+}
+$("#Contents > div.membership_box").addClass(gradeColor);
+})
+</script>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
 	<div>
 		<div id="Contents">
@@ -51,7 +81,7 @@ String quickyn = request.getParameter("quickyn");
 
 
 
-			<div class="membership_box  iconGrade5">
+			<div class="membership_box">
 				<p class="tx_grade_info">
 					<strong>${sessionScope.logOn.u_name}</strong>님의 멤버십 등급은 <span
 						class="grade">${sessionScope.logOn.grade_id} </span>입니다
@@ -272,7 +302,7 @@ String quickyn = request.getParameter("quickyn");
 								<div class="tbl_cell w390">
 									<div class="prd_info ">
 
-										<a class="prd_img" href="#"> <img
+										<a class="prd_img" href="/Black_OY/olive/productDetail.do?goodsNo=${bpl.displId }&displNum=${bpl.lid}${bpl.mid}"> <img
 											data-original="https://image.oliveyoung.co.kr/uploads/images/goods/220/10/0000/0018/A00000018412902ko.jpg?l=ko"
 											class="completed-seq-lazyload" alt="상품이미지"
 											onerror="common.errorImg(this);" src="${bpl.displImgSrc }">
@@ -287,7 +317,7 @@ String quickyn = request.getParameter("quickyn");
 
 
 
-										<a class="prd_name" href="#"> <span class="tx_sale_info">
+										<a class="prd_name" href="/Black_OY/olive/productDetail.do?goodsNo=${bpl.displId }&displNum=${bpl.lid}${bpl.mid}"> <span class="tx_sale_info">
 										</span> <!-- 브랜드명 및 할인정보 --> <span id="brandNm">${bpl.brandName }
 										</span>
 											<p id="goodsNm">${bpl.displProName }</p>

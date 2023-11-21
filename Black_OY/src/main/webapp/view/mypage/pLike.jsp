@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="/WEB-INF/inc/include.jspf" %>
 <%@ include file="/WEB-INF/inc/session_auth.jspf" %>
 <!DOCTYPE html>
@@ -36,15 +37,15 @@
 					</div>
 
 					<ul class="comm1sTabs mgzero">
-						<li class="on"><a>상품</a></li>
+						<li class="on"><a href="<%= contextPath%>/olive/Like.do">상품</a></li>
 						<li><a href="#" class="moveBrndWish">브랜드</a></li>
 					</ul>
 					
-					<c:set value="${  }"></c:set>
+					 <c:set value="${ pLike }" var="plike" />
 					
 					<div class="result-common">
 						<span class="num">
-							<strong>전체 <em>5</em>개</strong>
+							<strong>전체 <em>${ fn:length(plike) }</em>개</strong>
 							<span class="txt">좋아요 상품은 최대 <em>120일간</em> 보관됩니다.</span>
 						</span>
 
@@ -68,49 +69,74 @@
 							</tr>
 						</thead>
 						<tbody>
-
-
-							<tr class="">
-								<td class="subject"><div class="area">
-										<a href="javascript:;" name="Like" class="thum goodsList"
-											data-ref-goodsno="A000000190116" data-ref-dispcatno=""
-											data-ref-itemno="001">
-											<img src="<%-- 상품표시이미지 --%>"
-											alt="[한정기획] 아이소이 10년간, 1등 잡티세럼 20ml+20ml+15ml 증량 기획"
-											onerror="common.errorImg(this);">
-										</a>
-										<div class="textus">
-											<a href="javascript:;" name="Like" class="goodsList"
-												data-ref-goodsno="A000000190116" data-ref-dispcatno=""
-												data-ref-itemno="001">
-												<span class="tit">아이소이</span>
-												<span class="txt">[한정기획] 아이소이 10년간, 1등 잡티세럼 20ml+20ml+15ml
-													증량 기획</span>
-											</a>
-											<div class="prd_flag mgT10">
-												<span class="icon_flag blank"></span>
+						
+						<c:choose>
+							<c:when test="${ not empty pLike }">
+								<c:forEach items="${ pLike }" var="pl">
+									<tr class="">
+										<td class="subject"><div class="area">
+												<a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${pl.plpdispId}&displNum=${pl.plcsid}${pl.plcmid}" name="Like" class="thum goodsList"
+													data-ref-goodsno="${ pl.plpdispId }" data-ref-dispcatno=""
+													data-ref-itemno="001">
+													<img src="${ pl.plImgsrc }"
+													alt="${ pl.plpdispN }"
+													onerror="common.errorImg(this);">
+												</a>
+												<div class="textus">
+													<a href="<%=contextPath %>/olive/productDetail.do?goodsNo=${pl.plpdispId}&displNum=${pl.plcsid}${pl.plcmid}" name="Like" class="goodsList"
+														data-ref-goodsno="${ pl.plpdispId }" data-ref-dispcatno=""
+														data-ref-itemno="001">
+														<span class="tit">${ pl.plbrand }</span>
+														<span class="txt">${ pl.plpdispN }</span>
+													</a>
+														<div class="prd_flag mgT10">														
+															<c:if test="${ pl.pmd eq 1 }">
+																<span class="icon_flag sale">세일</span>
+															</c:if>
+															<c:if test="${ pl.pmp eq 1 }">
+																<span class="icon_flag gift">증정</span>
+															</c:if>
+															<c:if test="${ pl.pmc eq 1 }">
+																<span class="icon_flag coupon">쿠폰</span>
+															</c:if>
+															<c:if test="${	pl.stock > 0}">
+																<span class="icon_flag delivery">오늘드림</span>
+															</c:if>
+														</div>
+													</div>
 											</div>
-										</div>
-									</div>
-									</td>
-								<td>
-									<p class="won">
-										54,000<em>원</em>
-									</p></td>
+											</td>
+										
+										<td>
+											<p class="sale">
+												${ pl.plpricep }<em>원</em> 
+											</p>
+											<p class="won">
+												${ pl.plpricea }<em>원</em>
+											</p>
+										</td>
+		
+										<td>
+											<button type="button" class="BtnCart cartBtn"
+												data-ref-goodsno="A000000190116" data-ref-itemno="001"
+												name="Like">장바구니</button>
+											<br>
+											<button type="button" class="BtnDelete delBtn"
+												data-ref-goodsno="${ pl.plpdispId }">삭제</button>
+										</td>
+									</tr>
+															
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<tr style="display:none;">
+									<td class="nodata" colspan="3">좋아요 상품이 없습니다.</td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
 
-								<td>
-									<button type="button" class="BtnCart cartBtn"
-										data-ref-goodsno="A000000190116" data-ref-itemno="001"
-										name="Like">장바구니</button>
-									<br>
-									<button type="button" class="BtnDelete delBtn"
-										data-ref-goodsno="A000000190116">삭제</button>
-								</td>
-							</tr>
-
-							<tr style="display:none;">
-								<td class="nodata" colspan="3">좋아요 상품이 없습니다.</td>
-							</tr>
+							
+							
 
 						</tbody>
 					</table>
@@ -138,6 +164,36 @@
 		</div>
 
 	</div>
+<script>
+//좋아요 상품 하나 삭제
+$("button.BtnDelete.delBtn").on("click", function() {
+	var result = confirm("정말 삭제하시겠습니까?")
+	let deltype = 0;
+	let pdispId = null;
+	if (result) {
+		pdispId = $(this).attr("data-ref-goodsno");
+		var url = '<%= contextPath %>/olive/LikeDelete.do' + '?DelType=' + encodeURIComponent(deltype) + '&Del=' + encodeURIComponent(pdispId);
+		location.href = url;
+	} 
+});
+
+//좋아요 전체 상품 삭제
+$("button.all-delete").on("click", function() {
+	var result = confirm("정말 삭제하시겠습니까?")
+	let deltype = 1;
+	let pdispId = null;
+	if (result) {
+		var url = '<%= contextPath %>/olive/LikeDelete.do' + '?DelType=' + encodeURIComponent(deltype) + '&Del=';
+		location.href = url;
+	} 
+})
+
+$("a.moveBrndWish").on("click", function() {
+	var url = '<%= contextPath %>/olive/Like.do' + '?bnd=y';
+	location.href = url;
+})
+
+</script>
 
 
 

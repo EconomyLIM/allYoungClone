@@ -15,6 +15,7 @@ import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.DetailInfoDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
+import productDetail.domain.ProductMoreDTO;
 import productDetail.domain.ProductPromo;
 import productDetail.domain.QnADetailDTO;
 import productDetail.domain.WrtieQnaDTO;
@@ -340,7 +341,27 @@ public class ProDetailService {
 		return rowCnt;
 	} // sCollectView
 	
-	
+	// 상품 추천
+	public List<ProductMoreDTO> promoreService(String cateM){
+		Connection conn = null;
+		List<ProductMoreDTO> list = null;
+		
+		try {
+			
+			conn = ConnectionProvider.getConnection();
+			ProDetailDAOImpl proDetailDAOImpl = ProDetailDAOImpl.getInstance();
+			list = proDetailDAOImpl.proMore(conn, cateM);
+			System.out.println("> promoreService  call..");
+			
+		} catch (Exception e) {
+			System.out.println("promoreService Exception");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn);
+		} // try_catch
+		
+		return list;
+	}//promoreService
 	
 
 } // class

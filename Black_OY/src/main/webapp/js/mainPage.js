@@ -3,7 +3,7 @@
  */
 
 /***  main full banner ***/
-
+/*
 let timer;
 let flag = false; // main full banner의 timer 조건
 
@@ -63,7 +63,7 @@ $(function() {
 			});
 			
 		$("#contsInfoBeginNum").html(`${index+1}`);
-	});*/
+	});
 });
 
 // 매개변수를 안주면 현재페이지+1
@@ -94,3 +94,4 @@ function mainFullSlider(addIndex = 1) {
 		
 	$("#mainFullSlider .slick-paging .cur_no").html(`${index+1}`);
 }
+*/

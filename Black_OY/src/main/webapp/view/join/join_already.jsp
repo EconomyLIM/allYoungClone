@@ -72,7 +72,7 @@
 								</div>
 								<div class="btn_sec">
 									<!-- 간편인증 시  -->		
-						                <a href="#" class="btn">아이디 찾기</a>   
+						                <!-- <a href="#" class="btn">아이디 찾기</a>    -->
 									<a href="/Black_OY/olive/LogOn.do" class="btn btn_em">로그인</a>
 								</div>		
 							</div>

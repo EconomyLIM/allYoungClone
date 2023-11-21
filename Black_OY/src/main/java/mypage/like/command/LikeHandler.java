@@ -27,6 +27,9 @@ public class LikeHandler implements CommandHandler {
 		
 		//유저정보가져오기
 		String userId = null;
+		String bnd = "";
+		
+		bnd = request.getParameter("bnd");
 		
 		Connection conn = ConnectionProvider.getConnection();
 				
@@ -52,8 +55,7 @@ public class LikeHandler implements CommandHandler {
 		//좋아요
 		List<BLikeDTO> bLike = null;
 		List<MpPlikeDTO> pLike = null;
-		int rownum = 0;
-		
+	
 		//서비스
 		userInfo = mpservice.mpUIservice(userId);
 		userPoint = mpservice.mpUPservice(userId);
@@ -63,14 +65,7 @@ public class LikeHandler implements CommandHandler {
 		//좋아요
 		bLike = service.blListservice(userId);
 		pLike = service.plListservice(userId);
-		
-		//삭제 아마 case문?
-		rownum = service.blDelAllservice(userId);
-		rownum = service.blDelservice(userId, userId);
-		rownum = service.plDelAllservice(userId);
-		rownum = service.plDelservice(userId, userId);
-		
-		
+
 		request.setAttribute("userInfo", userInfo);
 		request.setAttribute("userPoint", userPoint);
 		request.setAttribute("userCoupon", userCoupon);
@@ -79,9 +74,15 @@ public class LikeHandler implements CommandHandler {
 		
 		request.setAttribute("bLike", bLike);
 		request.setAttribute("pLike", pLike);
-		request.setAttribute("rownum", rownum);
 		
-		return "view/mypage/pLike.jsp";
+		if ( bnd == null ) {
+			return "/view/mypage/pLike.jsp";
+		} 	else {
+			
+			return "/view/mypage/bLike.jsp";
+		}
+		
+		
 	}
 	
 		

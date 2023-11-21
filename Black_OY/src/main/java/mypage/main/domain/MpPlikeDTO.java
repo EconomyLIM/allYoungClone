@@ -16,6 +16,8 @@ public class MpPlikeDTO {
 		private String plImgsrc;			//상품좋아요 이미지경로
 		private String plbrand;				//상품좋아요 브랜드명
 		private String plpdispN;			//상품좋아요 상품표시명			
+		private String plcsid;				//상품좋아요 상품소분류
+		private String plcmid;				//상품좋아요 상품중분류
 		private String plpricep;			//상품좋아요 가격
 		private String plpricea;			//상품좋아요 할인된가격
 	   	private String plpdispId;			//상품좋아요 상품표시id

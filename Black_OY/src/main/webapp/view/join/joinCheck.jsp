@@ -30,7 +30,7 @@
 	<!--contents-->
 	<div id="contentsWrap">
 		<div id="contents">
-			<form method="post" id="form1" name="form1" action="">
+			<form method="post" id="form1" name="form1" action="<%=contextPath %>/olive/joinCheck.do">
 - 				<input type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
 				<input type="hidden" name="brnd_cd" id="brnd_cd" value="3000">
 				<input type="hidden" name="mcht_no" id="mcht_no" value="3000">
@@ -74,7 +74,7 @@
 								<span class="input_txt w450"><input type="text" class="text" id="mob_no" name="mob_no" placeholder="휴대전화번호 뒤 7~8자리를 입력해주세요. (01X 제외)" title="휴대전화번호 뒤 7~8자리를 입력해주세요. (01X 제외)" data-format="num" maxlength="8" autocomplete="off"></span>
 								<p class="msg_info hide" id="msg_mob_no">국번제외한 휴대폰번호를 입력해주세요. (ex.010-123-5678 &gt; 1235678)</p>
 								<div class="btn_sec">
-									<a href="javascript:submitForm();" class="btn btn_em" id="btnCheRegister">가입여부 확인</a>
+									<a href="#" class="btn btn_em" id="btnCheRegister">가입여부 확인</a>
 								</div> 
 							</div>
 						</div>
@@ -129,41 +129,63 @@
     </div>
     <!-- //footer -->
 </div>
-<script>
-$('#btnCheRegister').keydown(function(event) {
-	if (event.keyCode == 13) submitForm();
-});
-</script>
-<script>
-// 가입여부 확인 입력오류 메세지 출력
-document.getElementById("user_nm").addEventListener("input", checkField);
-document.getElementById("legl_birth_dy").addEventListener("input", checkField);
-document.getElementById("mob_no").addEventListener("input", checkField);
-
-function checkField(event) {
-    var inputField = event.target; // 변경된 입력 필드
-    var msgElement = document.getElementById("msg_" + inputField.id); // 해당 메시지 태그
-
-    if (inputField.textContent == "") {
-        msgElement.classList.remove("hide");
-        msgElement.classList.add("show");
-    } else {
-        msgElement.classList.remove("show");
-        msgElement.classList.add("hide");
-    }
-}
-
-</script>
 
 <script>
-function submitForm() {
-	$("#form1").attr("action", "/Black_OY/olive/joinCheck.do");
-	$("#form1").submit(); 
-}
 $("#btnCheRegister").on("click", function (event) {
 	event.preventDefault();
-	submitForm();
-});	
+	if(inputCheck() ){
+	$("#form1").submit();
+	}
+});	 
+
+function inputCheck() {
+	var isValid = true;	
+	if($("#user_nm").val() == "") {
+		$("#msg_user_nm").removeClass("hide");
+		$("#msg_user_nm").addClass("show");
+		$("#user_nm").focus();
+		 isValid = false;
+	}else if($("#legl_birth_dy").val() == "" ) {
+		$("#msg_legl_birth_dy").removeClass("hide");
+		$("#msg_legl_birth_dy").addClass("show");
+		$("#legl_birth_dy").focus();
+		 isValid = false;
+		 
+	}else if($("#legl_birth_dy").val().length<8 ) {
+		$("#msg_legl_birth_dy").removeClass("hide");
+		$("#msg_legl_birth_dy").addClass("show");
+		$("#legl_birth_dy").focus();
+		isValid = false;
+	}else  if($("#mob_no").val() == "" ) {
+		$("#msg_mob_no").removeClass("hide");
+		$("#msg_mob_no").addClass("show");
+		$("#mob_no").focus();
+		isValid = false;
+	}else if($("#mob_no").val().length<7) {
+		$("#msg_mob_no").removeClass("hide");
+		$("#msg_mob_no").addClass("show");
+		$("#mob_no").focus();
+		 isValid = false;
+	}
+	if(isValid){
+	$("#msg_user_nm").addClass("hide");
+	$("#msg_legl_birth_dy").addClass("hide");
+	$("#msg_mob_no").addClass("hide");
+	}
+	return isValid;
+}
+</script>
+
+<script>
+$(function () {
+    $('#mob_no').keydown(function(event) {
+    	if ( event.which == 13 ){
+    		$("#btnCheRegister").click();	
+    	}
+    });	
+}); 
+
+
 </script>
 </body>
 </html>

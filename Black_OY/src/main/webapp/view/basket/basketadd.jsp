@@ -260,7 +260,7 @@
 											<div class="tbl_cell w390">
 												<div class="prd_info ">
 
-													<a class="prd_img" href="#"> <img
+													<a class="prd_img" href="/Black_OY/olive/productDetail.do?goodsNo=${bpl.displId }&displNum=${bpl.lid}${bpl.mid}"> <img
 														data-original="https://image.oliveyoung.co.kr/uploads/images/goods/220/10/0000/0018/A00000018412902ko.jpg?l=ko"
 														class="completed-seq-lazyload" alt="상품이미지"
 														onerror="common.errorImg(this);" src="${bpl.displImgSrc }">
@@ -275,7 +275,7 @@
 
 
 
-													<a class="prd_name" href="#"> <span
+													<a class="prd_name" href="/Black_OY/olive/productDetail.do?goodsNo=${bpl.displId }&displNum=${bpl.lid}${bpl.mid}"> <span
 														class="tx_sale_info"> </span> <!-- 브랜드명 및 할인정보 --> <span
 														id="brandNm">${bpl.brandName } </span>
 														<p id="goodsNm">${bpl.displProName }</p>

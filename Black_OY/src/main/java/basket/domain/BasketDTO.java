@@ -13,8 +13,8 @@ public class BasketDTO {
 	private String displImgSrc;
 	private String brandName;
 	private String displProName;
-	private String lId;
-	private String mId;
+	private String lid;
+	private String mid;
 	private String sId;
 	private String proPrice;
 	private String afterPrice;

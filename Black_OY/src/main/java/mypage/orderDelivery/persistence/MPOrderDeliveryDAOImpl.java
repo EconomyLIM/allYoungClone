@@ -26,21 +26,25 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 	@Override
 	public List<MPODOrderDTO> selectUOrder(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT order_id, order_date, pro_displ_src, brand_name, pro_displ_name, pro_name, product_cnt, order_status, total_price, refund_date, refund_status "
+		String sql = " SELECT order_id, order_date, pro_displ_src,  csid,  cmid, "
+				+ "       brand_name, pro_displ_name, pro_name, product_cnt, order_status, total_price, "
+				+ "       refund_date, refund_status "
 				+ " FROM ( "
 				+ "    SELECT "
 				+ "        o.order_id, "
 				+ "        order_date, "
 				+ "        pro_displ_src, "
+				+ "        cs.cat_s_id csid, "
+				+ "        cm.cat_m_id cmid, "
 				+ "        brand_name, "
 				+ "        pro_displ_name, "
 				+ "        pro_name, "
 				+ "        product_cnt, "
 				+ "        order_status, "
-				+ "		   total_price, "
+				+ "        total_price, "
 				+ "        refund_date, "
 				+ "        refund_status, "
-				+ "        ROW_NUMBER() OVER (PARTITION BY pro_name ORDER BY rownum) AS rn "
+				+ "        ROW_NUMBER() OVER (PARTITION BY p.pro_name ORDER BY o.order_id) AS rn "
 				+ "    FROM o_order o "
 				+ "    LEFT JOIN order_product op ON o.order_id = op.order_id "
 				+ "    LEFT JOIN product p ON op.product_id = p.pro_id "
@@ -51,8 +55,10 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 				+ "        LEFT JOIN brand b ON pd.brand_id = b.brand_id "
 				+ "    ) pd ON p.pro_displ_id = pd.pro_displ_id "
 				+ "    LEFT JOIN refund r ON o.order_id = r.order_id "
-				+ "	   LEFT JOIN payment pm ON o.order_id = pm.order_id "
-				+ "    where user_id = ? "
+				+ "    LEFT JOIN payment pm ON o.order_id = pm.order_id "
+				+ "    LEFT JOIN cate_s cs ON p.cat_s_id = cs.cat_s_id "
+				+ "    LEFT JOIN cate_m cm ON cs.cat_m_id = cm.cat_m_id "
+				+ "    WHERE user_id = ? "
 				+ " ) subquery "
 				+ " WHERE rn = 1  ";
 		
@@ -73,6 +79,8 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 				dto.setUodDate(rs.getDate("order_date"));
 				dto.setUodOrderId(rs.getString("order_id"));
 				dto.setUodDisplsrc(rs.getString("pro_displ_src"));
+				dto.setUodcsid(rs.getString("csid"));
+				dto.setUodcmid(rs.getString("cmid"));
 				dto.setUodBrand(rs.getString("brand_name"));
 				dto.setUodDisplN(rs.getString("pro_displ_name"));
 				dto.setUodProN(rs.getString("pro_name"));
@@ -89,6 +97,7 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 		}
 		
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryDAOImpl_selectUOrder() Exception");
 		}
 		return list;
@@ -162,6 +171,7 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 		}
 		
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryDAOImpl_selectUOrder() Exception");
 		}
 		return list;
@@ -204,6 +214,7 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 		}
 		
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryDAOImpl_selectUODelivery() Exception");
 		}
 		return list;
@@ -250,6 +261,7 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 		}
 		
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryDAOImpl_selectUOPayment() Exception");
 		}
 		return list;		
@@ -262,12 +274,16 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 	public List<MPODOrderDTO> searchUOrder(Connection conn, String uId, String start, String end, String type)
 			throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT order_id, order_date, pro_displ_src, brand_name, pro_displ_name, pro_name, product_cnt, order_status, total_price, refund_date, refund_status "
+		String sql = " SELECT order_id, order_date, pro_displ_src,  csid,  cmid, "
+				+ "       brand_name, pro_displ_name, pro_name, product_cnt, order_status, total_price, "
+				+ "       refund_date, refund_status "
 				+ "FROM ( "
 				+ "    SELECT "
 				+ "        o.order_id, "
 				+ "        order_date, "
 				+ "        pro_displ_src, "
+				+ "        cs.cat_s_id AS csid, "
+				+ "        cm.cat_m_id AS cmid, "
 				+ "        brand_name, "
 				+ "        pro_displ_name, "
 				+ "        pro_name, "
@@ -276,7 +292,7 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 				+ "        total_price, "
 				+ "        refund_date, "
 				+ "        refund_status, "
-				+ "        ROW_NUMBER() OVER (PARTITION BY p.pro_id ORDER BY rownum) AS rn "
+				+ "        ROW_NUMBER() OVER (PARTITION BY p.pro_name ORDER BY o.order_id) AS rn "
 				+ "    FROM o_order o "
 				+ "    LEFT JOIN order_product op ON o.order_id = op.order_id "
 				+ "    LEFT JOIN product p ON op.product_id = p.pro_id "
@@ -287,8 +303,10 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 				+ "        LEFT JOIN brand b ON pd.brand_id = b.brand_id "
 				+ "    ) pd ON p.pro_displ_id = pd.pro_displ_id "
 				+ "    LEFT JOIN refund r ON o.order_id = r.order_id "
-				+ "    left join payment pm on o.order_id = pm.order_id "
-				+ "    where user_id = ? "
+				+ "    LEFT JOIN payment pm ON o.order_id = pm.order_id "
+				+ "    LEFT JOIN cate_s cs ON p.cat_s_id = cs.cat_s_id "
+				+ "    LEFT JOIN cate_m cm ON cs.cat_m_id = cm.cat_m_id "
+				+ "    WHERE user_id = ? "
 				+ "        and order_date between to_date( ? ,'YYYY-MM-DD' ) and to_date( ? , 'YYYY-MM-DD') "
 				+ "        and order_type = ? "
 				+ ") subquery "
@@ -315,6 +333,8 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 				dto.setUodDate(rs.getDate("order_date"));
 				dto.setUodOrderId(rs.getString("order_id"));
 				dto.setUodDisplsrc(rs.getString("pro_displ_src"));
+				dto.setUodcsid(rs.getString("csid"));
+				dto.setUodcmid(rs.getString("cmid"));
 				dto.setUodBrand(rs.getString("brand_name"));
 				dto.setUodDisplN(rs.getString("pro_displ_name"));
 				dto.setUodProN(rs.getString("pro_name"));
@@ -331,6 +351,7 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 		}
 		
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryDAOImpl_selectUOrder() Exception");
 		}
 		
@@ -341,12 +362,16 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 	public List<MPODOrderDTO> searchUOrder(Connection conn, String uId, String start, String end)
 			throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT order_id, order_date, pro_displ_src, brand_name, pro_displ_name, pro_name, product_cnt, order_status, total_price, refund_date, refund_status "
+		String sql = " SELECT order_id, order_date, pro_displ_src,  csid,  cmid, "
+				+ "       brand_name, pro_displ_name, pro_name, product_cnt, order_status, total_price, "
+				+ "       refund_date, refund_status "
 				+ "FROM ( "
 				+ "    SELECT "
 				+ "        o.order_id, "
 				+ "        order_date, "
 				+ "        pro_displ_src, "
+				+ "        cs.cat_s_id AS csid, "
+				+ "        cm.cat_m_id AS cmid, "
 				+ "        brand_name, "
 				+ "        pro_displ_name, "
 				+ "        pro_name, "
@@ -355,7 +380,7 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 				+ "        total_price, "
 				+ "        refund_date, "
 				+ "        refund_status, "
-				+ "        ROW_NUMBER() OVER (PARTITION BY p.pro_id ORDER BY rownum) AS rn "
+				+ "        ROW_NUMBER() OVER (PARTITION BY p.pro_name ORDER BY o.order_id) AS rn "
 				+ "    FROM o_order o "
 				+ "    LEFT JOIN order_product op ON o.order_id = op.order_id "
 				+ "    LEFT JOIN product p ON op.product_id = p.pro_id "
@@ -366,8 +391,10 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 				+ "        LEFT JOIN brand b ON pd.brand_id = b.brand_id "
 				+ "    ) pd ON p.pro_displ_id = pd.pro_displ_id "
 				+ "    LEFT JOIN refund r ON o.order_id = r.order_id "
-				+ "    left join payment pm on o.order_id = pm.order_id "
-				+ "    where user_id = ? "
+				+ "    LEFT JOIN payment pm ON o.order_id = pm.order_id "
+				+ "    LEFT JOIN cate_s cs ON p.cat_s_id = cs.cat_s_id "
+				+ "    LEFT JOIN cate_m cm ON cs.cat_m_id = cm.cat_m_id "
+				+ "    WHERE user_id = ? "
 				+ "        and order_date between to_date( ? ,'YYYY-MM-DD' ) and to_date( ? , 'YYYY-MM-DD') "
 				+ ") subquery "
 				+ "WHERE rn = 1  ";
@@ -392,6 +419,8 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 				dto.setUodDate(rs.getDate("order_date"));
 				dto.setUodOrderId(rs.getString("order_id"));
 				dto.setUodDisplsrc(rs.getString("pro_displ_src"));
+				dto.setUodcsid(rs.getString("csid"));
+				dto.setUodcmid(rs.getString("cmid"));
 				dto.setUodBrand(rs.getString("brand_name"));
 				dto.setUodDisplN(rs.getString("pro_displ_name"));
 				dto.setUodProN(rs.getString("pro_name"));
@@ -408,6 +437,7 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 		}
 		
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryDAOImpl_selectUOrder() Exception");
 		}
 		

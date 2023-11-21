@@ -413,29 +413,7 @@
 														</p>
 													</td>
 				
-			 	<script>
-				var sel;
-				var str = "${u_birth}";
-				const result1=str.substr(0,4);	
-				const result2=str.substr(4,2);		
-				const result3=str.substr(6,2);
-				
-				
-				sel = $("#birth_yy");
-				var selYYvalue =result1;
-				
-				sel.find("option[value='" + selYYvalue + "']").prop("selected", true);
-				
-				sel = $("#birth_mm");
-				var selMMvalue =result2;
-				
-				sel.find("option[value='" + selMMvalue + "']").prop("selected", true);
-				
-				sel = $("#birth_dd");
-				var selDDvalue =result3;
-				
-				sel.find("option[value='" + selDDvalue + "']").prop("selected", true);
-				</script>
+		
 												</tr>
 												<tr class="input">
 													<th scope="row" class="mandatory"
@@ -492,25 +470,6 @@
 									</tbody>
 									</table>
 									</div>
-			<script>
-				$("#email_addr2").val( $("#email_addr_opt").val() );
-				$("#email_addr_opt").change(function () {
-					$("#email_addr2").val( $("#email_addr_opt").val() );
-				});
-				</script>
-	<script>
-	var str = "${u_tel}";
-	const result4=str.substr(0,4);		
-	const result5=str.substr(4,4);	
-				let str1 = result4;
-				let str2 = result5;
-				let strAll = "010" + str1.replace(str1, '****') +str2;
-				$("#mob_no").val(strAll);
-	</script>					
-	<script>
-		$("#u_tel").val("010-"+str1+"-"+str2);
-	</script>
-
 									<div class="btn_sec">
 										<button type="button" class="btn" id="btncancel">취소</button>
 										<button type="button" class="btn btn_em" id="btnok">등록</button>
@@ -671,7 +630,7 @@
 	<!--script 영역-->
 
 	<script type="text/javascript">
-		$(document).ready(
+	/* 	$(document).ready(
 				function() {
 
 					if ($('#upd_coopco_id').val() == '') {
@@ -711,28 +670,8 @@
 						}
 
 					});
-
-					function setRcmEvt() {
-
-						$.ajax({
-							url : "/cjmweb/join/getRcmSeq.do",
-							dataType : "json",
-							async : false,
-							type : "POST",
-							success : function(data) {
-								if (data.rcm_conf_seq != "") {
-									$('#recommender_tr').removeClass("hide");
-									$('#rcm_conf_seq').val(data.rcm_conf_seq);
-								}
-
-							},
-							error : function(data) {
-								alert(data.msg);
-							}
-						});
-					}
-
-					$('#mbr_id').change(function() {
+ */
+			/* 		$('#mbr_id').change(function() {
 						$('#id_validate').val('N');
 						//showErrorMsg("mbr_id", "mbr_id_dupcheck");
 						alertMsg("alert_mbr_id", "아이디 중복확인을 해주세요.");
@@ -778,98 +717,9 @@
 					}
 				});
 
-	/* 	// 오프라인 회원정보
-		function setUserInfo() {
-			// 기본정보 hidden
-			if ('' != '') {
-				$('#legl_rep_nm').val('')
-			}
-			;
-			if ('' != '') {
-				$('#legl_rep_ssn1').val('')
-			}
-			;
-			if ('' != '') {
-				$('#legl_rep_ssn2').val('')
-			}
-			;
-			if ('' != '') {
-				$('#legl_rep_mob_no1').val('')
-			}
-			;
-			if ('' != '') {
-				$('#legl_rep_mob_no2').val('')
-			}
-			;
-			if ('' != '') {
-				$('#legl_rep_mob_no3').val('')
-			}
-			;
-			if ('' != '') {
-				$('#legl_rep_email_addr1').val('')
-			}
-			;
-			if ('' != '') {
-				$('#legl_rep_email_addr2').val('')
-			}
-			;
-			if ('' != '') {
-				$('#legl_rep_rel_cnts').val('')
-			}
-			;
-			if ('' != '') {
-				$('#legl_rep_agr_dy').val('')
-			}
-			;
-			if ('' != '') {
-				$('#legl_rep_agr_yn').val('')
-			}
-			;
-
-			if ('' != '') {
-				$('#email_addr1').val('')
-			}
-			;
-			if ('' != '') {
-				$('#email_addr_opt').val('')
-			}
-			;
-			if ('' != '') {
-				$('#email_addr2').val('')
-			}
-			;
-
-			// 이메일 직접입력일때
-			if ($('#email_addr2').val() != ''
-					&& ($('#email_addr_opt').val() != $('#email_addr2').val())) {
-				$('#email_addr_opt').val('0');
-			}
-
-			// 휴대폰
-			if ('' != '') {
-				$('#mob_no_1').val('')
-			}
-			;
-			if ('' != '') {
-				$('#mob_no_2').val('')
-			}
-			;
-			if ('' != '') {
-				$('#mob_no_3').val('')
-			}
-			;
-
-			// 생일
-			if ('' != '') {
-				$('#birth_yy').val('');
-				$('#birth_mm').val('');
-				$('#birth_dd').val('');
-			}
-
-		} */
-
+ */
 		// 이메일 셋팅
-		function setEmail() {
+	/* 	function setEmail() {
 			// 직접입력일때
 			if ($('#email_addr_opt').val() == '0') {
 				$('#email_addr2').attr('readonly', false);
@@ -899,37 +749,8 @@
 				$("#msg_" + id).hide();
 				msgStr = "";
 			}
-		}
+		} */
 
-		// 패스워드 강도 체크  2012.1.5
-		var pwStrength = false;
-		function checkPassword() {
-			pwStrength = false;
-			var special_chars1 = "~!@#$%&*";
-
-			var pw = new Password(document.getElementById('pwd').value,
-					special_chars1);
-			var verdict = pw.getStrength();
-
-			var hint = msgStr;
-			if (pw.lcase_count == 0)
-				hint += "";
-			if (pw.ucase_count == 0)
-				hint += "";
-			if (pw.num_count == 0)
-				hint += "";
-			if (pw.schar_count == 0)
-				hint += "";
-			if (pw.run_score <= 1)
-				hint += "";
-
-			alertMsg("alert_pwd_strength", "<em>" + verdict + " " + hint
-					+ "</em>");
-
-			if (pw.strength >= 38) {
-				pwStrength = true;
-			}
-		}
 /* 
 		function checkPasswordRule() {
 			if ($('#pwd').val() == "") {
@@ -1006,7 +827,7 @@
 		}
  */
 		// 취소
-		function goCancel() {
+/* 		function goCancel() {
 			if (!confirm('회원가입을 취소하시겠습니까?'))
 				return;
 
@@ -1330,7 +1151,7 @@
 							alert(str_msg);
 						}
 					});
-		}
+		} */
 
 		function showErrorMsg(occur_loc, occur_msg) {
 			$("#msg_pwd").addClass("hide");
@@ -1354,185 +1175,6 @@
 				$("#msg_" + occur_msg).removeClass("hide");
 			}
 		}
-
-		var flag = "invalid";
-		function checkPasswordValid() {
-			flag = "invalid";
-			$('#pwd').val($('#pwd_check').val());
-
-			var parameter = {};
-			function transHEX(a) {
-				var result = "";
-				for (var i = 0; i < a.length; ++i) {
-					var code = a.charCodeAt(i).toString(16);
-					result += '' + code;
-				}
-				return result;
-			}
-			
-			parameter.p = BASE64.encode($('#pwd').val());
-
-			if ($('#mbr_id').val() != undefined) {
-				parameter.m = BASE64.encode($('#mbr_id').val());
-			}
-
-			$.ajax({
-				url : '/cjmweb/common/check-pwd-rule.do',
-				dataType : 'json',
-				data : 'mbr_id=' + parameter.m + '&pwd=' + parameter.p,
-				async : false,
-				type : 'POST',
-				error : function(err) {
-					alertMsg("msg_pwd", "<em>" + err + "</em>");
-				},
-				success : function(response, statusText) {
-					if (response.result_code != "0000") {
-						alertMsg("msg_pwd", "<em>" + response.result_msg
-								+ "</em>");
-						alert(response.result_msg);
-						$('#pwd').focus();
-						flag = "invalid";
-					} else {
-						flag = "valid";
-					}
-				}
-			});
-		}
-/* 
-		// 회원가입 체크
-		function checkInput() {
-			if ($('#mbr_id').val().length < 6) {
-				alertMsg("alert_mbr_id",
-						"6~12자리의 영문 소문자 또는 영문 소문자+숫자 아이디를 입력해 주세요.");
-				alert("6~12자리의 영문 소문자 또는 영문 소문자+숫자 아이디를 입력해 주세요.");
-				$('#mbr_id').focus();
-				return false;
-			}
-
-			if ($('#id_validate').val() != "Y") {
-				alertMsg("alert_mbr_id", "아이디 중복확인을 해주세요.");
-				alert("아이디 중복확인을 해주세요.");
-				$('#mbr_id').focus();
-				return false;
-			}
-
-			if ($('#pwd').val().length < 6) {
-				showErrorMsg("pwd", "");
-				alert("비밀번호를 입력해 주세요.");
-				$('#pwd').focus();
-				return false;
-			}
-			$("#msg_pwd").hide();
-
-			if ($('#pwd_check').val() == "") {
-				showErrorMsg("pwd_check", "");
-				alert("입력하신 비밀번호가 일치하지 않습니다. 다시 확인해 주세요.");
-				$('#pwd_check').focus();
-				return false;
-			}
-
-			if ($("#pwd").val() != $("#pwd_check").val()) {
-				alertMsg('msg_pwd_check', "입력하신 비밀번호가 일치하지 않습니다. 다시 확인해 주세요.")
-				alert("입력하신 비밀번호가 일치하지 않습니다. 다시 확인해 주세요.");
-				$('#pwd_check').focus();
-				return false;
-			} else {
-				$("#msg_pwd_check").hide();
-			}
-
-			checkPasswordValid();
-			if (flag == "invalid") {
-				return false;
-			}
-
-			if (!$('#birth_yy').val()) {
-				alert("생년월일을 선택하세요.");
-				$('#birth_yy').focus();
-				return false;
-			} else if (!$('#birth_mm').val()) {
-				alert("생년월일을 선택하세요.");
-				$('#birth_mm').focus();
-				return false;
-			} else if (!$('#birth_dd').val()) {
-				alert("생년월일을 선택하세요.");
-				$('#birth_dd').focus();
-				return false;
-			}
-
-			if (!setFocusMobileTel("1") || !setFocusMobileTel("2")
-					|| !setFocusMobileTel("3"))
-				return false;
-			$('#alert_mob_no').hide();
-
-			if ($('#email_addr1').val() == "") {
-				alertMsg("alert_email_addr", "이메일 주소를 다시 확인해주세요.");
-				alert("이메일 주소를 다시 확인해주세요.");
-				$('#email_addr1').focus();
-				return false;
-			}
-
-			if ($('#email_addr_opt').val() == "") {
-				alertMsg("alert_email_addr", "이메일 도메인을 선택 하세요.");
-				alert("이메일 도메인을 선택 하세요.");
-				$('#email_addr_opt').focus();
-				return false;
-			}
-
-			if ($('#email_addr_opt').val() == "0"
-					&& $('#email_addr2').val() == "") {
-				alertMsg('alert_email_addr',
-						"이메일 도메인 직접입력시 이메일 도메인을 입력하셔야 합니다.");
-				alert("이메일 도메인 직접입력시 이메일 도메인을 입력하셔야 합니다.");
-				$('#email_addr2').focus();
-				return false;
-			}
-
-			// 이메일 유효성 체크
-			if (!CheckMailFormat($('#email_addr1').val() + '@'
-					+ $('#email_addr2').val())) {
-				alertMsg('alert_email_addr', "유효하지 않는 이메일 주소 입니다.");
-				alert("유효하지 않는 이메일 주소 입니다.");
-				$('#email_addr2').focus();
-				return false;
-			}
-			$('#alert_email_addr').hide();
-		} */
-
-		
-		function isValid_mbrId(str) {
-			var patten = new Array();
-			var msg = new Array();
-			var p;
-			var ret_msg = new Array();
-			patten["not_eng_num"] = /^[a-z0-9]+$/g; //a-z와 0-9 이외의 문자가 있는지 확인    
-			msg["not_eng_num"] = "영문 소문자/숫자만 사용가능합니다.";
-			patten["len"] = /^\w{6,12}$/; // 문자열 길이
-			msg["len"] = "6~12자리로 사용가능합니다.";
-			patten["only_num"] = /[a-zA-Z]/;// 숫자만
-			msg["only_num"] = "영문 소문자/숫자의 혼용으로 사용가능합니다(숫자만으로는 사용불가).";
-			var retVal = checkSpace(str);
-			if (retVal) {
-				alertMsg('msg_id', "아이디는 빈 공간 없이 연속된 영문 소문자와 숫자만 사용할 수 있습니다.");
-				alert("아이디는 빈 공간 없이 연속된 영문 소문자와 숫자만 사용할 수 있습니다.");
-				return false;
-			}
-			var i = 0;
-			for (x in patten) {
-				p = eval(patten[x]);
-				if (!p.test(str)) {
-					ret_msg[i] = msg[x];
-					i++;
-				}
-			}
-			if (i > 0) {
-				alertMsg("alert_mbr_id",
-						"6~12자리의 영문 소문자 또는 영문 소문자+숫자 아이디를 입력해 주세요.");
-				alert("6~12자리의 영문 소문자 또는 영문 소문자+숫자 아이디를 입력해 주세요.");
-				return false;
-			} else
-				return true;
-		}
-
 	</script>
 
 
@@ -1617,36 +1259,6 @@
 		});
 	});
 </script>
-<!-- <script>
-//입력체크 
-$("#btnok").on("click", function () {
-	
-var userid = $("#mbr_id").val();
-var userpwd = $("#pwd").val();
-var useremail1 = $("#email_addr1").val();
-var useremail2 = $('#email_addr2').val();
-var edomain = $("#email_addr_opt").val();
-
-	if ( userid== "" ){
-		alert("6~12자리의 영문 소문자 또는 영문 소문자+숫자 아이디를 입력해 주세요.");
-		$("#mbr_id").focus();
-		return false;
-	} else if (userpwd =="") {
-		alert("비밀번호를 입력해 주세요.");
-		$("#pwd").focus();
-		return false;
-	}else if (useremail1== "") {
-		alert("이메일 주소를 다시 확인해주세요.");
-		$('#email_addr1').focus();
-		return false;
-	} else if( edomain== "0" && useremail2== ""){
-        alert("이메일 도메인 직접입력시 이메일 도메인을 입력하셔야 합니다.");
-        $('#email_addr2').focus();
-        return false;
-    }
-	return true;
-});
-</script> -->
 <script>
 $('#new_pwd_check').keydown(function(event) {
 	if (event.keyCode == 13) chkPwd();
@@ -1691,15 +1303,59 @@ $('#new_pwd_check').keydown(function(event) {
 		}
 		return true;
 	}
-	$("#btnok").on("click", function () {
-		if (chkPwd() ) {
+
+	$("#btnok").on("click", function() {
+		if (chkPwd()) {
+			alert("회원가입이 완료되었습니다.")
 			$("#formJoin").submit();
 		}
 	});
 </script>
+	 	<script>
+				var sel;
+				var str = "${u_birth}";
+				const result1=str.substr(0,4);	
+				const result2=str.substr(4,2);		
+				const result3=str.substr(6,2);
+				
+				
+				sel = $("#birth_yy");
+				var selYYvalue =result1;
+				
+				sel.find("option[value='" + selYYvalue + "']").prop("selected", true);
+				
+				sel = $("#birth_mm");
+				var selMMvalue =result2;
+				
+				sel.find("option[value='" + selMMvalue + "']").prop("selected", true);
+				
+				sel = $("#birth_dd");
+				var selDDvalue =result3;
+				
+				sel.find("option[value='" + selDDvalue + "']").prop("selected", true);
+				</script>
+			<script>
+				$("#email_addr2").val( $("#email_addr_opt").val() );
+				$("#email_addr_opt").change(function () {
+					$("#email_addr2").val( $("#email_addr_opt").val() );
+				});
+				</script>
+	<script>
+	var str = "${u_tel}";
+	const result4=str.substr(0,4);		
+	const result5=str.substr(4,4);	
+				let str1 = result4;
+				let str2 = result5;
+				let strAll = "010" + str1.replace(str1, '****') +str2;
+				$("#mob_no").val(strAll);
+
+		$("#u_tel").val("010-"+str1+"-"+str2);
+	</script>
+
 <script>
 	$("#btncancel").on("click", function () {
-		
+		alert("회원가입을 취소하시겠습니까?");
+		location.href = "<%=contextPath%>/olive/joinCheck.do";
 	})
 </script>
 <%
@@ -1709,4 +1365,3 @@ $('#new_pwd_check').keydown(function(event) {
 %>
 </body>
 </html>
-

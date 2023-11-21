@@ -1,12 +1,16 @@
 package productDetail.command;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.CommandHandler;
+import head.domain.ProductHistoryDTO;
+import head.service.HeadService;
 import product.domain.PageDTO;
 import productDetail.domain.AllCateDTO;
 import productDetail.domain.CateLDTO;
@@ -17,6 +21,7 @@ import productDetail.domain.DetailExImgDTO;
 import productDetail.domain.DetailInfoDTO;
 import productDetail.domain.ProDisplImgDTO;
 import productDetail.domain.ProductInfo;
+import productDetail.domain.ProductMoreDTO;
 import productDetail.domain.ProductPromo;
 import productDetail.domain.QnADetailDTO;
 import productDetail.service.ProDetailService;
@@ -175,13 +180,39 @@ public class ProductDetailHandler implements CommandHandler{
 		// ======================= (데이터 수집) 사용자가 조회했던 중분류 카테고리 저장 ========
 	
 		LogOnDTO logOnDTO = (LogOnDTO) request.getSession().getAttribute("logOn");
-		if (logOnDTO != null || request.getParameter("displNum") != null ) {
+		if (logOnDTO != null) {
 			int rowCnt = proDetailService.sCollectView(logOnDTO.getUser_id(), cateMId);
 		} // if
+		
+		// ===================== 상품 추천
+		List<ProductMoreDTO> morelist = proDetailService.promoreService(cateMId);
+		request.setAttribute("morelist", morelist);
 
-		
-		
-		
+		// 쿠키 값확인
+		HeadService headService = HeadService.getInstance();
+		List<ProductHistoryDTO> history = new ArrayList<ProductHistoryDTO>();
+		ProductHistoryDTO historyDTO = null;
+		Cookie[] cookies = request.getCookies();
+
+		if (cookies != null) {
+		    for (Cookie cookie : cookies) {
+		        if (cookie.getName().equals("productItems")) {
+		            // 원하는 쿠키 가져오기
+		            String productItemsValue = cookie.getValue();
+		            productItemsValue = java.net.URLDecoder.decode(productItemsValue, "UTF-8");
+		            // 쿠키 값을 쉼표(,)를 기준으로 나누기
+		            String[] items = productItemsValue.split(",");
+		            // 각각의 값에 대해 작업하기
+		            for (String item : items) {
+		            	System.out.println(item);
+		                // 각각의 item에 대해 headService.productHistoryService() 호출하여 historyDTO 생성
+		                historyDTO = headService.productHistoryService(item);
+		                history.add(historyDTO);
+		            }
+		        }
+		    }
+		}
+		request.getSession().setAttribute("productHistory", history);
 		
 		return "/view/product/product.jsp";
 	} // process

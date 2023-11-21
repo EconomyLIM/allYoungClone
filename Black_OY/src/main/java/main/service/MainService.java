@@ -1,12 +1,17 @@
 package main.service;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 
 import com.util.ConnectionProvider;
 import com.util.JDBCUtil;
 
+import main.domain.BrandItemDTO;
+import main.domain.MainBrandDTO;
 import main.domain.MainUserDTO;
+import main.domain.PlanShopDisplDTO;
+import main.domain.PopularProDTO;
 import main.persistence.MainDAOImpl;
 import product.domain.PMidListDTO;
 
@@ -22,6 +27,7 @@ public class MainService {
 			return instance;
 		} // getinstance
 		
+		// ===================== 유사한 고객이 많이 구매한 상품 목록 갖고오는 서비스 ========================
 		public List<PMidListDTO> simmilarBuy(String userId) {
 			
 			Connection conn = null;
@@ -40,14 +46,14 @@ public class MainService {
 				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
 				
 				// 현재 유저의 정보를 갖고오는 작업
-				mainUserDTO = daoImpl.selectUserInfo(conn, userId); // 정보를 dto에 담았다.
+				mainUserDTO = daoImpl.selectUserInfo(conn, userId); // 현재 로그인한 고객 정보를 dto에 담았다.
 				System.out.println("Service.daoImpl.selectUserInfo...");
 				
 				
-				userList = daoImpl.similarUser(conn, mainUserDTO); // 나와 똑같은 타입의유저 아이디를 갖고오는 작업
+				userList = daoImpl.similarUser(conn, mainUserDTO); // 유저와 똑같은 타입의유저 아이디를 갖고오는 작업
 				
 				
-				displList = daoImpl.similarProduct(conn, userList); // 그 아이디들의 상품아이디를 갖고오는 작업
+				displList = daoImpl.similarProduct(conn, userList); // 그 아이디이 구매했던 상품아이디를 갖고오는 작업
 				
 				
 				displProduct = daoImpl.similardispl(conn, displList); // 상품아이디를 갖고 상세정보를 가져오는 작업
@@ -59,20 +65,20 @@ public class MainService {
 				e.printStackTrace();
 			} finally {
 				JDBCUtil.close(conn);
-			}
+			} // try_catch
 			
 			return displProduct; 
 			
 		} // sSelectUserInfo
 		
-		
+		// ===================== 추천 상품 갖고오는 서비스 ======================== 
 		public List<PMidListDTO> recommendBuy (String userId) {
 			
 			
 			Connection conn = null;
 			
 			List <String> cateMList = null;
-			int cnt = 0;
+			/* int cnt = 0; */
 			
 			List<PMidListDTO> recommendProduct = null;
 			try {
@@ -81,7 +87,7 @@ public class MainService {
 				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
 				
 				cateMList = daoImpl.getMidList(conn, userId); // 중분류 카테고리 갖고오기
-				cnt = daoImpl.getListCount(conn, cateMList); // 전체 총 레코드 수 
+//				cnt = daoImpl.getListCount(conn, cateMList); // 전체 총 레코드 수 
 				
 				
 				recommendProduct = daoImpl.recommendProduct(conn, cateMList);
@@ -93,11 +99,125 @@ public class MainService {
 				e.printStackTrace();
 			} finally {
 				JDBCUtil.close(conn);
-			}
+			} // try_catch
 			
 			return recommendProduct;
 			
 		} // recommendBuy
+		
+		// ===================== 상품 행사 배너정보 갖고오는 작업 (Week Special) ======================== 
+		public List<PlanShopDisplDTO> getWeekSpecial (int cate){
+			
+			Connection conn = null;
+			List<PlanShopDisplDTO> list = null;
+			
+			try {
+				
+				conn = ConnectionProvider.getConnection();
+				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
+				list = daoImpl.getPlanShop(conn, cate);
+				
+				
+				
+			} catch (Exception e) {
+				System.out.println("> MainService getWeekSpecial Exception<");
+				e.printStackTrace();
+			} finally {
+				JDBCUtil.close(conn);
+			} // try_catch
+			
+			return list;
+			
+		} // getWeekSpecial
+		
+		// ===================== 상품 행사 배너정보 갖고오는 작업 (인기행사) ======================== 
+		public HashMap<PlanShopDisplDTO, List<PopularProDTO>> sGetPopularShop(){
+			
+			Connection conn = null;
+			HashMap<PlanShopDisplDTO, List<PopularProDTO>> list = null;
+			try {
+				
+				conn = ConnectionProvider.getConnection();
+				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
+				list = daoImpl.getPopularShop(conn);
+				
+			} catch (Exception e) {
+				System.out.println("> MainService sGetPopularShop Exception<");
+				e.printStackTrace();
+			} finally {
+				JDBCUtil.close(conn);
+			} // try_catch
+			
+			return list;
+		} // sGetPopularShop
+		
+		// ===================== 메인 브랜드 좋아요 상위 10개 가져오기 =====================
+		public List<MainBrandDTO> mainBrandService(){
+			Connection conn = null;
+			List<MainBrandDTO> list = null;
+			
+			try {
+				
+				conn = ConnectionProvider.getConnection();
+				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
+				list = daoImpl.mainBrand(conn);
+				
+				
+			} catch (Exception e) {
+				System.out.println("> mainBrandService Exception<");
+				e.printStackTrace();
+			} finally {
+				JDBCUtil.close(conn);
+			} // try_catch
+			
+			return list;
+		}
+		
+		
+		// ===================== 브랜드 상위 2개 상품 가져오기 =====================
+		public List<BrandItemDTO> mainBrandItemService(String brand_id){
+			Connection conn = null;
+			List<BrandItemDTO> list = null;
+			
+			try {
+				
+				conn = ConnectionProvider.getConnection();
+				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
+				list = daoImpl.mainBrandItem(conn, brand_id);
+				
+				
+			} catch (Exception e) {
+				System.out.println("> mainBrandItemService Exception<");
+				e.printStackTrace();
+			} finally {
+				JDBCUtil.close(conn);
+			} // try_catch
+			
+			return list;
+		}  // mainBrandItemService
+		
+		// ===================== MD가 추천해요 상품 갖고오기 =====================
+		public List<PMidListDTO> sGetMdRecommend(){
+			
+			Connection conn = null;
+			List<PMidListDTO> list = null;
+			
+			try {
+				
+				conn = ConnectionProvider.getConnection();
+				MainDAOImpl daoImpl = MainDAOImpl.getInstance();
+				list = daoImpl.getMdRecommend(conn);
+				
+			} catch (Exception e) {
+				System.out.println("> sGetMdRecommend Exception<");
+				e.printStackTrace();
+			} finally {
+				JDBCUtil.close(conn);
+			} // try_catch
+			
+			return list;
+		} // sGetMdRecommend
+		
 		
 		
 } //class

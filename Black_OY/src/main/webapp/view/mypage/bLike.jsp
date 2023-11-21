@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="/WEB-INF/inc/include.jspf" %>
 <%@ include file="/WEB-INF/inc/session_auth.jspf" %>
 <!DOCTYPE html>
@@ -37,13 +38,15 @@
 				     
 				     
 					<ul class="comm1sTabs mgzero">
-						<li><a href="javascript:void(0);" class="movePrdWish">상품</a></li>
+						<li><a href="<%= contextPath%>/olive/Like.do" class="movePrdWish">상품</a></li>
 						<li class="on"><a>브랜드</a></li>
 					</ul>
-
+					
+					 <c:set value="${ bLike }" var="blike" />
+					
 					<div class="result-common">
 						<span class="num">
-							<strong>전체 <em>1</em>개</strong>
+							<strong>전체 <em>${ fn:length(blike) }</em>개</strong>
 						</span>
 						
 						<button type="button" class="all-delete">전체 삭제</button>
@@ -51,31 +54,43 @@
 					</div>
 					
 						<div class="brand_like_list">
+							
 							<ul class="inner clrfix" id="brand_area">
 														
-								
-									
+								<c:choose>
+									<c:when test="${ not empty bLike }">
+										<c:forEach items="${ bLike }" var="bl">
 											<li>
 													<div class="option">
 														<p class="opt">
-															<a href="javascript:void(0);" class="link moveBrandShop" value="A003377" data-ref-onlbrndcd="A003377">
-																아누아
+															<a href="<%-- 브랜드 상세 페이지 --%>" class="link moveBrandShop" value="A003377" data-ref-onlbrndcd="A003377">
+																${ bl.brandN }
 															</a>
 														</p>
-														<p class="txt">좋아요 <span>6,905</span><button type="button" class="btnlike">좋아요</button></p>
+														<p class="txt">좋아요 <span>${ bl.bamount }</span>
+															<button type="button" class="btnlike">좋아요</button>
+														</p>
 													</div>	
 													<p class="ban_brand">
 														<a href="javascript:void(0);" class="moveBrandShop" value="A003377" data-ref-onlbrndcd="A003377">
 															
 															
 																
-																<img onerror="this.src='https://static.oliveyoung.co.kr/pc-static-root/image/temp/img_brand_no.jpg'" src="https://image.oliveyoung.co.kr/uploads/images/display/90000020653/263/4572023418429793016.jpg" alt="아누아">
+																<img onerror="this.src='https://static.oliveyoung.co.kr/pc-static-root/image/temp/img_brand_no.jpg'" src="${ bl.bdisplsrc }" alt="${ bl.brandN }">
 															
 															
 															
 														</a>
 													</p>
 											</li>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+									<li class="nodata"><p>좋아요 브랜드가 없습니다.</p>	</li>
+									</c:otherwise>
+								</c:choose>
+									
+											
 									
 														
 								
@@ -103,16 +118,6 @@
 
 
 				
-<script type="text/javascript" src="https://static.oliveyoung.co.kr/pc-static-root/js/mypage/wish.js?dumm=202311160002" charset="utf-8"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	mypage.brndWish.init();
-});
-</script>
-
-
-
-
 
 			</div>
 				

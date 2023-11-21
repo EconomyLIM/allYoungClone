@@ -1,9 +1,14 @@
 package main.persistence;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 
+import main.domain.BrandItemDTO;
+import main.domain.MainBrandDTO;
 import main.domain.MainUserDTO;
+import main.domain.PlanShopDisplDTO;
+import main.domain.PopularProDTO;
 import product.domain.PMidListDTO;
 
 public interface MainDAO {
@@ -28,5 +33,21 @@ public interface MainDAO {
 	
 	// 6. 갖고온 중분류 카테고리를 갖고 상품리스트 갖고오기
 	public List<PMidListDTO> recommendProduct(Connection conn, List<String> cateMlist) throws Exception;
+	
+	// 7. 배너와 정보를 갖고오는 작업
+	public List<PlanShopDisplDTO> getPlanShop(Connection conn, int cate) throws Exception;
+	
+	// 8. 인기 행사의 배너정보와 상품을 갖고오는 작업
+	public HashMap<PlanShopDisplDTO, List<PopularProDTO>> getPopularShop(Connection conn) throws Exception;
+  
+    // 메인 브랜드 좋아요 상위 10개 가져오기
+	public List<MainBrandDTO> mainBrand(Connection conn) throws Exception;
+	
+	// 브랜드 상위 2개 상품 가져오기
+	public List<BrandItemDTO> mainBrandItem(Connection conn, String brand_id) throws Exception;
+	
+	// 11.  MD가 추천해요! 임의의 상품 두개 갖고오기 (추후 관리자 페이지 작업시 변경 예정)
+	public List<PMidListDTO> getMdRecommend (Connection conn) throws Exception;
+
 	
 } // interface

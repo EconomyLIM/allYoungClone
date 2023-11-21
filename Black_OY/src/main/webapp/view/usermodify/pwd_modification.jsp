@@ -166,23 +166,8 @@
 		<!-- //footer -->
 	</div>
 
-	<script type="text/javascript">
- 		$('#new_pwd_check').keydown(function(event) {
-			if (event.keyCode == 13) chkPwd();
-		});
+<script type="text/javascript">
 
-		// cabs lock 체크
-		var msgStr = "";
-		function cabsCheck() {
-			var id = this.id;
-			if (checkCapsLock()) {
-				msgStr = "Cabs lock가 켜져 있습니다.";
-			} else {
-				$("#msg_" + id).hide();
-				msgStr = "";
-			}
-		}
-		// 패스워드 강도 체크  
 		var pwStrength = false;
 		function checkPassword() {
 			pwStrength = false;
@@ -228,72 +213,18 @@
 					}, 0);
 					return false;
 				} else {
-					return true; 
+					return true;
 				}
 
 			}//end else                   
 		}
-
-/* 		var temp_check = 0;
-		function goChange() {
-
-			if ($("#bef_pwd").val() == "") {
-				alert("기존 비밀번호를 입력해주세요");
-				$("#bef_pwd").next().focus();
-				setTimeout(function() {
-					$("#bef_pwd").focus();
-				}, 0);
-				return;
-			}
-
-			if ($("#new_pwd").val() == "") {
-				alert("새 비밀번호를 입력해주세요");
-				$("#new_pwd").next().focus();
-				setTimeout(function() {
-					$("new_pwd").focus();
-				}, 0);
-				return;
-			}
-
-			if ($("#new_pwd_check").val() == "") {
-				alert("새 비밀번호확인을 입력하세요");
-				$("#new_pwd_check").next().focus();
-				setTimeout(function() {
-					$("#new_pwd_chk").focus();
-				}, 0);
-				return;
-			}
-
-			if ($('#new_pwd').val() != $('#new_pwd_check').val()) {
-				alert("새비밀번호와 새비밀번호 확인의 입력값이 같지 않습니다");
-				$('#new_pwd').next().focus();
-				setTimeout(function() {
-					$("#new_pwd").focus();
-				}, 0);
-				return;
-			}
-			checkPasswordValid();
-			if (flag == "invalid") {
-				return;
-			}
- */
-		// 취소
-		/* function goCancel() {
-			if (!confirm('비밀번호 변경을 취소하시겠습니까?'))
-				return;
-			var returnURL = 'usermodify.jsp';
-			if (returnURL != null && returnURL != '') {
-				location.href = returnURL;
-			} else {
-				location.href = "/Black_OY/olive/main.do";
-			}
-		} */
-		$("#btnCancel").on("click", function () {
-			alert('비밀번호 변경을 취소하시겠습니까?');
-
-		});
 	</script>
 <script>
+$("#btnCancel").on("click", function () {
+	alert('비밀번호 변경을 취소하시겠습니까?');
+	location.href = "<%=contextPath%>/olive/usermodify.do";
+});
+
 	//비밀번호 체크
 	function chkPwd() {
 		var befpwd = $("#bef_pwd").val();
@@ -338,12 +269,41 @@
 		}
 		return true;
 	}
-	$("#btnChange").on("click", function () {
-		if (chkPwd() ) {
-			$("#form1").submit();
-		}
+	// 패스워드 강도 체크  
+
+		$("#new_pwd").on("change", function () {
+			//alert("event");		
+		var inputVal = $("#new_pwd").val();	
+		var length = inputVal.length;
+			if ( length >15) {
+				$("#msg_pwd").text("강도 : 강함");
+			} else if ( length >13) {
+				$("#msg_pwd").text("강도 : 적정");
+			}  else if (length >9) {
+				$("#msg_pwd").text('강도 : 약함'); 
+			}  else{
+		       	$("#msg_pwd").text("강도 : 매우약함");
+		   }
 	});
-</script>
+	
+		$(function () {
+		     $('#new_pwd_check').keydown(function(event) {
+		     	if ( event.which == 13 ){
+		     		$("#btnChange").click();	
+		     	}
+		     });	
+		});
+		
+		$("#btnChange").on("click", function () {
+			if (chkPwd() ) {
+				$("#form1").submit();
+			}
+		});
+
+	
+
+</script> 
+
 	<form method="post" name="form2" id="form2">
 		<input type="hidden" id="coopco_cd" name="coopco_cd" value="7030">
 		<input type="hidden" id="brnd_cd" name="brnd_cd" value="3000">

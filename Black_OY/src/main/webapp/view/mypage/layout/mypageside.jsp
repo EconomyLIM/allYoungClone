@@ -39,12 +39,12 @@
 										확인</a></li>
 							</ul>
 							<ul class="line">
-								<li class="subMenu"><a href="<%-- 장바구니 페이지 --%>"
+								<li class="subMenu"><a href="<%= contextPath %>/olive/basket.do"
 									mymenuid="0201"
 									data-ref-linkurl="https://www.oliveyoung.co.kr/store/cart/getCart.do"
 									data-attr="마이페이지^메뉴^장바구니"
 									data-tracking-properties="t_page=마이페이지&amp;t_click=장바구니">장바구니</a></li>
-								<li class="subMenu"><a href="<%-- 좋아요 페이지 --%>"
+								<li class="subMenu"><a href="<%= contextPath %>/olive/Like.do"
 									mymenuid="0202"
 									data-ref-linkurl="https://www.oliveyoung.co.kr/store/mypage/getWishList.do"
 									data-attr="마이페이지^메뉴^좋아요"

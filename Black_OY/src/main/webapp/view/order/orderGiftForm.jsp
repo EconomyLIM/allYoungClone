@@ -16,76 +16,104 @@
 <body>
 
 <script>
-function formCheck() {
-	if($("#ordManNm").val() == "") {
-		alert($(this).attr("title"));
-		$("#ordManNm").focus();
-		return;
-	} else if($("#ordManCellSctNo").val() == "") {
-		alert($("#ordManCellSctNo").attr("title"));
-		$("#ordManCellSctNo").focus();
-		return;
-	} else if($("#ordManCellTxnoNo").val() == "") {
-		alert($("#ordManCellTxnoNo").attr("title"));
-		$("#ordManCellTxnoNo").focus();
-		return;
-	} else if($("#ordManCellEndNo").val() == "") {
-		alert($("#ordManCellEndNo").attr("title"));
-		$("#ordManCellEndNo").focus();
-		return;
-	} else if($("#ordManEmailAddrId").val() == "") {
-		alert($("#ordManEmailAddrId").attr("title"));
-		$("#ordManEmailAddrId").focus();
-		return;
-	} else if($("#ordManEmailAddrDmn").val() == "") {
-		alert($("#ordManEmailAddrDmn").attr("title"));
-		$("#ordManEmailAddrDmn").focus();
-		return;
-	} else if($("#rcvNm1").val() == "") {
-		alert("받는 사람 정보를 입력하세요.");
-		$("#rcvNm1").focus();
-		return;
-	} else if($("#rcvPhone1").val() == "") {
-		alert("받는 사람 정보를 입력하세요.");
-		$("#rcvPhone1").focus();
-		return;
-	}
-	
-	
-	if($("#payMethod_11").prop("checked") && $("#acqrCd").val() == "") {
-		alert("결제하실 카드를 선택하세요.");
-		return false;
-	}
-	
-	if($("#agree_1").prop("checked") == false) {
-		alert($("#agree_1").attr("title"));
-		$("#btnDetailAgree").click();
-		return false;
-	} else if($("#agree_2_1").prop("checked") == false) {
-		alert($("#agree_2_1").attr("title"));
-		$("#btnDetailAgree").click();
-		return false;
-	} else if($("#agree_2_2").prop("checked") == false) {
-		alert($("#agree_2_2").attr("title"));
-		$("#btnDetailAgree").click();
-		return false;
-	} else if($("#agree_2_3").prop("checked") == false) {
-		alert($("#agree_2_3").attr("title"));
-		$("#btnDetailAgree").click();
-		return false;
-	}
+	function formCheck() {
+		if($("#ordManNm").val() == "") {
+			alert($(this).attr("title"));
+			$("#ordManNm").focus();
+			return;
+		} else if($("#ordManCellSctNo").val() == "") {
+			alert($("#ordManCellSctNo").attr("title"));
+			$("#ordManCellSctNo").focus();
+			return;
+		} else if($("#ordManCellTxnoNo").val() == "") {
+			alert($("#ordManCellTxnoNo").attr("title"));
+			$("#ordManCellTxnoNo").focus();
+			return;
+		} else if($("#ordManCellEndNo").val() == "") {
+			alert($("#ordManCellEndNo").attr("title"));
+			$("#ordManCellEndNo").focus();
+			return;
+		} else if($("#ordManEmailAddrId").val() == "") {
+			alert($("#ordManEmailAddrId").attr("title"));
+			$("#ordManEmailAddrId").focus();
+			return;
+		} else if($("#ordManEmailAddrDmn").val() == "") {
+			alert($("#ordManEmailAddrDmn").attr("title"));
+			$("#ordManEmailAddrDmn").focus();
+			return;
+		} else if($("#rcvNm1").val() == "") {
+			alert("받는 사람 정보를 입력하세요.");
+			$("#rcvNm1").focus();
+			return;
+		} else if($("#rcvPhone1").val() == "") {
+			alert("받는 사람 정보를 입력하세요.");
+			$("#rcvPhone1").focus();
+			return;
+		}
 		
-	return true;
-}
-
+		
+		if($("#payMethod_11").prop("checked") && $("#acqrCd").val() == "") {
+			alert("결제하실 카드를 선택하세요.");
+			return false;
+		}
+		
+		if($("#agree_1").prop("checked") == false) {
+			alert($("#agree_1").attr("title"));
+			$("#btnDetailAgree").click();
+			return false;
+		} else if($("#agree_2_1").prop("checked") == false) {
+			alert($("#agree_2_1").attr("title"));
+			$("#btnDetailAgree").click();
+			return false;
+		} else if($("#agree_2_2").prop("checked") == false) {
+			alert($("#agree_2_2").attr("title"));
+			$("#btnDetailAgree").click();
+			return false;
+		} else if($("#agree_2_3").prop("checked") == false) {
+			alert($("#agree_2_3").attr("title"));
+			$("#btnDetailAgree").click();
+			return false;
+		}
+			
+		return true;
+	}
+	
 	$(function() {
+		//결제 버튼 눌렀을 때
 		$("#btnPay").on("click", function() {
 			if(formCheck()) {
+				let products = $("input[name=pro_id]");
+				let params = "";
+				for (var i = 0; i < products.length; i++) {
+					params += i==products.length-1 ? $(products[i]).val() : $(products[i]).val() + ",";
+				}
+				
+				$.ajax({
+					type : 'get'
+					, async : false
+					, cache: false
+					, url : '/Black_OY/olive/getProStockAjax.do'
+					, dataType : 'json'
+					, data : { products : params }
+					, success : function(data) {
+						if(data.cnt == 0) {
+							alert("현재 상품의 재고가 소진되었습니다.");
+							location.href = "<%=contextPath%>/olive/main.do";
+						}
+						// console.log(data);
+		            }
+					, error : function (data, textStatus) {
+						console.log('error');
+		            }
+				});
+				
 				alert("결제 가능~~");
-				//$("#orderForm").submit();
+				
+				$("#orderForm").submit();
 			}
 		});
-	})
+	});
+	
 </script>
 
 <script>
@@ -99,14 +127,22 @@ function formCheck() {
 			, dataType : 'json'
 			, data : { user_id : '${logOn.user_id}' }
 			, success : function(data) {
+				if(data == "") {
+					$(".couponView").text(`보유쿠폰 (0)`)
+					$("#userCpPop > div > h2").text(`보유쿠폰 (0})`)
+				}
+				
 				$(".couponView").text(`보유쿠폰 (\${data.userCoupon.length})`)
 				$("#userCpPop > div > h2").text(`보유쿠폰 (\${data.userCoupon.length})`)
-				console.log(data);
+				//console.log(data);
             }
 			, error : function (data, textStatus) {
 				console.log('error');
             }
 		}); 
+		
+		// 가지고 있는 포인트 표시
+		$("#cjonePnt").text('${logOn.u_point}');
 		
 		// 회원 기본 설정
 		let tel1 = '${dto.deli_tel}';
@@ -141,7 +177,7 @@ function formCheck() {
 		// 슬라이드 부분
 		$(".slide.slick-slide img").on("click", function() {
 			event.preventDefault();
-			
+			$("#mc_id").val($(this).attr("alt"));
 			$(".slide.slick-slide > span").removeClass("is-active");
 			$(this).parent().parent().addClass("is-active");
 			$(".img > img").attr({
@@ -270,9 +306,39 @@ function formCheck() {
 		
 		// 총 배송비 팝업창
 		$("#orderForm > div.order_payment_box > div.right_area > ul > li.line_top2 > span.tx_tit > button").on("click", function() {
-			$("#deliveryInfo").css("transform", "translate(-50%, -50%)").show();
+			$("#deliveryInfo").css({
+				"transform" : "translate(0, -50%)"
+				}).show();
+			var scrolled = window.scrollY;
+			var centeredDiv = document.getElementById('deliveryInfo');
+			var windowHeight = window.innerHeight;
+
+			// 스크롤에 따라 중앙에 위치하도록 설정
+			centeredDiv.style.top = (windowHeight / 2 + scrolled) + 'px';
+			
 			$("body").append(dimm);
 		});
+		
+		// 보유쿠폰 누를 시 가지고 있는 쿠폰을 보여줌
+		$("#orderForm > div.order_payment_box > div.left_area > a").on("click", function() {
+			$("#userCpPop").css({"transform" : "translate(0, -50%)", "margin-left" : "-290px"}).show();
+			
+			var scrolled = window.scrollY;
+			var centeredDiv = document.getElementById('userCpPop');
+			var windowHeight = window.innerHeight;
+
+			// 스크롤에 따라 중앙에 위치하도록 설정
+			centeredDiv.style.top = (windowHeight / 2 + scrolled) + 'px';
+			
+			$("body").append(dimm);
+		});
+		
+		$("#userCpPop > div > button").on("click", function() {
+			$("#userCpPop").hide();
+			$(".dimm").remove();
+		});
+		
+		
 	})
 </script>
 
@@ -292,19 +358,15 @@ function formCheck() {
                 <li class="last"><span class="step_num tx_num">3 </span> 주문완료</li>
             </ul>
         </div>
-        <form name="orderForm" id="orderForm">
+        <form name="orderForm" id="orderForm" method="post" action="<%=contextPath%>/olive/giftForm.do">
             <input type="hidden" id="giftYn" name="giftYn" value="Y">
-            <input type="hidden" id="rcvNmList1" name="rcvNmList1" value="">
-            <input type="hidden" id="rcvNmList2" name="rcvNmList2" value="">
-            <input type="hidden" id="rcvNmList3" name="rcvNmList3" value="">
-            <input type="hidden" id="rcvNmList4" name="rcvNmList4" value="">
-            <input type="hidden" id="rcvNmList5" name="rcvNmList5" value="">
-            <input type="hidden" id="o2oGiftBoxAmtRm" name="o2oGiftBoxAmtRm" value="30000">
-            <input type="hidden" id="o2oGiftBoxAmtDc" name="o2oGiftBoxAmtDc" value="2000">
-            <input type="hidden" id="o2oGiftBoxAmtDf" name="o2oGiftBoxAmtDf" value="2000">
-            <input type="hidden" id="o2oGiftBoxAmt" name="o2oGiftBoxAmt" value="0">
             <input type="hidden" id="quickYn" name="quickYn" value="N">
             <input type="hidden" id="presentYn" name="presentYn" value="Y">
+            <input type="hidden" id="cd_price" name="cd_price" value="0">
+            <input type="hidden" id="point_price" name="point_price" value="0">
+            <input type="hidden" id="mc_id" name="mc_id" value="">
+            
+            <input type="hidden" id="click" name="click" value="${click}">
             <input type="hidden" id="quickInfoYn" name="quickInfoYn" value="N">
             <input type="hidden" id="ocbValidChk" name="ocbValidChk" value="N">
             
@@ -312,9 +374,6 @@ function formCheck() {
             
             <input type="hidden" id="presentO2oYn" name="presentO2oYn" value="N"> 
             <input type="hidden" id="possibleO2oYn" name="possibleO2oYn" value="Y"> 
-            <input type="hidden" id="presentO2oOrdPayAmt" name="presentO2oOrdPayAmt" value="23940">
-            <input type="hidden" id="presentO2oPackingYn" name="presentO2oPackingYn" value="N"> 
-            <input type="hidden" id="presentO2oO2oGiftBoxAmt" name="presentO2oO2oGiftBoxAmt" value="0"> 
             <input type="hidden" id="giftboxGbnCd" name="giftboxGbnCd" value="10">
             <input type="hidden" id="dlvShpChgCd" name="dlvShpChgCd" value="10">
             <!-- init 이전 여부 -->
@@ -1017,6 +1076,7 @@ function formCheck() {
 								<tr>
 									<td colspan="5" itemno="001" entrno="C19275" brndcd="3440" tradeshpcd="1" staffdscntyn="Y" pntrsrvyn="Y" ordqty="1" thnlpathnm="https://image.oliveyoung.co.kr/uploads/images/goods/10/0000/0018/A00000018412902ko.jpg?l=ko"  purchasetype="N"><!-- 2017-01-13 수정 -->
 										<input type="hidden" name="pr_cnt" value="${list.proId }-${list.cnt}">
+										<input type="hidden" name="pro_id" value="${list.proId }">
 										<div class="tbl_cont_area">
 												<div class="tbl_cell w700"><!-- 2017-01-24 수정 : 클래스명 변경 -->
 													<div class="prd_info">
@@ -1032,9 +1092,19 @@ function formCheck() {
 															<i class="tit">옵션</i>${list.displName }											
 														</p>
 														<p class="prd_flag">
-															<span class="icon_flag sale">세일</span>
-															<span class="icon_flag gift">증정</span><!-- 14 -->
-															<span class="icon_flag delivery">오늘드림</span><!-- 15 -->	
+															<c:if test="${list.prd eq 1}">
+																<span class="icon_flag sale">세일</span>
+															</c:if>
+															<c:if test="${list.prc eq 1}">
+																<span class="icon_flag coupon">쿠폰</span>
+															</c:if>
+															<!-- 기간계 상품, 브랜드 증정품만 아이콘 노출 -->
+															<c:if test="${list.prp eq 1}">
+																<span class="icon_flag gift" id="free_gift">증정</span>
+															</c:if>
+															<c:if test="${list.stock eq 1}">
+																<span class="icon_flag delivery" id="quick_yn">오늘드림</span>
+															</c:if>		
 														</p>
 														<!--//fix/3275248 bmiy20 cjone point 적립불가건에 대해 사용 불가 처리 추가-->
 													</div>
@@ -1073,9 +1143,6 @@ function formCheck() {
                     <!-- 쿠폰할인정보 -->
                     <h2 class="sub-title2 width-inline">쿠폰할인정보</h2>
                     <a href="javascript:;" data-rel="layer" data-target="userCpPop" class="couponView" data-attr="쿠폰할인정보^보유쿠폰">
-                        보유쿠폰
-                        
-                            &nbsp;(2)
                         
                     </a>
                     <table class="tbl_inp_form type2">
@@ -1360,15 +1427,15 @@ function formCheck() {
                                     <td>
                                         <div>
                                             <select id="instMmCnt" name="instMmCnt" class="selH28" style="width:200px" data-attr="결제수단선택^할부종류" disabled="">
-                                                <option value="00">일시불</option>
-                                                <option value="02" targetid="nint2MmYn">2개월</option>
-                                                <option value="03" targetid="nint3MmYn">3개월</option>
-                                                <option value="04" targetid="nint4MmYn">4개월</option>
-                                                <option value="05" targetid="nint5MmYn">5개월</option>
-                                                <option value="06" targetid="nint6MmYn">6개월</option>
-                                                <option value="07" targetid="nint7MmYn">7개월</option>
-                                                <option value="08" targetid="nint8MmYn">8개월</option>
-                                                <option value="09" targetid="nint9MmYn">9개월</option>
+                                                <option value="일시불">일시불</option>
+                                                <option value="2" targetid="nint2MmYn">2개월</option>
+                                                <option value="3" targetid="nint3MmYn">3개월</option>
+                                                <option value="4" targetid="nint4MmYn">4개월</option>
+                                                <option value="5" targetid="nint5MmYn">5개월</option>
+                                                <option value="6" targetid="nint6MmYn">6개월</option>
+                                                <option value="7" targetid="nint7MmYn">7개월</option>
+                                                <option value="8" targetid="nint8MmYn">8개월</option>
+                                                <option value="9" targetid="nint9MmYn">9개월</option>
                                                 <option value="10" targetid="nint10MmYn">10개월</option>
                                                 <option value="11" targetid="nint11MmYn">11개월</option>
                                                 <option value="12" targetid="nint12MmYn">12개월</option>
@@ -1942,7 +2009,7 @@ function formCheck() {
                         <li>
                             <span class="tx_tit">총 상품금액</span>
                             <span class="tx_cont"><span class="tx_num">0</span>원</span>
-                            <input type="hidden" name="goodsAmt" value="26600">
+                            <input type="hidden" name="totalPrice" value="0">
                         </li>
                         <li>
                             <span class="tx_tit">쿠폰할인금액</span><!-- 2017-01-18 수정 : 문구수정 -->
@@ -1953,13 +2020,12 @@ function formCheck() {
                         
                         <li class="line_top2">
                             <span class="tx_tit">총 배송비 <button type="button" class="btnSmall wGray"><span>상세보기</span></button></span>
-                            <span class="tx_cont"><span class="tx_num" id="dlexPayAmt_span">0</span>원</span><!--
-										CJOYPF-242 :: PC ver 주문페이지 신설
-										## 포장비 추가일 경우에 추가
-									-->
+                            <span class="tx_cont"><span class="tx_num" id="dlexPayAmt_span">0</span>원</span>
+                            <input type="hidden" name="deli_price" value="0">
                             <div class="package-price">
                                 <span class="tx_tit">선물포장비</span>
                                 <span class="tx_cont"><span class="tx_num" id="giftPayAmt_span">0</span>원</span>
+                                <input type="hidden" name="present_price" value="0">
                             </div>
 
                             <input type="hidden" name="dlexPayAmt" value="0">
@@ -1999,7 +2065,7 @@ function formCheck() {
                         <li class="total">
                             <span class="tx_tit">최종 결제금액</span>
                             <span class="tx_cont"><span class="tx_num" id="totPayAmt_sum_span">0</span>원</span>
-                            <input type="hidden" id="totalPay" name="totalPay" value="">
+                            <input type="hidden" id="totalPay" name="totalPay" value="0">
                             <input type="hidden" name="remainAmt" value="23940">
                             <input type="hidden" name="ordPayAmt" value="23940">
                             <input type="hidden" name="goodsNm" value="바이오더마 하이드라비오 토너 500ml 기획(+화장솜 20매 증정)">

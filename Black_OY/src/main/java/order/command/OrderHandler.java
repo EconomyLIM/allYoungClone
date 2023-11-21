@@ -40,7 +40,7 @@ public class OrderHandler implements CommandHandler {
 		
 		
 		if(method.equals("GET")) {
-			String click = request.getParameter("click");
+			String click = request.getParameter("click"); // 어떤 버튼을 클릭하고 결제창에 왔는지
 			String[] products = request.getParameterValues("products");
 			String quickYN = request.getParameter("quickYN"); // 오늘드림 여부
 			
@@ -74,6 +74,7 @@ public class OrderHandler implements CommandHandler {
 			request.setAttribute("list", list);
 			request.setAttribute("productList", productList);
 			request.setAttribute("dto", dto);
+			request.setAttribute("click", click);
 			
 			if(click.equals("선물하기")) {
 				return "/view/order/orderGiftForm.jsp";
@@ -105,7 +106,7 @@ public class OrderHandler implements CommandHandler {
 			String pay_type = request.getParameter("payMethod");			// 결제 수단
 			String card_type = request.getParameter("acqrCd");				// 카드 종류
 			String[] product_id = request.getParameterValues("pr_cnt");		// 주문한 상품 id와 수량 
-			
+			String giftYn = request.getParameter("giftYn");					// 선물 여부		
 			/*
 			 * 추가 파라미터 작업
 			 * 1. 오늘드림 여부
@@ -115,6 +116,7 @@ public class OrderHandler implements CommandHandler {
 			 * 5. 선물포장 여부
 			 * 6. 포인트 결제 금액
 			 * 7. 어느 버튼을 누르고 왔는지 ex) 장바구니 또는 상품상세페이지
+			 * 8. cj ONE 포인트 적립
 			 */
 			String today_opt = request.getParameter("quickYN");				// 오늘 드림 여부
 			String pickupYN = request.getParameter("pickupYN");				// 픽업 여부
@@ -123,6 +125,10 @@ public class OrderHandler implements CommandHandler {
 			String cd_price = request.getParameter("cd_price"); 			// 쿠폰할인금액
 			String point_price = request.getParameter("point_price"); 		// 포인트 결제 금액
 			String click = request.getParameter("click");					// 어떤 버튼을 누르고 주문페이지로 온지 
+			
+			/*
+			 * 
+			 */
 			
 			
 			/*
@@ -240,8 +246,9 @@ public class OrderHandler implements CommandHandler {
 			map.put("click", click);
 			
 			
-			boolean flag = service.orderService(map);
-			
+			String order_id = service.orderService(map);
+			System.out.println("order_id : " + order_id);
+			request.setAttribute("order_id", order_id);
 			
 			
 			return "/view/order/orderComplete.jsp";

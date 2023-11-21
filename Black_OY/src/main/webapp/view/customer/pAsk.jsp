@@ -261,26 +261,39 @@
 						data : {faqkeyword: $(this).val() },
 						success : function(data) {
 							//console.log(data);
-							let tr = $("<tr>", {id: "recommFaqList", css: {display: "table-row"});
+							$("#recommFaqList").remove();
+							let tr = $("<tr>", { id: "recommFaqList" }).css("display", "table-row");
 							let th = $("<th>", scope="col").text("혹시 이게 궁금하세요?");
 							let td = $("<td>")
 							let div = $("<div>").addClass("list-customer");
 							let titul = $("<ul>").addClass("faq_list");
-							let li = $("<li>").addClass("open");
-							$("#recommFaqList > td > div > ul > li:nth-child(1)").on("click", function (event) {
-								let a =$("<a>", {href:"#", role="button", title="답변 내용닫기" }).addClass("tit").text(제목);
-
+							
+							for (var i = 0; i < data.recommfaqs.length ; i++) {
+								let li = $("<li>").on("click", function () {
+									$(".faq_list > li").removeClass("open");
+									$(this).toggleClass("open");
+								});
+								let a =$("<a>", {href:"#", role :"button", title:"답변 내용닫기" }).addClass("tit")
+									.text(data.recommfaqs[i].faq_title);
 								
-							}) ;
+								let contsul = $("<ul>").addClass("conts");
+								let contsli = $("<li>").addClass("question");
+								let p = $("<p>").addClass("pdzero").text(data.recommfaqs[i].faq_content);
+								li.append(a);
+								li.append(contsul);
+								contsul.append(contsli);
+								contsli.append(p);
 								
-								
+								titul.append(li);
 							}
 							
-							//내용
-							let contsul = $("<ul>").addClass("conts");
-							let contsli = $("<li>").addClass("question");
-							let p = $("<p>").addClass("pdzero").text(내용);
-							contsli.append(p)
+							tr.append(th);
+							tr.append(td);
+							td.append(div);
+							div.append(titul);
+
+							$("#Contents > table > tbody > tr:eq(1)").after(tr);
+				
 						},
 						error : function(data, textStatus) {
 							console.log('error');
@@ -296,7 +309,6 @@
 		});
 	});
 
-	
 </script>
 
 </body>

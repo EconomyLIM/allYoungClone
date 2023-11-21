@@ -208,9 +208,17 @@ function changePerPageAndClass(value) {
 	    matchedLi.parentElement.classList.add('on');
 	  }
 	}
+	$(function(){
+	// 브랜드 선택 초기화
+	$("#onlBrndReSet").on("click",function(){
+		var url = "/Black_OY/view/product/pmidlistproduct.do?displNum="+'<%=midId%>'+"&sort=${param.sort}&currentpage=1";
+		window.location.href = url;
+	})
+	})
 </script>
 <body>
 	<jsp:include page="/layout/head.jsp"></jsp:include>
+	
 	<div id="Container">
 		<div id="Contents">
 			<div class="page_location">
@@ -299,25 +307,6 @@ function changePerPageAndClass(value) {
 						</c:forEach>
 
 					</c:if>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
-					<li><input type="checkbox" name="" /> <label for="">123123</label></li>
 
 
 				</ul>
@@ -459,7 +448,7 @@ function changePerPageAndClass(value) {
 							<li class="flag">
 								<div class="prd_info">
 									<a href="<%=contextPath%>/olive/productDetail.do?goodsNo=${pml.displId}&displNum=<%=midId %>" class="prd_thumb goodsList"
-										name=""> <img src="${pml.displImgSrc}" alt="사진"
+										name="${pml.displId}"> <img src="${pml.displImgSrc}" alt="사진"
 										class="completed-seq-lazyload" />
 									</a>
 									<div class="prd_name">
@@ -632,6 +621,74 @@ $(document).ready(function() {
 }
 	
 </script>
+<script>
 
+
+// 쿠키 저장 함수
+function setCookie(cookie_name, value, days) {
+  var exdate = new Date();
+  exdate.setDate(exdate.getDate() + days);
+  // 설정 일수만큼 현재시간에 만료값으로 지정
+
+  var cookie_value = escape(value) + ((days == null) ? '' : '; expires=' + exdate.toUTCString());
+  document.cookie = cookie_name + '=' + cookie_value;
+}
+
+// 쿠키 값 가져오는 함수
+function getCookie(cookie_name) {
+	  var x, y;
+	  var val = document.cookie.split(';');
+
+	  for (var i = 0; i < val.length; i++) {
+	    x = val[i].substr(0, val[i].indexOf('='));
+	    y = val[i].substr(val[i].indexOf('=') + 1);
+	    x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+	    if (x == cookie_name) {
+	      return unescape(y); // unescape로 디코딩 후 값 리턴
+	    }
+	  }
+	}
+	
+	//쿠키 값 저장 하기
+	function addCookie(id) {
+  var items = getCookie('productItems'); // 이미 저장된 값을 쿠키에서 가져오기
+  var maxItemNum = 4; // 최대 저장 가능한 아이템 개수
+  var expire = 7; // 쿠키값을 저장할 기간
+  
+  if (items) {
+    var itemArray = items.split(',');
+    var itemSet = new Set(itemArray); // 중복 아이템을 제거하기 위해 Set 사용
+    
+    if (!itemSet.has(id)) {
+      // 새로운 값 추가
+      itemSet.add(id);
+      
+      // 쿠키에 새로운 값 추가 후, 최대 개수 유지하기
+      var updatedItemsArray = Array.from(itemSet);
+      while (updatedItemsArray.length > maxItemNum) {
+        updatedItemsArray.shift(); // 오래된 값을 삭제
+      }
+
+      // 쿠키에 새로운 값을 추가한 후, 다시 설정
+      var updatedItemsString = updatedItemsArray.join(',');
+      setCookie('productItems', updatedItemsString, expire);
+    }
+  } else {
+    // 신규 id값 저장하기
+    setCookie('productItems', id, expire);
+  }
+}
+
+// 클릭 이벤트 처리
+$(function(){
+  $(".prd_thumb.goodsList").on("click",function(){
+    let pro_id = $(this).attr("name");
+    addCookie(pro_id); // addCookie 함수 호출
+  })
+})
+
+
+	
+</script>
 
 </html>
