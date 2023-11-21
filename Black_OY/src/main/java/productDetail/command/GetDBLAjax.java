@@ -12,7 +12,7 @@ import productDetail.service.DBLService;
 import user.domain.LogOnDTO;
 
 
-@WebServlet("/GetDBLAjax")
+@WebServlet({"/GetDBLAjax", "/GetDBLAjaxP"})
 public class GetDBLAjax extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
