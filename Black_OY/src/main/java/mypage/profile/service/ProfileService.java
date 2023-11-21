@@ -6,6 +6,8 @@ import java.util.List;
 import com.util.ConnectionProvider;
 import com.util.JDBCUtil;
 
+import mypage.profile.domain.PfIntCateDTO;
+import mypage.profile.domain.PfSkinTrbDTO;
 import mypage.profile.domain.ProfileDTO;
 import mypage.profile.persistence.ProfileDAOImpl;
 
@@ -40,12 +42,12 @@ public class ProfileService {
 	}
 	
 	//2.	피부고민 가져오기 서비스
-	public List<String> pfstrService(String uId){
+	public List<PfSkinTrbDTO> pfstrService(String uId){
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			ProfileDAOImpl daoImpl = ProfileDAOImpl.getinstance();
-			List<String> list = null;
+			List<PfSkinTrbDTO> list = null;
 			list = daoImpl.selectSkinTrouble(conn, uId);
 			return list;
 		} catch (Exception e) {
@@ -60,12 +62,12 @@ public class ProfileService {
 	}
 	
 	//3.	관심카테고리 가져오기 서비스
-	public List<String> pfintcateService(String uId){
+	public List<PfIntCateDTO> pfintcateService(String uId){
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			ProfileDAOImpl daoImpl = ProfileDAOImpl.getinstance();
-			List<String> list = null;
+			List<PfIntCateDTO> list = null;
 			list = daoImpl.selectIntCate(conn, uId);
 			return list;
 		} catch (Exception e) {

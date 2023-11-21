@@ -15,11 +15,8 @@
 <link rel="stylesheet" href="../css/CJparticipate.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src = "https://www.cjone.com/cjmweb/js/modules/cjoneCore.js"></script>
-
 </head>
 <body>
-
-
 		<form id="headerFrm" method="get">
 			<input type="hidden" name="h_search_keyword" id="h_search_keyword">
 		</form>
@@ -626,559 +623,7 @@
 		</div>
 		<!-- //footer -->
 	</div>
-
-	<!--script 영역-->
-
-	<script type="text/javascript">
-	/* 	$(document).ready(
-				function() {
-
-					if ($('#upd_coopco_id').val() == '') {
-						$("#crdHead").hide();
-						$("#crdBody").hide();
-
-					} else {
-						$("#crdHead").show();
-						$("#crdBody").show();
-					}
-
-					setUserInfo(); // 오프라인 회원의 경우 값 셋팅
-
-					$("#crdNo01").keyup(goNext); // 카드번호이동       
-					$("#crdNo02").keyup(goNext); // 카드번호이동       
-					$("#crdNo03").keyup(goNext); // 카드번호이동
-					$("#crdNo04").keyup(goNext); // 카드번호이동       
-					$("#re_crdNo07").keyup(goNext); // 카드번호이동
-					$("#crdNo04").blur(reInput);
-
-					$("#crd_pwd").blur(checkPwd3);
-					$("#re_crd_pwd").blur(checkPwd4);
-
-					var coopco_cd = "7030";
-					var brnd_cd = "3000";
-
-					if (coopco_cd == "7000" && brnd_cd == "0000") {
-						//추천인 이벤트 여부 확인
-						setRcmEvt();
-					}
-
-					$('#rcm_id').change(function() {
-						if ($('#rcm_id').val().length > 0) {
-							rcmCheck = false;
-						} else {
-							rcmCheck = true;
-						}
-
-					});
- */
-			/* 		$('#mbr_id').change(function() {
-						$('#id_validate').val('N');
-						//showErrorMsg("mbr_id", "mbr_id_dupcheck");
-						alertMsg("alert_mbr_id", "아이디 중복확인을 해주세요.");
-					}); // 아이디(ID)중복확인
-
-					//	    $("#email_addr_opt").val("naver.com").change();
-					$('#pwd').keyup(checkPassword); // 강도  체크(비밀번호)
-
-					$('#email_addr_opt').change(setEmail); // 이메일 직접 입력등 선택
-					$('#email_addr_opt').change(chkEmail); // 이메일 직접입력
-					$('#email_addr2').blur(chkEmailDomain); // 직접입력 이메일 도메인 유효성 체크
-
-					$('#crdNo01').keypress(onlyNumber);
-					$('#crdNo02').keypress(onlyNumber);
-					$('#crdNo03').keypress(onlyNumber);
-					$('#crdNo04').keypress(onlyNumber);
-
-					
-					
-					$("#birth_yy").change(function() {
-						date_change();
-					});
-					$("#birth_mm").change(function() {
-						date_change();
-					});
-
-					var cj_marketing_agree = "Y";
-					if (cj_marketing_agree != "Y") {
-						$('#cj_agree input').attr("disabled", true).trigger(
-								'change');
-					}
-
-					var coop_marketing_agree = "";
-					if (coop_marketing_agree != "Y") {
-						$('#coop_agree input').attr("disabled", true).trigger(
-								'change');
-					}
-					if (coop_marketing_agree != "Y") {
-						//3자제공동의를 하지 않았더라도 마케팅수신동의 값이 N으로 저장되어야 하므로 해당 값은
-						//가입시 넘겨주어야함
-						$('#coop_agree input[name=rcvr_coopco]').attr(
-								"disabled", false).trigger('change');
-					}
-				});
-
- */
-		// 이메일 셋팅
-	/* 	function setEmail() {
-			// 직접입력일때
-			if ($('#email_addr_opt').val() == '0') {
-				$('#email_addr2').attr('readonly', false);
-			} else if ($('#email_addr_opt').val() != '') {
-				$('#email_addr2').attr('readonly', true);
-				$('#email_addr2').val($('#email_addr_opt').val());
-			} else {
-				$('#email_addr2').attr('readonly', true);
-			}
-		}
-
-		// 이메일 직접입력일때 추가필드 초기화
-		function chkEmail() {
-			// 직접입력일때
-			if ($('#email_addr_opt').val() == '0') {
-				$('#email_addr2').val('');
-			}
-		}
-
-		// cabs lock 체크
-		var msgStr = "";
-		function cabsCheck() {
-			var id = this.id;
-			if (checkCapsLock()) {
-				msgStr = "Cabs lock가 켜져 있습니다.";
-			} else {
-				$("#msg_" + id).hide();
-				msgStr = "";
-			}
-		} */
-
-/* 
-		function checkPasswordRule() {
-			if ($('#pwd').val() == "") {
-				alert("msg_pwd", "비밀번호를 입력해 주세요.");
-				alert("비밀번호를 입력해 주세요.");
-				return false;
-			} else {
-
-				var parameter = {};
-				parameter.p = BASE64.encode($('#pwd').val());
-				if ($('#mbr_id').val() != undefined) {
-					parameter.m = BASE64.encode($('#mbr_id').val());
-				}
-
-				$.ajax({
-					url : '/cjmweb/common/check-pwd-rule.do',
-					dataType : 'json',
-					data : 'mbr_id=' + parameter.m + '&pwd=' + parameter.p,
-					async : false,
-					type : 'POST',
-					error : function(err) {
-						alert(err);
-					},
-					success : function(response, statusText) {
-						if (response.resultCode != "0000") {
-							alertMsg("alert_pwd_strength", "<em>"
-									+ response.result_msg + "</em>");
-							return false;
-						} else {
-							return true;
-						}
-					}
-				});
-
-			}
-		}
- */
-/* 		function checkPwd2() {
-			if ($("#pwd").val() != $("#pwd_check").val()) {
-				alertMsg('msg_pwd_check', "입력하신 비밀번호가 일치하지 않습니다. 다시 확인해 주세요.")
-			} else {
-				$("#msg_pwd_check").hide();
-			}
-		} */
-
-	/* 	function chkEmailDomain() {
-			if ($('#email_addr_opt').val() == '0' && $('#email_addr2').val()) {
-				$.ajax({
-					url : '/cjmweb/common/check-email-available.do',
-					dataType : 'json',
-					data : 'domain=' + $('#email_addr2').val(),
-					async : false,
-					type : 'POST',
-					error : function(err) {
-						alert(err);
-					},
-					success : function(response, statusText) {
-						if (response.result_code != '00000') {
-							alertMsg('alert_email_addr',
-									"메일 도메인주소를 정확하게 입력하셨나요? 다시 한 번 확인해 주세요.");
-						} else
-							$('#alert_email_addr').hide();
-					}
-				});
-			}
-		}
- */
-/* 		function showCupoon() {
-			alert("생일쿠폰 보기!!");
-		}
-
-		function showMemory() {
-			alert("기념일서비스보기 보기!!");
-		}
- */
-		// 취소
-/* 		function goCancel() {
-			if (!confirm('회원가입을 취소하시겠습니까?'))
-				return;
-
-			if ('' == '') {
-				location.href = 'https://www.cjone.com/cjmweb/main.do';
-			} else {
-				location.href = 'https://www.cjone.com/cjmweb/join.do?coopco_cd=7030&brnd_cd=3000&mcht_no=3000&upd_coopco_id=';
-			}
-		}
-
-		// 회원가입 완료
-		function goSubmit() {
-
-			if (beforeSubmit()) {
-				var actionUrl = $('#form2').attr('action');
-
-				if (actionUrl.indexOf('/join.do') > -1) {
-					location.href = actionUrl;
-				} else {
-					$('#form2').submit();
-				}
-			}
-		}
-
-		function beforeSubmit() {
-			// 이메일 셋팅
-			if ($('#email_addr_opt').val() != "0") {
-				$('#email_addr2').val($('#email_addr_opt').val());
-			}
-
-			if (!checkInput())
-				return false;
-
-			if (!confirm('소중한 고객님의 정보는 CJ ONE 제휴 브랜드와 함께 변경 적용됩니다.\n이대로 입력하시겠습니까?')) {
-				return false;
-			} else {
-
-				ajaxRegister();
-				return true;
-			}
-		}
-
-		//매장가입pc
-		function submitOk() {
-			// 이메일 셋팅
-			if ($('#email_addr_opt').val() != "0") {
-				$('#email_addr2').val($('#email_addr_opt').val());
-			}
-
-			ajaxRegister();
-
-			var actionUrl = $('#form2').attr('action');
-
-			if (actionUrl.indexOf('/join.do') > -1) {
-				location.href = actionUrl;
-			} else {
-				$('#form2').submit();
-			}
-		}
-
-		function ajaxRegister() {
-			$("#pwd").val(BASE64.encode($("#pwd").val()));
-			$("#pwd_check").val('');
-			var params = $("#form1").serialize();
-
-			$
-					.ajax({
-						url : '/cjmweb/join/member-register.do',
-						dataType : 'json',
-						async : false,
-						type : 'POST',
-						data : params,
-						success : function(data) {
-							$("#pwd").val('');
-
-							if (data.reqBox.str_msg != ''
-									&& data.reqBox.str_msg != null
-									&& data.reqBox.str_msg != 'undefined') {
-								var str_msg = "" + data.reqBox.str_msg;
-								str_msg = str_msg.replace(/\\n/g, '\n');
-								alert(str_msg);
-							}
-
-							if (data.reqBox.sns_yn != "undefined"
-									&& data.reqBox.sns_yn != null
-									&& data.reqBox.sns_yn != '')
-								$("#form2 #sns_yn").val(data.reqBox.sns_yn);
-							if (data.reqBox.coopco_cd != "undefined"
-									&& data.reqBox.coopco_cd != null
-									&& data.reqBox.coopco_cd != '')
-								$("#form2 #coopco_cd").val(
-										data.reqBox.coopco_cd);
-							if (data.reqBox.brnd_cd != "undefined"
-									&& data.reqBox.brnd_cd != null
-									&& data.reqBox.brnd_cd != '')
-								$("#form2 #brnd_cd").val(data.reqBox.brnd_cd);
-							if (data.reqBox.mcht_no != "undefined"
-									&& data.reqBox.mcht_no != null
-									&& data.reqBox.mcht_no != '')
-								$("#form2 #mcht_no").val(data.reqBox.mcht_no);
-							if (data.reqBox.upd_coopco_id != "undefined"
-									&& data.reqBox.upd_coopco_id != null
-									&& data.reqBox.upd_coopco_id != '')
-								$("#form2 #upd_coopco_id").val(
-										data.reqBox.upd_coopco_id);
-							if (data.reqBox.coop_return_url != "undefined"
-									&& data.reqBox.coop_return_url != null
-									&& data.reqBox.coop_return_url != '')
-								$("#form2 #coop_return_url").val(
-										data.reqBox.coop_return_url);
-							if (data.reqBox.return_func != "undefined"
-									&& data.reqBox.return_func != null
-									&& data.reqBox.return_func != '')
-								$("#form2 #return_func").val(
-										data.reqBox.return_func);
-							if (data.reqBox.mbr_id != "undefined"
-									&& data.reqBox.mbr_id != null
-									&& data.reqBox.mbr_id != '')
-								$("#form2 #mbr_id").val(data.reqBox.mbr_id);
-							if (data.reqBox.sub_type != "undefined"
-									&& data.reqBox.sub_type != null
-									&& data.reqBox.sub_type != '')
-								$("#form2 #sub_type").val(data.reqBox.sub_type);
-							if (data.reqBox.ipin_use_yn != "undefined"
-									&& data.reqBox.ipin_use_yn != null
-									&& data.reqBox.ipin_use_yn != '')
-								$("#form2 #ipin_use_yn").val(
-										data.reqBox.ipin_use_yn);
-							if (data.reqBox.hg_nm != "undefined"
-									&& data.reqBox.hg_nm != null
-									&& data.reqBox.hg_nm != '')
-								$("#form2 #hg_nm").val(data.reqBox.hg_nm);
-							if (data.reqBox.vno != "undefined"
-									&& data.reqBox.vno != null
-									&& data.reqBox.vno != '')
-								$("#form2 #vno").val(data.reqBox.vno);
-							if (data.reqBox.ssn1 != "undefined"
-									&& data.reqBox.ssn1 != null
-									&& data.reqBox.ssn1 != '')
-								$("#form2 #ssn1").val(data.reqBox.ssn1);
-							if (data.reqBox.ssn2 != "undefined"
-									&& data.reqBox.ssn2 != null
-									&& data.reqBox.ssn2 != '')
-								$("#form2 #ssn2").val(data.reqBox.ssn2);
-							if (data.reqBox.ipin_ci != "undefined"
-									&& data.reqBox.ipin_ci != null
-									&& data.reqBox.ipin_ci != '')
-								$("#form2 #ipin_ci").val(data.reqBox.ipin_ci);
-							if (data.reqBox.ipin_di != "undefined"
-									&& data.reqBox.ipin_di != null
-									&& data.reqBox.ipin_di != '')
-								$("#form2 #ipin_di").val(data.reqBox.ipin_di);
-							if (data.reqBox.gender != "undefined"
-									&& data.reqBox.gender != null
-									&& data.reqBox.gender != '')
-								$("#form2 #gender").val(data.reqBox.gender);
-							if (data.reqBox.frgnr_yn != "undefined"
-									&& data.reqBox.frgnr_yn != null
-									&& data.reqBox.frgnr_yn != '')
-								$("#form2 #frgnr_yn").val(data.reqBox.frgnr_yn);
-							if (data.reqBox.under_14 != "undefined"
-									&& data.reqBox.under_14 != null
-									&& data.reqBox.under_14 != '')
-								$("#form2 #under_14").val(data.reqBox.under_14);
-							if (data.reqBox.id_validate != "undefined"
-									&& data.reqBox.id_validate != null
-									&& data.reqBox.id_validate != '')
-								$("#form2 #id_validate").val(
-										data.reqBox.id_validate);
-							if (data.reqBox.agr_dy != "undefined"
-									&& data.reqBox.agr_dy != null
-									&& data.reqBox.agr_dy != '')
-								$("#form2 #agr_dy").val(data.reqBox.agr_dy);
-							if (data.reqBox.agr_tm != "undefined"
-									&& data.reqBox.agr_tm != null
-									&& data.reqBox.agr_tm != '')
-								$("#form2 #agr_tm").val(data.reqBox.agr_tm);
-							if (data.reqBox.agr_yn != "undefined"
-									&& data.reqBox.agr_yn != null
-									&& data.reqBox.agr_yn != '')
-								$("#form2 #agr_yn").val(data.reqBox.agr_yn);
-							if (data.reqBox.agr_sub_yn99 != "undefined"
-									&& data.reqBox.agr_sub_yn99 != null
-									&& data.reqBox.agr_sub_yn99 != '')
-								$("#form2 #agr_sub_yn99").val(
-										data.reqBox.agr_sub_yn99);
-							if (data.reqBox.mbr_no != "undefined"
-									&& data.reqBox.mbr_no != null
-									&& data.reqBox.mbr_no != '')
-								$("#form2 #mbr_no").val(data.reqBox.mbr_no);
-							if (data.reqBox.mbr_typ_cd != "undefined"
-									&& data.reqBox.mbr_typ_cd != null
-									&& data.reqBox.mbr_typ_cd != '')
-								$("#form2 #mbr_typ_cd").val(
-										data.reqBox.mbr_typ_cd);
-							if (data.reqBox.legl_rep_nm != "undefined"
-									&& data.reqBox.legl_rep_nm != null
-									&& data.reqBox.legl_rep_nm != '')
-								$("#form2 #legl_rep_nm").val(
-										data.reqBox.legl_rep_nm);
-							if (data.reqBox.legl_birth_day != "undefined"
-									&& data.reqBox.legl_birth_day != null
-									&& data.reqBox.legl_birth_day != '')
-								$("#form2 #legl_birth_day").val(
-										data.reqBox.legl_birth_day);
-							if (data.reqBox.legl_ipin_ci != "undefined"
-									&& data.reqBox.legl_ipin_ci != null
-									&& data.reqBox.legl_ipin_ci != '')
-								$("#form2 #legl_ipin_ci").val(
-										data.reqBox.legl_ipin_ci);
-							if (data.reqBox.legl_cert != "undefined"
-									&& data.reqBox.legl_cert != null
-									&& data.reqBox.legl_cert != '')
-								$("#form2 #legl_cert").val(
-										data.reqBox.legl_cert);
-							if (data.reqBox.legl_typ_cd != "undefined"
-									&& data.reqBox.legl_typ_cd != null
-									&& data.reqBox.legl_typ_cd != '')
-								$("#form2 #legl_typ_cd").val(
-										data.reqBox.legl_typ_cd);
-							if (data.reqBox.legl_rep_agr_yn != "undefined"
-									&& data.reqBox.legl_rep_agr_yn != null
-									&& data.reqBox.legl_rep_agr_yn != '')
-								$("#form2 #legl_rep_agr_yn").val(
-										data.reqBox.legl_rep_agr_yn);
-							if (data.reqBox.join_coopco_list != "undefined"
-									&& data.reqBox.join_coopco_list != null
-									&& data.reqBox.join_coopco_list != '')
-								$("#form2 #join_coopco_list").val(
-										data.reqBox.join_coopco_list);
-							if (data.reqBox.rejoin_yn != "undefined"
-									&& data.reqBox.rejoin_yn != null
-									&& data.reqBox.rejoin_yn != '')
-								$("#form2 #rejoin_yn").val(
-										data.reqBox.rejoin_yn);
-							if (data.reqBox.action_url != "undefined"
-									&& data.reqBox.action_url != null
-									&& data.reqBox.action_url != '')
-								$("#form2 #action_url").val(
-										data.reqBox.action_url);
-							if (data.reqBox.evt_typ != "undefined"
-									&& data.reqBox.evt_typ != null
-									&& data.reqBox.evt_typ != '')
-								$("#form2 #evt_typ").val(data.reqBox.evt_typ);
-							if (data.reqBox.strEvtCode != "undefined"
-									&& data.reqBox.strEvtCode != null
-									&& data.reqBox.strEvtCode != '')
-								$("#form2 #strEvtCode").val(
-										data.reqBox.strEvtCode);
-							if (data.reqBox.evt_coopco_cd != "undefined"
-									&& data.reqBox.evt_coopco_cd != null
-									&& data.reqBox.evt_coopco_cd != '')
-								$("#form2 #evt_coopco_cd").val(
-										data.reqBox.evt_coopco_cd);
-							if (data.reqBox.evt_brnd_cd != "undefined"
-									&& data.reqBox.evt_brnd_cd != null
-									&& data.reqBox.evt_brnd_cd != '')
-								$("#form2 #evt_brnd_cd").val(
-										data.reqBox.evt_brnd_cd);
-							if (data.reqBox.evt_mcht_no != "undefined"
-									&& data.reqBox.evt_mcht_no != null
-									&& data.reqBox.evt_mcht_no != '')
-								$("#form2 #evt_mcht_no").val(
-										data.reqBox.evt_mcht_no);
-							if (data.reqBox.evt_mbr_no != "undefined"
-									&& data.reqBox.evt_mbr_no != null
-									&& data.reqBox.evt_mbr_no != '')
-								$("#form2 #evt_mbr_no").val(
-										data.reqBox.evt_mbr_no);
-							if (data.reqBox.card_register_error != "undefined"
-									&& data.reqBox.card_register_error != null
-									&& data.reqBox.card_register_error != '')
-								$("#form2 #card_register_error").val(
-										data.reqBox.card_register_error);
-
-							var html = ""
-
-							if (data.reqBox.svcuse_agr_typ != "undefined"
-									&& data.reqBox.svcuse_agr_typ != null
-									&& data.reqBox.svcuse_agr_typ != '') {
-								var obj01 = data.reqBox.svcuse_agr_typ;
-								$
-										.each(
-												obj01,
-												function(index, item) {
-													html += "<input type='hidden' name='svcuse_agr_typ_cd' id='svcuse_agr_typ_cd' value='"+item+"' />";
-												});
-							}
-
-							if (data.reqBox.agr_onln != "undefined"
-									&& data.reqBox.agr_onln != null
-									&& data.reqBox.agr_onln != '') {
-								var obj02 = data.reqBox.agr_onln;
-								$
-										.each(
-												obj02,
-												function(index, item) {
-													html += "<input type='hidden' name='agr_typ_onln' id='agr_typ_onln' value='"+item+"' />";
-												});
-							}
-
-							if (data.reqBox.etc_map != "undefined"
-									&& data.reqBox.etc_map != null
-									&& data.reqBox.etc_map != '') {
-								var obj03 = data.etc_map;
-								$
-										.each(
-												obj03,
-												function(index, item) {
-													html += "<input type='hidden' name='etc"+index+"' id='etc"+index+"' value='"+item+"' />";
-												});
-							}
-							$("#form2").append(html);
-
-							$('#form2').attr('action',
-									'/cjmweb' + data.reqBox.action_url);
-						},
-						error : function(data) {
-							var str_msg = "test" + data.reqBox.str_msg;
-							str_msg = str_msg.replace(/\\n/g, '\n');
-							alert(str_msg);
-						}
-					});
-		} */
-
-		function showErrorMsg(occur_loc, occur_msg) {
-			$("#msg_pwd").addClass("hide");
-			$("#msg_pwd_chedk").addClass("hide");
-			$("#alert_mob_no").addClass("hide");
-			$("#alert_email_addr").addClass("hide");
-			$("#alert_rcm_id").addClass("hide");
-
-			$("#mbr_id").removeClass("error");
-			$("#pwd").removeClass("error");
-			$("#pwd_chedk").removeClass("error");
-			$("#mob_no_1").removeClass("error");
-			$("#email_addr1").removeClass("error");
-			$("#rcm_id").removeClass("error");
-
-			$("#" + occur_loc).addClass("error");
-			if (occur_msg.length < 1) {
-				$("#msg_" + occur_loc).removeClass("hide");
-			} else {
-				$("#msg_" + occur_msg)
-				$("#msg_" + occur_msg).removeClass("hide");
-			}
-		}
-	</script>
-
-
-	<!--//script 영역-->
+	
 	<form method="post" name="form2" id="form2">
 		<input type="hidden" id="sns_yn" name="sns_yn" value=""> <input
 			type="hidden" id="coopco_cd" name="coopco_cd" value=""> <input
@@ -1246,6 +691,7 @@
 					if (data == "1") {
 						alert("이미 사용중인 아이디입니다. 다른 아이디를 입력해주세요.");
 						$("#alert_mbr_id").text("이미 사용중인 아이디입니다. 다른 아이디를 입력해주세요.");
+						
 					} else{
 						$("#alert_mbr_id").text("사용가능한 아이디입니다.");
 					
@@ -1258,10 +704,35 @@
 			});
 		});
 	});
+
+	$(function () {
+     $('#mbr_id').keydown(function(event) {
+     	if ( event.which == 13 ){
+     		$("#btnIdCheck").click();	
+     	}
+     });	
+});
 </script>
 <script>
 $('#new_pwd_check').keydown(function(event) {
 	if (event.keyCode == 13) chkPwd();
+});
+
+//패스워드 강도 체크  
+$("#pwd").on("change", function () {
+var inputVal = $("#pwd").val();	
+var length = inputVal.length;
+	if ( length >15) {
+		$("#pwd").focus();
+		$("#msg_pwd").removeClass("hide");
+		$("#msg_pwd").text("강도 : 강함");
+	} else if ( length >13) {
+		$("#msg_pwd").text("강도 : 적정");
+	}  else if (length >9) {
+		$("#msg_pwd").text('강도 : 약함'); 
+	}  else{
+       	$("#msg_pwd").text("강도 : 매우약함");
+   }
 });
 
 	//비밀번호 체크
@@ -1304,43 +775,40 @@ $('#new_pwd_check').keydown(function(event) {
 		return true;
 	}
 
-	$("#btnok").on("click", function() {
-		if (chkPwd()) {
-			alert("회원가입이 완료되었습니다.")
-			$("#formJoin").submit();
-		}
+</script>
+<script>
+	//생년월일
+	var sel;
+	var str = "${u_birth}";
+	const result1 = str.substr(0, 4);
+	const result2 = str.substr(4, 2);
+	const result3 = str.substr(6, 2);
+
+	sel = $("#birth_yy");
+	var selYYvalue = result1;
+
+	sel.find("option[value='" + selYYvalue + "']").prop("selected", true);
+
+	sel = $("#birth_mm");
+	var selMMvalue = result2;
+
+	sel.find("option[value='" + selMMvalue + "']").prop("selected", true);
+
+	sel = $("#birth_dd");
+	var selDDvalue = result3;
+
+	sel.find("option[value='" + selDDvalue + "']").prop("selected", true);
+</script>
+
+<script>
+//이메일 도메인옵션
+	$("#email_addr2").val($("#email_addr_opt").val());
+	$("#email_addr_opt").change(function() {
+		$("#email_addr2").val($("#email_addr_opt").val());
 	});
 </script>
-	 	<script>
-				var sel;
-				var str = "${u_birth}";
-				const result1=str.substr(0,4);	
-				const result2=str.substr(4,2);		
-				const result3=str.substr(6,2);
-				
-				
-				sel = $("#birth_yy");
-				var selYYvalue =result1;
-				
-				sel.find("option[value='" + selYYvalue + "']").prop("selected", true);
-				
-				sel = $("#birth_mm");
-				var selMMvalue =result2;
-				
-				sel.find("option[value='" + selMMvalue + "']").prop("selected", true);
-				
-				sel = $("#birth_dd");
-				var selDDvalue =result3;
-				
-				sel.find("option[value='" + selDDvalue + "']").prop("selected", true);
-				</script>
-			<script>
-				$("#email_addr2").val( $("#email_addr_opt").val() );
-				$("#email_addr_opt").change(function () {
-					$("#email_addr2").val( $("#email_addr_opt").val() );
-				});
-				</script>
-	<script>
+<script>
+	//휴대전화번호 마스킹처리
 	var str = "${u_tel}";
 	const result4=str.substr(0,4);		
 	const result5=str.substr(4,4);	
@@ -1348,15 +816,22 @@ $('#new_pwd_check').keydown(function(event) {
 				let str2 = result5;
 				let strAll = "010" + str1.replace(str1, '****') +str2;
 				$("#mob_no").val(strAll);
-
 		$("#u_tel").val("010-"+str1+"-"+str2);
 	</script>
 
 <script>
+	//회원가입취소
 	$("#btncancel").on("click", function () {
 		alert("회원가입을 취소하시겠습니까?");
-		location.href = "<%=contextPath%>/olive/joinCheck.do";
-	})
+		location.href = "<%=contextPath%>/olive/joinStart.do";
+	});
+	//회원가입
+	$("#btnok").on("click", function() {
+		if (chkPwd()) {
+			alert("회원가입이 완료되었습니다.")
+			$("#formJoin").submit();
+		}
+	});
 </script>
 <%
 	session.removeAttribute("u_name");

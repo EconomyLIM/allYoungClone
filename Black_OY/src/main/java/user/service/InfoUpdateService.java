@@ -3,6 +3,7 @@ package user.service;
 import java.sql.Connection;
 
 import com.util.ConnectionProvider;
+import com.util.JDBCUtil;
 
 import user.domain.LogOnDTO;
 import user.domain.OuserDTO;
@@ -30,6 +31,8 @@ public class InfoUpdateService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("InfoUpdateService.infoUpdateException");
+		} finally {
+			JDBCUtil.close(conn);
 		}
 		return infoUpd;
 		

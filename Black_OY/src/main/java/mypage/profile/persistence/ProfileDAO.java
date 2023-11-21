@@ -3,6 +3,8 @@ package mypage.profile.persistence;
 import java.sql.Connection;
 import java.util.List;
 
+import mypage.profile.domain.PfIntCateDTO;
+import mypage.profile.domain.PfSkinTrbDTO;
 import mypage.profile.domain.ProfileDTO;
 
 public interface ProfileDAO {
@@ -11,10 +13,10 @@ public interface ProfileDAO {
 	public List<ProfileDTO> selectProfile(Connection conn, String uId) throws Exception;
 	
 	//2.	피부고민 가져오기
-	public List<String> selectSkinTrouble(Connection conn, String uId) throws Exception;
+	public List<PfSkinTrbDTO> selectSkinTrouble(Connection conn, String uId) throws Exception;
 	
 	//3. 	관심카테고리 가져오기
-	public List<String> selectIntCate(Connection conn, String uId) throws Exception;
+	public List<PfIntCateDTO> selectIntCate(Connection conn, String uId) throws Exception;
 	
 	//4.	나의 프로필 수정하기
 	public int updateProfile(Connection conn, String uId, String nickN, String pfCon, String sTone, String sType, String uimgsrc ) throws Exception;

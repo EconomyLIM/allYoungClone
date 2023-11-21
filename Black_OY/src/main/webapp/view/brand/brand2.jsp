@@ -17,6 +17,7 @@
 <script src="/Black_OY/js/head.js"></script>
 <link rel="stylesheet" href="/Black_OY/css/style.css">
 <link rel="stylesheet" href="/Black_OY/css/brand.css">
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
@@ -455,145 +456,12 @@
 							aria-lebelledby="tabitem2">
 							<div class="itemList">
 								<div class="tabSwiperBox">
-									<div class="tabSwiper slick-initialized slick-slider"
-										id="bestTabSwiper">
-										<button type="button" data-role="none"
-											class="slick-prev slick-arrow" aria-label="Previous"
-											role="button" style="display: block;">Previous</button>
-
-
-
-
-										<div aria-live="polite" class="slick-list draggable">
-											<div class="slick-track" role="listbox"
-												style="opacity: 1; width: 5100px; transform: translate3d(-1020px, 0px, 0px);">
-												<div class="item slick-slide slick-cloned"
-													data-slick-index="-1" aria-hidden="true"
-													style="width: 1020px;" tabindex="-1">
-													<ul class="prod-list">
-
-
-														<li id="">
-															<div class="prod">
-																<a
-																	href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000171548&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=9"
-																	name="BrandA001436_Best" class="thumb goodsList"
-																	data-ref-goodsno="A000000171548"
-																	data-ref-dispcatno="9000002" data-ref-itemno="001"
-																	data-attr="브랜드관^구달_베스트^[한정기획] 구달 청귤 비타C 다크서클 아이크림 30ml 기획 (+15ml*2ea증정)"
-																	data-trk="/" tabindex="-1"
-																	onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000171548&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;1&quot;);"><img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0017/A00000017154812ko.jpg?l=ko"
-																	alt="[한정기획] 구달 청귤 비타C 다크서클 아이크림 30ml 기획 (+15ml*2ea증정)"
-																	class="pic-thumb" onerror="common.errorImg(this);"></a>
-																<div class="prod-info"
-																	onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000171548&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;1&quot;);">
-																	<a
-																		href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000171548&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=9"
-																		name="BrandA001436_Best" class="goodsList"
-																		data-ref-goodsno="A000000171548"
-																		data-ref-dispcatno="9000002" data-ref-itemno="001"
-																		data-attr="브랜드관^구달_베스트^[한정기획] 구달 청귤 비타C 다크서클 아이크림 30ml 기획 (+15ml*2ea증정)"
-																		data-trk="/" tabindex="-1"><div class="prod-brand">
-																			<strong class="exclusive"></strong>
-																		</div>
-																		<span class="prod-name double-line">[한정기획] 구달
-																			청귤 비타C 다크서클 아이크림 30ml 기획 (+15ml*2ea증정)</span>
-																	<div class="price">
-																			<strong class="total">24,000<span
-																				class="won">원</span></strong> <span class="oneday">오늘드림</span>
-																		</div>
-																		<div class="rating">
-																			<span class="point">4.6</span><span class="num">(999+)</span>
-																		</div>
-																		<div class="flags blank"></div></a>
-																</div>
-																<div class="prod-func">
-																	<button type="button" class="favorite btn_zzim jeem"
-																		data-ref-goodsno="A000000171548" tabindex="-1">
-																		<span>찜하기</span>
-																	</button>
-																	<button type="button" class="cart"
-																		onclick="common.gf_regCart(this); return false;"
-																		data-goods-no="A000000171548" data-item-no="001"
-																		tabindex="-1">장바구니</button>
-																</div>
-
-															</div>
-														</li>
-
-
-
-
-
-
-
-														<li id="">
-															<div class="prod">
-																<a
-																	href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000189175&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=10"
-																	name="BrandA001436_Best" class="thumb goodsList"
-																	data-ref-goodsno="A000000189175"
-																	data-ref-dispcatno="9000002" data-ref-itemno="001"
-																	data-attr="브랜드관^구달_베스트^[NEW] 구달 청귤 비타C 잡티케어 패드 70매+70매 리필기획"
-																	data-trk="/" tabindex="-1"
-																	onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000189175&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;2&quot;);"><img
-																	src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018917508ko.jpg?l=ko"
-																	alt="[NEW] 구달 청귤 비타C 잡티케어 패드 70매+70매 리필기획"
-																	class="pic-thumb" onerror="common.errorImg(this);"></a>
-																<div class="prod-info"
-																	onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000189175&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;2&quot;);">
-																	<a
-																		href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000189175&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=10"
-																		name="BrandA001436_Best" class="goodsList"
-																		data-ref-goodsno="A000000189175"
-																		data-ref-dispcatno="9000002" data-ref-itemno="001"
-																		data-attr="브랜드관^구달_베스트^[NEW] 구달 청귤 비타C 잡티케어 패드 70매+70매 리필기획"
-																		data-trk="/" tabindex="-1"><div class="prod-brand">
-																			<strong class="exclusive"></strong>
-																		</div>
-																		<span class="prod-name double-line">[NEW] 구달 청귤
-																			비타C 잡티케어 패드 70매+70매 리필기획</span>
-																	<div class="price">
-																			<strong class="total">38,000<span
-																				class="won">원</span></strong> <span class="oneday">오늘드림</span>
-																		</div>
-																		<div class="rating">
-																			<span class="point">4.7</span><span class="num">(999+)</span>
-																		</div>
-																		<div class="flags blank"></div></a>
-																</div>
-																<div class="prod-func">
-																	<button type="button" class="favorite btn_zzim jeem"
-																		data-ref-goodsno="A000000189175" tabindex="-1">
-																		<span>찜하기</span>
-																	</button>
-																	<button type="button" class="cart"
-																		onclick="common.gf_regCart(this); return false;"
-																		data-goods-no="A000000189175" data-item-no="001"
-																		tabindex="-1">장바구니</button>
-																</div>
-
-															</div>
-														</li>
-
-
-
-
-
-
-
-
-														<li></li>
-
-														<li></li>
-
-													</ul>
-												</div>
-												<div class="item slick-slide slick-current slick-active"
-													data-slick-index="0" aria-hidden="false"
-													style="width: 1020px;" tabindex="-1" role="option"
-													aria-describedby="slick-slide20">
+									<div class="tabSwiper"
+										id="bestTabSwiper" style="width: 1025px;">
+										
+  												<!-- div 태그 하나만 c:forEach 문돌릴 것 -->
+  												
+												<div class="item" ">
 													<ul class="prod-list">
 
 
@@ -836,9 +704,7 @@
 
 													</ul>
 												</div>
-												<div class="item slick-slide" data-slick-index="1"
-													aria-hidden="true" style="width: 1020px;" tabindex="-1"
-													role="option" aria-describedby="slick-slide21">
+												<div class="item">
 													<ul class="prod-list">
 
 
@@ -1076,9 +942,7 @@
 
 													</ul>
 												</div>
-												<div class="item slick-slide" data-slick-index="2"
-													aria-hidden="true" style="width: 1020px;" tabindex="-1"
-													role="option" aria-describedby="slick-slide22">
+												<div class="item">
 													<ul class="prod-list">
 
 
@@ -1199,9 +1063,7 @@
 
 													</ul>
 												</div>
-												<div class="item slick-slide slick-cloned"
-													data-slick-index="3" aria-hidden="true"
-													style="width: 1020px;" tabindex="-1">
+												<div class="item">
 													<ul class="prod-list">
 
 
@@ -1444,8 +1306,7 @@
 
 													</ul>
 												</div>
-											</div>
-										</div>
+											
 										<!-- item -->
 
 
@@ -1460,237 +1321,19 @@
 
 
 
-										<button type="button" data-role="none"
-											class="slick-next slick-arrow" aria-label="Next"
-											role="button" style="display: block;">Next</button>
+										
 									</div>
 
 								</div>
 
 							</div>
 							
-							<c:forEach var="pro" items="${ sellbrandProducts }">
-								<div class="item">
-									<ul class="prod-list">
-
-
-										<li id="">
-											<div class="prod">
-												<a
-													href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000162323&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=1"
-													name="BrandA001436_Best" class="thumb goodsList"
-													data-ref-goodsno="A000000162323"
-													data-ref-dispcatno="9000002" data-ref-itemno="001"
-													data-attr="브랜드관^구달_베스트^[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획"
-													data-trk="/" tabindex="-1"
-													onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000162323&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;13&quot;);"><img
-													src="${ sellbrandProducts.PRO_DISPL_SRC }"
-													alt="[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획"
-													class="pic-thumb" onerror="common.errorImg(this);"><span
-													class="flag-badge best">베스트</span></a>
-												<div class="prod-info"
-													onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000162323&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;13&quot;);">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000162323&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=1"
-														name="BrandA001436_Best" class="goodsList"
-														data-ref-goodsno="A000000162323"
-														data-ref-dispcatno="9000002" data-ref-itemno="001"
-														data-attr="브랜드관^구달_베스트^[한정기획] 구달 청귤 비타C 잡티케어 세럼 50ml+31ml 증정 기획"
-														data-trk="/" tabindex="-1"><div class="prod-brand">
-															<strong class="exclusive"></strong>
-														</div> <span class="prod-name double-line">${sellbrandProducts.PRO_DISPL_NAME }</span>
-														<div class="discount">
-															<span class="origin">${ sellbrandProducts.PRO_PRICE }</span>
-														</div>
-														<div class="price">
-															<strong class="total">30,960<span class="won">원</span></strong>
-															<span class="oneday">오늘드림</span>
-														</div>
-														<div class="rating">
-															<span class="point">4.7</span><span class="num">(999+)</span>
-														</div>
-														<div class="flags">
-															<span class="flag sale">세일</span><span
-																class="flag coupon">쿠폰</span>
-														</div></a>
-												</div>
-												<div class="prod-func">
-													<button type="button" class="favorite btn_zzim jeem"
-														data-ref-goodsno="A000000162323" tabindex="-1">
-														<span>찜하기</span>
-													</button>
-													<button type="button" class="cart"
-														onclick="common.gf_regCart(this); return false;"
-														data-goods-no="A000000162323" data-item-no="001"
-														tabindex="-1">장바구니</button>
-												</div>
-
-											</div>
-										</li>
-
-										<li id="">
-											<div class="prod">
-												<a
-													href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000168705&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=2"
-													name="BrandA001436_Best" class="thumb goodsList"
-													data-ref-goodsno="A000000168705"
-													data-ref-dispcatno="9000002" data-ref-itemno="001"
-													data-attr="브랜드관^구달_베스트^[1+1기획] 구달 맑은 어성초 진정 수분 선크림 50ml 1+1 기획 SPF50+ PA++++"
-													data-trk="/" tabindex="-1"
-													onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000168705&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;14&quot;);"><img
-													src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016870522ko.jpg?l=ko"
-													alt="[1+1기획] 구달 맑은 어성초 진정 수분 선크림 50ml 1+1 기획 SPF50+ PA++++"
-													class="pic-thumb" onerror="common.errorImg(this);"><span
-													class="flag-badge best">베스트</span></a>
-												<div class="prod-info"
-													onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000168705&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;14&quot;);">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000168705&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=2"
-														name="BrandA001436_Best" class="goodsList"
-														data-ref-goodsno="A000000168705"
-														data-ref-dispcatno="9000002" data-ref-itemno="001"
-														data-attr="브랜드관^구달_베스트^[1+1기획] 구달 맑은 어성초 진정 수분 선크림 50ml 1+1 기획 SPF50+ PA++++"
-														data-trk="/" tabindex="-1"><div class="prod-brand">
-															<strong class="exclusive"></strong>
-														</div> <span class="prod-name double-line">[1+1기획] 구달 맑은
-															어성초 진정 수분 선크림 50ml 1+1 기획 SPF50+ PA++++</span>
-														<div class="price">
-															<strong class="total">18,000<span class="won">원</span></strong>
-															<span class="oneday">오늘드림</span>
-														</div>
-														<div class="rating">
-															<span class="point">4.8</span><span class="num">(999+)</span>
-														</div>
-														<div class="flags blank"></div></a>
-												</div>
-												<div class="prod-func">
-													<button type="button" class="favorite btn_zzim jeem"
-														data-ref-goodsno="A000000168705" tabindex="-1">
-														<span>찜하기</span>
-													</button>
-													<button type="button" class="cart"
-														onclick="common.gf_regCart(this); return false;"
-														data-goods-no="A000000168705" data-item-no="001"
-														tabindex="-1">장바구니</button>
-												</div>
-
-											</div>
-										</li>
-										<li id="">
-											<div class="prod">
-												<a
-													href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000182780&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=3"
-													name="BrandA001436_Best" class="thumb goodsList"
-													data-ref-goodsno="A000000182780"
-													data-ref-dispcatno="9000002" data-ref-itemno="001"
-													data-attr="브랜드관^구달_베스트^[1+1 기획] 구달 맑은 어성초 진정 무기자차 선크림 50ml 1+1 기획 SPF50+ PA++++"
-													data-trk="/" tabindex="-1"
-													onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000182780&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;15&quot;);"><img
-													src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018278013ko.jpg?l=ko"
-													alt="[1+1 기획] 구달 맑은 어성초 진정 무기자차 선크림 50ml 1+1 기획 SPF50+ PA++++"
-													class="pic-thumb" onerror="common.errorImg(this);"><span
-													class="flag-badge best">베스트</span></a>
-												<div class="prod-info"
-													onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000182780&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;15&quot;);">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000182780&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=3"
-														name="BrandA001436_Best" class="goodsList"
-														data-ref-goodsno="A000000182780"
-														data-ref-dispcatno="9000002" data-ref-itemno="001"
-														data-attr="브랜드관^구달_베스트^[1+1 기획] 구달 맑은 어성초 진정 무기자차 선크림 50ml 1+1 기획 SPF50+ PA++++"
-														data-trk="/" tabindex="-1"><div class="prod-brand">
-															<strong class="exclusive"></strong>
-														</div> <span class="prod-name double-line">[1+1 기획] 구달 맑은
-															어성초 진정 무기자차 선크림 50ml 1+1 기획 SPF50+ PA++++</span>
-														<div class="discount">
-															<span class="origin">20,000원</span>
-														</div>
-														<div class="price">
-															<strong class="total">16,560<span class="won">원</span></strong>
-															<span class="oneday">오늘드림</span>
-														</div>
-														<div class="rating">
-															<span class="point">4.8</span><span class="num">(999+)</span>
-														</div>
-														<div class="flags">
-															<span class="flag sale">세일</span><span
-																class="flag coupon">쿠폰</span>
-														</div></a>
-												</div>
-												<div class="prod-func">
-													<button type="button" class="favorite btn_zzim jeem"
-														data-ref-goodsno="A000000182780" tabindex="-1">
-														<span>찜하기</span>
-													</button>
-													<button type="button" class="cart"
-														onclick="common.gf_regCart(this); return false;"
-														data-goods-no="A000000182780" data-item-no="001"
-														tabindex="-1">장바구니</button>
-												</div>
-
-											</div>
-										</li>
-										<li id="">
-											<div class="prod">
-												<a
-													href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000189175&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=4"
-													name="BrandA001436_Best" class="thumb goodsList"
-													data-ref-goodsno="A000000189175"
-													data-ref-dispcatno="9000002" data-ref-itemno="001"
-													data-attr="브랜드관^구달_베스트^[NEW] 구달 청귤 비타C 잡티케어 패드 70매+70매 리필기획"
-													data-trk="/" tabindex="-1"
-													onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000189175&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;16&quot;);"><img
-													src="https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018917508ko.jpg?l=ko"
-													alt="[NEW] 구달 청귤 비타C 잡티케어 패드 70매+70매 리필기획"
-													class="pic-thumb" onerror="common.errorImg(this);"><span
-													class="flag-badge best">베스트</span></a>
-												<div class="prod-info"
-													onclick="javascript:gtm.goods.callGoodsGtmInfo(&quot;A000000189175&quot;, &quot;&quot;, &quot;ee-productClick&quot;, &quot;브랜드관_구달_베스트&quot;, &quot;16&quot;);">
-													<a
-														href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000189175&amp;dispCatNo=9000002&amp;trackingCd=BrandA001436_Best&amp;t_page=브랜드관&amp;t_click=베스트_상품상세&amp;t_number=4"
-														name="BrandA001436_Best" class="goodsList"
-														data-ref-goodsno="A000000189175"
-														data-ref-dispcatno="9000002" data-ref-itemno="001"
-														data-attr="브랜드관^구달_베스트^[NEW] 구달 청귤 비타C 잡티케어 패드 70매+70매 리필기획"
-														data-trk="/" tabindex="-1"><div class="prod-brand">
-															<strong class="exclusive"></strong>
-														</div> <span class="prod-name double-line">[NEW] 구달 청귤
-															비타C 잡티케어 패드 70매+70매 리필기획</span>
-														<div class="discount">
-															<span class="origin">38,000원</span>
-														</div>
-														<div class="price">
-															<strong class="total">26,600<span class="won">원</span></strong>
-															<span class="oneday">오늘드림</span>
-														</div>
-														<div class="rating">
-															<span class="point">4.7</span><span class="num">(999+)</span>
-														</div>
-														<div class="flags">
-															<span class="flag coupon">쿠폰</span>
-														</div></a>
-												</div>
-												<div class="prod-func">
-													<button type="button" class="favorite btn_zzim jeem"
-														data-ref-goodsno="A000000189175" tabindex="-1">
-														<span>찜하기</span>
-													</button>
-													<button type="button" class="cart"
-														onclick="common.gf_regCart(this); return false;"
-														data-goods-no="A000000189175" data-item-no="001"
-														tabindex="-1">장바구니</button>
-												</div>
-
-											</div>
-										</li>
-
-
-									</ul>
-								</div>
+							
+								
 						</div>
 
 					</div>
-					</c:forEach>
+					
 					<!-- item -->
 					<!-- item -->
 
@@ -1698,17 +1341,14 @@
 					<!-- 슬라이더끝 -->
 				</div>
 			</div>
-			<c:forEach items="${ relist }" var="review" varStatus="status">
+			
 				<div class="tabCont reviewPanel" role="tabpanel" id="tab-panel3"
 					aria-lebelledby="tabitem3">
 
 					<div class="tabSwiperBox">
 						<div class="tabSwiper slick-initialized slick-slider"
 							id="reviewTabSwiper">
-							<button type="button" data-role="none"
-								class="slick-prev slick-arrow" aria-label="Previous"
-								role="button" style="display: block;">Previous</button>
-
+							
 							<div aria-live="polite" class="slick-list draggable">
 								<div class="slick-track" role="listbox"
 									style="opacity: 1; width: 0px; transform: translate3d(0px, 0px, 0px);">
@@ -2229,13 +1869,11 @@
 								</div>
 							</div>
 
-							<button type="button" data-role="none"
-								class="slick-next slick-arrow" aria-label="Next" role="button"
-								style="display: block;">Next</button>
+							
 						</div>
 					</div>
 				</div>
-			</c:forEach>
+			
 		</div>
 		<!--tabContainer  -->
 	</div>
@@ -2449,19 +2087,19 @@
 	
 </body>
 
-
-
-
-
-</html>
 <script type="text/javascript"
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
-	$(function(){
+jQuery(document).ready(function($) {
 	$('#bestTabSwiper').slick({
 	   slidesToShow: 1,
 	   slidesToScroll: 1,
+	   arrows: true,
 	   draggable: true
 	});
 	})
 </script>
+
+
+
+</html>
