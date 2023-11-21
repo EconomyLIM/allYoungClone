@@ -1,6 +1,7 @@
 package mypage.profile.command;
 
 import java.sql.Connection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.util.ConnectionProvider;
 
 import command.CommandHandler;
+import mypage.profile.domain.PfIntCateDTO;
+import mypage.profile.domain.PfSkinTrbDTO;
 import mypage.profile.domain.ProfileDTO;
 import mypage.profile.service.ProfileService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import user.domain.LogOnDTO;
 
 public class ProfileEditHandler implements CommandHandler {
@@ -32,18 +37,22 @@ public class ProfileEditHandler implements CommandHandler {
 		
 		//프로필
 		List<ProfileDTO> profileInfo = null;
-		List<String> skintrouble = null;
-		List<String> intcate = null;
+		List<PfSkinTrbDTO> skintrouble = null;
+		List<PfIntCateDTO> intcate = null;
 		
 		//프로필 서비스
 		profileInfo = service.pfinfoService(userId);
 		skintrouble = service.pfstrService(userId);
 		intcate = service.pfintcateService(userId);
 		
+		//JSON으로 변환
+		JSONArray pfiJson = listprofiledtoToJsonarray(profileInfo, skintrouble, intcate);
+		
+		
+		
 		//프로필 
-		request.setAttribute("profileInfo", profileInfo);
-		request.setAttribute("skintrouble", skintrouble);
-		request.setAttribute("intcate", intcate);
+		request.setAttribute("profileInfo", pfiJson);
+		
 		
 		//처음 접속시(파라미터 없음)
 		if ("GET".equals(method)) {
@@ -97,4 +106,51 @@ public class ProfileEditHandler implements CommandHandler {
 	
 	}
 
+	
+	//json 변환 메서드
+	private static JSONArray listprofiledtoToJsonarray(List<ProfileDTO> profileInfo, List<PfSkinTrbDTO> skintrouble, List<PfIntCateDTO> intcate ) {
+		JSONArray array = new JSONArray();
+		for (ProfileDTO profileDTO : profileInfo) {
+			JSONObject jsonObject = profileDTOToJsonObject(profileDTO);
+			array.add(jsonObject);
+		}
+		for (PfSkinTrbDTO pfSkinTrbDTO : skintrouble) {			
+			JSONObject jsonObject2 = pfskinTrbDTOToJsonObject(pfSkinTrbDTO);
+			array.add(jsonObject2);
+		}
+		for (PfIntCateDTO pfIntCateDTO : intcate) {
+			JSONObject jsonObject3 = pfintCateDTOToJsonObject(pfIntCateDTO);
+			array.add(jsonObject3);
+		}
+		System.out.println(array);
+		return array;
+	}
+	
+	private static JSONObject profileDTOToJsonObject( ProfileDTO dto ) {
+		JSONObject object = new JSONObject();
+		object.put("skinTypeid", dto.getSkinTypeid());
+		object.put("skinToneid", dto.getSkinToneid());
+		System.out.println(object);
+		return object;
+	}
+	
+	private static JSONObject pfskinTrbDTOToJsonObject( PfSkinTrbDTO dto ) {
+		JSONObject object = new JSONObject();
+		object.put("pfskinTrbId", dto.getPfskinTrbId());
+		System.out.println(object);
+		return object;
+	}
+	
+	private static JSONObject pfintCateDTOToJsonObject( PfIntCateDTO dto ) {
+		JSONObject object = new JSONObject();
+		object.put("pfintCateId", dto.getPfintCateId());
+		System.out.println(object);
+		return object;
+	}
+	
+	
+	
+
+	
 }
+
