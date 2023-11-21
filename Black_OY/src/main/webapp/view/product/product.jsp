@@ -517,6 +517,12 @@ $(function() {
 	$(function() {
 		// 주문하기 버튼 클릭 처리
 		$("#cartBtn").on("click", function() {
+			if(${empty logOn }) {
+				alert("로그인 후 이용해 주세요.")
+				location.href = "<%=contextPath%>/olive/LogOn.do";
+				return;
+			}
+			
 			let flag = false;
 			
 			/*
@@ -546,7 +552,7 @@ $(function() {
 					return;
 				}
 			} else {
-				params = "products=" + $("#pro_id").val() + "-" + $("#cartCnt_A000000175060001").val();
+				params = "products=" + $("#pro_id").val() + "-" + $("#cartCnt").val();
 			}
 			
 			if($("#deliveDay").prop("checked")) {
@@ -560,6 +566,12 @@ $(function() {
 		
 		// 선물하기 눌렀을 때
 		$(".btnGift.goods_gift").on("click", function() {
+			if(${empty logOn }) {
+				alert("로그인 후 이용해 주세요.")
+				location.href = "<%=contextPath%>/olive/LogOn.do";
+				return;
+			}
+			
 			let flag = false;
 			
 			/*
@@ -589,7 +601,7 @@ $(function() {
 					return;
 				}
 			} else {
-				params = "products=" + $("#pro_id").val() + "-" + $("#cartCnt_A000000175060001").val();
+				params = "products=" + $("#pro_id").val() + "-" + $("#cartCnt").val();
 			}
 			
 			if($("#deliveDay").prop("checked")) {

@@ -44,17 +44,44 @@
 		}); 
 		
 		$(".btn_zzim.jeem").on("click", function() {
+			let likeCheck = 0;
 			$(this).toggleClass("on");
 			if($(this).hasClass("on")) {
 				$(".layerAlim.zzimOn.wishPrd").fadeIn(1000).fadeOut(1000);
+				likeCheck = 1;
 			} else {
 				$(".layerAlim.zzimOff.wishPrd").fadeIn(1000).fadeOut(1000);
+				likeCheck = -1;
 			}
+			
+			/* $.ajax({
+				type : 'get'
+				, async : false
+				, cache: false
+				, url : '/Black_OY/olive/updateAjax'
+				, dataType : 'json'
+				, data : {  }
+				, success : function(data) {
+					console.log(data);
+	            }
+				, error : function (data, textStatus) {
+					console.log('error');
+	            }
+			});  */
 		});
 		
 		$(".common-menu button").on("click", function() {
-			location.href = '<%=contextPath%>/olive/ranking.do?mid=' + $(this).data('mid') + '&m_click=' + $(this).val();
-		})
+			location.href = '<%=contextPath%>/olive/ranking.do?mid=' + $(this).data('mid') + '&m_click=' + $(this).text();
+		});
+		
+		let lis = $(".common-menu li");
+		$(lis).removeClass("on");
+		for (var i = 0; i < lis.length; i++) {
+			if($(lis[i]).find("button").text() == '${param.m_click}') {
+				$(lis[i]).addClass("on");
+				break;
+			}
+		}
 	})
 </script>
 

@@ -16,6 +16,12 @@
 <body>
 
 <script>
+	//세 자리마다 , 찍기
+	function formatStringWithCommas(str) {
+	    return str.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
+	// form check
 	function formCheck() {
 		if($("#ordManNm").val() == "") {
 			alert($(this).attr("title"));
@@ -82,6 +88,12 @@
 		//결제 버튼 눌렀을 때
 		$("#btnPay").on("click", function() {
 			if(formCheck()) {
+				let payCheck = confirm("결제 하시겠습니까?");
+				if(!payCheck) {
+					alert("결제를 취소하셨습니다.");
+					history.back();
+				}
+				
 				let products = $("input[name=pro_id]");
 				let params = "";
 				for (var i = 0; i < products.length; i++) {
@@ -106,8 +118,6 @@
 						console.log('error');
 		            }
 				});
-				
-				alert("결제 가능~~");
 				
 				$("#orderForm").submit();
 			}
@@ -142,7 +152,7 @@
 		}); 
 		
 		// 가지고 있는 포인트 표시
-		$("#cjonePnt").text('${logOn.u_point}');
+		$("#cjonePnt").text(formatStringWithCommas('${logOn.u_point}'));
 		
 		// 회원 기본 설정
 		let tel1 = '${dto.deli_tel}';
@@ -255,8 +265,8 @@
 		}
 		
 		$("#orderForm > div.order_payment_box > div.right_area > ul > li:nth-child(1) > span.tx_cont > span")
-			.text(totalPrice);
-		$("#totPayAmt_sum_span").text(totalPrice);
+			.text(totalPrice.toLocaleString());
+		$("#totPayAmt_sum_span").text(totalPrice.toLocaleString());
 		$("#totalPrice").val(totalPrice);
 		$("#totalPay").val(totalPrice);
 		
@@ -2009,7 +2019,7 @@
                         <li>
                             <span class="tx_tit">총 상품금액</span>
                             <span class="tx_cont"><span class="tx_num">0</span>원</span>
-                            <input type="hidden" name="totalPrice" value="0">
+                            <input type="hidden" id="totalPrice" name="totalPrice" value="0">
                         </li>
                         <li>
                             <span class="tx_tit">쿠폰할인금액</span><!-- 2017-01-18 수정 : 문구수정 -->

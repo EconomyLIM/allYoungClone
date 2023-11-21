@@ -60,6 +60,8 @@ public class GiftHandler implements CommandHandler {
 			String msg = request.getParameter("presentMsg");			// 메시지
 			String mc_id = request.getParameter("mc_id");				// 메시지 카드 ID
 			
+			String click = request.getParameter("click");
+			
 			map.put("product_id", product_id);
 			map.put("user_id", user_id);
 			map.put("delivery_date", delivery_date);
@@ -81,6 +83,7 @@ public class GiftHandler implements CommandHandler {
 			
 			String order_id = service.giftOrderService(map);
 			request.setAttribute("order_id", order_id);
+			request.setAttribute("click", click);
 			
 			location = "/view/order/orderComplete.jsp";
 		}
