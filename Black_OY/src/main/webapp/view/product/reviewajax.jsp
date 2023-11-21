@@ -20,7 +20,7 @@
 									style="display: none;">
 									<div class="thum">
 										<span class="bg"></span> <img
-											src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2023/11/04/1699105876598.png?RS=60x60&amp;CS=60x60"
+											src="${review.user_img }"
 											class="profileThum_s"
 											style="background: url(https://static.oliveyoung.co.kr/pc-static-root/image/comm/my_picture_base.jpg) no-repeat 0 0; background-size: 60px">
 									</div>
@@ -40,7 +40,14 @@
 									<!--피부 컨디션이 -->
 									<!--<strong _tmplitem="143" >-->
 									<!-- ## 리뷰 고도화 1차 ## : 위치 변경 및 마크업 변경 -->
-									<span>복합성</span> <span>봄웜톤</span> <span>모공</span> <span>민감성</span>
+									<span>${review.skintype_title }</span> <span>${review.skintone_title }</span> 
+									<c:forEach items="${skinlists }" var="skinlist">
+													<c:forEach items="${skinlist }" var="skintrb">
+														<c:if test="${skintrb.user_id eq review.user_id }">
+												<span>${skintrb.skintrb_title }</span>
+												</c:if>
+												</c:forEach>
+												</c:forEach>
 									<!--</strong>-->
 								</p>
 								<!--## 리뷰 고도화 1차 ## : 재구매/한달사용 리뷰 -->

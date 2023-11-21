@@ -746,7 +746,7 @@
 		</script>
 <script>
 	$("#btnSms").on("click", function () {
-		location.href = "name_phlast.jsp";
+		location.href = "modify_phlast.jsp";
 	});
 </script>
 

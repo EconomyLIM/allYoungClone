@@ -92,22 +92,13 @@
 									</div>
 								</li>
 							</ul>
+							
+
 <script>
 
-	
+//서버에서 전송된 피부톤, 피부타입, 피부고민, 관심 카테고리를 가져와서 CHECKED 속성을 부여하는 스크립트
 
-    // 서버에서 전달된 체크된 값들의 배열
-    var serverCheckedValues = \${pf.skintype};
 
-    // 이미 생성된 체크박스들에 동적으로 checked 속성 부여
-    $(document).ready(function() {
-        $("input[value='\${ id값들 }']").each(function() {
-            var checkboxValue = $(this).val();
-            if ($.inArray(checkboxValue, serverCheckedValues) !== -1) {
-                $(this).prop("checked", true);
-            }
-        });
-    });
 </script>
 							
 							</c:forEach>
@@ -189,42 +180,42 @@
 													
 														
 															<li>
-																<input type="radio" id="skinTone쿨톤" name="skin_type2" value="B01">
+																<input type="radio" id="skinTone쿨톤" name="skin_type2" value="STO_00000001">
 																<label for="skinTone쿨톤">쿨톤</label>
 															</li>
 														
 													
 														
 															<li>
-																<input type="radio" id="skinTone웜톤" name="skin_type2" value="B02" >
+																<input type="radio" id="skinTone웜톤" name="skin_type2" value="STO_00000002" >
 																<label for="skinTone웜톤">웜톤</label>
 															</li>
 														
 													
 														
 															<li>
-																<input type="radio" id="skinTone봄웜톤" name="skin_type2" value="B03">
+																<input type="radio" id="skinTone봄웜톤" name="skin_type2" value="STO_00000003">
 																<label for="skinTone봄웜톤">봄웜톤</label>
 															</li>
 														
 													
 														
 															<li>
-																<input type="radio" id="skinTone여름쿨톤" name="skin_type2" value="B04">
+																<input type="radio" id="skinTone여름쿨톤" name="skin_type2" value="STO_00000004">
 																<label for="skinTone여름쿨톤">여름쿨톤</label>
 															</li>
 														
 													
 														
 															<li>
-																<input type="radio" id="skinTone가을웜톤" name="skin_type2" value="B05">
+																<input type="radio" id="skinTone가을웜톤" name="skin_type2" value="STO_00000005">
 																<label for="skinTone가을웜톤">가을웜톤</label>
 															</li>
 														
 													
 														
 															<li>
-																<input type="radio" id="skinTone겨울쿨톤" name="skin_type2" value="B06">
+																<input type="radio" id="skinTone겨울쿨톤" name="skin_type2" value="STO_00000006">
 																<label for="skinTone겨울쿨톤">겨울쿨톤</label>
 															</li>
 														
@@ -241,7 +232,7 @@
 													
 															
 															<li>
-																<input type="checkbox" id="skinTrouble잡티" name="skin_type3" value="C01">
+																<input type="checkbox" id="skinTrouble잡티" name="skin_type3" value="STR_00000001">
 																<label for="skinTrouble잡티">잡티</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -250,7 +241,7 @@
 													
 															
 															<li>
-																<input type="checkbox" id="skinTrouble미백" name="skin_type3" value="C02">
+																<input type="checkbox" id="skinTrouble미백" name="skin_type3" value="STR_00000002">
 																<label for="skinTrouble미백">미백</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -258,7 +249,7 @@
 														
 															
 															<li>
-																<input type="checkbox" id="skinTrouble주름" name="skin_type3" value="C03">
+																<input type="checkbox" id="skinTrouble주름" name="skin_type3" value="STR_00000003">
 																<label for="skinTrouble주름">주름</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -268,7 +259,7 @@
 																
 															
 															<li>
-																<input type="checkbox" id="skinTrouble각질" name="skin_type3" value="C04">
+																<input type="checkbox" id="skinTrouble각질" name="skin_type3" value="STR_00000004">
 																<label for="skinTrouble각질">각질</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -276,7 +267,7 @@
 														
 															
 															<li>
-																<input type="checkbox" id="skinTrouble트러블" name="skin_type3" value="C05">
+																<input type="checkbox" id="skinTrouble트러블" name="skin_type3" value="STR_00000005">
 																<label for="skinTrouble트러블">트러블</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -285,7 +276,7 @@
 													
 															
 															<li>
-																<input type="checkbox" id="skinTrouble블랙헤드" name="skin_type3" value="C06">
+																<input type="checkbox" id="skinTrouble블랙헤드" name="skin_type3" value="STR_00000006">
 																<label for="skinTrouble블랙헤드">블랙헤드</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -294,7 +285,7 @@
 																
 															
 															<li>
-																<input type="checkbox" id="skinTrouble피지과다" name="skin_type3" value="C07">
+																<input type="checkbox" id="skinTrouble피지과다" name="skin_type3" value="STR_00000007">
 																<label for="skinTrouble피지과다">피지과다</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -304,7 +295,7 @@
 																
 															
 															<li>
-																<input type="checkbox" id="skinTrouble민감성" name="skin_type3" value="C08">
+																<input type="checkbox" id="skinTrouble민감성" name="skin_type3" value="STR_00000008">
 																<label for="skinTrouble민감성">민감성</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -314,7 +305,7 @@
 																
 															
 															<li>
-																<input type="checkbox" id="skinTrouble모공" name="skin_type3" value="C09">
+																<input type="checkbox" id="skinTrouble모공" name="skin_type3" value="STR_00000009">
 																<label for="skinTrouble모공">모공</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -322,7 +313,7 @@
 														
 															
 															<li>
-																<input type="checkbox" id="skinTrouble탄력" name="skin_type3" value="C10">
+																<input type="checkbox" id="skinTrouble탄력" name="skin_type3" value="STR_00000010">
 																<label for="skinTrouble탄력">탄력</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -330,7 +321,7 @@
 														
 															
 															<li>
-																<input type="checkbox" id="skinTrouble홍조" name="skin_type3" value="C11">
+																<input type="checkbox" id="skinTrouble홍조" name="skin_type3" value="STR_00000011">
 																<label for="skinTrouble홍조">홍조</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -341,7 +332,7 @@
 															
 															
 															<li>
-																<input type="checkbox" id="skinTrouble아토피" name="skin_type3" value="C12">
+																<input type="checkbox" id="skinTrouble아토피" name="skin_type3" value="STR_00000012">
 																<label for="skinTrouble아토피">아토피</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -351,7 +342,7 @@
 																
 															
 															<li>
-																<input type="checkbox" id="skinTrouble다크서클" name="skin_type3" value="C13">
+																<input type="checkbox" id="skinTrouble다크서클" name="skin_type3" value="STR_00000013">
 																<label for="skinTrouble다크서클">다크서클</label>
 															</li>
 															<!-- checked사용후 초기화 -->
@@ -369,92 +360,92 @@
 												<ul id="personalCategoryList" class="radius_box_list clrfix">
 													
 														<li>
-															<input type="checkbox" id="personalCatogory스킨케어" value="D01" name="skin_type4">
+															<input type="checkbox" id="personalCatogory스킨케어" value="INT_00000001" name="skin_type4">
 															<label for="personalCatogory스킨케어">스킨케어</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory마스크팩" value="D02" name="skin_type4" >
+															<input type="checkbox" id="personalCatogory마스크팩" value="INT_00000002" name="skin_type4" >
 															<label for="personalCatogory마스크팩">마스크팩</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory클렌징" value="D03" name="skin_type4">
+															<input type="checkbox" id="personalCatogory클렌징" value="INT_00000003" name="skin_type4">
 															<label for="personalCatogory클렌징">클렌징</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory선케어" value="D04" name="skin_type4">
+															<input type="checkbox" id="personalCatogory선케어" value="INT_00000004" name="skin_type4">
 															<label for="personalCatogory선케어">선케어</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory더모 코스메틱" value="D05" name="skin_type4">
+															<input type="checkbox" id="personalCatogory더모 코스메틱" value="INT_00000005" name="skin_type4">
 															<label for="personalCatogory더모 코스메틱">더모 코스메틱</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory메이크업" value="D06" name="skin_type4">
+															<input type="checkbox" id="personalCatogory메이크업" value="INT_00000006" name="skin_type4">
 															<label for="personalCatogory메이크업">메이크업</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory네일" value="D07" name="skin_type4">
+															<input type="checkbox" id="personalCatogory네일" value="INT_00000007" name="skin_type4">
 															<label for="personalCatogory네일">네일</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory바디케어" value="D08" name="skin_type4">
+															<input type="checkbox" id="personalCatogory바디케어" value="INT_00000008" name="skin_type4">
 															<label for="personalCatogory바디케어">바디케어</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory헤어케어" value="D09" name="skin_type4">
+															<input type="checkbox" id="personalCatogory헤어케어" value="INT_00000009" name="skin_type4">
 															<label for="personalCatogory헤어케어">헤어케어</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory향수/디퓨저" value="D10" name="skin_type4">
+															<input type="checkbox" id="personalCatogory향수/디퓨저" value="INT_00000010" name="skin_type4">
 															<label for="personalCatogory향수/디퓨저">향수/디퓨저</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory미용소품" value="D11" name="skin_type4">
+															<input type="checkbox" id="personalCatogory미용소품" value="INT_00000011" name="skin_type4">
 															<label for="personalCatogory미용소품">미용소품</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory남성" value="D12" name="skin_type4">
+															<input type="checkbox" id="personalCatogory남성" value="INT_00000012" name="skin_type4">
 															<label for="personalCatogory남성">남성</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory구강/건강용품" value="D13" name="skin_type4">
+															<input type="checkbox" id="personalCatogory구강/건강용품" value="INT_00000013" name="skin_type4">
 															<label for="personalCatogory구강/건강용품">구강/건강용품</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory여성/위생용품" value="D19" name="skin_type4">
+															<input type="checkbox" id="personalCatogory여성/위생용품" value="INT_00000014" name="skin_type4">
 															<label for="personalCatogory여성/위생용품">여성/위생용품</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory건강식품" value="D14" name="skin_type4">
+															<input type="checkbox" id="personalCatogory건강식품" value="INT_00000015" name="skin_type4">
 															<label for="personalCatogory건강식품">건강식품</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory푸드" value="D15" name="skin_type4">
+															<input type="checkbox" id="personalCatogory푸드" value="INT_00000016" name="skin_type4">
 															<label for="personalCatogory푸드">푸드</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory라이프/홈" value="D16" name="skin_type4">
+															<input type="checkbox" id="personalCatogory라이프/홈" value="INT_00000017" name="skin_type4">
 															<label for="personalCatogory라이프/홈">라이프/홈</label>
 														</li>
 													
 														<li>
-															<input type="checkbox" id="personalCatogory반려동물" value="D17" name="skin_type4">
+															<input type="checkbox" id="personalCatogory반려동물" value="INT_00000018" name="skin_type4">
 															<label for="personalCatogory반려동물">반려동물</label>
 														</li>
 													

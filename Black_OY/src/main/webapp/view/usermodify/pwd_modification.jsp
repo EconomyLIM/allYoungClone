@@ -166,59 +166,6 @@
 		<!-- //footer -->
 	</div>
 
-<script type="text/javascript">
-
-		var pwStrength = false;
-		function checkPassword() {
-			pwStrength = false;
-			var special_chars1 = "\!\"\#$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\]\^\_\`\{\|\}\~";
-			var pw = new Password(document.getElementById('new_pwd').value,
-					special_chars1);
-			var verdict = pw.getStrength();
-			var hint = msgStr;
-			if (pw.lcase_count == 0)
-				hint += "";
-			if (pw.ucase_count == 0)
-				hint += "";
-			if (pw.num_count == 0)
-				hint += "";
-			if (pw.schar_count == 0)
-				hint += "";
-			if (pw.run_score <= 1)
-				hint += "";
-
-			alertMsg2("msg_pwd", verdict + " " + hint);
-			if (pw.strength >= 38) {
-				pwStrength = true;
-			}
-		}
-
-		function checkPwd1() {
-
-			// 비밀번호 유효성 체크 
-			if ($('#new_pwd').val() == "") {
-				alertMsg2("msg_pwd", "비밀번호를 입력해 주세요.");
-			} else {
-				if (!chkPasswordValid()) {
-					$('#new_pwd').next().focus();
-					setTimeout(function() {
-						$('#new_pwd').focus();
-					}, 0);
-					return false;
-				}
-				if (!isValid_passwd_with_id($('#new_pwd').val(), '')) {
-					$('#new_pwd').next().focus();
-					setTimeout(function() {
-						$('#new_pwd').focus();
-					}, 0);
-					return false;
-				} else {
-					return true;
-				}
-
-			}//end else                   
-		}
-	</script>
 <script>
 $("#btnCancel").on("click", function () {
 	alert('비밀번호 변경을 취소하시겠습니까?');
@@ -228,19 +175,24 @@ $("#btnCancel").on("click", function () {
 	//비밀번호 체크
 	function chkPwd() {
 		var befpwd = $("#bef_pwd").val();
-		var userpwd = $("#new_pwd").val();
-		var userckpwd = $("#new_pwd_check").val();
+		var newpwd = $("#new_pwd").val();
+		var newckpwd = $("#new_pwd_check").val();
 		var userid = "${logOn.user_id}";
+		var userpwd = "${logOn.u_pwd}";
 		var pwdPattern = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
-		var num = userpwd.search(/[0-9]/g);
-		var eng = userpwd.search(/[a-z]/ig);
-		var spe = userpwd.search(/[!"#$%&'()*+,-./:;<=>?@[]^_`{|}~]/gi);
+		var num = newpwd.search(/[0-9]/g);
+		var eng = newpwd.search(/[a-z]/ig);
+		var spe = newpwd.search(/[!"#$%&'()*+,-./:;<=>?@[]^_`{|}~]/gi);
 		
-		if (befpwd == userpwd) {
+		if( userpwd != befpwd ){
+			alert("비밀번호가 일치하지 않습니다.");
+			$("#bef_pwd").focus();
+			return false;
+		} else if(befpwd == newpwd) {
 			alert("현재 비밀번호와 동일한 비밀번호는 사용할 수 없습니다.");
 			$("#new_pwd").focus();
 			return false;
-		} else if (userpwd.length<8 || userpwd.length>12) {
+		} else if (newpwd.length<8 || newpwd.length>12) {
 			alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
 			$("#msg_pwd").removeClass("hide");
 			$("#new_pwd").focus();
@@ -251,17 +203,17 @@ $("#btnCancel").on("click", function () {
 			$("#msg_pwd").removeClass("hide");
 			$("#new_pwd").focus();
 			return false;
-		} else if (/(\w)\1\1\1/.test(userpwd)) {
+		} else if (/(\w)\1\1\1/.test(newpwd)) {
 			alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
 			$("#msg_pwd").removeClass("hide");
 			$("#new_pwd").focus();
 			return false;
-		} else if (userpwd.search(userid) > -1) {
+		} else if (newpwd.search(userid) > -1) {
 			alert("비밀번호 설정 시 아이디와 4자리 이상 동일한 문자 또는 숫자를 사용할 수 없습니다.");
 			$("#msg_pwd").removeClass("hide");
 			$("#new_pwd").focus();
 			return false;
-		} else if ( userpwd !=userckpwd){
+		} else if ( newpwd !=newckpwd){
 			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 			$("#msg_pwd_check").removeClass("hide");
 			$("#new_pwd").focus();

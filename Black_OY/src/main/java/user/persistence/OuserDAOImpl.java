@@ -122,7 +122,7 @@ public class OuserDAOImpl implements OuserDAO {
 	
 	//회원정보 수정
 	@Override
-	public int infoUpdate(Connection conn, String newEmail, String newPwd, String user_id) throws SQLException {
+	public int infoUpdate(Connection conn, String user_id, String newEmail, String newPwd) throws SQLException {
 		int infoUpd = 0;
 		String sql = "UPDATE o_user SET u_email = ? , u_pwd = ? "
 				+ "WHERE user_id = ? ";
@@ -143,7 +143,6 @@ public class OuserDAOImpl implements OuserDAO {
 			System.out.println("infoUpdateImpl Exception~");
 		}finally {
 			JDBCUtil.close(pstmt);
-			JDBCUtil.close(conn);
 		}
 		return infoUpd;
 	}

@@ -57,6 +57,7 @@ public class ProEventService {
 				conn = ConnectionProvider.getConnection();
 				ProEventDAOImpl daoImpl = ProEventDAOImpl.getInstance();
 				map = daoImpl.getEventProduct(conn, eventId);
+				System.out.println(map);
 			} catch (Exception e) {
 				System.out.println("ProEventService sGetEventProduct Exception");
 				e.printStackTrace();

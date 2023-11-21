@@ -44,6 +44,8 @@
 		<url-pattern>/olive/basket.do</url-pattern>
 		<url-pattern>/olive/itemlist.do</url-pattern>
 		<url-pattern>/olive/basketitemadd.do</url-pattern>
+		<url-pattern>/GetDBLAjax</url-pattern>
+		<url-pattern>/GetDILAjax</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 	
@@ -63,5 +65,15 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
+	<error-page>
+	    <error-code>404</error-code>
+	    <location>/WEB-INF/error/404.jsp</location>
+	</error-page>
+	
+	<error-page>
+	    <error-code>500</error-code>
+	    <location>/WEB-INF/error/500.jsp</location>
+	</error-page>
 	
 </web-app>

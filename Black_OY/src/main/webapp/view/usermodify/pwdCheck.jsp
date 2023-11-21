@@ -191,7 +191,7 @@
 	<!--script 영역-->
 
 	<script>
-	$(function () {
+	 $(function () {
 	     $('#pwd').keydown(function(event) {
 	     	if ( event.which == 13 ){
 	     		$("#btnPwdCheck").click();	
@@ -207,12 +207,15 @@
 
     function pwdCheck() {
         var u_pwd = $("#pwd").val();
+        
         if (u_pwd == "") {
             alert("비밀번호를 입력해 주세요.");
             $("#pwd").focus();
+            return false;
         } else if ( u_pwd != "${logOn.u_pwd}"){
         	alert("비밀번호가 일치하지 않습니다.");
         	$("#pwd").focus();
+        	return false;
         }
         return true;
 	}

@@ -12,6 +12,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/CJbase.css" />
 <link rel="stylesheet" href="../css/CJparticipate.css" />
+<link rel="stylesheet" href="../../css/CJbase.css" />
+<link rel="stylesheet" href="../../css/CJparticipate.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <body class="" style="height: 1269px;">
@@ -64,7 +66,7 @@
 		<!-- contents -->
 		<div id="contentsWrap">
 			<form name="mobChgForm" id="mobChgForm" method="post"
-				action="<%=contextPath%>/olive/infoUpdate.do">
+				action="">
 				<input type="hidden" name="enc_data" value=""> <input
 					type="hidden" name="enc_com" value=""> <input type="hidden"
 					name="hg_nm" value=""> <input type="hidden" name="phone_no"
@@ -83,7 +85,9 @@
 				<input type="hidden" name="coop_return_url" id="coop_return_url"
 					value="https://www.oliveyoung.co.kr/store/mypage/getMktReceiptInfo.do?refresh=Y">
 			</form>
-			<form name="form1" id="form1" method="post" action="">
+			<form name="form1" id="form1" method="post" action="<%=contextPath%>/olive/infoUpdate.do">
+					<input type="hidden" name = "newTel" value = "${newTel }"/>
+					<input type="hidden" name = "newName" value="${newName }"/>
 				<input type="hidden" name="coopco_cd" id="coopco_cd" value="7030">
 				<input type="hidden" name="brnd_cd" id="brnd_cd" value="3000">
 				<input type="hidden" name="mcht_no" id="mcht_no" value="3000">
@@ -166,7 +170,17 @@
 												<th scope="row">이름</th>
 												<td>
 													<div class="input_group">
-														<span id="hg_nm_area">${logOn.u_name}</span>
+														<span id="hg_nm_area" name = "u_name">
+														<c:choose>
+															<c:when test= "${not empty newName}">
+																${newName}
+															</c:when>
+															<c:otherwise>
+																${logOn.u_name}
+															</c:otherwise>
+														</c:choose>
+														
+														</span>
 														<a href="#" class="btn btn_sm" id="lnChangeName">
 														<span class="arr">변경하기</span></a>
 													</div>
@@ -213,14 +227,22 @@
 												<th scope="row"><label for="mob_no_1">휴대전화번호</label></th>
 												<td>
 													<div>
-														<span class="input_txt w100 phon_write" id="mobileNoInfo"></span>
+														<span class="input_txt w100 phon_write" id="mobileNoInfo">
+														<c:choose>
+														<c:when test= "${not empty newTel}">
+																${newTel}
+															</c:when>
+															<c:otherwise>
+																${logOn.u_tel}
+															</c:otherwise>
+														</c:choose>
+														</span>
 														<input type="hidden" name="mob_no_1" id="mob_no_1"
 															value=""> <input type="hidden" name="mob_no_2"
 															id="mob_no_2" value=""> <input type="hidden"
-															name="mob_no_3" id="mob_no_3" value=""> <a
-															href="javascript:void(0);"
-															onclick="callAuthLayerMobChgAuth();" class="btn btn_sm"><span
-															class="arr">변경하기</span></a>
+															name="mob_no_3" id="mob_no_3" value="">
+															<a href="<%=contextPath%>/olive/nameUpdate.do" class="btn btn_sm">
+															<span class="arr">변경하기</span></a>
 													</div>
 													<p class="msg_desc">
 														휴대전화번호는 본인 인증된 정보로 자동 적용 됩니다.<br>휴대전화번호로 주문, 배송, 쿠폰,
@@ -243,34 +265,17 @@
 															placeholder="이메일 도메인" data-format="email"
 															name="email_addr2" id="email_addr2" value=""
 															autocomplete="off">
-														</span> <span class="select w100 hide" data-skin="form"> <select
-															title="이메일 도메인 선택" data-control="emailSelector"
+														</span> <span class="select w100 " data-skin="form">
+														<select title="이메일 도메인 선택" data-control="emailSelector"
 															name="email_addr_opt" id="email_addr_opt">
-																<option value="" selected="selected">선택해주세요</option>
 																<option value="0">직접입력</option>
 																<option value="naver.com">네이버</option>
 																<option value="hanmail.net">한메일</option>
 																<option value="nate.com">네이트</option>
 																<option value="gmail.com">지메일</option>
-
 														</select>
 														</span>
-														<div class="select_wrap w100" style="">
-															<div class="item_seleced">
-																<a href="#naver.com" title="이메일 도메인 선택 목록 열기"
-																	data-title="이메일 도메인 선택" class="">네이버<span
-																	class="haze">선택됨</span></a>
-															</div>
-															<div class="item_list_wrap ">
-																<div class="item_list ui_scrollarea">
-																	<ul class="ui_content">
-																		<li><a href="#0"><span>직접입력</span></a></li>
-																		<li><a href="#naver.com" data-selected="true"><span>네이버</span></a></li>
-																		<li><a href="#hanmail.net"><span>한메일</span></a></li>
-																		<li><a href="#nate.com"><span>네이트</span></a></li>
-																		<li><a href="#gmail.com"><span>지메일</span></a></li>
-																	</ul>
-																</div>
+						
 																<div class="scroll ui_scrollbar">
 																	<span class="bg_top"></span> <span class="bg bg_mid"
 																		style="display: none;"></span> <span class="bg_btm"></span>
@@ -281,10 +286,6 @@
 													<p class="msg_desc">이메일 주소 입력 시 사용 가능 특수 문자 : - . _</p>
 												</td>
 											</tr>
-
-
-
-
 
 											<tr>
 												<th scope="row">카카오 로그인</th>
@@ -2362,6 +2363,7 @@ function goFooterMenu(type){
 	</div>
 	<!--script 영역-->
 
+
 	<script>
 		var tm_rcv_checkbox = new Array();
 		var sms_rcv_checkbox = new Array();
@@ -2386,21 +2388,10 @@ function goFooterMenu(type){
             
             //정보제공 동의여부
             $('[data-control="accordion"]').accordion();
-            
-            //이메일 선택
-            $('[data-control="emailSelector"]').on('change', function () {       
-              var $this = $(this);
-              $this.prev().val($this.val());
-            });  
+
             
             
-            //선택정보 > 현금영수증 발행 선택
-            $('#select_way').off('change').on('change', function () {
-                var $this = $(this),
-                      $next = $this.parent().children('span'),
-                      selectedIndex = $this.children().filter(':selected').index();
-                $next.not($next.eq(selectedIndex).removeClass('hide')).addClass('hide');  
-            });
+  
             
           	//현금영수증 발행정보 세팅
           	
@@ -2411,38 +2402,8 @@ function goFooterMenu(type){
     </script>
 
 
-	<script type="text/javascript">
+	<script type="text/javascript">	
 	
-	var isPwdChange = false;
-    $(document).ready(function(){
-	    	
-	
-	    setUserInfo();  // 오프라인 회원의 경우 값 셋팅
-	    
-	 	var coopco_cd = "7030";
-	 	var brnd_cd = "3000";
-	
-	    $('#mbr_id').change(function() { 
-	    	$('#id_validate').val('N');
-	    	alertMsg("alert_mbr_id", "아이디 중복확인을 해주세요.");
-	    }); // 아이디(ID)중복확인
-	    
-	    $('#pwd').keyup(checkPassword);      // 강도  체크(비밀번호)
-	
-	    $('#email_addr_opt').change(setEmail);  // 이메일 직접 입력등 선택
-	    $('#email_addr_opt').change(chkEmail);  // 이메일 직접입력
-	    $('#email_addr2').blur(chkEmailDomain); // 직접입력 이메일 도메인 유효성 체크
-
-	  //  $("#btn_cancel").click(goCancel);
-	    $("#btn_submit").click(goSubmit);
-	    
-	    $(".item_seleced a").click(chkCertification);
-	    $(".phon_write").click(chkCertification);
-	    $(".email_write").click(chkCertification);
-		
-	    if (navigator.userAgent.indexOf('MSIE') > -1) {
-	    	$('.ie8Lbls').hide();
-		}	    
 	    
 	    // 카카오 로그인 사용 여부
         if($('#under_14').val() == 'N'){
@@ -2477,212 +2438,7 @@ function goFooterMenu(type){
 	    	coopMarketingAgreeControl(false);
 	    } 
 
-        //--160802_수정: 비밀번호 변경 - 시작
-        $('[data-control="toggle"]').toggle().on({
-            'toggle:end': function (e, dataSet) {
-                var isOpen = dataSet.isOpen,
-                      $handlerTarget = $('[data-handler="'+dataSet.data.$el.attr('data-handler-target')+'"]');
-                $handlerTarget.toggleClass('hide');
-                $handlerTarget.last().children().toggleClass('hide');
-                isPwdChange = !isPwdChange;
-                
-                //20220829 수정 : 비밀번호 변경하기 버튼 클릭 시, 버튼 숨김 처리
-                $('#btn_chg_pw').hide();
-            }
-        });
-        //--160802_수정: 비밀번호 변경 - 끝	  
-
-	    var cj_marketting_code = '30';
-	    var coop_marketting_code = 'coop';
-	    var cootoo_code = ['35','36'];
-	    var precard_code = ['38','39'];
-	    var interpark_code = ['44','45','46'];
-	    
-	    $('input:radio').change(function(e){
-	    	//CJ 마케팅코드 동의/미동의 시 마케팅정보수신동의 disabled (true,false)처리.
-	    	if(e.currentTarget.name == 'agr'+cj_marketting_code){
-	    		if(confirm('개인정보 수집 및 활용 동의를 변경 하시겠습니까?')){
-					$('#agr'+cj_marketting_code+'_Y').focus();
-	    			if($(e.currentTarget).attr('value') == "Y"){
-						cjMarketingAgreeControl(true);
-	    			}else{
-	    				cjMarketingAgreeControl(false);
-	    			}
-				}
-	    	//제휴사 마케팅코드 동의/미동의 시 제휴사 마케팅정보수신동의 disabled (true,false)처리.
-	    	}else if(e.currentTarget.name == 'agr'+coop_marketting_code){
-	    		if(confirm('개인정보 수집 및 활용 동의를 변경 하시겠습니까?')){
-	    			$('#agr'+coop_marketting_code+'_Y').focus();
-	    			if($(e.currentTarget).attr('value') == "Y"){
-	    				coopMarketingAgreeControl(true);
-	    				
-	    			}else{
-	    				coopMarketingAgreeControl(false);
-	    			}
-				}
-	    	}
-	    	
-	    	//쿠투 약관코드중 하나가 미동의 되면 나머지 쿠투약관코드 미동의 처리 
-	    	for(var i=0; i < cootoo_code.length; i++ ){
-	    		if(e.currentTarget.name == 'agr'+cootoo_code[i]){
-	    			if($(e.currentTarget).attr('value') == "N"){
-						alert('쿠투 상품 구매를 위해서는 쿠투 상품 구매를 위한 제3자 정보제공과 쿠투 이용약관에 모두 동의하셔야 합니다.');	    				
-	    				for(var j=0; j < cootoo_code.length; j++){
-	    					if(e.currentTarget.name != 'agr'+cootoo_code[j] && $('#agr'+cootoo_code[j]+'_Y').prop('checked')){
-	    						$('#agr'+cootoo_code[j]+'_N').prop('checked', true).formSkin('addSkin');
-	    					}
-	    				}
-	    				return;
-	    			}
-	    		}
-	    	}
-	    	
-	    	//선불카드 약관코드중 하나가 미동의 되면 나머지 쿠투약관코드 미동의 처리 
-	    	for(var i=0; i < precard_code.length; i++ ){
-	    		if(e.currentTarget.name == 'agr'+precard_code[i]){
-	    			if($(e.currentTarget).attr('value') == "N"){
-	    				alert('기프트카드서비스 이용을 위해서는 CJ 기프트카드 서비스 이용약관과 멤버쉽연동을 위한 제3자 정보제공동의에 모두 동의하셔야합니다.');
-	    				for(var j=0; j < precard_code.length; j++){
-	    					if(e.currentTarget.name != 'agr'+precard_code[j] && $('#agr'+precard_code[j]+'_Y').prop('checked')){
-	    						$('#agr'+precard_code[j]+'_N').prop('checked', true).formSkin('addSkin');
-	    					}
-	    				}
-	    				return;
-	    			}
-	    		}
-	    	}
-	    	
-	    	//선불카드 약관코드중 하나가 미동의 되면 나머지 쿠투약관코드 미동의 처리 
-	    	for(var i=0; i < precard_code.length; i++ ){
-	    		if(e.currentTarget.name == 'agr'+precard_code[i]){
-	    			if($(e.currentTarget).attr('value') == "N"){
-	    				alert('기프트카드서비스 이용을 위해서는 CJ 기프트카드 서비스 이용약관과 멤버쉽연동을 위한 제3자 정보제공동의에 모두 동의하셔야합니다.');
-	    				for(var j=0; j < precard_code.length; j++){
-	    					if(e.currentTarget.name != 'agr'+precard_code[j] && $('#agr'+precard_code[j]+'_Y').prop('checked')){
-	    						$('#agr'+precard_code[j]+'_N').prop('checked', true).formSkin('addSkin');
-	    					}
-	    				}
-	    				return;
-	    			}
-	    		}
-	    	}
-	    	
-	    	//인터파크 약관코드중 하나가 미동의 되면 나머지 인터파크 약관코드 미동의 처리 
-	    	for(var i=0; i < interpark_code.length ; i++ ){
-	    		if(e.currentTarget.name == 'agr'+interpark_code[i]){
-	    			if($(e.currentTarget).attr('value') == "N"){
-	    				alert('인터파크 상품 구매를 위해서는 인터파크 상품 구매를 위한 제3자 정보제공과 인터파크 이용약관에 모두 동의하셔야 합니다.');  	
-	    				for(var j=0; j < interpark_code.length; j++){
-	    					if(e.currentTarget.name != 'agr'+interpark_code[j] && $('#agr'+interpark_code[j]+'_Y').prop('checked')){
-	    						$('#agr'+interpark_code[j]+'_N').prop('checked', true).formSkin('addSkin');
-	    					}
-	    				}
-	    				return;
-	    			}
-	    		}
-	    	}
-	    	
-	    });	
-		
-	    $('[data-control="cj_gatherAgree"]').click(function (e) {
-	        e.preventDefault();
-	        var $this = $(this);
-	        $handler = $('[data-handler-target="'+($this.attr('data-control'))+'"]');
-	        if($handler.closest('li').hasClass('on') == true){
-	        	cjone.util.scrollToElement($handler, {offset: 10});
-	        }else{
-	        	$handler.trigger('click');
-	        	cjone.util.scrollToElement($handler, {offset: 10});
-	        }
-	    });	
-	    $('[data-control="coop_gatherAgree"]').click(function (e) {
-	        e.preventDefault();
-	        var $this = $(this);
-	        $handler = $('[data-handler-target="'+($this.attr('data-control'))+'"]');
-	        if($handler.closest('li').hasClass('on') == true){
-	        	cjone.util.scrollToElement($handler, {offset: 10});
-	        }else{
-	        	$handler.trigger('click');
-	        	cjone.util.scrollToElement($handler, {offset: 10});
-	        }	        
-	    });	
-	    
-	    // 회원정보 Masking 처리 
-	    if ( isMaskYn == "Y" ) {
-	    	$("#mob_no_1").attr("disabled",true);
-	    	$("#mob_no_2").attr("disabled",true);
-	    	$("#mob_no_3").attr("disabled",true);
-	    	$("#email_addr1").attr("disabled",true);
-	    	$("#email_addr2").attr("disabled",true);
-	    	$("#email_addr_opt").attr("disabled",true);
-	    	$("#select_way").attr("disabled",true);
-	    	$("#option02_val_1").attr("disabled",true);
-	    	$("#option02_val_2").attr("disabled",true);
-	    	$("#option02_val_3").attr("disabled",true);
-	    	$("#option01_val_1").attr("disabled",true);
-	    	$("#option01_val_2").attr("disabled",true);
-	    	$("#option01_val_3").attr("disabled",true);
-	    	$("#option01_val_4").attr("disabled",true);
-	    	$("#option03_val_1").attr("disabled",true);
-	    	$("#option03_val_2").attr("disabled",true);
-	    	$("#option03_val_3").attr("disabled",true);
-	    	$("#option03_val_4").attr("disabled",true);
-	    	$("#option04_val_1").attr("disabled",true);
-	    	$("#option05_val_1").attr("disabled",true);
-	    	$(".select_wrap").attr("style","background-color:rgb(235,235,228)");
-	    }
-   });
-
-    // 이메일 셋팅
-    function setEmail(){
-        // 직접입력일때
-        if($('#email_addr_opt').val() == '0') {
-            $('#email_addr2').attr('readonly', false);
-        } else if ($('#email_addr_opt').val() != '') {
-            $('#email_addr2').attr('readonly', true);
-            $('#email_addr2').val($('#email_addr_opt').val());
-        } else {
-            $('#email_addr2').attr('readonly', true);
-        }
-    }
-    
-    // 이메일 직접입력일때 추가필드 초기화
-    function chkEmail(){
-        // 직접입력일때
-        if($('#email_addr_opt').val() == '0') {
-            $('#email_addr2').val('');
-        }
-    }
-
-    function beforeSubmit() {
-        // 이메일 셋팅
-        if($('#email_addr_opt').val() != "0"){
-            $('#email_addr2').val($('#email_addr_opt').val());
-        }
-
-        if(!checkInput()) return false;
-
-        if (isPwdChange && isMaskYn == 'Y') {
-            if(!confirm('비밀번호 변경 시 본인인증이 필요하며, 본인인증 완료 후\n소중한 고객님의 정보는 CJ ONE 제휴 브랜드와 함께 변경 적용됩니다.\n이대로 입력하시겠습니까?')) {
-                return false;
-            } else {
-            	cjone.openModal('/cjmweb/member/verify-account-passwd.do');
-            }        	
-        } else {
-	        if(!confirm('소중한 고객님의 정보는 CJ ONE 제휴 브랜드와 함께 변경 적용됩니다.\n이대로 입력하시겠습니까?')) {
-	            return false;
-	        } else {
-	        	if ( !isPwdChange ) {
-		        	$('#pwd').val('');
-		        	$('#pwd_check').val('');
-	        	}
-	            return true;
-	        }
-        }
-    }
-
-  
-
+/* 
     
 	function alertMsg(objId, ErrMsg){
 		$("#"+objId).html(ErrMsg);
@@ -2709,12 +2465,12 @@ function goFooterMenu(type){
 			$("#msg_" + occur_msg).removeClass("hide");
 		}
 	}
-    
+     */
 
 
 
     // 회원수정 체크
-    function checkInput() {
+ /*    function checkInput() {
     	
     	if ( isMaskYn == 'Y') {
     		
@@ -2817,153 +2573,7 @@ function goFooterMenu(type){
 	            $('#email_addr2').focus();
 	            return false;
 	        }
-	
-	        // 이메일 유효성 체크
-	        if(!CheckMailFormat($('#email_addr1').val()+'@'+$('#email_addr2').val())) {
-	            alert("유효하지 않는 이메일 주소 입니다.");
-	            alertMsg('msg_email_addr', "유효하지 않는 이메일 주소 입니다.");
-	            $('#email_addr2').focus();
-	            return false;
-	        }
-	        $('#msg_email_addr').hide();
-	
-	        if(!setFocusMobileTel("1")||!setFocusMobileTel("2")||!setFocusMobileTel("3")) return false;
-	
-		    return true;
-    	}
-    }
-    
-    /* 2012.02.01 휴대전화번호가 양식에 틀리면 focus를 준다. */
-    function setFocusMobileTel(id) {
-        /* 휴대전화 검사 */
-        var objMp   = $('#mob_no_'+id);
-        var chkVal  = "";
-        
-        //현금영수증의 휴대전화 validation 체크
-        if($("#select_way").val() == "option02") {
-            var objMp   = $('#option02_val_'+id);
-        }
-        
-        if(objMp.val() == "")   chkVal  = "*";
-        if(objMp.val() != "" && ((id == "2" && objMp.val().length < 3) || (id == "3" && objMp.val().length < 4)))   chkVal  = "*";
-
-        if(chkVal != "") {
-        	alert('휴대 전화번호를  정확히 입력해 주세요.');
-            alertMsg("alert_mob_no", "휴대 전화번호를  정확히 입력해 주세요.");
-            objMp.focus();
-
-            return false;
-        }
-        else return true;
-    }
-
-    function isValid_mbrId(str) {
-        var patten = new Array();
-        var msg = new Array();
-        var p;
-        var ret_msg = new Array();
-        patten["not_eng_num"] =/^[a-z0-9]+$/g;  //a-z와 0-9 이외의 문자가 있는지 확인    
-        msg["not_eng_num"] = "영문 소문자/숫자만 사용가능합니다.";
-        patten["len"] = /^\w{6,12}$/;	// 문자열 길이
-        msg["len"] = "6~12자리로 사용가능합니다.";
-        patten["only_num"] = /[a-zA-Z]/;// 숫자만
-        msg["only_num"] = "영문 소문자/숫자의 혼용으로 사용가능합니다(숫자만으로는 사용불가).";
-    	 var retVal = checkSpace( str );
-    	 if( retVal ) {
-    		 alert("아이디는 빈 공간 없이 연속된 영문 소문자와 숫자만 사용할 수 있습니다.");
-    		 alertMsg('msg_id', "아이디는 빈 공간 없이 연속된 영문 소문자와 숫자만 사용할 수 있습니다.");
-    		 return false;
-    	 }
-    	var i=0;
-    	for (x in patten)
-    	{
-    		p = eval(patten[x]);
-    		if(!p.test(str))
-    		{
-    			ret_msg[i] = msg[x];
-    			i++;
-    		} 
-    	}
-    	if(i>0) {
-    		alertMsg("alert_mbr_id", "영문자, 숫자 조합하여 6~12자리 아이디를 입력해 주세요.");
-    		return false;
-    	}
-    	else return true;
-    }
-    
-    // 이름변경(개명)
-	function changeName() {
-		$('#sform').attr('target', '_self');
-        $('#sform').attr('action', 'https://www.cjone.com/cjmweb/member/name-change.do');
-        $('#sform').submit();
-	}
-	//input size 검사
-	function chkInputDigit(id_list, length_list, receiptType) {
-		var check_ok = true;
-		
-		for(var i=0; i < id_list.length; i++){
-			var id = id_list[i];
-			
-			var $objMp = $('#'+id);
-			var index = i+1;
-			if($objMp.val().length != length_list[i]){
-				check_ok = false;
-				
-				if(receiptType != ""){
-					switch (receiptType) {
-					case "option01":
-						if($objMp.val().length <= length_list[i]){
-							alert("현금영수증 발행을 위한 "+ index +"번째 현금영수증카드" + ' ' + '번호' + ' ' + length_list[i] + '자리를 입력해주세요.');
-						}else{
-							alert("현금영수증 발행을 위한 현금영수증카드" + ' ' + '번호를 정확히 입력해 주세요.');
-						}
-						$objMp.focus();		
-						break;
-					case "option02":
-						if($objMp.val().length <= length_list[i]){
-							alert("현금영수증 발행을 위한 "+ index +"번째 휴대전화" + ' ' + '번호' + ' ' + length_list[i] + '자리를 입력해주세요.');
-						}else{
-							alert("현금영수증 발행을 위한 휴대전화" + ' ' + '번호를 정확히 입력해 주세요.');
-						}						
-						$objMp.focus();
-						break;
-					case "option03":
-						if($objMp.val().length <= length_list[i]){
-							alert("현금영수증 발행을 위한 "+ index +"번째 신용카드" + ' ' + '번호' + ' ' + length_list[i] + '자리를 입력해주세요.');
-						}else{
-							alert("현금영수증 발행을 위한 신용카드" + ' ' + '번호를 정확히 입력해 주세요.');
-						}							
-						$objMp.focus();
-						break;
-					case "option04":
-						if($objMp.val().length <= length_list[i]){
-							alert("현금영수증 발행을 위한 "+ index +"번째 M현금영수증카드" + ' ' + '번호' + ' ' + length_list[i] + '자리를 입력해주세요.');
-						}else{
-							alert("현금영수증 발행을 위한 M현금영수증카드" + ' ' + '번호를 정확히 입력해 주세요.');
-						}						
-						$objMp.focus();
-						break;
-					case "option05":
-						if($objMp.val().length <= length_list[i]){
-							alert("현금영수증 발행을 위한 "+ index +"번째 카드" + ' ' + '번호' + ' ' + length_list[i] + '자리를 입력해주세요.');
-						}else{
-							alert("현금영수증 발행을 위한 카드" + ' ' + '번호를 정확히 입력해 주세요.');
-						}						
-						$objMp.focus();
-						break;					
-					default:
-						alert('존재하지 않는 현금영수증 항목입니다.');
-					}		
-				}
-				break;
-				
-			}else{
-				check_ok = true;
-			}
-		}
-		return check_ok;
-	}	
-	
+ */
 	function placeHolder(){
 		  $('[placeholder][type="password"]').each(function(){
 	          $(this).wrap('<div style="position: relative;"></div>');
@@ -2980,163 +2590,8 @@ function goFooterMenu(type){
 	      });
 	}
 
-	/* ie8 이하버전에서 placeholder 처리하기 위한 기능 */
-    if (navigator.userAgent.indexOf('MSIE') > -1) {
-    	placeHolder();
-	}
-	
-	function date_change(){
-		$('#birth_dd').empty();
-		var dt = new Date($('#birth_yy').val(), $('#birth_mm').val(), 0);
-	    $('#birth_dd').append($('<option value="">일</option>'));
-		for(var i=1; i<=dt.getDate(); i++){
-			if(i<10){
-				if(i == 1){
-					$('#birth_dd').append($('<option value="0'+i+'" selected="selected" >0' + i + '</option>'));
-				}else{
-					$('#birth_dd').append($('<option value="0'+i+'">0' + i + '</option>'));
-				}
-			}else{
-				$('#birth_dd').append($('<option value="'+i+'">' + i + '</option>'));
-			}
-		}
-		$('[data-skin="form"] select#birth_dd').formSkin('addSkin');
-	}
-	
-	Kakao.init(KAKAO_API_KEY);
-	function getKakaoToken(){
-	    var token = '';
-	    var noAgr = $("#noAgr").val();
-	    var sns_first_yn = $("#sns_first_yn").val();
-	    //카카오 로그인 연결 토글시 처음일 경우만 카카오 로그인 처리
-	    if(sns_first_yn == "N"){
-	        setKakaoToggle();
-	        return false;
-	    }
-	 Kakao.Auth.login({
-	     serviceTerms: noAgr,
-	     success: function(authObj) {
-	         $("#access_token").val( authObj.access_token );
-	         setKakaoToggle();
-	     },
-	     fail: function(err) {
-	         alert('카카오와 연결상태가 원활하지 않습니다.\n잠시 후 다시 시도해 주세요.');
-	     }
-	 });
-	}
-	
-	//카카오 로그인 연결 ON/OFF 처리
-	function setKakaoToggle(){
-	    if($('#sns_first_yn').val() == "Y" && $('#access_token').val().trim() == ""){
-	        alert('연결상태가 원활하지 않습니다.\n잠시 후 다시 시도해 주세요.');
-	        return false;
-	    }
-	    
-	    var sns_use_yn = "";
-	    var sns_typ_cd = "";
-	    if($('#kakaosync').prop("checked")){
-	    	$('#kakaosync').val('Y');            
-	        sns_use_yn = "Y";
-	        sns_typ_cd = "10";
-	    }else{
-	    	$('#kakaosync').val('N');
-	        sns_use_yn = "N";
-	        sns_typ_cd = "10";	        
-	    }
-	    
-	    $.ajax({
-	        url : '/cjmweb/member/snsLoginYnUpdate.do',
-	        dataType:'json',
-	        async: false,
-	        type: 'POST',
-	        data: {	            
-	            access_token : $("#access_token").val(),
-	            sns_use_yn : sns_use_yn,
-	            sns_typ_cd : sns_typ_cd,
-	            mbr_no : "9990011335167"
-	        },
-	        success: function(data) {
-	        	var resBox = data.retMap;
-	        	
-	            if(resBox.result == "0"){
-	                $('#sns_first_yn').val(resBox.sns_first_yn);  //카카오 싱크 처음 여부값	                
-	            } else {
-	                alert(resBox.msg);
-	                //오류 발생시 이전 설정값으로 되돌리기
-	                if($('#kakaosync').prop("checked")){
-	                    $('#kakaosync').prop("checked", false)
-	                    sns_use_yn = "N";
-	                } else {
-	                    $('#kakaosync').prop("checked", true)
-	                    sns_use_yn = "Y";
-	                }
-	            }
-	        },
-	        error: function(res){
-	            alert('오류가 발생했습니다.\n잠시 후 다시 시도해 주세요.');
-	        },
-	        complete: function() {
-	        	$('#access_token').val("");    //토큰값 삭제
-            }
-	    });
-	}
-
-	function callAuthLayerMobChgAuth(){
-        cjone.openModal('/cjmweb/member/mobile-change-auth.do');
-    }
-	
-	function mobChangeAuthCallBack(enc_data, enc_com){
-        console.log("mobChangeAuthCallBack called");
-        $("#mobChgForm>input[name=enc_data]").val(enc_data);
-        $("#mobChgForm>input[name=enc_com]").val(enc_com);
-
-	    cjone.closeModal();
-	    
-		actionAjax();
-    }
-    
-    function actionAjax(){
-        var param = $("#mobChgForm").serialize();
-        $.ajax({
-            url: '/cjmweb/member/mobile-change-process.do'
-            ,dataType:'json'
-            ,async: false
-            ,type: 'POST'
-            ,data: param
-            ,success: function(data) {
-            	if(data.reqBox.resultcode == "00000"){
-            		if(data.reqBox.dup_mob_no_init_use != "Y"){
-                        if(data.reqBox.hg_nm != "undefined" && data.reqBox.hg_nm != null && data.reqBox.hg_nm != '' )$("#mobChgForm>input[name=hg_nm]").val(data.reqBox.hg_nm);
-                        if(data.reqBox.phone_no != "undefined" && data.reqBox.phone_no != null && data.reqBox.phone_no != '' )$("#mobChgForm>input[name=phone_no]").val(data.reqBox.phone_no);
-                        if(data.reqBox.mob_no_1 != "undefined" && data.reqBox.mob_no_1 != null && data.reqBox.mob_no_1 != '' )$("#mobChgForm>input[name=mob_no_1]").val(data.reqBox.mob_no_1);
-                        if(data.reqBox.mob_no_2 != "undefined" && data.reqBox.mob_no_2 != null && data.reqBox.mob_no_2 != '' )$("#mobChgForm>input[name=mob_no_2]").val(data.reqBox.mob_no_2);
-                        if(data.reqBox.mob_no_3 != "undefined" && data.reqBox.mob_no_3 != null && data.reqBox.mob_no_3 != '' )$("#mobChgForm>input[name=mob_no_3]").val(data.reqBox.mob_no_3);
-                        
-                        $('#mobChgForm').attr('action', '/cjmweb'+data.reqBox.action_url);
-                        $('#mobChgForm').submit();	
-            		} else {
-            			//휴대전화번호 초기화 고객이 휴대전화번호를 업데이트 한 경우, 회원정보수정 새로고침
-            			window.location.reload();
-            		}
-            	} else {
-                    if(data.reqBox.str_msg !='' && data.reqBox.str_msg != null &&  data.reqBox.str_msg != 'undefined'){
-                        var str_msg ="" + data.reqBox.str_msg;
-                        str_msg = str_msg.replace(/\\n/g, '\n');
-                        alert(str_msg);
-                    }
-            	}
-            }
-        });
-    }
 </script>
 
-	<script>
-$("#btn_submit").on("click", function () {
-	if (chkPwd() ) {
-		$("#mobChgForm").submit();
-	}
-});
-</script>
 	<style>
 .ie8Lbls {
 	font-size: 10px;
@@ -3147,28 +2602,29 @@ $("#btn_submit").on("click", function () {
 </style>
 	<!--//script 영역-->
 	<script>
-	var email = "${logOn.u_email}";
+ 	var email = "${logOn.u_email}";
 	var arr = email.split('@', 2);
 	var emailadd1 = arr[0];
 	var emailadd2 = arr[1];
 
 	$("#email_addr1").val(emailadd1);
 	$("#email_addr2").val(emailadd2);
-
-
+	 
+	if ( $("#email_addr2").val() != $("#email_addr_opt").val() ){
+		$("#email_addr_opt option:first").attr("selected", "selected");
+	}
 	$("#email_addr_opt").change(function () {
 		$("#email_addr2").val( $("#email_addr_opt").val() );
 	});
+	
 	</script>
 	<script>
-
 	var tel = "${logOn.u_tel}";
-	alert(tel);
 	var arr = tel.split('-', 3);
 	var tel1 = arr[0];
 	var tel2 = arr[1];
 	var tel3 = arr[2];
-
+	
 	$("#mob_no_1").val(tel1);
 	$("#mob_no_2").val("****");
 	$("#mob_no_3").val(tel3);
@@ -3186,37 +2642,35 @@ function chkPwd() {
 	var num = userpwd.search(/[0-9]/g);
 	var eng = userpwd.search(/[a-z]/ig);
 	var spe = userpwd.search(/[!"#$%&'()*+,-./:;<=>?@[]^_`{|}~]/gi);
-	if ((num < 0 && eng < 0) || (eng < 0 && spe < 0)
-			|| (spe < 0 && num < 0)) {
-		//alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
-		$("#msg_pwdNull").css("display", "block");
-		$("#pwd").focus();
-		return false;
-	else if (userpwd.length<8 || userpwd.length>12) {
-		//alert("영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합하여 8~12자리로 설정 가능합니다.");
-		$("#msg_pwdAbcd").css("display", "block");
-		$("#pwd").focus();
-		return false;
+	if (userpwd == null) {
+	   $("#msg_pwdNull").css("display", "block");
+	   $("#pwd").focus();
+	   return false;
+	} else if (userpwd.length < 8 || userpwd.length > 12) {
+	    $("#msg_pwdAbcd").css("display", "block");
+	    $("#pwd").focus();
+	    return false;
 	} else if (/(\w)\1\1\1/.test(userpwd)) {
-		//alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
-		$("#msg_pwdAbcd").css("display", "block");
-		$("#pwd").focus();
-		return false;
+	    $("#msg_pwdAbcd").css("display", "block");
+	    $("#pwd").focus();
+	    return false;
 	} else if (userpwd.search(userid) > -1) {
-		//alert("비밀번호 설정 시 아이디와 4자리 이상 동일한 문자 또는 숫자를 사용할 수 없습니다.");
-		$("#msg_pwdId").css("display", "block");
-		$("#pwd").focus();
-		return false;
-	} else if ( userpwd !=userckpwd){
-		//alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-		$("#msg_pwd_check").removeClass("hide");
-		$("#pwd_check").focus();
-		return false;
+	      $("#msg_pwdId").css("display", "block");
+	      $("#pwd").focus();
+	    return false;
+	 } else if (userpwd !== userckpwd) {
+	  	 $("#msg_pwd_check").removeClass("hide");
+	     $("#msg_pwd_check").addClass("show");
+	     $("#pwd_check").focus();
+	     return false;
+	  }
+	 $("#msg_pwdNull").css("display", "none");
+	 $("#msg_pwdAbcd").css("display", "none");
+	 $("#msg_pwdId").css("display", "none");
+	    return true;
 	}
-	return true;
-}
 // 패스워드 강도 체크  
-
+/* 
 	$("#btn_submit").on("change", function () {
 		//alert("event");		
 	var inputVal = $("#pwd").val();	
@@ -3230,25 +2684,23 @@ function chkPwd() {
 		}  else{
 	       	$("#pwd").text("강도 : 매우약함");
 	   }
-});
+}); */
 
 </script>
 	<script>
-	
-
-	$("#btn_submit").on("click", function () {
-		alert("event");
-		if (chkPwd() ) {
-			$("#mobChgForm").submit();
-		}
-	});
 	function btncancel(){
-	  alert('수정하신 정보는 저장되지 않습니다.\n수정을 취소하시겠습니까?');
-	  location.href='/Black_OY/view/usermodify/usermodify.jsp';
-	}
+		alert('수정하신 정보는 저장되지 않습니다.\n수정을 취소하시겠습니까?');
+		location.href='/Black_OY/view/usermodify/usermodify.jsp';
+		}
 	$("#lnChangeName").on("click", function (event) {
 		event.preventDefault();
 		location.href = "<%=contextPath%>/olive/nameUpdate.do"; 
+	});
+
+	$("#btn_submit").on("click", function () {
+		if (chkPwd() ) {
+			$("#form1").submit();
+		}
 	});
 
 </script>

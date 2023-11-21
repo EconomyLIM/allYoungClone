@@ -13,6 +13,7 @@ import com.util.JDBCUtil;
 import review.domain.ReviewDTO;
 import review.domain.ReviewImgDTO;
 import review.domain.ReviewScoreDTO;
+import review.domain.SkintbDTO;
 import review.persistence.ReviewDAO;
 
 public class ReviewDAOImpl implements ReviewDAO {
@@ -31,7 +32,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 		int begin = (currentPage -1) * numberPerPage + 1;
 		int end = begin + numberPerPage -1 ;
 		
-		String sql = " SELECT * From ( SELECT ROWNUM no, t.* FROM( SELECT * FROM review ";
+		String sql = " SELECT * From ( select ROWNUM no, t.* from ( select * from review r join user_profile up on r.user_id = up.user_id join PF_SKINTONE ps on up.skintone_id = ps.skintone_id join PF_SKINTYPE pf on up.skintype_id = pf.skintype_id ";
 		//String sql = " select rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2,rev_grade_3, pro_id "
 			//	+ " from review  ";
 				
@@ -60,6 +61,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 		int rev_grade_2;
 		int rev_grade_3;
 		String pro_id;
+		String user_img;
+		String skintone_title;
+		String skintype_title;
 		
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -95,8 +99,10 @@ public class ReviewDAOImpl implements ReviewDAO {
 					 rev_grade_2 = rs.getInt("rev_grade_2");
 					 rev_grade_3 = rs.getInt("rev_grade_3");
 					 pro_id = rs.getString("pro_id");
-					 
-					 reviewDTO = new ReviewDTO(rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2, rev_grade_3, pro_id);
+					 user_img = rs.getString("user_img");
+					 skintone_title = rs.getString("skintone_title");
+					 skintype_title = rs.getString("skintype_title");
+					 reviewDTO = new ReviewDTO(rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2, rev_grade_3, pro_id, user_img, skintone_title, skintype_title);
 					 reviewlist.add(reviewDTO);
 					
 				} while (rs.next());
@@ -120,8 +126,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 		ArrayList<ReviewDTO> reviewlist = null;
 		ReviewDTO reviewDTO = null;
 
-		String sql = " select rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2,rev_grade_3, pro_id "
-				+ " from review  ";
+		String sql = " select * "
+				+ " from review r join user_profile up on r.user_id = up.user_id join PF_SKINTONE ps on up.skintone_id = ps.skintone_id join PF_SKINTYPE pf on up.skintype_id = pf.skintype_id  ";
 				
 				if (!(proid.equals("ALL"))) {
 					sql+= " where pro_displ_id = ? AND pro_id = ?  ";
@@ -140,6 +146,10 @@ public class ReviewDAOImpl implements ReviewDAO {
 		int rev_grade_2;
 		int rev_grade_3;
 		String pro_id;
+		String user_img;
+		String skintone_title;
+		String skintype_title;
+		
 		
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -171,8 +181,12 @@ public class ReviewDAOImpl implements ReviewDAO {
 					 rev_grade_2 = rs.getInt("rev_grade_2");
 					 rev_grade_3 = rs.getInt("rev_grade_3");
 					 pro_id = rs.getString("pro_id");
+					 user_img = rs.getString("user_img");
+					 skintone_title = rs.getString("skintone_title");
+					 skintype_title = rs.getString("skintype_title");
 					 
-					 reviewDTO = new ReviewDTO(rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2, rev_grade_3, pro_id);
+					 
+					 reviewDTO = new ReviewDTO(rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2, rev_grade_3, pro_id, user_img, skintone_title, skintype_title);
 					 reviewlist.add(reviewDTO);
 					
 				} while (rs.next());
@@ -400,7 +414,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Override
 	public ReviewDTO review(Connection conn, String rev_id) {
 		ReviewDTO reviewDTO = null;
-		String sql = " select * from review where rev_id = ? ";
+		String sql = " select * from review r join user_profile up on r.user_id = up.user_id join PF_SKINTONE ps on up.skintone_id = ps.skintone_id join PF_SKINTYPE pf on up.skintype_id = pf.skintype_id where rev_id = ? ";
 		//String rev_id;
 		String user_id;
 		String pro_displ_id; 
@@ -412,6 +426,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 		int rev_grade_2;
 		int rev_grade_3;
 		String pro_id;
+		String user_img;
+		String skintone_title;
+		String skintype_title;
 		
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -439,8 +456,12 @@ public class ReviewDAOImpl implements ReviewDAO {
 					 rev_grade_2 = rs.getInt("rev_grade_2");
 					 rev_grade_3 = rs.getInt("rev_grade_3");
 					 pro_id = rs.getString("pro_id");
+					 user_img = rs.getString("user_img");
+					 skintone_title = rs.getString("skintone_title");
+					 skintype_title = rs.getString("skintype_title");
 					 
-					 reviewDTO = new ReviewDTO(rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2, rev_grade_3, pro_id);
+					 
+					 reviewDTO = new ReviewDTO(rev_id, user_id, pro_displ_id, rev_like, rev_content, rev_grade, rev_reg, rev_grade_1, rev_grade_2, rev_grade_3, pro_id, user_img, skintone_title, skintype_title);
 					
 					
 				
@@ -456,6 +477,50 @@ public class ReviewDAOImpl implements ReviewDAO {
 		}
 		
 		return reviewDTO;
+	}
+
+	@Override
+	public List<SkintbDTO> skintr(Connection conn, String user_id) {
+		// TODO Auto-generated method stub
+		ArrayList<SkintbDTO> Skintb = null;
+		SkintbDTO skintbDTO = null;
+		
+		String sql = " select * from upf_skintrouble us join pf_skintrouble pt on us.skintrb_id = pt.skintrb_id where us.user_id = ? ";
+		
+		String skintrb_title;
+		
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, user_id);
+			rs = psmt.executeQuery();
+			
+			if (rs.next()) {
+				Skintb = new ArrayList<SkintbDTO>();
+				do {
+					
+					user_id = rs.getString("user_id");
+					skintrb_title = rs.getString("skintrb_title");
+					
+					skintbDTO = new SkintbDTO(user_id, skintrb_title);
+					Skintb.add(skintbDTO);
+					
+				} while (rs.next());
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("reviewimg sql 오류");
+		}finally {
+			JDBCUtil.close(psmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		}
+		
+		return Skintb;
 	}
 	
 

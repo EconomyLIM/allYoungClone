@@ -88,6 +88,12 @@ if(request.getParameter("perPage")!= null){
 </head>
 <script>
 $(function () {
+	
+	if (${param.plusButtonFlag eq 'Y'}) {
+		$('.cate_brand_box').addClass("more_view")
+	}
+	
+	
 	console.log(window.location.href);
 	$(".loc_history>li").mouseover(function () {
 		$(this).addClass("active");
@@ -108,6 +114,13 @@ $(function () {
 	            $(this).text('축소');
 	        }
 	    });
+	
+	 var urlParams = new URLSearchParams(window.location.search);
+
+     // plusbutton 매개변수가 있고 값이 'y'인 경우 체크박스 체크
+     if (urlParams.has('plusbutton') && urlParams.get('plusbutton') === 'y') {
+         $('#checkbox').prop('checked', true);
+     }
 	//
 
 	 // midId와 일치하는 id를 가진 li 요소에 'on' 클래스 추가
@@ -151,23 +164,36 @@ $(function () {
     	var url = "/Black_OY/view/product/pmidlistproduct.do?displNum="+'<%=midId%>'+"&sort=${param.sort}&currentpage=1<%=s%>";
     	console.log(url);
         var brandID = $(this).val();
-
+		var plusButtonFlag = "&plusButtonFlag=Y";
+		const brandBox = $('.cate_brand_box');
         if ($(this).is(':checked')) {
             // 체크박스가 체크되었을 때
             if (url.indexOf('brandId=' + brandID) === -1) {
                 // 파라미터가 없으면 파라미터 추가
                 var separator = url.indexOf('?') !== -1 ? '&' : '?';
-                window.location.href = url + separator + 'brandId=' + brandID;
+                if (brandBox.hasClass('more_view')) {
+                	window.location.href = url + separator + 'brandId=' + brandID + plusButtonFlag;
+				}else{
+					window.location.href = url + separator + 'brandId=' + brandID;
+				}
+                
             }
         } else {
             // 체크박스가 해제되었을 때
             if (url.indexOf('brandId=' + brandID) !== -1) {
                 // 파라미터가 있으면 파라미터 삭제
                 var newUrl = url.replace(new RegExp('[?&]brandId=' + brandID), '');
-                window.location.href = newUrl;
+                if (brandBox.hasClass('more_view')) {
+                	window.location.href = newUrl + plusButtonFlag;
+				}else{
+					window.location.href = newUrl;
+				}
+                
             }
         }
     })   
+    
+    
 }) ; 
 
 function changePerPage(value) { // perPage 수정
@@ -294,7 +320,7 @@ function changePerPageAndClass(value) {
 
 			<div class="cate_brand_box">
 				<div class="tit_area">
-					<strong>브랜드</strong> <span class="tx_num">Total <%=myList.size()%></span>
+					<strong>브랜드</strong> <span class="tx_num">Total <c:if test="${not empty myList}"><%=myList.size()%></c:if> </span>
 				</div>
 				<ul class="brand_list">
 

@@ -63,14 +63,11 @@
 						<div class="regi_complete certification_sec">
 							<p class="certi_txt">회원정보에 등록된 이름을 변경하기 위해 본인확인 방법을 선택해주세요.</p>
 							<ul class="way" data-control="hover">
-								
-									
-										
-											
-												
-													<li class="type1"><span class="bg"></span><a href="javascript:;" class="btn btn_em" onclick="javascript:fnCheckKmcPopup(event);" title="새 창"><span>휴대전화 인증</span></a></li>
-								
-								<li class="type2" style="border-right:0px;"><span class="bg"></span><a href="javascript:;" onclick="javascript:fnCheckPlusPPopup(event);" class="btn btn_em" title="새 창">공인인증서 인증</a></li>
+								<li class="type1"><span class="bg"></span>
+								<a href="javascript:;" class="btn btn_em" onclick="javascript:fnCheckKmcPopup(event);" title="새 창">
+								<span>휴대전화 인증</span></a></li>
+							<!-- 	
+								<li class="type2" style="border-right:0px;"><span class="bg"></span><a href="javascript:;" onclick="javascript:fnCheckPlusPPopup(event);" class="btn btn_em" title="새 창">공인인증서 인증</a></li> -->
 								
 								
 							</ul>
@@ -318,7 +315,7 @@ function goFooterMenu(type){
 		function fnCheckKmcPopup(event) {
 			//event.preventDefault();
 			(event.preventDefault) ? event.preventDefault() : event.returnValue = false;
-			window.open('/Black_OY/view/usermodify/name_phfirst.jsp');
+			location.href = '/Black_OY/view/usermodify/modify_phfirst.jsp';
 		}
 		function fnCheckKcbMobilePopup(event) {
 			(event.preventDefault) ? event.preventDefault() : event.returnValue = false;
