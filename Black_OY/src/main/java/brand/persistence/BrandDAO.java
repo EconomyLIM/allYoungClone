@@ -8,7 +8,7 @@ import brand.domain.BrandDTO;
 
 public interface BrandDAO {
 
-
+	
    //상단 브랜드 정보 가져오기 
    BrandDTO getBrands(String brandId) throws Exception; 
 
@@ -22,7 +22,8 @@ public interface BrandDAO {
    List<BrandDTO> getSortBrands(String brandId, String sort, String dispcatno) throws Exception;
    
    // 리뷰 가져오기
-List<BrandDTO> getReviews(String pro_displ_id) throws Exception;
+List<BrandDTO> getReviews() throws Exception;
+
 
 
 
