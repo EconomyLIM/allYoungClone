@@ -3051,8 +3051,7 @@ $(function(){
 			 
 				
 				$.ajax({
-					url: "<%=contextPath%>
-					/olive/reviewimg.do",
+					url: "<%=contextPath%>/olive/reviewimg.do",
 																data : data,
 																cache : false,
 																success : function(
@@ -3606,6 +3605,8 @@ $(function(){
 			<strong>좋아요</strong>
 		</p>
 	</div>
+	
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	<script>
 		function slide(index) {
 			$('.slider-nav').slick('goTo', index);

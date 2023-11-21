@@ -21,7 +21,7 @@ if(quickyn == null || quickyn.equals("")){
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="/Black_OY/js/head.js"></script>
-<link rel="stylesheet" href="/BlackOY/css/style.css">
+<link rel="stylesheet" href="/Black_OY/css/style.css">
 <title>블랙올리브영 온라인몰</title>
 </head>
 <body>
@@ -3396,7 +3396,7 @@ yx-axis
 			<input type="hidden" id="recoGoodsYn" value="Y">
 			<script type="text/javascript">
 	$(function() {
-		common.wish.init();
+		
 		
 		$(".curaListBox", $("#crtPopWrap")).mCustomScrollbar();
 		
