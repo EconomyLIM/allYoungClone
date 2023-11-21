@@ -52,19 +52,11 @@
 							</strong>역삼역 근처 매장 알려주세요
 							<span class="data">2023.11.15</span>
 						</a>
-		
-		
-		
 						<ul class="conts" style="display: none">
 							<li class="question">
 								<strong>문의</strong>
 								<ul>
-								
 								    <li class="inquiry_type"><span>매장</span> &gt; <span>매장 문의</span></li>
-								
-		
-			
-			
 								</ul>
 								<p>
 									역삼역 근처 매장 알려주세요
@@ -81,16 +73,12 @@
 							</strong>반품신청을 취소 가능한가요?
 							<span class="data">2023.11.03</span>
 						</a>
-		
-		
-		
 						<ul class="conts">
 							<li class="question">
 								<strong>문의</strong>
 								<ul>
 								
 								    <li class="inquiry_type"><span>온라인몰</span> &gt; <span>취소/교환/환불</span></li>
-								
 		
 									<li><em>주문일자</em>2023.10.26</li>
 		
@@ -123,9 +111,6 @@
 								<ul>
 								
 								    <li class="inquiry_type"><span>매장</span> &gt; <span>매장 문의</span></li>
-								
-		
-			
 			
 								</ul>
 								<p>
@@ -187,6 +172,26 @@
 	</div>	
 	</div>
 	<script>
+	$(function() {
+		
+		$.ajax({
+			type : 'get',
+			async : false,
+			cache : false,
+			url : '/Black_OY/olive/paskList.do',
+			dataType : 'json',
+			data : {},
+			success : function(data) {
+				console.log(data);
+				
+			},
+			error : function(data, textStatus) {
+				console.log('error');
+			}
+		});//maj 카테고리
+	</script>
+	<script>
+	
 		$("#btnAnsCont").on("click", function (event) {
 			//a태그 이벤트 막기
 			event.preventDefault();

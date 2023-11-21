@@ -9,6 +9,8 @@ import java.util.List;
 
 import com.util.JDBCUtil;
 
+import mypage.profile.domain.PfIntCateDTO;
+import mypage.profile.domain.PfSkinTrbDTO;
 import mypage.profile.domain.ProfileDTO;
 
 public class ProfileDAOImpl implements ProfileDAO {
@@ -22,9 +24,9 @@ public class ProfileDAOImpl implements ProfileDAO {
 	@Override
 	public List<ProfileDTO> selectProfile(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT a.user_id, a.nickname nn, a.pc pfc, a.skintone_title stone, a.skintype_title stype, SUM(a.rev_like) AS trl, a.follower fl, a.following fi "
+		String sql = " SELECT a.user_id, a.nickname nn, a.pc pfc, a.skintone_title stone, a.skintype_title stype, SUM(a.rev_like) AS trl, a.follower fl, a.following fi, a.skintype_id typeid , a.skintone_id toneid "
 				+ " FROM ( "
-				+ "    SELECT up.user_id, nickname, NVL(pf_content, '내용없음') pc , pst.skintone_title, skintype_title, r.rev_like, follower, following "
+				+ "    SELECT up.user_id, nickname, NVL(pf_content, '내용없음') pc , pst.skintone_title, skintype_title, r.rev_like, follower, following, up.skintype_id, up.skintone_id "
 				+ "    FROM user_profile up "
 				+ "    LEFT JOIN pf_skintone pst ON up.skintone_id = pst.skintone_id "
 				+ "    LEFT JOIN pf_skintype psk ON up.skintype_id = psk.skintype_id "
@@ -32,7 +34,7 @@ public class ProfileDAOImpl implements ProfileDAO {
 				+ "    LEFT JOIN review r ON u.user_id = r.user_id "
 				+ "    WHERE up.user_id = ? "
 				+ " ) a "
-				+ " GROUP BY a.user_id, a.nickname, a.pc, a.skintone_title, a.skintype_title, a.follower, a.following ";
+				+ " GROUP BY a.user_id, a.nickname, a.pc, a.skintone_title, a.skintype_title, a.follower, a.following, a.skintype_id, a.skintone_id ";
 		
 		ArrayList<ProfileDTO> list = null;
 		PreparedStatement pstmt = null;
@@ -55,6 +57,8 @@ public class ProfileDAOImpl implements ProfileDAO {
 					dto.setRecommCount(rs.getInt("trl"));
 					dto.setFollowerCount(rs.getInt("fl"));
 					dto.setFollowingCount(rs.getInt("fi"));
+					dto.setSkinTypeid(rs.getString("typeid"));
+					dto.setSkinToneid(rs.getString("toneid"));
 					list.add(dto);
 				} while (rs.next());
 				JDBCUtil.close(pstmt);
@@ -72,25 +76,27 @@ public class ProfileDAOImpl implements ProfileDAO {
 	}
 
 	@Override
-	public List<String> selectSkinTrouble(Connection conn, String uId) throws Exception {
+	public List<PfSkinTrbDTO> selectSkinTrouble(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT  skintrb_title skint "
+		String sql = " SELECT  skintrb_title skint, ut.skintrb_id sid "
 				+ "FROM upf_skintrouble ut left join pf_skintrouble pt on ut.skintrb_id = pt.skintrb_id "
 				+ "WHERE user_id = ?  ";
 		
-		ArrayList<String> list =  new ArrayList<String>();
+		ArrayList<PfSkinTrbDTO> list =  null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
+			list = new ArrayList<PfSkinTrbDTO>();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, uId);
 			rs = pstmt.executeQuery();
-			String str = null;
+			PfSkinTrbDTO dto = null;
 			while (rs.next()) {
 				
-				str = rs.getString("skint");
-				list.add(str);
+				dto.setPfskinTrbId("sid");
+				dto.setPfskinTrbName("skint");
+				list.add(dto);
 			} 
 			
 			JDBCUtil.close(pstmt);
@@ -106,24 +112,27 @@ public class ProfileDAOImpl implements ProfileDAO {
 	}
 
 	@Override
-	public List<String> selectIntCate(Connection conn, String uId) throws Exception {
+	public List<PfIntCateDTO> selectIntCate(Connection conn, String uId) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = " SELECT interest_title inter "
+		String sql = " SELECT interest_title inter, ui.interest_id iid "
 				+ " FROM upf_intcate ui left join pf_intcate pi on ui.interest_id = pi.interest_id "
 				+ " WHERE user_id = ? ";
-		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<PfIntCateDTO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
+			list = new ArrayList<PfIntCateDTO>();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, uId);
 			rs = pstmt.executeQuery();
-			String itr = null;
+			PfIntCateDTO dto = null;
 			 while (rs.next()) {
-				
-				itr = rs.getString("inter");
-				list.add(itr);
+				 
+				dto.setPfintCateId(rs.getString("iid"));
+				dto.setPfintCateName(rs.getString("inter"));
+				 
+				list.add(dto);
 			}
 			
 			JDBCUtil.close(pstmt);

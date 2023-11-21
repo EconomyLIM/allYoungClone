@@ -21,6 +21,8 @@
 	href="https://m.cjone.com:8443/cjmmobile/setup/memberInfoupdate.do?return_url=close" />
 <link rel="stylesheet" href="../../css/CJbase.css" />
 <link rel="stylesheet" href="../../css/CJparticipate.css" />
+<link rel="stylesheet" href="../css/CJbase.css" />
+<link rel="stylesheet" href="../css/CJparticipate.css" />
 <script>
 	// google analytics 사용안함 처리했을 때 ga function이 없어서 에러나던 부분 처리.
 	window.ga = function() {
