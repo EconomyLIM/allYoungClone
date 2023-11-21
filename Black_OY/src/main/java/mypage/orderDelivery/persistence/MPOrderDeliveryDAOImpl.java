@@ -99,6 +99,10 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryDAOImpl_selectUOrder() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		return list;
 
@@ -173,6 +177,10 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryDAOImpl_selectUOrder() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		return list;
 	}//selectUDetailOrder
@@ -216,6 +224,10 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryDAOImpl_selectUODelivery() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		return list;
 	}//selectUODelivery
@@ -263,6 +275,10 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryDAOImpl_selectUOPayment() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		return list;		
 		
@@ -353,6 +369,10 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryDAOImpl_selectUOrder() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		return list;
@@ -439,6 +459,10 @@ public class MPOrderDeliveryDAOImpl implements MPOrderDeliveryDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("> MPOrderDeliveryDAOImpl_selectUOrder() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		return list;

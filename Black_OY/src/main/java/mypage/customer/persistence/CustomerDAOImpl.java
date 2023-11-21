@@ -45,6 +45,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 			System.out.println("> CustomerDAOImpl_insertPask() Exception");
 		}finally {
 			JDBCUtil.close(pstmt);
+			JDBCUtil.close(conn);
 		}
 		return rowCount;
 	}
@@ -87,6 +88,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("> CustomerDAOImpl_selectUserPAsk() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		return list;
 		
@@ -146,6 +151,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("> CustomerDAOImpl_selectOrderList() Exception");
+		}finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		return list;
 	}
@@ -255,6 +264,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		} finally {
 			JDBCUtil.close(rs);
 			JDBCUtil.close(pstmt);
+			JDBCUtil.close(conn);
 		}// try_catch
 		
 		return list;

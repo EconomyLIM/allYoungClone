@@ -11,6 +11,7 @@ import com.util.JDBCUtil;
 
 import product.domain.PlowcateDTO;
 import search.domain.BrandSearchDTO;
+import search.domain.SearchDTO;
 
 public class SearchDAOImpl implements SearchDAO{
 
@@ -21,12 +22,13 @@ public class SearchDAOImpl implements SearchDAO{
 	}
 	
 	@Override
-	public List<String> searchWord(Connection conn, String word) {
+	public List<SearchDTO> searchWord(Connection conn, String word) {
 		
 		String sql = " SELECT * FROM ( "
-				+ "    SELECT * FROM product_display where pro_displ_name Like ? "
+				+ "    SELECT * FROM pmlistview where pro_displ_name Like ? "
 				+ ") WHERE ROWNUM <= 5 ";
-		ArrayList<String> list = null;
+		List<SearchDTO> list = null;
+		SearchDTO searchDTO = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String displ = null;
@@ -40,8 +42,8 @@ public class SearchDAOImpl implements SearchDAO{
 				do {
 
 					displ = rs.getString("pro_displ_name");
-
-					list.add(displ);
+					searchDTO = new SearchDTO(rs.getString("pro_displ_id"),rs.getString("pro_displ_name"),rs.getString("cat_l_id") , rs.getString("cat_m_id"), rs.getString("cat_s_id"));
+					list.add(searchDTO);
 
 				} while ( rs.next() );
 

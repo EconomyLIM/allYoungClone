@@ -31,5 +31,6 @@ public class PMidListDTO {
 	private int displLike;
 	private int ordercnt;
 	private Date proReg;
+	private int prostock;
 	
 } // class

@@ -23,10 +23,10 @@
 	<ul>
 		<c:forEach items="${list}" var="item" varStatus="loop">
 			<li id="bg${loop.index}"
-				onclick="onClickKeywordSearch('${item}','${loop.index}');"
+				onclick="onClickKeywordSearch('${item.prodisplid}','${loop.index}');"
 				onmouseover="onMouseOverKeyword(${loop.index});"
 				style="background-color: rgb(255, 255, 255); cursor: pointer;">
-				<a href="?${word }" data-attr="통합^통합검색_자동완성키워드^${item}">${item}</a>
+				<a href="/Black_OY/olive/productDetail.do?goodsNo=${item.prodisplid }&displNum=${item.lid}${item.mid}" data-attr="통합^통합검색_자동완성키워드^${item.prodisplid}">${item.displProName}</a>
 			</li>
 
 		</c:forEach>

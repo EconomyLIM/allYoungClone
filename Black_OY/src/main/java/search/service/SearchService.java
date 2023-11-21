@@ -9,6 +9,7 @@ import com.util.JDBCUtil;
 import product.domain.PlowcateDTO;
 import product.persistence.PMidListDAOImpl;
 import search.domain.BrandSearchDTO;
+import search.domain.SearchDTO;
 import search.persistence.SearchDAOImpl;
 
 public class SearchService {
@@ -22,23 +23,23 @@ public class SearchService {
 		return instance;
 	} 
 	
-	public List<String> searchWordService(String word){
+	public List<SearchDTO> searchWordService(String word){
 		Connection conn = null;
 
 		try {
 
 			conn = ConnectionProvider.getConnection();
 			SearchDAOImpl searchDAOImpl = SearchDAOImpl.getInstance();
-			List<String> list = null;
-			list = searchDAOImpl.searchWord(conn, word);
+			List<SearchDTO> list = searchDAOImpl.searchWord(conn, word);
 			for (int i = 0; i < list.size(); i++) {
-	            String item = list.get(i);
-
+				 SearchDTO item = list.get(i);
+				 String fieldToSearch = item.getDisplProName();
 	            // 만약 리스트의 항목에 해당 단어가 포함되어 있다면 변경
-	            if (item.contains(word)) {
-	                item = item.replaceAll(word, "<span>" + word + "</span>");
-	                list.set(i, item); // 변경된 문자열로 대체
-	            }
+				 if (fieldToSearch != null && fieldToSearch.contains(word)) {
+				        fieldToSearch = fieldToSearch.replaceAll(word, "<span>" + word + "</span>");
+				        item.setDisplProName(fieldToSearch); // 변경된 문자열로 필드를 대체
+				        list.set(i, item); // 변경된 객체를 리스트에 다시 설정
+				    }
 	        }
 			
 			return list;
