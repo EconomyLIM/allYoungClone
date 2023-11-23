@@ -44,7 +44,7 @@ public class ProductDetailHandler implements CommandHandler{
 		
 		//=======================  해당 상품의 모든 상위칸에 있는 정보 ===========================	
 		List<ProductInfo> pLists = proDetailService.sProductInfo(goodsNo); 
-		ProductInfo productInfo = pLists.get(0);
+
 		request.setAttribute("pLists", pLists); // 상품 상단 정보 리스트
 		
 		

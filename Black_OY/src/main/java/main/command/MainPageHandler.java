@@ -38,6 +38,9 @@ public class MainPageHandler implements CommandHandler{
 		
 		// ================= 회원을 위한 추천 상품 ==================
 		List<PMidListDTO> recommendList = mainService.recommendBuy(user_id);
+		if (recommendList == null) {
+			 recommendList = mainService.recommendBuy("user1");
+		} //if
 		request.setAttribute("recommendList", recommendList);
 		
 		// ================= Week Special 배너정보 갖고오는 작업 ==================
@@ -48,7 +51,7 @@ public class MainPageHandler implements CommandHandler{
 		HashMap<PlanShopDisplDTO, List<PopularProDTO>> getPopBanner = mainService.sGetPopularShop();
 		request.setAttribute("getPopBanner", getPopBanner);
 		
-		// 메인 브랜드 10개
+		// ================= 메인 브랜드 10개 갖고오는 작업 ==================
 		List<MainBrandDTO> mbrandlist = mainService.mainBrandService();
 		request.setAttribute("mbrandlist", mbrandlist);
 		// 브랜드 제품 2개
