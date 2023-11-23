@@ -11,7 +11,7 @@
 ![슬라이드8](https://github.com/EconomyLIM/allYoungClone/assets/119987898/3148a917-2447-4f17-b994-5e64822a0d7f)
 ![슬라이드9](https://github.com/EconomyLIM/allYoungClone/assets/119987898/86aac915-b8cd-417b-a43b-7e7bdaf596e4)
 ![슬라이드10](https://github.com/EconomyLIM/allYoungClone/assets/119987898/9320a006-339e-4004-ba6a-81263fdf2bd0)
-![슬라이드11](https://github.com/EconomyLIM/allYoungClone/assets/119987898/18759be5-62b5-4f1b-9cd5-ff849fb50729)
+![비타참좋아 발표](https://github.com/EconomyLIM/allYoungClone/assets/119987898/7e64bbc5-32e9-4d58-a20e-da81531360c3)
 ![슬라이드12](https://github.com/EconomyLIM/allYoungClone/assets/119987898/4d4c5ee5-ce82-4d4e-ac45-28c6f05a055a)
 ![슬라이드13](https://github.com/EconomyLIM/allYoungClone/assets/119987898/e9872f07-cd55-42ac-aaef-999881190636)
 ![슬라이드14](https://github.com/EconomyLIM/allYoungClone/assets/119987898/e5538e7b-dd79-4b5d-b1b1-60639682cd56)
