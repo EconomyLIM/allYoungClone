@@ -14,11 +14,6 @@
 ![비타참좋아 발표](https://github.com/EconomyLIM/allYoungClone/assets/119987898/7e64bbc5-32e9-4d58-a20e-da81531360c3)
 ![슬라이드12](https://github.com/EconomyLIM/allYoungClone/assets/119987898/4d4c5ee5-ce82-4d4e-ac45-28c6f05a055a)
 ![슬라이드13](https://github.com/EconomyLIM/allYoungClone/assets/119987898/e9872f07-cd55-42ac-aaef-999881190636)
-<hr/>
-<img width="792" alt="1" src="https://github.com/EconomyLIM/allYoungClone/assets/119987898/5fafc396-feec-4a41-be47-eea63fc9d1ee">
-<img width="880" alt="2" src="https://github.com/EconomyLIM/allYoungClone/assets/119987898/bbe5cb79-45bb-4136-b58a-d70badd5360a">
-<img width="544" alt="3" src="https://github.com/EconomyLIM/allYoungClone/assets/119987898/db48cf49-6228-4dcd-83a2-81a3fe1ba6f3">
-<hr/>
 ![슬라이드14](https://github.com/EconomyLIM/allYoungClone/assets/119987898/e5538e7b-dd79-4b5d-b1b1-60639682cd56)
 ![슬라이드15](https://github.com/EconomyLIM/allYoungClone/assets/119987898/0b4256c6-5195-47d1-902a-1985152275aa)
 ![슬라이드16](https://github.com/EconomyLIM/allYoungClone/assets/119987898/ba8fe244-6d46-458e-96c6-e93c60f8f256)
